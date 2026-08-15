@@ -82,6 +82,17 @@ A tomada de limiar aproximada e a ocultação dos marcadores auxiliares foram ex
 - **TARGET_REGION**: Região 10 — Caverna do Orion
 - **DEADLINE_NEXT_PUSH**: `2026-08-15T16:50:25Z` (UTC)
 
+## Ciclo 9 — Resultado e transição de estado
+
+A tentativa de isolamento total da cena produziu um frame inválido dominado pelo céu, com a geometria do proxy cortada no topo. Esta variante foi descartada e o director de validação foi recuperado para o último commit estável `a5bfee7`. O Ciclo 9 é `REJECTED_VISUAL`; não há alteração aceite no fluxo normal.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `REJECTED_VISUAL`
+- **NEXT_ACTION_IMMEDIATE**: Construir uma cena de validação dedicada para Região 10, sem ocultar siblings em runtime; instanciar apenas TerrainPatch/Environment, o arco orgânico e os dois braseiros, posicionar a câmara pelo transform da cena e repetir parser, F5, gameplay e print.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T16:55:00Z` (UTC)
+
 ## Ciclo 7 — Resultado e transição de estado
 
 A mudança para o eixo exterior positivo-Z não alterou a composição funcional: a captura continua a mostrar símbolos de rota e fenda emissiva, sem revelar a boca do Orion. O Ciclo 7 é `REJECTED_VISUAL`.
