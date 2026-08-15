@@ -418,11 +418,41 @@ func _build_final_dome() -> void:
 		if crown == null:
 			continue
 		crown.name = "ArcoOrganicoCupula_%02d" % index
-		crown.position = Vector3(-5.6 + float(index) * 5.6, 8.0 + float(index % 2) * 1.5, -12.0)
-		crown.scale = Vector3(0.82 if index != 1 else 1.0, 0.55 if index == 1 else 0.9, 0.52)
+		crown.position = Vector3(-2.35 + float(index) * 2.35, 2.05 if index != 1 else 2.55, -4.48)
+		crown.scale = Vector3(2.9 if index != 1 else 3.35, 1.65 if index != 1 else 2.0, 1.85)
 		crown.rotation = Vector3(0.0, 0.08 * float(index - 1), 0.0)
 		_apply_material(crown, stone_material)
 		dome.add_child(crown)
+	# Validated Region 12 sanctuary gateway: organic side monoliths, staggered crown, and a recessed dark opening.
+	for gateway_x in [-4.2, 4.2]:
+		var gateway_monolith := PILLAR.instantiate() as Node3D
+		if gateway_monolith == null:
+			continue
+		gateway_monolith.name = "MonolitoGatewayCupula_%s" % str(gateway_x)
+		gateway_monolith.position = Vector3(gateway_x, 1.85, -4.45)
+		gateway_monolith.scale = Vector3(0.96, 3.45, 0.96)
+		gateway_monolith.rotation = Vector3(0.04, 0.10 * sign(gateway_x), 0.03 * sign(gateway_x))
+		_apply_material(gateway_monolith, stone_material)
+		dome.add_child(gateway_monolith)
+	var gateway_recess := ROCK_LARGE.instantiate() as Node3D
+	if gateway_recess != null:
+		gateway_recess.name = "RecessoEscuroGatewayCupula"
+		gateway_recess.position = Vector3(0.0, 2.25, -4.18)
+		gateway_recess.scale = Vector3(1.12, 0.78, 0.14)
+		gateway_recess.rotation = Vector3(0.0, PI, 0.0)
+		var gateway_dark := stone_material.duplicate() as StandardMaterial3D
+		gateway_dark.albedo_color = Color("#050914")
+		gateway_dark.emission_enabled = false
+		_apply_material(gateway_recess, gateway_dark)
+		dome.add_child(gateway_recess)
+	var gateway_base := ROCK_LARGE.instantiate() as Node3D
+	if gateway_base != null:
+		gateway_base.name = "BordaBaseGatewayCupula"
+		gateway_base.position = Vector3(0.0, 0.58, -4.42)
+		gateway_base.scale = Vector3(5.8, 0.52, 1.65)
+		gateway_base.rotation = Vector3(0.02, 0.0, 0.0)
+		_apply_material(gateway_base, stone_material)
+		dome.add_child(gateway_base)
 	var heart := MeshInstance3D.new()
 	heart.name = "NucleoCoroaFinal"
 	var heart_mesh := SphereMesh.new()
