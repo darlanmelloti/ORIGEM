@@ -146,8 +146,8 @@ func _process(delta: float) -> void:
 	elif validation_take_mode == 13:
 		var cave_travel: float = minf(validation_elapsed * 0.045, 1.0)
 		var cave_sway: float = sin(validation_elapsed * 0.28) * 0.85
-		validation_camera.position = Vector3(-112.0 - cave_travel * 2.0 + cave_sway, 53.0 - cave_travel * 3.0 + sin(validation_elapsed * 0.24) * 0.14, 543.0 + cave_travel * 5.0)
-		validation_camera.look_at(Vector3(-116.0, 47.0 - cave_travel * 2.0, 549.0 + cave_travel * 2.0), Vector3.UP)
+		validation_camera.position = Vector3(-90.0 - cave_travel * 12.0 + cave_sway, 58.0 - cave_travel * 4.0 + sin(validation_elapsed * 0.24) * 0.14, 520.0 + cave_travel * 18.0)
+		validation_camera.look_at(Vector3(-116.0, 44.0 - cave_travel * 2.0, 546.0 + cave_travel * 3.0), Vector3.UP)
 	else:
 		var travel: float = minf(validation_elapsed * 0.02, 0.35)
 		var lateral: float = sin(validation_elapsed * 0.52) * 2.2
@@ -228,21 +228,26 @@ func _activate_region10_validation_camera() -> void:
 	validation_camera = Camera3D.new()
 	validation_camera.name = "CameraValidacaoRegiao10CavernaOrion"
 	validation_camera.fov = 50.0
-	validation_camera.position = Vector3(-112.0, 53.0, 543.0)
+	validation_camera.position = Vector3(-90.0, 58.0, 520.0)
 	add_child(validation_camera)
-	validation_camera.look_at(Vector3(-116.0, 47.0, 549.0), Vector3.UP)
+	validation_camera.look_at(Vector3(-116.0, 44.0, 546.0), Vector3.UP)
 	validation_camera.current = true
 	call_deferred("_hide_region10_later_landmarks")
 
 func _hide_region10_later_landmarks() -> void:
 	var destinations := get_parent().get_node_or_null("DestinosOrionEHubTemporal") as Node3D
 	if destinations != null:
-		var cube_chamber := destinations.get_node_or_null("CamaraDoOrionCube") as Node3D
-		if cube_chamber != null:
-			cube_chamber.visible = false
+		_hide_region10_node_recursive(destinations)
 	var temporal_echo := get_node_or_null("Take8_EcoTemporal") as Node3D
 	if temporal_echo != null:
 		temporal_echo.visible = false
+
+func _hide_region10_node_recursive(node: Node) -> void:
+	if node.name in ["CamaraDoOrionCube", "CuboOrion", "NucleoTemporal"]:
+		node.visible = false
+		return
+	for child in node.get_children():
+		_hide_region10_node_recursive(child)
 
 func _activate_region8_validation_camera() -> void:
 	validation_take_mode = 12 if OS.get_environment("ORIGEM_REGION8_TO9_CLOSE") == "1" else (11 if OS.get_environment("ORIGEM_REGION8_TO9") == "1" else 10)
