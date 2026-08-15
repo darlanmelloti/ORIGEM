@@ -104,41 +104,41 @@ func _build_forest_wayfinding() -> void:
 	stone.albedo_color = Color(0.095, 0.105, 0.085, 1.0)
 	stone.roughness = 0.96
 	var ember: StandardMaterial3D = StandardMaterial3D.new()
-	ember.albedo_color = Color(0.58, 0.12, 0.025, 1.0)
+	ember.albedo_color = Color(0.30, 0.075, 0.018, 1.0)
 	ember.emission_enabled = true
-	ember.emission = Color(1.0, 0.12, 0.018, 1.0)
-	ember.emission_energy_multiplier = 0.70
-	for index: int in range(5):
-		var z_value: float = 122.0 + float(index) * 6.5
+	ember.emission = Color(0.42, 0.070, 0.012, 1.0)
+	ember.emission_energy_multiplier = 0.34
+	for index: int in range(4):
+		var z_value: float = 124.0 + float(index) * 8.4
 		var side: float = -1.0 if index % 2 == 0 else 1.0
-		var x_value: float = _path_x(z_value) + side * 2.40
+		var x_value: float = _path_x(z_value) + side * 2.75
 		var ground_y: float = _height_at(x_value, z_value)
 		var base_mesh: CylinderMesh = CylinderMesh.new()
-		base_mesh.top_radius = 0.20
-		base_mesh.bottom_radius = 0.29
-		base_mesh.height = 1.25
+		base_mesh.top_radius = 0.18
+		base_mesh.bottom_radius = 0.27
+		base_mesh.height = 0.88
 		base_mesh.radial_segments = 7
 		base_mesh.material = stone
 		var base: MeshInstance3D = MeshInstance3D.new()
 		base.name = "BalizaFlorestal_%02d" % index
 		base.mesh = base_mesh
-		base.position = Vector3(x_value, ground_y + 0.62, z_value)
+		base.position = Vector3(x_value, ground_y + 0.44, z_value)
 		base.rotation.y = 0.33 + float(index) * 0.52
 		markers.add_child(base)
 		var ember_mesh: SphereMesh = SphereMesh.new()
-		ember_mesh.radius = 0.105
-		ember_mesh.height = 0.21
+		ember_mesh.radius = 0.070
+		ember_mesh.height = 0.14
 		ember_mesh.radial_segments = 12
 		ember_mesh.material = ember
 		var glow: MeshInstance3D = MeshInstance3D.new()
 		glow.name = "BrasaDaBaliza_%02d" % index
 		glow.mesh = ember_mesh
-		glow.position = Vector3(x_value, ground_y + 1.30, z_value)
+		glow.position = Vector3(x_value, ground_y + 0.94, z_value)
 		markers.add_child(glow)
 		var light: OmniLight3D = OmniLight3D.new()
-		light.light_color = Color(1.0, 0.32, 0.10, 1.0)
-		light.light_energy = 0.20
-		light.omni_range = 3.8
+		light.light_color = Color(0.82, 0.20, 0.045, 1.0)
+		light.light_energy = 0.08
+		light.omni_range = 2.6
 		light.shadow_enabled = false
 		light.position = glow.position
 		markers.add_child(light)
