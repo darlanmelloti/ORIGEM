@@ -93,6 +93,17 @@ A tentativa de isolamento total da cena produziu um frame inválido dominado pel
 - **TARGET_REGION**: Região 10 — Caverna do Orion
 - **DEADLINE_NEXT_PUSH**: `2026-08-15T16:55:00Z` (UTC)
 
+## Ciclo 2 dedicado — Resultado e transição de estado
+
+A cena independente `Region10Validation.tscn` foi executada com o mesmo protocolo Godot 4.7.1/OpenGL/Xvfb. O print agora apresenta uma boca de entrada orgânica com pilares e lintel de rocha, cavidade recuada legível e dois núcleos luminosos simétricos correspondentes aos braseiros azuis. A composição está isolada de landmarks posteriores e o gameplay de 30 segundos foi gravado. O critério visual de leitura da entrada foi atingido nesta tomada dedicada.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `PASSED`
+- **NEXT_ACTION_IMMEDIATE**: Integrar a mesma composição orgânica e iluminação na transição jogável Região 9 → Região 10, sem copiar a cena inteira para o fluxo normal; validar a travessia física e a continuidade da câmera antes de avançar para a Região 11.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T17:06:00Z` (UTC)
+
 ## Ciclo 7 — Resultado e transição de estado
 
 A mudança para o eixo exterior positivo-Z não alterou a composição funcional: a captura continua a mostrar símbolos de rota e fenda emissiva, sem revelar a boca do Orion. O Ciclo 7 é `REJECTED_VISUAL`.
