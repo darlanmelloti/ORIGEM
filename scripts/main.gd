@@ -71,16 +71,21 @@ func _start_narrative():
 		await get_tree().process_frame
 		var validation_player := get_tree().get_first_node_in_group("player") as Node3D
 		var validation_take: String = OS.get_environment("ORIGEM_VALIDATION_TAKE")
+		var validation_region: String = OS.get_environment("ORIGEM_VALIDATION_REGION")
 		if validation_player != null:
 			if validation_take == "6":
 				validation_player.global_position = Vector3(0.0, 1.8, -73.0)
 			elif validation_take == "7":
 				validation_player.global_position = Vector3(0.0, 1.8, -104.0)
+			elif validation_region == "7":
+				validation_player.global_position = Vector3(128.0, 14.0, 332.0)
 			else:
 				validation_player.global_position = Vector3(0.0, 1.4, -28.0)
 			validation_player.rotation.y = PI
 		mission_phase = 1
-		if validation_take == "6":
+		if validation_region == "7":
+			_show_msg("REGIÃO 7 — Vila Elevada e rota para o Observatório.", 4.0)
+		elif validation_take == "6":
 			_show_msg("TAKE 6 — Desfiladeiro profundo e fendas tectónicas.", 4.0)
 		elif validation_take == "7":
 			_show_msg("TAKE 7 — Praça ciclópica e Cubo de Orion.", 4.0)
@@ -96,7 +101,7 @@ func _start_narrative():
 
 # ═══════════════════════════════════════════════════════════════
 func _take57_validation_mode() -> bool:
-	if OS.get_environment("ORIGEM_TAKE57") == "1" or OS.get_environment("ORIGEM_VALIDATION_TAKE") in ["6", "7"]:
+	if OS.get_environment("ORIGEM_TAKE57") == "1" or OS.get_environment("ORIGEM_VALIDATION_TAKE") in ["6", "7"] or OS.get_environment("ORIGEM_VALIDATION_REGION") == "7":
 		return true
 	for argument: String in OS.get_cmdline_args():
 		if argument == "--take57":

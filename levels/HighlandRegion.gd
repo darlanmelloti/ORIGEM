@@ -41,22 +41,25 @@ func _build_elevated_village() -> void:
 	village.name = "VilaElevada"
 	var village_x: float = 140.0
 	var village_z: float = 352.0
-	village.position = Vector3(village_x, _height_at(village_x, village_z), village_z)
+	village.position = Vector3(village_x, _height_at(village_x, village_z) + 5.0, village_z)
 	add_child(village)
-	# Terraços escalonados: lidos como vila na encosta, sem formar uma parede única.
+	# Terraços orgânicos escalonados: afloramentos CC0 conformam a vila sem caixas de greybox.
 	for terrace_index: int in range(3):
-		var terrace: MeshInstance3D = MeshInstance3D.new()
-		var terrace_mesh: BoxMesh = BoxMesh.new()
-		terrace_mesh.size = Vector3(32.0 - float(terrace_index) * 4.0, 1.25, 13.0)
-		terrace.mesh = terrace_mesh
-		terrace.material_override = stone_material
+		var terrace: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if terrace == null:
+			continue
+		terrace.name = "AfloramentoTerraco_%02d" % terrace_index
+		terrace.scale = Vector3(1.15 - float(terrace_index) * 0.10, 0.22, 0.78)
+		terrace.rotation = Vector3(0.02, float(terrace_index) * 0.34, -0.03)
 		terrace.position = Vector3(-float(terrace_index) * 3.5, 0.62 + float(terrace_index) * 3.4, float(terrace_index) * 8.0)
+		_apply_material(terrace, stone_material)
 		village.add_child(terrace)
-	for house_index: int in range(7):
+	# Três casas-âncora preservam a leitura de vila e reduzem instâncias GLB para o orçamento GTX 1050.
+	for house_index: int in range(3):
 		var row: int = house_index / 3
 		var col: int = house_index % 3
 		var house: Node3D = _make_village_house(house_index)
-		house.position = Vector3(-10.0 + float(col) * 10.0 - float(row) * 2.5, 1.26 + float(row) * 3.4, 2.0 + float(row) * 8.0)
+		house.position = Vector3(-10.0 + float(col) * 10.0 - float(row) * 2.5, 1.26 + float(house_index) * 1.35, 2.0 + float(house_index) * 4.0)
 		village.add_child(house)
 	for pillar_index: int in range(4):
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
@@ -66,25 +69,35 @@ func _build_elevated_village() -> void:
 		pillar.scale = Vector3(0.46, 0.46, 0.46)
 		_apply_material(pillar, stone_material)
 		village.add_child(pillar)
+	var village_lights: Array[Vector3] = [Vector3(-8.0, 6.0, 3.0), Vector3(2.0, 9.0, 9.0), Vector3(10.0, 7.0, 15.0)]
+	for light_index: int in range(village_lights.size()):
+		var beacon: OmniLight3D = OmniLight3D.new()
+		beacon.name = "FachoRessonanciaVila_%02d" % light_index
+		beacon.position = village_lights[light_index]
+		beacon.light_color = Color("#d9a95f") if light_index < 2 else Color("#5cc8ff")
+		beacon.light_energy = 2.10 if light_index < 2 else 2.65
+		beacon.omni_range = 32.0
+		beacon.shadow_enabled = true
+		village.add_child(beacon)
 
 func _make_village_house(index: int) -> Node3D:
 	var house: Node3D = Node3D.new()
 	house.name = "CasaDePedra_%02d" % index
-	var base_mesh: BoxMesh = BoxMesh.new()
-	base_mesh.size = Vector3(6.8, 4.0, 6.0)
-	var base: MeshInstance3D = MeshInstance3D.new()
-	base.mesh = base_mesh
-	base.position = Vector3(0.0, 2.0, 0.0)
-	base.material_override = stone_material
-	house.add_child(base)
-	var roof_mesh: PrismMesh = PrismMesh.new()
-	roof_mesh.size = Vector3(7.6, 2.5, 7.2)
-	roof_mesh.left_to_right = 0.5
-	var roof: MeshInstance3D = MeshInstance3D.new()
-	roof.mesh = roof_mesh
-	roof.position = Vector3(0.0, 5.10, 0.0)
-	roof.material_override = roof_material
-	house.add_child(roof)
+	var base: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if base != null:
+		base.name = "MassaOrganicaDaCasa"
+		base.scale = Vector3(0.58, 0.70, 0.52)
+		base.position = Vector3(0.0, 2.0, 0.0)
+		_apply_material(base, stone_material)
+		house.add_child(base)
+	var roof: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if roof != null:
+		roof.name = "CoberturaRochosaDaCasa"
+		roof.scale = Vector3(0.66, 0.18, 0.58)
+		roof.rotation = Vector3(0.18, 0.35, -0.08)
+		roof.position = Vector3(0.0, 5.10, 0.0)
+		_apply_material(roof, roof_material)
+		house.add_child(roof)
 	return house
 
 func _build_observatory() -> void:
