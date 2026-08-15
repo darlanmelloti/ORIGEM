@@ -24,6 +24,7 @@ func _ready() -> void:
 		_build_cube_chamber_marker()
 		_build_region11_to_12_approach()
 		_build_temporal_hub()
+		_build_hub_to_final_dome_approach()
 		_build_final_dome()
 
 func _height_at(world_x: float, world_z: float) -> float:
@@ -356,6 +357,32 @@ func _build_temporal_hub() -> void:
 	core.position = Vector3(0.0, 1.9, 0.0)
 	hub.add_child(core)
 
+
+func _build_hub_to_final_dome_approach() -> void:
+	var approach := Node3D.new()
+	approach.name = "TransicaoHubParaCupulaFinal"
+	add_child(approach)
+	var route: Array[Vector2] = [Vector2(164.0, 203.0), Vector2(164.0, 199.5), Vector2(162.5, 196.0), Vector2(165.0, 192.5), Vector2(163.0, 189.0), Vector2(165.0, 185.5), Vector2(164.0, 181.5)]
+	for index: int in range(route.size()):
+		var point := route[index]
+		var stone := ROCK_LARGE.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "DegrauCupulaFinal_%02d" % index
+		stone.position = Vector3(point.x, _height_at(point.x, point.y) + 0.30, point.y)
+		stone.scale = Vector3(0.58 + float(index % 2) * 0.10, 0.18 + float(index % 3) * 0.05, 0.48 + float(index % 2) * 0.08)
+		stone.rotation = Vector3(0.04, -0.22 + float(index) * 0.08, -0.03)
+		_apply_material(stone, stone_material)
+		approach.add_child(stone)
+		if index % 2 == 0:
+			var waypoint := OmniLight3D.new()
+			waypoint.name = "LuzWayfindingCupula_%02d" % index
+			waypoint.light_color = Color("#8b78dc")
+			waypoint.light_energy = 0.85
+			waypoint.omni_range = 5.5
+			waypoint.shadow_enabled = false
+			waypoint.position = stone.position + Vector3(0.0, 0.75, 0.0)
+			approach.add_child(waypoint)
 
 func _build_final_dome() -> void:
 	var dome := Node3D.new()
