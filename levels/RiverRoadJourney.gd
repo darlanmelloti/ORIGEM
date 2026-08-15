@@ -241,14 +241,14 @@ func _build_ruin_arch() -> void:
 		arch.add_child(debris)
 	# Duas brasas litúrgicas tornam o arco reconhecível à distância, mantendo a luz concentrada no marco e não em toda a estrada.
 	var ember_material: StandardMaterial3D = StandardMaterial3D.new()
-	ember_material.albedo_color = Color(0.60, 0.12, 0.025, 1.0)
+	ember_material.albedo_color = Color(0.30, 0.075, 0.018, 1.0)
 	ember_material.emission_enabled = true
-	ember_material.emission = Color(1.0, 0.14, 0.018, 1.0)
-	ember_material.emission_energy_multiplier = 1.20
+	ember_material.emission = Color(0.42, 0.070, 0.012, 1.0)
+	ember_material.emission_energy_multiplier = 0.40
 	for ember_side: float in [-2.82, 2.82]:
 		var ember_mesh: SphereMesh = SphereMesh.new()
-		ember_mesh.radius = 0.18
-		ember_mesh.height = 0.36
+		ember_mesh.radius = 0.10
+		ember_mesh.height = 0.20
 		ember_mesh.radial_segments = 12
 		var ember: MeshInstance3D = MeshInstance3D.new()
 		ember.name = "BrasaLiturgicaArco_%.1f" % ember_side
@@ -258,12 +258,25 @@ func _build_ruin_arch() -> void:
 		arch.add_child(ember)
 		var light: OmniLight3D = OmniLight3D.new()
 		light.name = "LuzLiturgicaArco_%.1f" % ember_side
-		light.light_color = Color(1.0, 0.30, 0.09, 1.0)
-		light.light_energy = 0.40
-		light.omni_range = 5.4
+		light.light_color = Color(0.82, 0.20, 0.045, 1.0)
+		light.light_energy = 0.12
+		light.omni_range = 2.8
 		light.shadow_enabled = false
 		light.position = ember.position
 		arch.add_child(light)
+	# Restos de coroamento quebram a perfeição do lintel; ficam acima ou fora do vão para não interferir com a rota física.
+	for crown_index: int in range(5):
+		var crown: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if crown == null:
+			continue
+		var crown_side: float = -1.0 if crown_index % 2 == 0 else 1.0
+		crown.name = "FragmentoDaCoroaDoArco_%02d" % crown_index
+		crown.position = Vector3(crown_side * (2.65 + float(crown_index % 3) * 1.08), 6.98 + float(crown_index % 2) * 0.34, -0.12 + float(crown_index % 2) * 0.48)
+		var crown_scale: float = 0.14 + float(crown_index % 3) * 0.035
+		crown.scale = Vector3(crown_scale, crown_scale * 0.78, crown_scale)
+		crown.rotation = Vector3(0.16 * float(crown_index % 2), float(crown_index) * 0.68, 0.12 * crown_side)
+		_apply_material(crown, ruin_material)
+		arch.add_child(crown)
 	# Preenchimento neutro reduz o corte preto do limiar e conserva as brasas como orientação, sem iluminar toda a Estrada do Rio.
 	var arch_fill: OmniLight3D = OmniLight3D.new()
 	arch_fill.name = "PreenchimentoDoArcoDasRuinas"
