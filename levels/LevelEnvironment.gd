@@ -184,18 +184,18 @@ func apply_voss_daylight() -> void:
 		opening_forest_fill = null
 	environment.background_mode = Environment.BG_SKY
 	environment.sky = _create_liturgical_twilight_sky()
-	environment.background_energy_multiplier = 0.94
+	environment.background_energy_multiplier = 0.98
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	environment.ambient_light_color = Color(0.27, 0.35, 0.45, 1.0)
-	environment.ambient_light_energy = 0.84
+	environment.ambient_light_color = Color(0.31, 0.40, 0.52, 1.0)
+	environment.ambient_light_energy = 0.98
 	environment.fog_enabled = true
-	environment.fog_light_color = Color(0.20, 0.28, 0.36, 1.0)
-	environment.fog_light_energy = 0.38
-	environment.fog_density = 0.0025
+	environment.fog_light_color = Color(0.24, 0.33, 0.43, 1.0)
+	environment.fog_light_energy = 0.43
+	environment.fog_density = 0.0022
 
 	environment.fog_sky_affect = 0.73
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.tonemap_exposure = 1.19
+	environment.tonemap_exposure = 1.25
 
 	environment.glow_enabled = true
 	environment.glow_intensity = 0.26
@@ -209,7 +209,7 @@ func apply_voss_daylight() -> void:
 	if sun != null:
 		sun.rotation_degrees = Vector3(-14.0, -38.0, 0.0)
 		sun.light_color = Color(1.0, 0.62, 0.38, 1.0)
-		sun.light_energy = 0.60
+		sun.light_energy = 0.70
 		sun.shadow_enabled = true
 
 func apply_voss_opening_storm() -> void:

@@ -114,6 +114,17 @@ func _build_river_crossing() -> void:
 	bridge.scale = Vector3(2.35, 1.05, 2.35)
 	bridge.rotation.y = PI * 0.5
 	add_child(bridge)
+	# Plataforma física baixa: acompanha a ponte CC0 e permite atravessar o rio sem depender da malha visual.
+	var bridge_body: StaticBody3D = StaticBody3D.new()
+	bridge_body.name = "ColisorPonteDePedraDoVale"
+	bridge_body.position = bridge.position + Vector3(0.0, 1.35, 0.0)
+	bridge_body.rotation.y = bridge.rotation.y
+	var bridge_collision: CollisionShape3D = CollisionShape3D.new()
+	var bridge_shape: BoxShape3D = BoxShape3D.new()
+	bridge_shape.size = Vector3(29.0, 0.70, 4.80)
+	bridge_collision.shape = bridge_shape
+	bridge_body.add_child(bridge_collision)
+	add_child(bridge_body)
 
 func _build_flagstone_path() -> void:
 	var path: Node3D = Node3D.new()

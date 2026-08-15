@@ -97,6 +97,17 @@ func _build_river_road() -> void:
 		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.042, z_value)
 		slab.rotation.y = atan2((_road_x(z_value + 1.0) - _road_x(z_value - 1.0)) * 0.5, 2.0) + rng.randf_range(-0.08, 0.08)
 		road.add_child(slab)
+		# Cada laje recebe um volume baixo: o caminho é físico sem criar degraus artificiais acima do terreno.
+		var slab_body: StaticBody3D = StaticBody3D.new()
+		slab_body.name = "ColisorLajeEstradaRio_%02d" % index
+		slab_body.position = slab.position + Vector3(0.0, -0.045, 0.0)
+		slab_body.rotation.y = slab.rotation.y
+		var slab_collision: CollisionShape3D = CollisionShape3D.new()
+		var slab_shape: BoxShape3D = BoxShape3D.new()
+		slab_shape.size = Vector3(1.58, 0.16, 1.18)
+		slab_collision.shape = slab_shape
+		slab_body.add_child(slab_collision)
+		road.add_child(slab_body)
 
 func _build_river() -> void:
 	var river_root: Node3D = Node3D.new()
@@ -149,6 +160,16 @@ func _build_ruin_arch() -> void:
 		masonry.position = Vector3(offset_x, 3.32, 0.0)
 		masonry.material_override = ruin_material
 		arch.add_child(masonry)
+		# Volume físico coincidente com a alvenaria; mantém o vão central da estrada inteiramente livre.
+		var pillar_body: StaticBody3D = StaticBody3D.new()
+		pillar_body.name = "ColisorPilarArco_%.1f" % offset_x
+		pillar_body.position = masonry.position
+		var pillar_collision: CollisionShape3D = CollisionShape3D.new()
+		var pillar_shape: BoxShape3D = BoxShape3D.new()
+		pillar_shape.size = Vector3(1.12, 6.65, 1.45)
+		pillar_collision.shape = pillar_shape
+		pillar_body.add_child(pillar_collision)
+		arch.add_child(pillar_body)
 	var lintel_mesh: BoxMesh = BoxMesh.new()
 	lintel_mesh.size = Vector3(8.45, 0.92, 1.40)
 	var lintel: MeshInstance3D = MeshInstance3D.new()

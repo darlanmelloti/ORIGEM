@@ -61,7 +61,9 @@ func _ready():
 	EventBus.player_stamina_changed.connect(_on_player_stamina_changed)
 	hud_status.text = "ELIAS  100 / 100"
 	stamina_label.text = "STAMINA  100 / 100"
-	_start_narrative()
+	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
+	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT"):
+		_start_narrative()
 
 func _start_narrative():
 	# A cartela narrativa inicia apenas depois do prólogo da Casa Voss: o comando de saltar e a câmara de abertura ficam livres de UI concorrente.

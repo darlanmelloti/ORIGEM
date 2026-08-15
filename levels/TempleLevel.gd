@@ -48,6 +48,62 @@ func _ready() -> void:
 		get_tree().create_timer(0.70).timeout.connect(_enforce_voss_opening_daylight)
 		# O vale diurno entra cedo para que o percurso, o rio e os marcos sejam visíveis logo depois da saída da Casa Voss.
 		get_tree().create_timer(1.20).timeout.connect(_build_world_after_voss_prologue)
+	if OS.get_environment("ORIGEM_QA_ROUTE") == "majestic_to_lake":
+		# Exclusivo de QA: posiciona Elias depois de o mundo regional existir, sem alterar o spawn do jogo normal.
+		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_lake_route_qa)
+	elif OS.get_environment("ORIGEM_QA_ROUTE") == "bridge_crossing":
+		get_tree().create_timer(2.40).timeout.connect(_prepare_valley_bridge_route_qa)
+	if OS.get_environment("ORIGEM_QA_INTERACT") == "lake_stela":
+		get_tree().create_timer(2.40).timeout.connect(_prepare_lake_stela_interaction_qa)
+
+func _prepare_lake_stela_interaction_qa() -> void:
+	# A região é procedural e pode ocupar mais do que a primeira janela de temporizador em llvmpipe.
+	# Reagenda a prova até o lago existir, sem alterar o fluxo normal de jogo.
+	if not has_node("RegiaoFlorestaLagoExploravel"):
+		get_tree().create_timer(0.75).timeout.connect(_prepare_lake_stela_interaction_qa)
+		return
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		get_tree().create_timer(0.25).timeout.connect(_prepare_lake_stela_interaction_qa)
+		return
+	var stela_x: float = 52.0
+	var stela_z: float = 231.0
+	var approach_x: float = 49.5
+	var approach_z: float = 228.5
+	player.velocity = Vector3.ZERO
+	player.global_position = Vector3(approach_x, _terrain_height_for_qa(approach_x, approach_z) + 1.25, approach_z)
+	player.look_at(Vector3(stela_x, player.global_position.y, stela_z), Vector3.UP, true)
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_INTERACT] Elias posicionado diante da estela em %s" % player.global_position)
+
+func _prepare_valley_bridge_route_qa() -> void:
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		push_warning("[ORIGEM_QA_ROUTE] Jogador indisponível para a ponte do vale.")
+		return
+	var bridge_start_x: float = -7.0
+	var bridge_z: float = -57.0
+	player.global_position = Vector3(bridge_start_x, _terrain_height_for_qa(bridge_start_x, bridge_z) + 2.20, bridge_z)
+	player.rotation.y = -PI * 0.5
+	print("[ORIGEM_QA_ROUTE] Elias posicionado na entrada da Ponte de Pedra em %s" % player.global_position)
+
+func _prepare_majestic_lake_route_qa() -> void:
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		push_warning("[ORIGEM_QA_ROUTE] Jogador indisponível para a rota Majestic–lago.")
+		return
+	var spawn_x: float = -77.4
+	var spawn_z: float = 178.0
+	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.25, spawn_z)
+	player.rotation.y = -PI * 0.5
+	print("[ORIGEM_QA_ROUTE] Spawn Majestic–lago ativo em %s" % player.global_position)
+
+func _terrain_height_for_qa(world_x: float, world_z: float) -> float:
+	if terrain_patch != null and terrain_patch.has_method("height_at"):
+		return float(terrain_patch.call("height_at", world_x, world_z))
+	return 0.0
 
 func _enforce_voss_opening_daylight() -> void:
 	var level_environment: Node = get_parent().get_node_or_null("LevelEnvironment")
