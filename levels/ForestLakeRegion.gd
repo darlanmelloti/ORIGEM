@@ -36,6 +36,7 @@ func _ready() -> void:
 	_build_majestic_lake_transition()
 	_build_lake_wayfinding()
 	_build_dense_forest()
+	_build_forest_canopy_clusters()
 	_build_forest_micro_details()
 	_build_majestic_camp()
 	_build_majestic_connector()
@@ -434,6 +435,48 @@ func _build_dense_forest() -> void:
 		fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 		fern.rotation.y = float(index) * 0.68
 		forest.add_child(fern)
+
+func _build_forest_canopy_clusters() -> void:
+	# Sete árvores focais PBR quebram a repetição das coníferas económicas; cada grupo preserva uma abertura clara para a próxima laje.
+	var clusters: Node3D = Node3D.new()
+	clusters.name = "CopasFocaisDaFlorestaDensa"
+	add_child(clusters)
+	var cluster_data: Array[Dictionary] = [
+		{"z": 138.0, "side": -1.0, "offset": 7.4, "scale": 0.48, "yaw": -0.28},
+		{"z": 146.0, "side": 1.0, "offset": 8.2, "scale": 0.42, "yaw": 0.86},
+		{"z": 155.0, "side": -1.0, "offset": 9.1, "scale": 0.38, "yaw": -1.24},
+		{"z": 163.0, "side": 1.0, "offset": 7.8, "scale": 0.52, "yaw": 2.18},
+		{"z": 173.0, "side": -1.0, "offset": 8.6, "scale": 0.44, "yaw": 0.34},
+		{"z": 184.0, "side": 1.0, "offset": 9.4, "scale": 0.40, "yaw": -2.02},
+		{"z": 196.0, "side": -1.0, "offset": 7.6, "scale": 0.46, "yaw": 1.42}
+	]
+	for index: int in range(cluster_data.size()):
+		var data: Dictionary = cluster_data[index]
+		var z_value: float = data["z"] as float
+		var side: float = data["side"] as float
+		var x_value: float = _path_x(z_value) + side * (data["offset"] as float)
+		var tree_source: PackedScene = ISLAND_TREE if index % 3 != 1 else OAK_DARK
+		var tree: Node3D = tree_source.instantiate() as Node3D
+		if tree == null:
+			continue
+		tree.name = "CopaFocalFlorestal_%02d" % index
+		tree.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
+		var scale_value: float = data["scale"] as float
+		tree.scale = Vector3(scale_value, scale_value, scale_value)
+		tree.rotation.y = data["yaw"] as float
+		clusters.add_child(tree)
+		# Apenas três troncos do primeiro plano são físicos, para manter a exploração tática sem perfurar o orçamento de colisão.
+		if index in [0, 3, 5]:
+			var trunk: StaticBody3D = StaticBody3D.new()
+			trunk.name = "ColisorCopaFocalFlorestal_%02d" % index
+			trunk.position = tree.position + Vector3(0.0, 1.90, 0.0)
+			var shape: CollisionShape3D = CollisionShape3D.new()
+			var capsule: CylinderShape3D = CylinderShape3D.new()
+			capsule.radius = 0.42
+			capsule.height = 3.80
+			shape.shape = capsule
+			trunk.add_child(shape)
+			clusters.add_child(trunk)
 
 func _build_forest_micro_details() -> void:
 	# Microdetalhe no limite do trilho: raízes e pedra estabelecem escala de exploração sem virar uma parede de vegetação.
