@@ -400,10 +400,10 @@ func _build_majestic_camp() -> void:
 		canvas_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 		canvas_material.uv1_scale = Vector3(1.18, 1.05, 1.0)
 	canvas_material.roughness = 0.86
-	# Reflexo difuso muito baixo: simula lona húmida a captar o crepúsculo em GL Compatibility, sem criar autoiluminação evidente.
+	# Reflexo de baixa intensidade: mantém a trama e os remendos legíveis no modo GL Compatibility sem transformar a lona numa fonte de luz.
 	canvas_material.emission_enabled = true
-	canvas_material.emission = Color(0.052, 0.038, 0.022, 1.0)
-	canvas_material.emission_energy_multiplier = 0.32
+	canvas_material.emission = Color(0.19, 0.115, 0.055, 1.0)
+	canvas_material.emission_energy_multiplier = 0.64
 	var camp_wood: StandardMaterial3D = StandardMaterial3D.new()
 	camp_wood.albedo_color = Color(0.16, 0.082, 0.030, 1.0)
 	camp_wood.roughness = 0.91
@@ -483,11 +483,12 @@ func _build_majestic_camp() -> void:
 	var camp_fill: OmniLight3D = OmniLight3D.new()
 	camp_fill.name = "PreenchimentoDoAcampamentoMajestic"
 	camp_fill.light_color = Color(0.34, 0.43, 0.49, 1.0)
-	camp_fill.light_energy = 1.48
-	camp_fill.omni_range = 26.0
-	camp_fill.omni_attenuation = 1.55
+	# Preenchimento de baixa altura: recupera o detalhe da lona e do solo no crepúsculo de compatibilidade.
+	camp_fill.light_energy = 2.05
+	camp_fill.omni_range = 31.0
+	camp_fill.omni_attenuation = 1.12
 	camp_fill.shadow_enabled = false
-	camp_fill.position = Vector3(0.0, 8.0, 0.0)
+	camp_fill.position = Vector3(0.0, 5.2, 0.0)
 	camp.add_child(camp_fill)
 	# Anel de pedra e caixas de campo: a fogueira passa a ser uma estação arqueológica identificável e fisicamente navegável.
 	for ring_index: int in range(8):
