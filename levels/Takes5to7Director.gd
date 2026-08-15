@@ -34,12 +34,15 @@ func _build_once() -> void:
 	_build_take_5_cave_threshold()
 	_build_take_6_canyon_ascent()
 	_build_take_7_open_orion_chamber()
+	_build_take_8_temporal_echo()
 	_build_kharu_tactical_presence()
 	var validation_take: String = OS.get_environment("ORIGEM_VALIDATION_TAKE")
 	if validation_take == "6":
 		call_deferred("_activate_take6_validation_camera")
 	elif validation_take == "7":
 		call_deferred("_activate_take7_validation_camera")
+	elif validation_take == "8":
+		call_deferred("_activate_take8_validation_camera")
 	elif OS.get_environment("ORIGEM_TAKE57") == "1":
 		call_deferred("_activate_validation_camera")
 
@@ -62,10 +65,10 @@ func _create_materials() -> void:
 	stone_dark = _organic_material(Color("#111a1a"), 0.96, 0.22, Color("#0b2424"))
 	moss_stone = _organic_material(Color("#263d2d"), 0.94, 0.18, Color("#4d7549"))
 	resonance = StandardMaterial3D.new()
-	resonance.albedo_color = Color("#276e89")
+	resonance.albedo_color = Color("#163c56")
 	resonance.emission_enabled = true
 	resonance.emission = Color("#5cc8ff")
-	resonance.emission_energy_multiplier = 3.2
+	resonance.emission_energy_multiplier = 0.82
 	resonance.roughness = 0.22
 	bronze = StandardMaterial3D.new()
 	bronze.albedo_color = Color("#4d3b24")
@@ -113,6 +116,10 @@ func _process(delta: float) -> void:
 		var approach: float = cos(validation_elapsed * 0.24) * 0.7
 		validation_camera.position = Vector3(sweep, 5.7 + sin(validation_elapsed * 0.28) * 0.14, -78.0 + approach)
 		validation_camera.look_at(Vector3(0.0, 4.8, -103.0), Vector3.UP)
+	elif validation_take_mode == 8:
+		var orbit: float = validation_elapsed * 0.22
+		validation_camera.position = Vector3(-112.0 + sin(orbit) * 1.8, 53.0 + sin(validation_elapsed * 0.31) * 0.14, 543.0 + cos(orbit) * 2.0)
+		validation_camera.look_at(Vector3(-116.0, 48.0, 562.0), Vector3.UP)
 	else:
 		var travel: float = minf(validation_elapsed * 0.02, 0.35)
 		var lateral: float = sin(validation_elapsed * 0.52) * 2.2
@@ -157,6 +164,19 @@ func _activate_take7_validation_camera() -> void:
 	validation_camera.position = Vector3(0.0, 5.7, -78.0)
 	add_child(validation_camera)
 	validation_camera.look_at(Vector3(0.0, 4.8, -103.0), Vector3.UP)
+	validation_camera.current = true
+
+func _activate_take8_validation_camera() -> void:
+	validation_take_mode = 8
+	var legacy_enemies := get_parent().get_node_or_null("Enemies") as Node3D
+	if legacy_enemies != null:
+		legacy_enemies.visible = false
+	validation_camera = Camera3D.new()
+	validation_camera.name = "CameraValidacaoTake8"
+	validation_camera.fov = 58.0
+	validation_camera.position = Vector3(0.0, 6.2, -112.2)
+	add_child(validation_camera)
+	validation_camera.look_at(Vector3(0.0, 4.2, -121.0), Vector3.UP)
 	validation_camera.current = true
 
 func _build_take_5_cave_threshold() -> void:
@@ -261,6 +281,46 @@ func _build_take_7_open_orion_chamber() -> void:
 	open_light.omni_range = 22.0
 	open_light.shadow_enabled = true
 	chamber.add_child(open_light)
+
+func _build_take_8_temporal_echo() -> void:
+	# Região 11 / Take 20–21: mecanismo temporal na Câmara do Orion Cube.
+	# O marco é co-localizado com o destino regional oficial, sem reabrir as Regiões 1–6.
+	var echo := Node3D.new()
+	echo.name = "Take8_EcoTemporal"
+	echo.position = Vector3(-116.0, 48.0, 562.0)
+	add_child(echo)
+	_add_organic_rock(echo, Vector3(0.0, -0.2, 0.0), Vector3(10.5, 0.7, 7.5), 1520, stone_dark, "PlataformaEcoTemporal")
+	# Região 11: moldura de rocha orgânica para a câmara vertical; o Hub Temporal permanece exterior e separado.
+	_add_organic_rock(echo, Vector3(-8.8, 4.6, 3.6), Vector3(3.4, 6.8, 2.8), 1530, stone_dark, "ParedeOrionCube_L")
+	_add_organic_rock(echo, Vector3(8.8, 4.8, 3.8), Vector3(3.6, 7.2, 3.0), 1531, stone_dark, "ParedeOrionCube_R")
+	_add_organic_rock(echo, Vector3(0.0, 8.8, 5.4), Vector3(8.5, 3.2, 2.6), 1532, moss_stone, "AbobadaOrionCube")
+	_add_organic_rock(echo, Vector3(-5.8, 3.2, -5.0), Vector3(2.5, 4.8, 2.3), 1533, moss_stone, "RochaGaleria_L")
+	_add_organic_rock(echo, Vector3(5.6, 3.0, -5.2), Vector3(2.7, 4.6, 2.4), 1534, moss_stone, "RochaGaleria_R")
+	for index: int in range(3):
+		var ring := MeshInstance3D.new()
+		ring.name = "AnelTemporal_%02d" % index
+		var ring_mesh := TorusMesh.new()
+		ring_mesh.inner_radius = 3.0 + float(index) * 1.7
+		ring_mesh.outer_radius = ring_mesh.inner_radius + 0.10
+		ring_mesh.rings = 48
+		ring_mesh.ring_segments = 12
+		ring_mesh.material = resonance
+		ring.mesh = ring_mesh
+		ring.position = Vector3(0.0, 3.0 + float(index) * 1.25, -float(index) * 0.8)
+		ring.rotation_degrees = Vector3(90.0, float(index) * 11.0, 0.0)
+		echo.add_child(ring)
+	for index: int in range(5):
+		var angle: float = TAU * float(index) / 5.0
+		_add_history_marker(echo, Vector3(cos(angle) * 7.0, 1.0, sin(angle) * 4.6), 80 + index)
+		_add_resonance_fissure(echo, Vector3(cos(angle) * 4.2, 0.8, sin(angle) * 2.4), 1.4)
+	var echo_light := OmniLight3D.new()
+	echo_light.name = "LuzEcoTemporal"
+	echo_light.position = Vector3(0.0, 4.5, 0.0)
+	echo_light.light_color = Color("#6f8cff")
+	echo_light.light_energy = 1.4
+	echo_light.omni_range = 18.0
+	echo_light.shadow_enabled = true
+	echo.add_child(echo_light)
 
 func _build_kharu_tactical_presence() -> void:
 	# Take 7 only: a tactical silhouette staged before the Orion plaza.
