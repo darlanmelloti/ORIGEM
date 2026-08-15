@@ -63,6 +63,19 @@ func _ready():
 	_start_narrative()
 
 func _start_narrative():
+	if _take57_validation_mode():
+		await get_tree().create_timer(2.0).timeout
+		var voss_house := get_tree().get_first_node_in_group("voss_house_controller") as Node
+		if voss_house != null and voss_house.has_method("_finish_opening_camera"):
+			voss_house.call("_finish_opening_camera")
+		await get_tree().process_frame
+		var validation_player := get_tree().get_first_node_in_group("player") as Node3D
+		if validation_player != null:
+			validation_player.global_position = Vector3(0.0, 1.4, -28.0)
+			validation_player.rotation.y = PI
+		mission_phase = 1
+		_show_msg("TAKE 5–7 — Rota de validação iniciada no limiar da caverna.", 4.0)
+		return
 	await get_tree().create_timer(0.5).timeout
 	_show_msg("ORIGEM — VALE DE KHEPER\n\n2026. Elias Voss desperta diante de ruínas que não existem em nenhum mapa. A memória do futuro chama-o pelo nome...", 6.0)
 	await get_tree().create_timer(6.5).timeout
@@ -71,6 +84,14 @@ func _start_narrative():
 	_show_msg("CONTROLOS: WASD Mover | Rato Olhar | Botão Esquerdo Atacar | Botão Direito Defender | Shift Correr | E Interagir\n\nCOMBATE: atacar, defender e correr consomem STAMINA. Depois de um golpe, Elias recupera o fôlego antes de voltar a atacar.\n\nObjectivo: Explora o Vale de Kheper, derrota os Kharu e encontra as 3 Tábuas de Tradução.", 8.5)
 
 # ═══════════════════════════════════════════════════════════════
+func _take57_validation_mode() -> bool:
+	if OS.get_environment("ORIGEM_TAKE57") == "1":
+		return true
+	for argument: String in OS.get_cmdline_args():
+		if argument == "--take57":
+			return true
+	return false
+
 func _process(delta: float):
 	_process_messages(delta)
 	_process_seraph(delta)

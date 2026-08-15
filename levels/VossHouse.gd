@@ -721,6 +721,10 @@ func _tint_tree_silhouette(tree: Node3D, material: StandardMaterial3D) -> void:
 			mesh_node.material_override = material
 
 func _build_opening_camera() -> void:
+	# A validação Take 5–7 começa diretamente no limiar da caverna; o prólogo continua intacto nos lançamentos normais.
+	if OS.get_environment("ORIGEM_TAKE57") == "1":
+		opening_active = false
+		return
 	# Prólogo breve: apresenta a Casa Voss diante da serra antes de Elias recuperar o controlo no interior.
 	opening_camera = Camera3D.new()
 	opening_camera.name = "CameraPrologoCasaVoss"

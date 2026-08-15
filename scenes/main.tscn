@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://ui/menus/PauseMenu.tscn" id="5"]
 [ext_resource type="Script" path="res://levels/LevelEnvironment.gd" id="LevelEnv"]
 [ext_resource type="Script" path="res://levels/TempleLevel.gd" id="TempleLvl"]
+[ext_resource type="Script" path="res://levels/Takes5to7Director.gd" id="Takes57"]
 [ext_resource type="Script" path="res://entities/enemies/KharuWarrior.gd" id="Kharu"]
 [ext_resource type="Script" path="res://entities/enemies/EliteKharu.gd" id="EliteKharu"]
 
@@ -119,6 +120,9 @@ navigation_layers = 1
 
 [node name="TempleLevel" type="Node3D" parent="."]
 script = ExtResource("TempleLvl")
+
+[node name="Takes5to7Director" type="Node3D" parent="."]
+script = ExtResource("Takes57")
 
 [node name="Geometry" type="Node3D" parent="." unique_id=1722151607]
 
