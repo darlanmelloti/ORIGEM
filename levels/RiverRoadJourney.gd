@@ -214,6 +214,16 @@ func _build_ruin_arch() -> void:
 		light.shadow_enabled = false
 		light.position = ember.position
 		arch.add_child(light)
+	# Preenchimento neutro reduz o corte preto do limiar e conserva as brasas como orientação, sem iluminar toda a Estrada do Rio.
+	var arch_fill: OmniLight3D = OmniLight3D.new()
+	arch_fill.name = "PreenchimentoDoArcoDasRuinas"
+	arch_fill.light_color = Color(0.30, 0.42, 0.46, 1.0)
+	arch_fill.light_energy = 0.54
+	arch_fill.omni_range = 16.0
+	arch_fill.omni_attenuation = 1.32
+	arch_fill.shadow_enabled = false
+	arch_fill.position = Vector3(0.0, 4.4, 2.6)
+	arch.add_child(arch_fill)
 
 func _build_roadside_vegetation() -> void:
 	var vegetation: Node3D = Node3D.new()
@@ -285,6 +295,10 @@ func _make_ruin_material() -> StandardMaterial3D:
 	material.normal_texture = MOSSY_RUIN_NORMAL
 	material.normal_scale = 0.32
 	material.roughness = 0.94
+	# Resposta residual de material: retém a leitura do musgo e dos blocos no modo GL Compatibility sem transformar a ruína em luz própria.
+	material.emission_enabled = true
+	material.emission = Color(0.026, 0.040, 0.030, 1.0)
+	material.emission_energy_multiplier = 0.30
 	material.uv1_scale = Vector3(0.28, 0.28, 0.28)
 	return material
 
