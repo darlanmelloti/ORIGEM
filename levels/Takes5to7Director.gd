@@ -14,6 +14,7 @@ var resonance: StandardMaterial3D
 var bronze: StandardMaterial3D
 var built := false
 var validation_camera: Camera3D
+var validation_elapsed := 0.0
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -91,13 +92,26 @@ void fragment() {
 	material.set_shader_parameter("displacement_amount", displacement_amount)
 	return material
 
+func _process(delta: float) -> void:
+	if validation_camera == null or not is_instance_valid(validation_camera):
+		return
+	validation_elapsed += delta
+	var travel: float = minf(validation_elapsed * 0.02, 0.35)
+	var lateral: float = sin(validation_elapsed * 0.52) * 2.2
+	validation_camera.position = Vector3(lateral, 2.7 + sin(validation_elapsed * 0.52) * 0.08, -28.5 - travel)
+	validation_camera.look_at(Vector3(lateral * 0.34, 2.9, -45.0 - travel * 0.45), Vector3.UP)
+
 func _activate_validation_camera() -> void:
+	# A validação do Take 5 deve atravessar a boca da caverna, não colidir com o Kharu herdado do prólogo.
+	var legacy_enemies := get_parent().get_node_or_null("Enemies") as Node3D
+	if legacy_enemies != null:
+		legacy_enemies.visible = false
 	validation_camera = Camera3D.new()
 	validation_camera.name = "CameraValidacaoTakes5a7"
 	validation_camera.fov = 68.0
-	validation_camera.position = Vector3(0.0, 3.1, -41.0)
+	validation_camera.position = Vector3(0.0, 2.7, -28.5)
 	add_child(validation_camera)
-	validation_camera.look_at(Vector3(0.0, 3.2, -58.0), Vector3.UP)
+	validation_camera.look_at(Vector3(0.0, 2.9, -45.0), Vector3.UP)
 	validation_camera.current = true
 
 func _build_take_5_cave_threshold() -> void:
@@ -111,8 +125,9 @@ func _build_take_5_cave_threshold() -> void:
 		_add_organic_rock(cave, Vector3(7.0 + cos(index * 0.7) * 1.5, 3.4, z - 0.8), Vector3(3.0, 4.8, 2.8), 610 + index, stone_dark, "ParedeCavernaR_%02d" % index)
 		if index % 2 == 0:
 			_add_resonance_fissure(cave, Vector3(-2.8 + sin(index) * 1.5, 1.2, z - 1.1), 2.0 + index * 0.05)
-	_add_brazier(cave, Vector3(-4.2, 1.0, -7.0), "BraseiroAzul_Caverna_L")
-	_add_brazier(cave, Vector3(4.2, 1.0, -16.0), "BraseiroAzul_Caverna_R")
+		_add_brazier(cave, Vector3(-4.2, 1.0, -7.0), "BraseiroAzul_Caverna_L")
+		_add_brazier(cave, Vector3(4.2, 1.0, -16.0), "BraseiroAzul_Caverna_R")
+		_add_brazier(cave, Vector3(0.0, 1.0, -24.0), "BraseiroAzul_Caverna_Profundo")
 
 func _build_take_6_canyon_ascent() -> void:
 	var canyon := Node3D.new()
@@ -229,8 +244,8 @@ func _add_brazier(parent: Node3D, position_value: Vector3, node_name: String) ->
 	var light := OmniLight3D.new()
 	light.name = "LuzDoBraseiro"
 	light.light_color = Color("#5cc8ff")
-	light.light_energy = 1.4
-	light.omni_range = 7.0
+	light.light_energy = 2.5
+	light.omni_range = 8.0
 	light.shadow_enabled = false
 	light.position.y = 1.0
 	brazier.add_child(light)
