@@ -24,6 +24,7 @@ func _ready() -> void:
 		_build_cube_chamber_marker()
 		_build_region11_to_12_approach()
 		_build_temporal_hub()
+		_build_final_dome()
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -354,6 +355,69 @@ func _build_temporal_hub() -> void:
 	core.material_override = cube_material
 	core.position = Vector3(0.0, 1.9, 0.0)
 	hub.add_child(core)
+
+
+func _build_final_dome() -> void:
+	var dome := Node3D.new()
+	dome.name = "CupulaFinal"
+	var dome_x: float = 164.0
+	var dome_z: float = 178.0
+	dome.position = Vector3(dome_x, _height_at(dome_x, dome_z), dome_z)
+	add_child(dome)
+	# An organic ring of CC0 pillars establishes the final sanctuary without greybox geometry.
+	for index: int in range(10):
+		var angle: float = float(index) * TAU / 10.0
+		var pillar := PILLAR.instantiate() as Node3D
+		if pillar == null:
+			continue
+		pillar.name = "PilarCupulaFinal_%02d" % index
+		pillar.position = Vector3(cos(angle) * 15.0, 3.2 + float(index % 3) * 0.7, sin(angle) * 15.0)
+		pillar.scale = Vector3(0.62 + float(index % 2) * 0.12, 0.92 + float(index % 3) * 0.12, 0.62 + float(index % 2) * 0.12)
+		pillar.rotation = Vector3(0.05 * sin(angle), angle, 0.04 * cos(angle))
+		_apply_material(pillar, stone_material)
+		dome.add_child(pillar)
+		if index % 2 == 0:
+			var beacon := OmniLight3D.new()
+			beacon.name = "LuzCoroaCupula_%02d" % index
+			beacon.light_color = Color("#8b78dc")
+			beacon.light_energy = 1.15
+			beacon.omni_range = 8.0
+			beacon.shadow_enabled = false
+			beacon.position = pillar.position + Vector3(0.0, 5.1, 0.0)
+			dome.add_child(beacon)
+	# The entrance crown is made from three large organic rock masses.
+	for index: int in range(3):
+		var crown := ROCK_LARGE.instantiate() as Node3D
+		if crown == null:
+			continue
+		crown.name = "ArcoOrganicoCupula_%02d" % index
+		crown.position = Vector3(-5.6 + float(index) * 5.6, 8.0 + float(index % 2) * 1.5, -12.0)
+		crown.scale = Vector3(0.82 if index != 1 else 1.0, 0.55 if index == 1 else 0.9, 0.52)
+		crown.rotation = Vector3(0.0, 0.08 * float(index - 1), 0.0)
+		_apply_material(crown, stone_material)
+		dome.add_child(crown)
+	var heart := MeshInstance3D.new()
+	heart.name = "NucleoCoroaFinal"
+	var heart_mesh := SphereMesh.new()
+	heart_mesh.radius = 1.15
+	heart_mesh.height = 2.3
+	heart.mesh = heart_mesh
+	var heart_material := StandardMaterial3D.new()
+	heart_material.albedo_color = Color("#6d5bd0")
+	heart_material.emission_enabled = true
+	heart_material.emission = Color("#6d5bd0")
+	heart_material.emission_energy_multiplier = 1.6
+	heart.material_override = heart_material
+	heart.position = Vector3(0.0, 5.2, 0.0)
+	dome.add_child(heart)
+	var heart_light := OmniLight3D.new()
+	heart_light.name = "LuzNucleoCupulaFinal"
+	heart_light.light_color = Color("#7f6bd6")
+	heart_light.light_energy = 2.2
+	heart_light.omni_range = 14.0
+	heart_light.shadow_enabled = false
+	heart_light.position = Vector3(0.0, 5.0, 0.0)
+	dome.add_child(heart_light)
 
 func _make_stone_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
