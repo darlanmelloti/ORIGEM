@@ -102,6 +102,8 @@ func _build_orion_cave() -> void:
 	rune_light.position = Vector3(0.0, 4.2, -6.6)
 	rune_light.shadow_enabled = false
 	cave.add_child(rune_light)
+	_create_visible_brazier_core(cave, Vector3(-2.2, 3.85, -8.1), "NucleoBraseiroOrionEsquerdo")
+	_create_visible_brazier_core(cave, Vector3(2.2, 3.85, -8.1), "NucleoBraseiroOrionDireito")
 	var mouth_fill: OmniLight3D = OmniLight3D.new()
 	mouth_fill.name = "LuzPreenchimentoBocaOrion"
 	mouth_fill.light_color = Color("#7ed9e8")
@@ -110,6 +112,22 @@ func _build_orion_cave() -> void:
 	mouth_fill.shadow_enabled = false
 	mouth_fill.position = Vector3(0.0, 3.0, -3.0)
 	cave.add_child(mouth_fill)
+
+func _create_visible_brazier_core(parent: Node3D, position_value: Vector3, node_name: String) -> void:
+	var core := MeshInstance3D.new()
+	core.name = node_name
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.24
+	sphere.height = 0.48
+	core.mesh = sphere
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color("#5cc8ff")
+	material.emission_enabled = true
+	material.emission = Color("#5cc8ff")
+	material.emission_energy_multiplier = 3.8
+	core.material_override = material
+	core.position = position_value
+	parent.add_child(core)
 
 func _build_region9_to_10_approach() -> void:
 	var approach: Node3D = Node3D.new()
