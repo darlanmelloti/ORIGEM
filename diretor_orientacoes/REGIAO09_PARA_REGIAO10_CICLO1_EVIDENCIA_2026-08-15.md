@@ -104,6 +104,30 @@ A cena independente `Region10Validation.tscn` foi executada com o mesmo protocol
 - **TARGET_REGION**: Região 10 — Caverna do Orion
 - **DEADLINE_NEXT_PUSH**: `2026-08-15T17:06:00Z` (UTC)
 
+## Integração atómica e início da Região 11
+
+A composição aprovada da `Region10Validation.tscn` foi incorporada na travessia normal por meio dos dois núcleos emissivos adicionados ao `OrionDestinationRegion.gd`; não foi copiada a cena de validação inteira para o fluxo de jogo. O parser Godot 4.7.1 permaneceu limpo. Em seguida, a Região 11 — Câmara do Orion Cube — foi iniciada no mesmo bloco, com quatro suportes orgânicos CC0 e um anel de quatro luzes de ressonância azul ao redor do Cube.
+
+O código da integração de Região 10 está no commit `4818a06`; o primeiro passe de Região 11 está no commit `1b262b9`, ambos na branch `feature/dev2-mountain-canyon`. A próxima execução obrigatória é capturar a evidência formal da Região 11 e validar a leitura do Cube, dos suportes e da iluminação sem greybox.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `PASSED`
+- **NEXT_ACTION_IMMEDIATE**: Executar F5 da Região 11, capturar gameplay de 30 segundos e print 1600×900, comparar a câmara do Cube e iniciar a próxima correção no mesmo ciclo se houver oclusão ou escala inadequada.
+- **TARGET_REGION**: Região 11 — Câmara do Orion Cube
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T17:20:00Z` (UTC)
+
+## Região 11 — Ciclo 1 de evidência
+
+A cena `Region11Validation.tscn` foi executada com parser limpo, gameplay de 30 segundos e print 1600×900. Após elevar a câmara acima da superfície e isolar a Câmara do Orion Cube, o enquadramento apresenta o altar circular, o Cube azul e quatro núcleos luminosos distribuídos no anel de suportes orgânicos. A leitura estrutural da Região 11 foi atingida; o passe seguinte deverá melhorar a luz ambiente e a leitura de textura sem substituir a geometria orgânica.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `PASSED`
+- **NEXT_ACTION_IMMEDIATE**: Aumentar a legibilidade da câmara do Cube com luz de recorte suave e material PBR mais visível, mantendo o Cube como foco e preparando a continuidade física para o Hub Temporal da Região 12.
+- **TARGET_REGION**: Região 11 — Câmara do Orion Cube
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T17:20:00Z` (UTC)
+
 ## Ciclo 7 — Resultado e transição de estado
 
 A mudança para o eixo exterior positivo-Z não alterou a composição funcional: a captura continua a mostrar símbolos de rota e fenda emissiva, sem revelar a boca do Orion. O Ciclo 7 é `REJECTED_VISUAL`.

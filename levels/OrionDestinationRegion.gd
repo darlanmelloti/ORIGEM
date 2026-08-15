@@ -251,6 +251,20 @@ func _build_cube_chamber_marker() -> void:
 		support_light.shadow_enabled = false
 		support_light.position = Vector3(cos(angle) * 5.4, 1.1, sin(angle) * 5.4)
 		chamber.add_child(support_light)
+		var ring_core := MeshInstance3D.new()
+		ring_core.name = "NucleoVisivelAnelCube_%02d" % index
+		var ring_sphere := SphereMesh.new()
+		ring_sphere.radius = 0.22
+		ring_sphere.height = 0.44
+		ring_core.mesh = ring_sphere
+		var ring_material := StandardMaterial3D.new()
+		ring_material.albedo_color = Color("#4ebbd3")
+		ring_material.emission_enabled = true
+		ring_material.emission = Color("#4ebbd3")
+		ring_material.emission_energy_multiplier = 2.8
+		ring_core.material_override = ring_material
+		ring_core.position = Vector3(cos(angle) * 5.4, 1.65, sin(angle) * 5.4)
+		chamber.add_child(ring_core)
 
 func _build_temporal_hub() -> void:
 	var hub: Node3D = Node3D.new()
@@ -308,7 +322,7 @@ func _make_cube_material() -> StandardMaterial3D:
 	material.roughness = 0.18
 	material.emission_enabled = true
 	material.emission = Color(0.04, 0.36, 1.0, 1.0)
-	material.emission_energy_multiplier = 2.4
+	material.emission_energy_multiplier = 1.35
 	return material
 
 func _apply_material(root: Node, material: Material) -> void:
