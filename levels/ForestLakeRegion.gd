@@ -29,7 +29,6 @@ func _ready() -> void:
 	path_material = _create_path_material()
 	ruin_material = _create_ruin_material()
 	_build_forest_path()
-	_build_forest_threshold()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
 	_build_shore_access_steps()
@@ -95,54 +94,6 @@ func _build_forest_path() -> void:
 		slab_collision.shape = slab_shape
 		slab_body.add_child(slab_collision)
 		road.add_child(slab_body)
-
-func _build_forest_threshold() -> void:
-	# Limiar físico de raízes e pedras: anuncia a floresta como espaço explorável, deixando mais de quatro metros livres no eixo de lajes.
-	var threshold: Node3D = Node3D.new()
-	threshold.name = "LimiarOrganicoDaFlorestaDensa"
-	add_child(threshold)
-	var root_material: StandardMaterial3D = StandardMaterial3D.new()
-	root_material.albedo_color = Color(0.12, 0.075, 0.032, 1.0)
-	root_material.roughness = 0.93
-	var moss_material: StandardMaterial3D = StandardMaterial3D.new()
-	moss_material.albedo_color = Color(0.075, 0.14, 0.090, 1.0)
-	moss_material.roughness = 0.91
-	for side: float in [-1.0, 1.0]:
-		var z_value: float = 127.0
-		var x_value: float = _path_x(z_value) + side * 3.55
-		var ground_y: float = _height_at(x_value, z_value)
-		var root_mesh: CylinderMesh = CylinderMesh.new()
-		root_mesh.top_radius = 0.18
-		root_mesh.bottom_radius = 0.31
-		root_mesh.height = 4.10
-		root_mesh.radial_segments = 9
-		root_mesh.material = root_material
-		var root: MeshInstance3D = MeshInstance3D.new()
-		root.name = "RaizLimiarFlorestal_%s" % ("Oeste" if side < 0.0 else "Este")
-		root.mesh = root_mesh
-		root.position = Vector3(x_value, ground_y + 0.92, z_value + side * 0.40)
-		root.rotation.z = side * deg_to_rad(24.0)
-		root.rotation.y = side * deg_to_rad(17.0)
-		threshold.add_child(root)
-		var rock: Node3D = ROCK.instantiate() as Node3D
-		if rock != null:
-			rock.name = "AfloramentoLimiarFlorestal_%s" % ("Oeste" if side < 0.0 else "Este")
-			rock.position = Vector3(x_value + side * 0.86, ground_y + 0.05, z_value - 1.10)
-			rock.scale = Vector3(0.19, 0.15, 0.19)
-			rock.rotation.y = side * deg_to_rad(38.0)
-			_apply_material(rock, moss_material)
-			threshold.add_child(rock)
-	# Estela baixa de orientação, sem luz pontual: a textura azul residual responde à narrativa P-0 e não cria sinalização moderna.
-	var guide_x: float = _path_x(132.0) - 2.75
-	var guide_y: float = _height_at(guide_x, 132.0)
-	var guide: Node3D = PILLAR.instantiate() as Node3D
-	if guide != null:
-		guide.name = "MarcoDeOrientacaoP0DaFloresta"
-		guide.position = Vector3(guide_x, guide_y + 0.45, 132.0)
-		guide.scale = Vector3(0.22, 0.30, 0.22)
-		guide.rotation.y = deg_to_rad(-18.0)
-		_apply_material(guide, moss_material)
-		threshold.add_child(guide)
 
 func _build_forest_wayfinding() -> void:
 	# Balizas baixas, quentes e espaçadas: guiam Elias no sub-bosque sem transformar a floresta num corredor iluminado.

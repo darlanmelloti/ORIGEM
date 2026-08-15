@@ -28,7 +28,7 @@ func _play_capture_take(take_id: int) -> void:
 const TAKE_FRAMES: Dictionary = {
 	1: {"position": Vector3(-33.0, 5.5, 3.0), "target": Vector3(-7.0, 1.5, 47.0), "fov": 52.0},
 	2: {"position": Vector3(-22.0, 4.0, 22.0), "target": Vector3(-16.5, 3.8, 50.0), "fov": 48.0},
-	3: {"position": Vector3(-5.0, 4.6, 96.0), "target": Vector3(-4.0, 1.5, 132.0), "fov": 45.0},
+	3: {"position": Vector3(-4.5, 3.35, 110.0), "target": Vector3(-4.0, 1.45, 141.0), "fov": 43.0},
 	4: {"position": Vector3(31.5, 5.4, 231.0), "target": Vector3(59.0, 1.7, 251.0), "fov": 43.0},
 	5: {"position": Vector3(72.0, 27.5, 313.0), "target": Vector3(168.0, 12.0, 385.0), "fov": 50.0},
 	9: {"position": Vector3(-104.0, 16.0, 163.0), "target": Vector3(-36.0, 1.6, 180.0), "fov": 49.0},
