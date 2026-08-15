@@ -20,8 +20,9 @@ func _ready() -> void:
 	cube_material = _make_cube_material()
 	_build_orion_cave()
 	_build_region9_to_10_approach()
-	_build_cube_chamber_marker()
-	_build_temporal_hub()
+	if OS.get_environment("ORIGEM_VALIDATION_REGION") != "10":
+		_build_cube_chamber_marker()
+		_build_temporal_hub()
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -35,6 +36,26 @@ func _build_orion_cave() -> void:
 	var cave_z: float = 548.0
 	cave.position = Vector3(cave_x, _height_at(cave_x, cave_z), cave_z)
 	add_child(cave)
+	# Marco orgânico de legibilidade da boca: massas CC0 formam um limiar arqueológico, sem caixa/greybox.
+	var mouth_positions: Array[Vector3] = [Vector3(-5.4, 4.2, -8.0), Vector3(5.4, 4.2, -8.0), Vector3(0.0, 8.6, -8.4)]
+	for mouth_index: int in range(mouth_positions.size()):
+		var mouth_frame: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if mouth_frame == null:
+			continue
+		mouth_frame.name = "LimiarOrganicoOrion_%02d" % mouth_index
+		mouth_frame.position = mouth_positions[mouth_index]
+		mouth_frame.scale = Vector3(0.66 if mouth_index < 2 else 0.82, 1.05 if mouth_index < 2 else 0.48, 0.38)
+		mouth_frame.rotation = Vector3(0.0, 0.16 * float(mouth_index - 1), 0.0)
+		_apply_material(mouth_frame, stone_material)
+		cave.add_child(mouth_frame)
+	var threshold_glow: OmniLight3D = OmniLight3D.new()
+	threshold_glow.name = "BraseiroLimiarOrion"
+	threshold_glow.light_color = Color("#5cc8ff")
+	threshold_glow.light_energy = 3.0
+	threshold_glow.omni_range = 16.0
+	threshold_glow.shadow_enabled = false
+	threshold_glow.position = Vector3(0.0, 3.4, -8.2)
+	cave.add_child(threshold_glow)
 	# Rocha disposta em ferradura: forma entrada física sem cartão plano e deixa o percurso de Orion legível à distância.
 	for index: int in range(9):
 		var angle: float = lerpf(-2.35, -0.78, float(index) / 8.0)

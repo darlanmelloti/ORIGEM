@@ -27,6 +27,57 @@ A cena renderiza e a transição está presente no mundo, mas este ciclo **não 
 
 Após este registo, a branch continua automaticamente no próximo ciclo de refinamento da Região 10. As Regiões 1–6 e a `feature/dev1-gameplay-core` permanecem fora do escopo.
 
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `REJECTED_VISUAL`
+- **NEXT_ACTION_IMMEDIATE**: Recuar e reposicionar a câmara de validação da Região 10 para uma vista lateral exterior; elevar o alvo para a abertura escura da Caverna do Orion e enquadrar os braseiros de ressonância; recompilar, executar F5 e submeter novo gameplay/print.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T16:42:33Z` (UTC)
+
 ## Refinamento imediato pós-ciclo
 
 A releitura pós-commit confirmou novamente a recomendação da Direção: a câmara dedicada evita o prólogo, mas a composição continua a enquadrar uma massa de pedra em vez de revelar inequivocamente a boca da Caverna do Orion. O ciclo seguinte deve abandonar este ponto de vista e usar uma câmara exterior mais lateral, com o alvo na abertura escura e não nos marcadores posteriores. O estado permanece **não aceite visualmente**, apesar de parser, gameplay e print formais estarem presentes.
+
+## Ciclo 2 — Resultado e transição de estado
+
+A vista lateral exterior recuada removeu o landmark azul posterior e recuperou a silhueta alpina, mas ficou demasiado ampla: a boca da Caverna do Orion e os braseiros não aparecem como foco legível. O resultado do Ciclo 2 é rejeitado visualmente.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `REJECTED_VISUAL`
+- **NEXT_ACTION_IMMEDIATE**: Criar uma câmara dedicada no limiar da Região 10, mais próxima das coordenadas oficiais da boca, com deslocamento lateral suficiente para evitar clipping; manter os landmarks posteriores omitidos e enquadrar a abertura escura com pelo menos dois braseiros azuis no terço central.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T16:44:03Z` (UTC)
+
+## Ciclo 3/4 — Resultado e transição de estado
+
+A câmara ancorada no nó runtime e o novo limiar de rocha orgânica foram compilados e capturados. A cena continua a mostrar a trilha, as fendas emissivas e massas de referência, mas não apresenta uma abertura escura reconhecível nem dois braseiros enquadrados. O resultado permanece rejeitado visualmente; a evidência confirma execução, não aceitação.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `REJECTED_VISUAL`
+- **NEXT_ACTION_IMMEDIATE**: Criar uma tomada de limiar dedicada e determinística a partir da própria CavernaDoOrion, desativar temporariamente os marcadores de trilha dentro do campo de visão e iluminar a cavidade recuada com dois OmniLight3D azuis visíveis na abertura; repetir parser, F5, gameplay e print.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T16:47:46Z` (UTC)
+
+## Ciclo 5 — Resultado e transição de estado
+
+A supressão de `TransicaoRegiao09Para10` foi aplicada apenas ao modo de validação, mas o print ainda mostra massas de pedra, símbolos e a fenda emissiva sem uma boca de caverna inequívoca. O Ciclo 5 é rejeitado visualmente; o próximo ciclo deve tornar a tomada determinística e focal, com o arco orgânico no centro e sem elementos auxiliares de trilha.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `REJECTED_VISUAL`
+- **NEXT_ACTION_IMMEDIATE**: Criar uma tomada de limiar determinística que desative também as fendas/marcadores auxiliares durante a captura, posicione a câmara a poucos metros do arco orgânico e enquadre os dois OmniLight3D azuis dentro da abertura recuada; repetir parser, F5, gameplay e print.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T16:49:04Z` (UTC)
+
+## Ciclo 6 — Resultado e transição de estado
+
+A tomada de limiar aproximada e a ocultação dos marcadores auxiliares foram executadas, mas o frame continua a mostrar terreno, massas pétreas e símbolos sem a boca escura legível. O Ciclo 6 é `REJECTED_VISUAL`; a falha permanece de composição e não de parser ou captura.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `REJECTED_VISUAL`
+- **NEXT_ACTION_IMMEDIATE**: Forçar uma tomada de entrada determinística ancorada na geometria frontal da CavernaDoOrion, ocultar todos os símbolos/rock markers fora do arco, aumentar o contraste da cavidade e verificar por frame que a abertura e dois braseiros ocupam o centro visual.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T16:50:25Z` (UTC)

@@ -146,8 +146,8 @@ func _process(delta: float) -> void:
 	elif validation_take_mode == 13:
 		var cave_travel: float = minf(validation_elapsed * 0.045, 1.0)
 		var cave_sway: float = sin(validation_elapsed * 0.28) * 0.85
-		validation_camera.position = Vector3(-90.0 - cave_travel * 12.0 + cave_sway, 58.0 - cave_travel * 4.0 + sin(validation_elapsed * 0.24) * 0.14, 520.0 + cave_travel * 18.0)
-		validation_camera.look_at(Vector3(-116.0, 44.0 - cave_travel * 2.0, 546.0 + cave_travel * 3.0), Vector3.UP)
+		validation_camera.position = Vector3(-100.0 - cave_travel * 4.0 + cave_sway, 48.0 - cave_travel * 2.0 + sin(validation_elapsed * 0.24) * 0.14, 524.0 + cave_travel * 10.0)
+		validation_camera.look_at(Vector3(-116.0, 41.0 - cave_travel * 1.0, 538.0 + cave_travel * 2.0), Vector3.UP)
 	else:
 		var travel: float = minf(validation_elapsed * 0.02, 0.35)
 		var lateral: float = sin(validation_elapsed * 0.52) * 2.2
@@ -227,10 +227,12 @@ func _activate_region10_validation_camera() -> void:
 		legacy_enemies.visible = false
 	validation_camera = Camera3D.new()
 	validation_camera.name = "CameraValidacaoRegiao10CavernaOrion"
-	validation_camera.fov = 50.0
-	validation_camera.position = Vector3(-90.0, 58.0, 520.0)
+	validation_camera.fov = 58.0
 	add_child(validation_camera)
-	validation_camera.look_at(Vector3(-116.0, 44.0, 546.0), Vector3.UP)
+	var cave_node := get_parent().get_node_or_null("DestinosOrionEHubTemporal/CavernaDoOrion") as Node3D
+	var cave_origin: Vector3 = cave_node.global_position if cave_node != null else Vector3(-116.0, 42.0, 548.0)
+	validation_camera.global_position = cave_origin + Vector3(-10.0, 6.0, -10.0)
+	validation_camera.look_at(cave_origin + Vector3(0.0, 4.2, -8.0), Vector3.UP)
 	validation_camera.current = true
 	call_deferred("_hide_region10_later_landmarks")
 
@@ -238,9 +240,20 @@ func _hide_region10_later_landmarks() -> void:
 	var destinations := get_parent().get_node_or_null("DestinosOrionEHubTemporal") as Node3D
 	if destinations != null:
 		_hide_region10_node_recursive(destinations)
+		var approach := destinations.get_node_or_null("TransicaoRegiao09Para10") as Node3D
+		if approach != null:
+			approach.visible = false
 	var temporal_echo := get_node_or_null("Take8_EcoTemporal") as Node3D
 	if temporal_echo != null:
 		temporal_echo.visible = false
+	_hide_region10_auxiliary_markers(get_parent())
+
+func _hide_region10_auxiliary_markers(node: Node) -> void:
+	if node.name.contains("Fenda") or node.name.contains("Degrau") or node.name.contains("Wayfinding"):
+		node.visible = false
+		return
+	for child in node.get_children():
+		_hide_region10_auxiliary_markers(child)
 
 func _hide_region10_node_recursive(node: Node) -> void:
 	if node.name in ["CamaraDoOrionCube", "CuboOrion", "NucleoTemporal"]:
