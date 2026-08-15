@@ -33,10 +33,10 @@ func _ready() -> void:
 	var dome_anchor := Vector3.ZERO
 	camera = Camera3D.new()
 	camera.name = "Region12ValidationCamera"
-	camera.position = Vector3(0.0, 7.0, 17.0)
+	camera.position = Vector3(0.0, 6.5, 11.5)
 	camera.fov = 58.0
 	add_child(camera)
-	camera.look_at(Vector3(0.0, 4.8, -3.8), Vector3.UP)
+	camera.look_at(Vector3(0.0, 4.6, -4.0), Vector3.UP)
 	camera.current = true
 
 func _build_environment() -> void:
@@ -68,8 +68,8 @@ func _process(delta: float) -> void:
 	if camera == null:
 		return
 	elapsed += delta
-	camera.position = Vector3(sin(elapsed * 0.22) * 1.2, 7.0 + sin(elapsed * 0.18) * 0.25, 17.0 + cos(elapsed * 0.22) * 1.0)
-	camera.look_at(Vector3(0.0, 4.8, -3.8), Vector3.UP)
+	camera.position = Vector3(sin(elapsed * 0.22) * 0.75, 6.5 + sin(elapsed * 0.18) * 0.18, 11.5 + cos(elapsed * 0.22) * 0.7)
+	camera.look_at(Vector3(0.0, 4.6, -4.0), Vector3.UP)
 
 func _build_final_dome_validation_proxy() -> void:
 	var proxy := Node3D.new()
@@ -81,8 +81,8 @@ func _build_final_dome_validation_proxy() -> void:
 		if pillar == null:
 			continue
 		pillar.name = "PilarProxy_%02d" % index
-		pillar.position = Vector3(cos(angle) * 8.0, 2.5 + float(index % 2) * 0.5, sin(angle) * 8.0)
-		pillar.scale = Vector3(0.72, 1.0 + float(index % 3) * 0.12, 0.72)
+		pillar.position = Vector3(cos(angle) * 6.6, 3.1 + float(index % 2) * 0.55, sin(angle) * 6.6)
+		pillar.scale = Vector3(1.18, 1.55 + float(index % 3) * 0.16, 1.18)
 		pillar.rotation = Vector3(0.04 * sin(angle), angle, 0.04 * cos(angle))
 		proxy.add_child(pillar)
 		var light := OmniLight3D.new()
@@ -97,11 +97,26 @@ func _build_final_dome_validation_proxy() -> void:
 		if crown == null:
 			continue
 		crown.name = "ArcoProxy_%02d" % index
-		crown.position = Vector3(-3.8 + float(index) * 3.8, 3.8 + float(index % 2) * 0.8, -4.8)
-		crown.scale = Vector3(2.0 if index != 1 else 2.5, 1.35 if index == 1 else 1.85, 1.45)
+		crown.position = Vector3(-3.6 + float(index) * 3.6, 4.0 + float(index % 2) * 0.65, -4.6)
+		crown.scale = Vector3(3.2 if index != 1 else 3.8, 1.75 if index == 1 else 2.4, 2.1)
 		crown.rotation = Vector3(0.0, 0.08 * float(index - 1), 0.0)
 		proxy.add_child(crown)
+	var base := MeshInstance3D.new()
+	base.name = "BasePedraCupulaFinal"
+	var base_mesh := CylinderMesh.new()
+	base_mesh.top_radius = 7.2
+	base_mesh.bottom_radius = 7.8
+	base_mesh.height = 0.7
+	base_mesh.radial_segments = 32
+	base.mesh = base_mesh
+	base.position = Vector3(0.0, 0.35, 0.0)
+	var base_material := StandardMaterial3D.new()
+	base_material.albedo_color = Color("#25233b")
+	base_material.roughness = 0.92
+	base.material_override = base_material
+	proxy.add_child(base)
 	var core := MeshInstance3D.new()
+
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.58
 	sphere.height = 1.16
