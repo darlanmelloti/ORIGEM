@@ -103,3 +103,14 @@ A mudança para o eixo exterior positivo-Z não alterou a composição funcional
 - **NEXT_ACTION_IMMEDIATE**: Criar um proxy de entrada exclusivo para validação dentro do mesmo ramo activo da Região 10, com arco orgânico, cavidade recuada e dois OmniLight3D azuis; apontar a câmara directamente ao proxy e validar que os símbolos auxiliares ficam fora do campo.
 - **TARGET_REGION**: Região 10 — Caverna do Orion
 - **DEADLINE_NEXT_PUSH**: `2026-08-15T16:52:02Z` (UTC)
+
+## Ciclo 10 — Resultado e transição de estado
+
+A inclusão de `ORIGEM_VALIDATION_REGION=10` no controlador narrativo passou o parser, mas a captura permaneceu visualmente idêntica à composição da trilha. O hook de player foi necessário, porém não tornou a câmara de Região 10 alcançável no enquadramento final.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `REJECTED_VISUAL`
+- **NEXT_ACTION_IMMEDIATE**: Criar uma cena de validação dedicada para Região 10 ou um ramo de câmara explicitamente alcançável pelo harness, instanciando TerrainPatch/Environment, arco orgânico, cavidade recuada e dois OmniLight3D azuis; validar que a captura abandona a composição da Região 9.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T17:04:04Z` (UTC)
