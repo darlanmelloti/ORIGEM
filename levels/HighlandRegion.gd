@@ -16,16 +16,23 @@ var terrain_patch: Node3D
 var stone_material: StandardMaterial3D
 var roof_material: StandardMaterial3D
 var path_material: StandardMaterial3D
+var timber_material: StandardMaterial3D
+var window_material: StandardMaterial3D
+var beacon_material: StandardMaterial3D
 
 func _ready() -> void:
 	terrain_patch = get_parent().get_node_or_null("TerrainPatch") as Node3D
 	stone_material = _make_stone_material()
 	roof_material = _make_roof_material()
 	path_material = _make_path_material()
+	timber_material = _make_timber_material()
+	window_material = _make_window_material()
+	beacon_material = _make_beacon_material()
 	_build_lake_to_village_path()
 	_build_elevated_village()
 	_build_observatory()
 	_build_mountain_trail()
+	_build_highland_silhouette()
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -43,48 +50,62 @@ func _build_elevated_village() -> void:
 	var village_z: float = 352.0
 	village.position = Vector3(village_x, _height_at(village_x, village_z), village_z)
 	add_child(village)
-	# Terraços escalonados: lidos como vila na encosta, sem formar uma parede única.
+	# Terraços quebrados: uma vila construída sobre a encosta, não uma muralha geométrica uniforme.
 	for terrace_index: int in range(3):
-		var terrace: MeshInstance3D = MeshInstance3D.new()
-		var terrace_mesh: BoxMesh = BoxMesh.new()
-		terrace_mesh.size = Vector3(32.0 - float(terrace_index) * 4.0, 1.25, 13.0)
-		terrace.mesh = terrace_mesh
-		terrace.material_override = stone_material
-		terrace.position = Vector3(-float(terrace_index) * 3.5, 0.62 + float(terrace_index) * 3.4, float(terrace_index) * 8.0)
-		village.add_child(terrace)
-	for house_index: int in range(7):
-		var row: int = house_index / 3
-		var col: int = house_index % 3
+		var width: float = 34.0 - float(terrace_index) * 4.8
+		_add_box_mesh(village, "TerracoDePedra_%02d" % terrace_index, Vector3(-float(terrace_index) * 3.8, 0.60 + float(terrace_index) * 3.35, float(terrace_index) * 8.4), Vector3(width, 1.20, 13.4), stone_material)
+		_add_box_mesh(village, "MuroDoTerraco_%02d" % terrace_index, Vector3(-float(terrace_index) * 3.8, 1.38 + float(terrace_index) * 3.35, float(terrace_index) * 8.4 - 5.9), Vector3(width - 2.6, 1.45, 0.75), stone_material)
+	var house_positions: Array[Vector3] = [
+		Vector3(-11.6, 1.28, 1.1), Vector3(-1.8, 1.28, 0.3), Vector3(8.3, 1.28, 1.5),
+		Vector3(-8.8, 4.64, 9.5), Vector3(1.1, 4.64, 8.7), Vector3(9.5, 4.64, 10.0),
+		Vector3(-5.8, 7.99, 17.3), Vector3(4.6, 7.99, 18.1)
+	]
+	for house_index: int in range(house_positions.size()):
 		var house: Node3D = _make_village_house(house_index)
-		house.position = Vector3(-10.0 + float(col) * 10.0 - float(row) * 2.5, 1.26 + float(row) * 3.4, 2.0 + float(row) * 8.0)
+		house.position = house_positions[house_index]
 		village.add_child(house)
 	for pillar_index: int in range(4):
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
 		if pillar == null:
 			continue
-		pillar.position = Vector3(-16.0 + float(pillar_index) * 10.0, 2.4, -4.5)
-		pillar.scale = Vector3(0.46, 0.46, 0.46)
+		pillar.position = Vector3(-16.0 + float(pillar_index) * 10.4, 2.55, -4.8)
+		pillar.scale = Vector3(0.52, 0.52, 0.52)
+		pillar.rotation.y = 0.12 * float(pillar_index)
 		_apply_material(pillar, stone_material)
 		village.add_child(pillar)
+	for lantern_index: int in range(4):
+		var lantern: OmniLight3D = OmniLight3D.new()
+		lantern.name = "LanternaDaVila_%02d" % lantern_index
+		lantern.position = Vector3(-10.0 + float(lantern_index) * 7.0, 3.0 + float(lantern_index % 2) * 3.4, 4.0 + float(lantern_index % 2) * 8.0)
+		lantern.light_color = Color(1.0, 0.43, 0.14, 1.0)
+		lantern.light_energy = 0.65
+		lantern.omni_range = 8.0
+		lantern.shadow_enabled = false
+		village.add_child(lantern)
 
 func _make_village_house(index: int) -> Node3D:
 	var house: Node3D = Node3D.new()
 	house.name = "CasaDePedra_%02d" % index
-	var base_mesh: BoxMesh = BoxMesh.new()
-	base_mesh.size = Vector3(6.8, 4.0, 6.0)
-	var base: MeshInstance3D = MeshInstance3D.new()
-	base.mesh = base_mesh
-	base.position = Vector3(0.0, 2.0, 0.0)
-	base.material_override = stone_material
-	house.add_child(base)
+	var width: float = 6.2 + float(index % 3) * 0.75
+	var depth: float = 5.5 + float(index % 2) * 0.70
+	var height: float = 3.5 + float(index % 3) * 0.38
+	_add_box_mesh(house, "BaseDePedra", Vector3(0.0, height * 0.5, 0.0), Vector3(width, height, depth), stone_material)
 	var roof_mesh: PrismMesh = PrismMesh.new()
-	roof_mesh.size = Vector3(7.6, 2.5, 7.2)
+	roof_mesh.size = Vector3(width + 0.75, 2.35, depth + 0.90)
 	roof_mesh.left_to_right = 0.5
 	var roof: MeshInstance3D = MeshInstance3D.new()
+	roof.name = "TelhadoDeArdosia"
 	roof.mesh = roof_mesh
-	roof.position = Vector3(0.0, 5.10, 0.0)
+	roof.position = Vector3(0.0, height + 1.0, 0.0)
 	roof.material_override = roof_material
 	house.add_child(roof)
+	_add_box_mesh(house, "PortaDeMadeira", Vector3(0.0, 1.18, -depth * 0.51), Vector3(1.20, 2.35, 0.12), timber_material)
+	for window_index: int in range(2):
+		var offset_x: float = -width * 0.27 if window_index == 0 else width * 0.27
+		_add_box_mesh(house, "JanelaQuente_%02d" % window_index, Vector3(offset_x, 2.10, -depth * 0.52), Vector3(0.92, 0.82, 0.08), window_material)
+	_add_box_mesh(house, "VigaFrontal", Vector3(0.0, height - 0.45, -depth * 0.55), Vector3(width + 0.20, 0.20, 0.14), timber_material)
+	if index % 2 == 0:
+		_add_box_mesh(house, "Chamine", Vector3(width * 0.28, height + 1.85, depth * 0.14), Vector3(0.55, 2.10, 0.60), stone_material)
 	return house
 
 func _build_observatory() -> void:
@@ -95,41 +116,65 @@ func _build_observatory() -> void:
 	observatory.position = Vector3(ox, _height_at(ox, oz), oz)
 	add_child(observatory)
 	var plinth_mesh: CylinderMesh = CylinderMesh.new()
-	plinth_mesh.top_radius = 10.5
-	plinth_mesh.bottom_radius = 12.0
-	plinth_mesh.height = 3.2
-	plinth_mesh.radial_segments = 24
+	plinth_mesh.top_radius = 10.8
+	plinth_mesh.bottom_radius = 13.2
+	plinth_mesh.height = 3.5
+	plinth_mesh.radial_segments = 28
 	var plinth: MeshInstance3D = MeshInstance3D.new()
+	plinth.name = "BaseAstronomica"
 	plinth.mesh = plinth_mesh
-	plinth.position = Vector3(0.0, 1.6, 0.0)
+	plinth.position = Vector3(0.0, 1.75, 0.0)
 	plinth.material_override = stone_material
 	observatory.add_child(plinth)
+	for ring_index: int in range(3):
+		var ring_mesh: CylinderMesh = CylinderMesh.new()
+		ring_mesh.top_radius = 9.4 - float(ring_index) * 1.55
+		ring_mesh.bottom_radius = ring_mesh.top_radius + 0.30
+		ring_mesh.height = 0.52
+		ring_mesh.radial_segments = 28
+		var ring: MeshInstance3D = MeshInstance3D.new()
+		ring.name = "AnelAstronomico_%02d" % ring_index
+		ring.mesh = ring_mesh
+		ring.position = Vector3(0.0, 3.65 + float(ring_index) * 1.38, 0.0)
+		ring.material_override = stone_material
+		observatory.add_child(ring)
 	var dome_mesh: SphereMesh = SphereMesh.new()
-	dome_mesh.radius = 8.8
-	dome_mesh.height = 5.0
+	dome_mesh.radius = 8.5
+	dome_mesh.height = 5.4
 	dome_mesh.radial_segments = 32
 	var dome: MeshInstance3D = MeshInstance3D.new()
 	dome.name = "DomoDoObservatorio"
 	dome.mesh = dome_mesh
-	dome.scale = Vector3(1.0, 0.44, 1.0)
-	dome.position = Vector3(0.0, 5.0, 0.0)
+	dome.scale = Vector3(1.0, 0.46, 1.0)
+	dome.position = Vector3(0.0, 6.55, 0.0)
 	dome.material_override = stone_material
 	observatory.add_child(dome)
-	for index: int in range(6):
+	for index: int in range(8):
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
 		if pillar == null:
 			continue
-		var angle: float = float(index) * TAU / 6.0
-		pillar.position = Vector3(cos(angle) * 8.4, 3.1, sin(angle) * 8.4)
-		pillar.scale = Vector3(0.55, 0.55, 0.55)
+		var angle: float = float(index) * TAU / 8.0
+		pillar.position = Vector3(cos(angle) * 9.5, 4.25, sin(angle) * 9.5)
+		pillar.scale = Vector3(0.62, 0.72 + float(index % 2) * 0.08, 0.62)
+		pillar.rotation = Vector3(0.05 * sin(angle), angle + 0.26, 0.04 * cos(angle))
 		_apply_material(pillar, stone_material)
 		observatory.add_child(pillar)
+	var lens_mesh: SphereMesh = SphereMesh.new()
+	lens_mesh.radius = 1.15
+	lens_mesh.height = 2.30
+	lens_mesh.radial_segments = 24
+	var lens: MeshInstance3D = MeshInstance3D.new()
+	lens.name = "LenteDeOrion"
+	lens.mesh = lens_mesh
+	lens.position = Vector3(0.0, 9.25, 0.0)
+	lens.material_override = beacon_material
+	observatory.add_child(lens)
 	var beacon: OmniLight3D = OmniLight3D.new()
 	beacon.name = "LuzDoObservatorio"
 	beacon.light_color = Color(0.22, 0.56, 1.0, 1.0)
-	beacon.light_energy = 2.1
-	beacon.omni_range = 28.0
-	beacon.position = Vector3(0.0, 8.4, 0.0)
+	beacon.light_energy = 2.8
+	beacon.omni_range = 32.0
+	beacon.position = Vector3(0.0, 9.2, 0.0)
 	beacon.shadow_enabled = false
 	observatory.add_child(beacon)
 
@@ -188,6 +233,75 @@ func _make_stone_material() -> StandardMaterial3D:
 	material.normal_scale = 0.30
 	material.roughness = 0.95
 	material.uv1_scale = Vector3(0.26, 0.26, 0.26)
+	return material
+
+func _build_highland_silhouette() -> void:
+	var forest: Node3D = Node3D.new()
+	forest.name = "SilhuetasDaVilaElevada"
+	add_child(forest)
+	var placements: Array[Vector3] = [
+		Vector3(108.0, 0.0, 331.0), Vector3(119.0, 0.0, 372.0), Vector3(154.0, 0.0, 325.0),
+		Vector3(172.0, 0.0, 362.0), Vector3(209.0, 0.0, 385.0), Vector3(216.0, 0.0, 423.0)
+	]
+	for index: int in range(placements.size()):
+		var tree: Node3D = PINE_TALL.instantiate() as Node3D
+		if tree == null:
+			continue
+		var point: Vector3 = placements[index]
+		tree.name = "ConiferaElevada_%02d" % index
+		tree.position = Vector3(point.x, _height_at(point.x, point.z), point.z)
+		var scale_value: float = 0.38 + float(index % 3) * 0.08
+		tree.scale = Vector3(scale_value, scale_value, scale_value)
+		tree.rotation.y = 0.42 + float(index) * 0.84
+		forest.add_child(tree)
+	for index: int in range(12):
+		var angle: float = 0.30 + float(index) * TAU / 12.0
+		var x_value: float = 194.0 + cos(angle) * (15.0 + fmod(float(index), 3.0) * 2.8)
+		var z_value: float = 404.0 + sin(angle) * (15.0 + fmod(float(index), 4.0) * 2.0)
+		var rock: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if rock == null:
+			continue
+		rock.name = "RochaDoObservatorio_%02d" % index
+		rock.position = Vector3(x_value, _height_at(x_value, z_value) + 0.08, z_value)
+		var rock_scale: float = 0.18 + fmod(float(index), 4.0) * 0.055
+		rock.scale = Vector3(rock_scale, rock_scale, rock_scale)
+		rock.rotation.y = angle + 0.36
+		forest.add_child(rock)
+
+func _add_box_mesh(parent: Node3D, node_name: String, position_value: Vector3, size_value: Vector3, material: Material) -> MeshInstance3D:
+	var mesh: BoxMesh = BoxMesh.new()
+	mesh.size = size_value
+	var instance: MeshInstance3D = MeshInstance3D.new()
+	instance.name = node_name
+	instance.mesh = mesh
+	instance.position = position_value
+	instance.material_override = material
+	instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+	parent.add_child(instance)
+	return instance
+
+func _make_timber_material() -> StandardMaterial3D:
+	var material: StandardMaterial3D = StandardMaterial3D.new()
+	material.albedo_color = Color(0.13, 0.075, 0.038, 1.0)
+	material.roughness = 0.87
+	return material
+
+func _make_window_material() -> StandardMaterial3D:
+	var material: StandardMaterial3D = StandardMaterial3D.new()
+	material.albedo_color = Color(0.80, 0.20, 0.045, 1.0)
+	material.emission_enabled = true
+	material.emission = Color(1.0, 0.18, 0.035, 1.0)
+	material.emission_energy_multiplier = 1.30
+	material.roughness = 0.55
+	return material
+
+func _make_beacon_material() -> StandardMaterial3D:
+	var material: StandardMaterial3D = StandardMaterial3D.new()
+	material.albedo_color = Color(0.08, 0.38, 0.86, 1.0)
+	material.emission_enabled = true
+	material.emission = Color(0.04, 0.38, 1.0, 1.0)
+	material.emission_energy_multiplier = 2.2
+	material.roughness = 0.26
 	return material
 
 func _make_roof_material() -> StandardMaterial3D:
