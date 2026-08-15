@@ -64,15 +64,6 @@ func _physics_process(delta: float) -> void:
 	_handle_interaction()
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_F9:
-		print("ROUTE_TELEMETRY position=", global_position, " rotation_y=", rotation.y)
-		return
-	if event is InputEventKey and event.pressed and event.keycode == KEY_F10:
-		# Âncora de QA: permite validar visualmente a margem do lago no renderizador de captura lento.
-		global_position = Vector3(14.0, 8.0, 221.0)
-		player_velocity = Vector3.ZERO
-		EventBus.player_message_requested.emit("Ponto de teste: margem do lago.", 1.2)
-		return
 	if event is InputEventMouseButton and event.pressed:
 		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
