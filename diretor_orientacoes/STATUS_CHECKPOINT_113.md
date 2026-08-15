@@ -1,64 +1,61 @@
 # ORIGEM — Ponto de Situação Técnico
 
-**Branch:** `feature/dev1-gameplay-core`  
-**Marco:** Checkpoint 113 — Corredor Ribeirinho, Floresta e Crepúsculo  
-**Responsável técnico:** Desenvolvimento Principal  
-**Estado:** Em evolução contínua; base jogável preservada e sincronizada.
+**Branch:** `feature/dev1-gameplay-core`
+**Marco atual:** Checkpoint 114 — Lago das Ruínas Submersas, Margens e Crepúsculo
+**Responsável técnico:** Desenvolvimento Principal
+**Estado:** Validado localmente; pronto para sincronização remota.
 
 ## Estado consolidado
 
-A base regional de doze marcos permanece funcional. A rota de entrada inclui a Casa Voss, a Estrada do Rio, o Arco das Ruínas, a Floresta Densa e a transição para as Ruínas Submersas. A porta, o salto do prólogo, a stamina e os corredores iniciais mantêm comportamento estável nas sessões de validação.
+A base regional de doze marcos permanece íntegra. A rota inicial mantém Casa Voss, Estrada do Rio, Arco das Ruínas, Floresta Densa e o setor do Lago das Ruínas Submersas como componentes de um mesmo mundo físico. A escala continua a obedecer ao mapa regional, não à duração da cinemática.
 
-| Componente | Estado | Evidência / observação |
+| Componente | Estado | Evidência / decisão |
 |---|---|---|
-| Branch de gameplay | Publicada | `feature/dev1-gameplay-core` contém a base regional e a correção ribeirinha. |
-| Terreno regional | Validado | A malha cobre a escala regional dos 12 marcos sem regressão na área inicial. |
-| Estrada do Rio e Arco | Validada | Corredor físico e arco carregam sem erros de GDScript. |
-| Floresta Densa | Em refinamento | A mistura de espécies, fetos e árvores focais foi ampliada; ainda requer ativos menos estilizados. |
-| Lago e margem | Em refinamento | A bacia elíptica e as margens rochosas existem; o acesso é fisicamente materializado por lajes, mas a automação de captura é lenta demais para concluir a travessia integral no llvmpipe. |
-| Crepúsculo litúrgico | Em calibração | Perfil persistente após o prólogo criado; o preenchimento ambiente está a ser elevado para melhorar a legibilidade do solo e da vegetação. |
-| GitHub | Operacional | Escrita confirmada; commits já publicados na branch dev1. |
+| Terreno regional | Validado | Terreno 640 × 880, bacia do lago e corredores navegáveis permanecem carregados sem regressão técnica. |
+| Casa Voss e prólogo | Validado | Salto com `E`, porta interativa e devolução de controlo a Elias preservados. |
+| Saída para exterior | Validada | O roteiro de QA passou a capturar o rato e confirmou Elias fora da soleira após abertura da porta. |
+| Lago das Ruínas Submersas | Validado | Lâmina de água escura com ondulação, ruínas emergentes e pilares submersos reposicionados para leitura a partir da margem. |
+| Margens ribeirinhas | Validado | Rochas foram ampliadas e a vegetação de margem reforçada em grupos descontínuos, sem fechar o percurso. |
+| Take cinematográfico 4 | Validado | Câmera aproximada da água, FOV reduzido e duração de QA ampliada para evitar capturar o retorno à câmara do jogador. |
+| Crepúsculo litúrgico | Validado | Ambiente azul profundo, luz quente de alpendre e ajuste de exposição após correção de sintaxe. |
+| Estabilidade de gameplay | Validada | Execução limpa de 30 segundos no exterior sem `Parse Error`, sem queda livre e sem bloqueio na porta. |
 
-## Validação recente
+## Correções materiais deste ciclo
 
-A validação técnica headless concluiu sem erros de script. O ciclo de gameplay mantém captura após saída e observação superior a 30 segundos. No renderizador de captura `gl_compatibility` com Mesa llvmpipe, a simulação decorre significativamente abaixo do tempo de parede; por isso, percursos extensos até ao lago exigem tempos de captura desproporcionais. A correção de rota foi validada estruturalmente pela continuidade das lajes, relevo de baixa inclinação e bacia lateral sem vegetação dentro da água.
+O take 4 não estava a ser fotografado durante a cinematografia: a rotina de captura aguardava mais tempo do que a duração da câmara regional. O diretor foi ajustado para manter takes de QA ativos por 35 segundos, enquanto o script passou a capturar aos 18 segundos. Os logs confirmam a ativação da câmara na posição regional antes da gravação.
 
-## Decisões técnicas adotadas
+O lago recebeu material sem emissão ciano, com ondulação em duas frequências, maior aspereza e especularidade controlada. Os pilares interiores foram elevados e escalados; três marcos arqueológicos emergentes foram enfatizados para que a narrativa de ruína submersa seja visível no enquadramento de margem. Rochas e fetos foram reforçados sem criar uma parede vegetal.
 
-> A sequência cinematográfica orienta a composição e o ritmo, mas o mapa de 12 marcos define a escala real do mundo.
+O perfil de crepúsculo teve a iluminação ambiente, neblina, exposição e luz solar recalibradas. Durante esta iteração foi identificado e corrigido um erro de indentação em `LevelEnvironment.gd`; após a correção, a validação headless e o gameplay limpo voltaram a concluir sem falhas de carregamento.
 
-A frente de desenvolvimento principal não altera a região da montanha/canyon. Qualquer integração da branch `feature/dev2-mountain-canyon` deve ocorrer apenas depois de a referência remota estar disponível e de as mudanças serem revistas contra os corredores já construídos.
+> A sequência cinematográfica guia a composição; o mapa de doze marcos continua a definir a escala real do mundo explorável.
 
-A vegetação foi concentrada fora do eixo de lajes e a margem do lago foi deslocada para a lateral do corredor. Isso preserva a exploração e evita que árvores, pedras ou água fechem a progressão.
+## Validação obrigatória concluída
 
-## Próximo ciclo recomendado
+| Verificação | Resultado | Artefacto |
+|---|---|---|
+| Compilação/editor headless | Aprovado | Godot 4.7.1 concluiu sem erro de GDScript. |
+| Take físico do lago | Aprovado | `origem_v2_phase114_take4_lakeshore.png` com log `[ORIGEM_QA]` da câmara regional. |
+| Interação de porta e saída | Aprovado | `origem_v2_phase113_twilight_exterior.png` demonstra Elias já no exterior. |
+| Estabilidade de 30 segundos | Aprovado | `origem_v2_phase113_twilight_stable_30s.png`. |
+| Integridade do checkpoint | Aprovado | `ORIGEM_V2_RegionalWorld_Phase114_LakeRuins_Twilight_Validated.zip`. |
 
-1. Confirmar a legibilidade do novo crepúsculo com captura pós-prólogo e manter apenas valores que preservem leitura de chão, ruínas e silhuetas.
-2. Substituir progressivamente as copas estilizadas restantes por modelos orgânicos PBR de instância econômica.
-3. Executar uma validação manual ou em GPU com desempenho normal para documentar a travessia completa Casa Voss → margem do lago; o llvmpipe permanece adequado para estabilidade e regressões, não para medir tempo de deslocação regional.
-4. Integrar a frente da montanha/canyon apenas por merge/revisão, depois que a branch dev2 passar a existir no remoto.
-
-## Artefactos locais relevantes
+## Artefactos preservados
 
 | Artefacto | Finalidade |
 |---|---|
-| `WORLD_BLUEPRINT_12_LANDMARKS.md` | Distribuição regional dos doze marcos e corredores. |
-| `levels/RiverRoadJourney.gd` | Estrada do Rio e Arco das Ruínas. |
-| `levels/ForestLakeRegion.gd` | Floresta Densa, Acampamento Majestic, margem do lago e Ruínas Submersas. |
-| `levels/LevelEnvironment.gd` | Perfis ambiental diurno, tempestade e crepúsculo persistente. |
-| `levels/RegionalCinematicDirector.gd` | Camada reutilizável dos sete takes cinematográficos. |
+| `ORIGEM_V2_RegionalWorld_Phase114_LakeRuins_Twilight_Validated.zip` | Checkpoint recuperável completo, sem cache `.godot`. |
+| `ORIGEM_V2_RegionalWorld_Phase114_LakeRuins_Twilight_Validated.sha256` | SHA-256: `facf3ad714d49e7e6a4478fc079ee2f520a99c82fb3d4ec268f1ff17e0e61b59`. |
+| `origem_v2_phase114_take4_lakeshore.png` | Composição de QA para Lago das Ruínas Submersas. |
+| `checkpoint114_gameplay_validation_observations.txt` | Registo da validação de porta, exterior e estabilidade de 30 segundos. |
+| `levels/ForestLakeRegion.gd` | Lago, ruínas, rochas e vegetação ribeirinha. |
+| `levels/LevelEnvironment.gd` | Perfil de crepúsculo e iluminação. |
+| `levels/RegionalCinematicDirector.gd` | Takes físicos regionais e duração de QA. |
+
+## Próximo ciclo recomendado
+
+O próximo passe deve seguir para o **Take 5 — Vila Elevada e Observatório**, preservando o mesmo ciclo: alteração material, validação headless, captura durante a câmara realmente ativa, gameplay de 30 segundos e checkpoint antes de qualquer integração seguinte. A frente principal não altera a região de montanha/canyon sem revisão explícita da branch correspondente.
 
 ---
 
-**Regra de continuidade:** cada alteração visual ou de rota deve passar por validação técnica e por pelo menos 30 segundos de gameplay/captura antes de ser preservada.
-
-## Atualização de Fecho do Ciclo 113
-
-O ciclo adicional de crepúsculo foi concluído localmente. O perfil atmosférico passou a persistir após a devolução de controlo a Elias; a intensidade de preenchimento azul e a luz quente direcional foram recalibradas para manter as silhuetas e o percurso visíveis sem reverter para o perfil diurno. A vegetação da Floresta Densa foi aumentada de forma controlada, preservando o eixo das lajes e a bacia do lago sem árvores ou rochas na superfície de água.
-
-A sessão automatizada pós-prólogo executou uma observação de 30 segundos e gerou capturas de controlo. A cartela narrativa inicial ainda pode permanecer mais tempo no renderizador llvmpipe porque usa temporização dependente da simulação, mas o HUD de Elias e a câmara de primeira pessoa confirmam o estado jogável. Em GPU-alvo, esta cartela progride à velocidade normal; no próximo passe deverá ser movida para uma temporização independente da carga de streaming, caso seja necessário melhorar a evidência de captura por software.
-
-O pacote recuperável é `ORIGEM_V2_RegionalWorld_Phase113_LakeRoute_Twilight_Validated.zip`, SHA-256 `b15e0d0910779a92d9d1e26c59bb927a2f4bf1201779f8984ebc86d9d4b8b6ad`.
-
-> Sincronização remota pendente: a integração GitHub foi novamente recusada ao submeter a reativação do conector nesta sessão. Os commits e este ponto de situação permanecem preservados localmente na branch `feature/dev1-gameplay-core`, prontos para `push` assim que o conector ficar efetivamente ativo.
-
+**Regra de continuidade:** nenhuma alteração visual, de rota ou de interação é aceite sem validação técnica e pelo menos 30 segundos de gameplay ou captura de cena.

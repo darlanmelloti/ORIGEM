@@ -186,27 +186,30 @@ func apply_voss_daylight() -> void:
 	environment.sky = _create_liturgical_twilight_sky()
 	environment.background_energy_multiplier = 0.94
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	environment.ambient_light_color = Color(0.28, 0.35, 0.43, 1.0)
-	environment.ambient_light_energy = 0.78
+	environment.ambient_light_color = Color(0.27, 0.35, 0.45, 1.0)
+	environment.ambient_light_energy = 0.84
 	environment.fog_enabled = true
-	environment.fog_light_color = Color(0.19, 0.25, 0.31, 1.0)
+	environment.fog_light_color = Color(0.20, 0.28, 0.36, 1.0)
 	environment.fog_light_energy = 0.38
-	environment.fog_density = 0.0027
+	environment.fog_density = 0.0025
+
 	environment.fog_sky_affect = 0.73
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.tonemap_exposure = 1.18
+	environment.tonemap_exposure = 1.19
+
 	environment.glow_enabled = true
 	environment.glow_intensity = 0.26
 	environment.glow_strength = 0.34
 	environment.glow_bloom = 0.04
 	environment.adjustment_enabled = true
-	environment.adjustment_brightness = 1.07
-	environment.adjustment_contrast = 1.14
-	environment.adjustment_saturation = 0.90
+	environment.adjustment_brightness = 1.04
+	environment.adjustment_contrast = 1.12
+	environment.adjustment_saturation = 0.93
+
 	if sun != null:
 		sun.rotation_degrees = Vector3(-14.0, -38.0, 0.0)
 		sun.light_color = Color(1.0, 0.62, 0.38, 1.0)
-		sun.light_energy = 0.62
+		sun.light_energy = 0.60
 		sun.shadow_enabled = true
 
 func apply_voss_opening_storm() -> void:

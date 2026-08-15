@@ -39,10 +39,15 @@ func _ready() -> void:
 	_create_terrain()
 	_build_orion_mountains()
 	_build_voss_house()
-	# A variante diurna mantém a tempestade guardada como opção temporal, mas inicia o vale legível sob sol oblíquo.
-	get_tree().create_timer(0.70).timeout.connect(_enforce_voss_opening_daylight)
-	# O vale diurno entra cedo para que o percurso, o rio e os marcos sejam visíveis logo depois da saída da Casa Voss.
-	get_tree().create_timer(1.20).timeout.connect(_build_world_after_voss_prologue)
+	# A captura técnica precisa da geografia regional já construída antes de ativar a câmara do take; o fluxo jogável mantém os atrasos cinematográficos normais.
+	if OS.has_environment("ORIGEM_CAPTURE_TAKE"):
+		_enforce_voss_opening_daylight()
+		_build_world_after_voss_prologue()
+	else:
+		# A variante diurna mantém a tempestade guardada como opção temporal, mas inicia o vale legível sob sol oblíquo.
+		get_tree().create_timer(0.70).timeout.connect(_enforce_voss_opening_daylight)
+		# O vale diurno entra cedo para que o percurso, o rio e os marcos sejam visíveis logo depois da saída da Casa Voss.
+		get_tree().create_timer(1.20).timeout.connect(_build_world_after_voss_prologue)
 
 func _enforce_voss_opening_daylight() -> void:
 	var level_environment: Node = get_parent().get_node_or_null("LevelEnvironment")

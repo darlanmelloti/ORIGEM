@@ -737,6 +737,12 @@ func _build_opening_camera() -> void:
 	opening_camera.current = false
 	opening_camera.fov = 52.0
 	add_child(opening_camera)
+	# O modo de captura regional ignora apenas o prólogo para permitir QA dos takes físicos; o fluxo normal do jogo permanece inalterado.
+	if OS.has_environment("ORIGEM_CAPTURE_TAKE"):
+		opening_camera.queue_free()
+		opening_camera = null
+		opening_active = false
+		return
 	# Variante diurna: câmara mais alta e ligeiramente à direita, deixando Casa Voss à esquerda, lajes ao centro e rio à direita.
 	if DAYLIGHT_VARIANT_ENABLED:
 		# A abertura mostra o percurso que Elias realmente seguirá: Casa Voss à esquerda, rio à direita e Arco das Ruínas no plano médio.

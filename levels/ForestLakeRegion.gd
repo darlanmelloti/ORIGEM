@@ -27,10 +27,12 @@ func _ready() -> void:
 	ruin_material = _create_ruin_material()
 	_build_forest_path()
 	_build_lake_shore_path()
+	_build_lake_wayfinding()
 	_build_dense_forest()
 	_build_majestic_camp()
 	_build_submerged_ruins()
 	_build_riparian_margin()
+	_build_lakeside_focal_vegetation()
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -80,6 +82,54 @@ func _build_lake_shore_path() -> void:
 		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.055, z_value)
 		slab.rotation.y = atan2((_lake_shore_x(z_value + 1.0) - _lake_shore_x(z_value - 1.0)) * 0.5, 2.7) + rng.randf_range(-0.08, 0.08)
 		shore_road.add_child(slab)
+
+func _build_lake_wayfinding() -> void:
+	# Quatro marcos de pedra com brilho Chronos baixo: orientam a curva da margem sem transformar o trilho em sinalização moderna.
+	var markers: Node3D = Node3D.new()
+	markers.name = "MarcosDaMargemDoLago"
+	add_child(markers)
+	var stone: StandardMaterial3D = StandardMaterial3D.new()
+	stone.albedo_color = Color(0.14, 0.17, 0.16, 1.0)
+	stone.roughness = 0.91
+	var chronos: StandardMaterial3D = StandardMaterial3D.new()
+	chronos.albedo_color = Color(0.035, 0.20, 0.30, 1.0)
+	chronos.emission_enabled = true
+	chronos.emission = Color(0.02, 0.42, 0.80, 1.0)
+	chronos.emission_energy_multiplier = 1.45
+	for index: int in range(4):
+		var t: float = float(index) / 3.0
+		var z_value: float = lerpf(154.0, 218.0, t)
+		var x_value: float = _lake_shore_x(z_value) - 2.35
+		var ground_y: float = _height_at(x_value, z_value)
+		var pillar_mesh: CylinderMesh = CylinderMesh.new()
+		pillar_mesh.top_radius = 0.24
+		pillar_mesh.bottom_radius = 0.34
+		pillar_mesh.height = 2.35
+		pillar_mesh.radial_segments = 8
+		pillar_mesh.material = stone
+		var pillar: MeshInstance3D = MeshInstance3D.new()
+		pillar.name = "MarcoRibeirinho_%02d" % index
+		pillar.mesh = pillar_mesh
+		pillar.position = Vector3(x_value, ground_y + 1.18, z_value)
+		pillar.rotation.y = 0.26 + float(index) * 0.57
+		markers.add_child(pillar)
+		var beacon_mesh: SphereMesh = SphereMesh.new()
+		beacon_mesh.radius = 0.16
+		beacon_mesh.height = 0.32
+		beacon_mesh.radial_segments = 12
+		beacon_mesh.material = chronos
+		var beacon: MeshInstance3D = MeshInstance3D.new()
+		beacon.name = "LuzChronosMargem_%02d" % index
+		beacon.mesh = beacon_mesh
+		beacon.position = Vector3(x_value, ground_y + 2.42, z_value)
+		markers.add_child(beacon)
+		var light: OmniLight3D = OmniLight3D.new()
+		light.light_color = Color(0.18, 0.48, 0.82, 1.0)
+		light.light_energy = 0.38
+		light.omni_range = 5.5
+		light.shadow_enabled = false
+		light.position = beacon.position
+		markers.add_child(light)
 
 func _build_dense_forest() -> void:
 	var forest: Node3D = Node3D.new()
@@ -197,18 +247,39 @@ func _build_submerged_ruins() -> void:
 	water.mesh = water_mesh
 	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	lake.add_child(water)
+	var shoreline_fill: OmniLight3D = OmniLight3D.new()
+	shoreline_fill.name = "PreenchimentoAzulDaMargem"
+	shoreline_fill.light_color = Color(0.10, 0.28, 0.42, 1.0)
+	shoreline_fill.light_energy = 0.56
+	shoreline_fill.omni_range = 42.0
+
+	shoreline_fill.shadow_enabled = false
+	shoreline_fill.position = Vector3(-19.0, 5.0, -7.0)
+	lake.add_child(shoreline_fill)
 	for index: int in range(8):
 		var angle: float = float(index) * TAU / 8.0
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
 		if pillar == null:
 			continue
 		pillar.name = "PilarSubmerso_%02d" % index
-		pillar.position = Vector3(cos(angle) * 23.0, -0.7 + float(index % 3) * 0.46, sin(angle) * 18.0)
-		var pillar_scale: float = 0.72 + float(index % 2) * 0.18
+		pillar.position = Vector3(cos(angle) * 23.0, -0.25 + float(index % 3) * 0.60, sin(angle) * 18.0)
+		var pillar_scale: float = 0.90 + float(index % 2) * 0.22
 		pillar.scale = Vector3(pillar_scale, pillar_scale, pillar_scale)
 		pillar.rotation = Vector3(0.20 + float(index % 3) * 0.15, angle, 0.13 * sin(angle))
 		_apply_material(pillar, ruin_material)
 		lake.add_child(pillar)
+	# Três remanescentes altos asseguram que a civilização submersa é lida desde o trilho sem criar uma parede.
+	for landmark_index: int in range(3):
+		var landmark: Node3D = PILLAR.instantiate() as Node3D
+		if landmark == null:
+			continue
+		landmark.name = "MarcoRuinaEmergente_%02d" % landmark_index
+		landmark.position = Vector3(-17.0 + float(landmark_index) * 16.5, 2.35 + float(landmark_index % 2) * 0.55, -9.0 + float(landmark_index) * 5.0)
+		var landmark_scale: float = 1.46 - float(landmark_index) * 0.13
+		landmark.scale = Vector3(landmark_scale, landmark_scale, landmark_scale)
+		landmark.rotation = Vector3(0.08 * float(landmark_index + 1), 0.38 + float(landmark_index) * 0.41, 0.04)
+		_apply_material(landmark, ruin_material)
+		lake.add_child(landmark)
 	var dome_mesh: SphereMesh = SphereMesh.new()
 	dome_mesh.radius = 7.5
 	dome_mesh.height = 3.6
@@ -257,7 +328,7 @@ func _build_riparian_margin() -> void:
 		if rock != null:
 			rock.name = "RochaDeMargem_%02d" % index
 			rock.position = Vector3(world_x, _height_at(world_x, world_z) + 0.15, world_z)
-			var rock_scale: float = 0.10 + fmod(float(index), 4.0) * 0.035
+			var rock_scale: float = 0.19 + fmod(float(index), 4.0) * 0.050
 			rock.scale = Vector3(rock_scale, rock_scale, rock_scale)
 			rock.rotation = Vector3(0.0, angle + 0.4, 0.0)
 			margin.add_child(rock)
@@ -270,6 +341,46 @@ func _build_riparian_margin() -> void:
 				fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 				fern.rotation.y = angle + 0.6
 				margin.add_child(fern)
+
+func _build_lakeside_focal_vegetation() -> void:
+	# Grupos descontínuos de espécies reais: enquadram a água e mantêm a abertura do trilho ocidental livre.
+	var foliage: Node3D = Node3D.new()
+	foliage.name = "VegetacaoFocalDaMargem"
+	add_child(foliage)
+	var placements: Array[Vector3] = [
+		Vector3(25.0, 0.0, 236.0), Vector3(33.0, 0.0, 278.0),
+		Vector3(61.0, 0.0, 290.0), Vector3(88.0, 0.0, 276.0),
+		Vector3(101.0, 0.0, 253.0), Vector3(91.0, 0.0, 226.0)
+	]
+	for index: int in range(placements.size()):
+		var source: PackedScene = OAK_DARK if index % 3 == 0 else (DARK_TREE if index % 3 == 1 else PINE_TALL)
+		var tree: Node3D = source.instantiate() as Node3D
+		if tree == null:
+			continue
+		var point: Vector3 = placements[index]
+		tree.name = "ArvoreFocalMargem_%02d" % index
+		tree.position = Vector3(point.x, _height_at(point.x, point.z), point.z)
+		var scale_value: float = 0.38 + float(index % 3) * 0.08
+		if index % 3 == 0:
+			scale_value = 0.58
+		tree.scale = Vector3(scale_value, scale_value, scale_value)
+		tree.rotation.y = 0.37 + float(index) * 0.91
+		foliage.add_child(tree)
+	for index: int in range(32):
+		var angle: float = 0.34 + float(index) * TAU / 32.0
+		var x_value: float = 60.0 + cos(angle) * (46.0 + fmod(float(index), 3.0) * 1.6)
+		var z_value: float = 252.0 + sin(angle) * (38.0 + fmod(float(index), 4.0) * 1.1)
+		if z_value < 236.0 and x_value < 28.0:
+			continue
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern == null:
+			continue
+		fern.name = "FetoFocalMargem_%02d" % index
+		fern.position = Vector3(x_value, _height_at(x_value, z_value) + 0.03, z_value)
+		var fern_scale: float = 0.50 + fmod(float(index), 4.0) * 0.075
+		fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+		fern.rotation.y = angle + 0.48
+		foliage.add_child(fern)
 
 func _make_slab(width: float, depth: float, rng: RandomNumberGenerator) -> ArrayMesh:
 	var points: Array[Vector3] = [
@@ -316,9 +427,14 @@ void vertex() {
 }
 void fragment() {
 	float ripple = sin(VERTEX.x * 0.28 + VERTEX.z * 0.19 + TIME * 0.75) * 0.5 + 0.5;
-			ALBEDO = mix(vec3(0.018, 0.14, 0.16), vec3(0.055, 0.34, 0.35), ripple * 0.42 + 0.28);
-		ROUGHNESS = 0.28;
-		SPECULAR = 0.52;
+					// Água profunda e fria: o detalhe nasce de ripples e reflexo, nunca de emissão ciano plana.
+		float broad_ripple = sin(VERTEX.x * 0.08 - VERTEX.z * 0.06 + TIME * 0.22) * 0.5 + 0.5;
+		float surface_variation = clamp(ripple * 0.62 + broad_ripple * 0.38, 0.0, 1.0);
+		ALBEDO = mix(vec3(0.008, 0.040, 0.060), vec3(0.030, 0.135, 0.165), surface_variation * 0.56);
+		EMISSION = vec3(0.0);
+		ROUGHNESS = 0.46;
+		SPECULAR = 0.42;
+
 		ALPHA = 1.0;
 
 }

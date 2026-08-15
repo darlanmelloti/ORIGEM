@@ -1,0 +1,14 @@
+Checkpoint 114 — validação de gameplay finalizada em 2026-08-15
+
+Evidências visuais finais:
+- /home/ubuntu/origem_v2_phase113_twilight_exterior.png
+- /home/ubuntu/origem_v2_phase113_twilight_stable_30s.png
+
+Resultado técnico e de gameplay:
+1. A validação headless terminou com êxito depois da correção de indentação do LevelEnvironment.gd.
+2. A execução de gameplay não contém mensagens de Parse Error nem de Failed to load script.
+3. O roteiro de QA passou a capturar o rato explicitamente e a manter a ação de avanço durante 12 segundos. A captura exterior confirma que Elias atravessou a soleira, deixando a moldura da porta fora do enquadramento e alcançando a estrada exterior.
+4. A captura final após 30 segundos confirma continuidade no exterior: HUD presente, mundo regional renderizado, sem queda livre, sem bloqueio da porta e sem interrupção da simulação.
+5. A cena apresenta o perfil de crepúsculo azul e luz quente de alpendre. A composição é funcional e legível no corredor de saída.
+
+Decisão de QA: APROVADO para estabilidade de 30 segundos, interação de porta e passagem física de Elias para o exterior.
