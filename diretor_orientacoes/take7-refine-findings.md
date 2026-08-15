@@ -1,0 +1,9 @@
+## Take 7 refine cycle — visual comparison
+
+The new 1600×900 capture renders successfully and remains stable for the 30-second recording. The Orion Cube now reads as a controlled deep blue rather than a white-emission block. The approach camera is open and no longer clips into the sanctuary. However, the cyclopean columns and side rock masses still dominate the foreground, compressing the plaza; the Kharu tactical silhouette is not legible in this frame. The next Take 7-only pass should reduce the height/radius of selected foreground columns and shift the Kharu marker onto the central approach axis while preserving the frozen Take 5 and completed Take 6 blocks.
+## Take 7 refine cycle 2 — visual comparison
+
+The second capture improves the intended axis: the Orion Cube is centered, the arena ring is more readable, and the Kharu silhouette is visible beneath the Cube. Foreground mass is reduced enough to show the sanctuary approach. A remaining visual mismatch is clear: the two Kharu tactical brasiers still use the legacy white-emission material. The next Take 7-only correction will route those two sources through the controlled cyan brazier constructor; no Take 5 or Take 6 code will be changed.
+## Take 7 refine cycle 3 — acceptance
+
+The final 1600×900 capture renders without parser or gameplay failure. The 30-second recording remains stable and the camera sweep is perceptible. The Orion Cube is centered and controlled-blue, the Kharu silhouette holds the tactical axis, and the plaza ring is readable. The tactical brasiers now use the Take 7 cyan treatment rather than the legacy white constructor. The remaining limitation is stylistic rather than functional: the environment is still a deliberately low-poly procedural prototype and will need higher-detail CC0/PBR meshes in a later art pass.

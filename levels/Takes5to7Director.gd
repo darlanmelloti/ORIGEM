@@ -108,9 +108,11 @@ func _process(delta: float) -> void:
 		validation_camera.position = Vector3(-2.4 + canyon_sway, 5.6 + sin(validation_elapsed * 0.34) * 0.18, -72.0 - canyon_travel)
 		validation_camera.look_at(Vector3(canyon_sway * 0.22, 4.8, -91.0 - canyon_travel), Vector3.UP)
 	elif validation_take_mode == 7:
-		var sweep: float = sin(validation_elapsed * 0.34) * 0.85
-		validation_camera.position = Vector3(sweep, 10.2 + sin(validation_elapsed * 0.28) * 0.18, -86.0 + cos(validation_elapsed * 0.34) * 1.2)
-		validation_camera.look_at(Vector3(0.0, 5.6, -105.0), Vector3.UP)
+		# Take 7 only: clear northern approach, below the column crowns, with a readable Cube-to-arena axis.
+		var sweep: float = sin(validation_elapsed * 0.30) * 1.30
+		var approach: float = cos(validation_elapsed * 0.24) * 0.7
+		validation_camera.position = Vector3(sweep, 5.7 + sin(validation_elapsed * 0.28) * 0.14, -78.0 + approach)
+		validation_camera.look_at(Vector3(0.0, 4.8, -103.0), Vector3.UP)
 	else:
 		var travel: float = minf(validation_elapsed * 0.02, 0.35)
 		var lateral: float = sin(validation_elapsed * 0.52) * 2.2
@@ -152,9 +154,9 @@ func _activate_take7_validation_camera() -> void:
 	validation_camera = Camera3D.new()
 	validation_camera.name = "CameraValidacaoTake7"
 	validation_camera.fov = 60.0
-	validation_camera.position = Vector3(0.0, 10.2, -86.0)
+	validation_camera.position = Vector3(0.0, 5.7, -78.0)
 	add_child(validation_camera)
-	validation_camera.look_at(Vector3(0.0, 5.6, -105.0), Vector3.UP)
+	validation_camera.look_at(Vector3(0.0, 4.8, -103.0), Vector3.UP)
 	validation_camera.current = true
 
 func _build_take_5_cave_threshold() -> void:
@@ -224,8 +226,8 @@ func _build_take_7_open_orion_chamber() -> void:
 	add_child(chamber)
 	for index: int in range(14):
 		var angle: float = TAU * float(index) / 14.0
-		var radius: float = 12.0 + sin(float(index) * 2.1) * 0.9
-		_add_organic_rock(chamber, Vector3(cos(angle) * radius, 4.2 + float(index % 3), sin(angle) * radius), Vector3(1.9, 5.2 + float(index % 3), 1.9), 990 + index, stone_wet, "ColunaCiclopea_%02d" % index)
+		var radius: float = 13.5 + sin(float(index) * 2.1) * 0.8
+		_add_organic_rock(chamber, Vector3(cos(angle) * radius, 4.2 + float(index % 3), sin(angle) * radius), Vector3(1.55, 4.4 + float(index % 3) * 0.8, 1.55), 990 + index, stone_wet, "ColunaCiclopea_%02d" % index)
 		if index % 2 == 0:
 			_add_history_marker(chamber, Vector3(cos(angle) * 8.9, 1.3, sin(angle) * 8.9), 40 + index)
 	for index: int in range(8):
@@ -240,8 +242,8 @@ func _build_take_7_open_orion_chamber() -> void:
 	cube_material.metallic = 0.72
 	cube_material.roughness = 0.28
 	cube_material.emission_enabled = true
-	cube_material.emission = Color("#2f9dff")
-	cube_material.emission_energy_multiplier = 1.35
+	cube_material.emission = Color("#176fb8")
+	cube_material.emission_energy_multiplier = 0.72
 	var cube_mesh := BoxMesh.new()
 	cube_mesh.size = Vector3(2.8, 2.8, 2.8)
 	cube_mesh.material = cube_material
@@ -250,13 +252,13 @@ func _build_take_7_open_orion_chamber() -> void:
 	cube.rotation = Vector3(0.34, 0.48, 0.18)
 	chamber.add_child(cube)
 	for index: int in range(6):
-		_add_brazier(chamber, Vector3(cos(index * TAU / 6.0) * 7.0, 0.9, sin(index * TAU / 6.0) * 7.0), "BraseiroAzul_Camara_%02d" % index)
+		_add_canyon_brazier(chamber, Vector3(cos(index * TAU / 6.0) * 7.0, 0.9, sin(index * TAU / 6.0) * 7.0), "BraseiroCiano_Camara_%02d" % index)
 	var open_light := OmniLight3D.new()
 	open_light.name = "LuzDoNucleoOrion"
 	open_light.position = Vector3(0.0, 5.5, 0.0)
 	open_light.light_color = Color("#5cc8ff")
-	open_light.light_energy = 3.2
-	open_light.omni_range = 26.0
+	open_light.light_energy = 1.8
+	open_light.omni_range = 22.0
 	open_light.shadow_enabled = true
 	chamber.add_child(open_light)
 
@@ -264,14 +266,14 @@ func _build_kharu_tactical_presence() -> void:
 	# Take 7 only: a tactical silhouette staged before the Orion plaza.
 	var marker := Node3D.new()
 	marker.name = "PresencaTacticaSentinelaKharu"
-	marker.position = Vector3(0.0, 0.0, -78.0)
+	marker.position = Vector3(0.0, 0.0, -94.0)
 	add_child(marker)
 	_add_organic_rock(marker, Vector3(0.0, 2.0, -2.0), Vector3(1.7, 3.2, 1.2), 1410, stone_dark, "SilhuetaKharuTorso")
 	_add_organic_rock(marker, Vector3(0.0, 4.5, -2.0), Vector3(1.0, 1.1, 0.9), 1411, stone_dark, "SilhuetaKharuMascara")
 	_add_organic_rock(marker, Vector3(-1.5, 2.4, -2.0), Vector3(0.42, 2.2, 0.42), 1412, bronze, "ArmaKharuL")
 	_add_organic_rock(marker, Vector3(1.5, 2.4, -2.0), Vector3(0.42, 2.2, 0.42), 1413, bronze, "ArmaKharuR")
 	for side: float in [-1.0, 1.0]:
-		_add_brazier(marker, Vector3(side * 5.4, 1.0, -1.0), "BraseiroKharu_%s" % str(side))
+		_add_canyon_brazier(marker, Vector3(side * 5.4, 1.0, -1.0), "BraseiroCianoKharu_%s" % str(side))
 	var sentinel_light := OmniLight3D.new()
 	sentinel_light.name = "OlharAzulKharu"
 	sentinel_light.position = Vector3(0.0, 3.4, -3.0)
