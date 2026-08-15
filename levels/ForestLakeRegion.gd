@@ -490,6 +490,22 @@ func _build_majestic_camp() -> void:
 	camp_fill.shadow_enabled = false
 	camp_fill.position = Vector3(0.0, 5.2, 0.0)
 	camp.add_child(camp_fill)
+	# Lajes rasas de acampamento: desenham uma área de uso no solo sem adicionar colisores ou degraus ao percurso de Elias.
+	var camp_floor: Node3D = Node3D.new()
+	camp_floor.name = "LajesRasasDoAcampamento"
+	camp.add_child(camp_floor)
+	var floor_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	floor_rng.seed = 50518
+	for floor_index: int in range(12):
+		var floor_angle: float = float(floor_index) * TAU / 12.0 + floor_rng.randf_range(-0.12, 0.12)
+		var floor_radius: float = 2.55 + floor_rng.randf_range(-0.28, 0.40)
+		var floor_slab: MeshInstance3D = MeshInstance3D.new()
+		floor_slab.name = "LajeRasaAcampamento_%02d" % floor_index
+		floor_slab.mesh = _make_slab(1.34 + floor_rng.randf_range(-0.18, 0.14), 0.86 + floor_rng.randf_range(-0.12, 0.10), floor_rng)
+		floor_slab.material_override = path_material
+		floor_slab.position = Vector3(cos(floor_angle) * floor_radius, 0.032, sin(floor_angle) * floor_radius)
+		floor_slab.rotation.y = floor_angle + PI * 0.5 + floor_rng.randf_range(-0.18, 0.18)
+		camp_floor.add_child(floor_slab)
 	# Anel de pedra e caixas de campo: a fogueira passa a ser uma estação arqueológica identificável e fisicamente navegável.
 	for ring_index: int in range(8):
 		var ring_angle: float = float(ring_index) * TAU / 8.0
