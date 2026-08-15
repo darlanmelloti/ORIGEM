@@ -686,7 +686,8 @@ func _build_submerged_ruins() -> void:
 	lake.name = "RuinasSubmersasDoLago"
 	var center_x: float = 60.0
 	var center_z: float = 252.0
-	var water_y: float = _height_at(center_x, center_z) + 0.45
+	# Cota elevada de forma contida: cobre a margem interna fragmentada e revela uma bacia lacustre contínua, preservando as lajes de chegada acima da água.
+	var water_y: float = _height_at(center_x, center_z) + 0.82
 	lake.position = Vector3(center_x, water_y, center_z)
 	add_child(lake)
 	# Luz em coordenadas mundiais: garante leitura de margem e ruínas no renderizador de compatibilidade sem depender do espaço local da água.
@@ -753,8 +754,9 @@ func _build_submerged_ruins() -> void:
 		if landmark == null:
 			continue
 		landmark.name = "MarcoRuinaEmergente_%02d" % landmark_index
-		landmark.position = Vector3(-17.0 + float(landmark_index) * 16.5, 2.35 + float(landmark_index % 2) * 0.55, -9.0 + float(landmark_index) * 5.0)
-		var landmark_scale: float = 1.46 - float(landmark_index) * 0.13
+		# Marcos emergem acima da lâmina para lerem como ruínas antigas e não como pequenas estacas na margem.
+		landmark.position = Vector3(-17.0 + float(landmark_index) * 16.5, 2.95 + float(landmark_index % 2) * 0.60, -9.0 + float(landmark_index) * 5.0)
+		var landmark_scale: float = 1.82 - float(landmark_index) * 0.15
 		landmark.scale = Vector3(landmark_scale, landmark_scale, landmark_scale)
 		landmark.rotation = Vector3(0.08 * float(landmark_index + 1), 0.38 + float(landmark_index) * 0.41, 0.04)
 		_apply_material(landmark, ruin_material)
@@ -763,8 +765,8 @@ func _build_submerged_ruins() -> void:
 		var landmark_beacon: OmniLight3D = OmniLight3D.new()
 		landmark_beacon.name = "BrilhoMarcoRuina_%02d" % landmark_index
 		landmark_beacon.light_color = Color(0.16, 0.44, 0.68, 1.0)
-		landmark_beacon.light_energy = 0.42
-		landmark_beacon.omni_range = 8.5
+		landmark_beacon.light_energy = 0.56
+		landmark_beacon.omni_range = 9.5
 		landmark_beacon.shadow_enabled = false
 		landmark_beacon.position = landmark.position + Vector3(0.0, 2.65 * landmark_scale, 0.0)
 		lake.add_child(landmark_beacon)
@@ -997,12 +999,12 @@ void fragment() {
 					// Água profunda e fria: o detalhe nasce de ripples e reflexo, nunca de emissão ciano plana.
 		float broad_ripple = sin(VERTEX.x * 0.08 - VERTEX.z * 0.06 + TIME * 0.22) * 0.5 + 0.5;
 		float surface_variation = clamp(ripple * 0.62 + broad_ripple * 0.38, 0.0, 1.0);
-					ALBEDO = mix(vec3(0.018, 0.085, 0.118), vec3(0.075, 0.255, 0.320), surface_variation * 0.70);
-			// Emissão fria contida: separa a bacia e os pilares no renderizador de compatibilidade sem simular um lago luminoso.
-			EMISSION = mix(vec3(0.006, 0.028, 0.040), vec3(0.028, 0.115, 0.155), surface_variation * 0.70);
+					ALBEDO = mix(vec3(0.028, 0.115, 0.150), vec3(0.085, 0.285, 0.355), surface_variation * 0.70);
+			// Emissão fria muito contida: revela a forma elíptica no modo GL Compatibility sem transformar o lago numa superfície luminosa.
+			EMISSION = mix(vec3(0.008, 0.040, 0.056), vec3(0.032, 0.128, 0.170), surface_variation * 0.62);
 
-		ROUGHNESS = 0.30;
-		SPECULAR = 0.64;
+		ROUGHNESS = 0.34;
+		SPECULAR = 0.60;
 
 		ALPHA = 1.0;
 
