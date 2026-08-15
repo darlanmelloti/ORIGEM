@@ -28,6 +28,7 @@ func _ready() -> void:
 	_build_forest_path()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
+	_build_majestic_lake_transition()
 	_build_lake_wayfinding()
 	_build_dense_forest()
 	_build_majestic_camp()
@@ -131,6 +132,61 @@ func _build_lake_shore_path() -> void:
 		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.055, z_value)
 		slab.rotation.y = atan2((_lake_shore_x(z_value + 1.0) - _lake_shore_x(z_value - 1.0)) * 0.5, 2.7) + rng.randf_range(-0.08, 0.08)
 		shore_road.add_child(slab)
+
+func _build_majestic_lake_transition() -> void:
+	# Vestígios de observação da Majestic acompanham a chegada ao lago: tornam a transição narrativa física sem bloquear o trilho.
+	var transition: Node3D = Node3D.new()
+	transition.name = "TransicaoMajesticParaRuinasSubmersas"
+	add_child(transition)
+	var crate_material: StandardMaterial3D = StandardMaterial3D.new()
+	crate_material.albedo_color = Color(0.115, 0.072, 0.035, 1.0)
+	crate_material.roughness = 0.88
+	var lamp_material: StandardMaterial3D = StandardMaterial3D.new()
+	lamp_material.albedo_color = Color(0.42, 0.09, 0.018, 1.0)
+	lamp_material.emission_enabled = true
+	lamp_material.emission = Color(0.95, 0.11, 0.012, 1.0)
+	lamp_material.emission_energy_multiplier = 0.72
+	for index: int in range(4):
+		var t: float = float(index) / 3.0
+		var z_value: float = lerpf(186.0, 220.0, t)
+		var side: float = -1.0 if index % 2 == 0 else 1.0
+		var x_value: float = _lake_shore_x(z_value) + side * 4.25
+		var ground_y: float = _height_at(x_value, z_value)
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.name = "AfloramentoDeTransicao_%02d" % index
+			rock.position = Vector3(x_value + side * 1.18, ground_y + 0.07, z_value + 1.15)
+			var rock_scale: float = 0.18 + float(index % 2) * 0.065
+			rock.scale = Vector3(rock_scale, rock_scale, rock_scale)
+			rock.rotation.y = 0.42 + float(index) * 0.73
+			transition.add_child(rock)
+		var crate_mesh: BoxMesh = BoxMesh.new()
+		crate_mesh.size = Vector3(0.95, 0.62, 0.82)
+		var crate: MeshInstance3D = MeshInstance3D.new()
+		crate.name = "CaixaDeCampoMajestic_%02d" % index
+		crate.mesh = crate_mesh
+		crate.material_override = crate_material
+		crate.position = Vector3(x_value, ground_y + 0.31, z_value)
+		crate.rotation.y = 0.25 + float(index) * 0.58
+		transition.add_child(crate)
+		var lamp_mesh: SphereMesh = SphereMesh.new()
+		lamp_mesh.radius = 0.11
+		lamp_mesh.height = 0.22
+		lamp_mesh.radial_segments = 10
+		var lamp: MeshInstance3D = MeshInstance3D.new()
+		lamp.name = "LanternaMajestic_%02d" % index
+		lamp.mesh = lamp_mesh
+		lamp.material_override = lamp_material
+		lamp.position = Vector3(x_value, ground_y + 0.94, z_value)
+		transition.add_child(lamp)
+		var fill: OmniLight3D = OmniLight3D.new()
+		fill.name = "LuzDeCampoMajestic_%02d" % index
+		fill.light_color = Color(1.0, 0.27, 0.07, 1.0)
+		fill.light_energy = 0.18
+		fill.omni_range = 3.2
+		fill.shadow_enabled = false
+		fill.position = lamp.position
+		transition.add_child(fill)
 
 func _build_lake_wayfinding() -> void:
 	# Quatro marcos de pedra com brilho Chronos baixo: orientam a curva da margem sem transformar o trilho em sinalização moderna.
@@ -289,6 +345,23 @@ func _build_submerged_ruins() -> void:
 	var water_y: float = _height_at(center_x, center_z) + 0.45
 	lake.position = Vector3(center_x, water_y, center_z)
 	add_child(lake)
+	# Luz em coordenadas mundiais: garante leitura de margem e ruínas no renderizador de compatibilidade sem depender do espaço local da água.
+	var world_lake_fill: OmniLight3D = OmniLight3D.new()
+	world_lake_fill.name = "PreenchimentoMundialDoLago"
+	world_lake_fill.light_color = Color(0.14, 0.38, 0.62, 1.0)
+	world_lake_fill.light_energy = 1.90
+	world_lake_fill.omni_range = 58.0
+	world_lake_fill.shadow_enabled = false
+	world_lake_fill.position = Vector3(center_x - 12.0, water_y + 7.5, center_z - 4.0)
+	add_child(world_lake_fill)
+	var opposite_lake_fill: OmniLight3D = OmniLight3D.new()
+	opposite_lake_fill.name = "PreenchimentoOpostoDoLago"
+	opposite_lake_fill.light_color = Color(0.10, 0.28, 0.46, 1.0)
+	opposite_lake_fill.light_energy = 1.15
+	opposite_lake_fill.omni_range = 46.0
+	opposite_lake_fill.shadow_enabled = false
+	opposite_lake_fill.position = Vector3(center_x + 18.0, water_y + 5.0, center_z + 6.0)
+	add_child(opposite_lake_fill)
 	var water_mesh: ArrayMesh = _make_elliptical_lake_mesh(42.0, 34.0)
 	water_mesh.surface_set_material(0, _create_lake_material())
 	var water: MeshInstance3D = MeshInstance3D.new()
@@ -299,8 +372,8 @@ func _build_submerged_ruins() -> void:
 	var shoreline_fill: OmniLight3D = OmniLight3D.new()
 	shoreline_fill.name = "PreenchimentoAzulDaMargem"
 	shoreline_fill.light_color = Color(0.10, 0.28, 0.42, 1.0)
-	shoreline_fill.light_energy = 0.56
-	shoreline_fill.omni_range = 42.0
+	shoreline_fill.light_energy = 0.74
+	shoreline_fill.omni_range = 46.0
 
 	shoreline_fill.shadow_enabled = false
 	shoreline_fill.position = Vector3(-19.0, 5.0, -7.0)
@@ -376,7 +449,7 @@ func _build_riparian_margin() -> void:
 		var rock: Node3D = ROCK.instantiate() as Node3D
 		if rock != null:
 			rock.name = "RochaDeMargem_%02d" % index
-			rock.position = Vector3(world_x, _height_at(world_x, world_z) + 0.15, world_z)
+			rock.position = Vector3(world_x, _height_at(world_x, world_z) + 0.08, world_z)
 			var rock_scale: float = 0.19 + fmod(float(index), 4.0) * 0.050
 			rock.scale = Vector3(rock_scale, rock_scale, rock_scale)
 			rock.rotation = Vector3(0.0, angle + 0.4, 0.0)
@@ -479,10 +552,11 @@ void fragment() {
 					// Água profunda e fria: o detalhe nasce de ripples e reflexo, nunca de emissão ciano plana.
 		float broad_ripple = sin(VERTEX.x * 0.08 - VERTEX.z * 0.06 + TIME * 0.22) * 0.5 + 0.5;
 		float surface_variation = clamp(ripple * 0.62 + broad_ripple * 0.38, 0.0, 1.0);
-		ALBEDO = mix(vec3(0.008, 0.040, 0.060), vec3(0.030, 0.135, 0.165), surface_variation * 0.56);
-		EMISSION = vec3(0.0);
-		ROUGHNESS = 0.46;
-		SPECULAR = 0.42;
+		ALBEDO = mix(vec3(0.010, 0.052, 0.074), vec3(0.040, 0.165, 0.205), surface_variation * 0.60);
+		// Emissão fria muito baixa: recupera a leitura no renderizador de compatibilidade sem simular um lago luminoso.
+		EMISSION = mix(vec3(0.002, 0.010, 0.016), vec3(0.010, 0.055, 0.086), surface_variation * 0.62);
+		ROUGHNESS = 0.34;
+		SPECULAR = 0.56;
 
 		ALPHA = 1.0;
 
