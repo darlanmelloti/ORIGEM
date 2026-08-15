@@ -27,6 +27,7 @@ func _ready() -> void:
 	_build_river()
 	_build_river_margins()
 	_build_ruin_arch()
+	_build_arch_approach_ecology()
 	_build_roadside_vegetation()
 
 func _height_at(world_x: float, world_z: float) -> float:
@@ -287,6 +288,41 @@ func _build_ruin_arch() -> void:
 	arch_fill.shadow_enabled = false
 	arch_fill.position = Vector3(0.0, 4.4, 2.6)
 	arch.add_child(arch_fill)
+
+func _build_arch_approach_ecology() -> void:
+	# Grupos laterais e descontínuos fazem a aproximação parecer uma margem antiga invadida pela vegetação, sem fechar o eixo de lajes.
+	var ecology: Node3D = Node3D.new()
+	ecology.name = "EcologiaDaAproximacaoDoArco"
+	add_child(ecology)
+	var placements: Array[Vector3] = [
+		Vector3(-1.0, 0.0, 35.5), Vector3(1.0, 0.0, 39.0),
+		Vector3(-1.0, 0.0, 43.5), Vector3(1.0, 0.0, 53.0),
+		Vector3(-1.0, 0.0, 57.0), Vector3(1.0, 0.0, 61.0)
+	]
+	for index: int in range(placements.size()):
+		var point: Vector3 = placements[index]
+		var side: float = point.x
+		var x_value: float = _road_x(point.z) + side * (4.85 + float(index % 2) * 0.72)
+		var ground_y: float = _height_at(x_value, point.z)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoDaAproximacaoDoArco_%02d" % index
+			fern.position = Vector3(x_value, ground_y + 0.025, point.z)
+			var fern_scale: float = 0.38 + float(index % 3) * 0.055
+			fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+			fern.rotation.y = 0.46 + float(index) * 0.83
+			ecology.add_child(fern)
+		if index % 2 == 0:
+			var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+			if rock == null:
+				continue
+			rock.name = "RochaDaAproximacaoDoArco_%02d" % index
+			rock.position = Vector3(x_value + side * 0.72, ground_y + 0.06, point.z + 0.48)
+			var rock_scale: float = 0.18 + float(index % 3) * 0.035
+			rock.scale = Vector3(rock_scale, rock_scale * 0.72, rock_scale)
+			rock.rotation.y = 0.34 + float(index) * 0.76
+			_apply_material(rock, ruin_material)
+			ecology.add_child(rock)
 
 func _build_roadside_vegetation() -> void:
 	var vegetation: Node3D = Node3D.new()
