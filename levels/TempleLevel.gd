@@ -40,7 +40,8 @@ func _ready() -> void:
 	_build_orion_mountains()
 	_build_voss_house()
 	# A captura técnica precisa da geografia regional já construída antes de ativar a câmara do take; o fluxo jogável mantém os atrasos cinematográficos normais.
-	if OS.has_environment("ORIGEM_CAPTURE_TAKE"):
+	if OS.has_environment("ORIGEM_CAPTURE_TAKE") or OS.has_environment("ORIGEM_QA_INTERACT"):
+		# Capturas e interações de QA requerem o mundo regional antes da contagem do roteiro; o jogo normal mantém o carregamento encenado.
 		_enforce_voss_opening_daylight()
 		_build_world_after_voss_prologue()
 	else:
@@ -55,6 +56,32 @@ func _ready() -> void:
 		get_tree().create_timer(2.40).timeout.connect(_prepare_valley_bridge_route_qa)
 	if OS.get_environment("ORIGEM_QA_INTERACT") == "lake_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_lake_stela_interaction_qa)
+	elif OS.get_environment("ORIGEM_QA_INTERACT") == "majestic_stela":
+		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_stela_interaction_qa)
+
+func _prepare_majestic_stela_interaction_qa() -> void:
+	# Prova isolada da Estela de Memória: o jogador nasce fora do anel de tendas e de frente para o colisor interactivo.
+	if not has_node("RegiaoFlorestaLagoExploravel"):
+		get_tree().create_timer(0.75).timeout.connect(_prepare_majestic_stela_interaction_qa)
+		return
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		get_tree().create_timer(0.25).timeout.connect(_prepare_majestic_stela_interaction_qa)
+		return
+	var stela: StaticBody3D = get_node_or_null("RegiaoFlorestaLagoExploravel/AcampamentoMajestic/RuneP0_01") as StaticBody3D
+	if stela == null:
+		get_tree().create_timer(0.50).timeout.connect(_prepare_majestic_stela_interaction_qa)
+		return
+	# Aproximação pelo exterior norte: mantém uma linha de visão livre para o raio de 2,5 m e não atravessa as tendas.
+	var approach: Vector3 = stela.global_position + Vector3(0.0, 0.0, 2.0)
+	player.velocity = Vector3.ZERO
+	player.global_position = Vector3(approach.x, _terrain_height_for_qa(approach.x, approach.z) + 1.25, approach.z)
+	# A câmara de primeira pessoa aponta no eixo -Z; não usar a frente +Z de um modelo de personagem neste spawn técnico.
+	player.look_at(Vector3(stela.global_position.x, player.global_position.y, stela.global_position.z), Vector3.UP)
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_INTERACT] Elias posicionado diante da Estela Majestic em %s; estela=%s" % [player.global_position, stela.global_position])
 
 func _prepare_lake_stela_interaction_qa() -> void:
 	# A região é procedural e pode ocupar mais do que a primeira janela de temporizador em llvmpipe.
