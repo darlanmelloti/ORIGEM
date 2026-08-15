@@ -231,7 +231,7 @@ func _activate_region10_validation_camera() -> void:
 	add_child(validation_camera)
 	var cave_node := get_parent().get_node_or_null("DestinosOrionEHubTemporal/CavernaDoOrion") as Node3D
 	var cave_origin: Vector3 = cave_node.global_position if cave_node != null else Vector3(-116.0, 42.0, 548.0)
-	validation_camera.global_position = cave_origin + Vector3(-10.0, 6.0, -10.0)
+	validation_camera.global_position = cave_origin + Vector3(10.0, 6.0, 10.0)
 	validation_camera.look_at(cave_origin + Vector3(0.0, 4.2, -8.0), Vector3.UP)
 	validation_camera.current = true
 	call_deferred("_hide_region10_later_landmarks")

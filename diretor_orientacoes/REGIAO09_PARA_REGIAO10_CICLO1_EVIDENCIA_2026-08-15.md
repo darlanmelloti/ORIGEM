@@ -81,3 +81,14 @@ A tomada de limiar aproximada e a ocultação dos marcadores auxiliares foram ex
 - **NEXT_ACTION_IMMEDIATE**: Forçar uma tomada de entrada determinística ancorada na geometria frontal da CavernaDoOrion, ocultar todos os símbolos/rock markers fora do arco, aumentar o contraste da cavidade e verificar por frame que a abertura e dois braseiros ocupam o centro visual.
 - **TARGET_REGION**: Região 10 — Caverna do Orion
 - **DEADLINE_NEXT_PUSH**: `2026-08-15T16:50:25Z` (UTC)
+
+## Ciclo 7 — Resultado e transição de estado
+
+A mudança para o eixo exterior positivo-Z não alterou a composição funcional: a captura continua a mostrar símbolos de rota e fenda emissiva, sem revelar a boca do Orion. O Ciclo 7 é `REJECTED_VISUAL`.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `REJECTED_VISUAL`
+- **NEXT_ACTION_IMMEDIATE**: Criar um proxy de entrada exclusivo para validação dentro do mesmo ramo activo da Região 10, com arco orgânico, cavidade recuada e dois OmniLight3D azuis; apontar a câmara directamente ao proxy e validar que os símbolos auxiliares ficam fora do campo.
+- **TARGET_REGION**: Região 10 — Caverna do Orion
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T16:52:02Z` (UTC)
