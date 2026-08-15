@@ -1186,8 +1186,9 @@ void fragment() {
 			// Emissão fria muito contida: revela a forma elíptica no modo GL Compatibility sem transformar o lago numa superfície luminosa.
 			EMISSION = mix(vec3(0.008, 0.040, 0.056), vec3(0.032, 0.128, 0.170), surface_variation * 0.62);
 
-		ROUGHNESS = 0.34;
-		SPECULAR = 0.60;
+		// Superfície lacustre larga e difusa: suaviza reflexos duros do modo GL Compatibility, preservando ondas e ruínas abaixo da linha de água.
+		ROUGHNESS = 0.52;
+		SPECULAR = 0.28;
 
 		ALPHA = 1.0;
 
