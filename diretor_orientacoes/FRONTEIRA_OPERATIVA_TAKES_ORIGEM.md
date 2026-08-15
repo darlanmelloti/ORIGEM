@@ -1,26 +1,27 @@
-# ORIGEM — Fronteira Operativa Definitiva de 22 Capítulos
+# ORIGEM — Fronteira Operativa Definitiva
 
+**Versão:** 12 Regiões do Mapa e 22 Takes
 **Aplicação imediata:** 15 de agosto de 2026
-**Autoridade:** Direção Executiva e Direção de Desenvolvimento
-**Finalidade:** eliminar duplicação de esforço e garantir uma transição física contínua desde a Casa Voss até ao Orion Cube.
 
-## Divisão exclusiva de responsabilidades
+## Divisão exclusiva entre branches
 
-| Equipa / branch | Âmbito exclusivo | Conteúdo permitido | Âmbito vedado |
-|---|---|---|---|
-| Desenvolvimento Principal — `feature/dev1-gameplay-core` | **Capítulos / Takes 1–10** | Ato I — Memória da Casa Voss; Ato II — Chamamento; Ato III inicial — estrada junto à casa, arco monumental, vale inicial, bifurcação e preparação da travessia. Inclui fundação interativa do prólogo, porta exterior `[E]`, espada, trilhos, floresta inicial e desempenho na GTX 1050. | Capítulos / Takes 11–22: ponte, subida, Vila Elevada, observatório, trilho da montanha, canyon, caverna, galeria das eras, praça ciclópica e Orion Cube. |
-| Novo Desenvolvedor — `feature/dev2-mountain-canyon` | **Capítulos / Takes 11–22** | Bifurcação avançada, sinais no bosque, ponte, subida, Vila Elevada, observatório, trilho da montanha, desfiladeiro, fendas tectónicas, caverna profunda, vestígios históricos, arena do Sentinela Kharu, praça ciclópica e Orion Cube. | Capítulos / Takes 1–10: Casa Voss, prólogo, estrada junto à casa, arco monumental, vale inicial e fundação da travessia. |
+| Branch | Regiões exclusivas | Takes exclusivos | Conteúdo |
+|---|---|---:|---|
+| `feature/dev1-gameplay-core` | **1–6** | **1–11** | Casa Voss, prólogo, avô, espada, MJ-12, porta `[E]`, Estrada do Rio, Arco das Ruínas, Floresta Densa, Acampamento Majestic e Ruínas Submersas. |
+| `feature/dev2-mountain-canyon` | **7–12** | **12–22** | Vila Elevada, Observatório, Trilha da Montanha, desfiladeiro, Caverna do Orion, Câmara do Cube e Hub Temporal. |
 
-## Regra crítica de transição
+## Regras de integração
 
-O conteúdo experimental do antigo bloco isolado do Take 5 não define a nova divisão. A frente `feature/dev2-mountain-canyon` começa a partir da **base estável consolidada** entregue pela frente principal; qualquer transição espacial deve respeitar a escala do mapa e a continuidade física do mundo.
+A escala do mapa de 12 marcos tem precedência sobre a duração dos takes. A transição de Região 6 para Região 7 é uma **entrega de base**, não uma autorização de edição cruzada. A frente `dev2` herda a base estável entregue pela `dev1`; a frente `dev1` deixa de alterar os módulos de Regiões 7–12 depois deste registo.
 
-## Cadência obrigatória de coordenação
+As alterações de `HighlandRegion.gd` e `OrionDestinationRegion.gd` existentes no histórico permanecem como referência de integração, mas passam a pertencer exclusivamente à revisão e evolução da `feature/dev2-mountain-canyon`.
 
-| Frequência | Procedimento obrigatório |
+## Protocolo obrigatório
+
+| Cadência | Ação obrigatória |
 |---|---|
-| A cada 10 minutos | Ler `diretor_orientacoes/` no GitHub antes de continuar a codificação. |
-| A cada 30 minutos ou no fecho de uma tarefa | Executar validação Godot 4.7.1, captura de alta resolução, gameplay de cerca de 30 segundos, registo de fecho e push imediato na branch própria. |
-| A cada 20 minutos após novos commits | A direção audita o código, a jogabilidade e a fidelidade narrativa, emitindo o próximo alinhamento. |
+| 10 minutos | Ler `diretor_orientacoes/` no GitHub. |
+| 30 minutos ou conclusão de subtarefa | Validar Godot 4.7.1, capturar imagem em alta resolução, executar gameplay de aproximadamente 30 segundos, registar o fecho e fazer push. |
+| 20 minutos após novos commits | Direção audita a fidelidade narrativa, técnica e visual. |
 
-> Os takes são instrumentos de narrativa e composição. A autoridade espacial permanece o mapa regional e a continuidade explorável do mundo, nunca um corte cinematográfico isolado.
+> Nenhuma branch modifica módulos, geometrias, takes de câmara ou ativos do bloco exclusivo da outra branch sem uma diretiva de integração explícita da direção.
