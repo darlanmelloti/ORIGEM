@@ -1,0 +1,10 @@
+Auditoria visual dos Takes 1–5 — 15 de agosto de 2026
+
+Capturas revistas:
+- origem_v2_phase113_dense_twilight_forest.png
+- origem_v2_phase114_take4_lakeshore.png
+
+Conclusões:
+1. A Floresta Densa mantém silhuetas de coníferas, arco de ruínas e percurso em lajes, mas o primeiro plano do take permanece demasiado subexposto e a Casa Voss ocupa parte relevante do enquadramento. Este é o setor periférico prioritário para consolidação, por ser a transição direta entre os Takes 2–4.
+2. O Lago das Ruínas Submersas continua legível e apresenta água, marcos emergentes e rota visual para a Vila Elevada. A composição ainda é simplificada, mas não requer mais expansão de escopo neste ciclo.
+3. O próximo passe dentro do domínio do desenvolvimento principal deve concentrar-se apenas na leitura de percurso e luz de orientação da transição florestal entre a Casa Voss, Arco das Ruínas e corredor ribeirinho. Não deve alterar a Vila Elevada/Take 5, Trilha da Montanha/Take 6 ou Caverna de Orion/Take 7.
