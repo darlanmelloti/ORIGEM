@@ -51,3 +51,14 @@ A vegetação foi concentrada fora do eixo de lajes e a margem do lago foi deslo
 ---
 
 **Regra de continuidade:** cada alteração visual ou de rota deve passar por validação técnica e por pelo menos 30 segundos de gameplay/captura antes de ser preservada.
+
+## Atualização de Fecho do Ciclo 113
+
+O ciclo adicional de crepúsculo foi concluído localmente. O perfil atmosférico passou a persistir após a devolução de controlo a Elias; a intensidade de preenchimento azul e a luz quente direcional foram recalibradas para manter as silhuetas e o percurso visíveis sem reverter para o perfil diurno. A vegetação da Floresta Densa foi aumentada de forma controlada, preservando o eixo das lajes e a bacia do lago sem árvores ou rochas na superfície de água.
+
+A sessão automatizada pós-prólogo executou uma observação de 30 segundos e gerou capturas de controlo. A cartela narrativa inicial ainda pode permanecer mais tempo no renderizador llvmpipe porque usa temporização dependente da simulação, mas o HUD de Elias e a câmara de primeira pessoa confirmam o estado jogável. Em GPU-alvo, esta cartela progride à velocidade normal; no próximo passe deverá ser movida para uma temporização independente da carga de streaming, caso seja necessário melhorar a evidência de captura por software.
+
+O pacote recuperável é `ORIGEM_V2_RegionalWorld_Phase113_LakeRoute_Twilight_Validated.zip`, SHA-256 `b15e0d0910779a92d9d1e26c59bb927a2f4bf1201779f8984ebc86d9d4b8b6ad`.
+
+> Sincronização remota pendente: a integração GitHub foi novamente recusada ao submeter a reativação do conector nesta sessão. Os commits e este ponto de situação permanecem preservados localmente na branch `feature/dev1-gameplay-core`, prontos para `push` assim que o conector ficar efetivamente ativo.
+

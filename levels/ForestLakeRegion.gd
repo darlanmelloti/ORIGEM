@@ -87,10 +87,10 @@ func _build_dense_forest() -> void:
 	add_child(forest)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = 40417
-	for index: int in range(74):
+	for index: int in range(104):
 		var z_value: float = 72.0 + float(index / 2) * 4.5 + rng.randf_range(-2.0, 2.0)
 		var side: float = -1.0 if index % 2 == 0 else 1.0
-		var spacing: float = 10.0 + fmod(float(index * 7), 18.0)
+		var spacing: float = 8.5 + fmod(float(index * 7), 20.0)
 		var x_value: float = _path_x(z_value) + side * spacing
 		# Mantém o corredor livre e evita árvores dentro da bacia elíptica das Ruínas Submersas.
 		var lake_dx: float = (x_value - 60.0) / 48.0
@@ -124,10 +124,10 @@ func _build_dense_forest() -> void:
 		tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
 		tree.rotation.y = rng.randf_range(-PI, PI)
 		forest.add_child(tree)
-	for index: int in range(54):
-		var z_value: float = 70.0 + float(index) * 3.1
+	for index: int in range(112):
+		var z_value: float = 70.0 + float(index) * 1.55
 		var side: float = -1.0 if index % 2 == 0 else 1.0
-		var x_value: float = _path_x(z_value) + side * (4.2 + fmod(float(index), 4.0) * 0.75)
+		var x_value: float = _path_x(z_value) + side * (4.7 + fmod(float(index), 5.0) * 0.78)
 		var fern: Node3D = FERN.instantiate() as Node3D
 		if fern == null:
 			continue
@@ -244,8 +244,8 @@ func _build_riparian_margin() -> void:
 	margin.name = "MargensRochosasDoLago"
 	add_child(margin)
 	var center: Vector2 = Vector2(60.0, 252.0)
-	for index: int in range(32):
-		var angle: float = float(index) * TAU / 32.0
+	for index: int in range(48):
+		var angle: float = float(index) * TAU / 48.0
 		var radius_x: float = 44.0 + sin(float(index) * 1.71) * 2.8
 		var radius_z: float = 36.0 + cos(float(index) * 1.27) * 2.4
 		var world_x: float = center.x + cos(angle) * radius_x

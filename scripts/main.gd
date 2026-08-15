@@ -63,6 +63,16 @@ func _ready():
 	_start_narrative()
 
 func _start_narrative():
+	# A cartela narrativa inicia apenas depois do prólogo da Casa Voss: o comando de saltar e a câmara de abertura ficam livres de UI concorrente.
+	var voss_controller: Node = null
+	# TempleLevel constrói a Casa Voss durante o arranque; aguarda o controlador antes de decidir se a cartela pode começar.
+	for frame_index: int in range(900):
+		voss_controller = get_tree().get_first_node_in_group("voss_house_controller")
+		if voss_controller != null:
+			break
+		await get_tree().process_frame
+	while voss_controller != null and bool(voss_controller.get("opening_active")):
+		await get_tree().process_frame
 	await get_tree().create_timer(0.5).timeout
 	_show_msg("ORIGEM — VALE DE KHEPER\n\n2026. Elias Voss desperta diante de ruínas que não existem em nenhum mapa. A memória do futuro chama-o pelo nome...", 6.0)
 	await get_tree().create_timer(6.5).timeout

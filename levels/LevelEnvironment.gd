@@ -183,27 +183,30 @@ func apply_voss_daylight() -> void:
 		opening_forest_fill.queue_free()
 		opening_forest_fill = null
 	environment.background_mode = Environment.BG_SKY
-	environment.sky = _create_daylight_sky()
-	environment.background_energy_multiplier = 1.0
+	environment.sky = _create_liturgical_twilight_sky()
+	environment.background_energy_multiplier = 0.94
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	environment.ambient_light_color = Color(0.66, 0.77, 0.72, 1.0)
-	environment.ambient_light_energy = 0.72
+	environment.ambient_light_color = Color(0.28, 0.35, 0.43, 1.0)
+	environment.ambient_light_energy = 0.78
 	environment.fog_enabled = true
-	environment.fog_light_color = Color(0.72, 0.83, 0.90, 1.0)
-	environment.fog_light_energy = 0.30
-	environment.fog_density = 0.0017
-	environment.fog_sky_affect = 0.66
+	environment.fog_light_color = Color(0.19, 0.25, 0.31, 1.0)
+	environment.fog_light_energy = 0.38
+	environment.fog_density = 0.0027
+	environment.fog_sky_affect = 0.73
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.tonemap_exposure = 1.02
-	environment.glow_enabled = false
+	environment.tonemap_exposure = 1.18
+	environment.glow_enabled = true
+	environment.glow_intensity = 0.26
+	environment.glow_strength = 0.34
+	environment.glow_bloom = 0.04
 	environment.adjustment_enabled = true
-	environment.adjustment_brightness = 1.00
-	environment.adjustment_contrast = 1.05
-	environment.adjustment_saturation = 1.06
+	environment.adjustment_brightness = 1.07
+	environment.adjustment_contrast = 1.14
+	environment.adjustment_saturation = 0.90
 	if sun != null:
-		sun.rotation_degrees = Vector3(-52.0, -28.0, 0.0)
-		sun.light_color = Color(1.0, 0.93, 0.78, 1.0)
-		sun.light_energy = 1.06
+		sun.rotation_degrees = Vector3(-14.0, -38.0, 0.0)
+		sun.light_color = Color(1.0, 0.62, 0.38, 1.0)
+		sun.light_energy = 0.62
 		sun.shadow_enabled = true
 
 func apply_voss_opening_storm() -> void:
@@ -272,9 +275,8 @@ func restore_timeline_environment() -> void:
 	if opening_forest_fill != null:
 		opening_forest_fill.queue_free()
 		opening_forest_fill = null
-	_setup_sun()
-	_setup_environment()
-	_sync_chronos_profile()
+	# A abertura devolve o controlo a Elias no perfil de crepúsculo; o Chronos só substitui este estado numa transição temporal explícita.
+	apply_voss_daylight()
 
 func _create_daylight_sky() -> Sky:
 	# Shader de céu explícito: mantém o azul e os cúmulos leves também no renderizador de captura GL.
@@ -303,6 +305,26 @@ void sky() {
 	vec3 color = mix(horizon_color, zenith_color, horizon);
 	// Gradiente limpo de céu: evita costuras entre faces do cubemap no renderizador de captura.
 	COLOR = color;
+}
+"""
+	var sky_material: ShaderMaterial = ShaderMaterial.new()
+	sky_material.shader = sky_shader
+	var sky: Sky = Sky.new()
+	sky.sky_material = sky_material
+	return sky
+
+func _create_liturgical_twilight_sky() -> Sky:
+	var sky_shader: Shader = Shader.new()
+	sky_shader.code = """
+shader_type sky;
+void sky() {
+	vec3 view_dir = normalize(EYEDIR);
+	float horizon = smoothstep(-0.16, 0.84, view_dir.y);
+	vec3 horizon_color = vec3(0.13, 0.20, 0.28);
+	vec3 zenith_color = vec3(0.008, 0.018, 0.055);
+	float warm_band = exp(-pow((view_dir.y - 0.10) * 9.5, 2.0));
+	vec3 color = mix(horizon_color, zenith_color, horizon);
+	COLOR = color + vec3(0.12, 0.045, 0.018) * warm_band;
 }
 """
 	var sky_material: ShaderMaterial = ShaderMaterial.new()

@@ -395,6 +395,16 @@ func _input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	if opening_active:
+		# Salvaguarda contínua: o estado físico de E é lido a cada frame para que o salto não dependa de um evento perdido durante o carregamento regional.
+		var physical_skip_held: bool = Input.is_key_pressed(KEY_E) or Input.is_action_pressed("interact")
+		if physical_skip_held and not opening_skip_key_held:
+			opening_skip_key_held = true
+			if opening_skip_timer != null:
+				opening_skip_timer.start()
+		elif not physical_skip_held and opening_skip_key_held:
+			opening_skip_key_held = false
+			if opening_skip_timer != null:
+				opening_skip_timer.stop()
 		_update_opening_skip_prompt()
 		return
 	# Salvaguarda de gameplay: perto da entrada, E abre a porta mesmo se o raycast estiver a tocar numa moldura em vez do gatilho.
