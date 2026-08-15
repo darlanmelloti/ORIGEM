@@ -115,6 +115,27 @@ func _build_final_dome_validation_proxy() -> void:
 	base_material.roughness = 0.92
 	base.material_override = base_material
 	proxy.add_child(base)
+	for index: int in range(5):
+		var approach_stone := ROCK_LARGE.instantiate() as Node3D
+		if approach_stone == null:
+			continue
+		approach_stone.name = "DegrauValidacaoHubCupula_%02d" % index
+		approach_stone.position = Vector3(sin(float(index) * 1.4) * 1.5, 0.78 + float(index % 2) * 0.08, 8.0 - float(index) * 2.3)
+		approach_stone.scale = Vector3(0.55, 0.22, 0.42)
+		approach_stone.rotation = Vector3(0.02, float(index) * 0.3, -0.03)
+		var approach_material := StandardMaterial3D.new()
+		approach_material.albedo_color = Color("#4a4566")
+		approach_material.roughness = 0.9
+		approach_stone.material_override = approach_material
+		proxy.add_child(approach_stone)
+		if index % 2 == 0:
+			var approach_light := OmniLight3D.new()
+			approach_light.light_color = Color("#8b78dc")
+			approach_light.light_energy = 0.6
+			approach_light.omni_range = 4.0
+			approach_light.shadow_enabled = false
+			approach_light.position = approach_stone.position + Vector3(0.0, 0.65, 0.0)
+			proxy.add_child(approach_light)
 	var core := MeshInstance3D.new()
 
 	var sphere := SphereMesh.new()
