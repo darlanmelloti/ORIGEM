@@ -858,6 +858,10 @@ func _create_materials() -> void:
 	stone_material.uv1_triplanar = true
 	stone_material.uv1_world_triplanar = true
 	stone_material.uv1_scale = Vector3(0.26, 0.26, 0.26)
+	# Emissão residual imperceptível à distância, mas suficiente para conservar a leitura de parede em GL Compatibility.
+	stone_material.emission_enabled = true
+	stone_material.emission = Color(0.012, 0.020, 0.018, 1.0)
+	stone_material.emission_energy_multiplier = 0.46
 	timber_material = _material(Color(0.175, 0.155, 0.125, 1.0), 0.48, 0.02)
 	timber_material.albedo_texture = WEATHERED_DARK_TIMBER_DIFF
 	timber_material.uv1_triplanar = true
@@ -891,7 +895,14 @@ func _create_materials() -> void:
 		aged_wood_material.albedo_color = Color(0.22, 0.15, 0.095, 1.0)
 		aged_wood_material.uv1_scale = Vector3(0.30, 0.30, 0.30)
 	interior_wood_material = _material(Color(0.28, 0.16, 0.08, 1.0), 0.82, 0.0)
+	# Resposta residual do mobiliário: revela silhuetas narrativas em GL Compatibility sem converter madeira em material luminoso.
+	interior_wood_material.emission_enabled = true
+	interior_wood_material.emission = Color(0.032, 0.016, 0.006, 1.0)
+	interior_wood_material.emission_energy_multiplier = 0.52
 	brass_material = _material(Color(0.34, 0.20, 0.07, 1.0), 0.48, 0.63)
+	brass_material.emission_enabled = true
+	brass_material.emission = Color(0.055, 0.025, 0.006, 1.0)
+	brass_material.emission_energy_multiplier = 0.42
 	window_material = _material(Color(0.10, 0.035, 0.008, 1.0), 0.24, 0.05)
 	window_material.emission_enabled = true
 	window_material.emission = Color(0.46, 0.235, 0.070, 1.0)
@@ -1101,6 +1112,12 @@ func _build_interior(house: Node3D) -> void:
 	_add_box(house, "BrasaDaLareira", Vector3(-1.38, 1.22, 2.70), Vector3(0.82, 0.14, 0.18), warm_glow_material, false)
 	_add_light(house, Vector3(-1.38, 1.85, 2.30), Color(1.0, 0.38, 0.12, 1.0), 2.0, 6.0, "LuzDaLareira")
 	_add_light(house, Vector3(0.0, 3.0, -2.2), Color(1.0, 0.62, 0.29, 1.0), 0.75, 5.0, "LuzDaEntrada")
+	# Preenchimento doméstico sem sombras: revela mesa, mapa e estrutura da casa em GL Compatibility, mantendo a lareira como fonte de calor dominante.
+	_add_light(house, Vector3(0.18, 2.72, 0.18), Color(0.34, 0.42, 0.48, 1.0), 3.60, 12.0, "PreenchimentoInteriorCasaVoss")
+	# Luz prática da mesa de Tomás: guia o olhar para a memória e evita que os objetos narrativos desapareçam após o prólogo.
+	_add_light(house, Vector3(1.35, 2.38, 1.35), Color(1.0, 0.54, 0.20, 1.0), 1.45, 5.5, "LuzDaMesaDeTomas")
+	# Rebate frio mínimo no limiar: preserva a noite exterior, mas separa a moldura, a porta e o piso quando o jogador desperta.
+	_add_light(house, Vector3(0.0, 2.20, -3.25), Color(0.38, 0.48, 0.58, 1.0), 3.10, 12.5, "PreenchimentoDoLimiarVoss")
 
 func _create_daylight_path_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
