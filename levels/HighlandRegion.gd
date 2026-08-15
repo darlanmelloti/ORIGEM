@@ -107,27 +107,32 @@ func _build_observatory() -> void:
 	var oz: float = 404.0
 	observatory.position = Vector3(ox, _height_at(ox, oz), oz)
 	add_child(observatory)
-	var plinth_mesh: CylinderMesh = CylinderMesh.new()
-	plinth_mesh.top_radius = 10.5
-	plinth_mesh.bottom_radius = 12.0
-	plinth_mesh.height = 3.2
-	plinth_mesh.radial_segments = 24
-	var plinth: MeshInstance3D = MeshInstance3D.new()
-	plinth.mesh = plinth_mesh
-	plinth.position = Vector3(0.0, 1.6, 0.0)
-	plinth.material_override = stone_material
-	observatory.add_child(plinth)
-	var dome_mesh: SphereMesh = SphereMesh.new()
-	dome_mesh.radius = 8.8
-	dome_mesh.height = 5.0
-	dome_mesh.radial_segments = 32
-	var dome: MeshInstance3D = MeshInstance3D.new()
-	dome.name = "DomoDoObservatorio"
-	dome.mesh = dome_mesh
-	dome.scale = Vector3(1.0, 0.44, 1.0)
-	dome.position = Vector3(0.0, 5.0, 0.0)
-	dome.material_override = stone_material
-	observatory.add_child(dome)
+	print("ORIGEM_REGION8_OBSERVATORY_READY ", observatory.global_position)
+	var observatory_stone: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
+	observatory_stone.albedo_color = Color("#64766d")
+	observatory_stone.roughness = 0.78
+	# Plataforma e cúpula orgânicas: a Região 8 usa massas CC0 em vez de primitivas de greybox.
+	for shell_index: int in range(5):
+		var shell: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if shell == null:
+			continue
+		var shell_angle: float = float(shell_index) * TAU / 5.0
+		shell.name = "CascaOrganicaObservatorio_%02d" % shell_index
+		shell.position = Vector3(cos(shell_angle) * 7.2, 1.8 + float(shell_index % 2) * 0.7, sin(shell_angle) * 7.2)
+		shell.scale = Vector3(0.72, 0.32, 0.60)
+		shell.rotation = Vector3(0.08, shell_angle, -0.04)
+		_apply_material(shell, observatory_stone)
+		observatory.add_child(shell)
+	for crown_index: int in range(3):
+		var crown: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if crown == null:
+			continue
+		crown.name = "CoroaOrganicaObservatorio_%02d" % crown_index
+		crown.position = Vector3(-3.6 + float(crown_index) * 3.6, 5.0 + float(crown_index % 2) * 0.8, 0.0)
+		crown.scale = Vector3(0.52, 0.46, 0.48)
+		crown.rotation = Vector3(0.14, float(crown_index) * 0.7, -0.10)
+		_apply_material(crown, observatory_stone)
+		observatory.add_child(crown)
 	for index: int in range(6):
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
 		if pillar == null:
@@ -137,14 +142,43 @@ func _build_observatory() -> void:
 		pillar.scale = Vector3(0.55, 0.55, 0.55)
 		_apply_material(pillar, stone_material)
 		observatory.add_child(pillar)
+	var eye: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if eye != null:
+		eye.name = "OlhoOrganicoDoObservatorio"
+		eye.position = Vector3(0.0, 8.2, 0.0)
+		eye.scale = Vector3(0.82, 0.64, 0.82)
+		var eye_material: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
+		eye_material.albedo_color = Color("#163c4c")
+		eye_material.emission_enabled = true
+		eye_material.emission = Color("#1a9bc2")
+		eye_material.emission_energy_multiplier = 2.4
+		_apply_material(eye, eye_material)
+		observatory.add_child(eye)
 	var beacon: OmniLight3D = OmniLight3D.new()
 	beacon.name = "LuzDoObservatorio"
-	beacon.light_color = Color(0.22, 0.56, 1.0, 1.0)
-	beacon.light_energy = 2.1
-	beacon.omni_range = 28.0
+	beacon.light_color = Color(0.22, 0.72, 1.0, 1.0)
+	beacon.light_energy = 5.2
+	beacon.omni_range = 34.0
 	beacon.position = Vector3(0.0, 8.4, 0.0)
 	beacon.shadow_enabled = false
 	observatory.add_child(beacon)
+	for fill_index: int in range(2):
+		var fill: OmniLight3D = OmniLight3D.new()
+		fill.name = "PreenchimentoObservatorio_%02d" % fill_index
+		fill.light_color = Color("#7dc7d8")
+		fill.light_energy = 1.45
+		fill.omni_range = 22.0
+		fill.position = Vector3(-6.0 + float(fill_index) * 12.0, 4.0, 2.5)
+		fill.shadow_enabled = false
+		observatory.add_child(fill)
+	var frontal_fill: OmniLight3D = OmniLight3D.new()
+	frontal_fill.name = "PreenchimentoFrontalObservatorio"
+	frontal_fill.light_color = Color("#b7dce2")
+	frontal_fill.light_energy = 1.15
+	frontal_fill.omni_range = 20.0
+	frontal_fill.position = Vector3(0.0, 8.5, -8.0)
+	frontal_fill.shadow_enabled = false
+	observatory.add_child(frontal_fill)
 
 func _build_mountain_trail() -> void:
 	var route: Array[Vector2] = [

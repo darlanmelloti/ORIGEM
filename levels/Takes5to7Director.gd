@@ -45,6 +45,8 @@ func _build_once() -> void:
 		call_deferred("_activate_take8_validation_camera")
 	elif OS.get_environment("ORIGEM_VALIDATION_REGION") == "7":
 		call_deferred("_activate_region7_validation_camera")
+	elif OS.get_environment("ORIGEM_VALIDATION_REGION") == "8":
+		call_deferred("_activate_region8_validation_camera")
 	elif OS.get_environment("ORIGEM_TAKE57") == "1":
 		call_deferred("_activate_validation_camera")
 
@@ -126,6 +128,10 @@ func _process(delta: float) -> void:
 		var village_sweep: float = sin(validation_elapsed * 0.18) * 1.6
 		validation_camera.position = Vector3(112.0 + village_sweep, 19.0 + sin(validation_elapsed * 0.22) * 0.20, 330.0)
 		validation_camera.look_at(Vector3(140.0, 12.0, 354.0), Vector3.UP)
+	elif validation_take_mode == 10:
+		var observatory_sweep: float = sin(validation_elapsed * 0.20) * 2.2
+		validation_camera.position = Vector3(188.0 + observatory_sweep * 0.45, 39.0 + sin(validation_elapsed * 0.24) * 0.12, 398.0)
+		validation_camera.look_at(Vector3(194.0, 37.0, 404.0), Vector3.UP)
 	else:
 		var travel: float = minf(validation_elapsed * 0.02, 0.35)
 		var lateral: float = sin(validation_elapsed * 0.52) * 2.2
@@ -196,6 +202,19 @@ func _activate_region7_validation_camera() -> void:
 	validation_camera.position = Vector3(112.0, 19.0, 330.0)
 	add_child(validation_camera)
 	validation_camera.look_at(Vector3(140.0, 12.0, 354.0), Vector3.UP)
+	validation_camera.current = true
+
+func _activate_region8_validation_camera() -> void:
+	validation_take_mode = 10
+	var legacy_enemies := get_parent().get_node_or_null("Enemies") as Node3D
+	if legacy_enemies != null:
+		legacy_enemies.visible = false
+	validation_camera = Camera3D.new()
+	validation_camera.name = "CameraValidacaoRegiao08"
+	validation_camera.fov = 54.0
+	validation_camera.position = Vector3(188.0, 39.0, 398.0)
+	add_child(validation_camera)
+	validation_camera.look_at(Vector3(194.0, 37.0, 404.0), Vector3.UP)
 	validation_camera.current = true
 
 func _build_take_5_cave_threshold() -> void:
