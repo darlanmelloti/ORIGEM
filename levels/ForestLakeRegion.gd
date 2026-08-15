@@ -702,6 +702,15 @@ func _build_submerged_ruins() -> void:
 		landmark.rotation = Vector3(0.08 * float(landmark_index + 1), 0.38 + float(landmark_index) * 0.41, 0.04)
 		_apply_material(landmark, ruin_material)
 		lake.add_child(landmark)
+		# Baliza arqueológica discreta: delineia os marcos emergentes na captura sem criar um perímetro artificial de luz.
+		var landmark_beacon: OmniLight3D = OmniLight3D.new()
+		landmark_beacon.name = "BrilhoMarcoRuina_%02d" % landmark_index
+		landmark_beacon.light_color = Color(0.16, 0.44, 0.68, 1.0)
+		landmark_beacon.light_energy = 0.42
+		landmark_beacon.omni_range = 8.5
+		landmark_beacon.shadow_enabled = false
+		landmark_beacon.position = landmark.position + Vector3(0.0, 2.65 * landmark_scale, 0.0)
+		lake.add_child(landmark_beacon)
 		var landmark_body: StaticBody3D = StaticBody3D.new()
 		landmark_body.name = "ColisorMarcoRuinaEmergente_%02d" % landmark_index
 		landmark_body.position = landmark.position + Vector3(0.0, 2.55 * landmark_scale, 0.0)
@@ -911,6 +920,10 @@ func _create_ruin_material() -> StandardMaterial3D:
 	material.normal_texture = MOSSY_RUIN_NORMAL
 	material.normal_scale = 0.32
 	material.roughness = 0.95
+	# Resposta material quase neutra: conserva o musgo no crepúsculo de compatibilidade sem tornar as ruínas autoiluminadas.
+	material.emission_enabled = true
+	material.emission = Color(0.028, 0.052, 0.060, 1.0)
+	material.emission_energy_multiplier = 0.34
 	material.uv1_scale = Vector3(0.28, 0.28, 0.28)
 	return material
 
@@ -927,12 +940,12 @@ void fragment() {
 					// Água profunda e fria: o detalhe nasce de ripples e reflexo, nunca de emissão ciano plana.
 		float broad_ripple = sin(VERTEX.x * 0.08 - VERTEX.z * 0.06 + TIME * 0.22) * 0.5 + 0.5;
 		float surface_variation = clamp(ripple * 0.62 + broad_ripple * 0.38, 0.0, 1.0);
-					ALBEDO = mix(vec3(0.014, 0.068, 0.092), vec3(0.060, 0.205, 0.255), surface_variation * 0.66);
+					ALBEDO = mix(vec3(0.018, 0.085, 0.118), vec3(0.075, 0.255, 0.320), surface_variation * 0.70);
 			// Emissão fria contida: separa a bacia e os pilares no renderizador de compatibilidade sem simular um lago luminoso.
-			EMISSION = mix(vec3(0.004, 0.018, 0.026), vec3(0.018, 0.085, 0.120), surface_variation * 0.66);
+			EMISSION = mix(vec3(0.006, 0.028, 0.040), vec3(0.028, 0.115, 0.155), surface_variation * 0.70);
 
-		ROUGHNESS = 0.34;
-		SPECULAR = 0.56;
+		ROUGHNESS = 0.30;
+		SPECULAR = 0.64;
 
 		ALPHA = 1.0;
 

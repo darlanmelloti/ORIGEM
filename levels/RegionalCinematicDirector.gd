@@ -33,7 +33,7 @@ const TAKE_FRAMES: Dictionary = {
 	5: {"position": Vector3(72.0, 27.5, 313.0), "target": Vector3(168.0, 12.0, 385.0), "fov": 50.0},
 	9: {"position": Vector3(-104.0, 16.0, 163.0), "target": Vector3(-36.0, 1.6, 180.0), "fov": 49.0},
 	10: {"position": Vector3(-100.0, 4.8, 158.0), "target": Vector3(-88.0, 1.45, 172.0), "fov": 40.0},
-	11: {"position": Vector3(15.0, 11.5, 216.0), "target": Vector3(60.0, 1.0, 252.0), "fov": 47.0},
+	11: {"position": Vector3(20.0, 7.4, 222.0), "target": Vector3(58.0, 1.2, 251.0), "fov": 40.0},
 	6: {"position": Vector3(22.0, 37.0, 462.0), "target": Vector3(-98.0, 47.0, 535.0), "fov": 51.0},
 	7: {"position": Vector3(-112.0, 53.0, 543.0), "target": Vector3(-116.0, 48.0, 562.0), "fov": 47.0}
 }
