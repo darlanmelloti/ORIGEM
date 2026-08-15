@@ -22,6 +22,7 @@ func _ready() -> void:
 	_build_region9_to_10_approach()
 	if OS.get_environment("ORIGEM_VALIDATION_REGION") != "10":
 		_build_cube_chamber_marker()
+		_build_region11_to_12_approach()
 		_build_temporal_hub()
 
 func _height_at(world_x: float, world_z: float) -> float:
@@ -265,6 +266,33 @@ func _build_cube_chamber_marker() -> void:
 		ring_core.material_override = ring_material
 		ring_core.position = Vector3(cos(angle) * 5.4, 1.65, sin(angle) * 5.4)
 		chamber.add_child(ring_core)
+
+func _build_region11_to_12_approach() -> void:
+	var approach := Node3D.new()
+	approach.name = "TransicaoRegiao11Para12"
+	add_child(approach)
+	var route: Array[Vector2] = [Vector2(-116.0, 562.0), Vector2(-82.0, 518.0), Vector2(-48.0, 474.0), Vector2(-14.0, 430.0), Vector2(20.0, 386.0), Vector2(54.0, 342.0), Vector2(88.0, 298.0), Vector2(126.0, 254.0), Vector2(164.0, 216.0)]
+	for index: int in range(route.size()):
+		var point := route[index]
+		var stone := ROCK_LARGE.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "DegrauHubTemporal_%02d" % index
+		stone.position = Vector3(point.x, _height_at(point.x, point.y) + 0.24, point.y)
+		stone.scale = Vector3(0.46 + float(index % 3) * 0.08, 0.14 + float(index % 2) * 0.05, 0.34 + float(index % 2) * 0.08)
+		stone.rotation = Vector3(0.03, -0.26 + float(index) * 0.12, -0.04)
+		_apply_material(stone, stone_material)
+		approach.add_child(stone)
+		if index % 3 == 1:
+			var waypoint := OmniLight3D.new()
+			waypoint.name = "LuzWayfindingHub_%02d" % index
+			waypoint.light_color = Color("#7f6bd6")
+			waypoint.light_energy = 0.9
+			waypoint.omni_range = 6.5
+			waypoint.shadow_enabled = false
+			waypoint.position = stone.position + Vector3(0.0, 0.9, 0.0)
+			approach.add_child(waypoint)
+
 
 func _build_temporal_hub() -> void:
 	var hub: Node3D = Node3D.new()

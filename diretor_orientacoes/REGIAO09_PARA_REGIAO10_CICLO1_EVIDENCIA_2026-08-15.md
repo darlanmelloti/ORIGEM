@@ -171,3 +171,15 @@ A primeira composição do Hub Temporal foi refinada em dois passes. O segundo p
 - **NEXT_ACTION_IMMEDIATE**: Integrar a leitura do Hub Temporal na continuidade jogável Região 11 → Região 12, validar a câmara em percurso normal e manter os monólitos sem greybox.
 - **TARGET_REGION**: Região 12 — Hub Temporal
 - **DEADLINE_NEXT_PUSH**: `2026-08-15T17:30:00Z` (UTC)
+
+## Região 11 → Região 12 — Integração de continuidade
+
+A travessia entre a Câmara do Orion Cube e o Hub Temporal recebeu uma cadeia orgânica de nove degraus CC0 ao longo do eixo oficial do mapa, com luzes violetas de wayfinding espaçadas e sem greybox. O parser Godot 4.7.1 passou e a captura do Hub Temporal foi regenerada com gameplay de aproximadamente 30 segundos e print 1600×900; o anel megalítico e o núcleo temporal permanecem legíveis.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `PASSED`
+- **NEXT_ACTION_IMMEDIATE**: Validar o percurso físico completo Região 10 → Região 11 → Região 12 em uma tomada contínua, mantendo os marcos orgânicos e as luzes de wayfinding dentro do orçamento GTX 1050.
+- **TARGET_REGION**: Regiões 10–12 — Caverna do Orion → Câmara do Orion Cube → Hub Temporal
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T17:30:00Z` (UTC)
+
