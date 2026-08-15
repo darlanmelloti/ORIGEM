@@ -1,0 +1,62 @@
+# ============================================================
+# ORIGEM PROJECT — Regras para a IA (Windsurf / Cursor)
+# Godot 4.x | GDScript | Arquitetura Modular AAA
+# ============================================================
+
+## LINGUAGEM E SINTAXE
+- Este é um projeto Godot 4.x. Usa SEMPRE sintaxe Godot 4.
+- Usa `await` (NUNCA `yield`).
+- Usa `@export` (NUNCA `export`).
+- Usa `@onready` (NUNCA `onready`).
+- Usa `CharacterBody2D` / `CharacterBody3D` (NUNCA `KinematicBody`).
+- Usa `move_and_slide()` sem argumentos; a velocidade vem de `self.velocity`.
+- Usa tipagem estática em todas as variáveis e funções:
+  - Correto: `var speed: float = 5.0`
+  - Correto: `func take_damage(amount: int) -> void:`
+  - Errado: `var speed = 5.0`
+
+## ARQUITETURA
+- Usa SEMPRE o padrão de Composição. Nunca cries classes monolíticas.
+- Divide a lógica em componentes pequenos e reutilizáveis (Nós filhos).
+- Para comunicação DENTRO da mesma cena: usa Sinais (signals) normais.
+- Para comunicação ENTRE cenas diferentes: usa SEMPRE o Autoload `EventBus`.
+- NUNCA uses `get_parent().get_node(...)` para comunicar para cima na árvore.
+- NUNCA uses `get_tree().get_root().get_node(...)` para aceder a outros sistemas.
+
+## DADOS
+- Usa `class_name NomeResource extends Resource` para dados estáticos (itens, missões, NPCs).
+- Guarda dados de jogo em Custom Resources (`.tres`), não em JSON.
+- O sistema de Save/Load usa o `SaveManager` Autoload.
+
+## AUTOLOADS DISPONÍVEIS
+Os seguintes Autoloads estão registados no projeto e podem ser acedidos diretamente:
+- `EventBus` — Sinais globais entre sistemas.
+- `GameManager` — Estado global do jogo (fase, modo, pausa).
+- `SaveManager` — Guardar e carregar o progresso.
+
+## DOCUMENTAÇÃO
+- Todo o script deve começar com um comentário de cabeçalho:
+  ```
+  ## NomeDoScript.gd
+  ## Descrição breve do que este script faz.
+  ## Parte do módulo: [nome do módulo]
+  ```
+- Todas as funções públicas devem ter uma docstring `##` acima delas.
+
+## IDIOMA
+- Código (variáveis, funções, classes, sinais): INGLÊS.
+- Comentários e documentação: PORTUGUÊS.
+- Nomes de ficheiros e pastas: INGLÊS, snake_case.
+
+## ESTRUTURA DE PASTAS
+```
+res://
+├── _autoloads/     → EventBus, GameManager, SaveManager
+├── components/     → HealthComponent, MovementComponent, InteractableComponent
+├── core/           → Sistemas: inventory, quests, timeline, save
+├── entities/       → player/, npcs/, enemies/
+├── levels/         → Cenas dos mapas
+├── resources/      → Ficheiros .tres (itens, missões, npcs)
+├── ui/             → hud/, inventory/, dialogue/, menus/
+└── tools/          → Ferramentas do editor (EditorPlugins)
+```
