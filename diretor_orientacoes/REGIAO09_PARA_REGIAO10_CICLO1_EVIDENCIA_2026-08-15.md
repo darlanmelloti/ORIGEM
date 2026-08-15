@@ -26,3 +26,7 @@ A cena renderiza e a transição está presente no mundo, mas este ciclo **não 
 ## Continuidade
 
 Após este registo, a branch continua automaticamente no próximo ciclo de refinamento da Região 10. As Regiões 1–6 e a `feature/dev1-gameplay-core` permanecem fora do escopo.
+
+## Refinamento imediato pós-ciclo
+
+A releitura pós-commit confirmou novamente a recomendação da Direção: a câmara dedicada evita o prólogo, mas a composição continua a enquadrar uma massa de pedra em vez de revelar inequivocamente a boca da Caverna do Orion. O ciclo seguinte deve abandonar este ponto de vista e usar uma câmara exterior mais lateral, com o alvo na abertura escura e não nos marcadores posteriores. O estado permanece **não aceite visualmente**, apesar de parser, gameplay e print formais estarem presentes.

@@ -240,6 +240,9 @@ func _hide_region10_later_landmarks() -> void:
 		var cube_chamber := destinations.get_node_or_null("CamaraDoOrionCube") as Node3D
 		if cube_chamber != null:
 			cube_chamber.visible = false
+	var temporal_echo := get_node_or_null("Take8_EcoTemporal") as Node3D
+	if temporal_echo != null:
+		temporal_echo.visible = false
 
 func _activate_region8_validation_camera() -> void:
 	validation_take_mode = 12 if OS.get_environment("ORIGEM_REGION8_TO9_CLOSE") == "1" else (11 if OS.get_environment("ORIGEM_REGION8_TO9") == "1" else 10)
