@@ -186,12 +186,13 @@ func apply_voss_daylight() -> void:
 	environment.sky = _create_liturgical_twilight_sky()
 	environment.background_energy_multiplier = 0.98
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	environment.ambient_light_color = Color(0.31, 0.40, 0.52, 1.0)
-	environment.ambient_light_energy = 0.98
+	# Fill global moderado para o modo GL Compatibility: devolve informação a solo, pedra e folhagem sem apagar o contraste litúrgico.
+	environment.ambient_light_color = Color(0.36, 0.46, 0.58, 1.0)
+	environment.ambient_light_energy = 1.10
 	environment.fog_enabled = true
-	environment.fog_light_color = Color(0.24, 0.33, 0.43, 1.0)
-	environment.fog_light_energy = 0.43
-	environment.fog_density = 0.0022
+	environment.fog_light_color = Color(0.28, 0.38, 0.49, 1.0)
+	environment.fog_light_energy = 0.48
+	environment.fog_density = 0.0020
 
 	environment.fog_sky_affect = 0.73
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
@@ -202,14 +203,14 @@ func apply_voss_daylight() -> void:
 	environment.glow_strength = 0.34
 	environment.glow_bloom = 0.04
 	environment.adjustment_enabled = true
-	environment.adjustment_brightness = 1.04
-	environment.adjustment_contrast = 1.12
-	environment.adjustment_saturation = 0.93
+	environment.adjustment_brightness = 1.10
+	environment.adjustment_contrast = 1.05
+	environment.adjustment_saturation = 0.95
 
 	if sun != null:
 		sun.rotation_degrees = Vector3(-14.0, -38.0, 0.0)
-		sun.light_color = Color(1.0, 0.62, 0.38, 1.0)
-		sun.light_energy = 0.70
+		sun.light_color = Color(1.0, 0.65, 0.42, 1.0)
+		sun.light_energy = 0.78
 		sun.shadow_enabled = true
 
 func apply_voss_opening_storm() -> void:
