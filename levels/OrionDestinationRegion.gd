@@ -232,6 +232,25 @@ func _build_cube_chamber_marker() -> void:
 	cube_light.position = Vector3(0.0, 1.2, 0.0)
 	cube_light.shadow_enabled = false
 	chamber.add_child(cube_light)
+	for index: int in range(4):
+		var angle: float = float(index) * TAU / 4.0 + 0.22
+		var support: Node3D = PILLAR.instantiate() as Node3D
+		if support == null:
+			continue
+		support.name = "SuporteOrganicoOrionCube_%02d" % index
+		support.position = Vector3(cos(angle) * 6.8, 0.8, sin(angle) * 6.8)
+		support.scale = Vector3(0.62, 0.85 + float(index % 2) * 0.16, 0.62)
+		support.rotation = Vector3(0.03 * sin(angle), angle, 0.04 * cos(angle))
+		_apply_material(support, stone_material)
+		chamber.add_child(support)
+		var support_light := OmniLight3D.new()
+		support_light.name = "BraseiroAnelCube_%02d" % index
+		support_light.light_color = Color("#4ebbd3")
+		support_light.light_energy = 1.6
+		support_light.omni_range = 7.0
+		support_light.shadow_enabled = false
+		support_light.position = Vector3(cos(angle) * 5.4, 1.1, sin(angle) * 5.4)
+		chamber.add_child(support_light)
 
 func _build_temporal_hub() -> void:
 	var hub: Node3D = Node3D.new()
