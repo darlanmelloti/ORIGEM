@@ -185,7 +185,7 @@ func _build_mountain_trail() -> void:
 		Vector2(174.0, 414.0), Vector2(130.0, 426.0), Vector2(76.0, 443.0),
 		Vector2(28.0, 462.0), Vector2(-26.0, 482.0), Vector2(-76.0, 508.0), Vector2(-112.0, 532.0)
 	]
-	_build_flagstone_route("TrilhaDaMontanhaOrion", route, 4.1)
+	_build_organic_route("TrilhaDaMontanhaOrion", route, 4.1)
 	var rocks: Node3D = Node3D.new()
 	rocks.name = "AfloramentosDaTrilha"
 	add_child(rocks)
@@ -201,6 +201,46 @@ func _build_mountain_trail() -> void:
 		rock.scale = Vector3(scale_value, scale_value, scale_value)
 		rock.rotation.y = float(index) * 0.79
 		rocks.add_child(rock)
+
+func _build_organic_route(route_name: String, route: Array[Vector2], width: float) -> void:
+	var path: Node3D = Node3D.new()
+	path.name = route_name
+	add_child(path)
+	var route_material: StandardMaterial3D = path_material.duplicate() as StandardMaterial3D
+	route_material.emission_enabled = true
+	route_material.emission = Color("#173b45")
+	route_material.emission_energy_multiplier = 0.65
+	var stone_index: int = 0
+	for segment_index: int in range(route.size() - 1):
+		var start: Vector2 = route[segment_index]
+		var finish: Vector2 = route[segment_index + 1]
+		var distance: float = start.distance_to(finish)
+		var count: int = max(1, int(distance / 4.2))
+		for index: int in range(count):
+			var t: float = float(index) / float(count)
+			var point: Vector2 = start.lerp(finish, t)
+			var next: Vector2 = start.lerp(finish, minf(t + 0.08, 1.0))
+			var stone: Node3D = ROCK_LARGE.instantiate() as Node3D
+			if stone == null:
+				continue
+			stone.name = "DegrauOrganico_%03d" % stone_index
+			stone.position = Vector3(point.x, _height_at(point.x, point.y) + 0.16, point.y)
+			if OS.get_environment("ORIGEM_DEBUG_ROUTE") == "1" and (stone_index == 0 or stone_index == 5 or stone_index == 10):
+				print("[REGIAO8_9_ROUTE] index=%d world=%s" % [stone_index, str(stone.position)])
+			stone.scale = Vector3(width * 0.18, 0.10 + fmod(float(stone_index), 3.0) * 0.025, 0.28)
+			stone.rotation = Vector3(0.03, atan2(next.x - point.x, next.y - point.y), -0.04)
+			_apply_material(stone, route_material)
+			path.add_child(stone)
+			if stone_index % 5 == 0:
+				var wayfinder: OmniLight3D = OmniLight3D.new()
+				wayfinder.name = "LuzWayfinding_%03d" % stone_index
+				wayfinder.light_color = Color("#4ea6b6")
+				wayfinder.light_energy = 0.85
+				wayfinder.omni_range = 8.0
+				wayfinder.position = Vector3(0.0, 1.6, 0.0)
+				wayfinder.shadow_enabled = false
+				stone.add_child(wayfinder)
+			stone_index += 1
 
 func _build_flagstone_route(route_name: String, route: Array[Vector2], width: float) -> void:
 	var path: Node3D = Node3D.new()
