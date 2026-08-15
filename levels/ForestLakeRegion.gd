@@ -35,6 +35,7 @@ func _ready() -> void:
 	_build_majestic_lake_transition()
 	_build_lake_wayfinding()
 	_build_dense_forest()
+	_build_forest_micro_details()
 	_build_majestic_camp()
 	_build_majestic_connector()
 	_build_submerged_ruins()
@@ -384,6 +385,71 @@ func _build_dense_forest() -> void:
 		fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 		fern.rotation.y = float(index) * 0.68
 		forest.add_child(fern)
+
+func _build_forest_micro_details() -> void:
+	# Microdetalhe no limite do trilho: raízes e pedra estabelecem escala de exploração sem virar uma parede de vegetação.
+	var details: Node3D = Node3D.new()
+	details.name = "RaizesPedrasESinaisP0"
+	add_child(details)
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 40691
+	var root_material: StandardMaterial3D = StandardMaterial3D.new()
+	root_material.albedo_color = Color(0.115, 0.072, 0.032, 1.0)
+	root_material.roughness = 0.96
+	var moss_material: StandardMaterial3D = StandardMaterial3D.new()
+	moss_material.albedo_color = Color(0.085, 0.135, 0.090, 1.0)
+	moss_material.roughness = 0.94
+	for index: int in range(16):
+		var z_value: float = 126.0 + float(index) * 4.1
+		var side: float = -1.0 if index % 2 == 0 else 1.0
+		var x_value: float = _path_x(z_value) + side * (4.95 + float(index % 3) * 0.44)
+		var ground_y: float = _height_at(x_value, z_value)
+		var root_mesh: BoxMesh = BoxMesh.new()
+		root_mesh.size = Vector3(0.30 + float(index % 3) * 0.06, 0.16, 1.55 + float(index % 4) * 0.24)
+		root_mesh.material = root_material
+		var root: MeshInstance3D = MeshInstance3D.new()
+		root.name = "RaizExpostaFlorestal_%02d" % index
+		root.mesh = root_mesh
+		root.position = Vector3(x_value, ground_y + 0.075, z_value + rng.randf_range(-0.68, 0.68))
+		root.rotation = Vector3(rng.randf_range(-0.06, 0.06), rng.randf_range(-0.92, 0.92), rng.randf_range(-0.12, 0.12))
+		details.add_child(root)
+		if index % 2 == 0:
+			var wet_rock: Node3D = ROCK.instantiate() as Node3D
+			if wet_rock != null:
+				wet_rock.name = "PedraHumidaFlorestal_%02d" % index
+				wet_rock.position = Vector3(x_value + side * 0.64, ground_y + 0.035, z_value + rng.randf_range(-0.84, 0.84))
+				var rock_scale: float = 0.12 + float(index % 4) * 0.026
+				wet_rock.scale = Vector3(rock_scale, rock_scale * 0.78, rock_scale)
+				wet_rock.rotation.y = rng.randf_range(-PI, PI)
+				_apply_material(wet_rock, moss_material)
+				details.add_child(wet_rock)
+	# Três sinais P-0 respondem à narrativa temporal, mas a emissão mínima não compete com a orientação quente do trilho.
+	var p0_material: StandardMaterial3D = StandardMaterial3D.new()
+	p0_material.albedo_color = Color(0.018, 0.11, 0.16, 1.0)
+	p0_material.emission_enabled = true
+	p0_material.emission = Color(0.02, 0.20, 0.32, 1.0)
+	p0_material.emission_energy_multiplier = 0.68
+	for marker_index: int in range(3):
+		var marker_z: float = 142.0 + float(marker_index) * 16.0
+		var marker_side: float = -1.0 if marker_index % 2 == 0 else 1.0
+		var marker_x: float = _path_x(marker_z) + marker_side * 3.65
+		var marker_y: float = _height_at(marker_x, marker_z)
+		var p0_stone: Node3D = PILLAR.instantiate() as Node3D
+		if p0_stone != null:
+			p0_stone.name = "SinalP0Florestal_%02d" % marker_index
+			p0_stone.position = Vector3(marker_x, marker_y + 0.62, marker_z)
+			p0_stone.scale = Vector3(0.28, 0.36, 0.28)
+			p0_stone.rotation = Vector3(0.03, 0.34 + float(marker_index) * 0.58, 0.02)
+			_apply_material(p0_stone, p0_material)
+			details.add_child(p0_stone)
+			var p0_light: OmniLight3D = OmniLight3D.new()
+			p0_light.name = "BrilhoP0Florestal_%02d" % marker_index
+			p0_light.light_color = Color(0.12, 0.40, 0.58, 1.0)
+			p0_light.light_energy = 0.14
+			p0_light.omni_range = 3.0
+			p0_light.shadow_enabled = false
+			p0_light.position = p0_stone.position + Vector3(0.0, 0.80, 0.0)
+			details.add_child(p0_light)
 
 func _build_majestic_camp() -> void:
 	var camp: Node3D = Node3D.new()
