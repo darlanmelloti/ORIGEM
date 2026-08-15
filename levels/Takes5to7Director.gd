@@ -47,6 +47,8 @@ func _build_once() -> void:
 		call_deferred("_activate_region7_validation_camera")
 	elif OS.get_environment("ORIGEM_VALIDATION_REGION") == "8":
 		call_deferred("_activate_region8_validation_camera")
+	elif OS.get_environment("ORIGEM_VALIDATION_REGION") == "10":
+		call_deferred("_activate_region10_validation_camera")
 	elif OS.get_environment("ORIGEM_TAKE57") == "1":
 		call_deferred("_activate_validation_camera")
 
@@ -141,6 +143,11 @@ func _process(delta: float) -> void:
 		var close_travel: float = minf(validation_elapsed * 0.08, 1.0)
 		validation_camera.position = Vector3(210.0 - close_travel * 22.0, 46.0 + sin(validation_elapsed * 0.25) * 0.10, 404.0 + close_travel * 12.0)
 		validation_camera.look_at(Vector3(174.0 - close_travel * 12.0, 29.0, 414.0 + close_travel * 13.0), Vector3.UP)
+	elif validation_take_mode == 13:
+		var cave_travel: float = minf(validation_elapsed * 0.045, 1.0)
+		var cave_sway: float = sin(validation_elapsed * 0.28) * 0.85
+		validation_camera.position = Vector3(-112.0 - cave_travel * 2.0 + cave_sway, 53.0 - cave_travel * 3.0 + sin(validation_elapsed * 0.24) * 0.14, 543.0 + cave_travel * 5.0)
+		validation_camera.look_at(Vector3(-116.0, 47.0 - cave_travel * 2.0, 549.0 + cave_travel * 2.0), Vector3.UP)
 	else:
 		var travel: float = minf(validation_elapsed * 0.02, 0.35)
 		var lateral: float = sin(validation_elapsed * 0.52) * 2.2
@@ -212,6 +219,27 @@ func _activate_region7_validation_camera() -> void:
 	add_child(validation_camera)
 	validation_camera.look_at(Vector3(140.0, 12.0, 354.0), Vector3.UP)
 	validation_camera.current = true
+
+func _activate_region10_validation_camera() -> void:
+	validation_take_mode = 13
+	var legacy_enemies := get_parent().get_node_or_null("Enemies") as Node3D
+	if legacy_enemies != null:
+		legacy_enemies.visible = false
+	validation_camera = Camera3D.new()
+	validation_camera.name = "CameraValidacaoRegiao10CavernaOrion"
+	validation_camera.fov = 50.0
+	validation_camera.position = Vector3(-112.0, 53.0, 543.0)
+	add_child(validation_camera)
+	validation_camera.look_at(Vector3(-116.0, 47.0, 549.0), Vector3.UP)
+	validation_camera.current = true
+	call_deferred("_hide_region10_later_landmarks")
+
+func _hide_region10_later_landmarks() -> void:
+	var destinations := get_parent().get_node_or_null("DestinosOrionEHubTemporal") as Node3D
+	if destinations != null:
+		var cube_chamber := destinations.get_node_or_null("CamaraDoOrionCube") as Node3D
+		if cube_chamber != null:
+			cube_chamber.visible = false
 
 func _activate_region8_validation_camera() -> void:
 	validation_take_mode = 12 if OS.get_environment("ORIGEM_REGION8_TO9_CLOSE") == "1" else (11 if OS.get_environment("ORIGEM_REGION8_TO9") == "1" else 10)

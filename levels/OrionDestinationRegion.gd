@@ -19,6 +19,7 @@ func _ready() -> void:
 	stone_material = _make_stone_material()
 	cube_material = _make_cube_material()
 	_build_orion_cave()
+	_build_region9_to_10_approach()
 	_build_cube_chamber_marker()
 	_build_temporal_hub()
 
@@ -48,25 +49,115 @@ func _build_orion_cave() -> void:
 		cliff.rotation = Vector3(0.12 * sin(angle), angle + PI * 0.5, 0.10 * cos(angle))
 		_apply_material(cliff, stone_material)
 		cave.add_child(cliff)
-	var darkness_mesh: BoxMesh = BoxMesh.new()
-	darkness_mesh.size = Vector3(8.5, 8.0, 1.0)
-	var darkness: MeshInstance3D = MeshInstance3D.new()
-	darkness.name = "BocaEscuraDaCaverna"
-	darkness.mesh = darkness_mesh
-	darkness.position = Vector3(0.0, 3.6, -7.8)
-	var darkness_material: StandardMaterial3D = StandardMaterial3D.new()
-	darkness_material.albedo_color = Color(0.005, 0.009, 0.013, 1.0)
-	darkness_material.roughness = 1.0
-	darkness.material_override = darkness_material
-	cave.add_child(darkness)
+	# A boca recuada usa massas CC0 orgânicas; não há plano/caixa preta a bloquear a câmara.
+	for mouth_index: int in range(3):
+		var mouth_stone: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if mouth_stone == null:
+			continue
+		mouth_stone.name = "MassaOrganicaInterior_%02d" % mouth_index
+		mouth_stone.position = Vector3(-3.2 + float(mouth_index) * 3.2, 2.6 + float(mouth_index % 2) * 1.2, -7.0)
+		mouth_stone.scale = Vector3(0.75, 0.85 + float(mouth_index % 2) * 0.18, 0.48)
+		mouth_stone.rotation = Vector3(0.08, float(mouth_index) * 0.63, -0.05)
+		_apply_material(mouth_stone, stone_material)
+		cave.add_child(mouth_stone)
+	var cave_eye: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if cave_eye != null:
+		cave_eye.name = "OlhoRessonanteDaEntradaOrion"
+		cave_eye.position = Vector3(0.0, 3.4, -7.2)
+		cave_eye.scale = Vector3(0.58, 0.38, 0.22)
+		var cave_eye_material: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
+		cave_eye_material.albedo_color = Color("#123c4b")
+		cave_eye_material.emission_enabled = true
+		cave_eye_material.emission = Color("#4ec9e5")
+		cave_eye_material.emission_energy_multiplier = 1.15
+		_apply_material(cave_eye, cave_eye_material)
+		cave.add_child(cave_eye)
+
 	var rune_light: OmniLight3D = OmniLight3D.new()
 	rune_light.name = "BrilhoChronosDaCaverna"
 	rune_light.light_color = Color(0.10, 0.42, 1.0, 1.0)
-	rune_light.light_energy = 2.1
-	rune_light.omni_range = 18.0
-	rune_light.position = Vector3(0.0, 3.5, -6.6)
+	rune_light.light_energy = 3.6
+	rune_light.omni_range = 24.0
+	rune_light.position = Vector3(0.0, 4.2, -6.6)
 	rune_light.shadow_enabled = false
 	cave.add_child(rune_light)
+	var mouth_fill: OmniLight3D = OmniLight3D.new()
+	mouth_fill.name = "LuzPreenchimentoBocaOrion"
+	mouth_fill.light_color = Color("#7ed9e8")
+	mouth_fill.light_energy = 2.2
+	mouth_fill.omni_range = 18.0
+	mouth_fill.shadow_enabled = false
+	mouth_fill.position = Vector3(0.0, 3.0, -3.0)
+	cave.add_child(mouth_fill)
+
+func _build_region9_to_10_approach() -> void:
+	var approach: Node3D = Node3D.new()
+	approach.name = "TransicaoRegiao09Para10"
+	add_child(approach)
+	var route: Array[Vector2] = [Vector2(-112.0, 532.0), Vector2(-114.0, 536.5), Vector2(-116.0, 541.0), Vector2(-116.0, 545.0)]
+	var route_material: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
+	route_material.albedo_color = Color("#53665d")
+	route_material.roughness = 0.92
+	for index: int in range(route.size()):
+		var point: Vector2 = route[index]
+		var stone: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "DegrauCavernaOrganico_%02d" % index
+		stone.position = Vector3(point.x, _height_at(point.x, point.y) + 0.22, point.y)
+		stone.scale = Vector3(0.46 + float(index % 2) * 0.10, 0.12 + float(index % 3) * 0.04, 0.34)
+		stone.rotation = Vector3(0.03, -0.25 + float(index) * 0.18, -0.04)
+		_apply_material(stone, route_material)
+		approach.add_child(stone)
+		if index == 1 or index == 3:
+			var marker_light: OmniLight3D = OmniLight3D.new()
+			marker_light.name = "LuzWayfindingCaverna_%02d" % index
+			marker_light.light_color = Color("#4ebbd3")
+			marker_light.light_energy = 1.05
+			marker_light.omni_range = 7.0
+			marker_light.shadow_enabled = false
+			marker_light.position = Vector3(0.0, 1.15, 0.0)
+			stone.add_child(marker_light)
+	for root_index: int in range(5):
+		var root: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if root == null:
+			continue
+		root.name = "RaizPetrea_%02d" % root_index
+		var side: float = -1.0 if root_index % 2 == 0 else 1.0
+		root.position = Vector3(side * (8.2 - float(root_index % 2) * 1.3), 2.8 + float(root_index) * 0.85, 539.0 + float(root_index) * 1.65)
+		root.scale = Vector3(0.20 + float(root_index % 2) * 0.06, 0.95, 0.18)
+		root.rotation = Vector3(0.14 * side, side * (0.52 + float(root_index) * 0.16), 0.18 * side)
+		_apply_material(root, stone_material)
+		approach.add_child(root)
+	for fissure_index: int in range(3):
+		var fissure: MeshInstance3D = MeshInstance3D.new()
+		fissure.name = "FendaRessonanciaRegiao10_%02d" % fissure_index
+		var ribbon: QuadMesh = QuadMesh.new()
+		ribbon.size = Vector2(0.18 + float(fissure_index) * 0.06, 3.0 + float(fissure_index) * 0.7)
+		ribbon.material = _make_resonance_material()
+		fissure.mesh = ribbon
+		var fissure_x: float = -116.2 + float(fissure_index) * 0.9
+		var fissure_z: float = 538.0 + float(fissure_index) * 2.0
+		fissure.position = Vector3(fissure_x, _height_at(fissure_x, fissure_z) + 0.12, fissure_z)
+		fissure.rotation_degrees = Vector3(-90.0, 14.0 + float(fissure_index) * 9.0, 0.0)
+		approach.add_child(fissure)
+	var entrance_light: OmniLight3D = OmniLight3D.new()
+	entrance_light.name = "LuzTransicaoCavernaOrion"
+	entrance_light.light_color = Color("#5cc8ff")
+	entrance_light.light_energy = 1.8
+	entrance_light.omni_range = 14.0
+	entrance_light.shadow_enabled = false
+	entrance_light.position = Vector3(-116.0, 4.2, 542.0)
+	approach.add_child(entrance_light)
+
+func _make_resonance_material() -> StandardMaterial3D:
+	var material: StandardMaterial3D = StandardMaterial3D.new()
+	material.albedo_color = Color("#0d2630")
+	material.emission_enabled = true
+	material.emission = Color("#5cc8ff")
+	material.emission_energy_multiplier = 1.35
+	material.roughness = 0.40
+	return material
 
 func _build_cube_chamber_marker() -> void:
 	var chamber: Node3D = Node3D.new()
