@@ -25,6 +25,7 @@ func _ready() -> void:
 	_build_compacted_roadbed()
 	_build_river_road()
 	_build_river()
+	_build_river_margins()
 	_build_ruin_arch()
 	_build_roadside_vegetation()
 
@@ -121,8 +122,9 @@ func _build_river() -> void:
 		var z1: float = z0 + 5.0
 		var x0: float = _river_x(z0)
 		var x1: float = _river_x(z1)
-		var y0: float = (_height_at(x0 - width * 0.35, z0) + _height_at(x0 + width * 0.35, z0)) * 0.5 + 0.08
-		var y1: float = (_height_at(x1 - width * 0.35, z1) + _height_at(x1 + width * 0.35, z1)) * 0.5 + 0.08
+		# Lâmina ligeiramente acima do terreno local: mantém o curso contínuo no modo de compatibilidade sem invadir a estrada distante.
+		var y0: float = (_height_at(x0 - width * 0.35, z0) + _height_at(x0 + width * 0.35, z0)) * 0.5 + 0.20
+		var y1: float = (_height_at(x1 - width * 0.35, z1) + _height_at(x1 + width * 0.35, z1)) * 0.5 + 0.20
 		_add_water_triangle(surface, Vector3(x0 - width * 0.5, y0, z0), Vector3(x0 - width * 0.5, y1, z1), Vector3(x0 + width * 0.5, y0, z0), Vector2(0.0, float(index) * 0.18), Vector2(0.0, float(index + 1) * 0.18), Vector2(1.0, float(index) * 0.18))
 		_add_water_triangle(surface, Vector3(x0 + width * 0.5, y0, z0), Vector3(x0 - width * 0.5, y1, z1), Vector3(x1 + width * 0.5, y1, z1), Vector2(1.0, float(index) * 0.18), Vector2(0.0, float(index + 1) * 0.18), Vector2(1.0, float(index + 1) * 0.18))
 	var mesh: ArrayMesh = surface.commit()
@@ -132,6 +134,54 @@ func _build_river() -> void:
 	water.mesh = mesh
 	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	river_root.add_child(water)
+
+func _build_river_margins() -> void:
+	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
+	var margins: Node3D = Node3D.new()
+	margins.name = "MargensRochosasDaEstradaDoRio"
+	add_child(margins)
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 10139
+	var wet_material: StandardMaterial3D = StandardMaterial3D.new()
+	wet_material.albedo_color = Color(0.075, 0.115, 0.105, 1.0)
+	wet_material.roughness = 0.78
+	wet_material.emission_enabled = true
+	wet_material.emission = Color(0.008, 0.020, 0.022, 1.0)
+	wet_material.emission_energy_multiplier = 0.20
+	for index: int in range(28):
+		var z_value: float = 14.0 + float(index) * 4.90
+		var side: float = -1.0 if index % 2 == 0 else 1.0
+		var river_center: float = _river_x(z_value)
+		var x_value: float = river_center + side * (5.80 + float(index % 3) * 0.42)
+		var ground_y: float = _height_at(x_value, z_value)
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.name = "RochaMargemRio_%02d" % index
+			rock.position = Vector3(x_value, ground_y + 0.06, z_value + rng.randf_range(-1.0, 1.0))
+			var rock_scale: float = 0.14 + float(index % 4) * 0.035
+			rock.scale = Vector3(rock_scale, rock_scale * 0.76, rock_scale)
+			rock.rotation.y = rng.randf_range(-PI, PI)
+			_apply_material(rock, wet_material)
+			margins.add_child(rock)
+			if index % 4 == 0:
+				var rock_body: StaticBody3D = StaticBody3D.new()
+				rock_body.name = "ColisorRochaMargemRio_%02d" % index
+				rock_body.position = rock.position + Vector3(0.0, 0.35, 0.0)
+				var rock_collision: CollisionShape3D = CollisionShape3D.new()
+				var rock_shape: BoxShape3D = BoxShape3D.new()
+				rock_shape.size = Vector3(0.92, 0.70, 0.90)
+				rock_collision.shape = rock_shape
+				rock_body.add_child(rock_collision)
+				margins.add_child(rock_body)
+		if index % 2 == 0:
+			var fern: Node3D = FERN.instantiate() as Node3D
+			if fern != null:
+				fern.name = "FetoMargemRio_%02d" % index
+				fern.position = Vector3(x_value + side * 0.86, ground_y + 0.025, z_value + rng.randf_range(-0.82, 0.82))
+				var fern_scale: float = 0.30 + float(index % 3) * 0.055
+				fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+				fern.rotation.y = rng.randf_range(-PI, PI)
+				margins.add_child(fern)
 
 func _build_ruin_arch() -> void:
 	var arch: Node3D = Node3D.new()
@@ -306,7 +356,7 @@ func _make_water_material() -> ShaderMaterial:
 	var shader: Shader = Shader.new()
 	shader.code = """
 shader_type spatial;
-render_mode blend_mix, cull_disabled, depth_draw_always, diffuse_burley;
+render_mode cull_disabled, depth_draw_opaque, diffuse_burley;
 void vertex() {
 	VERTEX.y += sin(VERTEX.x * 0.52 + TIME * 0.9) * 0.042 + cos(VERTEX.z * 0.35 + TIME * 0.7) * 0.028;
 }
@@ -315,7 +365,7 @@ void fragment() {
 	ALBEDO = mix(vec3(0.015, 0.10, 0.12), vec3(0.035, 0.30, 0.33), ripple * 0.40 + 0.30);
 	ROUGHNESS = 0.25;
 	SPECULAR = 0.58;
-	ALPHA = 0.78;
+	ALPHA = 1.0;
 }
 """
 	var material: ShaderMaterial = ShaderMaterial.new()
