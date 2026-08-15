@@ -93,17 +93,19 @@ func _prepare_lake_stela_interaction_qa() -> void:
 	if player == null:
 		get_tree().create_timer(0.25).timeout.connect(_prepare_lake_stela_interaction_qa)
 		return
-	var stela_x: float = 52.0
-	var stela_z: float = 231.0
-	var approach_x: float = 49.5
-	var approach_z: float = 228.5
+	var stela: StaticBody3D = get_node_or_null("RegiaoFlorestaLagoExploravel/RuinasSubmersasDoLago/RuneP0_02") as StaticBody3D
+	if stela == null:
+		get_tree().create_timer(0.50).timeout.connect(_prepare_lake_stela_interaction_qa)
+		return
+	# A aproximação usa o nó real da estela para acompanhar a cota de água e qualquer refinamento futuro da margem.
+	var approach: Vector3 = stela.global_position + Vector3(0.0, 0.0, 2.0)
 	player.velocity = Vector3.ZERO
-	player.global_position = Vector3(approach_x, _terrain_height_for_qa(approach_x, approach_z) + 1.25, approach_z)
-	player.look_at(Vector3(stela_x, player.global_position.y, stela_z), Vector3.UP, true)
+	player.global_position = Vector3(approach.x, _terrain_height_for_qa(approach.x, approach.z) + 1.25, approach.z)
+	player.look_at(Vector3(stela.global_position.x, player.global_position.y, stela.global_position.z), Vector3.UP)
 	var head: Node3D = player.get_node_or_null("Head") as Node3D
 	if head != null:
 		head.rotation = Vector3.ZERO
-	print("[ORIGEM_QA_INTERACT] Elias posicionado diante da estela em %s" % player.global_position)
+	print("[ORIGEM_QA_INTERACT] Elias posicionado diante da Estela do Lago em %s; estela=%s" % [player.global_position, stela.global_position])
 
 func _prepare_valley_bridge_route_qa() -> void:
 	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
