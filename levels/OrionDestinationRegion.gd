@@ -295,6 +295,28 @@ func _build_temporal_hub() -> void:
 		monolith.rotation = Vector3(0.04 * sin(angle), angle, 0.03 * cos(angle))
 		_apply_material(monolith, stone_material)
 		hub.add_child(monolith)
+		var rim_light := OmniLight3D.new()
+		rim_light.name = "LuzRimMonolitoTemporal_%02d" % index
+		rim_light.light_color = Color("#7f6bd6")
+		rim_light.light_energy = 1.8
+		rim_light.omni_range = 8.0
+		rim_light.shadow_enabled = false
+		rim_light.position = Vector3(cos(angle) * 12.5, 3.8, sin(angle) * 12.5)
+		hub.add_child(rim_light)
+		var monolith_core := MeshInstance3D.new()
+		monolith_core.name = "NucleoVisivelMonolito_%02d" % index
+		var monolith_sphere := SphereMesh.new()
+		monolith_sphere.radius = 0.18
+		monolith_sphere.height = 0.36
+		monolith_core.mesh = monolith_sphere
+		var monolith_material := StandardMaterial3D.new()
+		monolith_material.albedo_color = Color("#8b78dc")
+		monolith_material.emission_enabled = true
+		monolith_material.emission = Color("#8b78dc")
+		monolith_material.emission_energy_multiplier = 0.95
+		monolith_core.material_override = monolith_material
+		monolith_core.position = Vector3(cos(angle) * 12.5, 4.1, sin(angle) * 12.5)
+		hub.add_child(monolith_core)
 	var core_mesh: SphereMesh = SphereMesh.new()
 	core_mesh.radius = 1.55
 	core_mesh.height = 3.10

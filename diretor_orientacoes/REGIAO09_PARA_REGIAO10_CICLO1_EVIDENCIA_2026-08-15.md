@@ -160,3 +160,14 @@ A luz ambiente da validação foi elevada e recebeu um recorte suave azul-verde.
 - **NEXT_ACTION_IMMEDIATE**: Iniciar o primeiro passe dedicado da Região 12 — Hub Temporal, reutilizando o anel de monólitos orgânicos e o núcleo emissivo sem reabrir as Regiões 1–6.
 - **TARGET_REGION**: Região 12 — Hub Temporal
 - **DEADLINE_NEXT_PUSH**: `2026-08-15T17:30:00Z` (UTC)
+
+## Região 12 — Ciclo 1/2 de validação do Hub Temporal
+
+A primeira composição do Hub Temporal foi refinada em dois passes. O segundo passe adicionou rim lights violetas aos oito monólitos orgânicos e núcleos visíveis de baixa intensidade, mantendo o núcleo temporal azul como foco, o disco megalítico texturizado e a geometria CC0 do anel. Parser Godot 4.7.1, gameplay de aproximadamente 30 segundos e print 1600×900 foram regenerados.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `PASSED`
+- **NEXT_ACTION_IMMEDIATE**: Integrar a leitura do Hub Temporal na continuidade jogável Região 11 → Região 12, validar a câmara em percurso normal e manter os monólitos sem greybox.
+- **TARGET_REGION**: Região 12 — Hub Temporal
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T17:30:00Z` (UTC)
