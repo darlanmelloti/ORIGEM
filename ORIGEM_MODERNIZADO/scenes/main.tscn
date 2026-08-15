@@ -1,0 +1,416 @@
+[gd_scene format=3 uid="uid://c0gfddgiiaxis"]
+
+[ext_resource type="Script" uid="uid://dubcjjgjoljt4" path="res://scripts/main.gd" id="1"]
+[ext_resource type="Script" uid="uid://pbower0o7k7e" path="res://entities/player/Player.gd" id="2"]
+[ext_resource type="Script" uid="uid://cjx4a85ojiqsv" path="res://entities/enemies/Guardian.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://bqx7inventoryui01" path="res://ui/inventory/InventoryUI.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://ui/menus/PauseMenu.tscn" id="5"]
+[ext_resource type="Script" path="res://levels/LevelEnvironment.gd" id="LevelEnv"]
+[ext_resource type="Script" path="res://levels/TempleLevel.gd" id="TempleLvl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="Sky1"]
+sky_top_color = Color(0.25, 0.70, 0.98, 1)
+sky_horizon_color = Color(0.70, 0.92, 1.00, 1)
+ground_bottom_color = Color(0.30, 0.55, 0.75, 1)
+ground_horizon_color = Color(0.65, 0.82, 0.94, 1)
+sun_angle_max = 60.0
+
+[sub_resource type="Sky" id="Sky2"]
+sky_material = SubResource("Sky1")
+
+[sub_resource type="Environment" id="Env1"]
+background_mode = 2
+background_color = Color(0.35, 0.72, 0.96, 1)
+background_energy_multiplier = 1.0
+sky = SubResource("Sky2")
+ambient_light_source = 2
+ambient_light_color = Color(0.70, 0.85, 0.95, 1)
+ambient_light_energy = 1.0
+glow_enabled = true
+glow_intensity = 0.6
+glow_bloom = 0.15
+fog_light_color = Color(0.05, 0.03, 0.02, 1)
+fog_density = 0.018
+volumetric_fog_density = 0.028
+volumetric_fog_albedo = Color(0.08, 0.05, 0.03, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.88
+adjustment_contrast = 1.15
+adjustment_saturation = 0.8
+
+[sub_resource type="StandardMaterial3D" id="MatStone"]
+albedo_color = Color(0.18, 0.16, 0.14, 1)
+metallic = 0.05
+roughness = 0.95
+
+[sub_resource type="StandardMaterial3D" id="MatWall"]
+albedo_color = Color(0.22, 0.2, 0.18, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="MatPillar"]
+albedo_color = Color(0.28, 0.26, 0.24, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="MatSun"]
+albedo_color = Color(1, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0.2, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="MatCube"]
+albedo_color = Color(0.05, 0.1, 0.2, 1)
+metallic = 0.8
+roughness = 0.3
+emission_enabled = true
+emission = Color(0.1, 0.4, 0.9, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="BoxShape3D" id="ShCube"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="MatTablet"]
+albedo_color = Color(0.35, 0.3, 0.22, 1)
+roughness = 0.85
+emission_enabled = true
+emission = Color(0.4, 0.35, 0.1, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="BoxShape3D" id="ShTablet"]
+size = Vector3(0.5, 0.15, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="MatTerminal"]
+albedo_color = Color(0.05, 0.08, 0.15, 1)
+metallic = 0.6
+roughness = 0.4
+emission_enabled = true
+emission = Color(0.1, 0.5, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="ShTerminal"]
+size = Vector3(0.6, 1.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="MatGuardian"]
+albedo_color = Color(0.72, 0.74, 0.76, 1)
+metallic = 0.1
+roughness = 0.6
+
+[sub_resource type="CapsuleShape3D" id="ShGuardian"]
+radius = 0.32
+height = 2.1
+
+[sub_resource type="CapsuleShape3D" id="ShPlayer"]
+radius = 0.35
+height = 1.7
+
+[sub_resource type="BoxShape3D" id="FloorBoxShape"]
+size = Vector3(200, 0.3, 200)
+
+[node name="Main" type="Node3D" unique_id=1399145496]
+script = ExtResource("1")
+
+[node name="LevelEnvironment" type="Node3D" parent="."]
+script = ExtResource("LevelEnv")
+
+[node name="Sun" type="DirectionalLight3D" parent="LevelEnvironment" unique_id=1580362910]
+transform = Transform3D(0.8, -0.55, 0.25, 0, 0.80, 0.6, -0.5, -0.40, 0.77, 0, 18, 0)
+light_color = Color(1.0, 0.95, 0.80, 1)
+light_energy = 0.8
+shadow_enabled = true
+shadow_bias = 0.05
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LevelEnvironment" unique_id=2038390393]
+environment = SubResource("Env1")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_layers = 1
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+
+[node name="GroundMesh" type="CSGBox3D" parent="Ground"]
+size = Vector3(250, 0.3, 250)
+material = SubResource("MatStone")
+
+[node name="GroundCol" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("FloorBoxShape")
+
+[node name="TempleLevel" type="Node3D" parent="."]
+script = ExtResource("TempleLvl")
+
+[node name="Geometry" type="Node3D" parent="." unique_id=1722151607]
+
+[node name="Lights" type="Node3D" parent="." unique_id=2032362596]
+
+[node name="TorchNW" type="OmniLight3D" parent="Lights" unique_id=2133531857]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, -18)
+light_color = Color(1, 0.55, 0.15, 1)
+light_energy = 2.0
+omni_range = 9.0
+
+[node name="TorchNE" type="OmniLight3D" parent="Lights" unique_id=756088343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 3, -18)
+light_color = Color(1, 0.55, 0.15, 1)
+light_energy = 2.0
+omni_range = 9.0
+
+[node name="TorchCW" type="OmniLight3D" parent="Lights" unique_id=1215752522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, 0)
+light_color = Color(1, 0.5, 0.12, 1)
+light_energy = 1.6
+omni_range = 8.0
+
+[node name="TorchCE" type="OmniLight3D" parent="Lights" unique_id=761964961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 3, 0)
+light_color = Color(1, 0.5, 0.12, 1)
+light_energy = 1.6
+omni_range = 8.0
+
+[node name="TorchSW" type="OmniLight3D" parent="Lights" unique_id=864772178]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, 18)
+light_color = Color(1, 0.5, 0.12, 1)
+light_energy = 1.4
+omni_range = 7.0
+
+[node name="TorchSE" type="OmniLight3D" parent="Lights" unique_id=496801951]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 3, 18)
+light_color = Color(1, 0.5, 0.12, 1)
+light_energy = 1.4
+omni_range = 7.0
+
+[node name="AltarLight" type="OmniLight3D" parent="Lights" unique_id=1473366550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -18)
+light_color = Color(0.8, 0.6, 0.2, 1)
+omni_range = 6.0
+
+[node name="Interactables" type="Node3D" parent="." unique_id=1348873966]
+
+[node name="OrionCube" type="StaticBody3D" parent="Interactables" groups=["interactable"] unique_id=1936009677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -18)
+collision_layer = 4
+
+[node name="CubeMesh" type="CSGBox3D" parent="Interactables/OrionCube" unique_id=1389352686]
+size = Vector3(0.7, 0.7, 0.7)
+material = SubResource("MatCube")
+
+[node name="CubeLight" type="OmniLight3D" parent="Interactables/OrionCube" unique_id=1853334284]
+light_color = Color(0.2, 0.5, 1, 1)
+light_energy = 1.5
+
+[node name="CubeCol" type="CollisionShape3D" parent="Interactables/OrionCube" unique_id=278965844]
+shape = SubResource("ShCube")
+
+[node name="Tablet1" type="StaticBody3D" parent="Interactables" groups=["interactable"] unique_id=1864219965]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0.35, -8)
+collision_layer = 4
+
+[node name="Tablet1Mesh" type="CSGBox3D" parent="Interactables/Tablet1" unique_id=388127452]
+size = Vector3(0.45, 0.12, 0.65)
+material = SubResource("MatTablet")
+
+[node name="Tablet1Light" type="OmniLight3D" parent="Interactables/Tablet1" unique_id=1909308424]
+light_color = Color(0.9, 0.8, 0.2, 1)
+light_energy = 0.6
+omni_range = 2.5
+
+[node name="Tablet1Col" type="CollisionShape3D" parent="Interactables/Tablet1" unique_id=1588445433]
+shape = SubResource("ShTablet")
+
+[node name="Tablet2" type="StaticBody3D" parent="Interactables" groups=["interactable"] unique_id=204280781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.35, 10)
+collision_layer = 4
+
+[node name="Tablet2Mesh" type="CSGBox3D" parent="Interactables/Tablet2" unique_id=1002912581]
+size = Vector3(0.45, 0.12, 0.65)
+material = SubResource("MatTablet")
+
+[node name="Tablet2Light" type="OmniLight3D" parent="Interactables/Tablet2" unique_id=1743461522]
+light_color = Color(0.9, 0.8, 0.2, 1)
+light_energy = 0.6
+omni_range = 2.5
+
+[node name="Tablet2Col" type="CollisionShape3D" parent="Interactables/Tablet2" unique_id=85537100]
+shape = SubResource("ShTablet")
+
+[node name="Tablet3" type="StaticBody3D" parent="Interactables" groups=["interactable"] unique_id=593876174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.35, 26)
+collision_layer = 4
+
+[node name="Tablet3Mesh" type="CSGBox3D" parent="Interactables/Tablet3" unique_id=135191649]
+size = Vector3(0.45, 0.12, 0.65)
+material = SubResource("MatTablet")
+
+[node name="Tablet3Light" type="OmniLight3D" parent="Interactables/Tablet3" unique_id=2037959362]
+light_color = Color(0.9, 0.8, 0.2, 1)
+light_energy = 0.6
+omni_range = 2.5
+
+[node name="Tablet3Col" type="CollisionShape3D" parent="Interactables/Tablet3" unique_id=720646549]
+shape = SubResource("ShTablet")
+
+[node name="TerminalP52" type="StaticBody3D" parent="Interactables" groups=["interactable"] unique_id=743110920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.7, -28)
+collision_layer = 4
+
+[node name="TerminalMesh" type="CSGBox3D" parent="Interactables/TerminalP52" unique_id=1001651910]
+size = Vector3(0.55, 1.4, 0.35)
+material = SubResource("MatTerminal")
+
+[node name="TerminalLight" type="OmniLight3D" parent="Interactables/TerminalP52" unique_id=646626208]
+light_color = Color(0.1, 0.5, 1, 1)
+light_energy = 1.2
+omni_range = 4.0
+
+[node name="TerminalCol" type="CollisionShape3D" parent="Interactables/TerminalP52" unique_id=1996955448]
+shape = SubResource("ShTerminal")
+
+[node name="Characters" type="Node3D" parent="." unique_id=1284009383]
+
+[node name="Guardian" type="CharacterBody3D" parent="Characters" unique_id=956428813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.05, -14)
+collision_layer = 2
+script = ExtResource("3")
+
+[node name="Body" type="CSGCylinder3D" parent="Characters/Guardian" unique_id=1698794617]
+radius = 0.28
+height = 1.85
+material = SubResource("MatGuardian")
+
+[node name="Head" type="CSGSphere3D" parent="Characters/Guardian" unique_id=2098171106]
+transform = Transform3D(1.1, 0, 0, 0, 0.75, 0, 0, 0, 1.1, 0, 1.1, 0)
+radius = 0.3
+material = SubResource("MatGuardian")
+
+[node name="Eyes" type="OmniLight3D" parent="Characters/Guardian" unique_id=1074399339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.22)
+light_color = Color(0.15, 0.75, 0.5, 1)
+light_energy = 0.5
+omni_range = 1.8
+
+[node name="GuardianCol" type="CollisionShape3D" parent="Characters/Guardian" unique_id=816362922]
+shape = SubResource("ShGuardian")
+
+[node name="NavAgent" type="NavigationAgent3D" parent="Characters/Guardian" unique_id=2003300436]
+path_desired_distance = 0.5
+target_desired_distance = 0.6
+
+[node name="Seraph" type="Node3D" parent="Characters" unique_id=17751937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 2, -28)
+
+[node name="SeraphBody" type="CSGSphere3D" parent="Characters/Seraph" unique_id=460447435]
+radius = 0.35
+
+[node name="SeraphLight" type="OmniLight3D" parent="Characters/Seraph" unique_id=1406179032]
+light_color = Color(0.3, 0.6, 1, 1)
+light_energy = 1.2
+omni_range = 6.0
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"] unique_id=701580306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0, 2.5, 30.0)
+script = ExtResource("2")
+
+[node name="PlayerCol" type="CollisionShape3D" parent="Player" unique_id=1186945885]
+shape = SubResource("ShPlayer")
+
+[node name="Head" type="Node3D" parent="Player" unique_id=1937915174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=759234536]
+current = true
+fov = 80.0
+
+[node name="Flashlight" type="SpotLight3D" parent="Player/Head/Camera3D" unique_id=1437539497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.1, -0.3)
+visible = false
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 3.5
+shadow_enabled = true
+spot_range = 18.0
+spot_angle = 22.0
+
+[node name="InteractRay" type="RayCast3D" parent="Player/Head/Camera3D" unique_id=244641174]
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 4
+
+[node name="FootstepTimer" type="Timer" parent="Player" unique_id=433605184]
+wait_time = 0.5
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1597112200]
+
+[node name="HUD" type="Control" parent="UI" unique_id=102541963]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="Label" parent="UI/HUD" unique_id=2027911429]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "·"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="UI/HUD" unique_id=1918443936]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 80.0
+grow_horizontal = 0
+text = "ORIGEM"
+horizontal_alignment = 2
+
+[node name="InteractLabel" type="Label" parent="UI/HUD" unique_id=2052401657]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.62
+anchor_right = 0.5
+anchor_bottom = 0.62
+offset_left = -180.0
+offset_top = -16.0
+offset_right = 180.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[E] Examinar"
+horizontal_alignment = 1
+
+[node name="MsgPanel" type="PanelContainer" parent="UI/HUD" unique_id=583997986]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -150.0
+offset_right = 380.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MsgLabel" type="Label" parent="UI/HUD/MsgPanel" unique_id=1105770758]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="InventoryUI" parent="UI" instance=ExtResource("4")]
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("5")]

@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	fileMode = false
+	bare = true
+	symlinks = false
+	ignorecase = false
+	longpaths = true
+	autocrlf = false
+[user]
+	name = Summer User
+	email = local@summerengine.dev
