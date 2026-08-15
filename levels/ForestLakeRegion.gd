@@ -707,6 +707,80 @@ func _build_majestic_camp() -> void:
 		supply_collision.shape = supply_shape
 		supply_body.add_child(supply_collision)
 		camp.add_child(supply_body)
+	# Mesa de cartografia e rolos de campanha: contam a logística Majestic sem introduzir cartazes planos ou barreiras no anel central.
+	var chart_material: StandardMaterial3D = StandardMaterial3D.new()
+	chart_material.albedo_color = Color(0.48, 0.34, 0.16, 1.0)
+	chart_material.roughness = 0.88
+	chart_material.emission_enabled = true
+	chart_material.emission = Color(0.045, 0.025, 0.008, 1.0)
+	chart_material.emission_energy_multiplier = 0.34
+	var chart_table: MeshInstance3D = MeshInstance3D.new()
+	chart_table.name = "MesaDeCartografiaMajestic"
+	var chart_table_mesh: BoxMesh = BoxMesh.new()
+	chart_table_mesh.size = Vector3(1.75, 0.13, 1.12)
+	chart_table.mesh = chart_table_mesh
+	chart_table.material_override = camp_wood
+	chart_table.position = Vector3(2.72, 1.28, -2.78)
+	chart_table.rotation.y = deg_to_rad(-16.0)
+	camp.add_child(chart_table)
+	for leg_x: float in [-0.68, 0.68]:
+		for leg_z: float in [-0.38, 0.38]:
+			var leg: MeshInstance3D = MeshInstance3D.new()
+			var leg_mesh: CylinderMesh = CylinderMesh.new()
+			leg_mesh.top_radius = 0.055
+			leg_mesh.bottom_radius = 0.075
+			leg_mesh.height = 1.22
+			leg_mesh.radial_segments = 8
+			leg_mesh.material = camp_wood
+			leg.mesh = leg_mesh
+			leg.position = chart_table.position + Vector3(leg_x, -0.61, leg_z).rotated(Vector3.UP, chart_table.rotation.y)
+			camp.add_child(leg)
+	var map_sheet: MeshInstance3D = MeshInstance3D.new()
+	map_sheet.name = "MapaDaExpedicaoMajestic"
+	var map_mesh: BoxMesh = BoxMesh.new()
+	map_mesh.size = Vector3(1.38, 0.026, 0.84)
+	map_sheet.mesh = map_mesh
+	map_sheet.material_override = chart_material
+	map_sheet.position = chart_table.position + Vector3(0.0, 0.083, 0.0)
+	map_sheet.rotation.y = chart_table.rotation.y
+	camp.add_child(map_sheet)
+	for roll_index: int in range(3):
+		var roll: MeshInstance3D = MeshInstance3D.new()
+		roll.name = "RoloDeCampoMajestic_%02d" % roll_index
+		var roll_mesh: CylinderMesh = CylinderMesh.new()
+		roll_mesh.top_radius = 0.13
+		roll_mesh.bottom_radius = 0.13
+		roll_mesh.height = 0.86
+		roll_mesh.radial_segments = 12
+		roll_mesh.material = chart_material
+		roll.mesh = roll_mesh
+		roll.position = Vector3(-3.20 + float(roll_index) * 0.52, 0.18, 2.82)
+		roll.rotation.z = PI * 0.5
+		roll.rotation.y = 0.26 + float(roll_index) * 0.16
+		camp.add_child(roll)
+	var rack_pole_mesh: CylinderMesh = CylinderMesh.new()
+	rack_pole_mesh.top_radius = 0.045
+	rack_pole_mesh.bottom_radius = 0.065
+	rack_pole_mesh.height = 2.35
+	rack_pole_mesh.radial_segments = 8
+	rack_pole_mesh.material = camp_wood
+	for rack_x: float in [-2.15, -0.85]:
+		var rack_pole: MeshInstance3D = MeshInstance3D.new()
+		rack_pole.name = "SuporteExpedicaoMajestic"
+		rack_pole.mesh = rack_pole_mesh
+		rack_pole.position = Vector3(rack_x, 1.18, 3.18)
+		camp.add_child(rack_pole)
+	var rack_beam: MeshInstance3D = MeshInstance3D.new()
+	var rack_beam_mesh: CylinderMesh = CylinderMesh.new()
+	rack_beam_mesh.top_radius = 0.055
+	rack_beam_mesh.bottom_radius = 0.055
+	rack_beam_mesh.height = 1.48
+	rack_beam_mesh.radial_segments = 8
+	rack_beam_mesh.material = camp_wood
+	rack_beam.mesh = rack_beam_mesh
+	rack_beam.position = Vector3(-1.50, 2.18, 3.18)
+	rack_beam.rotation.z = PI * 0.5
+	camp.add_child(rack_beam)
 	for torch_index: int in range(3):
 		var torch_angle: float = deg_to_rad(35.0 + float(torch_index) * 120.0)
 		var torch: MeshInstance3D = MeshInstance3D.new()
