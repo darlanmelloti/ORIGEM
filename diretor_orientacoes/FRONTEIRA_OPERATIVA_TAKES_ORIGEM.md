@@ -1,21 +1,26 @@
-# ORIGEM — Fronteira Operativa de Takes
+# ORIGEM — Fronteira Operativa Definitiva de 22 Capítulos
 
 **Aplicação imediata:** 15 de agosto de 2026
-**Finalidade:** impedir sobreposição entre frentes de desenvolvimento e preservar a coerência do mundo regional.
+**Autoridade:** Direção Executiva e Direção de Desenvolvimento
+**Finalidade:** eliminar duplicação de esforço e garantir uma transição física contínua desde a Casa Voss até ao Orion Cube.
 
 ## Divisão exclusiva de responsabilidades
 
-| Equipa / branch | Âmbito permitido | Âmbito explicitamente vedado |
-|---|---|---|
-| Desenvolvimento Principal — `feature/dev1-gameplay-core` | Takes 1–5: Casa Voss, trilho do rio, ponte 3D, Floresta Densa, Lago das Ruínas Submersas, margens, Vila Elevada, Observatório e elementos periféricos do vale. | Takes 6–7, desfiladeiro da montanha, fendas tectónicas, caverna profunda, arena do Sentinela Kharu, praça ciclópica e Cubo de Orion. |
-| Novo Desenvolvedor — `feature/dev2-mountain-canyon` | Takes 6–7: desfiladeiro íngreme, canyon, fendas tectónicas, caverna profunda, vestígios históricos, arena do Sentinela Kharu, praça ciclópica e Cubo de Orion. | Takes 1–5, Casa Voss, corredor ribeirinho, Lago das Ruínas Submersas, Vila Elevada, Observatório e a base de entrada da montanha. |
+| Equipa / branch | Âmbito exclusivo | Conteúdo permitido | Âmbito vedado |
+|---|---|---|---|
+| Desenvolvimento Principal — `feature/dev1-gameplay-core` | **Capítulos / Takes 1–10** | Ato I — Memória da Casa Voss; Ato II — Chamamento; Ato III inicial — estrada junto à casa, arco monumental, vale inicial, bifurcação e preparação da travessia. Inclui fundação interativa do prólogo, porta exterior `[E]`, espada, trilhos, floresta inicial e desempenho na GTX 1050. | Capítulos / Takes 11–22: ponte, subida, Vila Elevada, observatório, trilho da montanha, canyon, caverna, galeria das eras, praça ciclópica e Orion Cube. |
+| Novo Desenvolvedor — `feature/dev2-mountain-canyon` | **Capítulos / Takes 11–22** | Bifurcação avançada, sinais no bosque, ponte, subida, Vila Elevada, observatório, trilho da montanha, desfiladeiro, fendas tectónicas, caverna profunda, vestígios históricos, arena do Sentinela Kharu, praça ciclópica e Orion Cube. | Capítulos / Takes 1–10: Casa Voss, prólogo, estrada junto à casa, arco monumental, vale inicial e fundação da travessia. |
 
-## Estado de consolidação da frente principal
+## Regra crítica de transição
 
-A branch `feature/dev1-gameplay-core` está consolidada até ao commit `13e2b86`. O Checkpoint 114 cobre o lago, as ruínas e a estabilidade de porta/exterior. O Checkpoint 115 consolida a Vila Elevada e o Observatório como o fecho visual do Take 5. A partir deste registo, o Take 5 fica **encerrado para expansão de escopo**; qualquer ação futura nesta zona limita-se a correções de regressão confirmadas por QA.
+O conteúdo experimental do antigo bloco isolado do Take 5 não define a nova divisão. A frente `feature/dev2-mountain-canyon` começa a partir da **base estável consolidada** entregue pela frente principal; qualquer transição espacial deve respeitar a escala do mapa e a continuidade física do mundo.
 
-## Protocolo de evidência
+## Cadência obrigatória de coordenação
 
-Cada alteração dentro do respetivo âmbito deve incluir validação Godot, captura durante a câmara de take ativa, gameplay ou captura estável de 30 segundos e registo de fecho na pasta `diretor_orientacoes/`. Nenhuma branch deve editar módulos, coordenadas, tomadas de câmara ou ativos pertencentes ao bloco da outra frente.
+| Frequência | Procedimento obrigatório |
+|---|---|
+| A cada 10 minutos | Ler `diretor_orientacoes/` no GitHub antes de continuar a codificação. |
+| A cada 30 minutos ou no fecho de uma tarefa | Executar validação Godot 4.7.1, captura de alta resolução, gameplay de cerca de 30 segundos, registo de fecho e push imediato na branch própria. |
+| A cada 20 minutos após novos commits | A direção audita o código, a jogabilidade e a fidelidade narrativa, emitindo o próximo alinhamento. |
 
-> A escala do mapa de doze marcos continua a ser a autoridade espacial. Os takes são instrumentos de composição, não fronteiras geográficas que possam ser alteradas sem coordenação.
+> Os takes são instrumentos de narrativa e composição. A autoridade espacial permanece o mapa regional e a continuidade explorável do mundo, nunca um corte cinematográfico isolado.

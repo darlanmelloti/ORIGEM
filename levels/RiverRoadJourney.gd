@@ -168,6 +168,31 @@ func _build_ruin_arch() -> void:
 		debris.scale = Vector3(debris_scale, debris_scale * 0.76, debris_scale)
 		debris.rotation.y = float(debris_index) * 0.91
 		arch.add_child(debris)
+	# Duas brasas litúrgicas tornam o arco reconhecível à distância, mantendo a luz concentrada no marco e não em toda a estrada.
+	var ember_material: StandardMaterial3D = StandardMaterial3D.new()
+	ember_material.albedo_color = Color(0.60, 0.12, 0.025, 1.0)
+	ember_material.emission_enabled = true
+	ember_material.emission = Color(1.0, 0.14, 0.018, 1.0)
+	ember_material.emission_energy_multiplier = 1.20
+	for ember_side: float in [-2.82, 2.82]:
+		var ember_mesh: SphereMesh = SphereMesh.new()
+		ember_mesh.radius = 0.18
+		ember_mesh.height = 0.36
+		ember_mesh.radial_segments = 12
+		var ember: MeshInstance3D = MeshInstance3D.new()
+		ember.name = "BrasaLiturgicaArco_%.1f" % ember_side
+		ember.mesh = ember_mesh
+		ember.material_override = ember_material
+		ember.position = Vector3(ember_side, 3.15, -0.78)
+		arch.add_child(ember)
+		var light: OmniLight3D = OmniLight3D.new()
+		light.name = "LuzLiturgicaArco_%.1f" % ember_side
+		light.light_color = Color(1.0, 0.30, 0.09, 1.0)
+		light.light_energy = 0.40
+		light.omni_range = 5.4
+		light.shadow_enabled = false
+		light.position = ember.position
+		arch.add_child(light)
 
 func _build_roadside_vegetation() -> void:
 	var vegetation: Node3D = Node3D.new()
