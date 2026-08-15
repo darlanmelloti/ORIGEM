@@ -43,7 +43,7 @@ func _build_environment() -> void:
 	environment.background_color = Color("#07111b")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#2e3e52")
-	environment.ambient_light_energy = 0.58
+	environment.ambient_light_energy = 0.78
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	environment.glow_enabled = true
 	environment.glow_intensity = 0.42
@@ -52,9 +52,15 @@ func _build_environment() -> void:
 	add_child(world)
 	var moon := DirectionalLight3D.new()
 	moon.light_color = Color("#8da7c1")
-	moon.light_energy = 0.42
+	moon.light_energy = 0.58
 	moon.rotation_degrees = Vector3(-42.0, 22.0, 0.0)
 	add_child(moon)
+	var fill := DirectionalLight3D.new()
+	fill.name = "RecorteSuaveCamaraCube"
+	fill.light_color = Color("#5d9bb5")
+	fill.light_energy = 0.34
+	fill.rotation_degrees = Vector3(-22.0, -58.0, 0.0)
+	add_child(fill)
 
 func _process(delta: float) -> void:
 	if camera == null:

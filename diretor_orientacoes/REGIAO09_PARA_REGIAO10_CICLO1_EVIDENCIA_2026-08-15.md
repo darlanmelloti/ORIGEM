@@ -149,3 +149,14 @@ A inclusão de `ORIGEM_VALIDATION_REGION=10` no controlador narrativo passou o p
 - **NEXT_ACTION_IMMEDIATE**: Criar uma cena de validação dedicada para Região 10 ou um ramo de câmara explicitamente alcançável pelo harness, instanciando TerrainPatch/Environment, arco orgânico, cavidade recuada e dois OmniLight3D azuis; validar que a captura abandona a composição da Região 9.
 - **TARGET_REGION**: Região 10 — Caverna do Orion
 - **DEADLINE_NEXT_PUSH**: `2026-08-15T17:04:04Z` (UTC)
+
+## Região 11 — Ciclo 2 de iluminação
+
+A luz ambiente da validação foi elevada e recebeu um recorte suave azul-verde. O Cube permanece legível, o altar PBR ganhou leitura de textura e os quatro núcleos do anel continuam visíveis sem substituir os suportes orgânicos. Parser, gameplay de aproximadamente 30 segundos e print 1600×900 foram regenerados.
+
+### 🔄 Estado do Ciclo
+
+- **STATUS_CODE**: `PASSED`
+- **NEXT_ACTION_IMMEDIATE**: Iniciar o primeiro passe dedicado da Região 12 — Hub Temporal, reutilizando o anel de monólitos orgânicos e o núcleo emissivo sem reabrir as Regiões 1–6.
+- **TARGET_REGION**: Região 12 — Hub Temporal
+- **DEADLINE_NEXT_PUSH**: `2026-08-15T17:30:00Z` (UTC)
