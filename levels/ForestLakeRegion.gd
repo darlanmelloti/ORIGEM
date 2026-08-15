@@ -623,6 +623,47 @@ func _build_majestic_connector() -> void:
 			marker.shadow_enabled = false
 			marker.position = slab.position + Vector3(0.0, 0.68, 0.68)
 			connector.add_child(marker)
+	# Aglomerados descontínuos recuperam a leitura de margem natural, sem criar uma parede de floresta sobre o corredor físico.
+	var connector_margin: Node3D = Node3D.new()
+	connector_margin.name = "AglomeradosDaLigacaoMajestic"
+	connector.add_child(connector_margin)
+	for cluster_index: int in range(10):
+		var cluster_t: float = float(cluster_index + 1) / 11.0
+		var path_x: float = lerpf(start_x, end_x, cluster_t)
+		var path_z: float = 178.0 + sin(cluster_t * PI) * 3.4
+		var side: float = -1.0 if cluster_index % 2 == 0 else 1.0
+		var offset: float = 3.35 + float(cluster_index % 3) * 0.55
+		var world_x: float = path_x + side * offset
+		var world_z: float = path_z + rng.randf_range(-1.15, 1.15)
+		var ground_y: float = _height_at(world_x, world_z)
+		var margin_rock: Node3D = ROCK.instantiate() as Node3D
+		if margin_rock != null:
+			margin_rock.name = "RochaLigacaoMajestic_%02d" % cluster_index
+			margin_rock.position = Vector3(world_x, ground_y + 0.05, world_z)
+			var rock_scale: float = 0.14 + float(cluster_index % 4) * 0.032
+			margin_rock.scale = Vector3(rock_scale, rock_scale * 0.82, rock_scale)
+			margin_rock.rotation.y = rng.randf_range(-PI, PI)
+			connector_margin.add_child(margin_rock)
+		var margin_fern: Node3D = FERN.instantiate() as Node3D
+		if margin_fern != null:
+			margin_fern.name = "FetoLigacaoMajestic_%02d" % cluster_index
+			margin_fern.position = Vector3(world_x - side * 0.56, ground_y + 0.03, world_z + rng.randf_range(-0.44, 0.44))
+			var fern_scale: float = 0.38 + float(cluster_index % 3) * 0.07
+			margin_fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+			margin_fern.rotation.y = rng.randf_range(-PI, PI)
+			connector_margin.add_child(margin_fern)
+		# Quatro focos verticais quebram a silhueta de corredor sem formar uma parede vegetal nem interferir com colisões do trilho.
+		if cluster_index in [1, 3, 6, 8]:
+			var margin_tree: Node3D = (DARK_TREE if cluster_index % 2 == 0 else OAK_DARK).instantiate() as Node3D
+			if margin_tree != null:
+				margin_tree.name = "ArvoreLigacaoMajestic_%02d" % cluster_index
+				var tree_x: float = path_x + side * (6.80 + float(cluster_index % 2) * 1.10)
+				var tree_z: float = path_z + rng.randf_range(-2.0, 2.0)
+				margin_tree.position = Vector3(tree_x, _height_at(tree_x, tree_z), tree_z)
+				var tree_scale: float = 0.34 + float(cluster_index % 3) * 0.075
+				margin_tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
+				margin_tree.rotation.y = rng.randf_range(-PI, PI)
+				connector_margin.add_child(margin_tree)
 
 func _build_submerged_ruins() -> void:
 	var lake: Node3D = Node3D.new()
