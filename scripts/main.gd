@@ -41,6 +41,7 @@ var mission_phase: int = 0  # 0=início, 1=tábuas, 2=cubo, 3=fuga, 4=fim
 
 # ─── MENSAGEM ─────────────────────────────────────────────────
 var msg_timer: float = 0.0
+var msg_expires_at_msec: int = 0
 var msg_queue: Array = []
 
 # ─── SERAPH (ALIADA P-52) ─────────────────────────────────────
@@ -90,9 +91,10 @@ func _process(delta: float):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _process_messages(delta: float):
+func _process_messages(_delta: float):
 	if msg_timer > 0:
-		msg_timer -= delta
+		# A expiração usa tempo de parede para que a UI não fique presa quando o renderizador de captura reduz o delta do jogo.
+		msg_timer = maxf(0.0, float(msg_expires_at_msec - Time.get_ticks_msec()) / 1000.0)
 		if msg_timer <= 0:
 			msg_panel.visible = false
 			if msg_queue.size() > 0:
@@ -272,6 +274,7 @@ func _show_msg(text: String, duration: float = 4.0):
 	msg_label.text = text
 	msg_panel.visible = true
 	msg_timer = duration
+	msg_expires_at_msec = Time.get_ticks_msec() + roundi(maxf(0.0, duration) * 1000.0)
 
 func _queue_msg(text: String, duration: float = 3.0):
 	if msg_timer > 0:
