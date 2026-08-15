@@ -70,11 +70,22 @@ func _start_narrative():
 			voss_house.call("_finish_opening_camera")
 		await get_tree().process_frame
 		var validation_player := get_tree().get_first_node_in_group("player") as Node3D
+		var validation_take: String = OS.get_environment("ORIGEM_VALIDATION_TAKE")
 		if validation_player != null:
-			validation_player.global_position = Vector3(0.0, 1.4, -28.0)
+			if validation_take == "6":
+				validation_player.global_position = Vector3(0.0, 1.8, -73.0)
+			elif validation_take == "7":
+				validation_player.global_position = Vector3(0.0, 1.8, -104.0)
+			else:
+				validation_player.global_position = Vector3(0.0, 1.4, -28.0)
 			validation_player.rotation.y = PI
 		mission_phase = 1
-		_show_msg("TAKE 5–7 — Rota de validação iniciada no limiar da caverna.", 4.0)
+		if validation_take == "6":
+			_show_msg("TAKE 6 — Desfiladeiro profundo e fendas tectónicas.", 4.0)
+		elif validation_take == "7":
+			_show_msg("TAKE 7 — Praça ciclópica e Cubo de Orion.", 4.0)
+		else:
+			_show_msg("TAKE 5–7 — Rota de validação iniciada no limiar da caverna.", 4.0)
 		return
 	await get_tree().create_timer(0.5).timeout
 	_show_msg("ORIGEM — VALE DE KHEPER\n\n2026. Elias Voss desperta diante de ruínas que não existem em nenhum mapa. A memória do futuro chama-o pelo nome...", 6.0)
@@ -85,7 +96,7 @@ func _start_narrative():
 
 # ═══════════════════════════════════════════════════════════════
 func _take57_validation_mode() -> bool:
-	if OS.get_environment("ORIGEM_TAKE57") == "1":
+	if OS.get_environment("ORIGEM_TAKE57") == "1" or OS.get_environment("ORIGEM_VALIDATION_TAKE") in ["6", "7"]:
 		return true
 	for argument: String in OS.get_cmdline_args():
 		if argument == "--take57":

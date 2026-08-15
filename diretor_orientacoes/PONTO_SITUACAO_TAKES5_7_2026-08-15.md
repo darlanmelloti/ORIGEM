@@ -50,3 +50,16 @@ O primeiro ecrã preto persistiu durante os testes, mas a investigação por est
 **Evidência principal:** `validation/take5-cycle-final-moving/take5-final-moving-print-1600x900.jpg` e `validation/take5-cycle-final-moving/take5-final-moving-gameplay-30s.mp4`.
 
 O Take 5 passa agora no critério técnico de estabilidade, iluminação local e evidência jogável. A composição ainda representa a boca do desfiladeiro/caverna em estilo low-poly e deve receber um passe artístico posterior para aprofundar o túnel, substituir marcadores herdados e aproximar a escala da referência cinematográfica alpina. Este ponto não deve ser confundido com aprovação final de qualidade artística dos Takes 5–7.
+
+
+## Commit e sincronização
+
+A evidência final foi committed localmente na branch `feature/dev2-mountain-canyon`:
+
+> `ecfa539 fix: validate Take 5 cave lighting and gameplay evidence`
+
+O push foi tentado com prompt de terminal desativado e continua bloqueado por autenticação da sessão:
+
+> `fatal: could not read Username for 'https://github.com': terminal prompts disabled`
+
+O working tree contém apenas artefactos gerados pelo editor (`.godot/` e `Takes5to7Director.gd.uid`) fora do commit. O código, relatório e evidências estão no commit local `ecfa539`.
