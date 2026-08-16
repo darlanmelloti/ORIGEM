@@ -471,8 +471,8 @@ func _build_forest_micro_details() -> void:
 	var p0_material: StandardMaterial3D = StandardMaterial3D.new()
 	p0_material.albedo_color = Color(0.018, 0.11, 0.16, 1.0)
 	p0_material.emission_enabled = true
-	p0_material.emission = Color(0.02, 0.20, 0.32, 1.0)
-	p0_material.emission_energy_multiplier = 0.68
+	p0_material.emission = Color(0.012, 0.105, 0.155, 1.0)
+	p0_material.emission_energy_multiplier = 0.38
 	for marker_index: int in range(3):
 		var marker_z: float = 142.0 + float(marker_index) * 16.0
 		var marker_side: float = -1.0 if marker_index % 2 == 0 else 1.0
@@ -488,9 +488,9 @@ func _build_forest_micro_details() -> void:
 			details.add_child(p0_stone)
 			var p0_light: OmniLight3D = OmniLight3D.new()
 			p0_light.name = "BrilhoP0Florestal_%02d" % marker_index
-			p0_light.light_color = Color(0.12, 0.40, 0.58, 1.0)
-			p0_light.light_energy = 0.14
-			p0_light.omni_range = 3.0
+			p0_light.light_color = Color(0.08, 0.25, 0.34, 1.0)
+			p0_light.light_energy = 0.07
+			p0_light.omni_range = 2.4
 			p0_light.shadow_enabled = false
 			p0_light.position = p0_stone.position + Vector3(0.0, 0.80, 0.0)
 			details.add_child(p0_light)
