@@ -145,7 +145,8 @@ func _build_forest_wayfinding() -> void:
 
 func _lake_shore_x(world_z: float) -> float:
 	var t: float = clampf((world_z - 145.0) / 79.0, 0.0, 1.0)
-	return lerpf(_path_x(145.0), 14.0, t) + sin(t * PI) * 1.0
+	# Meandra controlada: o percurso afasta-se da leitura de lajes em linha reta, mas mantém a chegada à margem oeste livre e previsível.
+	return lerpf(_path_x(145.0), 14.0, t) + sin(t * PI) * 3.25 + sin(t * TAU) * 0.85
 
 func _build_lake_shore_path() -> void:
 	var shore_road: Node3D = Node3D.new()
