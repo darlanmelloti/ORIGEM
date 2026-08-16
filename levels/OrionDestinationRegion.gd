@@ -375,6 +375,17 @@ func _build_hub_to_final_dome_approach() -> void:
 		stone.scale = Vector3(0.58 + float(index % 2) * 0.10, 0.18 + float(index % 3) * 0.05, 0.48 + float(index % 2) * 0.08)
 		stone.rotation = Vector3(0.04, -0.22 + float(index) * 0.08, -0.03)
 		_apply_material(stone, stone_material)
+		var stone_body := StaticBody3D.new()
+		stone_body.name = "ColisaoDegrauCupulaFinal_%02d" % index
+		stone_body.collision_layer = 1
+		stone_body.collision_mask = 1
+		var stone_shape := CollisionShape3D.new()
+		var stone_box := BoxShape3D.new()
+		stone_box.size = Vector3(1.25 + float(index % 2) * 0.18, 0.48, 1.05 + float(index % 2) * 0.16)
+		stone_shape.shape = stone_box
+		stone_shape.position = Vector3(0.0, 0.02, 0.0)
+		stone_body.add_child(stone_shape)
+		stone.add_child(stone_body)
 		approach.add_child(stone)
 		if index % 2 == 0:
 			var waypoint := OmniLight3D.new()
