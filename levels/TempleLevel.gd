@@ -476,6 +476,12 @@ func _add_box(parent: Node3D, position_value: Vector3, size_value: Vector3, mate
 	mesh_instance.position = position_value
 	parent.add_child(mesh_instance)
 
+func _apply_material(root: Node, material: Material) -> void:
+	if root is MeshInstance3D:
+		(root as MeshInstance3D).material_override = material
+	for child: Node in root.get_children():
+		_apply_material(child, material)
+
 func _ground_height(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
 		return float(terrain_patch.call("height_at", world_x, world_z))
@@ -533,20 +539,26 @@ func _build_region7_transition() -> void:
 	var gate_y: float = _terrain_height_for_qa(gate_x, gate_z)
 	for pillar_side: int in range(2):
 		var px: float = gate_x + (float(pillar_side) * 2.0 - 1.0) * 3.2
-		var pillar: MeshInstance3D = MeshInstance3D.new()
+		# Coluna de ruína real: substitui a leitura de bloco regular por uma silhueta arqueológica já usada no vale.
+		var pillar: Node3D = CARTOGRAPHIC_HANDOFF_PILLAR.instantiate() as Node3D
+		if pillar == null:
+			continue
 		pillar.name = "PilarPortaoR7_%d" % pillar_side
-		var pillar_mesh: BoxMesh = BoxMesh.new()
-		pillar_mesh.size = Vector3(0.65, 4.8, 0.65)
-		pillar.mesh = pillar_mesh
-		pillar.material_override = stone_mat
-		pillar.position = Vector3(px, gate_y + 2.4, gate_z)
-		var pb: StaticBody3D = StaticBody3D.new()
-		var ps: CollisionShape3D = CollisionShape3D.new()
-		ps.shape = BoxShape3D.new()
-		(ps.shape as BoxShape3D).size = pillar_mesh.size
-		pb.add_child(ps)
-		pillar.add_child(pb)
+		pillar.position = Vector3(px, gate_y, gate_z)
+		pillar.scale = Vector3(1.08, 2.10 + float(pillar_side) * 0.12, 1.08)
+		pillar.rotation = Vector3(0.025 * float(pillar_side), 0.10 * (float(pillar_side) * 2.0 - 1.0), -0.035 * (float(pillar_side) * 2.0 - 1.0))
+		_apply_material(pillar, stone_mat)
 		gate_root.add_child(pillar)
+		# Colisor simples mantém a abertura central livre e não depende da malha detalhada do activo.
+		var pb: StaticBody3D = StaticBody3D.new()
+		pb.name = "ColisorPilarPortaoR7_%d" % pillar_side
+		pb.position = Vector3(px, gate_y + 2.4, gate_z)
+		var ps: CollisionShape3D = CollisionShape3D.new()
+		var pillar_shape: BoxShape3D = BoxShape3D.new()
+		pillar_shape.size = Vector3(0.92, 4.80, 0.92)
+		ps.shape = pillar_shape
+		pb.add_child(ps)
+		gate_root.add_child(pb)
 	# CP 203: Pedras de base nos pilares para leitura arqueológica
 	for base_side: int in range(2):
 		var bx: float = gate_x + (float(base_side) * 2.0 - 1.0) * 3.2
