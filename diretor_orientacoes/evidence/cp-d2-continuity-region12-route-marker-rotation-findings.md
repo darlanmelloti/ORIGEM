@@ -1,6 +1,6 @@
 # Findings — Passe de rotação dos marcadores de rota Região 12
 
-A rotação dos marcadores foi ajustada para alinhar melhor a leitura dos elementos com a trajectória da faixa pétrea. A captura mantém o wayfinding físico subtil e preserva a composição monumental da Cúpula Final, incluindo soleira, base e núcleo temporal.
+A rotação dos marcadores foi reduzida subtilmente para alinhar a leitura com a trajectória orgânica da faixa pétrea. A captura confirma um alinhamento físico mais estável, com os marcadores discretos e a hierarquia visual da soleira, da base e do núcleo preservada.
 
 O parser/headless passou, o gameplay tem 30.000000 segundos e o print é 1600×900. O passe está aprovado para publicação; a continuidade seguirá imediatamente dentro da Região 12.
 
