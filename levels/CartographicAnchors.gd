@@ -23,6 +23,9 @@ static func world_position(anchor: Vector2, terrain_y: float, vertical_offset: f
 
 static func next_dev1_destination(player_z: float) -> Dictionary:
 	# A sequência pertence à cartografia, não à UI: todas as telas e sistemas consultam a mesma rota.
+	# O ponto 2 é um marco jogável real entre a Casa Voss e o Arco; não pode ser saltado pela orientação.
+	if player_z < ESTRADA_RIO_INICIO.y + 8.0:
+		return {"anchor": ESTRADA_RIO_INICIO, "label": "RUMO À ESTRADA DO RIO", "anchor_id": 2}
 	if player_z >= RUINAS_SUBMERSAS.y - 18.0:
 		return {"anchor": VILA_ELEVADA, "label": "PASSAGEM: VILA ELEVADA", "anchor_id": 7}
 	if player_z >= ACAMPAMENTO_MAJESTIC.y - 12.0:
