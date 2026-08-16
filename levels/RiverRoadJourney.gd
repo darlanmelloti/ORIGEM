@@ -31,6 +31,7 @@ func _ready() -> void:
 	_build_river_margins()
 	_build_ruin_arch()
 	_build_arch_crown_stones()
+	_build_river_fill_light()
 	_build_arch_approach_ecology()
 	_build_roadside_vegetation()
 
@@ -573,6 +574,32 @@ func _build_arch_wet_overlay() -> void:
 	arch_overlay.mesh = arch_surface.commit()
 	arch_overlay.material_override = arch_zone_mat
 	add_child(arch_overlay)
+
+func _build_river_fill_light() -> void:
+	# CP 206: Luz de preenchimento fria sobre o leito do rio para revelar as pedras emergentes.
+	# Duas OmniLight3D de baixa energia posicionadas sobre a lâmina de água.
+	var river_root: Node3D = Node3D.new()
+	river_root.name = "RiverFillLights"
+	add_child(river_root)
+	# Luz 1: zona central do rio (z≈35, junto às pedras emergentes do CP 192)
+	var fill1: OmniLight3D = OmniLight3D.new()
+	fill1.name = "LuzRio_Centro"
+	fill1.position = Vector3(0.0, 3.5, 35.0)
+	fill1.light_color = Color(0.72, 0.82, 0.95, 1.0)
+	fill1.light_energy = 0.55
+	fill1.omni_range = 14.0
+	fill1.shadow_enabled = false
+	river_root.add_child(fill1)
+	# Luz 2: zona norte do rio (z≈18, junto à margem sul do CP 195)
+	var fill2: OmniLight3D = OmniLight3D.new()
+	fill2.name = "LuzRio_Norte"
+	fill2.position = Vector3(0.0, 3.5, 18.0)
+	fill2.light_color = Color(0.68, 0.78, 0.92, 1.0)
+	fill2.light_energy = 0.48
+	fill2.omni_range = 12.0
+	fill2.shadow_enabled = false
+	river_root.add_child(fill2)
+
 
 func _apply_material(root: Node, material: Material) -> void:
 	for child: Node in root.get_children():
