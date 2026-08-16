@@ -546,6 +546,9 @@ func _process(delta: float) -> void:
 	_set_camera(clamp(elapsed / 30.0, 0.0, 1.0))
 	if recess_resonance_light != null:
 		recess_resonance_light.light_energy = 0.20 + sin(elapsed * 1.7) * 0.055
+	for child in get_children():
+		if child is OmniLight3D and child.name.begins_with("PreenchimentoQuenteSoleira"):
+			(child as OmniLight3D).light_energy = 0.34 + sin(elapsed * 1.25) * 0.08
 	performance_sample_timer += delta
 	if performance_sample_timer >= 5.0:
 		performance_sample_timer = 0.0
