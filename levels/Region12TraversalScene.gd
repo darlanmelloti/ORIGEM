@@ -549,6 +549,10 @@ func _process(delta: float) -> void:
 	for child in get_children():
 		if child is OmniLight3D and child.name.begins_with("PreenchimentoQuenteSoleira"):
 			(child as OmniLight3D).light_energy = 0.34 + sin(elapsed * 1.25) * 0.08
+		if child is MeshInstance3D and child.name == "NucleoCoroaFinal":
+			var core_material := child.material_override as StandardMaterial3D
+			if core_material != null:
+				core_material.emission_energy_multiplier = 5.6 + sin(elapsed * 1.05) * 0.65
 	performance_sample_timer += delta
 	if performance_sample_timer >= 5.0:
 		performance_sample_timer = 0.0
