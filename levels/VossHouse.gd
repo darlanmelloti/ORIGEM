@@ -81,6 +81,7 @@ func _ready() -> void:
 	_build_real_fern_frame()
 	_build_forest_ground_integration_92(house)
 	_build_opening_camera()
+	_build_exterior_porch_light()
 
 func _build_visible_opening_road() -> void:
 	# Percurso contínuo no espaço mundial: acompanha o relevo e usa o mesmo PBR de solo, sem placas ou planos de fundo.
@@ -1316,6 +1317,19 @@ func _build_voss_candle_and_lantern() -> void:
 	lantern_light.omni_range = 4.5
 	lantern_light.shadow_enabled = false
 	add_child(lantern_light)
+
+func _build_exterior_porch_light() -> void:
+	# CP 208: Luz de pórtico quente na entrada da Casa Voss para guiar o jogador à porta.
+	# OmniLight3D âmbar sobre a entrada, energia moderada para não competir com a lareira.
+	var porch_light: OmniLight3D = OmniLight3D.new()
+	porch_light.name = "LuzPorchVoss"
+	porch_light.position = Vector3(-22.0, 3.2, 10.5)
+	porch_light.light_color = Color(0.92, 0.72, 0.38, 1.0)
+	porch_light.light_energy = 0.85
+	porch_light.omni_range = 7.5
+	porch_light.shadow_enabled = false
+	add_child(porch_light)
+
 
 func darken(source: StandardMaterial3D, factor: float) -> StandardMaterial3D:
 	return _material(source.albedo_color.darkened(1.0 - factor), source.roughness, source.metallic)
