@@ -1,6 +1,6 @@
 # Findings — Passe longitudinal dos marcadores de rota Região 12
 
-O eixo longitudinal dos marcadores foi ajustado para acompanhar melhor a direcção da faixa de percurso. A captura mantém a orientação física subtil, a integração cromática com a pedra e a leitura hierárquica da soleira, da base e do núcleo temporal.
+O eixo longitudinal dos marcadores foi ajustado para acompanhar melhor a trajectória da faixa pétrea. A captura confirma a continuidade visual da rota na soleira, mantendo os marcadores discretos e o núcleo temporal separado no plano central.
 
 O parser/headless passou, o gameplay tem 30.000000 segundos e o print é 1600×900. O passe está aprovado para publicação; a continuidade seguirá imediatamente dentro da Região 12.
 
