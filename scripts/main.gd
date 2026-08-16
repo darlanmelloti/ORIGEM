@@ -8,6 +8,8 @@ extends Node3D
 # Ameaça ativa: os guerreiros Kharu guardam os fragmentos e as ruínas do Vale de Kheper.
 # ═══════════════════════════════════════════════════════════════
 
+const CARTOGRAPHIC_MAP_UI_SCRIPT: Script = preload("res://ui/menus/CartographicMapUI.gd")
+
 # ─── UI ───────────────────────────────────────────────────────
 @onready var interact_label: Label = $UI/HUD/InteractLabel
 @onready var msg_panel: PanelContainer = $UI/HUD/MsgPanel
@@ -47,12 +49,17 @@ var msg_queue: Array = []
 # ─── SERAPH (ALIADA P-52) ─────────────────────────────────────
 var seraph_pulse_time: float = 0.0
 var seraph_active: bool = true
+var cartographic_map_ui: CanvasLayer
+var map_key_was_pressed: bool = false
 
 # ═══════════════════════════════════════════════════════════════
 func _ready():
 	add_to_group("main_scene")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	RenderingServer.set_default_clear_color(Color(0.05, 0.05, 0.08))
+	cartographic_map_ui = CARTOGRAPHIC_MAP_UI_SCRIPT.new() as CanvasLayer
+	if cartographic_map_ui != null:
+		add_child(cartographic_map_ui)
 	interact_label.visible = false
 	EventBus.player_interacted.connect(_on_player_interacted)
 	EventBus.player_interact_target_changed.connect(_on_player_interact_target_changed)
@@ -87,6 +94,10 @@ func _start_narrative():
 func _process(delta: float):
 	_process_messages(delta)
 	_process_seraph(delta)
+	var map_key_pressed: bool = Input.is_key_pressed(KEY_M)
+	if map_key_pressed and not map_key_was_pressed and cartographic_map_ui != null and cartographic_map_ui.has_method("toggle_map"):
+		cartographic_map_ui.call("toggle_map")
+	map_key_was_pressed = map_key_pressed
 	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
