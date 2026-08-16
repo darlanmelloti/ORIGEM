@@ -18,6 +18,7 @@ const FOREST_LAKE_REGION_SCRIPT: Script = preload("res://levels/ForestLakeRegion
 const HIGHLAND_REGION_SCRIPT: Script = preload("res://levels/HighlandRegion.gd")
 const ORION_DESTINATION_REGION_SCRIPT: Script = preload("res://levels/OrionDestinationRegion.gd")
 const REGIONAL_CINEMATIC_DIRECTOR_SCRIPT: Script = preload("res://levels/RegionalCinematicDirector.gd")
+const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 const CARTOGRAPHIC_HANDOFF_PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const DAYLIGHT_VARIANT_ENABLED: bool = true
 
@@ -525,8 +526,8 @@ func _build_region7_transition() -> void:
 		gate_root.add_child(slab)
 	
 	# Portão de transição: dois pilares e uma verga em z=348
-	var gate_x: float = 140.0
-	var gate_z: float = 348.0
+	var gate_x: float = CARTOGRAPHIC_ANCHORS.VILA_ELEVADA.x
+	var gate_z: float = CARTOGRAPHIC_ANCHORS.VILA_ELEVADA.y - 4.0
 	var gate_y: float = _terrain_height_for_qa(gate_x, gate_z)
 	for pillar_side: int in range(2):
 		var px: float = gate_x + (float(pillar_side) * 2.0 - 1.0) * 3.2
@@ -573,7 +574,7 @@ func _build_region7_transition() -> void:
 	# Marcador de spawn para o Dev2 (invisível em runtime, visível no editor)
 	var spawn_marker: Node3D = Node3D.new()
 	spawn_marker.name = "SpawnRegiao7_Dev2_HandoffPoint"
-	spawn_marker.position = Vector3(140.0, _terrain_height_for_qa(140.0, 352.0) + 1.5, 352.0)
+	spawn_marker.position = CARTOGRAPHIC_ANCHORS.world_position(CARTOGRAPHIC_ANCHORS.VILA_ELEVADA, _terrain_height_for_qa(CARTOGRAPHIC_ANCHORS.VILA_ELEVADA.x, CARTOGRAPHIC_ANCHORS.VILA_ELEVADA.y), 1.5)
 	gate_root.add_child(spawn_marker)
 	
 	# Luz de sinalização no portão (discreta, cor âmbar)

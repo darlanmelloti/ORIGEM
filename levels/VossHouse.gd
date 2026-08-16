@@ -2,7 +2,7 @@ extends Node3D
 ## Casa Voss — abertura jogável de 1908.
 ## Refúgio de Elias em pedra, madeira e cobre; a entrada olha para a estrada e a montanha.
 
-const HOUSE_ORIGIN := Vector3(-22.0, 0.0, 8.0)
+const HOUSE_ORIGIN := Vector3(CartographicAnchors.CASA_VOSS.x, 0.0, CartographicAnchors.CASA_VOSS.y)
 const MOSSY_ROCK_DIFF: Texture2D = preload("res://assets/textures/pbr/mossy_rock_diff.jpg")
 const MOSSY_ROCK_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 const MOSSY_ROCK_ROUGH: Texture2D = preload("res://assets/textures/pbr/mossy_rock_roughness.jpg")
