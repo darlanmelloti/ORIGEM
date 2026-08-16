@@ -59,7 +59,7 @@ func _build_interface() -> void:
 	player_marker = Panel.new()
 	player_marker.name = "MarcadorDeElias"
 	player_marker.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	player_marker.size = Vector2(14.0, 14.0)
+	player_marker.size = Vector2(16.0, 16.0)
 	player_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var marker_style := StyleBoxFlat.new()
 	marker_style.bg_color = Color(0.20, 0.72, 0.96, 1.0)
@@ -75,15 +75,17 @@ func _build_interface() -> void:
 	player_marker_label = Label.new()
 	player_marker_label.name = "LegendaMarcadorElias"
 	player_marker_label.text = "ELIAS"
-	player_marker_label.add_theme_font_size_override("font_size", 12)
+	player_marker_label.add_theme_font_size_override("font_size", 14)
 	player_marker_label.add_theme_color_override("font_color", Color(0.94, 0.86, 0.62, 1.0))
+	player_marker_label.add_theme_color_override("font_outline_color", Color(0.04, 0.03, 0.02, 0.96))
+	player_marker_label.add_theme_constant_override("outline_size", 4)
 	player_marker_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_texture.add_child(player_marker_label)
 
 	route_marker = Panel.new()
 	route_marker.name = "DestinoInicialArcoDasRuinas"
 	route_marker.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	route_marker.size = Vector2(16.0, 16.0)
+	route_marker.size = Vector2(18.0, 18.0)
 	route_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var route_style := StyleBoxFlat.new()
 	route_style.bg_color = Color(0.94, 0.46, 0.10, 1.0)
@@ -99,8 +101,10 @@ func _build_interface() -> void:
 	route_marker_label = Label.new()
 	route_marker_label.name = "LegendaDestinoInicial"
 	route_marker_label.text = "RUMO AO ARCO"
-	route_marker_label.add_theme_font_size_override("font_size", 11)
+	route_marker_label.add_theme_font_size_override("font_size", 14)
 	route_marker_label.add_theme_color_override("font_color", Color(1.0, 0.84, 0.47, 1.0))
+	route_marker_label.add_theme_color_override("font_outline_color", Color(0.05, 0.025, 0.01, 0.96))
+	route_marker_label.add_theme_constant_override("outline_size", 4)
 	route_marker_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_texture.add_child(route_marker_label)
 	_place_route_marker(CARTOGRAPHIC_ANCHORS.ARCO_RUINAS)
