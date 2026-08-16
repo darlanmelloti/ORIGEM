@@ -296,19 +296,21 @@ func _build_shore_access_steps() -> void:
 		var z_value: float = lerpf(lake_anchor.y - 30.0, lake_anchor.y - 12.0, t)
 		var x_value: float = lerpf(_lake_shore_x(lake_anchor.y - 30.0), lake_anchor.x - 37.0, t) + sin(t * PI) * 0.45
 		var ground_y: float = _height_at(x_value, z_value)
-		var step_mesh: BoxMesh = BoxMesh.new()
-		step_mesh.size = Vector3(2.05, 0.20, 1.58)
-		var step: MeshInstance3D = MeshInstance3D.new()
-		step.name = "LajeDeChegada_%02d" % index
-		step.mesh = step_mesh
-		step.material_override = shore_material
-		step.position = Vector3(x_value, ground_y + 0.10, z_value)
-		step.rotation.y = atan2(CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.x - 37.0 - _lake_shore_x(CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y - 30.0), 18.0)
-		access.add_child(step)
+		var step_position: Vector3 = Vector3(x_value, ground_y + 0.10, z_value)
+		var step_rotation_y: float = atan2(CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.x - 37.0 - _lake_shore_x(CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y - 30.0), 18.0)
+		# A leitura visual passa a usar afloramentos reais; o colisor continua uma plataforma baixa e regular para a travessia.
+		var step: Node3D = ROCK.instantiate() as Node3D
+		if step != null:
+			step.name = "AfloramentoDeChegada_%02d" % index
+			step.scale = Vector3(0.21 + float(index % 2) * 0.018, 0.080 + float(index % 3) * 0.010, 0.18)
+			step.position = step_position
+			step.rotation = Vector3(0.03 * float((index % 3) - 1), step_rotation_y + 0.10 * float((index % 2) - 1), 0.025 * float((index % 2) - 1))
+			_apply_material(step, shore_material)
+			access.add_child(step)
 		var body: StaticBody3D = StaticBody3D.new()
 		body.name = "ColisorLajeDeChegada_%02d" % index
-		body.position = step.position
-		body.rotation.y = step.rotation.y
+		body.position = step_position
+		body.rotation.y = step_rotation_y
 		var collision: CollisionShape3D = CollisionShape3D.new()
 		var shape: BoxShape3D = BoxShape3D.new()
 		shape.size = Vector3(2.05, 0.22, 1.58)
