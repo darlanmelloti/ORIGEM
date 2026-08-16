@@ -443,7 +443,14 @@ func _create_opening_skip_prompt() -> void:
 	opening_skip_label.add_theme_font_size_override("font_size", 18)
 	opening_skip_label.add_theme_color_override("font_color", Color(0.86, 0.91, 0.96, 1.0))
 	opening_skip_layer.add_child(opening_skip_label)
-	get_tree().current_scene.add_child(opening_skip_layer)
+	var scene_root: Node = get_tree().current_scene
+	if scene_root == null:
+		# Uma sonda headless pode instanciar a cena sem a definir como current_scene; nesse caso, não há UI a anexar.
+		opening_skip_layer.queue_free()
+		opening_skip_layer = null
+		opening_skip_label = null
+		return
+	scene_root.add_child(opening_skip_layer)
 	_update_opening_skip_prompt()
 
 func _update_opening_skip_prompt() -> void:
@@ -795,21 +802,27 @@ func _activate_opening_camera() -> void:
 	if opening_camera != null:
 		opening_camera.current = true
 	# Durante o enquadramento inicial, não há HUD nem mensagens de outro mapa a competir com a Casa Voss.
-	opening_ui = get_tree().current_scene.get_node_or_null("UI") as CanvasLayer
-	if opening_ui != null:
-		opening_ui.visible = false
-	# Marcadores, inimigos e protótipos do vale só entram depois do prólogo; não devem contaminar a leitura da casa.
-	for node_name: String in ["Enemies", "Interactables", "Characters"]:
-		var legacy_node: Node3D = get_tree().current_scene.get_node_or_null(node_name) as Node3D
-		if legacy_node != null and legacy_node.visible:
-			legacy_node.visible = false
-			opening_hidden_nodes.append(legacy_node)
+	# A cena actual pode ser nula em sondas headless que instanciam a main scene manualmente.
+	var scene_root: Node = get_tree().current_scene
+	if scene_root != null:
+		opening_ui = scene_root.get_node_or_null("UI") as CanvasLayer
+		if opening_ui != null:
+			opening_ui.visible = false
+		# Marcadores, inimigos e protótipos do vale só entram depois do prólogo; não devem contaminar a leitura da casa.
+		for node_name: String in ["Enemies", "Interactables", "Characters"]:
+			var legacy_node: Node3D = scene_root.get_node_or_null(node_name) as Node3D
+			if legacy_node != null and legacy_node.visible:
+				legacy_node.visible = false
+				opening_hidden_nodes.append(legacy_node)
 	# A tempestade é aplicada imediatamente à câmara de prólogo; o reforço diferido vence qualquer sincronização Chronos tardia.
 	_apply_opening_storm()
 	get_tree().create_timer(0.35).timeout.connect(_apply_opening_storm)
 
 func _apply_opening_storm() -> void:
-	var level_environment: Node = get_tree().current_scene.get_node_or_null("LevelEnvironment")
+	var scene_root: Node = get_tree().current_scene
+	if scene_root == null:
+		return
+	var level_environment: Node = scene_root.get_node_or_null("LevelEnvironment")
 	if level_environment == null:
 		return
 	if DAYLIGHT_VARIANT_ENABLED and level_environment.has_method("apply_voss_daylight"):
