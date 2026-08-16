@@ -1165,6 +1165,8 @@ func _make_slab(width: float, depth: float, rng: RandomNumberGenerator) -> Array
 
 func _create_path_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
+	# Matiz pedra húmida: reduz o contraste branco das lajes contra o relvado sem apagar a continuidade de navegação.
+	material.albedo_color = Color(0.43, 0.46, 0.38, 1.0)
 	material.albedo_texture = FLAGSTONE
 	material.normal_enabled = true
 	material.normal_texture = GROUND_NORMAL
