@@ -480,6 +480,13 @@ func _build_final_dome() -> void:
 	heart_light.shadow_enabled = false
 	heart_light.position = Vector3(0.0, 5.0, 0.0)
 	dome.add_child(heart_light)
+	var alpine_fill := DirectionalLight3D.new()
+	alpine_fill.name = "PreenchimentoAlpinoSemSombrasR12"
+	alpine_fill.light_color = Color("#8fb7d6")
+	alpine_fill.light_energy = 0.24
+	alpine_fill.shadow_enabled = false
+	alpine_fill.rotation_degrees = Vector3(-52.0, -28.0, 0.0)
+	dome.add_child(alpine_fill)
 	var recess_light := OmniLight3D.new()
 	recess_resonance_light = recess_light
 	recess_light.name = "RessonanciaRecessivoCupulaR12"
