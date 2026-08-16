@@ -240,6 +240,29 @@ func _build_final_dome_traversal_proxy() -> void:
 		wall_material.roughness = 0.98
 		
 		proxy.add_child(wall)
+	for horizon_x in [-8.8, 8.8]:
+		var horizon_mass := ROCK_LARGE.instantiate() as Node3D
+		if horizon_mass == null:
+			continue
+		horizon_mass.name = "MassaHorizonteAlpino_%s" % str(horizon_x)
+		horizon_mass.position = Vector3(horizon_x, 1.45, -7.4)
+		horizon_mass.scale = Vector3(1.15, 0.92, 0.82)
+		horizon_mass.rotation = Vector3(0.04, 0.18 * sign(horizon_x), 0.06 * sign(horizon_x))
+		horizon_mass.visible = true
+		proxy.add_child(horizon_mass)
+	var alpine_backdrop := ROCK_LARGE.instantiate() as Node3D
+	if alpine_backdrop != null:
+		alpine_backdrop.name = "FundoAlpinoOrganicoRecuado"
+		alpine_backdrop.position = Vector3(0.0, 4.35, -10.8)
+		alpine_backdrop.scale = Vector3(5.4, 1.55, 0.48)
+		alpine_backdrop.rotation = Vector3(0.03, 0.0, 0.0)
+		var alpine_material := StandardMaterial3D.new()
+		alpine_material.albedo_color = Color("#0b1222")
+		alpine_material.roughness = 0.98
+		for alpine_mesh in alpine_backdrop.find_children("*", "MeshInstance3D", true, false):
+			alpine_mesh.set_surface_override_material(0, alpine_material)
+		alpine_backdrop.visible = false
+		proxy.add_child(alpine_backdrop)
 	for frame_x in [-4.8, 4.8]:
 		var frame_rock := ROCK_LARGE.instantiate() as Node3D
 		if frame_rock == null:
