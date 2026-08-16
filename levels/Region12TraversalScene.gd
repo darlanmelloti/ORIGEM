@@ -367,6 +367,14 @@ func _build_final_dome_traversal_proxy() -> void:
 		threshold_material.roughness = 0.92
 		for threshold_mesh in threshold.find_children("*", "MeshInstance3D", true, false):
 			threshold_mesh.set_surface_override_material(0, threshold_material)
+		var threshold_body := StaticBody3D.new()
+		var threshold_shape := CollisionShape3D.new()
+		var threshold_box := BoxShape3D.new()
+		threshold_box.size = Vector3(7.1, 0.52, 2.0)
+		threshold_shape.shape = threshold_box
+		threshold_shape.position = Vector3(0.0, -0.22, 0.0)
+		threshold_body.add_child(threshold_shape)
+		threshold.add_child(threshold_body)
 		proxy.add_child(threshold)
 		for connector_x in [-2.35, 2.35]:
 			var threshold_connector := ROCK_LARGE.instantiate() as Node3D
