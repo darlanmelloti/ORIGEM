@@ -18,8 +18,37 @@ const CAVERNA_ORION := Vector2(-116.0, 548.0)
 const CAMARA_ORION_CUBE := Vector2(-116.0, 562.0)
 const HUB_TEMPORAL := Vector2(164.0, 210.0)
 
+# Coordenadas no canvas nativo 800×600 do mapa cartográfico fornecido pela direcção.
+# São a ponte entre as âncoras 3D e os marcos desenhados; não derivam de uma projecção rectangular genérica.
+const MAP_TEXTURE_POSITIONS: Dictionary = {
+	1: Vector2(80.0, 452.0), 2: Vector2(234.0, 462.0), 3: Vector2(362.0, 463.0),
+	4: Vector2(334.0, 244.0), 5: Vector2(187.0, 258.0), 6: Vector2(408.0, 351.0),
+	7: Vector2(542.0, 235.0), 8: Vector2(560.0, 165.0), 9: Vector2(440.0, 137.0),
+	10: Vector2(466.0, 78.0), 11: Vector2(514.0, 33.0), 12: Vector2(564.0, 497.0)
+}
+
 static func world_position(anchor: Vector2, terrain_y: float, vertical_offset: float = 0.0) -> Vector3:
 	return Vector3(anchor.x, terrain_y + vertical_offset, anchor.y)
+
+static func map_texture_position(world: Vector2) -> Vector2:
+	# Interpolação ponderada pelas âncoras geográficas: mantém cada marco exactamente sobre a ilustração e acompanha Elias entre eles.
+	var anchors: Array[Vector2] = [
+		CASA_VOSS, ESTRADA_RIO_INICIO, ARCO_RUINAS, FLORESTA_DENSA_ENTRADA,
+		ACAMPAMENTO_MAJESTIC, RUINAS_SUBMERSAS, VILA_ELEVADA, OBSERVATORIO,
+		TRILHA_MONTANHA_INICIO, CAVERNA_ORION, CAMARA_ORION_CUBE
+	]
+	var weighted_position: Vector2 = Vector2.ZERO
+	var total_weight: float = 0.0
+	for index: int in range(anchors.size()):
+		var distance_to_anchor: float = world.distance_to(anchors[index])
+		if distance_to_anchor < 0.75:
+			return MAP_TEXTURE_POSITIONS[index + 1] as Vector2
+		var weight: float = 1.0 / maxf(distance_to_anchor * distance_to_anchor, 16.0)
+		weighted_position += (MAP_TEXTURE_POSITIONS[index + 1] as Vector2) * weight
+		total_weight += weight
+	if total_weight <= 0.0:
+		return MAP_TEXTURE_POSITIONS[1] as Vector2
+	return weighted_position / total_weight
 
 static func next_dev1_destination(player_z: float) -> Dictionary:
 	# A sequência pertence à cartografia, não à UI: todas as telas e sistemas consultam a mesma rota.

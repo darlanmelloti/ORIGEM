@@ -12,15 +12,7 @@ var route_marker: Panel
 var route_marker_label: Label
 var is_open: bool = false
 
-# Janela útil da cartografia, calibrada contra as âncoras do mundo: oeste→este e sul→norte.
-const WORLD_MIN_X: float = -140.0
-const WORLD_MAX_X: float = 210.0
-const WORLD_MIN_Z: float = 0.0
-const WORLD_MAX_Z: float = 570.0
-const MAP_INSET_LEFT: float = 92.0
-const MAP_INSET_TOP: float = 46.0
-const MAP_INSET_WIDTH: float = 620.0
-const MAP_INSET_HEIGHT: float = 500.0
+# A conversão mundo→mapa vive no registo de âncoras: a UI apenas apresenta a cartografia calibrada pela direcção.
 
 func _ready() -> void:
 	layer = 12
@@ -144,13 +136,7 @@ func _build_interface() -> void:
 	map_root.add_child(hint)
 
 func _map_position(world_x: float, world_z: float) -> Vector2:
-	var map_x: float = MAP_INSET_LEFT + inverse_lerp(WORLD_MIN_X, WORLD_MAX_X, world_x) * MAP_INSET_WIDTH
-	# O eixo Z cresce para norte no mundo, mas cresce para baixo na textura do mapa.
-	var map_y: float = MAP_INSET_TOP + (1.0 - inverse_lerp(WORLD_MIN_Z, WORLD_MAX_Z, world_z)) * MAP_INSET_HEIGHT
-	return Vector2(
-		clampf(map_x, MAP_INSET_LEFT, MAP_INSET_LEFT + MAP_INSET_WIDTH),
-		clampf(map_y, MAP_INSET_TOP, MAP_INSET_TOP + MAP_INSET_HEIGHT)
-	)
+	return CARTOGRAPHIC_ANCHORS.map_texture_position(Vector2(world_x, world_z))
 
 func _place_route_marker(destination: Vector2) -> void:
 	if route_marker == null:
