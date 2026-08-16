@@ -30,6 +30,7 @@ func _ready() -> void:
 	_build_river()
 	_build_river_margins()
 	_build_ruin_arch()
+	_build_arch_crown_stones()
 	_build_arch_approach_ecology()
 	_build_roadside_vegetation()
 
@@ -335,6 +336,48 @@ func _build_ruin_arch() -> void:
 	arch_fill.shadow_enabled = false
 	arch_fill.position = Vector3(0.0, 4.4, 2.6)
 	arch.add_child(arch_fill)
+
+func _build_arch_crown_stones() -> void:
+	# CP 205: Pedras de topo no Arco das Ruínas para silhueta arqueológica mais rica.
+	# Fragmentos irregulares no topo dos pilares e na verga para leitura de colapso.
+	var arch_root: Node3D = get_node_or_null("RuinArch")
+	if arch_root == null:
+		arch_root = Node3D.new()
+		arch_root.name = "RuinArchCrownStones"
+		add_child(arch_root)
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 50312
+	var crown_mat: StandardMaterial3D = StandardMaterial3D.new()
+	crown_mat.albedo_color = Color(0.16, 0.135, 0.09, 1.0)
+	crown_mat.roughness = 0.93
+	# 5 fragmentos de pedra no topo e lados dos pilares do arco (z≈48, x≈±4.5)
+	var crown_positions: Array = [
+		Vector3(-4.5, 5.8, 48.0),
+		Vector3(4.5, 5.6, 48.0),
+		Vector3(-4.2, 4.2, 47.5),
+		Vector3(4.3, 4.0, 48.5),
+		Vector3(0.0, 6.4, 48.0),
+	]
+	for i: int in range(crown_positions.size()):
+		var pos: Vector3 = crown_positions[i]
+		var frag: MeshInstance3D = MeshInstance3D.new()
+		frag.name = "FragmentoCroa_%02d" % i
+		var fmesh: BoxMesh = BoxMesh.new()
+		fmesh.size = Vector3(
+			rng.randf_range(0.35, 0.75),
+			rng.randf_range(0.25, 0.55),
+			rng.randf_range(0.30, 0.60)
+		)
+		frag.mesh = fmesh
+		frag.material_override = crown_mat
+		frag.position = pos
+		frag.rotation = Vector3(
+			rng.randf_range(-0.18, 0.18),
+			rng.randf_range(-0.35, 0.35),
+			rng.randf_range(-0.12, 0.12)
+		)
+		arch_root.add_child(frag)
+
 
 func _build_arch_approach_ecology() -> void:
 	# Grupos laterais e descontínuos fazem a aproximação parecer uma margem antiga invadida pela vegetação, sem fechar o eixo de lajes.
