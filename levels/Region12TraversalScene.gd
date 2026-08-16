@@ -11,6 +11,7 @@ var camera: Camera3D
 var elapsed: float = 0.0
 var destination: Node3D
 var recess_resonance_light: OmniLight3D
+var performance_sample_timer: float = 0.0
 
 func _ready() -> void:
 	_build_environment()
@@ -54,8 +55,9 @@ func _ready() -> void:
 		dome_light.omni_range = 22.0
 		dome_light.position = dome.position + Vector3(0.0, 4.0, 1.5)
 		add_child(dome_light)
-	_dampen_emissive_landmarks(destination)
-	_build_final_dome_traversal_proxy()
+		_dampen_emissive_landmarks(destination)
+		destination.visible = false
+		_build_final_dome_traversal_proxy()
 	var traversal_proxy := get_node_or_null("CupulaFinalTraversalOrganicReveal") as Node3D
 	if traversal_proxy != null:
 		# Dedicated Region 12 visual correction: enlarge the organic sanctuary for a readable cinematic take.
@@ -289,7 +291,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		for route_mesh in route_marker.find_children("*", "MeshInstance3D", true, false):
 			route_mesh.set_surface_override_material(0, route_material)
 		proxy.add_child(route_marker)
-	for wall_x in [-7.0, 7.0]:
+	for wall_x in []:
 		var wall := ROCK_LARGE.instantiate() as Node3D
 		if wall == null:
 			continue
@@ -435,22 +437,23 @@ func _build_final_dome_traversal_proxy() -> void:
 	threshold_light.shadow_enabled = false
 	threshold_light.position = Vector3(164.0, 0.78, 173.55)
 	add_child(threshold_light)
-	for contact_x in [-3.4, 3.4]:
+	for contact_x in []:
 		var contact_light := OmniLight3D.new()
 		contact_light.name = "LuzContactoArco_%s" % str(contact_x)
 		contact_light.light_color = Color("#6f9bc4")
-		contact_light.light_energy = 0.35
-		contact_light.omni_range = 4.0
+		contact_light.light_energy = 0.18
+		contact_light.omni_range = 2.8
 		contact_light.shadow_enabled = false
 		contact_light.position = Vector3(contact_x, 1.45, 173.6)
 		add_child(contact_light)
 	var portal_rim := OmniLight3D.new()
 	portal_rim.name = "RimAzulPortalCupulaFinal"
 	portal_rim.light_color = Color("#6aa7d8")
-	portal_rim.light_energy = 0.48
-	portal_rim.omni_range = 13.0
+	portal_rim.light_energy = 0.22
+	portal_rim.omni_range = 7.5
 	portal_rim.shadow_enabled = false
 	portal_rim.position = Vector3(164.0, 4.0, 170.5)
+	portal_rim.visible = false
 	add_child(portal_rim)
 
 func _build_environment() -> void:
@@ -462,9 +465,9 @@ func _build_environment() -> void:
 	environment.ambient_light_color = Color("#35405c")
 	environment.ambient_light_energy = 0.42
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.glow_enabled = true
-	environment.glow_intensity = 0.32
-	environment.glow_bloom = 0.12
+	environment.glow_enabled = false
+	environment.glow_intensity = 0.0
+	environment.glow_bloom = 0.0
 	world.environment = environment
 	add_child(world)
 	var moon := DirectionalLight3D.new()
@@ -478,6 +481,10 @@ func _process(delta: float) -> void:
 	_set_camera(clamp(elapsed / 30.0, 0.0, 1.0))
 	if recess_resonance_light != null:
 		recess_resonance_light.light_energy = 0.20 + sin(elapsed * 1.7) * 0.045
+	performance_sample_timer += delta
+	if performance_sample_timer >= 5.0:
+		performance_sample_timer = 0.0
+		print("[REGION12_PERF] fps=", Engine.get_frames_per_second(), " elapsed=", snapped(elapsed, 0.1))
 
 func _set_camera(progress: float) -> void:
 	if camera == null:
