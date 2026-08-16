@@ -951,10 +951,30 @@ func _build_submerged_ruins() -> void:
 	shoreline_fill.light_color = Color(0.10, 0.28, 0.42, 1.0)
 	shoreline_fill.light_energy = 0.74
 	shoreline_fill.omni_range = 46.0
-
 	shoreline_fill.shadow_enabled = false
 	shoreline_fill.position = Vector3(-19.0, 5.0, -7.0)
 	lake.add_child(shoreline_fill)
+	# Luz submersa central: posicionada abaixo da lâmina de água para criar um brilho frio que sobe pelos pilares.
+	# Simula a refração subaquatica no gl_compatibility sem SSR nem SDFGI.
+	var sub_center: OmniLight3D = OmniLight3D.new()
+	sub_center.name = "LuzSubaquaticaCentral"
+	sub_center.light_color = Color(0.06, 0.28, 0.52, 1.0)
+	sub_center.light_energy = 1.40
+	sub_center.omni_range = 38.0
+	sub_center.omni_attenuation = 0.80
+	sub_center.shadow_enabled = false
+	sub_center.position = Vector3(0.0, -1.80, 0.0)
+	lake.add_child(sub_center)
+	# Luz submersa lateral: deslocada para o quadrante dos pilares mais altos para destacar a silhueta de colapso.
+	var sub_lateral: OmniLight3D = OmniLight3D.new()
+	sub_lateral.name = "LuzSubaquaticaLateral"
+	sub_lateral.light_color = Color(0.04, 0.22, 0.44, 1.0)
+	sub_lateral.light_energy = 0.90
+	sub_lateral.omni_range = 26.0
+	sub_lateral.omni_attenuation = 0.90
+	sub_lateral.shadow_enabled = false
+	sub_lateral.position = Vector3(14.0, -2.40, 8.0)
+	lake.add_child(sub_lateral)
 	for index: int in range(8):
 		var angle: float = float(index) * TAU / 8.0
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
