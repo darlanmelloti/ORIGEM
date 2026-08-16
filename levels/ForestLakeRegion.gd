@@ -3,6 +3,12 @@
 ## Construção modular e aterrrada sobre TerrainPatch para manter continuidade física sem ecrãs de carregamento.
 
 extends Node3D
+# CP 200: Orçamento de luzes — ForestLakeRegion
+# Luzes dinâmicas criadas: 22 (fogueira×2, subaquáticas×2, preenchimento×3, margem×1, take9×1, take6×1, ...)
+# Estratégia GTX 1050 Ti: alcance reduzido → menos tiles iluminados simultaneamente
+# Limite efectivo simultâneo estimado: ≤14 luzes por frame (câmara nunca vê todas)
+# MAX_DYNAMIC_LIGHTS_BUDGET = 14  # referência para futuras adições
+
 
 const PINE_TALL: PackedScene = preload("res://assets/models_generated/ez_pine_tall_pbr.glb")
 const PINE_MEDIUM: PackedScene = preload("res://assets/models_generated/ez_pine_medium_pbr.glb")
@@ -1381,7 +1387,7 @@ func _build_forest_corridor_fill() -> void:
 		fill.position = Vector3(fx, fy, fz)
 		fill.light_color = Color(0.52, 0.62, 0.78, 1.0)
 		fill.light_energy = fp[1]
-		fill.omni_range = fp[2]
+		fill.omni_range = min(fp[2], 12.0)  # CP 200: limite de alcance para GTX 1050
 		fill.shadow_enabled = false
 		fill_root.add_child(fill)
 
@@ -1408,7 +1414,7 @@ func _build_south_shore_fill() -> void:
 	south_fill.position = Vector3(60.0, _height_at(60.0, 272.0) + 1.5, 272.0)
 	south_fill.light_color = Color(0.62, 0.52, 0.38, 1.0)
 	south_fill.light_energy = 0.50
-	south_fill.omni_range = 22.0
+	south_fill.omni_range = 14.0  # CP 200: reduzido para GTX 1050
 	south_fill.shadow_enabled = false
 	south_shore.add_child(south_fill)
 
