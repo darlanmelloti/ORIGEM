@@ -468,7 +468,7 @@ func _build_final_dome() -> void:
 		gateway_recess.scale = Vector3(1.12, 0.78, 0.14)
 		gateway_recess.rotation = Vector3(0.0, PI, 0.0)
 		var gateway_dark := stone_material.duplicate() as StandardMaterial3D
-		gateway_dark.albedo_color = Color("#050914")
+		gateway_dark.albedo_color = Color("#03050b")
 		gateway_dark.emission_enabled = false
 		_apply_material(gateway_recess, gateway_dark)
 		dome.add_child(gateway_recess)
