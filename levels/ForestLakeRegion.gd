@@ -54,8 +54,9 @@ func _process(delta: float) -> void:
 	for index: int in range(camp_flame_meshes.size()):
 		var flame: MeshInstance3D = camp_flame_meshes[index]
 		if is_instance_valid(flame):
-			var flicker: float = 0.93 + sin(camp_animation_time * 3.2) * 0.07
-			flame.scale = Vector3(1.0, flicker, 1.0)
+			# Flicker de escala mais amplo: 0.82–1.18 para leitura clara no gl_compatibility.
+			var flicker: float = 1.0 + sin(camp_animation_time * (3.4 + float(index) * 0.31) + float(index) * 1.7) * 0.18
+			flame.scale = Vector3(flicker * 0.92, flicker, flicker * 0.92)
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -583,30 +584,60 @@ func _build_majestic_camp() -> void:
 		tent_collision.shape = tent_shape
 		tent_body.add_child(tent_collision)
 		camp.add_child(tent_body)
+	# Chama principal: esfera emissiva com brilho laranja-âmbar intenso.
 	var fire_mesh: SphereMesh = SphereMesh.new()
-	fire_mesh.radius = 0.34
-	fire_mesh.height = 0.68
+	fire_mesh.radius = 0.38
+	fire_mesh.height = 0.76
 	var fire_material: StandardMaterial3D = StandardMaterial3D.new()
-	fire_material.albedo_color = Color(0.62, 0.16, 0.025, 1.0)
+	fire_material.albedo_color = Color(0.72, 0.22, 0.028, 1.0)
 	fire_material.emission_enabled = true
-	fire_material.emission = Color(1.0, 0.18, 0.015, 1.0)
-	fire_material.emission_energy_multiplier = 1.6
+	fire_material.emission = Color(1.0, 0.26, 0.018, 1.0)
+	fire_material.emission_energy_multiplier = 2.4
 	fire_mesh.material = fire_material
 	var fire: MeshInstance3D = MeshInstance3D.new()
 	fire.name = "FogoDoAcampamento"
 	fire.mesh = fire_mesh
-	fire.position = Vector3(0.0, 0.45, 0.0)
+	fire.position = Vector3(0.0, 0.48, 0.0)
 	camp.add_child(fire)
 	camp_flame_meshes.append(fire)
+	# Núcleo de brasa baixa: esfera menor no centro do anel de pedras para leitura de profundidade.
+	var ember_core_mesh: SphereMesh = SphereMesh.new()
+	ember_core_mesh.radius = 0.18
+	ember_core_mesh.height = 0.36
+	var ember_core_mat: StandardMaterial3D = StandardMaterial3D.new()
+	ember_core_mat.albedo_color = Color(0.55, 0.10, 0.010, 1.0)
+	ember_core_mat.emission_enabled = true
+	ember_core_mat.emission = Color(0.80, 0.12, 0.008, 1.0)
+	ember_core_mat.emission_energy_multiplier = 1.8
+	ember_core_mesh.material = ember_core_mat
+	var ember_core: MeshInstance3D = MeshInstance3D.new()
+	ember_core.name = "BrasaCentralDoAcampamento"
+	ember_core.mesh = ember_core_mesh
+	ember_core.position = Vector3(0.0, 0.14, 0.0)
+	camp.add_child(ember_core)
+	camp_flame_meshes.append(ember_core)
+	# Luz principal da fogueira: energia aumentada para 3.2 e alcance expandido para 18 m.
 	var fire_light: OmniLight3D = OmniLight3D.new()
-	fire_light.light_color = Color(1.0, 0.32, 0.08, 1.0)
-	fire_light.light_energy = 2.10
-	fire_light.omni_range = 14.0
+	fire_light.name = "LuzPrincipalDaFogueira"
+	fire_light.light_color = Color(1.0, 0.34, 0.08, 1.0)
+	fire_light.light_energy = 3.2
+	fire_light.omni_range = 18.0
 	fire_light.shadow_enabled = false
-	fire_light.position = Vector3(0.0, 1.4, 0.0)
+	fire_light.position = Vector3(0.0, 1.5, 0.0)
 	fire_light.set_meta("base_energy", fire_light.light_energy)
 	camp.add_child(fire_light)
 	camp_light_sources.append(fire_light)
+	# Luz de brasa ao nível do solo: tom vermelho-âmbar quente para iluminar o anel de pedras e o solo imediato.
+	var ember_light: OmniLight3D = OmniLight3D.new()
+	ember_light.name = "LuzDeBrasaDoSolo"
+	ember_light.light_color = Color(1.0, 0.18, 0.04, 1.0)
+	ember_light.light_energy = 1.6
+	ember_light.omni_range = 6.0
+	ember_light.shadow_enabled = false
+	ember_light.position = Vector3(0.0, 0.22, 0.0)
+	ember_light.set_meta("base_energy", ember_light.light_energy)
+	camp.add_child(ember_light)
+	camp_light_sources.append(ember_light)
 	var camp_fill: OmniLight3D = OmniLight3D.new()
 	camp_fill.name = "PreenchimentoDoAcampamentoMajestic"
 	camp_fill.light_color = Color(0.34, 0.43, 0.49, 1.0)
