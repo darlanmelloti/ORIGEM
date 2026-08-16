@@ -294,6 +294,8 @@ func _build_final_dome_traversal_proxy() -> void:
 			for route_mesh in route_marker.find_children("*", "MeshInstance3D", true, false):
 				route_mesh.set_surface_override_material(0, route_material)
 			var route_body := StaticBody3D.new()
+			route_body.collision_layer = 1
+			route_body.collision_mask = 1
 			var route_shape := CollisionShape3D.new()
 			var route_box := BoxShape3D.new()
 			route_box.size = Vector3(0.72, 0.22, 0.64)
@@ -368,6 +370,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		for threshold_mesh in threshold.find_children("*", "MeshInstance3D", true, false):
 			threshold_mesh.set_surface_override_material(0, threshold_material)
 		var threshold_body := StaticBody3D.new()
+		threshold_body.collision_layer = 1
+		threshold_body.collision_mask = 1
 		var threshold_shape := CollisionShape3D.new()
 		var threshold_box := BoxShape3D.new()
 		threshold_box.size = Vector3(7.1, 0.52, 2.0)
@@ -395,6 +399,8 @@ func _build_final_dome_traversal_proxy() -> void:
 			doorway_jamb.scale = Vector3(0.72, 2.35, 0.72)
 			doorway_jamb.rotation = Vector3(0.04, 0.10 * sign(doorway_x), 0.03 * sign(doorway_x))
 			var jamb_body := StaticBody3D.new()
+			jamb_body.collision_layer = 1
+			jamb_body.collision_mask = 1
 			var jamb_shape := CollisionShape3D.new()
 			var jamb_box := BoxShape3D.new()
 			jamb_box.size = Vector3(1.35, 4.6, 1.35)
