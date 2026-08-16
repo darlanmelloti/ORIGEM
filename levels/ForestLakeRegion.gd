@@ -20,6 +20,7 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
 var ruin_material: StandardMaterial3D
+var shore_material: StandardMaterial3D
 var camp_light_sources: Array[OmniLight3D] = []
 var camp_flame_meshes: Array[MeshInstance3D] = []
 var camp_animation_time: float = 0.0
@@ -28,6 +29,7 @@ func _ready() -> void:
 	terrain_patch = get_parent().get_node_or_null("TerrainPatch") as Node3D
 	path_material = _create_path_material()
 	ruin_material = _create_ruin_material()
+	shore_material = _create_shore_material()
 	_build_forest_path()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
@@ -165,9 +167,9 @@ func _build_lake_shore_path() -> void:
 		var slab: MeshInstance3D = MeshInstance3D.new()
 		slab.name = "LajeMargem_%02d" % index
 		slab.mesh = _make_slab(1.72 + rng.randf_range(-0.18, 0.20), 1.30 + rng.randf_range(-0.14, 0.16), rng)
-		slab.material_override = path_material
+		slab.material_override = shore_material
 		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.055, z_value)
-		slab.rotation.y = atan2((_lake_shore_x(z_value + 1.0) - _lake_shore_x(z_value - 1.0)) * 0.5, 2.7) + rng.randf_range(-0.08, 0.08)
+		slab.rotation.y = atan2((_lake_shore_x(z_value + 1.0) - _lake_shore_x(z_value - 1.0)) * 0.5, 2.7) + rng.randf_range(-0.10, 0.10)
 		shore_road.add_child(slab)
 
 func _build_shore_access_steps() -> void:
@@ -185,7 +187,7 @@ func _build_shore_access_steps() -> void:
 		var step: MeshInstance3D = MeshInstance3D.new()
 		step.name = "LajeDeChegada_%02d" % index
 		step.mesh = step_mesh
-		step.material_override = path_material
+		step.material_override = shore_material
 		step.position = Vector3(x_value, ground_y + 0.10, z_value)
 		step.rotation.y = atan2(23.0 - _lake_shore_x(222.0), 18.0)
 		access.add_child(step)
@@ -1289,6 +1291,19 @@ func _make_slab(width: float, depth: float, rng: RandomNumberGenerator) -> Array
 		surface.add_vertex(points[vertex_index])
 	surface.generate_normals()
 	return surface.commit()
+
+func _create_shore_material() -> StandardMaterial3D:
+	# Material de pedra molhada para as lajes de margem do lago: mais escuro e com reflexo subtil.
+	var material: StandardMaterial3D = StandardMaterial3D.new()
+	material.albedo_color = Color(0.32, 0.36, 0.34, 1.0)
+	material.albedo_texture = FLAGSTONE
+	material.normal_enabled = true
+	material.normal_texture = GROUND_NORMAL
+	material.normal_scale = 0.42
+	material.roughness = 0.72
+	material.metallic = 0.04
+	material.uv1_scale = Vector3(0.30, 0.30, 0.30)
+	return material
 
 func _create_path_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
