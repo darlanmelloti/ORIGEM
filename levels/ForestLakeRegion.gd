@@ -43,6 +43,7 @@ func _ready() -> void:
 	_build_cartographic_forest_threshold()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
+	_build_cartographic_river_inlet()
 	_build_shore_access_steps()
 	_build_majestic_lake_transition()
 	_build_cartographic_lake_vistas()
@@ -217,6 +218,52 @@ func _lake_shore_x(world_z: float) -> float:
 	var t: float = clampf((world_z - shore_start_z) / (shore_end_z - shore_start_z), 0.0, 1.0)
 	# Meandra controlada: o percurso afasta-se da leitura de lajes em linha reta, mas mantém a chegada à margem oeste livre e previsível.
 	return lerpf(_path_x(shore_start_z), lake_anchor.x - 46.0, t) + sin(t * PI) * 3.25 + sin(t * TAU) * 0.85
+
+func _build_cartographic_river_inlet() -> void:
+	# Afluente raso sem colisão: liga a leitura do Rio da Estrada à Bacia Central indicada pela cartografia.
+	# É deliberadamente leve para não aumentar o orçamento de luzes ou de física da GTX 1050 Ti.
+	var inlet: Node3D = Node3D.new()
+	inlet.name = "AfluenteCartograficoRioParaBacia"
+	add_child(inlet)
+	var points: Array[Vector2] = [
+		Vector2(12.6, 163.0), Vector2(13.4, 178.0), Vector2(17.8, 193.0),
+		Vector2(25.6, 208.0), Vector2(36.0, 224.0)
+	]
+	var surface: SurfaceTool = SurfaceTool.new()
+	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for index: int in range(points.size() - 1):
+		var point_a: Vector2 = points[index]
+		var point_b: Vector2 = points[index + 1]
+		var direction: Vector2 = (point_b - point_a).normalized()
+		var right: Vector2 = Vector2(-direction.y, direction.x)
+		var width_a: float = 2.5 + float(index) * 0.45
+		var width_b: float = 2.5 + float(index + 1) * 0.45
+		var y_a: float = _height_at(point_a.x, point_a.y) + 0.25
+		var y_b: float = _height_at(point_b.x, point_b.y) + 0.25
+		var left_a: Vector3 = Vector3(point_a.x - right.x * width_a, y_a, point_a.y - right.y * width_a)
+		var right_a: Vector3 = Vector3(point_a.x + right.x * width_a, y_a, point_a.y + right.y * width_a)
+		var left_b: Vector3 = Vector3(point_b.x - right.x * width_b, y_b, point_b.y - right.y * width_b)
+		var right_b: Vector3 = Vector3(point_b.x + right.x * width_b, y_b, point_b.y + right.y * width_b)
+		surface.set_uv(Vector2(0.0, float(index) * 0.25))
+		surface.add_vertex(left_a)
+		surface.set_uv(Vector2(1.0, float(index) * 0.25))
+		surface.add_vertex(right_a)
+		surface.set_uv(Vector2(0.0, float(index + 1) * 0.25))
+		surface.add_vertex(left_b)
+		surface.set_uv(Vector2(1.0, float(index) * 0.25))
+		surface.add_vertex(right_a)
+		surface.set_uv(Vector2(1.0, float(index + 1) * 0.25))
+		surface.add_vertex(right_b)
+		surface.set_uv(Vector2(0.0, float(index + 1) * 0.25))
+		surface.add_vertex(left_b)
+	surface.generate_normals()
+	var water_mesh: ArrayMesh = surface.commit()
+	water_mesh.surface_set_material(0, _create_lake_material())
+	var water: MeshInstance3D = MeshInstance3D.new()
+	water.name = "LaminaDoAfluenteCartografico"
+	water.mesh = water_mesh
+	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	inlet.add_child(water)
 
 func _build_lake_shore_path() -> void:
 	var shore_road: Node3D = Node3D.new()
