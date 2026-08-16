@@ -280,8 +280,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		base_edge.scale = Vector3(5.15, 0.34, 1.22)
 		base_edge.rotation = Vector3(0.02, 0.0, 0.0)
 		var base_edge_material := StandardMaterial3D.new()
-		base_edge_material.albedo_color = Color("#34495c")
-		base_edge_material.roughness = 0.98
+		base_edge_material.albedo_color = Color("#405b70")
+		base_edge_material.roughness = 0.93
 		for base_edge_mesh in base_edge.find_children("*", "MeshInstance3D", true, false):
 			base_edge_mesh.set_surface_override_material(0, base_edge_material)
 		proxy.add_child(base_edge)
