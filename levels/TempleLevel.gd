@@ -191,6 +191,7 @@ func _build_world_after_voss_prologue() -> void:
 		var highlands: Node3D = HIGHLAND_REGION_SCRIPT.new() as Node3D
 		highlands.name = "RegiaoVilaMontanhaExploravel"
 		add_child(highlands)
+		_build_region7_transition()
 		var orion_destinations: Node3D = ORION_DESTINATION_REGION_SCRIPT.new() as Node3D
 		orion_destinations.name = "DestinosOrionEHubTemporal"
 		add_child(orion_destinations)
@@ -475,6 +476,93 @@ func _ground_height(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
 		return float(terrain_patch.call("height_at", world_x, world_z))
 	return 0.0
+
+func _build_region7_transition() -> void:
+	# CP 201: Ponte de integração física Região 6 → Região 7 (Vila Elevada).
+	# Liga a margem norte das Ruínas Submersas (z≈282) à entrada da Vila Elevada (z≈352).
+	# Este nó é o ponto de handoff entre a branch dev1 e a branch dev2.
+	# O Dev2 deve posicionar o spawn da Região 7 em Vector3(140, y, 352).
+	var gate_root: Node3D = Node3D.new()
+	gate_root.name = "Region7TransitionGate"
+	add_child(gate_root)
+	
+	var stone_mat: StandardMaterial3D = StandardMaterial3D.new()
+	stone_mat.albedo_color = Color(0.22, 0.19, 0.13, 1.0)
+	stone_mat.roughness = 0.88
+	
+	# Trilho de acesso: 12 lajes de pedra de z=285 a z=345, eixo x≈140
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 72801
+	for step: int in range(12):
+		var sz: float = 285.0 + float(step) * 5.0
+		var sx: float = 140.0 + rng.randf_range(-1.2, 1.2)
+		var sy: float = _terrain_height_for_qa(sx, sz) + 0.04
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeTrilhoR7_%02d" % step
+		var box: BoxMesh = BoxMesh.new()
+		box.size = Vector3(
+			rng.randf_range(1.8, 2.4),
+			0.18,
+			rng.randf_range(1.4, 1.9)
+		)
+		slab.mesh = box
+		slab.material_override = stone_mat
+		slab.position = Vector3(sx, sy, sz)
+		slab.rotation.y = rng.randf_range(-0.12, 0.12)
+		var slab_body: StaticBody3D = StaticBody3D.new()
+		var slab_shape: CollisionShape3D = CollisionShape3D.new()
+		slab_shape.shape = BoxShape3D.new()
+		(slab_shape.shape as BoxShape3D).size = box.size
+		slab_body.add_child(slab_shape)
+		slab.add_child(slab_body)
+		gate_root.add_child(slab)
+	
+	# Portão de transição: dois pilares e uma verga em z=348
+	var gate_x: float = 140.0
+	var gate_z: float = 348.0
+	var gate_y: float = _terrain_height_for_qa(gate_x, gate_z)
+	for pillar_side: int in range(2):
+		var px: float = gate_x + (float(pillar_side) * 2.0 - 1.0) * 3.2
+		var pillar: MeshInstance3D = MeshInstance3D.new()
+		pillar.name = "PilarPortaoR7_%d" % pillar_side
+		var pillar_mesh: BoxMesh = BoxMesh.new()
+		pillar_mesh.size = Vector3(0.65, 4.8, 0.65)
+		pillar.mesh = pillar_mesh
+		pillar.material_override = stone_mat
+		pillar.position = Vector3(px, gate_y + 2.4, gate_z)
+		var pb: StaticBody3D = StaticBody3D.new()
+		var ps: CollisionShape3D = CollisionShape3D.new()
+		ps.shape = BoxShape3D.new()
+		(ps.shape as BoxShape3D).size = pillar_mesh.size
+		pb.add_child(ps)
+		pillar.add_child(pb)
+		gate_root.add_child(pillar)
+	# Verga
+	var lintel: MeshInstance3D = MeshInstance3D.new()
+	lintel.name = "VergaPortaoR7"
+	var lintel_mesh: BoxMesh = BoxMesh.new()
+	lintel_mesh.size = Vector3(7.2, 0.55, 0.65)
+	lintel.mesh = lintel_mesh
+	lintel.material_override = stone_mat
+	lintel.position = Vector3(gate_x, gate_y + 4.85, gate_z)
+	gate_root.add_child(lintel)
+	
+	# Marcador de spawn para o Dev2 (invisível em runtime, visível no editor)
+	var spawn_marker: Node3D = Node3D.new()
+	spawn_marker.name = "SpawnRegiao7_Dev2_HandoffPoint"
+	spawn_marker.position = Vector3(140.0, _terrain_height_for_qa(140.0, 352.0) + 1.5, 352.0)
+	gate_root.add_child(spawn_marker)
+	
+	# Luz de sinalização no portão (discreta, cor âmbar)
+	var gate_light: OmniLight3D = OmniLight3D.new()
+	gate_light.name = "LuzPortaoR7"
+	gate_light.position = Vector3(gate_x, gate_y + 5.5, gate_z)
+	gate_light.light_color = Color(0.85, 0.68, 0.32, 1.0)
+	gate_light.light_energy = 0.65
+	gate_light.omni_range = 12.0
+	gate_light.shadow_enabled = false
+	gate_root.add_child(gate_light)
+
 
 func _make_material(color: Color, roughness_value: float) -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
