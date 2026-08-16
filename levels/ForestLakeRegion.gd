@@ -4,7 +4,7 @@
 
 extends Node3D
 # CP 200: Orçamento de luzes — ForestLakeRegion
-# Luzes dinâmicas criadas: 22 (fogueira×2, subaquáticas×2, preenchimento×3, margem×1, take9×1, take6×1, ...)
+# Luzes dinâmicas criadas: 22 na auditoria CP 200 + luar de acampamento CP 213.
 # Estratégia GTX 1050 Ti: alcance reduzido → menos tiles iluminados simultaneamente
 # Limite efectivo simultâneo estimado: ≤14 luzes por frame (câmara nunca vê todas)
 # MAX_DYNAMIC_LIGHTS_BUDGET = 14  # referência para futuras adições
@@ -670,6 +670,19 @@ func _build_majestic_camp() -> void:
 	camp_fill.shadow_enabled = false
 	camp_fill.position = Vector3(0.0, 5.2, 0.0)
 	camp.add_child(camp_fill)
+	# CP 213 — luar direccional baixo: separa lonas, mastros e solo da luz quente da fogueira.
+	# Não lança sombra e tem alcance contido, preservando o orçamento da GTX 1050 Ti.
+	var moonlight: SpotLight3D = SpotLight3D.new()
+	moonlight.name = "LuarFrioDoAcampamento"
+	moonlight.light_color = Color(0.46, 0.62, 0.94, 1.0)
+	moonlight.light_energy = 0.30
+	moonlight.spot_range = 16.0
+	moonlight.spot_angle = 44.0
+	moonlight.spot_attenuation = 1.35
+	moonlight.shadow_enabled = false
+	moonlight.position = Vector3(-1.8, 8.6, 1.4)
+	moonlight.rotation_degrees = Vector3(-67.0, -24.0, 0.0)
+	camp.add_child(moonlight)
 	# Lajes rasas de acampamento: desenham uma área de uso no solo sem adicionar colisores ou degraus ao percurso de Elias.
 	var camp_floor: Node3D = Node3D.new()
 	camp_floor.name = "LajesRasasDoAcampamento"
