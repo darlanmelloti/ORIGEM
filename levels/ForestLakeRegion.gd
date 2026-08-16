@@ -39,6 +39,7 @@ func _ready() -> void:
 	_build_forest_micro_details()
 	_build_majestic_camp()
 	_build_majestic_connector()
+	_build_take6_corridor_accent()
 	_build_submerged_ruins()
 	_build_riparian_margin()
 	_build_lakeside_focal_vegetation()
@@ -915,6 +916,39 @@ func _build_majestic_connector() -> void:
 				margin_tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
 				margin_tree.rotation.y = rng.randf_range(-PI, PI)
 				connector_margin.add_child(margin_tree)
+
+func _build_take6_corridor_accent() -> void:
+	# Acentos visuais no eixo central do corredor Majestic–Floresta para criar interesse no Take 6.
+	# Posicionados lateralmente ao trilho (offset 4–6 m) para não obstruir a passagem de Elias.
+	var accent: Node3D = Node3D.new()
+	accent.name = "AcentosVisuaisCorredorTake6"
+	add_child(accent)
+	var accent_data: Array[Dictionary] = [
+		{"x": -38.0, "z": 490.0, "rock_scale": 0.28, "fern_scale": 0.52, "yaw": 0.68},
+		{"x": -55.0, "z": 505.0, "rock_scale": 0.22, "fern_scale": 0.44, "yaw": -1.32},
+		{"x": -44.0, "z": 520.0, "rock_scale": 0.26, "fern_scale": 0.48, "yaw": 2.14},
+	]
+	for ad: Dictionary in accent_data:
+		var ax: float = ad["x"] as float
+		var az: float = ad["z"] as float
+		var ay: float = _height_at(ax, az)
+		var ar: Node3D = ROCK.instantiate() as Node3D
+		if ar != null:
+			ar.name = "RochaAcentoTake6_%s" % str(int(ax))
+			ar.position = Vector3(ax, ay + 0.04, az)
+			var rs: float = ad["rock_scale"] as float
+			ar.scale = Vector3(rs, rs * 0.80, rs)
+			ar.rotation.y = ad["yaw"] as float
+			_apply_material(ar, ruin_material)
+			accent.add_child(ar)
+		var af: Node3D = FERN.instantiate() as Node3D
+		if af != null:
+			af.name = "FetoAcentoTake6_%s" % str(int(ax))
+			af.position = Vector3(ax + 0.8, ay + 0.02, az + 0.6)
+			var fs: float = ad["fern_scale"] as float
+			af.scale = Vector3(fs, fs, fs)
+			af.rotation.y = -(ad["yaw"] as float)
+			accent.add_child(af)
 
 func _build_submerged_ruins() -> void:
 	var lake: Node3D = Node3D.new()
