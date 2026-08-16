@@ -83,7 +83,8 @@ func _build_forest_path() -> void:
 		slab.mesh = _make_slab(1.58 + rng.randf_range(-0.22, 0.25), 1.20 + rng.randf_range(-0.16, 0.18), rng)
 		slab.material_override = path_material
 		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.05, z_value)
-		slab.rotation.y = atan2((_path_x(z_value + 1.0) - _path_x(z_value - 1.0)) * 0.5, 2.8) + rng.randf_range(-0.12, 0.12)
+		# Variação de rotação ampliada: ±0.18 rad para naturalizar o pavimento e reduzir a aparência de corredor artificial.
+		slab.rotation.y = atan2((_path_x(z_value + 1.0) - _path_x(z_value - 1.0)) * 0.5, 2.8) + rng.randf_range(-0.18, 0.18)
 		road.add_child(slab)
 		# A laje acompanha o relevo com uma colisão baixa, tornando o trilho transitável sem criar obstáculos no sub-bosque.
 		var slab_body: StaticBody3D = StaticBody3D.new()
