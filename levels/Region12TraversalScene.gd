@@ -234,6 +234,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		var backdrop_material := StandardMaterial3D.new()
 		backdrop_material.albedo_color = Color("#0d1420")
 		backdrop_material.roughness = 1.0
+		backdrop_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		
 		recessed_backdrop.visible = true
 		proxy.add_child(recessed_backdrop)
@@ -263,34 +264,36 @@ func _build_final_dome_traversal_proxy() -> void:
 		for base_edge_mesh in base_edge.find_children("*", "MeshInstance3D", true, false):
 			base_edge_mesh.set_surface_override_material(0, base_edge_material)
 		proxy.add_child(base_edge)
-	for grounding_x in [-3.45, 3.45]:
-		var grounding_stone := ROCK_LARGE.instantiate() as Node3D
-		if grounding_stone == null:
-			continue
-		grounding_stone.name = "ApoioBaixoSoleiraR12_%s" % str(grounding_x)
-		grounding_stone.position = Vector3(grounding_x, 0.58, -4.82)
-		grounding_stone.scale = Vector3(1.25, 0.34, 0.82)
-		grounding_stone.rotation = Vector3(0.03, 0.12 * sign(grounding_x), 0.02)
-		var grounding_material := StandardMaterial3D.new()
-		grounding_material.albedo_color = Color("#455b70")
-		grounding_material.roughness = 0.96
-		for grounding_mesh in grounding_stone.find_children("*", "MeshInstance3D", true, false):
-			grounding_mesh.set_surface_override_material(0, grounding_material)
-		proxy.add_child(grounding_stone)
-	for route_x in [-1.65, 1.65]:
-		var route_marker := ROCK_LARGE.instantiate() as Node3D
-		if route_marker == null:
-			continue
-		route_marker.name = "MarcadorRotaFisicaR12_%s" % str(route_x)
-		route_marker.position = Vector3(route_x, 0.34, -3.05)
-		route_marker.scale = Vector3(0.34, 0.12, 0.30)
-		route_marker.rotation = Vector3(0.02, 0.10 * sign(route_x), 0.02)
-		var route_material := StandardMaterial3D.new()
-		route_material.albedo_color = Color("#263e50")
-		route_material.roughness = 0.98
-		for route_mesh in route_marker.find_children("*", "MeshInstance3D", true, false):
-			route_mesh.set_surface_override_material(0, route_material)
-		proxy.add_child(route_marker)
+		for grounding_x in [-3.8]:
+			var grounding_stone := ROCK_LARGE.instantiate() as Node3D
+			if grounding_stone == null:
+				continue
+			grounding_stone.name = "ApoioBaixoSoleiraR12_%s" % str(grounding_x)
+			grounding_stone.position = Vector3(grounding_x, 0.58, -4.82)
+			grounding_stone.scale = Vector3(1.25, 0.34, 0.82)
+			grounding_stone.rotation = Vector3(0.03, 0.12 * sign(grounding_x), 0.02)
+			var grounding_material := StandardMaterial3D.new()
+			grounding_material.albedo_color = Color("#455b70")
+			grounding_material.roughness = 0.96
+			grounding_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			for grounding_mesh in grounding_stone.find_children("*", "MeshInstance3D", true, false):
+				grounding_mesh.set_surface_override_material(0, grounding_material)
+			proxy.add_child(grounding_stone)
+		for route_x in [0.0]:
+			var route_marker := ROCK_LARGE.instantiate() as Node3D
+			if route_marker == null:
+				continue
+			route_marker.name = "MarcadorRotaFisicaR12_%s" % str(route_x)
+			route_marker.position = Vector3(route_x, 0.34, -3.05)
+			route_marker.scale = Vector3(0.34, 0.12, 0.30)
+			route_marker.rotation = Vector3(0.02, 0.10 * sign(route_x), 0.02)
+			var route_material := StandardMaterial3D.new()
+			route_material.albedo_color = Color("#263e50")
+			route_material.roughness = 0.98
+			route_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			for route_mesh in route_marker.find_children("*", "MeshInstance3D", true, false):
+				route_mesh.set_surface_override_material(0, route_material)
+			proxy.add_child(route_marker)
 	for wall_x in []:
 		var wall := ROCK_LARGE.instantiate() as Node3D
 		if wall == null:
@@ -302,9 +305,10 @@ func _build_final_dome_traversal_proxy() -> void:
 		var wall_material := StandardMaterial3D.new()
 		wall_material.albedo_color = Color("#12192a")
 		wall_material.roughness = 0.98
+		wall_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		
 		proxy.add_child(wall)
-	for horizon_x in [-8.8, 8.8]:
+	for horizon_x in []:
 		var horizon_mass := ROCK_LARGE.instantiate() as Node3D
 		if horizon_mass == null:
 			continue
@@ -323,6 +327,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		var alpine_material := StandardMaterial3D.new()
 		alpine_material.albedo_color = Color("#0b1222")
 		alpine_material.roughness = 0.98
+		alpine_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		for alpine_mesh in alpine_backdrop.find_children("*", "MeshInstance3D", true, false):
 			alpine_mesh.set_surface_override_material(0, alpine_material)
 		alpine_backdrop.visible = false
@@ -339,6 +344,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		var frame_material := StandardMaterial3D.new()
 		frame_material.albedo_color = Color("#17182a")
 		frame_material.roughness = 0.96
+		frame_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		
 		frame_rock.visible = false
 		proxy.add_child(frame_rock)
