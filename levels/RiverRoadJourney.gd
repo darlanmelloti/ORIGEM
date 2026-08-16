@@ -138,6 +138,34 @@ func _build_river() -> void:
 	water.mesh = mesh
 	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	river_root.add_child(water)
+	# Rochas submersas no leito do rio: emergem ligeiramente acima da lâmina para criar leitura de profundidade e naturalizar o curso.
+	# Sem colisores: o jogador não atravessa o rio; as rochas são apenas visuais.
+	var bed_rock_mat: StandardMaterial3D = StandardMaterial3D.new()
+	bed_rock_mat.albedo_color = Color(0.068, 0.095, 0.088, 1.0)
+	bed_rock_mat.roughness = 0.82
+	bed_rock_mat.emission_enabled = true
+	bed_rock_mat.emission = Color(0.006, 0.016, 0.018, 1.0)
+	bed_rock_mat.emission_energy_multiplier = 0.18
+	var bed_rock_data: Array[Dictionary] = [
+		{"z": 28.0, "dx": -1.4, "scale": 0.32, "yaw": 0.42},
+		{"z": 52.0, "dx": 1.8, "scale": 0.28, "yaw": -1.12},
+		{"z": 76.0, "dx": -0.6, "scale": 0.36, "yaw": 2.34},
+		{"z": 102.0, "dx": 1.2, "scale": 0.30, "yaw": -0.78},
+	]
+	for bed_data: Dictionary in bed_rock_data:
+		var bz: float = bed_data["z"] as float
+		var bx: float = _river_x(bz) + (bed_data["dx"] as float)
+		var by: float = (_height_at(bx - width * 0.35, bz) + _height_at(bx + width * 0.35, bz)) * 0.5 + 0.08
+		var bed_rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if bed_rock == null:
+			continue
+		bed_rock.name = "RochaDeLeitoDoRio_%s" % str(int(bz))
+		bed_rock.position = Vector3(bx, by, bz)
+		var bscale: float = bed_data["scale"] as float
+		bed_rock.scale = Vector3(bscale, bscale * 0.62, bscale)
+		bed_rock.rotation.y = bed_data["yaw"] as float
+		_apply_material(bed_rock, bed_rock_mat)
+		river_root.add_child(bed_rock)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
