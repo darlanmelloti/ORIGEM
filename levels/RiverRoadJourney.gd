@@ -33,6 +33,7 @@ func _ready() -> void:
 	_build_arch_crown_stones()
 	_build_river_fill_light()
 	_build_arch_base_ferns()
+	_build_riparian_color_variation()
 	_build_arch_approach_ecology()
 	_build_roadside_vegetation()
 
@@ -634,6 +635,38 @@ func _build_arch_base_ferns() -> void:
 		fern.position = fpos
 		fern.rotation.y = rng.randf_range(0.0, TAU)
 		fern_root.add_child(fern)
+
+
+func _build_riparian_color_variation() -> void:
+	# CP 209: Variação de cor nas margens ribeirinhas — alterna verde-musgo e castanho-seco
+	# para quebrar a uniformidade visual e criar leitura de ecologia real.
+	var var_root: Node3D = Node3D.new()
+	var_root.name = "RiparianColorVariation"
+	add_child(var_root)
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 72815
+	# 6 manchas de cor alternadas ao longo das margens (z=5 a z=70)
+	var color_patches: Array = [
+		{"pos": Vector3(-6.5, 0.05, 12.0), "col": Color(0.08, 0.12, 0.04, 1.0)},  # musgo escuro
+		{"pos": Vector3(6.2, 0.05, 22.0), "col": Color(0.18, 0.12, 0.06, 1.0)},   # castanho seco
+		{"pos": Vector3(-7.0, 0.05, 35.0), "col": Color(0.07, 0.11, 0.05, 1.0)},  # musgo húmido
+		{"pos": Vector3(5.8, 0.05, 48.0), "col": Color(0.16, 0.10, 0.05, 1.0)},   # terra seca
+		{"pos": Vector3(-6.0, 0.05, 58.0), "col": Color(0.09, 0.14, 0.04, 1.0)},  # musgo vivo
+		{"pos": Vector3(6.5, 0.05, 68.0), "col": Color(0.14, 0.09, 0.04, 1.0)},   # folha morta
+	]
+	for patch: Dictionary in color_patches:
+		var p: MeshInstance3D = MeshInstance3D.new()
+		p.name = "ColorPatch"
+		var pmesh: PlaneMesh = PlaneMesh.new()
+		pmesh.size = Vector2(rng.randf_range(1.8, 3.2), rng.randf_range(1.4, 2.6))
+		p.mesh = pmesh
+		var pmat: StandardMaterial3D = StandardMaterial3D.new()
+		pmat.albedo_color = patch["col"]
+		pmat.roughness = 0.95
+		p.material_override = pmat
+		p.position = patch["pos"]
+		p.rotation.y = rng.randf_range(0.0, TAU)
+		var_root.add_child(p)
 
 
 func _apply_material(root: Node, material: Material) -> void:
