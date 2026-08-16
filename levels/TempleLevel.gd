@@ -507,7 +507,7 @@ func _build_region7_transition() -> void:
 			rng.randf_range(1.4, 1.9)
 		)
 		slab.mesh = box
-		slab.material_override = trail_mat
+		slab.material_override = stone_mat
 		slab.position = Vector3(sx, sy, sz)
 		slab.rotation.y = rng.randf_range(-0.12, 0.12)
 		var slab_body: StaticBody3D = StaticBody3D.new()
