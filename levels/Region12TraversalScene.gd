@@ -453,8 +453,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		doorway_plane.scale = Vector3(1.85, 1.95, 0.10)
 		doorway_plane.rotation = Vector3(0.0, PI, 0.0)
 		var doorway_material := StandardMaterial3D.new()
-		doorway_material.albedo_color = Color("#03050b")
-		doorway_material.roughness = 1.0
+		doorway_material.albedo_color = Color("#0a1020")
+		doorway_material.roughness = 0.92
 		
 		doorway_plane.visible = false
 		proxy.add_child(doorway_plane)
