@@ -440,8 +440,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		crown_stone.scale = Vector3(2.55 if crown_index != 1 else 2.95, 1.30 if crown_index != 1 else 1.52, 1.62)
 		crown_stone.rotation = Vector3(0.08 * sign(float(crown_index - 1)), 0.08 * float(crown_index - 1), -0.06 * sign(float(crown_index - 1)))
 		var crown_material := StandardMaterial3D.new()
-		crown_material.albedo_color = Color("#4f657c") if crown_index != 1 else Color("#617b94")
-		crown_material.roughness = 0.94
+		crown_material.albedo_color = Color("#5b718b") if crown_index != 1 else Color("#708aa5")
+		crown_material.roughness = 0.89
 		for crown_mesh in crown_stone.find_children("*", "MeshInstance3D", true, false):
 			crown_mesh.set_surface_override_material(0, crown_material)
 		proxy.add_child(crown_stone)
