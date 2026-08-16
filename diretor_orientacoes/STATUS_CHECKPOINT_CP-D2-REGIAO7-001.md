@@ -27,7 +27,7 @@
 ## Artefacto reproduzível
 
 - Pacote: `validation/checkpoints/CP-D2-REGIAO7-001/CP-D2-REGIAO7-001_VilaElevada_Validated.zip`
-- SHA-256 do pacote: `854a0163b70149096d3db0ef70d7e2ccc31b244197f434d05ef2deb72327c916`
+- SHA-256 do pacote: `b140662cf50f520e373b95273969e75eed084c35dc6a69928e17bd8fee1b24db`
 - Commit: `8e065066b27ed308131e0ba75f01a189dbd5a0e5`
 
 ## Hashes da evidência actual
