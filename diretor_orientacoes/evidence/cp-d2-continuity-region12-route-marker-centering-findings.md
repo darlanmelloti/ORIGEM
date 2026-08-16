@@ -1,6 +1,6 @@
 # Findings — Passe de centragem dos marcadores de rota Região 12
 
-A posição lateral dos marcadores foi comprimida subtilmente para manter a faixa de percurso centrada na entrada da Cúpula Final. A captura confirma uma composição mais coesa, com a rota integrada na base pétrea sem competir com o núcleo temporal.
+A posição lateral dos marcadores foi comprimida subtilmente para manter a faixa de percurso centrada na entrada da Cúpula Final. A captura confirma uma composição mais coesa, com a rota integrada na base pétrea e o corredor visual claramente encaminhado para o núcleo temporal.
 
 O parser/headless passou, o gameplay tem 30.000000 segundos e o print é 1600×900. O passe está aprovado para publicação; a continuidade seguirá imediatamente dentro da Região 12.
 
