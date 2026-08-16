@@ -412,17 +412,20 @@ func _build_final_dome() -> void:
 			beacon.shadow_enabled = false
 			beacon.position = pillar.position + Vector3(0.0, 5.1, 0.0)
 			dome.add_child(beacon)
-	# The entrance crown is made from three large organic rock masses.
-	for index: int in range(3):
-		var crown := ROCK_LARGE.instantiate() as Node3D
-		if crown == null:
-			continue
-		crown.name = "ArcoOrganicoCupula_%02d" % index
-		crown.position = Vector3(-2.35 + float(index) * 2.35, 2.05 if index != 1 else 2.55, -4.48)
-		crown.scale = Vector3(2.9 if index != 1 else 3.35, 1.65 if index != 1 else 2.0, 1.85)
-		crown.rotation = Vector3(0.0, 0.08 * float(index - 1), 0.0)
-		_apply_material(crown, stone_material)
-		dome.add_child(crown)
+		# The entrance crown uses the validated staggered organic masses from the R12 harness.
+		for crown_index: int in range(3):
+			var crown := ROCK_LARGE.instantiate() as Node3D
+			if crown == null:
+				continue
+			crown.name = "ArcoOrganicoCupula_%02d" % crown_index
+			crown.position = Vector3(-2.35 + float(crown_index) * 2.35, 3.55 if crown_index != 1 else 4.15, -4.48)
+			crown.scale = Vector3(2.9 if crown_index != 1 else 3.35, 1.65 if crown_index != 1 else 2.0, 1.85)
+			crown.rotation = Vector3(0.08 * sign(float(crown_index - 1)), 0.08 * float(crown_index - 1), -0.06 * sign(float(crown_index - 1)))
+			var crown_material := stone_material.duplicate() as StandardMaterial3D
+			crown_material.albedo_color = Color("#66839c")
+			crown_material.roughness = 0.86
+			_apply_material(crown, crown_material)
+			dome.add_child(crown)
 	# Validated Region 12 sanctuary gateway: organic side monoliths, staggered crown, and a recessed dark opening.
 	for gateway_x in [-4.2, 4.2]:
 		var gateway_monolith := PILLAR.instantiate() as Node3D
