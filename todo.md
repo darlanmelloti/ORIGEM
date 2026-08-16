@@ -60,3 +60,13 @@
 - [ ] Verificar a entrada Take 6 no dicionário de `RegionalCinematicDirector.gd` e documentar a atribuição à Dev2 sem tocar nas Regiões 1–6.
 - [ ] Executar o primeiro ciclo auditável do Take 8: implementar, validar, capturar, avaliar, empacotar ZIP, commitar e escrever `STATUS_CHECKPOINT_CP-D2-001.md`.
 - [ ] Verificar a fronteira operacional em cada commit e confirmar que nenhum ficheiro das Regiões 1–6 foi alterado.
+
+## Auditoria Dev2 — Regiões 7–12
+
+- [x] Auditar os 24 ficheiros `.gd` e mapear cada módulo para as Regiões 7, 8, 9, 10, 11 e 12.
+- [x] Executar validação headless e captura de gameplay/print para cada região.
+- [x] Registar estado regional no formato de checkpoint do Dev1.
+- [ ] Aplicar passes de polimento visual apenas onde a evidência indicar lacunas, sem reescrever a base.
+- [x] Repetir headless, gameplay de 30 segundos e print 1600×900 após cada passe.
+- [ ] Criar ZIP reproduzível, SHA-256, commit e sincronização remota para cada checkpoint regional.
+- [x] Emitir relatório consolidado das Regiões 7–12 e iniciar a próxima acção sem aguardar autorização.

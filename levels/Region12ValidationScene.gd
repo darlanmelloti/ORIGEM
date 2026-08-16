@@ -42,8 +42,16 @@ func _ready() -> void:
 func _build_environment() -> void:
 	var world := WorldEnvironment.new()
 	var environment := Environment.new()
-	environment.background_mode = Environment.BG_COLOR
-	environment.background_color = Color("#050711")
+	environment.background_mode = Environment.BG_SKY
+	var dome_sky := Sky.new()
+	var dome_sky_material := ProceduralSkyMaterial.new()
+	dome_sky_material.sky_top_color = Color("#07091a")
+	dome_sky_material.sky_horizon_color = Color("#5b5a86")
+	dome_sky_material.ground_bottom_color = Color("#070817")
+	dome_sky_material.ground_horizon_color = Color("#242044")
+	dome_sky_material.sun_angle_max = 18.0
+	dome_sky.sky_material = dome_sky_material
+	environment.sky = dome_sky
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#46395a")
 	environment.ambient_light_energy = 0.52
@@ -51,6 +59,13 @@ func _build_environment() -> void:
 	environment.glow_enabled = true
 	environment.glow_intensity = 0.48
 	environment.glow_bloom = 0.16
+	environment.fog_enabled = true
+	environment.fog_light_color = Color("#2a2850")
+	environment.fog_light_energy = 0.34
+	environment.fog_density = 0.018
+	environment.fog_height = 2.0
+	environment.fog_height_density = 0.045
+	environment.background_energy_multiplier = 0.62
 	world.environment = environment
 	add_child(world)
 	var moon := DirectionalLight3D.new()
@@ -101,20 +116,18 @@ func _build_final_dome_validation_proxy() -> void:
 		crown.scale = Vector3(3.2 if index != 1 else 3.8, 1.75 if index == 1 else 2.4, 2.1)
 		crown.rotation = Vector3(0.0, 0.08 * float(index - 1), 0.0)
 		proxy.add_child(crown)
-	var base := MeshInstance3D.new()
-	base.name = "BasePedraCupulaFinal"
-	var base_mesh := CylinderMesh.new()
-	base_mesh.top_radius = 7.2
-	base_mesh.bottom_radius = 7.8
-	base_mesh.height = 0.7
-	base_mesh.radial_segments = 32
-	base.mesh = base_mesh
-	base.position = Vector3(0.0, 0.35, 0.0)
-	var base_material := StandardMaterial3D.new()
-	base_material.albedo_color = Color("#25233b")
-	base_material.roughness = 0.92
-	base.material_override = base_material
-	proxy.add_child(base)
+	var base: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if base != null:
+		base.name = "BaseOrganicaCupulaFinal"
+		base.position = Vector3(0.0, 0.42, 0.0)
+		base.scale = Vector3(3.8, 0.42, 3.4)
+		base.rotation = Vector3(0.02, 0.12, -0.01)
+		var base_material := StandardMaterial3D.new()
+		base_material.albedo_color = Color("#25233b")
+		base_material.roughness = 0.92
+		for base_mesh in base.find_children("*", "MeshInstance3D", true, false):
+			(base_mesh as MeshInstance3D).material_override = base_material
+		proxy.add_child(base)
 	for index: int in range(5):
 		var approach_stone := ROCK_LARGE.instantiate() as Node3D
 		if approach_stone == null:
@@ -126,7 +139,8 @@ func _build_final_dome_validation_proxy() -> void:
 		var approach_material := StandardMaterial3D.new()
 		approach_material.albedo_color = Color("#4a4566")
 		approach_material.roughness = 0.9
-		approach_stone.material_override = approach_material
+		for approach_mesh in approach_stone.find_children("*", "MeshInstance3D", true, false):
+			(approach_mesh as MeshInstance3D).material_override = approach_material
 		proxy.add_child(approach_stone)
 		if index % 2 == 0:
 			var approach_light := OmniLight3D.new()
