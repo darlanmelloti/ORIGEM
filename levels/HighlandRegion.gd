@@ -186,6 +186,33 @@ func _build_mountain_trail() -> void:
 		Vector2(28.0, 462.0), Vector2(-26.0, 482.0), Vector2(-76.0, 508.0), Vector2(-112.0, 532.0)
 	]
 	_build_organic_route("TrilhaDaMontanhaOrion", route, 4.1)
+	var trail_marker: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if trail_marker != null:
+		trail_marker.name = "MarcoOrganicoEntradaTrilhaTake8"
+		trail_marker.position = Vector3(169.0, _height_at(169.0, 414.0) + 1.35, 414.0)
+		trail_marker.scale = Vector3(0.72, 1.25, 0.66)
+		trail_marker.rotation = Vector3(0.08, -0.26, -0.05)
+		_apply_material(trail_marker, stone_material)
+		add_child(trail_marker)
+		var entry_rocks: Array[Vector3] = [Vector3(162.0, 0.0, 416.0), Vector3(158.0, 0.0, 421.0), Vector3(166.0, 0.0, 424.0)]
+		for entry_index: int in range(entry_rocks.size()):
+			var entry_rock: Node3D = ROCK_LARGE.instantiate() as Node3D
+			if entry_rock == null:
+				continue
+			var entry_point: Vector3 = entry_rocks[entry_index]
+			entry_rock.name = "ArcoOrganicoEntradaTake8_%02d" % entry_index
+			entry_rock.position = Vector3(entry_point.x, _height_at(entry_point.x, entry_point.z) + 0.9 + float(entry_index) * 0.35, entry_point.z)
+			entry_rock.scale = Vector3(0.52, 0.78 + float(entry_index) * 0.16, 0.48)
+			entry_rock.rotation.y = -0.32 + float(entry_index) * 0.44
+			_apply_material(entry_rock, stone_material)
+			add_child(entry_rock)
+	var alpine_fill := DirectionalLight3D.new()
+	alpine_fill.name = "RecorteAlpinoTrilhaTake8"
+	alpine_fill.light_color = Color("#9fc4d4")
+	alpine_fill.light_energy = 0.22
+	alpine_fill.shadow_enabled = false
+	alpine_fill.rotation_degrees = Vector3(-48.0, -32.0, 0.0)
+	add_child(alpine_fill)
 	var rocks: Node3D = Node3D.new()
 	rocks.name = "AfloramentosDaTrilha"
 	add_child(rocks)
@@ -224,12 +251,23 @@ func _build_organic_route(route_name: String, route: Array[Vector2], width: floa
 			if stone == null:
 				continue
 			stone.name = "DegrauOrganico_%03d" % stone_index
-			stone.position = Vector3(point.x, _height_at(point.x, point.y) + 0.16, point.y)
+			stone.position = Vector3(point.x, _height_at(point.x, point.y) + 0.82, point.y)
 			if OS.get_environment("ORIGEM_DEBUG_ROUTE") == "1" and (stone_index == 0 or stone_index == 5 or stone_index == 10):
 				print("[REGIAO8_9_ROUTE] index=%d world=%s" % [stone_index, str(stone.position)])
 			stone.scale = Vector3(width * 0.18, 0.10 + fmod(float(stone_index), 3.0) * 0.025, 0.28)
 			stone.rotation = Vector3(0.03, atan2(next.x - point.x, next.y - point.y), -0.04)
 			_apply_material(stone, route_material)
+			var stone_body := StaticBody3D.new()
+			stone_body.name = "ColisaoTrilhaMontanha_%03d" % stone_index
+			stone_body.collision_layer = 1
+			stone_body.collision_mask = 1
+			var stone_shape := CollisionShape3D.new()
+			var stone_box := BoxShape3D.new()
+			stone_box.size = Vector3(width * 0.62, 0.34, 0.72)
+			stone_shape.shape = stone_box
+			stone_shape.position = Vector3(0.0, 0.10, 0.0)
+			stone_body.add_child(stone_shape)
+			stone.add_child(stone_body)
 			path.add_child(stone)
 			if stone_index % 5 == 0:
 				var wayfinder: OmniLight3D = OmniLight3D.new()

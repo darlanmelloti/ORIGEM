@@ -77,6 +77,8 @@ func _start_narrative():
 				validation_player.global_position = Vector3(0.0, 1.8, -73.0)
 			elif validation_take == "7":
 				validation_player.global_position = Vector3(0.0, 1.8, -104.0)
+			elif validation_take == "8":
+				validation_player.global_position = Vector3(128.0, 17.0, 420.0)
 			elif validation_region == "7":
 				validation_player.global_position = Vector3(128.0, 14.0, 332.0)
 			elif validation_region == "8":
@@ -85,7 +87,7 @@ func _start_narrative():
 				validation_player.global_position = Vector3(-116.0, 43.0, 532.0)
 			else:
 				validation_player.global_position = Vector3(0.0, 1.4, -28.0)
-			validation_player.rotation.y = PI
+			validation_player.rotation.y = -0.92 if validation_take == "8" else PI
 		mission_phase = 1
 		if validation_region == "8":
 			_show_msg("REGIÃO 8 — Observatório da Orion e leitura do céu alpino.", 4.0)
@@ -97,6 +99,8 @@ func _start_narrative():
 			_show_msg("TAKE 6 — Desfiladeiro profundo e fendas tectónicas.", 4.0)
 		elif validation_take == "7":
 			_show_msg("TAKE 7 — Praça ciclópica e Cubo de Orion.", 4.0)
+		elif validation_take == "8":
+			_show_msg("TAKE 8 — Trilha da Montanha: ascensão arqueológica.", 4.0)
 		else:
 			_show_msg("TAKE 5–7 — Rota de validação iniciada no limiar da caverna.", 4.0)
 		return
@@ -109,8 +113,7 @@ func _start_narrative():
 
 # ═══════════════════════════════════════════════════════════════
 func _take57_validation_mode() -> bool:
-	if OS.get_environment("ORIGEM_TAKE57") == "1" or OS.get_environment("ORIGEM_VALIDATION_TAKE") in ["6", "7"] or OS.get_environment("ORIGEM_VALIDATION_REGION") in ["7", "8"]:
- or OS.get_environment("ORIGEM_VALIDATION_REGION") == "10":
+	if OS.get_environment("ORIGEM_TAKE57") == "1" or OS.get_environment("ORIGEM_VALIDATION_TAKE") in ["6", "7", "8"] or OS.get_environment("ORIGEM_VALIDATION_REGION") in ["7", "8"] or OS.get_environment("ORIGEM_VALIDATION_REGION") == "10":
 		return true
 	for argument: String in OS.get_cmdline_args():
 		if argument == "--take57":
