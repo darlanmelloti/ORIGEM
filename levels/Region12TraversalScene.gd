@@ -394,6 +394,14 @@ func _build_final_dome_traversal_proxy() -> void:
 			doorway_jamb.position = Vector3(doorway_x * 0.92, 2.25, -4.36)
 			doorway_jamb.scale = Vector3(0.72, 2.35, 0.72)
 			doorway_jamb.rotation = Vector3(0.04, 0.10 * sign(doorway_x), 0.03 * sign(doorway_x))
+			var jamb_body := StaticBody3D.new()
+			var jamb_shape := CollisionShape3D.new()
+			var jamb_box := BoxShape3D.new()
+			jamb_box.size = Vector3(1.35, 4.6, 1.35)
+			jamb_shape.shape = jamb_box
+			jamb_shape.position = Vector3(0.0, -0.05, 0.0)
+			jamb_body.add_child(jamb_shape)
+			doorway_jamb.add_child(jamb_body)
 			proxy.add_child(doorway_jamb)
 	for crown_index in range(3):
 		var crown_stone := ROCK_LARGE.instantiate() as Node3D
