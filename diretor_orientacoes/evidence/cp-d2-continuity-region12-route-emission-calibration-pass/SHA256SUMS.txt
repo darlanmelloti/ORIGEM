@@ -1,0 +1,2 @@
+3f66df8925b021e1826e1f328147381fd82774a723423918cae48bf55d017d0c  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-continuity-region12-route-emission-calibration-pass/gameplay-30s.mp4
+599298ec9a10e3206e1cfebfd2c0364b3f1a3ab5600a9411c5da47610710a2de  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-continuity-region12-route-emission-calibration-pass/print-1600x900.jpg
