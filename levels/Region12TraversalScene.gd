@@ -164,18 +164,18 @@ func _build_final_dome_traversal_proxy() -> void:
 		left_arch.position = Vector3(-2.35, 2.15, -4.38)
 		left_arch.scale = Vector3(1.35, 2.55, 1.45)
 		left_arch.rotation = Vector3(0.0, -0.08, 0.0)
-		left_arch.visible = false
+		left_arch.visible = true
 		proxy.add_child(left_arch)
 	if right_arch != null:
 		right_arch.name = "ArcoOrganicoDireito"
 		right_arch.position = Vector3(2.35, 2.15, -4.38)
 		right_arch.scale = Vector3(1.35, 2.55, 1.45)
 		right_arch.rotation = Vector3(0.0, 0.08, 0.0)
-		right_arch.visible = false
+		right_arch.visible = true
 		proxy.add_child(right_arch)
 		if crown != null:
 			crown.name = "ArcoOrganicoCoroa"
-			crown.visible = false
+			crown.visible = true
 			crown.position = Vector3(0.0, 2.86, -4.34)
 			crown.scale = Vector3(1.48, 0.78, 1.16)
 			crown.rotation = Vector3(-0.22, 0.08, 0.06)
@@ -187,7 +187,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		lintel.position = Vector3(0.0, 2.72, -4.18)
 		lintel.scale = Vector3(3.15, 1.08, 1.7)
 		lintel.rotation = Vector3(0.0, 0.0, 0.02)
-		lintel.visible = false
+		lintel.visible = true
 		proxy.add_child(lintel)
 	for support_x in [-0.9, 0.9]:
 		var center_support := PILLAR.instantiate() as Node3D
@@ -197,7 +197,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		center_support.position = Vector3(support_x, 1.52, -4.05)
 		center_support.scale = Vector3(0.78, 1.28, 0.78)
 		center_support.rotation = Vector3(0.03, 0.08 * sign(support_x), -0.02)
-		center_support.visible = false
+		center_support.visible = true
 		proxy.add_child(center_support)
 	for shoulder_x in [-3.2, 3.2]:
 		var shoulder := ROCK_LARGE.instantiate() as Node3D
@@ -207,7 +207,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		shoulder.position = Vector3(shoulder_x, 2.15, -4.1)
 		shoulder.scale = Vector3(2.35, 0.82, 1.65)
 		shoulder.rotation = Vector3(0.0, 0.12 * sign(shoulder_x), 0.03 * sign(shoulder_x))
-		shoulder.visible = false
+		shoulder.visible = true
 		proxy.add_child(shoulder)
 	for connector_x in [-2.1, 2.1]:
 		var connector := ROCK_LARGE.instantiate() as Node3D
@@ -217,7 +217,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		connector.position = Vector3(connector_x, 2.48 + 0.08 * sign(connector_x), -4.30)
 		connector.scale = Vector3(1.45, 0.78, 1.28)
 		connector.rotation = Vector3(0.05 * sign(connector_x), 0.18 * sign(connector_x), 0.08 * sign(connector_x))
-		connector.visible = false
+		connector.visible = true
 		proxy.add_child(connector)
 	for jamb_x in [-2.45, 2.45]:
 		var jamb := ROCK_LARGE.instantiate() as Node3D
@@ -227,7 +227,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		jamb.position = Vector3(jamb_x * 1.08, 1.9, -4.35)
 		jamb.scale = Vector3(0.92, 1.42, 1.16)
 		jamb.rotation = Vector3(0.04, 0.12 * sign(jamb_x), 0.04 * sign(jamb_x))
-		jamb.visible = false
+		jamb.visible = true
 		proxy.add_child(jamb)
 	var recessed_backdrop := ROCK_LARGE.instantiate() as Node3D
 	if recessed_backdrop != null:
@@ -418,12 +418,13 @@ func _build_final_dome_traversal_proxy() -> void:
 		if crown_stone == null:
 			continue
 		crown_stone.name = "CoroaValidadaCupula_%02d" % crown_index
-		crown_stone.position = Vector3(-2.35 + float(crown_index) * 2.35, 3.55 if crown_index != 1 else 4.15, -4.48)
-		crown_stone.scale = Vector3(2.9 if crown_index != 1 else 3.35, 1.65 if crown_index != 1 else 2.0, 1.85)
+		# A coroa assenta no conjunto vertical; o passe reduz a leitura de pedras flutuantes.
+		crown_stone.position = Vector3(-2.35 + float(crown_index) * 2.35, 2.62 if crown_index != 1 else 3.06, -4.48)
+		crown_stone.scale = Vector3(2.55 if crown_index != 1 else 2.95, 1.30 if crown_index != 1 else 1.52, 1.62)
 		crown_stone.rotation = Vector3(0.08 * sign(float(crown_index - 1)), 0.08 * float(crown_index - 1), -0.06 * sign(float(crown_index - 1)))
 		var crown_material := StandardMaterial3D.new()
-		crown_material.albedo_color = Color("#66839c")
-		crown_material.roughness = 0.86
+		crown_material.albedo_color = Color("#4f657c") if crown_index != 1 else Color("#617b94")
+		crown_material.roughness = 0.94
 		for crown_mesh in crown_stone.find_children("*", "MeshInstance3D", true, false):
 			crown_mesh.set_surface_override_material(0, crown_material)
 		proxy.add_child(crown_stone)
