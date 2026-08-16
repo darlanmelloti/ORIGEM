@@ -1,0 +1,2 @@
+659dbbc4e9be944b0e2b3592aa383da9d3e624f7e8fd82dcd1794ce4053da1bd  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-continuity-region12-route-roughness-pass/gameplay-30s.mp4
+e86447261c1bf3409e5566d4a77c7bf6d9f37e452cc6da636ca7656822a87bfb  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-continuity-region12-route-roughness-pass/print-1600x900.jpg
