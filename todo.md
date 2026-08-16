@@ -80,3 +80,13 @@
 - [ ] Harmonizar iluminação de crepúsculo, ecologia lateral, fogueiras/lanternas e estela de chegada dentro do orçamento GTX 1050 Ti.
 - [ ] Executar headless, captura, avaliação visual >=85%, gameplay 30s, ZIP, commit, push e STATUS_CHECKPOINT do primeiro incremento Região 7.
 - [ ] Avançar automaticamente para a próxima prioridade Dev2 após o checkpoint.
+
+
+## Delegação publicada — Dev2 / Takes 6–7
+
+- [ ] Ler `EQUIPA_FUNCOES_E_DELEGACAO.md` e todas as orientações activas em `diretor_orientacoes/`.
+- [ ] Confirmar a tarefa imediata publicada para Dev2 e a fronteira exclusiva Regiões 7–12.
+- [ ] Auditar e sincronizar os módulos de código dos Takes 6 e 7 na branch `feature/dev2-mountain-canyon`.
+- [ ] Executar QA headless, gameplay de 30 segundos e print 1600×900 para os Takes 6–7.
+- [ ] Criar ZIP compacto, SHA-256, STATUS_CHECKPOINT e commit/publicação remota.
+- [ ] Avançar para a próxima tarefa delegada sem tocar nas Regiões 1–6.

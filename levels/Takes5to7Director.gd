@@ -68,9 +68,10 @@ func _configure_forward_plus_environment() -> void:
 	environment.fog_density = 0.004
 
 func _create_materials() -> void:
-	stone_wet = _organic_material(Color("#343d3a"), 0.88, 0.14, Color("#173522"))
-	stone_dark = _organic_material(Color("#111a1a"), 0.96, 0.22, Color("#0b2424"))
-	moss_stone = _organic_material(Color("#263d2d"), 0.94, 0.18, Color("#4d7549"))
+	# Material pass CP-D2-001: wet stone remains readable but loses the plastic low-poly sheen.
+	stone_wet = _organic_material(Color("#293b37"), 0.97, 0.05, Color("#10251b"))
+	stone_dark = _organic_material(Color("#0d1716"), 0.99, 0.04, Color("#071812"))
+	moss_stone = _organic_material(Color("#20382a"), 0.98, 0.03, Color("#345c3b"))
 	resonance = StandardMaterial3D.new()
 	resonance.albedo_color = Color("#163c56")
 	resonance.emission_enabled = true
@@ -369,7 +370,9 @@ func _build_take_6_canyon_ascent() -> void:
 		var x: float = side * width
 		var ledge_height: float = 1.4 + float(index % 4) * 0.46
 		_add_organic_rock(canyon, Vector3(x, ledge_height, z), Vector3(3.4, ledge_height + 0.9, 2.5), 710 + index, stone_wet, "DegrauOrganico_%02d" % index)
-		_add_organic_rock(canyon, Vector3(side * (10.5 + sin(float(index) * 0.7)), 5.0 + float(index % 3), z - 1.2), Vector3(5.0, 6.6 + float(index % 3), 4.0), 760 + index, moss_stone, "ParedeTectonica_%02d" % index)
+		var tectonic_height: float = 6.0 + float((index * 2) % 4) * 0.7
+		var tectonic := _add_organic_rock(canyon, Vector3(side * (10.5 + sin(float(index) * 0.7)), 5.0 + float(index % 3), z - 1.2), Vector3(4.4 + float(index % 3) * 0.35, tectonic_height, 3.5 + float(index % 2) * 0.45), 760 + index, moss_stone, "ParedeTectonica_%02d" % index)
+		tectonic.rotation_degrees = Vector3(float((index % 3) - 1) * 3.0, float(side) * (6.0 + float(index % 4) * 2.5), float((index % 4) - 1) * 2.0)
 		if index % 3 == 0:
 			_add_history_marker(canyon, Vector3(-side * 3.25, ledge_height + 1.1, z - 1.0), index)
 		if index % 4 == 1:
@@ -409,7 +412,10 @@ func _build_take_7_open_orion_chamber() -> void:
 	for index: int in range(14):
 		var angle: float = TAU * float(index) / 14.0
 		var radius: float = 13.5 + sin(float(index) * 2.1) * 0.8
-		_add_organic_rock(chamber, Vector3(cos(angle) * radius, 4.2 + float(index % 3), sin(angle) * radius), Vector3(1.55, 4.4 + float(index % 3) * 0.8, 1.55), 990 + index, stone_wet, "ColunaCiclopea_%02d" % index)
+		var column_height: float = 4.0 + float(index % 4) * 0.75
+		var column_width: float = 1.25 + float((index * 3) % 4) * 0.18
+		var column := _add_organic_rock(chamber, Vector3(cos(angle) * radius, 3.8 + float(index % 3) * 0.85, sin(angle) * radius), Vector3(column_width, column_height, 1.35 + float(index % 3) * 0.16), 990 + index, stone_wet, "ColunaCiclopea_%02d" % index)
+		column.rotation_degrees = Vector3(float((index % 3) - 1) * 4.0, rad_to_deg(angle) + float(index % 5) * 3.0, float((index % 4) - 1) * 3.0)
 		if index % 2 == 0:
 			_add_history_marker(chamber, Vector3(cos(angle) * 8.9, 1.3, sin(angle) * 8.9), 40 + index)
 	for index: int in range(8):
@@ -417,22 +423,12 @@ func _build_take_7_open_orion_chamber() -> void:
 		_add_organic_rock(chamber, Vector3(cos(slab_angle) * 7.4, 0.45, sin(slab_angle) * 7.4), Vector3(2.6, 0.65, 1.5), 1150 + index, stone_dark, "AnelArenaCiclopea_%02d" % index)
 	_add_organic_rock(chamber, Vector3(0.0, 0.55, 0.0), Vector3(9.2, 0.75, 9.2), 1080, stone_dark, "DaisCuboOrion")
 	_add_organic_rock(chamber, Vector3(0.0, 2.0, -6.4), Vector3(4.8, 3.2, 0.8), 1180, moss_stone, "TronoHistoricoOrion")
-	var cube := MeshInstance3D.new()
-	cube.name = "CuboDeOrion_Take7"
-	var cube_material := StandardMaterial3D.new()
-	cube_material.albedo_color = Color("#163c63")
-	cube_material.metallic = 0.72
-	cube_material.roughness = 0.28
-	cube_material.emission_enabled = true
-	cube_material.emission = Color("#176fb8")
-	cube_material.emission_energy_multiplier = 0.72
-	var cube_mesh := BoxMesh.new()
-	cube_mesh.size = Vector3(2.8, 2.8, 2.8)
-	cube_mesh.material = cube_material
-	cube.mesh = cube_mesh
-	cube.position = Vector3(0.0, 6.5, 0.0)
-	cube.rotation = Vector3(0.34, 0.48, 0.18)
-	chamber.add_child(cube)
+	# O núcleo do Orion mantém a silhueta cúbica narrativa através de uma assembleia CC0,
+	# sem BoxMesh proxy: uma massa central emissiva e quatro lascas tectónicas orbitais.
+	_add_organic_rock(chamber, Vector3(0.0, 6.1, 0.0), Vector3(2.35, 2.70, 2.35), 1200, resonance, "CuboDeOrion_Take7_NucleoOrganico")
+	for shard_index: int in range(4):
+		var shard_angle: float = TAU * float(shard_index) / 4.0 + 0.22
+		_add_organic_rock(chamber, Vector3(cos(shard_angle) * 2.7, 5.7 + float(shard_index % 2) * 0.7, sin(shard_angle) * 2.7), Vector3(0.68, 1.45, 0.68), 1210 + shard_index, moss_stone, "CuboDeOrion_Take7_Lasca_%02d" % shard_index)
 	for index: int in range(6):
 		_add_canyon_brazier(chamber, Vector3(cos(index * TAU / 6.0) * 7.0, 0.9, sin(index * TAU / 6.0) * 7.0), "BraseiroCiano_Camara_%02d" % index)
 	var open_light := OmniLight3D.new()
