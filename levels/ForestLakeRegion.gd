@@ -39,6 +39,7 @@ func _ready() -> void:
 	_build_forest_micro_details()
 	_build_majestic_camp()
 	_build_majestic_connector()
+	_build_take9_corridor_fill()
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
 	_build_riparian_margin()
@@ -917,6 +918,20 @@ func _build_majestic_connector() -> void:
 				margin_tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
 				margin_tree.rotation.y = rng.randf_range(-PI, PI)
 				connector_margin.add_child(margin_tree)
+
+func _build_take9_corridor_fill() -> void:
+	# Luz de preenchimento do Take 9: ilumina o solo frontal do conector Majestic–lago.
+	# A câmara do Take 9 está em (-104, 16, 163) e aponta para (-36, 1.6, 180);
+	# o solo frontal (z≈70–180, x≈-90 a -40) estava demasiado escuro na auditoria do CP 187.
+	var fill_light: OmniLight3D = OmniLight3D.new()
+	fill_light.name = "PreenchimentoSoloTake9"
+	fill_light.light_color = Color(0.28, 0.34, 0.40, 1.0)
+	fill_light.light_energy = 0.85
+	fill_light.omni_range = 52.0
+	fill_light.omni_attenuation = 1.20
+	fill_light.shadow_enabled = false
+	fill_light.position = Vector3(-68.0, 8.5, 172.0)
+	add_child(fill_light)
 
 func _build_take6_corridor_accent() -> void:
 	# Acentos visuais no eixo central do corredor Majestic–Floresta para criar interesse no Take 6.
