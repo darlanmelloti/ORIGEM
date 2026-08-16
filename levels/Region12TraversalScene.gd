@@ -305,7 +305,7 @@ func _build_final_dome_traversal_proxy() -> void:
 			if route_marker == null:
 				continue
 			route_marker.name = "MarcadorRotaFisicaR12_%s" % str(route_x)
-			route_marker.position = Vector3(route_x * 0.962, 0.345, -3.06)
+			route_marker.position = Vector3(route_x * 0.962, 0.345, -3.055)
 			route_marker.scale = Vector3(0.33, 0.095, 0.29)
 			route_marker.rotation = Vector3(0.018, 0.13 * sign(route_x), 0.018)
 			var route_material := StandardMaterial3D.new()
