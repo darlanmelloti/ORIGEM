@@ -295,6 +295,11 @@ func _build_final_dome_traversal_proxy() -> void:
 		threshold.position = Vector3(0.0, 0.68, -4.55)
 		threshold.scale = Vector3(3.65, 0.30, 1.05)
 		threshold.rotation = Vector3(0.02, 0.0, 0.0)
+		var threshold_material := StandardMaterial3D.new()
+		threshold_material.albedo_color = Color("#536b82")
+		threshold_material.roughness = 0.92
+		for threshold_mesh in threshold.find_children("*", "MeshInstance3D", true, false):
+			threshold_mesh.set_surface_override_material(0, threshold_material)
 		proxy.add_child(threshold)
 		for connector_x in [-2.35, 2.35]:
 			var threshold_connector := ROCK_LARGE.instantiate() as Node3D
