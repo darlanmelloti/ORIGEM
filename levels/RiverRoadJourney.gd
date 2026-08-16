@@ -15,6 +15,7 @@ const GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_groun
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 const GROUND_ROUGHNESS: Texture2D = preload("res://assets/textures/pbr/forest_ground_roughness.jpg")
+const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -348,9 +349,10 @@ func _build_cartographic_southwest_readability() -> void:
 	cues.name = "MarcosCartograficosSudoeste"
 	add_child(cues)
 	var cue_specs: Array[Dictionary] = [
-		{"z": 18.0, "side": -1.0, "scale": 0.22, "name": "MarcoDaSaidaVoss"},
-		{"z": 31.0, "side": 1.0, "scale": 0.26, "name": "MarcoDaCurvaDoRio"},
-		{"z": 40.0, "side": -1.0, "scale": 0.30, "name": "MarcoDaVistaDoArco"},
+		# A ordem e a distância vêm directamente das âncoras do mapa: Casa → Estrada → Arco.
+		{"z": CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.y + 2.0, "side": -1.0, "scale": 0.22, "name": "MarcoDaSaidaVoss"},
+		{"z": lerpf(CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.y, CARTOGRAPHIC_ANCHORS.ARCO_RUINAS.y, 0.52), "side": 1.0, "scale": 0.26, "name": "MarcoDaCurvaDoRio"},
+		{"z": CARTOGRAPHIC_ANCHORS.ARCO_RUINAS.y - 8.0, "side": -1.0, "scale": 0.30, "name": "MarcoDaVistaDoArco"},
 	]
 	for cue_index: int in range(cue_specs.size()):
 		var spec: Dictionary = cue_specs[cue_index]
