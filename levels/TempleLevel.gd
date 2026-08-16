@@ -61,6 +61,8 @@ func _queue_regional_qa_modes() -> void:
 		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_lake_route_qa)
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "bridge_crossing":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_valley_bridge_route_qa)
+	elif OS.get_environment("ORIGEM_QA_ROUTE") == "handoff_to_village":
+		get_tree().create_timer(2.40).timeout.connect(_prepare_village_handoff_route_qa)
 	if OS.get_environment("ORIGEM_QA_INTERACT") == "lake_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_lake_stela_interaction_qa)
 	elif OS.get_environment("ORIGEM_QA_INTERACT") == "majestic_stela":
@@ -139,6 +141,23 @@ func _prepare_majestic_lake_route_qa() -> void:
 	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.25, spawn_z)
 	player.rotation.y = -PI * 0.5
 	print("[ORIGEM_QA_ROUTE] Spawn Majestic–lago ativo em %s" % player.global_position)
+
+func _prepare_village_handoff_route_qa() -> void:
+	# Exclusivo de QA: começa no início do trilho Dev1 e desloca-se para a abertura central do portão.
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		push_warning("[ORIGEM_QA_ROUTE] Jogador indisponível para o handoff da Vila Elevada.")
+		return
+	var handoff_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.VILA_ELEVADA
+	var spawn_z: float = handoff_anchor.y - 64.0
+	player.velocity = Vector3.ZERO
+	player.global_position = Vector3(handoff_anchor.x, _terrain_height_for_qa(handoff_anchor.x, spawn_z) + 1.25, spawn_z)
+	# Em primeira pessoa, W segue o eixo local -Z; PI orienta o corredor no sentido de Z crescente.
+	player.rotation.y = PI
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_ROUTE] Spawn handoff Vila Elevada ativo em %s" % player.global_position)
 
 func _terrain_height_for_qa(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
