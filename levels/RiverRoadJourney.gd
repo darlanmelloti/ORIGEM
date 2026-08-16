@@ -151,6 +151,10 @@ func _build_river() -> void:
 		{"z": 52.0, "dx": 1.8, "scale": 0.28, "yaw": -1.12},
 		{"z": 76.0, "dx": -0.6, "scale": 0.36, "yaw": 2.34},
 		{"z": 102.0, "dx": 1.2, "scale": 0.30, "yaw": -0.78},
+		# Pedras emergentes (CP 192): sobressaem acima da lâmina para criar leitura de profundidade adicional.
+		{"z": 38.0, "dx": 0.6, "scale": 0.44, "yaw": 1.22},
+		{"z": 64.0, "dx": -1.0, "scale": 0.38, "yaw": -0.55},
+		{"z": 88.0, "dx": 1.5, "scale": 0.42, "yaw": 2.80},
 	]
 	for bed_data: Dictionary in bed_rock_data:
 		var bz: float = bed_data["z"] as float
