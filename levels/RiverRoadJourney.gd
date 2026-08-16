@@ -21,6 +21,7 @@ var path_material: StandardMaterial3D
 var ruin_material: StandardMaterial3D
 
 func _ready() -> void:
+	_build_arch_wet_overlay()
 	terrain_patch = get_parent().get_node_or_null("TerrainPatch") as Node3D
 	path_material = _make_path_material()
 	ruin_material = _make_ruin_material()
@@ -49,7 +50,7 @@ func _build_compacted_roadbed() -> void:
 	# Solo compactado contínuo: torna o percurso legível entre as lajes e evita a leitura de relvado aleatório.
 	var roadbed_material: StandardMaterial3D = StandardMaterial3D.new()
 	# Solo húmido legível: mantém o trilho integrado ao vale, mas evita que o leito físico se perca em preto no crepúsculo.
-	roadbed_material.albedo_color = Color(0.285, 0.245, 0.165, 1.0)
+	roadbed_material.albedo_color = Color(0.175, 0.148, 0.098, 1.0)
 	roadbed_material.roughness = 0.96
 	roadbed_material.normal_enabled = true
 	roadbed_material.normal_texture = GROUND_NORMAL
@@ -474,6 +475,61 @@ void fragment() {
 	var material: ShaderMaterial = ShaderMaterial.new()
 	material.shader = shader
 	return material
+
+func _build_south_bend_ecology() -> void:
+	# CP 195: ecologia da curva sul do rio (z=112-138).
+	var south: Node3D = Node3D.new()
+	south.name = "SouthBendEcology"
+	add_child(south)
+	var positions: Array = [
+		[Vector3(_road_x(115.0) - 4.5, _height_at(_road_x(115.0) - 4.5, 115.0) + 0.05, 115.0), 0.22],
+		[Vector3(_road_x(124.0) + 5.2, _height_at(_road_x(124.0) + 5.2, 124.0) + 0.05, 124.0), 0.19],
+		[Vector3(_road_x(132.0) - 3.8, _height_at(_road_x(132.0) - 3.8, 132.0) + 0.05, 132.0), 0.25],
+	]
+	for pd in positions:
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.position = pd[0]
+			var s: float = pd[1]
+			rock.scale = Vector3(s, s * 0.78, s)
+			south.add_child(rock)
+	var fern_positions: Array = [
+		[Vector3(_road_x(119.0) + 4.8, _height_at(_road_x(119.0) + 4.8, 119.0) + 0.02, 119.0), 0.38],
+		[Vector3(_road_x(128.0) - 4.2, _height_at(_road_x(128.0) - 4.2, 128.0) + 0.02, 128.0), 0.42],
+	]
+	for fp in fern_positions:
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.position = fp[0]
+			var s: float = fp[1]
+			fern.scale = Vector3(s, s, s)
+			south.add_child(fern)
+
+func _build_arch_wet_overlay() -> void:
+	# CP 198: sobreposicao de pedra humida na zona do Arco (z=38-60).
+	var arch_zone_mat: StandardMaterial3D = StandardMaterial3D.new()
+	arch_zone_mat.albedo_color = Color(0.095, 0.082, 0.055, 1.0)
+	arch_zone_mat.roughness = 0.92
+	var arch_surface: SurfaceTool = SurfaceTool.new()
+	arch_surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for index: int in range(9):
+		var z0: float = 38.0 + float(index) * 2.5
+		var z1: float = z0 + 2.5
+		var x0: float = _road_x(z0)
+		var x1: float = _road_x(z1)
+		var aw: float = 5.20
+		var ap00: Vector3 = Vector3(x0 - aw * 0.5, _height_at(x0 - aw * 0.5, z0) + 0.025, z0)
+		var ap10: Vector3 = Vector3(x0 + aw * 0.5, _height_at(x0 + aw * 0.5, z0) + 0.025, z0)
+		var ap01: Vector3 = Vector3(x1 - aw * 0.5, _height_at(x1 - aw * 0.5, z1) + 0.025, z1)
+		var ap11: Vector3 = Vector3(x1 + aw * 0.5, _height_at(x1 + aw * 0.5, z1) + 0.025, z1)
+		arch_surface.add_vertex(ap00); arch_surface.add_vertex(ap01); arch_surface.add_vertex(ap10)
+		arch_surface.add_vertex(ap10); arch_surface.add_vertex(ap01); arch_surface.add_vertex(ap11)
+	arch_surface.generate_normals()
+	var arch_overlay: MeshInstance3D = MeshInstance3D.new()
+	arch_overlay.name = "SoloHumidoZonaArco"
+	arch_overlay.mesh = arch_surface.commit()
+	arch_overlay.material_override = arch_zone_mat
+	add_child(arch_overlay)
 
 func _apply_material(root: Node, material: Material) -> void:
 	for child: Node in root.get_children():

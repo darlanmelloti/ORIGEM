@@ -26,6 +26,8 @@ var camp_flame_meshes: Array[MeshInstance3D] = []
 var camp_animation_time: float = 0.0
 
 func _ready() -> void:
+	_build_south_shore_fill()
+	_build_forest_corridor_fill()
 	terrain_patch = get_parent().get_node_or_null("TerrainPatch") as Node3D
 	path_material = _create_path_material()
 	ruin_material = _create_ruin_material()
@@ -1359,6 +1361,56 @@ void fragment() {
 	var material: ShaderMaterial = ShaderMaterial.new()
 	material.shader = shader
 	return material
+
+func _build_forest_corridor_fill() -> void:
+	# CP 197: 3 luzes frias no corredor central da Floresta Densa.
+	var fill_root: Node3D = Node3D.new()
+	fill_root.name = "PreenchimentoCorredorFloresta"
+	add_child(fill_root)
+	var positions: Array = [
+		[100.0, 0.58, 17.0],
+		[148.0, 0.62, 18.5],
+		[196.0, 0.55, 16.0],
+	]
+	for fp in positions:
+		var fz: float = fp[0]
+		var fx: float = _path_x(fz)
+		var fy: float = _height_at(fx, fz) + 4.5
+		var fill: OmniLight3D = OmniLight3D.new()
+		fill.name = "PreenchimentoFloresta_z%s" % str(int(fz))
+		fill.position = Vector3(fx, fy, fz)
+		fill.light_color = Color(0.52, 0.62, 0.78, 1.0)
+		fill.light_energy = fp[1]
+		fill.omni_range = fp[2]
+		fill.shadow_enabled = false
+		fill_root.add_child(fill)
+
+func _build_south_shore_fill() -> void:
+	# CP 199: margem inferior sul das Ruinas Submersas.
+	var south_shore: Node3D = Node3D.new()
+	south_shore.name = "MargemInferiorSulLago"
+	add_child(south_shore)
+	var south_rocks: Array = [
+		[Vector3(42.0, _height_at(42.0, 270.0) + 0.06, 270.0), 0.30, 0.82],
+		[Vector3(60.0, _height_at(60.0, 278.0) + 0.06, 278.0), 0.26, 2.14],
+		[Vector3(78.0, _height_at(78.0, 272.0) + 0.06, 272.0), 0.34, -0.55],
+	]
+	for rd in south_rocks:
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.position = rd[0]
+			var s: float = rd[1]
+			rock.scale = Vector3(s, s * 0.78, s)
+			rock.rotation.y = rd[2]
+			south_shore.add_child(rock)
+	var south_fill: OmniLight3D = OmniLight3D.new()
+	south_fill.name = "PreenchimentoMargeminferior"
+	south_fill.position = Vector3(60.0, _height_at(60.0, 272.0) + 1.5, 272.0)
+	south_fill.light_color = Color(0.62, 0.52, 0.38, 1.0)
+	south_fill.light_energy = 0.50
+	south_fill.omni_range = 22.0
+	south_fill.shadow_enabled = false
+	south_shore.add_child(south_fill)
 
 func _apply_material(root: Node, material: Material) -> void:
 	for child: Node in root.get_children():

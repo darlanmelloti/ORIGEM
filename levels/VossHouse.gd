@@ -1298,5 +1298,24 @@ func _material(color_value: Color, roughness_value: float, metallic_value: float
 	material.metallic = metallic_value
 	return material
 
+func _build_voss_candle_and_lantern() -> void:
+	# CP 194: vela na mesa de Tomas e lanterna de parede junto a espada.
+	var candle_light: OmniLight3D = OmniLight3D.new()
+	candle_light.name = "VelaMessaDeTomas"
+	candle_light.position = Vector3(-1.2, 1.05, 1.8)
+	candle_light.light_color = Color(1.0, 0.72, 0.28, 1.0)
+	candle_light.light_energy = 0.90
+	candle_light.omni_range = 3.2
+	candle_light.shadow_enabled = false
+	add_child(candle_light)
+	var lantern_light: OmniLight3D = OmniLight3D.new()
+	lantern_light.name = "LanternaDeParede"
+	lantern_light.position = Vector3(1.8, 1.65, -0.5)
+	lantern_light.light_color = Color(0.95, 0.68, 0.32, 1.0)
+	lantern_light.light_energy = 0.75
+	lantern_light.omni_range = 4.5
+	lantern_light.shadow_enabled = false
+	add_child(lantern_light)
+
 func darken(source: StandardMaterial3D, factor: float) -> StandardMaterial3D:
 	return _material(source.albedo_color.darkened(1.0 - factor), source.roughness, source.metallic)
