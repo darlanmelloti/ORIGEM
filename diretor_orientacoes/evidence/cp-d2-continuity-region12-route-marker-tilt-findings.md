@@ -1,6 +1,6 @@
 # Findings — Passe de inclinação dos marcadores de rota Região 12
 
-A inclinação lateral dos marcadores foi reduzida para manter a leitura da rota mais orgânica e estável sobre a faixa pétrea. A captura confirma a legibilidade do percurso e a separação visual entre soleira, base e núcleo temporal.
+A inclinação dos marcadores foi reduzida subtilmente para estabilizar o wayfinding sobre a faixa pétrea. A captura confirma uma leitura física mais calma, com os marcadores integrados na composição e sem competir com a soleira ou com o núcleo temporal.
 
 O parser/headless passou, o gameplay tem 30.000000 segundos e o print é 1600×900. O passe está aprovado para publicação; a continuidade seguirá imediatamente dentro da Região 12.
 
