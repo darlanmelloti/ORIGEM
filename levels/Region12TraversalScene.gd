@@ -465,8 +465,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		central_recess.scale = Vector3(1.12, 0.78, 0.14)
 		central_recess.rotation = Vector3(0.0, PI, 0.0)
 		var recess_material := StandardMaterial3D.new()
-		recess_material.albedo_color = Color("#050914")
-		recess_material.roughness = 1.0
+		recess_material.albedo_color = Color("#0b1524")
+		recess_material.roughness = 0.94
 		for recess_mesh in central_recess.find_children("*", "MeshInstance3D", true, false):
 			recess_mesh.set_surface_override_material(0, recess_material)
 		central_recess.visible = true
