@@ -254,6 +254,20 @@ func _build_final_dome_traversal_proxy() -> void:
 		base_edge.scale = Vector3(4.8, 0.42, 1.25)
 		base_edge.rotation = Vector3(0.02, 0.0, 0.0)
 		proxy.add_child(base_edge)
+	for grounding_x in [-3.45, 3.45]:
+		var grounding_stone := ROCK_LARGE.instantiate() as Node3D
+		if grounding_stone == null:
+			continue
+		grounding_stone.name = "ApoioBaixoSoleiraR12_%s" % str(grounding_x)
+		grounding_stone.position = Vector3(grounding_x, 0.58, -4.82)
+		grounding_stone.scale = Vector3(1.25, 0.34, 0.82)
+		grounding_stone.rotation = Vector3(0.03, 0.12 * sign(grounding_x), 0.02)
+		var grounding_material := StandardMaterial3D.new()
+		grounding_material.albedo_color = Color("#455b70")
+		grounding_material.roughness = 0.96
+		for grounding_mesh in grounding_stone.find_children("*", "MeshInstance3D", true, false):
+			grounding_mesh.set_surface_override_material(0, grounding_material)
+		proxy.add_child(grounding_stone)
 	for wall_x in [-7.0, 7.0]:
 		var wall := ROCK_LARGE.instantiate() as Node3D
 		if wall == null:
