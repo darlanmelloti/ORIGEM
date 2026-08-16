@@ -356,8 +356,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		alpine_backdrop.scale = Vector3(5.4, 1.55, 0.48)
 		alpine_backdrop.rotation = Vector3(0.03, 0.0, 0.0)
 		var alpine_material := StandardMaterial3D.new()
-		alpine_material.albedo_color = Color("#0b1222")
-		alpine_material.roughness = 0.98
+		alpine_material.albedo_color = Color("#101a2c")
+		alpine_material.roughness = 0.96
 		alpine_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		for alpine_mesh in alpine_backdrop.find_children("*", "MeshInstance3D", true, false):
 			alpine_mesh.set_surface_override_material(0, alpine_material)

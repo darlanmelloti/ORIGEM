@@ -1,0 +1,2 @@
+9e55f896a5ed96e4b10b430e9c58e0c4a23351388013e8115333ca63549ee830  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-continuity-region12-backdrop-contrast-pass/gameplay-30s.mp4
+a8e5c76cc725670320df0e42b63e40db09d42bebba6a9be1b40c033bf1019fe1  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-continuity-region12-backdrop-contrast-pass/print-1600x900.jpg
