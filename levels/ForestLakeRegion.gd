@@ -281,8 +281,8 @@ func _build_lake_wayfinding() -> void:
 	var chronos: StandardMaterial3D = StandardMaterial3D.new()
 	chronos.albedo_color = Color(0.035, 0.20, 0.30, 1.0)
 	chronos.emission_enabled = true
-	chronos.emission = Color(0.02, 0.42, 0.80, 1.0)
-	chronos.emission_energy_multiplier = 1.45
+	chronos.emission = Color(0.012, 0.16, 0.31, 1.0)
+	chronos.emission_energy_multiplier = 0.42
 	for index: int in range(4):
 		var t: float = float(index) / 3.0
 		var z_value: float = lerpf(154.0, 218.0, t)
@@ -301,8 +301,8 @@ func _build_lake_wayfinding() -> void:
 		pillar.rotation.y = 0.26 + float(index) * 0.57
 		markers.add_child(pillar)
 		var beacon_mesh: SphereMesh = SphereMesh.new()
-		beacon_mesh.radius = 0.16
-		beacon_mesh.height = 0.32
+		beacon_mesh.radius = 0.105
+		beacon_mesh.height = 0.21
 		beacon_mesh.radial_segments = 12
 		beacon_mesh.material = chronos
 		var beacon: MeshInstance3D = MeshInstance3D.new()
@@ -311,9 +311,9 @@ func _build_lake_wayfinding() -> void:
 		beacon.position = Vector3(x_value, ground_y + 2.42, z_value)
 		markers.add_child(beacon)
 		var light: OmniLight3D = OmniLight3D.new()
-		light.light_color = Color(0.18, 0.48, 0.82, 1.0)
-		light.light_energy = 0.38
-		light.omni_range = 5.5
+		light.light_color = Color(0.08, 0.26, 0.44, 1.0)
+		light.light_energy = 0.11
+		light.omni_range = 3.0
 		light.shadow_enabled = false
 		light.position = beacon.position
 		markers.add_child(light)
