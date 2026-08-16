@@ -128,6 +128,23 @@ func _build_region12_cinematic_fill() -> void:
 	rim_light.directional_shadow_max_distance = 28.0
 	rim_light.rotation = Vector3(deg_to_rad(-48.0), deg_to_rad(-28.0), deg_to_rad(-12.0))
 	add_child(rim_light)
+	# Passe contínuo: recorte quente de baixa energia para separar a soleira e a rocha CC0 do núcleo violeta.
+	var warm_fill := DirectionalLight3D.new()
+	warm_fill.name = "RecorteQuenteSoleiraR12"
+	warm_fill.light_color = Color("#c18b68")
+	warm_fill.light_energy = 0.12
+	warm_fill.shadow_enabled = false
+	warm_fill.rotation = Vector3(deg_to_rad(-24.0), deg_to_rad(148.0), deg_to_rad(8.0))
+	add_child(warm_fill)
+	for local_x in [-2.2, 2.2]:
+		var threshold_fill := OmniLight3D.new()
+		threshold_fill.name = "PreenchimentoQuenteSoleira_%s" % str(local_x)
+		threshold_fill.light_color = Color("#d39363")
+		threshold_fill.light_energy = 0.42
+		threshold_fill.omni_range = 7.0
+		threshold_fill.shadow_enabled = false
+		threshold_fill.position = Vector3(164.0 + local_x, 1.35, 173.9)
+		add_child(threshold_fill)
 
 func _dampen_emissive_landmarks(root: Node) -> void:
 	for child in root.get_children():
