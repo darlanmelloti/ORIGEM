@@ -332,6 +332,7 @@ func _build_ruin_arch() -> void:
 			base_rock.rotation.y = base_side * 0.22
 			_apply_material(base_rock, ruin_material)
 			arch.add_child(base_rock)
+	_build_arch_grounding_clusters(arch)
 	# Duas brasas litúrgicas tornam o arco reconhecível à distância, mantendo a luz concentrada no marco e não em toda a estrada.
 	var ember_material: StandardMaterial3D = StandardMaterial3D.new()
 	ember_material.albedo_color = Color(0.30, 0.075, 0.018, 1.0)
@@ -380,6 +381,30 @@ func _build_ruin_arch() -> void:
 	arch_fill.shadow_enabled = false
 	arch_fill.position = Vector3(0.0, 4.4, 2.6)
 	arch.add_child(arch_fill)
+
+func _build_arch_grounding_clusters(arch: Node3D) -> void:
+	# Grupos baixos e assimétricos de pedra quebram a transição recta pilar-solo. Estão fora do vão
+	# central, não recebem colisores e não acrescentam luzes dinâmicas ao orçamento do corredor.
+	var cluster_specs: Array[Dictionary] = [
+		{"x": -4.50, "z": -1.28, "s": 0.28, "yaw": 0.36},
+		{"x": -4.92, "z": 0.32, "s": 0.22, "yaw": -0.72},
+		{"x": -4.30, "z": 1.56, "s": 0.17, "yaw": 1.08},
+		{"x": 4.50, "z": 1.22, "s": 0.27, "yaw": -0.44},
+		{"x": 4.94, "z": -0.34, "s": 0.20, "yaw": 0.88},
+		{"x": 4.26, "z": -1.46, "s": 0.16, "yaw": -1.18},
+	]
+	for index: int in range(cluster_specs.size()):
+		var spec: Dictionary = cluster_specs[index]
+		var rubble: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rubble == null:
+			continue
+		rubble.name = "GrupoDeBaseArco_%02d" % index
+		var scale_value: float = spec["s"] as float
+		rubble.position = Vector3(spec["x"] as float, -0.11, spec["z"] as float)
+		rubble.scale = Vector3(scale_value, scale_value * 0.60, scale_value * 0.92)
+		rubble.rotation.y = spec["yaw"] as float
+		_apply_material(rubble, ruin_material)
+		arch.add_child(rubble)
 
 func _build_cartographic_southwest_readability() -> void:
 	# CP 218 — Leitura cartográfica do sudoeste: Casa Voss → Estrada do Rio → Arco.
