@@ -408,11 +408,11 @@ func _process(delta: float) -> void:
 func _set_camera(progress: float) -> void:
 	if camera == null:
 		return
-	var start := Vector3(164.0, 5.85, 181.8)
-	var finish := Vector3(164.0, 5.55, 179.4)
+	var start := Vector3(164.0, 5.55, 181.8)
+	var finish := Vector3(164.0, 5.25, 179.4)
 	var position := start.lerp(finish, progress)
 	position.x += sin(progress * TAU * 0.8) * 0.8
 	position.y += sin(progress * PI) * 0.55
 	camera.position = position
-	var target := Vector3(164.0, 3.45, 173.7)
+	var target := Vector3(164.0, 3.15, 173.7)
 	camera.look_at(target, Vector3.UP)
