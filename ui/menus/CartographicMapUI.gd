@@ -8,6 +8,8 @@ var map_root: Control
 var map_texture: TextureRect
 var player_marker: Panel
 var player_marker_label: Label
+var player_heading: Polygon2D
+var player_heading_shadow: Polygon2D
 var route_marker: Panel
 var route_marker_label: Label
 var is_open: bool = false
@@ -63,6 +65,24 @@ func _build_interface() -> void:
 	marker_style.corner_radius_bottom_right = 7
 	player_marker.add_theme_stylebox_override("panel", marker_style)
 	map_texture.add_child(player_marker)
+
+	# Seta geométrica: elimina a ambiguidade visual do glifo tipográfico quando o mapa é reduzido.
+	var arrow_shape := PackedVector2Array([
+		Vector2(0.0, -18.0), Vector2(11.0, 10.0),
+		Vector2(0.0, 5.0), Vector2(-11.0, 10.0)
+	])
+	player_heading_shadow = Polygon2D.new()
+	player_heading_shadow.name = "SombraDirecaoDeElias"
+	player_heading_shadow.polygon = arrow_shape
+	player_heading_shadow.color = Color(0.025, 0.045, 0.065, 0.94)
+	player_heading_shadow.scale = Vector2(1.30, 1.30)
+	map_texture.add_child(player_heading_shadow)
+
+	player_heading = Polygon2D.new()
+	player_heading.name = "DirecaoDeElias"
+	player_heading.polygon = arrow_shape
+	player_heading.color = Color(1.0, 0.90, 0.42, 1.0)
+	map_texture.add_child(player_heading)
 
 	player_marker_label = Label.new()
 	player_marker_label.name = "LegendaMarcadorElias"
@@ -153,11 +173,18 @@ func _update_route_destination(player_z: float) -> void:
 	if route_marker_label != null:
 		route_marker_label.text = str(route["label"])
 
-func update_player_world_position(world_position: Vector3) -> void:
+func update_player_world_position(world_position: Vector3, player_yaw: float = 0.0) -> void:
 	if player_marker == null:
 		return
 	var map_position: Vector2 = _map_position(world_position.x, world_position.z)
 	player_marker.position = map_position - player_marker.size * 0.5
+	if player_heading != null:
+		# No mundo +Z aponta para norte cartográfico e a frente de Elias é -Z quando yaw=0.
+		player_heading.position = map_position
+		player_heading.rotation = player_yaw + PI
+		if player_heading_shadow != null:
+			player_heading_shadow.position = map_position
+			player_heading_shadow.rotation = player_yaw + PI
 	if player_marker_label != null:
 		player_marker_label.position = player_marker.position + Vector2(10.0, -5.0)
 	_update_route_destination(world_position.z)
