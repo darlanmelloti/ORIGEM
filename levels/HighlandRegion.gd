@@ -5,6 +5,8 @@
 extends Node3D
 
 const PINE_TALL: PackedScene = preload("res://assets/models_generated/ez_pine_tall_pbr.glb")
+const TREE_CC0: PackedScene = preload("res://assets/models_cc0/tree_detailed_dark.glb")
+const FERN_CC0: PackedScene = preload("res://assets/models_polyhaven/fern_02/fern_02_1k.gltf")
 const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const FLAGSTONE: Texture2D = preload("res://assets/textures/generated/daylight_weathered_flagstone.png")
@@ -56,13 +58,14 @@ func _build_elevated_village() -> void:
 		_apply_material(terrace, stone_material)
 		village.add_child(terrace)
 	# Três casas-âncora preservam a leitura de vila e reduzem instâncias GLB para o orçamento GTX 1050.
-	for house_index: int in range(3):
-		var row: int = house_index / 3
-		var col: int = house_index % 3
+	for house_index: int in range(4):
+		var row: int = house_index / 2
+		var col: int = house_index % 2
 		var house: Node3D = _make_village_house(house_index)
-		var house_local_x: float = -10.0 + float(col) * 10.0 - float(row) * 2.5
-		var house_local_z: float = 2.0 + float(house_index) * 4.0
-		house.position = Vector3(house_local_x, _height_at(village_x + house_local_x, village_z + house_local_z) - village.position.y - 0.45, house_local_z)
+		house.scale = Vector3.ONE * 1.8
+		var house_local_x: float = -9.0 + float(col) * 18.0
+		var house_local_z: float = 4.0 + float(row) * 11.0
+		house.position = Vector3(house_local_x, 1.15 + float(row) * 2.85, house_local_z)
 		village.add_child(house)
 	for pillar_index: int in range(4):
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
@@ -72,50 +75,106 @@ func _build_elevated_village() -> void:
 		pillar.scale = Vector3(0.46, 0.46, 0.46)
 		_apply_material(pillar, stone_material)
 		village.add_child(pillar)
-		var village_lights: Array[Vector3] = [Vector3(-8.0, 6.0, 3.0), Vector3(2.0, 9.0, 9.0), Vector3(10.0, 7.0, 15.0)]
-		for light_index: int in range(village_lights.size()):
-			var beacon: OmniLight3D = OmniLight3D.new()
-			beacon.name = "FachoRessonanciaVila_%02d" % light_index
-			beacon.position = village_lights[light_index]
-			beacon.light_color = Color("#d9a95f") if light_index < 2 else Color("#5cc8ff")
-			beacon.light_energy = 0.92 if light_index < 2 else 1.10
-			beacon.omni_range = 10.0
-			beacon.shadow_enabled = false
-			village.add_child(beacon)
-		# Estela de chegada no handoff Dev1: asset CC0, Area3D de raio físico 2.5m e texto diegético.
-		var arrival_stela: Node3D = PILLAR.instantiate() as Node3D
-		if arrival_stela != null:
-			arrival_stela.name = "EstelaChegadaRegiao7"
-			arrival_stela.position = Vector3(0.0, 2.25, 3.0)
-			arrival_stela.scale = Vector3(0.42, 0.78, 0.42)
-			_apply_material(arrival_stela, stone_material)
-			village.add_child(arrival_stela)
-			var stela_light := OmniLight3D.new()
-			stela_light.name = "LuzEstelaRegiao7"
-			stela_light.position = arrival_stela.position + Vector3(0.0, 1.6, 0.0)
-			stela_light.light_color = Color("#d9a95f")
-			stela_light.light_energy = 0.85
-			stela_light.omni_range = 8.0
-			stela_light.shadow_enabled = false
-			village.add_child(stela_light)
-			var stela_area := Area3D.new()
-			stela_area.name = "EstelaChegadaRegiao7_Area"
-			stela_area.position = Vector3(0.0, 1.4, 3.0)
-			var stela_shape := CollisionShape3D.new()
-			var stela_sphere := SphereShape3D.new()
-			stela_sphere.radius = 2.5
-			stela_shape.shape = stela_sphere
-			stela_area.add_child(stela_shape)
-			village.add_child(stela_area)
-			var stela_label := Label3D.new()
-			stela_label.name = "EstelaChegadaRegiao7_Label"
-			stela_label.text = "Vila Elevada — Marco 7"
-			stela_label.font_size = 28
-			stela_label.outline_size = 8
-			stela_label.modulate = Color("#f3d39b")
-			stela_label.position = Vector3(0.0, 4.1, 3.0)
-			stela_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-			village.add_child(stela_label)
+	var village_lights: Array[Vector3] = [Vector3(-8.0, 6.0, 3.0), Vector3(2.0, 9.0, 9.0), Vector3(10.0, 7.0, 15.0)]
+	for light_index: int in range(village_lights.size()):
+		var beacon: OmniLight3D = OmniLight3D.new()
+		beacon.name = "FachoRessonanciaVila_%02d" % light_index
+		beacon.position = village_lights[light_index]
+		beacon.light_color = Color("#9fc4d4") if light_index == 0 else Color("#d9a95f")
+		beacon.light_energy = 1.10 if light_index == 0 else 1.45
+		beacon.omni_range = 10.0
+		beacon.shadow_enabled = false
+		village.add_child(beacon)
+	_build_village_ecology(village)
+	_build_village_npcs(village)
+	# Estela de chegada no handoff Dev1: asset CC0, Area3D de raio físico 2.5m e texto diegético.
+	var arrival_stela: Node3D = PILLAR.instantiate() as Node3D
+	if arrival_stela != null:
+		arrival_stela.name = "EstelaChegadaRegiao7"
+		arrival_stela.position = Vector3(0.0, 2.25, 3.0)
+		arrival_stela.scale = Vector3(0.42, 0.78, 0.42)
+		_apply_material(arrival_stela, stone_material)
+		village.add_child(arrival_stela)
+		var stela_light := OmniLight3D.new()
+		stela_light.name = "LuzEstelaRegiao7"
+		stela_light.position = arrival_stela.position + Vector3(0.0, 1.6, 0.0)
+		stela_light.light_color = Color("#d9a95f")
+		stela_light.light_energy = 0.85
+		stela_light.omni_range = 8.0
+		stela_light.shadow_enabled = false
+		village.add_child(stela_light)
+		var stela_area := Area3D.new()
+		stela_area.name = "EstelaChegadaRegiao7_Area"
+		stela_area.position = Vector3(0.0, 1.4, 3.0)
+		var stela_shape := CollisionShape3D.new()
+		var stela_sphere := SphereShape3D.new()
+		stela_sphere.radius = 2.5
+		stela_shape.shape = stela_sphere
+		stela_area.add_child(stela_shape)
+		village.add_child(stela_area)
+		var stela_label := Label3D.new()
+		stela_label.name = "EstelaChegadaRegiao7_Label"
+		stela_label.text = "Vila Elevada — Marco 7"
+		stela_label.font_size = 28
+		stela_label.outline_size = 8
+		stela_label.modulate = Color("#f3d39b")
+		stela_label.position = Vector3(0.0, 4.1, 3.0)
+		stela_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		village.add_child(stela_label)
+
+func _build_village_ecology(village: Node3D) -> void:
+	var tree_positions: Array[Vector3] = [Vector3(-18.0, 0.0, 0.0), Vector3(18.0, 0.0, 1.0), Vector3(-19.0, 0.0, 12.0), Vector3(19.0, 0.0, 14.0), Vector3(-15.0, 0.0, 24.0), Vector3(15.0, 0.0, 25.0)]
+	for index: int in range(tree_positions.size()):
+		var tree: Node3D = TREE_CC0.instantiate() as Node3D
+		if tree == null:
+			continue
+		tree.name = "ArvoreVila_%02d" % index
+		tree.position = tree_positions[index]
+		tree.scale = Vector3.ONE * (0.72 + float(index % 3) * 0.10)
+		_apply_material(tree, stone_material)
+		village.add_child(tree)
+	var fern_positions: Array[Vector3] = [Vector3(-13.0, 0.0, 1.0), Vector3(13.0, 0.0, 2.0), Vector3(-14.0, 0.0, 8.0), Vector3(14.0, 0.0, 9.0), Vector3(-14.0, 0.0, 17.0), Vector3(14.0, 0.0, 18.0), Vector3(-11.0, 0.0, 25.0), Vector3(11.0, 0.0, 26.0)]
+	for index: int in range(fern_positions.size()):
+		var fern: Node3D = FERN_CC0.instantiate() as Node3D
+		if fern == null:
+			continue
+		fern.name = "FetoVila_%02d" % index
+		fern.position = fern_positions[index]
+		fern.scale = Vector3.ONE * (0.55 + float(index % 2) * 0.10)
+		_apply_material(fern, stone_material)
+		village.add_child(fern)
+
+func _build_village_npcs(village: Node3D) -> void:
+	var npc_data: Array = [["Aldeão Velho", Vector3(-3.0, 0.0, 9.0)], ["Ferreiro", Vector3(4.0, 0.0, 20.0)]]
+	for index: int in range(npc_data.size()):
+		var npc: Node3D = Node3D.new()
+		npc.name = "NPCVila_%02d" % index
+		var ground: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if ground != null:
+			ground.name = "BaseNPC"
+			ground.scale = Vector3(0.22, 0.42, 0.22)
+			_apply_material(ground, stone_material)
+			npc.add_child(ground)
+		var marker: Node3D = PILLAR.instantiate() as Node3D
+		if marker != null:
+			marker.name = "SilhuetaNPC"
+			marker.position = Vector3(0.0, 1.25, 0.0)
+			marker.scale = Vector3(0.16, 0.38, 0.16)
+			_apply_material(marker, stone_material)
+			npc.add_child(marker)
+		var label := Label3D.new()
+		label.text = str(npc_data[index][0])
+		label.font_size = 22
+		label.outline_size = 6
+		label.modulate = Color("#e5c995")
+		label.position = Vector3(0.0, 2.3, 0.0)
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		npc.add_child(label)
+		npc.position = Vector3(npc_data[index][1])
+		var world_x: float = 140.0 + npc.position.x
+		var world_z: float = 352.0 + npc.position.z
+		npc.position.y = _height_at(world_x, world_z) - (village.position.y - 0.0)
+		village.add_child(npc)
 
 func _make_village_house(index: int) -> Node3D:
 	var house: Node3D = Node3D.new()
@@ -124,7 +183,7 @@ func _make_village_house(index: int) -> Node3D:
 	house_stone_material.albedo_color = Color("#b9aa86")
 	house_stone_material.emission_enabled = true
 	house_stone_material.emission = Color("#765e37")
-	house_stone_material.emission_energy_multiplier = 0.28
+	house_stone_material.emission_energy_multiplier = 0.52
 	var house_roof_material: StandardMaterial3D = roof_material.duplicate() as StandardMaterial3D
 	house_roof_material.albedo_color = Color("#726951")
 	var base: Node3D = ROCK_LARGE.instantiate() as Node3D
@@ -154,7 +213,7 @@ func _make_village_house(index: int) -> Node3D:
 	hearth_light.name = "LuzDiegeticaCasa_%02d" % index
 	hearth_light.position = Vector3(0.0, 2.5, 0.5)
 	hearth_light.light_color = Color("#d9a95f")
-	hearth_light.light_energy = 1.10
+	hearth_light.light_energy = 1.55
 	hearth_light.omni_range = 6.0
 	hearth_light.shadow_enabled = false
 	house.add_child(hearth_light)
