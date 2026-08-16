@@ -1,0 +1,2 @@
+d25808f028c1249ed9b3e98b013748761a65d77ce7c6f024cdc3037de845e03e  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-continuity-region12-camera-framing-pass/gameplay-30s.mp4
+b8d717ab2dbe970b1c50fa8f3a63bfdf8128c84284107600b115ad901bee8706  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-continuity-region12-camera-framing-pass/print-1600x900.jpg
