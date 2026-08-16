@@ -1,0 +1,58 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+ERROR: Condition "status < 0" is true. Returning: ERR_CANT_OPEN
+   at: init_output_device (drivers/alsa/audio_driver_alsa.cpp:97)
+WARNING: All audio drivers failed, falling back to the dummy driver.
+     at: initialize (servers/audio/audio_server.cpp:258)
+
+WARNING: FSR1 3D scaling is only available when using the Forward+ renderer.
+     at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:1028)
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+ORIGEM_REGION7_VILLAGE_GLOBAL (140.0, 19.05272, 352.0)
+ORIGEM_REGION7_STELA_GLOBAL (140.0, 21.30272, 355.0)
+ORIGEM_REGION7_CHILD_GLOBAL AfloramentoTerraco_00 (140.0, 19.67272, 352.0)
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(139.9997, 19.66173, 351.9998) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_CHILD_GLOBAL AfloramentoTerraco_01 (136.5, 23.07272, 360.0)
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(136.4996, 23.06173, 359.9999) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_CHILD_GLOBAL AfloramentoTerraco_02 (133.0, 26.47272, 368.0)
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(132.9996, 26.46173, 368.0) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_CHILD_GLOBAL CasaDePedra_00 (131.0, 20.20272, 356.0)
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(131.0, 21.11712, 356.0) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(128.12, 24.34992, 356.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(131.0, 24.85392, 356.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(133.88, 24.34992, 356.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(130.9985, 25.68028, 355.9987) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_CHILD_GLOBAL CasaDePedra_01 (149.0, 20.20272, 356.0)
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(149.0, 21.11712, 356.0) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(146.12, 24.34992, 356.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(149.0, 24.85392, 356.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(151.88, 24.34992, 356.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(148.9985, 25.68028, 355.9987) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_CHILD_GLOBAL CasaDePedra_02 (131.0, 23.05272, 367.0)
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(131.0, 23.96712, 367.0) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(128.12, 27.19992, 367.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(131.0, 27.70392, 367.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(133.88, 27.19992, 367.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(130.9985, 28.53028, 366.9987) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_CHILD_GLOBAL CasaDePedra_03 (149.0, 23.05272, 367.0)
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(149.0, 23.96712, 367.0) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(146.12, 27.19992, 367.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(149.0, 27.70392, 367.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_tallC visible=true global=(151.88, 27.19992, 367.0) aabb=[P: (-0.228097, 0.0, -0.218254), S: (0.456194, 0.782936, 0.436508)]
+ORIGEM_REGION7_MESH stone_largeA visible=true global=(148.9985, 28.53028, 366.9987) aabb=[P: (-0.392453, -0.0, -0.507731), S: (0.784907, 0.259776, 1.015461)]
+ORIGEM_REGION7_TERRAIN_PROBE (130.0, 354.0) 12.5898634488948
+ORIGEM_REGION7_TERRAIN_PROBE (140.0, 358.0) 14.3646302667559
+ORIGEM_REGION7_TERRAIN_PROBE (150.0, 362.0) 18.2188960430613

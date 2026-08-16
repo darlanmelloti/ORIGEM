@@ -75,7 +75,7 @@ func _build_region7_cinematic_house_reveal() -> void:
 			if pillar == null:
 				continue
 			pillar.name = "CasaRevealPilar_%02d_%02d" % [index, pillar_index]
-			pillar.position = house_positions[index] + Vector3(-1.4 + float(pillar_index) * 1.4, 2.1, 0.0)
+			pillar.position = house_positions[index] + Vector3(-1.4 + float(pillar_index) * 1.4, 1.65, 0.0)
 			pillar.scale = Vector3(0.42, 1.25 + 0.12 * float(pillar_index % 2), 0.42)
 			pillar.rotation = Vector3(0.02, 0.16 * float(index), -0.02)
 			_apply_region7_reveal_material(pillar, reveal_material)
@@ -83,7 +83,7 @@ func _build_region7_cinematic_house_reveal() -> void:
 		var roof := ROCK_LARGE.instantiate() as Node3D
 		if roof != null:
 			roof.name = "CasaRevealCobertura_%02d" % index
-			roof.position = house_positions[index] + Vector3(0.0, 3.55, 0.0)
+			roof.position = house_positions[index] + Vector3(0.0, 3.05, 0.0)
 			roof.scale = Vector3(2.35, 0.34, 1.75)
 			roof.rotation = Vector3(0.12, 0.28 * float(index), -0.08)
 			_apply_region7_reveal_material(roof, reveal_material)
