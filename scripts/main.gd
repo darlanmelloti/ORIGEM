@@ -98,6 +98,10 @@ func _process(delta: float):
 	if map_key_pressed and not map_key_was_pressed and cartographic_map_ui != null and cartographic_map_ui.has_method("toggle_map"):
 		cartographic_map_ui.call("toggle_map")
 	map_key_was_pressed = map_key_pressed
+	if cartographic_map_ui != null and cartographic_map_ui.has_method("update_player_world_position"):
+		var player_node: Node3D = get_tree().get_first_node_in_group("player") as Node3D
+		if player_node != null:
+			cartographic_map_ui.call("update_player_world_position", player_node.global_position)
 	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

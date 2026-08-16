@@ -4,7 +4,20 @@ extends CanvasLayer
 const MAP_TEXTURE: Texture2D = preload("res://assets/ui/mapa_cartografico_origem.png")
 
 var map_root: Control
+var map_texture: TextureRect
+var player_marker: Panel
+var player_marker_label: Label
 var is_open: bool = false
+
+# Janela útil da cartografia, calibrada contra as âncoras do mundo: oeste→este e sul→norte.
+const WORLD_MIN_X: float = -140.0
+const WORLD_MAX_X: float = 210.0
+const WORLD_MIN_Z: float = 0.0
+const WORLD_MAX_Z: float = 570.0
+const MAP_INSET_LEFT: float = 92.0
+const MAP_INSET_TOP: float = 46.0
+const MAP_INSET_WIDTH: float = 620.0
+const MAP_INSET_HEIGHT: float = 500.0
 
 func _ready() -> void:
 	layer = 12
@@ -26,19 +39,43 @@ func _build_interface() -> void:
 	backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
 	map_root.add_child(backdrop)
 
-	var texture := TextureRect.new()
-	texture.name = "MapaOficialDoVale"
-	texture.texture = MAP_TEXTURE
-	texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	map_texture = TextureRect.new()
+	map_texture.name = "MapaOficialDoVale"
+	map_texture.texture = MAP_TEXTURE
+	map_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	map_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	# Canvas 4:3 de 800×600, centrado em qualquer resolução; preserva a cartografia completa sem corte lateral.
-	texture.set_anchors_preset(Control.PRESET_CENTER)
-	texture.offset_left = -400.0
-	texture.offset_top = -300.0
-	texture.offset_right = 400.0
-	texture.offset_bottom = 300.0
-	texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	map_root.add_child(texture)
+	map_texture.set_anchors_preset(Control.PRESET_CENTER)
+	map_texture.offset_left = -400.0
+	map_texture.offset_top = -300.0
+	map_texture.offset_right = 400.0
+	map_texture.offset_bottom = 300.0
+	map_texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map_root.add_child(map_texture)
+
+	player_marker = Panel.new()
+	player_marker.name = "MarcadorDeElias"
+	player_marker.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	player_marker.size = Vector2(14.0, 14.0)
+	player_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var marker_style := StyleBoxFlat.new()
+	marker_style.bg_color = Color(0.20, 0.72, 0.96, 1.0)
+	marker_style.border_color = Color(0.94, 0.82, 0.45, 1.0)
+	marker_style.set_border_width_all(2)
+	marker_style.corner_radius_top_left = 7
+	marker_style.corner_radius_top_right = 7
+	marker_style.corner_radius_bottom_left = 7
+	marker_style.corner_radius_bottom_right = 7
+	player_marker.add_theme_stylebox_override("panel", marker_style)
+	map_texture.add_child(player_marker)
+
+	player_marker_label = Label.new()
+	player_marker_label.name = "LegendaMarcadorElias"
+	player_marker_label.text = "ELIAS"
+	player_marker_label.add_theme_font_size_override("font_size", 12)
+	player_marker_label.add_theme_color_override("font_color", Color(0.94, 0.86, 0.62, 1.0))
+	player_marker_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map_texture.add_child(player_marker_label)
 
 	var title := Label.new()
 	title.name = "TituloMapa"
@@ -73,6 +110,18 @@ func _build_interface() -> void:
 	hint.offset_bottom = -12.0
 	hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_root.add_child(hint)
+
+func update_player_world_position(world_position: Vector3) -> void:
+	if player_marker == null:
+		return
+	var map_x: float = MAP_INSET_LEFT + inverse_lerp(WORLD_MIN_X, WORLD_MAX_X, world_position.x) * MAP_INSET_WIDTH
+	# O eixo Z cresce para norte no mundo, mas cresce para baixo na textura do mapa.
+	var map_y: float = MAP_INSET_TOP + (1.0 - inverse_lerp(WORLD_MIN_Z, WORLD_MAX_Z, world_position.z)) * MAP_INSET_HEIGHT
+	map_x = clampf(map_x, MAP_INSET_LEFT, MAP_INSET_LEFT + MAP_INSET_WIDTH)
+	map_y = clampf(map_y, MAP_INSET_TOP, MAP_INSET_TOP + MAP_INSET_HEIGHT)
+	player_marker.position = Vector2(map_x - player_marker.size.x * 0.5, map_y - player_marker.size.y * 0.5)
+	if player_marker_label != null:
+		player_marker_label.position = player_marker.position + Vector2(10.0, -5.0)
 
 func toggle_map() -> void:
 	_set_open(not is_open)
