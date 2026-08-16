@@ -89,3 +89,7 @@ O ficheiro `.windsurfrules` na raiz do projeto define as regras que a IA deve se
 
 Arquitetura e implementação inicial: **Manus AI**
 Visão e direção criativa: **Darlan Mello**
+## Identificação da Branch Dev2
+
+Esta branch também integra o pacote de desenvolvimento das Regiões 7–12 do projecto ORIGEM, incluindo os módulos de Takes 6–8 e as validações auditáveis do Desenvolvedor 2.
+
