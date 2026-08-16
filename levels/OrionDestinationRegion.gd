@@ -223,6 +223,33 @@ func _make_resonance_material() -> StandardMaterial3D:
 	return material
 
 func _build_cube_chamber_marker() -> void:
+	var chamber_route: Node3D = Node3D.new()
+	chamber_route.name = "ContinuidadeCavernaParaCamaraOrion"
+	add_child(chamber_route)
+	var chamber_route_material: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
+	chamber_route_material.albedo_color = Color("#425b61")
+	chamber_route_material.roughness = 0.94
+	for index: int in range(7):
+		var route_t: float = float(index) / 6.0
+		var route_z: float = lerpf(547.0, 560.0, route_t)
+		var route_stone: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if route_stone == null:
+			continue
+		route_stone.name = "DegrauCavernaParaCamara_%02d" % index
+		route_stone.position = Vector3(-116.0, _height_at(-116.0, route_z) + 0.25, route_z)
+		route_stone.scale = Vector3(0.48 + float(index % 2) * 0.08, 0.13, 0.34)
+		route_stone.rotation = Vector3(0.02, float(index) * 0.21, -0.03)
+		_apply_material(route_stone, chamber_route_material)
+		chamber_route.add_child(route_stone)
+		if index % 2 == 1:
+			var route_light := OmniLight3D.new()
+			route_light.name = "LuzWayfindingCamara_%02d" % index
+			route_light.light_color = Color("#4ebbd3")
+			route_light.light_energy = 0.70
+			route_light.omni_range = 5.5
+			route_light.shadow_enabled = false
+			route_light.position = route_stone.position + Vector3(0.0, 0.9, 0.0)
+			chamber_route.add_child(route_light)
 	var chamber: Node3D = Node3D.new()
 	chamber.name = "CamaraDoOrionCube"
 	var chamber_x: float = -116.0
