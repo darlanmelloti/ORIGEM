@@ -42,6 +42,8 @@ func _ready() -> void:
 			hub_core.visible = false
 	var dome := destination.get_node_or_null("CupulaFinal") as Node3D
 	if dome != null:
+		# Dedicated validation isolates the proxy; the integrated builder remains unchanged in OrionDestinationRegion.gd.
+		dome.visible = false
 		dome.position += Vector3(0.0, 1.6, 0.0)
 		var dome_light := OmniLight3D.new()
 		dome_light.name = "FinalDomeApproachLight"
@@ -55,8 +57,8 @@ func _ready() -> void:
 	_build_final_dome_traversal_proxy()
 	var traversal_proxy := get_node_or_null("CupulaFinalTraversalOrganicReveal") as Node3D
 	if traversal_proxy != null:
-		# Builder integration is now the active evidence target; keep proxy code for rollback/reference only.
-		traversal_proxy.visible = false
+		# Dedicated Region 12 visual correction: enlarge the organic sanctuary for a readable cinematic take.
+		traversal_proxy.visible = true
 	camera = Camera3D.new()
 	camera.name = "Region12TraversalCamera"
 	camera.fov = 53.0
@@ -78,6 +80,7 @@ func _build_final_dome_traversal_proxy() -> void:
 	var proxy := Node3D.new()
 	proxy.name = "CupulaFinalTraversalOrganicReveal"
 	proxy.position = Vector3(164.0, -0.85, 178.0)
+	proxy.scale = Vector3(1.28, 1.28, 1.28)
 	add_child(proxy)
 	for index: int in range(7):
 		var angle: float = float(index) * TAU / 7.0
@@ -166,7 +169,7 @@ func _build_final_dome_traversal_proxy() -> void:
 	var recessed_backdrop := ROCK_LARGE.instantiate() as Node3D
 	if recessed_backdrop != null:
 		recessed_backdrop.name = "FundoOrganicoRecuadoCupula"
-		recessed_backdrop.position = Vector3(0.0, 2.55, -5.05)
+		recessed_backdrop.position = Vector3(0.0, 2.75, -5.05)
 		recessed_backdrop.scale = Vector3(1.35, 0.82, 0.24)
 		recessed_backdrop.rotation = Vector3(0.0, PI, 0.0)
 		var backdrop_material := StandardMaterial3D.new()
@@ -187,8 +190,8 @@ func _build_final_dome_traversal_proxy() -> void:
 	var base_edge := ROCK_LARGE.instantiate() as Node3D
 	if base_edge != null:
 		base_edge.name = "BordaBaseOrganicaCupula"
-		base_edge.position = Vector3(0.0, 0.62, -4.42)
-		base_edge.scale = Vector3(5.8, 0.52, 1.65)
+		base_edge.position = Vector3(0.0, 0.78, -5.05)
+		base_edge.scale = Vector3(4.8, 0.42, 1.25)
 		base_edge.rotation = Vector3(0.02, 0.0, 0.0)
 		proxy.add_child(base_edge)
 	for wall_x in [-7.0, 7.0]:
@@ -222,19 +225,29 @@ func _build_final_dome_traversal_proxy() -> void:
 	var threshold := ROCK_LARGE.instantiate() as Node3D
 	if threshold != null:
 		threshold.name = "SoleiraOrganicaCupulaFinal"
-		threshold.position = Vector3(0.0, 0.52, -4.15)
-		threshold.scale = Vector3(6.2, 0.7, 2.6)
+		threshold.position = Vector3(0.0, 0.68, -4.55)
+		threshold.scale = Vector3(3.65, 0.30, 1.05)
 		threshold.rotation = Vector3(0.02, 0.0, 0.0)
 		proxy.add_child(threshold)
-	for doorway_x in [-2.65, 2.65]:
-		var doorway_jamb := PILLAR.instantiate() as Node3D
-		if doorway_jamb == null:
-			continue
-		doorway_jamb.name = "JambaVerticalPortalCupula_%s" % str(doorway_x)
-		doorway_jamb.position = Vector3(doorway_x * 0.92, 2.25, -4.36)
-		doorway_jamb.scale = Vector3(0.72, 2.35, 0.72)
-		doorway_jamb.rotation = Vector3(0.04, 0.10 * sign(doorway_x), 0.03 * sign(doorway_x))
-		proxy.add_child(threshold)
+		for connector_x in [-2.35, 2.35]:
+			var threshold_connector := ROCK_LARGE.instantiate() as Node3D
+			if threshold_connector == null:
+				continue
+			threshold_connector.name = "ConectorSoleiraGateway_%s" % str(connector_x)
+			threshold_connector.position = Vector3(connector_x * 1.35, 0.66, -4.82)
+			threshold_connector.scale = Vector3(1.7, 0.24, 1.05)
+			threshold_connector.rotation = Vector3(0.04, 0.12 * sign(connector_x), 0.02 * sign(connector_x))
+			threshold_connector.visible = false
+			proxy.add_child(threshold_connector)
+		for doorway_x in [-2.65, 2.65]:
+			var doorway_jamb := PILLAR.instantiate() as Node3D
+			if doorway_jamb == null:
+				continue
+			doorway_jamb.name = "JambaVerticalPortalCupula_%s" % str(doorway_x)
+			doorway_jamb.position = Vector3(doorway_x * 0.92, 2.25, -4.36)
+			doorway_jamb.scale = Vector3(0.72, 2.35, 0.72)
+			doorway_jamb.rotation = Vector3(0.04, 0.10 * sign(doorway_x), 0.03 * sign(doorway_x))
+			proxy.add_child(doorway_jamb)
 	for crown_index in range(3):
 		var crown_stone := ROCK_LARGE.instantiate() as Node3D
 		if crown_stone == null:
@@ -339,11 +352,11 @@ func _process(delta: float) -> void:
 func _set_camera(progress: float) -> void:
 	if camera == null:
 		return
-	var start := Vector3(164.0, 6.25, 184.0)
-	var finish := Vector3(164.0, 5.95, 180.2)
+	var start := Vector3(164.0, 5.85, 181.8)
+	var finish := Vector3(164.0, 5.55, 179.4)
 	var position := start.lerp(finish, progress)
 	position.x += sin(progress * TAU * 0.8) * 0.8
 	position.y += sin(progress * PI) * 0.55
 	camera.position = position
-	var target := Vector3(164.0, 3.2, 173.6)
+	var target := Vector3(164.0, 3.45, 173.7)
 	camera.look_at(target, Vector3.UP)
