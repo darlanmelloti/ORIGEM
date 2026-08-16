@@ -19,20 +19,24 @@ func _ready() -> void:
 	terrain.name = "TerrainPatchRegiao12Traversal"
 	terrain.visible = false
 	add_child(terrain)
-	var traversal_base := MeshInstance3D.new()
-	traversal_base.name = "BaseBaixaTravessiaRegiao12"
-	var base_mesh := CylinderMesh.new()
-	base_mesh.top_radius = 22.0
-	base_mesh.bottom_radius = 23.0
-	base_mesh.height = 0.55
-	base_mesh.radial_segments = 48
-	traversal_base.mesh = base_mesh
-	traversal_base.position = Vector3(164.0, 0.25, 186.0)
-	var base_material := StandardMaterial3D.new()
-	base_material.albedo_color = Color("#29283c")
-	base_material.roughness = 0.94
-	traversal_base.material_override = base_material
+	# A validação não usa uma plataforma cilíndrica como silhueta final; a base é composta por massas CC0 baixas.
+	var traversal_base := Node3D.new()
+	traversal_base.name = "BaseOrganicaTravessiaRegiao12"
+	traversal_base.position = Vector3(164.0, 0.0, 186.0)
 	add_child(traversal_base)
+	var base_positions: Array[Vector3] = [
+		Vector3(-10.0, 0.18, 0.0), Vector3(-6.0, 0.10, 3.2), Vector3(-1.8, 0.08, 4.0),
+		Vector3(3.2, 0.12, 3.6), Vector3(7.6, 0.16, 1.2), Vector3(10.0, 0.10, -2.0), Vector3(0.0, 0.05, -1.2)
+	]
+	for index: int in range(base_positions.size()):
+		var base_stone := ROCK_LARGE.instantiate() as Node3D
+		if base_stone == null:
+			continue
+		base_stone.name = "MassaBaseOrganicaR12_%02d" % index
+		base_stone.position = base_positions[index]
+		base_stone.scale = Vector3(1.45 + float(index % 3) * 0.22, 0.34 + float(index % 2) * 0.12, 1.10 + float(index % 2) * 0.18)
+		base_stone.rotation = Vector3(0.03 * float(index % 2), float(index) * 0.47, -0.02 * float(index % 3))
+		traversal_base.add_child(base_stone)
 	destination = DESTINATION_SCRIPT.new() as Node3D
 	destination.name = "DestinosOrionRegiao12Traversal"
 	add_child(destination)
@@ -496,10 +500,17 @@ func _build_environment() -> void:
 	var world := WorldEnvironment.new()
 	var environment := Environment.new()
 	environment.background_mode = Environment.BG_COLOR
-	environment.background_color = Color("#020611")
+	environment.background_color = Color("#090d24")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_color = Color("#35405c")
-	environment.ambient_light_energy = 0.42
+	environment.ambient_light_color = Color("#56618a")
+	environment.ambient_light_energy = 0.52
+	environment.fog_enabled = true
+	environment.fog_light_color = Color("#53648b")
+	environment.fog_light_energy = 0.38
+	environment.fog_density = 0.0065
+	environment.fog_sky_affect = 0.42
+	environment.fog_height = 1.0
+	environment.fog_height_density = 0.035
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	environment.glow_enabled = false
 	environment.glow_intensity = 0.0

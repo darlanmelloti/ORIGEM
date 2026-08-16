@@ -266,20 +266,31 @@ func _build_cube_chamber_marker() -> void:
 	altar.material_override = stone_material
 	altar.position = Vector3(0.0, -1.9, 0.0)
 	chamber.add_child(altar)
-	var cube_mesh: BoxMesh = BoxMesh.new()
-	cube_mesh.size = Vector3(1.75, 1.75, 1.75)
-	var cube: MeshInstance3D = MeshInstance3D.new()
-	cube.name = "CuboOrion"
-	cube.mesh = cube_mesh
-	cube.material_override = cube_material
-	cube.position = Vector3(0.0, 0.8, 0.0)
-	cube.rotation = Vector3(0.20, 0.54, 0.10)
-	cube.add_to_group("interactable")
-	chamber.add_child(cube)
+	# CP-D2 continuidade: o marco narrativo mantém o grupo interactable, mas deixa de usar um BoxMesh azul como silhueta principal.
+	var cube: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if cube != null:
+		cube.name = "CuboOrion"
+		cube.position = Vector3(0.0, 0.72, 0.0)
+		cube.scale = Vector3(0.72, 1.08, 0.72)
+		cube.rotation = Vector3(0.12, 0.54, -0.08)
+		_apply_material(cube, stone_material)
+		cube.add_to_group("interactable")
+		chamber.add_child(cube)
+		var inner_core := MeshInstance3D.new()
+		inner_core.name = "NucleoEmissivoOrion"
+		var inner_mesh := SphereMesh.new()
+		inner_mesh.radius = 0.58
+		inner_mesh.height = 1.22
+		inner_mesh.radial_segments = 12
+		inner_mesh.material = cube_material
+		inner_core.mesh = inner_mesh
+		inner_core.position = Vector3(0.0, 0.72, 0.0)
+		cube.add_child(inner_core)
 	var cube_light: OmniLight3D = OmniLight3D.new()
+	cube_light.name = "LuzNucleoOrion"
 	cube_light.light_color = Color(0.10, 0.48, 1.0, 1.0)
-	cube_light.light_energy = 4.0
-	cube_light.omni_range = 22.0
+	cube_light.light_energy = 2.2
+	cube_light.omni_range = 14.0
 	cube_light.position = Vector3(0.0, 1.2, 0.0)
 	cube_light.shadow_enabled = false
 	chamber.add_child(cube_light)
