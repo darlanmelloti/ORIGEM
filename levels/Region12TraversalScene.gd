@@ -516,7 +516,7 @@ func _process(delta: float) -> void:
 	elapsed += delta
 	_set_camera(clamp(elapsed / 30.0, 0.0, 1.0))
 	if recess_resonance_light != null:
-		recess_resonance_light.light_energy = 0.20 + sin(elapsed * 1.7) * 0.045
+		recess_resonance_light.light_energy = 0.20 + sin(elapsed * 1.7) * 0.055
 	performance_sample_timer += delta
 	if performance_sample_timer >= 5.0:
 		performance_sample_timer = 0.0
