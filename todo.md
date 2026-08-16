@@ -39,3 +39,12 @@
 - [ ] Iniciar o próximo passe de código imediatamente após cada commit, relatório, gameplay ou print.
 - [ ] Manter o estado `CONTINUOUS_IMPLEMENT_VALIDATE_COMMIT` activo e a próxima acção física já definida.
 - [ ] Limitar o próximo passe às Regiões 7–12, sem modificar Regiões 1–6.
+
+## R12_NEXT_CONTINUITY_PASS — início efectivo
+
+- [ ] Alterar efectivamente a composição da Região 12 na mesma branch.
+- [ ] Preservar a pulsação temporal existente no recessivo.
+- [ ] Melhorar escala/silhueta do santuário, base pétrea, contraste do núcleo e navegação física.
+- [ ] Validar parser/runtime Godot 4.7.1, desempenho e percurso de 30 segundos.
+- [ ] Gerar gameplay e print 1600×900.
+- [ ] Commitar o novo passe e iniciar a próxima acção no mesmo fluxo.

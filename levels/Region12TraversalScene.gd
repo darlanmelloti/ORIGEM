@@ -252,9 +252,14 @@ func _build_final_dome_traversal_proxy() -> void:
 	var base_edge := ROCK_LARGE.instantiate() as Node3D
 	if base_edge != null:
 		base_edge.name = "BordaBaseOrganicaCupula"
-		base_edge.position = Vector3(0.0, 0.78, -5.05)
-		base_edge.scale = Vector3(4.8, 0.42, 1.25)
+		base_edge.position = Vector3(0.0, 0.82, -5.05)
+		base_edge.scale = Vector3(5.15, 0.34, 1.22)
 		base_edge.rotation = Vector3(0.02, 0.0, 0.0)
+		var base_edge_material := StandardMaterial3D.new()
+		base_edge_material.albedo_color = Color("#34495c")
+		base_edge_material.roughness = 0.98
+		for base_edge_mesh in base_edge.find_children("*", "MeshInstance3D", true, false):
+			base_edge_mesh.set_surface_override_material(0, base_edge_material)
 		proxy.add_child(base_edge)
 	for grounding_x in [-3.45, 3.45]:
 		var grounding_stone := ROCK_LARGE.instantiate() as Node3D
@@ -270,6 +275,20 @@ func _build_final_dome_traversal_proxy() -> void:
 		for grounding_mesh in grounding_stone.find_children("*", "MeshInstance3D", true, false):
 			grounding_mesh.set_surface_override_material(0, grounding_material)
 		proxy.add_child(grounding_stone)
+	for route_x in [-1.65, 1.65]:
+		var route_marker := ROCK_LARGE.instantiate() as Node3D
+		if route_marker == null:
+			continue
+		route_marker.name = "MarcadorRotaFisicaR12_%s" % str(route_x)
+		route_marker.position = Vector3(route_x, 0.34, -3.05)
+		route_marker.scale = Vector3(0.34, 0.12, 0.30)
+		route_marker.rotation = Vector3(0.02, 0.10 * sign(route_x), 0.02)
+		var route_material := StandardMaterial3D.new()
+		route_material.albedo_color = Color("#263e50")
+		route_material.roughness = 0.98
+		for route_mesh in route_marker.find_children("*", "MeshInstance3D", true, false):
+			route_mesh.set_surface_override_material(0, route_material)
+		proxy.add_child(route_marker)
 	for wall_x in [-7.0, 7.0]:
 		var wall := ROCK_LARGE.instantiate() as Node3D
 		if wall == null:
