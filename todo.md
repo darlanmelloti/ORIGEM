@@ -70,3 +70,13 @@
 - [x] Repetir headless, gameplay de 30 segundos e print 1600×900 após cada passe.
 - [ ] Criar ZIP reproduzível, SHA-256, commit e sincronização remota para cada checkpoint regional.
 - [x] Emitir relatório consolidado das Regiões 7–12 e iniciar a próxima acção sem aguardar autorização.
+
+
+## Handoff Dev1 → Dev2 — Região 7 / Vila Elevada
+
+- [ ] Confirmar o handoff `Region7TransitionGate` em z=285–348 e `SpawnRegiao7_Dev2_HandoffPoint` em Vector3(140, y, 352).
+- [ ] Auditar a Vila Elevada existente no `HighlandRegion.gd` sem reescrever o módulo base.
+- [ ] Aplicar aterramento físico dos terraços/casas e verificar navegação a partir do portão.
+- [ ] Harmonizar iluminação de crepúsculo, ecologia lateral, fogueiras/lanternas e estela de chegada dentro do orçamento GTX 1050 Ti.
+- [ ] Executar headless, captura, avaliação visual >=85%, gameplay 30s, ZIP, commit, push e STATUS_CHECKPOINT do primeiro incremento Região 7.
+- [ ] Avançar automaticamente para a próxima prioridade Dev2 após o checkpoint.
