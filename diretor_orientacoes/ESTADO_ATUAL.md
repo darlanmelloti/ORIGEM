@@ -7,7 +7,7 @@
 - **TAREFA_EM_EXECUCAO_AGORA**: Próximo passe de validação contínua da travessia Hub Temporal → Cúpula Final, iniciado imediatamente após o commit `479ce56`, sem alterar Regiões 1–6.
 - **DEADLINE_PROXIMO_PUSH**: 2026-08-16T07:55:00Z (UTC)
 
-A validação normal da Cúpula Final passou no harness. A captura de gameplay de 30 segundos e o print 1600×900 foram regenerados com parser e runtime Godot 4.7.1 limpos. A abertura escura agora é legível entre a coroa escalonada, os monólitos laterais sustentam a escala de santuário e a soleira mantém a continuidade do chão. O passe foi aplicado apenas ao harness de Região 12; Regiões 1–6 não foram modificadas.
+A validação normal da Cúpula Final passou no harness. A captura de gameplay de 30 segundos e o print 1600×900 foram regenerados com parser e runtime Godot 4.7.1 limpos. A abertura escura agora é legível entre a coroa escalonada, os monólitos laterais sustentam a escala de santuário e a soleira mantém a continuidade do chão. O passe foi aplicado apenas ao builder/harness da Região 12; Regiões 1–6 não foram modificadas. A sincronização remota HTTPS foi tentada, mas permanece pendente por ausência de credenciais GitHub no ambiente; os commits locais continuam preservados.
 
 ### 🔄 Estado do Ciclo
 
