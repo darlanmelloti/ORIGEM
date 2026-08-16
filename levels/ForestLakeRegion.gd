@@ -394,13 +394,13 @@ func _build_forest_canopy_clusters() -> void:
 	clusters.name = "CopasFocaisDaFlorestaDensa"
 	add_child(clusters)
 	var cluster_data: Array[Dictionary] = [
-		{"z": 138.0, "side": -1.0, "offset": 7.4, "scale": 0.48, "yaw": -0.28},
-		{"z": 146.0, "side": 1.0, "offset": 8.2, "scale": 0.42, "yaw": 0.86},
-		{"z": 155.0, "side": -1.0, "offset": 9.1, "scale": 0.38, "yaw": -1.24},
-		{"z": 163.0, "side": 1.0, "offset": 7.8, "scale": 0.52, "yaw": 2.18},
-		{"z": 173.0, "side": -1.0, "offset": 8.6, "scale": 0.44, "yaw": 0.34},
-		{"z": 184.0, "side": 1.0, "offset": 9.4, "scale": 0.40, "yaw": -2.02},
-		{"z": 196.0, "side": -1.0, "offset": 7.6, "scale": 0.46, "yaw": 1.42}
+		{"z": 138.0, "side": -1.0, "offset": 7.4, "scale": 0.60, "yaw": -0.28},
+		{"z": 146.0, "side": 1.0, "offset": 8.2, "scale": 0.56, "yaw": 0.86},
+		{"z": 155.0, "side": -1.0, "offset": 9.1, "scale": 0.52, "yaw": -1.24},
+		{"z": 163.0, "side": 1.0, "offset": 7.8, "scale": 0.64, "yaw": 2.18},
+		{"z": 173.0, "side": -1.0, "offset": 8.6, "scale": 0.56, "yaw": 0.34},
+		{"z": 184.0, "side": 1.0, "offset": 9.4, "scale": 0.54, "yaw": -2.02},
+		{"z": 196.0, "side": -1.0, "offset": 7.6, "scale": 0.58, "yaw": 1.42}
 	]
 	for index: int in range(cluster_data.size()):
 		var data: Dictionary = cluster_data[index]
