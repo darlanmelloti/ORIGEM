@@ -31,6 +31,7 @@ func _ready() -> void:
 	_build_flagstone_path()
 	_build_ruin_threshold()
 	_build_river_crossing()
+	_build_bridge_crossing_stones()
 	_build_bank_vegetation()
 	_build_distant_ruins()
 
@@ -125,6 +126,38 @@ func _build_river_crossing() -> void:
 	bridge_collision.shape = bridge_shape
 	bridge_body.add_child(bridge_collision)
 	add_child(bridge_body)
+
+func _build_bridge_crossing_stones() -> void:
+	# CP 214 — três pedras emergem da água junto à ponte para reforçar a profundidade do rio.
+	# São puramente visuais: a ponte e o respectivo colisor continuam a ser a travessia física autorizada.
+	var crossings: Node3D = Node3D.new()
+	crossings.name = "PedrasEmergentesDaPonte"
+	add_child(crossings)
+	var wet_stone: StandardMaterial3D = StandardMaterial3D.new()
+	wet_stone.albedo_color = Color(0.12, 0.17, 0.16, 1.0)
+	wet_stone.roughness = 0.76
+	wet_stone.metallic = 0.03
+	var stone_data: Array[Dictionary] = [
+		{"z": -50.5, "dx": -2.30, "scale": 0.34, "yaw": 0.38},
+		{"z": -56.8, "dx": 1.80, "scale": 0.42, "yaw": -0.92},
+		{"z": -63.2, "dx": -1.25, "scale": 0.37, "yaw": 1.66}
+	]
+	for index: int in range(stone_data.size()):
+		var data: Dictionary = stone_data[index]
+		var z_value: float = data["z"] as float
+		var x_value: float = _river_center_x(z_value) + (data["dx"] as float)
+		# A lâmina do rio está a +0.10; a pedra sobe mais 0.08 para ficar claramente legível acima da água.
+		var water_level: float = (_height_at(x_value - 4.48, z_value) + _height_at(x_value + 4.48, z_value)) * 0.5 + 0.10
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraTravessiaPonte_%02d" % index
+		stone.position = Vector3(x_value, water_level + 0.08, z_value)
+		var scale_value: float = data["scale"] as float
+		stone.scale = Vector3(scale_value, scale_value * 0.58, scale_value)
+		stone.rotation.y = data["yaw"] as float
+		_apply_material_recursive(stone, wet_stone)
+		crossings.add_child(stone)
 
 func _build_flagstone_path() -> void:
 	var path: Node3D = Node3D.new()
