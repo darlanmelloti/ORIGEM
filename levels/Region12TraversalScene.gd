@@ -60,6 +60,7 @@ func _ready() -> void:
 		# Dedicated Region 12 visual correction: enlarge the organic sanctuary for a readable cinematic take.
 		traversal_proxy.visible = true
 	_build_region12_wayfinding_lights()
+	_build_region12_recess_resonance()
 	_build_region12_cinematic_fill()
 	camera = Camera3D.new()
 	camera.name = "Region12TraversalCamera"
@@ -99,6 +100,16 @@ func _build_region12_wayfinding_lights() -> void:
 		resonance_core.position = wayfinding_positions[index] + Vector3(0.0, 0.10, 0.0)
 		resonance_core.visible = index < 3
 		add_child(resonance_core)
+
+func _build_region12_recess_resonance() -> void:
+	var recess_light := OmniLight3D.new()
+	recess_light.name = "RessonanciaRecessivoCupulaR12"
+	recess_light.light_color = Color("#3c8fb5")
+	recess_light.light_energy = 0.24
+	recess_light.omni_range = 2.8
+	recess_light.shadow_enabled = false
+	recess_light.position = Vector3(164.0, 2.25, 173.0)
+	add_child(recess_light)
 
 func _build_region12_cinematic_fill() -> void:
 	var rim_light := DirectionalLight3D.new()
