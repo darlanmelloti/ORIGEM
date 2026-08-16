@@ -373,8 +373,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		frame_rock.rotation = Vector3(0.08, 0.18 * sign(frame_x), 0.06 * sign(frame_x))
 
 		var frame_material := StandardMaterial3D.new()
-		frame_material.albedo_color = Color("#17182a")
-		frame_material.roughness = 0.96
+		frame_material.albedo_color = Color("#202842")
+		frame_material.roughness = 0.91
 		frame_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		
 		frame_rock.visible = false
