@@ -377,13 +377,13 @@ func _build_dense_forest() -> void:
 	for index: int in range(112):
 		var z_value: float = 70.0 + float(index) * 1.55
 		var side: float = -1.0 if index % 2 == 0 else 1.0
-		var x_value: float = _path_x(z_value) + side * (4.7 + fmod(float(index), 5.0) * 0.78)
+		var x_value: float = _path_x(z_value) + side * (5.15 + fmod(float(index), 5.0) * 0.82)
 		var fern: Node3D = FERN.instantiate() as Node3D
 		if fern == null:
 			continue
 		fern.name = "FetoFloresta_%02d" % index
 		fern.position = Vector3(x_value, _height_at(x_value, z_value) + 0.02, z_value)
-		var fern_scale: float = 0.34 + fmod(float(index), 3.0) * 0.07
+		var fern_scale: float = 0.42 + fmod(float(index), 3.0) * 0.08
 		fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 		fern.rotation.y = float(index) * 0.68
 		forest.add_child(fern)
