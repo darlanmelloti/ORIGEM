@@ -556,6 +556,10 @@ func _process(delta: float) -> void:
 			var core_material := child.material_override as StandardMaterial3D
 			if core_material != null:
 				core_material.emission_energy_multiplier = 5.6 + sin(elapsed * 1.05) * 0.65
+		if child is MeshInstance3D and child.name.begins_with("MarcadorRotaFisicaR12"):
+			var route_marker_material := child.material_override as StandardMaterial3D
+			if route_marker_material != null:
+				route_marker_material.emission_energy_multiplier = 0.35 + sin(elapsed * 1.35) * 0.10
 	performance_sample_timer += delta
 	if performance_sample_timer >= 5.0:
 		performance_sample_timer = 0.0
