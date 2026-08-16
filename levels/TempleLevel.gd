@@ -559,31 +559,29 @@ func _build_region7_transition() -> void:
 		ps.shape = pillar_shape
 		pb.add_child(ps)
 		gate_root.add_child(pb)
-	# CP 203: Pedras de base nos pilares para leitura arqueológica
+	# Bases e verga usam o kit de ruína real; os colisores dos pilares mantêm a abertura central jogável.
 	for base_side: int in range(2):
 		var bx: float = gate_x + (float(base_side) * 2.0 - 1.0) * 3.2
-		var base_rock: MeshInstance3D = MeshInstance3D.new()
+		var base_rock: Node3D = CARTOGRAPHIC_HANDOFF_PILLAR.instantiate() as Node3D
+		if base_rock == null:
+			continue
 		base_rock.name = "PedraBasePilar_%d" % base_side
-		var base_mesh: BoxMesh = BoxMesh.new()
-		base_mesh.size = Vector3(
-			1.1 + float(base_side) * 0.08,
-			0.28,
-			1.0 + float(base_side) * 0.06
-		)
-		base_rock.mesh = base_mesh
-		base_rock.material_override = moss_mat
-		base_rock.position = Vector3(bx, gate_y + 0.14, gate_z + (float(base_side) * 2.0 - 1.0) * 0.18)
-		base_rock.rotation.y = float(base_side) * 0.06 - 0.03
+		base_rock.scale = Vector3(0.54 + float(base_side) * 0.03, 0.16, 0.50)
+		base_rock.position = Vector3(bx, gate_y + 0.12, gate_z + (float(base_side) * 2.0 - 1.0) * 0.20)
+		base_rock.rotation = Vector3(0.04, float(base_side) * 0.12 - 0.06, 0.05 * (float(base_side) * 2.0 - 1.0))
+		_apply_material(base_rock, moss_mat)
 		gate_root.add_child(base_rock)
-	# Verga
-	var lintel: MeshInstance3D = MeshInstance3D.new()
-	lintel.name = "VergaPortaoR7"
-	var lintel_mesh: BoxMesh = BoxMesh.new()
-	lintel_mesh.size = Vector3(7.2, 0.55, 0.65)
-	lintel.mesh = lintel_mesh
-	lintel.material_override = stone_mat
-	lintel.position = Vector3(gate_x, gate_y + 4.85, gate_z)
-	gate_root.add_child(lintel)
+	# Verga fragmentada: três pedras orgânicas quebram a silhueta perfeita sem fechar o vão do portão.
+	for lintel_index: int in range(3):
+		var lintel: Node3D = CARTOGRAPHIC_HANDOFF_PILLAR.instantiate() as Node3D
+		if lintel == null:
+			continue
+		lintel.name = "FragmentoVergaPortaoR7_%d" % lintel_index
+		lintel.scale = Vector3(0.62 + float(lintel_index % 2) * 0.05, 0.25, 0.34)
+		lintel.position = Vector3(gate_x + (float(lintel_index) - 1.0) * 2.32, gate_y + 4.84 + float(lintel_index % 2) * 0.10, gate_z + 0.03 * float(lintel_index - 1))
+		lintel.rotation = Vector3(0.08 * float(lintel_index - 1), 0.05 * float(lintel_index - 1), PI * 0.5 + 0.06 * float(lintel_index - 1))
+		_apply_material(lintel, stone_mat)
+		gate_root.add_child(lintel)
 	
 	# Marcador de spawn para o Dev2 (invisível em runtime, visível no editor)
 	var spawn_marker: Node3D = Node3D.new()
