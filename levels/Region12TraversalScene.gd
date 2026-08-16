@@ -230,6 +230,11 @@ func _build_final_dome_traversal_proxy() -> void:
 		monument.position = Vector3(monument_x, 2.75, -4.45)
 		monument.scale = Vector3(0.96, 3.45, 0.96)
 		monument.rotation = Vector3(0.04, 0.10 * sign(monument_x), 0.03 * sign(monument_x))
+		var monument_material := StandardMaterial3D.new()
+		monument_material.albedo_color = Color("#6b8499")
+		monument_material.roughness = 0.94
+		for monument_mesh in monument.find_children("*", "MeshInstance3D", true, false):
+			monument_mesh.set_surface_override_material(0, monument_material)
 		proxy.add_child(monument)
 	var base_edge := ROCK_LARGE.instantiate() as Node3D
 	if base_edge != null:
