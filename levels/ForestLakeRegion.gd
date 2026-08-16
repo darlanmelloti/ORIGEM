@@ -516,6 +516,12 @@ func _build_majestic_camp() -> void:
 	var camp_wood: StandardMaterial3D = StandardMaterial3D.new()
 	camp_wood.albedo_color = Color(0.16, 0.082, 0.030, 1.0)
 	camp_wood.roughness = 0.91
+	var seam_material: StandardMaterial3D = StandardMaterial3D.new()
+	seam_material.albedo_color = Color(0.34, 0.17, 0.060, 1.0)
+	seam_material.roughness = 0.94
+	seam_material.emission_enabled = true
+	seam_material.emission = Color(0.035, 0.012, 0.003, 1.0)
+	seam_material.emission_energy_multiplier = 0.16
 	var groundsheet_material: StandardMaterial3D = StandardMaterial3D.new()
 	groundsheet_material.albedo_color = Color(0.105, 0.075, 0.042, 1.0)
 	groundsheet_material.roughness = 0.95
@@ -553,6 +559,17 @@ func _build_majestic_camp() -> void:
 			pole.position = tent.position + local_pole.rotated(Vector3.UP, tent.rotation.y)
 			pole.rotation.y = tent.rotation.y
 			camp.add_child(pole)
+		# Costuras e cintas sem colisão: quebram a leitura de prisma e preservam a lona como material de expedição remendado.
+		var seam_mesh: BoxMesh = BoxMesh.new()
+		seam_mesh.size = Vector3(0.052, 1.78, 0.036)
+		seam_mesh.material = seam_material
+		for seam_side: float in [-1.0, 1.0]:
+			var seam: MeshInstance3D = MeshInstance3D.new()
+			seam.name = "CosturaDaTenda_%02d_%s" % [index, "E" if seam_side > 0.0 else "W"]
+			seam.mesh = seam_mesh
+			seam.position = tent.position + Vector3(seam_side * 1.38, 1.18, -1.48).rotated(Vector3.UP, tent.rotation.y)
+			seam.rotation.y = tent.rotation.y
+			camp.add_child(seam)
 		camp.add_child(tent)
 		# Volume físico aproximado da lona: impede atravessar a tenda, mas mantém o anel central e o trilho exterior navegáveis.
 		var tent_body: StaticBody3D = StaticBody3D.new()
