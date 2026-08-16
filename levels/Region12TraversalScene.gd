@@ -306,7 +306,7 @@ func _build_final_dome_traversal_proxy() -> void:
 				continue
 			route_marker.name = "MarcadorRotaFisicaR12_%s" % str(route_x)
 			route_marker.position = Vector3(route_x * 0.98, 0.35, -3.08)
-			route_marker.scale = Vector3(0.33, 0.10, 0.30)
+			route_marker.scale = Vector3(0.33, 0.095, 0.30)
 			route_marker.rotation = Vector3(0.02, 0.14 * sign(route_x), 0.02)
 			var route_material := StandardMaterial3D.new()
 			route_material.albedo_color = Color("#36576b")
