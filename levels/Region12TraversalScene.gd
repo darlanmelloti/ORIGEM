@@ -484,7 +484,8 @@ func _process(delta: float) -> void:
 	performance_sample_timer += delta
 	if performance_sample_timer >= 5.0:
 		performance_sample_timer = 0.0
-		print("[REGION12_PERF] fps=", Engine.get_frames_per_second(), " elapsed=", snapped(elapsed, 0.1))
+		var draw_calls := Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
+		print("[REGION12_PERF] fps=", Engine.get_frames_per_second(), " draw_calls=", draw_calls, " elapsed=", snapped(elapsed, 0.1))
 
 func _set_camera(progress: float) -> void:
 	if camera == null:
