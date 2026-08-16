@@ -10,6 +10,7 @@ const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 var camera: Camera3D
 var elapsed: float = 0.0
 var destination: Node3D
+var recess_resonance_light: OmniLight3D
 
 func _ready() -> void:
 	_build_environment()
@@ -103,6 +104,7 @@ func _build_region12_wayfinding_lights() -> void:
 
 func _build_region12_recess_resonance() -> void:
 	var recess_light := OmniLight3D.new()
+	recess_resonance_light = recess_light
 	recess_light.name = "RessonanciaRecessivoCupulaR12"
 	recess_light.light_color = Color("#3c8fb5")
 	recess_light.light_energy = 0.24
@@ -455,6 +457,8 @@ func _build_environment() -> void:
 func _process(delta: float) -> void:
 	elapsed += delta
 	_set_camera(clamp(elapsed / 30.0, 0.0, 1.0))
+	if recess_resonance_light != null:
+		recess_resonance_light.light_energy = 0.20 + sin(elapsed * 1.7) * 0.045
 
 func _set_camera(progress: float) -> void:
 	if camera == null:
