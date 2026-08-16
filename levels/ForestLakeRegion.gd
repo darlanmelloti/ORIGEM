@@ -349,6 +349,7 @@ func _build_dense_forest() -> void:
 		if abs(x_value - _path_x(z_value)) < 6.0 or lake_dx * lake_dx + lake_dz * lake_dz < 1.20:
 			continue
 		var tree_source: PackedScene
+		var is_conifer: bool = false
 		# A maioria dos pontos focais usa malhas orgânicas reais; as coníferas EZ ficam como profundidade económica.
 		if index % 7 == 0:
 			tree_source = ISLAND_TREE
@@ -358,8 +359,10 @@ func _build_dense_forest() -> void:
 			tree_source = DARK_TREE
 		elif index % 2 == 0:
 			tree_source = PINE_TALL
+			is_conifer = true
 		else:
 			tree_source = PINE_MEDIUM
+			is_conifer = true
 		var tree: Node3D = tree_source.instantiate() as Node3D
 		if tree == null:
 			continue
@@ -372,10 +375,13 @@ func _build_dense_forest() -> void:
 			tree_scale *= 1.48
 		elif index % 3 == 0:
 			tree_scale *= 1.20
-		# Variação de altura independente: escala Y entre 0.85 e 1.35 × tree_scale para quebrar a uniformidade das coníferas económicas.
-		# A escala XZ mantém-se em tree_scale para preservar a silhueta de copa sem alargar os troncos.
+		# Variações independentes tornam cada conífera reconhecível sem deslocar a sua base nem fechar o trilho.
+		# A altura fica entre 0.85 e 1.35; XZ varia ±15% apenas nos pinheiros económicos.
 		var height_var: float = 0.85 + fmod(float(index * 13 + 7), 50.0) / 100.0
-		tree.scale = Vector3(tree_scale, tree_scale * height_var, tree_scale)
+		var horizontal_var: float = 1.0
+		if is_conifer:
+			horizontal_var = 0.85 + fmod(float(index * 17 + 11), 31.0) / 100.0
+		tree.scale = Vector3(tree_scale * horizontal_var, tree_scale * height_var, tree_scale * horizontal_var)
 		tree.rotation.y = rng.randf_range(-PI, PI)
 		forest.add_child(tree)
 		# Um subconjunto de troncos ganha colisão: a floresta torna-se física sem saturar o orçamento nem bloquear o corredor central.
