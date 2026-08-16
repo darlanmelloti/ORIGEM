@@ -490,6 +490,10 @@ func _build_region7_transition() -> void:
 	var stone_mat: StandardMaterial3D = StandardMaterial3D.new()
 	stone_mat.albedo_color = Color(0.18, 0.155, 0.105, 1.0)
 	stone_mat.roughness = 0.92
+	# Material dedicado às pedras de base: preserva o contraste de musgo sem depender de variável externa.
+	var moss_mat: StandardMaterial3D = StandardMaterial3D.new()
+	moss_mat.albedo_color = Color(0.095, 0.145, 0.070, 1.0)
+	moss_mat.roughness = 0.94
 	
 	# Trilho de acesso: 12 lajes de pedra de z=285 a z=345, eixo x≈140
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()

@@ -533,7 +533,7 @@ func _build_south_bend_ecology() -> void:
 		[Vector3(_road_x(132.0) - 3.8, _height_at(_road_x(132.0) - 3.8, 132.0) + 0.05, 132.0), 0.25],
 	]
 	for pd in positions:
-		var rock: Node3D = ROCK.instantiate() as Node3D
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
 		if rock != null:
 			rock.position = pd[0]
 			var s: float = pd[1]

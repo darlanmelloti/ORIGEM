@@ -417,6 +417,12 @@ func _complete_opening_skip() -> void:
 		opening_was_skipped = true
 		_finish_opening_camera()
 
+func _complete_opening_for_qa() -> void:
+	if not opening_active:
+		return
+	opening_was_skipped = true
+	_finish_opening_camera()
+
 func _create_opening_skip_prompt() -> void:
 	if not opening_active:
 		return
@@ -776,6 +782,10 @@ func _build_opening_camera() -> void:
 	opening_skip_timer.process_mode = Node.PROCESS_MODE_ALWAYS
 	opening_skip_timer.timeout.connect(_complete_opening_skip)
 	add_child(opening_skip_timer)
+	# Exclusivo de validação automatizada: acelera apenas a apresentação de QA depois de Novo Jogo.
+	# Não é lido numa execução normal nem altera o gesto E destinado ao jogador.
+	if OS.get_environment("ORIGEM_QA_SKIP_OPENING") == "1":
+		get_tree().create_timer(2.0).timeout.connect(_complete_opening_for_qa)
 
 func _activate_opening_camera() -> void:
 	# Elias acorda no interior: depois do prólogo, a exploração começa realmente na Casa Voss.
@@ -823,18 +833,40 @@ func _finish_opening_camera() -> void:
 		opening_skip_layer = null
 		opening_skip_label = null
 	if opening_camera != null:
+		# Liberta definitivamente a câmara cinematográfica antes de devolver o controlo.
+		# Isto evita uma moldura preta quando duas câmaras disputam o viewport no mesmo frame.
 		opening_camera.current = false
+		opening_camera.queue_free()
+		opening_camera = null
 	var elias: Node = get_tree().get_first_node_in_group("player")
 	if elias != null:
-		# A fachada da Casa Voss está rodada cerca de 190 graus; Elias recupera o controlo já voltado para a porta e para a Estrada do Rio.
+		# Reposiciona Elias numa área interior livre, afastada de parede, telhado e fundação.
+		# A porta fica à frente no eixo local -Z, preservando o começo narrativo dentro da Casa Voss.
+		var house_node: Node3D = get_node_or_null("CasaVoss") as Node3D
 		if elias is Node3D:
-			(elias as Node3D).rotation.y = PI + deg_to_rad(10.0)
+			var elias_3d: Node3D = elias as Node3D
+			if opening_was_skipped:
+				# O salto deve ser uma entrada segura no vale, nunca uma câmara presa em geometria interior.
+				var recovery_x: float = -25.0
+				var recovery_z: float = 3.0
+				elias_3d.global_position = Vector3(recovery_x, _ground_height(recovery_x, recovery_z) + 1.30, recovery_z)
+				elias_3d.global_rotation.y = deg_to_rad(-32.0)
+			elif house_node != null:
+				elias_3d.global_position = house_node.to_global(Vector3(0.0, 1.28, -1.80))
+				elias_3d.global_rotation.y = house_node.global_rotation.y
+			else:
+				elias_3d.rotation.y = PI + deg_to_rad(10.0)
+			if elias is CharacterBody3D:
+				(elias as CharacterBody3D).velocity = Vector3.ZERO
 		var player_head: Node3D = elias.get_node_or_null("Head") as Node3D
 		if player_head != null:
 			player_head.rotation.x = 0.0
 		var player_camera: Camera3D = elias.get_node_or_null("Head/Camera3D") as Camera3D
 		if player_camera != null:
+			# make_current garante o viewport da primeira pessoa no próprio frame do salto.
+			player_camera.make_current()
 			player_camera.current = true
+			get_tree().create_timer(0.10).timeout.connect(_verify_player_camera_handoff.bind(player_camera))
 	if opening_ui != null:
 		opening_ui.visible = true
 		opening_ui = null
@@ -848,6 +880,24 @@ func _finish_opening_camera() -> void:
 		level_environment.call("restore_timeline_environment")
 	var opening_message: String = "Prólogo saltado. Elias recupera o controlo na Casa Voss." if opening_was_skipped else "1908 — Casa Voss\n\nA tempestade cobre a estrada para as cavernas de Orion."
 	EventBus.player_message_requested.emit(opening_message, 3.0 if opening_was_skipped else 5.5)
+
+func _verify_player_camera_handoff(player_camera: Camera3D) -> void:
+	if player_camera == null or not is_instance_valid(player_camera):
+		push_error("[ORIGEM_OPENING] A câmara de Elias não está disponível após o prólogo.")
+		return
+	player_camera.make_current()
+	var active_camera: Camera3D = get_viewport().get_camera_3d()
+	var diagnostic: String = "camera_current=%s active=%s player_pos=%s camera_pos=%s" % [
+		str(player_camera.is_current()),
+		active_camera.name if active_camera != null else "NULA",
+		str(player_camera.get_parent().get_parent().global_position),
+		str(player_camera.global_position)
+	]
+	print("[ORIGEM_OPENING] Controlo devolvido a Elias; %s" % diagnostic)
+	var debug_file: FileAccess = FileAccess.open("user://origem_opening_camera_debug.txt", FileAccess.WRITE)
+	if debug_file != null:
+		debug_file.store_line(diagnostic)
+		debug_file.close()
 
 func _create_materials() -> void:
 	stone_material = _material(Color(0.24, 0.27, 0.24, 1.0), 0.66, 0.04)
