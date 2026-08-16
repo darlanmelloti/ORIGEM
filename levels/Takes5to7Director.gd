@@ -5,6 +5,7 @@ extends Node3D
 ## This extension is additive to TempleLevel and deliberately avoids greybox meshes.
 
 const ORGANIC_RUIN_KIT_SCRIPT: Script = preload("res://levels/OrganicRuinKit.gd")
+const REGION8_WAYFINDING_ROCK: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
 
 var organic_kit: Node3D
 var stone_wet: ShaderMaterial
@@ -81,6 +82,12 @@ func _create_materials() -> void:
 	bronze.metallic = 0.64
 	bronze.roughness = 0.32
 
+func _apply_material(root: Node, material: Material) -> void:
+	for child: Node in root.get_children():
+		if child is MeshInstance3D:
+			(child as MeshInstance3D).material_override = material
+		_apply_material(child, material)
+
 func _organic_material(base_color: Color, roughness_value: float, displacement_amount: float, moss_color: Color) -> ShaderMaterial:
 	var shader := Shader.new()
 	shader.code = """
@@ -143,6 +150,11 @@ func _process(delta: float) -> void:
 		var close_travel: float = minf(validation_elapsed * 0.08, 1.0)
 		validation_camera.position = Vector3(210.0 - close_travel * 22.0, 46.0 + sin(validation_elapsed * 0.25) * 0.10, 404.0 + close_travel * 12.0)
 		validation_camera.look_at(Vector3(174.0 - close_travel * 12.0, 29.0, 414.0 + close_travel * 13.0), Vector3.UP)
+	elif validation_take_mode == 14:
+		var trail_validation_progress: float = minf(validation_elapsed * 0.12, 1.0)
+		var trail_validation_sway: float = sin(validation_elapsed * 0.24) * 1.1
+		validation_camera.position = Vector3(184.0 - trail_validation_progress * 42.0 + trail_validation_sway, 35.0 + sin(validation_elapsed * 0.20) * 0.12, 398.0 + trail_validation_progress * 34.0)
+		validation_camera.look_at(Vector3(168.0 - trail_validation_progress * 40.0, 25.0, 420.0 + trail_validation_progress * 30.0), Vector3.UP)
 	elif validation_take_mode == 13:
 		var cave_travel: float = minf(validation_elapsed * 0.045, 1.0)
 		var cave_sway: float = sin(validation_elapsed * 0.28) * 0.85
@@ -263,14 +275,23 @@ func _hide_region10_node_recursive(node: Node) -> void:
 		_hide_region10_node_recursive(child)
 
 func _activate_region8_validation_camera() -> void:
-	validation_take_mode = 12 if OS.get_environment("ORIGEM_REGION8_TO9_CLOSE") == "1" else (11 if OS.get_environment("ORIGEM_REGION8_TO9") == "1" else 10)
+	validation_take_mode = 14 if OS.get_environment("ORIGEM_REGION8_TRAIL") == "1" else (12 if OS.get_environment("ORIGEM_REGION8_TO9_CLOSE") == "1" else (11 if OS.get_environment("ORIGEM_REGION8_TO9") == "1" else 10))
 	var legacy_enemies := get_parent().get_node_or_null("Enemies") as Node3D
 	if legacy_enemies != null:
 		legacy_enemies.visible = false
+	if validation_take_mode == 14:
+		var observatory := get_tree().root.find_child("ObservatorioDaOrion", true, false) as Node3D
+		if observatory != null:
+			observatory.visible = false
+		_build_region8_validation_wayfinding()
 	validation_camera = Camera3D.new()
-	validation_camera.name = "CameraValidacaoRegiao08Para09" if validation_take_mode == 11 else "CameraValidacaoRegiao08"
-	validation_camera.fov = 50.0 if validation_take_mode == 12 else (54.0 if validation_take_mode == 10 else 58.0)
-	if validation_take_mode == 12:
+	validation_camera.name = "CameraValidacaoTrilhaRegiao08" if validation_take_mode == 14 else ("CameraValidacaoRegiao08Para09" if validation_take_mode == 11 else "CameraValidacaoRegiao08")
+	validation_camera.fov = 64.0 if validation_take_mode == 14 else (50.0 if validation_take_mode == 12 else (54.0 if validation_take_mode == 10 else 58.0))
+	if validation_take_mode == 14:
+		validation_camera.position = Vector3(184.0, 35.0, 398.0)
+		add_child(validation_camera)
+		validation_camera.look_at(Vector3(168.0, 25.0, 420.0), Vector3.UP)
+	elif validation_take_mode == 12:
 		validation_camera.position = Vector3(210.0, 46.0, 404.0)
 		add_child(validation_camera)
 		validation_camera.look_at(Vector3(174.0, 29.0, 414.0), Vector3.UP)
@@ -283,6 +304,42 @@ func _activate_region8_validation_camera() -> void:
 		add_child(validation_camera)
 		validation_camera.look_at(Vector3(194.0, 37.0, 404.0), Vector3.UP)
 	validation_camera.current = true
+	print("[CP_D2_002_CAMERA] mode=%d name=%s position=%s" % [validation_take_mode, validation_camera.name, str(validation_camera.position)])
+
+func _build_region8_validation_wayfinding() -> void:
+	var wayfinding := Node3D.new()
+	wayfinding.name = "CPD2_WayfindingOrganicoRegiao08"
+	var positions: Array[Vector2] = [
+		Vector2(176.0, 416.0),
+		Vector2(168.0, 424.0),
+		Vector2(158.0, 434.0),
+		Vector2(148.0, 444.0),
+		Vector2(138.0, 454.0)
+	]
+	var observatory := get_tree().root.find_child("ObservatorioDaOrion", true, false) as Node3D
+	var highlands := observatory.get_parent() as Node3D if observatory != null else null
+	for index: int in range(positions.size()):
+		var marker := REGION8_WAYFINDING_ROCK.instantiate() as Node3D
+		if marker == null:
+			continue
+		marker.name = "MarcoOrganicoCPD2_%02d" % index
+		var point := positions[index]
+		var validation_ground_height: float = 32.8 + float(index) * 0.35
+		marker.position = Vector3(point.x, validation_ground_height, point.y)
+		marker.scale = Vector3(1.05, 1.62, 1.05)
+		marker.rotation = Vector3(0.04, float(index) * 0.42, -0.03)
+		_apply_material(marker, stone_dark)
+		if index % 2 == 0:
+			var marker_light := OmniLight3D.new()
+			marker_light.name = "LuzWayfindingCPD2_%02d" % index
+			marker_light.light_color = Color("#5ca9b8")
+			marker_light.light_energy = 0.42
+			marker_light.omni_range = 5.0
+			marker_light.shadow_enabled = false
+			marker_light.position = Vector3(0.0, 1.8, 0.0)
+			marker.add_child(marker_light)
+		wayfinding.add_child(marker)
+	add_child(wayfinding)
 
 func _build_take_5_cave_threshold() -> void:
 	var cave := Node3D.new()

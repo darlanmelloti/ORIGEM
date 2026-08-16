@@ -92,6 +92,7 @@ func _build_world_after_voss_prologue() -> void:
 		var highlands: Node3D = HIGHLAND_REGION_SCRIPT.new() as Node3D
 		highlands.name = "RegiaoVilaMontanhaExploravel"
 		add_child(highlands)
+		_register_region8_traversal_link(highlands)
 		var orion_destinations: Node3D = ORION_DESTINATION_REGION_SCRIPT.new() as Node3D
 		orion_destinations.name = "DestinosOrionEHubTemporal"
 		add_child(orion_destinations)
@@ -113,6 +114,43 @@ func _build_world_after_voss_prologue() -> void:
 	_build_waterfall()
 	_build_fireflies()
 	_build_sanctuary_interior()
+
+func _register_region8_traversal_link(highlands: Node3D) -> void:
+	var route: Node3D = highlands.get_node_or_null("TrilhaDaMontanhaOrion") as Node3D
+	if route == null:
+		return
+	var link := Node3D.new()
+	link.name = "LigacaoTravessiaRegiao8"
+	link.set_meta("scope", "REGIONS_7_12_ONLY")
+	link.set_meta("entry_world_position", Vector3(174.0, 0.0, 414.0))
+	link.set_meta("exit_world_position", Vector3(-112.0, 0.0, 532.0))
+	highlands.add_child(link)
+	var entry := Area3D.new()
+	entry.name = "SensorEntradaTrilhaRegiao8"
+	entry.collision_layer = 0
+	entry.collision_mask = 1
+	var entry_shape := CollisionShape3D.new()
+	var entry_box := BoxShape3D.new()
+	entry_box.size = Vector3(8.0, 4.0, 8.0)
+	entry_shape.shape = entry_box
+	entry.position = Vector3(174.0, 2.0, 414.0)
+	entry.add_child(entry_shape)
+	entry.body_entered.connect(_on_region8_entry_body_entered)
+	link.add_child(entry)
+	var start_marker := Marker3D.new()
+	start_marker.name = "MarcadorInicioTrilhaRegiao8"
+	start_marker.position = Vector3(174.0, 1.0, 414.0)
+	link.add_child(start_marker)
+	var exit_marker := Marker3D.new()
+	exit_marker.name = "MarcadorSaidaTrilhaRegiao8"
+	exit_marker.position = Vector3(-112.0, 16.0, 532.0)
+	link.add_child(exit_marker)
+
+func _on_region8_entry_body_entered(body: Node3D) -> void:
+	if not body.is_in_group("player"):
+		return
+	if EventBus != null:
+		EventBus.player_message_requested.emit("Trilha da Montanha: rota de ascensão desbloqueada.", 1.8)
 
 func _build_orion_mountains() -> void:
 	# Manto rochoso real diante da Casa Voss: mantém o destino Orion como geometria explorável, nunca como painel de fundo.

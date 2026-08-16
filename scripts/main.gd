@@ -78,7 +78,7 @@ func _start_narrative():
 			elif validation_take == "7":
 				validation_player.global_position = Vector3(0.0, 1.8, -104.0)
 			elif validation_take == "8":
-				validation_player.global_position = Vector3(128.0, 17.0, 420.0)
+				validation_player.global_position = Vector3(174.0, 34.0, 410.0)
 			elif validation_region == "7":
 				validation_player.global_position = Vector3(128.0, 14.0, 332.0)
 			elif validation_region == "8":
@@ -87,7 +87,7 @@ func _start_narrative():
 				validation_player.global_position = Vector3(-116.0, 43.0, 532.0)
 			else:
 				validation_player.global_position = Vector3(0.0, 1.4, -28.0)
-			validation_player.rotation.y = -0.92 if validation_take == "8" else PI
+			validation_player.rotation.y = -1.92 if validation_take == "8" else PI
 		mission_phase = 1
 		if validation_region == "8":
 			_show_msg("REGIÃO 8 — Observatório da Orion e leitura do céu alpino.", 4.0)
