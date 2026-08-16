@@ -310,7 +310,7 @@ func _build_final_dome_traversal_proxy() -> void:
 			route_marker.rotation = Vector3(0.02, 0.14 * sign(route_x), 0.02)
 			var route_material := StandardMaterial3D.new()
 			route_material.albedo_color = Color("#36576b")
-			route_material.roughness = 0.90
+			route_material.roughness = 0.93
 			route_material.emission_enabled = true
 			route_material.emission = Color("#5bc8ee")
 			route_material.emission_energy_multiplier = 0.27
