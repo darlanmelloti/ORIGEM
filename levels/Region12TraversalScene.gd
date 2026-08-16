@@ -432,7 +432,7 @@ func _build_final_dome_traversal_proxy() -> void:
 	threshold_light.light_color = Color("#4b83a8")
 	threshold_light.light_energy = 0.34
 	threshold_light.omni_range = 4.2
-	threshold_light.shadow_enabled = true
+	threshold_light.shadow_enabled = false
 	threshold_light.position = Vector3(164.0, 0.78, 173.55)
 	add_child(threshold_light)
 	for contact_x in [-3.4, 3.4]:
@@ -441,7 +441,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		contact_light.light_color = Color("#6f9bc4")
 		contact_light.light_energy = 0.35
 		contact_light.omni_range = 4.0
-		contact_light.shadow_enabled = true
+		contact_light.shadow_enabled = false
 		contact_light.position = Vector3(contact_x, 1.45, 173.6)
 		add_child(contact_light)
 	var portal_rim := OmniLight3D.new()
