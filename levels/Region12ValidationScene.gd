@@ -33,10 +33,10 @@ func _ready() -> void:
 	var dome_anchor := Vector3.ZERO
 	camera = Camera3D.new()
 	camera.name = "Region12ValidationCamera"
-	camera.position = Vector3(0.0, 6.5, 11.5)
-	camera.fov = 58.0
+	camera.position = Vector3(0.0, 6.2, 9.6)
+	camera.fov = 56.0
 	add_child(camera)
-	camera.look_at(Vector3(0.0, 4.6, -4.0), Vector3.UP)
+	camera.look_at(Vector3(0.0, 4.0, -3.2), Vector3.UP)
 	camera.current = true
 
 func _build_environment() -> void:
@@ -83,8 +83,8 @@ func _process(delta: float) -> void:
 	if camera == null:
 		return
 	elapsed += delta
-	camera.position = Vector3(sin(elapsed * 0.22) * 0.75, 6.5 + sin(elapsed * 0.18) * 0.18, 11.5 + cos(elapsed * 0.22) * 0.7)
-	camera.look_at(Vector3(0.0, 4.6, -4.0), Vector3.UP)
+	camera.position = Vector3(sin(elapsed * 0.22) * 0.62, 6.2 + sin(elapsed * 0.18) * 0.16, 9.6 + cos(elapsed * 0.22) * 0.58)
+	camera.look_at(Vector3(0.0, 4.0, -3.2), Vector3.UP)
 
 func _build_final_dome_validation_proxy() -> void:
 	var proxy := Node3D.new()
