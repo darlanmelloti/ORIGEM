@@ -192,6 +192,7 @@ func _build_world_after_voss_prologue() -> void:
 		highlands.name = "RegiaoVilaMontanhaExploravel"
 		add_child(highlands)
 		_build_region7_transition()
+		_build_region7_corridor_ecology()
 		var orion_destinations: Node3D = ORION_DESTINATION_REGION_SCRIPT.new() as Node3D
 		orion_destinations.name = "DestinosOrionEHubTemporal"
 		add_child(orion_destinations)
@@ -562,6 +563,71 @@ func _build_region7_transition() -> void:
 	gate_light.omni_range = 12.0
 	gate_light.shadow_enabled = false
 	gate_root.add_child(gate_light)
+
+
+func _build_region7_corridor_ecology() -> void:
+	# CP 202: Ecologia lateral do corredor de acesso à Região 7 (z=285-345, x≈140).
+	# Pedras e fetos nas margens do trilho para que a transição não pareça um corredor vazio.
+	var eco_root: Node3D = Node3D.new()
+	eco_root.name = "Region7CorridorEcology"
+	add_child(eco_root)
+	
+	var rock_mat: StandardMaterial3D = StandardMaterial3D.new()
+	rock_mat.albedo_color = Color(0.20, 0.17, 0.11, 1.0)
+	rock_mat.roughness = 0.92
+	
+	var fern_mat: StandardMaterial3D = StandardMaterial3D.new()
+	fern_mat.albedo_color = Color(0.12, 0.22, 0.09, 1.0)
+	fern_mat.roughness = 0.75
+	
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 72802
+	
+	# 8 grupos de pedras alternados esquerda/direita ao longo do corredor
+	var rock_positions: Array = [
+		[135.5, 290.0, -1], [144.8, 295.0, 1],
+		[134.8, 302.0, -1], [145.5, 308.0, 1],
+		[135.2, 316.0, -1], [144.6, 322.0, 1],
+		[135.8, 330.0, -1], [144.2, 338.0, 1]
+	]
+	for rp: Array in rock_positions:
+		var rx: float = float(rp[0]) + rng.randf_range(-0.4, 0.4)
+		var rz: float = float(rp[1]) + rng.randf_range(-0.6, 0.6)
+		var ry: float = _terrain_height_for_qa(rx, rz) + 0.05
+		var rock: MeshInstance3D = MeshInstance3D.new()
+		rock.name = "RochaCorredorR7_%d" % rock_positions.find(rp)
+		var rock_mesh: BoxMesh = BoxMesh.new()
+		rock_mesh.size = Vector3(
+			rng.randf_range(0.55, 1.1),
+			rng.randf_range(0.35, 0.75),
+			rng.randf_range(0.55, 1.0)
+		)
+		rock.mesh = rock_mesh
+		rock.material_override = rock_mat
+		rock.position = Vector3(rx, ry + rock_mesh.size.y * 0.5, rz)
+		rock.rotation.y = rng.randf_range(0.0, TAU)
+		eco_root.add_child(rock)
+	
+	# 6 fetos nas margens do corredor
+	var fern_positions: Array = [
+		[136.2, 293.0], [143.8, 299.0],
+		[135.6, 311.0], [144.4, 318.0],
+		[136.0, 326.0], [143.6, 334.0]
+	]
+	for fp: Array in fern_positions:
+		var fx: float = float(fp[0]) + rng.randf_range(-0.3, 0.3)
+		var fz: float = float(fp[1]) + rng.randf_range(-0.5, 0.5)
+		var fy: float = _terrain_height_for_qa(fx, fz)
+		var fern: MeshInstance3D = MeshInstance3D.new()
+		fern.name = "FetoCorredorR7_%d" % fern_positions.find(fp)
+		var fern_mesh: BoxMesh = BoxMesh.new()
+		var fern_scale: float = rng.randf_range(0.55, 0.80)
+		fern_mesh.size = Vector3(fern_scale * 1.4, fern_scale * 0.9, fern_scale * 1.4)
+		fern.mesh = fern_mesh
+		fern.material_override = fern_mat
+		fern.position = Vector3(fx, fy + fern_mesh.size.y * 0.5, fz)
+		fern.rotation.y = rng.randf_range(0.0, TAU)
+		eco_root.add_child(fern)
 
 
 func _make_material(color: Color, roughness_value: float) -> StandardMaterial3D:
