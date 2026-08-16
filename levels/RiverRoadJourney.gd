@@ -8,6 +8,8 @@ const RUIN_PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.gl
 const RUIN_ROCK: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
 const FERN: PackedScene = preload("res://assets/models_polyhaven/fern_02/fern_02_1k.gltf")
 const PINE_MEDIUM: PackedScene = preload("res://assets/models_generated/ez_pine_medium_pbr.glb")
+const DARK_TREE: PackedScene = preload("res://assets/models_cc0/tree_detailed_dark.glb")
+const OAK_DARK: PackedScene = preload("res://assets/models_cc0/tree_oak_dark.glb")
 const FLAGSTONE: Texture2D = preload("res://assets/textures/generated/daylight_weathered_flagstone.png")
 const GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_ground_normal_gl.jpg")
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
@@ -332,9 +334,15 @@ func _build_roadside_vegetation() -> void:
 		var z_value: float = 26.0 + float(index) * 9.0
 		var side: float = -1.0 if index % 2 == 0 else 1.0
 		var x_value: float = _road_x(z_value) + side * (7.0 + float(index % 3) * 1.1)
-		var tree: Node3D = PINE_MEDIUM.instantiate() as Node3D
+		# Alternância de espécies reais: cria profundidade de margem sem concentrar árvores no eixo do percurso.
+		var tree_source: PackedScene = PINE_MEDIUM
+		if index % 5 == 0:
+			tree_source = OAK_DARK
+		elif index % 3 == 0:
+			tree_source = DARK_TREE
+		var tree: Node3D = tree_source.instantiate() as Node3D
 		if tree != null:
-			tree.name = "ConiferaEstrada_%02d" % index
+			tree.name = "ArvoreEstrada_%02d" % index
 			tree.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
 			var tree_scale: float = 0.24 + float(index % 3) * 0.04
 			tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
