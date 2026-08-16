@@ -193,6 +193,25 @@ func _build_region9_to_10_approach() -> void:
 	entrance_light.shadow_enabled = false
 	entrance_light.position = Vector3(-116.0, 4.2, 542.0)
 	approach.add_child(entrance_light)
+	for side: int in [-1, 1]:
+		var mouth_jamb: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if mouth_jamb == null:
+			continue
+		mouth_jamb.name = "OmbreiraBocaCavernaOrion_%s" % ("Norte" if side < 0 else "Sul")
+		var mouth_x: float = -116.0 + float(side) * 5.2
+		mouth_jamb.position = Vector3(mouth_x, _height_at(mouth_x, 545.0) + 2.4, 545.0)
+		mouth_jamb.scale = Vector3(0.42, 0.92, 0.34)
+		mouth_jamb.rotation = Vector3(0.12 * float(side), 0.26 * float(side), -0.08 * float(side))
+		_apply_material(mouth_jamb, stone_material)
+		approach.add_child(mouth_jamb)
+	var mouth_rim_fill := OmniLight3D.new()
+	mouth_rim_fill.name = "PreenchimentoFrontalBocaCavernaOrion"
+	mouth_rim_fill.light_color = Color("#86dbea")
+	mouth_rim_fill.light_energy = 0.78
+	mouth_rim_fill.omni_range = 10.0
+	mouth_rim_fill.shadow_enabled = false
+	mouth_rim_fill.position = Vector3(-116.0, 3.0, 546.5)
+	approach.add_child(mouth_rim_fill)
 
 func _make_resonance_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
