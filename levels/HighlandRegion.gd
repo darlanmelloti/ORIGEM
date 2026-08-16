@@ -26,6 +26,7 @@ func _ready() -> void:
 	_build_elevated_village()
 	_build_observatory()
 	_build_mountain_trail()
+	_build_region9_threshold()
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -228,6 +229,34 @@ func _build_mountain_trail() -> void:
 		rock.scale = Vector3(scale_value, scale_value, scale_value)
 		rock.rotation.y = float(index) * 0.79
 		rocks.add_child(rock)
+
+func _build_region9_threshold() -> void:
+	var route: Array[Vector2] = [
+		Vector2(-112.0, 532.0), Vector2(-128.0, 542.0), Vector2(-144.0, 552.0), Vector2(-164.0, 560.0)
+	]
+	_build_organic_route("ContinuidadeRegiao08Para09", route, 3.6)
+	var threshold := Node3D.new()
+	threshold.name = "LimiarOrganicoRegiao09"
+	threshold.position = Vector3(-164.0, _height_at(-164.0, 560.0), 560.0)
+	add_child(threshold)
+	for side: int in [-1, 1]:
+		var jamb: Node3D = PILLAR.instantiate() as Node3D
+		if jamb == null:
+			continue
+		jamb.name = "OmbreiraRegiao09_%s" % ("Norte" if side < 0 else "Sul")
+		jamb.position = Vector3(float(side) * 4.2, 3.2, 0.0)
+		jamb.scale = Vector3(0.62, 0.70, 0.58)
+		jamb.rotation = Vector3(0.06, 0.18 * float(side), -0.04)
+		_apply_material(jamb, stone_material)
+		threshold.add_child(jamb)
+	var threshold_beacon := OmniLight3D.new()
+	threshold_beacon.name = "BeaconContinuidadeRegiao09"
+	threshold_beacon.position = Vector3(0.0, 6.2, 0.0)
+	threshold_beacon.light_color = Color("#5cc8ff")
+	threshold_beacon.light_energy = 1.05
+	threshold_beacon.omni_range = 12.0
+	threshold_beacon.shadow_enabled = false
+	threshold.add_child(threshold_beacon)
 
 func _build_organic_route(route_name: String, route: Array[Vector2], width: float) -> void:
 	var path: Node3D = Node3D.new()
