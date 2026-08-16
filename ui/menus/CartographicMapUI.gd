@@ -156,6 +156,17 @@ func _place_route_marker(destination: Vector2) -> void:
 	if route_marker_label != null:
 		route_marker_label.position = route_marker.position + Vector2(12.0, -5.0)
 
+func _update_route_destination(player_z: float) -> void:
+	var destination: Vector2 = CARTOGRAPHIC_ANCHORS.ARCO_RUINAS
+	var destination_label: String = "RUMO AO ARCO"
+	# Depois de Elias ultrapassar a zona arqueológica, o mapa confirma a continuidade orgânica para o marco 4.
+	if player_z >= CARTOGRAPHIC_ANCHORS.ARCO_RUINAS.y + 12.0:
+		destination = CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA
+		destination_label = "RUMO À FLORESTA"
+	_place_route_marker(destination)
+	if route_marker_label != null:
+		route_marker_label.text = destination_label
+
 func update_player_world_position(world_position: Vector3) -> void:
 	if player_marker == null:
 		return
@@ -163,6 +174,7 @@ func update_player_world_position(world_position: Vector3) -> void:
 	player_marker.position = map_position - player_marker.size * 0.5
 	if player_marker_label != null:
 		player_marker_label.position = player_marker.position + Vector2(10.0, -5.0)
+	_update_route_destination(world_position.z)
 
 func toggle_map() -> void:
 	_set_open(not is_open)
