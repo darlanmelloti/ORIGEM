@@ -27,8 +27,8 @@
 |---|---|
 | ZIP | `validation/checkpoints/CP-D2-001_Take8_Regiao8.zip` |
 | SHA-256 | `afae0c4def6cd3908d244e15755e17f7f2a86b6168e806524aae042883f14a86` |
-| Commit de código | `PREENCHER APÓS COMMIT LOCAL` |
-| Commit de documentação | `PREENCHER APÓS COMMIT LOCAL` |
+| Commit de código | `9419a57` |
+| Commit de documentação | `9419a57` |
 
 ## Implementação
 
