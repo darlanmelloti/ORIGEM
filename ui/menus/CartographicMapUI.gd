@@ -169,6 +169,10 @@ func _update_route_destination(player_z: float) -> void:
 	if player_z >= CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC.y - 12.0:
 		destination = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
 		destination_label = "RUMO ÀS RUÍNAS"
+	# A transição para o marco 7 é uma orientação de mapa; a Região 7 continua exclusivamente sob responsabilidade Dev2.
+	if player_z >= CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y - 18.0:
+		destination = CARTOGRAPHIC_ANCHORS.VILA_ELEVADA
+		destination_label = "PASSAGEM: VILA ELEVADA"
 	_place_route_marker(destination)
 	if route_marker_label != null:
 		route_marker_label.text = destination_label
