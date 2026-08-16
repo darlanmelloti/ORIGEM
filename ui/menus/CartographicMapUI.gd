@@ -2,11 +2,14 @@ extends CanvasLayer
 ## Mapa cartográfico do ORIGEM — acessível durante o gameplay com a tecla M.
 
 const MAP_TEXTURE: Texture2D = preload("res://assets/ui/mapa_cartografico_origem.png")
+const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 
 var map_root: Control
 var map_texture: TextureRect
 var player_marker: Panel
 var player_marker_label: Label
+var route_marker: Panel
+var route_marker_label: Label
 var is_open: bool = false
 
 # Janela útil da cartografia, calibrada contra as âncoras do mundo: oeste→este e sul→norte.
@@ -77,6 +80,31 @@ func _build_interface() -> void:
 	player_marker_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_texture.add_child(player_marker_label)
 
+	route_marker = Panel.new()
+	route_marker.name = "DestinoInicialArcoDasRuinas"
+	route_marker.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	route_marker.size = Vector2(16.0, 16.0)
+	route_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var route_style := StyleBoxFlat.new()
+	route_style.bg_color = Color(0.94, 0.46, 0.10, 1.0)
+	route_style.border_color = Color(1.0, 0.86, 0.48, 1.0)
+	route_style.set_border_width_all(2)
+	route_style.corner_radius_top_left = 8
+	route_style.corner_radius_top_right = 8
+	route_style.corner_radius_bottom_left = 8
+	route_style.corner_radius_bottom_right = 8
+	route_marker.add_theme_stylebox_override("panel", route_style)
+	map_texture.add_child(route_marker)
+
+	route_marker_label = Label.new()
+	route_marker_label.name = "LegendaDestinoInicial"
+	route_marker_label.text = "RUMO AO ARCO"
+	route_marker_label.add_theme_font_size_override("font_size", 11)
+	route_marker_label.add_theme_color_override("font_color", Color(1.0, 0.84, 0.47, 1.0))
+	route_marker_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map_texture.add_child(route_marker_label)
+	_place_route_marker(CARTOGRAPHIC_ANCHORS.ARCO_RUINAS)
+
 	var title := Label.new()
 	title.name = "TituloMapa"
 	title.text = "CARTOGRAFIA DO VALE DE KHEPER"
@@ -111,15 +139,28 @@ func _build_interface() -> void:
 	hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_root.add_child(hint)
 
+func _map_position(world_x: float, world_z: float) -> Vector2:
+	var map_x: float = MAP_INSET_LEFT + inverse_lerp(WORLD_MIN_X, WORLD_MAX_X, world_x) * MAP_INSET_WIDTH
+	# O eixo Z cresce para norte no mundo, mas cresce para baixo na textura do mapa.
+	var map_y: float = MAP_INSET_TOP + (1.0 - inverse_lerp(WORLD_MIN_Z, WORLD_MAX_Z, world_z)) * MAP_INSET_HEIGHT
+	return Vector2(
+		clampf(map_x, MAP_INSET_LEFT, MAP_INSET_LEFT + MAP_INSET_WIDTH),
+		clampf(map_y, MAP_INSET_TOP, MAP_INSET_TOP + MAP_INSET_HEIGHT)
+	)
+
+func _place_route_marker(destination: Vector2) -> void:
+	if route_marker == null:
+		return
+	var map_position: Vector2 = _map_position(destination.x, destination.y)
+	route_marker.position = map_position - route_marker.size * 0.5
+	if route_marker_label != null:
+		route_marker_label.position = route_marker.position + Vector2(12.0, -5.0)
+
 func update_player_world_position(world_position: Vector3) -> void:
 	if player_marker == null:
 		return
-	var map_x: float = MAP_INSET_LEFT + inverse_lerp(WORLD_MIN_X, WORLD_MAX_X, world_position.x) * MAP_INSET_WIDTH
-	# O eixo Z cresce para norte no mundo, mas cresce para baixo na textura do mapa.
-	var map_y: float = MAP_INSET_TOP + (1.0 - inverse_lerp(WORLD_MIN_Z, WORLD_MAX_Z, world_position.z)) * MAP_INSET_HEIGHT
-	map_x = clampf(map_x, MAP_INSET_LEFT, MAP_INSET_LEFT + MAP_INSET_WIDTH)
-	map_y = clampf(map_y, MAP_INSET_TOP, MAP_INSET_TOP + MAP_INSET_HEIGHT)
-	player_marker.position = Vector2(map_x - player_marker.size.x * 0.5, map_y - player_marker.size.y * 0.5)
+	var map_position: Vector2 = _map_position(world_position.x, world_position.z)
+	player_marker.position = map_position - player_marker.size * 0.5
 	if player_marker_label != null:
 		player_marker_label.position = player_marker.position + Vector2(10.0, -5.0)
 
