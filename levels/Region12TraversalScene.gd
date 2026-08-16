@@ -311,6 +311,9 @@ func _build_final_dome_traversal_proxy() -> void:
 			var route_material := StandardMaterial3D.new()
 			route_material.albedo_color = Color("#345268")
 			route_material.roughness = 0.92
+			route_material.emission_enabled = true
+			route_material.emission = Color("#3d9fc2")
+			route_material.emission_energy_multiplier = 0.35
 			route_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			for route_mesh in route_marker.find_children("*", "MeshInstance3D", true, false):
 				route_mesh.set_surface_override_material(0, route_material)
