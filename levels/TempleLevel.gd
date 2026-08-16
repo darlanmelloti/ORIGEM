@@ -488,8 +488,8 @@ func _build_region7_transition() -> void:
 	add_child(gate_root)
 	
 	var stone_mat: StandardMaterial3D = StandardMaterial3D.new()
-	stone_mat.albedo_color = Color(0.22, 0.19, 0.13, 1.0)
-	stone_mat.roughness = 0.88
+	stone_mat.albedo_color = Color(0.18, 0.155, 0.105, 1.0)
+	stone_mat.roughness = 0.92
 	
 	# Trilho de acesso: 12 lajes de pedra de z=285 a z=345, eixo x≈140
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -507,7 +507,7 @@ func _build_region7_transition() -> void:
 			rng.randf_range(1.4, 1.9)
 		)
 		slab.mesh = box
-		slab.material_override = stone_mat
+		slab.material_override = trail_mat
 		slab.position = Vector3(sx, sy, sz)
 		slab.rotation.y = rng.randf_range(-0.12, 0.12)
 		var slab_body: StaticBody3D = StaticBody3D.new()
@@ -538,6 +538,22 @@ func _build_region7_transition() -> void:
 		pb.add_child(ps)
 		pillar.add_child(pb)
 		gate_root.add_child(pillar)
+	# CP 203: Pedras de base nos pilares para leitura arqueológica
+	for base_side: int in range(2):
+		var bx: float = gate_x + (float(base_side) * 2.0 - 1.0) * 3.2
+		var base_rock: MeshInstance3D = MeshInstance3D.new()
+		base_rock.name = "PedraBasePilar_%d" % base_side
+		var base_mesh: BoxMesh = BoxMesh.new()
+		base_mesh.size = Vector3(
+			1.1 + float(base_side) * 0.08,
+			0.28,
+			1.0 + float(base_side) * 0.06
+		)
+		base_rock.mesh = base_mesh
+		base_rock.material_override = moss_mat
+		base_rock.position = Vector3(bx, gate_y + 0.14, gate_z + (float(base_side) * 2.0 - 1.0) * 0.18)
+		base_rock.rotation.y = float(base_side) * 0.06 - 0.03
+		gate_root.add_child(base_rock)
 	# Verga
 	var lintel: MeshInstance3D = MeshInstance3D.new()
 	lintel.name = "VergaPortaoR7"
