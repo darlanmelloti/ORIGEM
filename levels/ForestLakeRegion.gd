@@ -930,10 +930,11 @@ func _build_submerged_ruins() -> void:
 		if pillar == null:
 			continue
 		pillar.name = "PilarSubmerso_%02d" % index
-		pillar.position = Vector3(cos(angle) * 23.0, -0.25 + float(index % 3) * 0.60, sin(angle) * 18.0)
-		var pillar_scale: float = 0.90 + float(index % 2) * 0.22
+		# Cotas, inclinações e escalas irregulares sugerem colapso gradual sob a água em vez de uma coroa regular de pilares.
+		pillar.position = Vector3(cos(angle) * (22.2 + float(index % 3) * 0.74), -0.82 + float(index % 4) * 0.47, sin(angle) * (17.1 + float((index + 1) % 3) * 0.62))
+		var pillar_scale: float = 0.68 + float(index % 4) * 0.17
 		pillar.scale = Vector3(pillar_scale, pillar_scale, pillar_scale)
-		pillar.rotation = Vector3(0.20 + float(index % 3) * 0.15, angle, 0.13 * sin(angle))
+		pillar.rotation = Vector3(0.10 + float(index % 4) * 0.14, angle + 0.12 * sin(float(index)), -0.16 + float(index % 3) * 0.13)
 		_apply_material(pillar, ruin_material)
 		lake.add_child(pillar)
 		# Apenas metade dos vestígios recebe corpo físico: a ruína ganha presença sem formar uma muralha dentro da água.
@@ -959,7 +960,7 @@ func _build_submerged_ruins() -> void:
 		landmark.position = Vector3(-17.0 + float(landmark_index) * 16.5, 2.95 + float(landmark_index % 2) * 0.60, -9.0 + float(landmark_index) * 5.0)
 		var landmark_scale: float = 1.82 - float(landmark_index) * 0.15
 		landmark.scale = Vector3(landmark_scale, landmark_scale, landmark_scale)
-		landmark.rotation = Vector3(0.08 * float(landmark_index + 1), 0.38 + float(landmark_index) * 0.41, 0.04)
+		landmark.rotation = Vector3(0.11 + float(landmark_index) * 0.10, 0.38 + float(landmark_index) * 0.41, -0.07 + float(landmark_index) * 0.06)
 		_apply_material(landmark, ruin_material)
 		lake.add_child(landmark)
 		# Baliza arqueológica discreta: delineia os marcos emergentes na captura sem criar um perímetro artificial de luz.
