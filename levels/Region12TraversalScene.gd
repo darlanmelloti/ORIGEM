@@ -60,6 +60,7 @@ func _ready() -> void:
 		# Dedicated Region 12 visual correction: enlarge the organic sanctuary for a readable cinematic take.
 		traversal_proxy.visible = true
 	_build_region12_wayfinding_lights()
+	_build_region12_cinematic_fill()
 	camera = Camera3D.new()
 	camera.name = "Region12TraversalCamera"
 	camera.fov = 53.0
@@ -98,6 +99,16 @@ func _build_region12_wayfinding_lights() -> void:
 		resonance_core.position = wayfinding_positions[index] + Vector3(0.0, 0.10, 0.0)
 		resonance_core.visible = index < 3
 		add_child(resonance_core)
+
+func _build_region12_cinematic_fill() -> void:
+	var rim_light := DirectionalLight3D.new()
+	rim_light.name = "RecorteFrioCinematicoR12"
+	rim_light.light_color = Color("#8fb7d6")
+	rim_light.light_energy = 0.32
+	rim_light.shadow_enabled = true
+	rim_light.directional_shadow_max_distance = 28.0
+	rim_light.rotation = Vector3(deg_to_rad(-48.0), deg_to_rad(-28.0), deg_to_rad(-12.0))
+	add_child(rim_light)
 
 func _dampen_emissive_landmarks(root: Node) -> void:
 	for child in root.get_children():
