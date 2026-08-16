@@ -275,6 +275,17 @@ func _build_ruin_arch() -> void:
 		debris.scale = Vector3(debris_scale, debris_scale * 0.76, debris_scale)
 		debris.rotation.y = float(debris_index) * 0.91
 		arch.add_child(debris)
+	# Pedras de base (CP 193): naturalizam a transição entre os pilares e o solo, reforçando a leitura arqueológica.
+	for base_side: float in [-3.25, 3.25]:
+		var base_rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if base_rock != null:
+			base_rock.name = "PedraDaBaseDoArco_%.1f" % base_side
+			base_rock.position = Vector3(base_side, -0.12, 0.55)
+			var base_scale: float = 0.34 if base_side < 0.0 else 0.30
+			base_rock.scale = Vector3(base_scale, base_scale * 0.58, base_scale)
+			base_rock.rotation.y = base_side * 0.22
+			_apply_material(base_rock, ruin_material)
+			arch.add_child(base_rock)
 	# Duas brasas litúrgicas tornam o arco reconhecível à distância, mantendo a luz concentrada no marco e não em toda a estrada.
 	var ember_material: StandardMaterial3D = StandardMaterial3D.new()
 	ember_material.albedo_color = Color(0.30, 0.075, 0.018, 1.0)
