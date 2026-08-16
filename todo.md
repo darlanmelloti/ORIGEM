@@ -48,3 +48,15 @@
 - [ ] Validar parser/runtime Godot 4.7.1, desempenho e percurso de 30 segundos.
 - [ ] Gerar gameplay e print 1600×900.
 - [ ] Commitar o novo passe e iniciar a próxima acção no mesmo fluxo.
+
+## Directiva de Alinhamento Dev2 — sincronização e Take 8
+
+- [ ] Auditar todos os módulos de código das Regiões 7–12 existentes no ambiente local.
+- [ ] Sincronizar os ficheiros `.gd` reais para `feature/dev2-mountain-canyon` e verificar a presença no repositório.
+- [ ] Tentar sincronização remota GitHub e registar explicitamente qualquer bloqueio de credenciais.
+- [ ] Criar roteiro QA integrado para Regiões 7–12: headless sem erros + gameplay de 30 segundos.
+- [ ] Adoptar checkpoints paralelos `CP-D2-001`, `CP-D2-002`, etc., sem colidir com CP 119–193 do Dev1.
+- [ ] Criar briefing do Take 8 / Região 8 com câmara, rochas orgânicas, névoa, trilho ascendente e referência visual.
+- [ ] Verificar a entrada Take 6 no dicionário de `RegionalCinematicDirector.gd` e documentar a atribuição à Dev2 sem tocar nas Regiões 1–6.
+- [ ] Executar o primeiro ciclo auditável do Take 8: implementar, validar, capturar, avaliar, empacotar ZIP, commitar e escrever `STATUS_CHECKPOINT_CP-D2-001.md`.
+- [ ] Verificar a fronteira operacional em cada commit e confirmar que nenhum ficheiro das Regiões 1–6 foi alterado.
