@@ -32,6 +32,7 @@ func _ready() -> void:
 	_build_ruin_arch()
 	_build_arch_crown_stones()
 	_build_river_fill_light()
+	_build_arch_base_ferns()
 	_build_arch_approach_ecology()
 	_build_roadside_vegetation()
 
@@ -599,6 +600,40 @@ func _build_river_fill_light() -> void:
 	fill2.omni_range = 12.0
 	fill2.shadow_enabled = false
 	river_root.add_child(fill2)
+
+
+func _build_arch_base_ferns() -> void:
+	# CP 207: Fetos na base dos pilares do Arco das Ruínas para ecologia arqueológica.
+	# 4 fetos baixos em torno dos pilares (z≈48, x≈±4.5) para naturalizar a transição pedra-solo.
+	var fern_root: Node3D = Node3D.new()
+	fern_root.name = "ArchBaseFerns"
+	add_child(fern_root)
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 61204
+	var fern_mat: StandardMaterial3D = StandardMaterial3D.new()
+	fern_mat.albedo_color = Color(0.09, 0.13, 0.06, 1.0)
+	fern_mat.roughness = 0.88
+	# 4 fetos: 2 por pilar, alternados em x e z
+	var fern_offsets: Array = [
+		Vector3(-5.2, 0.0, 47.2),
+		Vector3(-3.8, 0.0, 48.8),
+		Vector3(5.1, 0.0, 47.5),
+		Vector3(3.9, 0.0, 48.6),
+	]
+	for i: int in range(fern_offsets.size()):
+		var fpos: Vector3 = fern_offsets[i]
+		var fern: MeshInstance3D = MeshInstance3D.new()
+		fern.name = "FernArco_%02d" % i
+		var fmesh: CylinderMesh = CylinderMesh.new()
+		fmesh.top_radius = 0.0
+		fmesh.bottom_radius = rng.randf_range(0.28, 0.42)
+		fmesh.height = rng.randf_range(0.55, 0.85)
+		fmesh.radial_segments = 5
+		fern.mesh = fmesh
+		fern.material_override = fern_mat
+		fern.position = fpos
+		fern.rotation.y = rng.randf_range(0.0, TAU)
+		fern_root.add_child(fern)
 
 
 func _apply_material(root: Node, material: Material) -> void:
