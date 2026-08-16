@@ -157,25 +157,11 @@ func _place_route_marker(destination: Vector2) -> void:
 		route_marker_label.position = route_marker.position + Vector2(12.0, -5.0)
 
 func _update_route_destination(player_z: float) -> void:
-	var destination: Vector2 = CARTOGRAPHIC_ANCHORS.ARCO_RUINAS
-	var destination_label: String = "RUMO AO ARCO"
-	# Depois de Elias ultrapassar a zona arqueológica, o mapa confirma a continuidade orgânica para o marco 4.
-	if player_z >= CARTOGRAPHIC_ANCHORS.ARCO_RUINAS.y + 12.0:
-		destination = CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA
-		destination_label = "RUMO À FLORESTA"
-	if player_z >= CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA.y + 20.0:
-		destination = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC
-		destination_label = "RUMO AO MAJESTIC"
-	if player_z >= CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC.y - 12.0:
-		destination = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
-		destination_label = "RUMO ÀS RUÍNAS"
-	# A transição para o marco 7 é uma orientação de mapa; a Região 7 continua exclusivamente sob responsabilidade Dev2.
-	if player_z >= CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y - 18.0:
-		destination = CARTOGRAPHIC_ANCHORS.VILA_ELEVADA
-		destination_label = "PASSAGEM: VILA ELEVADA"
+	var route: Dictionary = CARTOGRAPHIC_ANCHORS.next_dev1_destination(player_z)
+	var destination: Vector2 = route["anchor"] as Vector2
 	_place_route_marker(destination)
 	if route_marker_label != null:
-		route_marker_label.text = destination_label
+		route_marker_label.text = str(route["label"])
 
 func update_player_world_position(world_position: Vector3) -> void:
 	if player_marker == null:

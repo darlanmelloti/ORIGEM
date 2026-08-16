@@ -21,6 +21,18 @@ const HUB_TEMPORAL := Vector2(164.0, 210.0)
 static func world_position(anchor: Vector2, terrain_y: float, vertical_offset: float = 0.0) -> Vector3:
 	return Vector3(anchor.x, terrain_y + vertical_offset, anchor.y)
 
+static func next_dev1_destination(player_z: float) -> Dictionary:
+	# A sequência pertence à cartografia, não à UI: todas as telas e sistemas consultam a mesma rota.
+	if player_z >= RUINAS_SUBMERSAS.y - 18.0:
+		return {"anchor": VILA_ELEVADA, "label": "PASSAGEM: VILA ELEVADA", "anchor_id": 7}
+	if player_z >= ACAMPAMENTO_MAJESTIC.y - 12.0:
+		return {"anchor": RUINAS_SUBMERSAS, "label": "RUMO ÀS RUÍNAS", "anchor_id": 6}
+	if player_z >= FLORESTA_DENSA_ENTRADA.y + 20.0:
+		return {"anchor": ACAMPAMENTO_MAJESTIC, "label": "RUMO AO MAJESTIC", "anchor_id": 5}
+	if player_z >= ARCO_RUINAS.y + 12.0:
+		return {"anchor": FLORESTA_DENSA_ENTRADA, "label": "RUMO À FLORESTA", "anchor_id": 4}
+	return {"anchor": ARCO_RUINAS, "label": "RUMO AO ARCO", "anchor_id": 3}
+
 static func anchor_name(anchor_id: int) -> String:
 	var names: Array[String] = [
 		"Casa Voss", "Estrada do Rio", "Arco das Ruínas", "Floresta Densa",
