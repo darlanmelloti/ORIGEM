@@ -313,7 +313,7 @@ func _build_final_dome_traversal_proxy() -> void:
 			route_material.roughness = 0.93
 			route_material.emission_enabled = true
 			route_material.emission = Color("#5bc8ee")
-			route_material.emission_energy_multiplier = 0.27
+			route_material.emission_energy_multiplier = 0.26
 			route_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			for route_mesh in route_marker.find_children("*", "MeshInstance3D", true, false):
 				route_mesh.set_surface_override_material(0, route_material)
