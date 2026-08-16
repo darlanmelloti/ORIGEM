@@ -163,6 +163,9 @@ func _update_route_destination(player_z: float) -> void:
 	if player_z >= CARTOGRAPHIC_ANCHORS.ARCO_RUINAS.y + 12.0:
 		destination = CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA
 		destination_label = "RUMO À FLORESTA"
+	if player_z >= CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA.y + 20.0:
+		destination = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC
+		destination_label = "RUMO AO MAJESTIC"
 	_place_route_marker(destination)
 	if route_marker_label != null:
 		route_marker_label.text = destination_label
