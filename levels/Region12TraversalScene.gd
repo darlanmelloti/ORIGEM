@@ -59,12 +59,45 @@ func _ready() -> void:
 	if traversal_proxy != null:
 		# Dedicated Region 12 visual correction: enlarge the organic sanctuary for a readable cinematic take.
 		traversal_proxy.visible = true
+	_build_region12_wayfinding_lights()
 	camera = Camera3D.new()
 	camera.name = "Region12TraversalCamera"
 	camera.fov = 53.0
 	add_child(camera)
 	camera.current = true
 	_set_camera(0.0)
+
+func _build_region12_wayfinding_lights() -> void:
+	var wayfinding_positions: Array[Vector3] = [
+		Vector3(164.0, 0.95, 181.5),
+		Vector3(163.8, 1.05, 179.8),
+		Vector3(164.2, 1.15, 178.2),
+		Vector3(164.0, 0.82, 171.9)
+	]
+	for index: int in range(wayfinding_positions.size()):
+		var waypoint_light := OmniLight3D.new()
+		waypoint_light.name = "LuzWayfindingR12_%02d" % index
+		waypoint_light.light_color = Color("#58b9d6" if index < 3 else "#7f6bd6")
+		waypoint_light.light_energy = 1.35 if index < 3 else 0.48
+		waypoint_light.omni_range = 5.6 if index < 3 else 4.6
+		waypoint_light.shadow_enabled = false
+		waypoint_light.position = wayfinding_positions[index]
+		add_child(waypoint_light)
+		var resonance_core := MeshInstance3D.new()
+		resonance_core.name = "NucleoWayfindingR12_%02d" % index
+		var resonance_mesh := SphereMesh.new()
+		resonance_mesh.radius = 0.11 if index < 3 else 0.09
+		resonance_mesh.height = 0.22 if index < 3 else 0.18
+		resonance_core.mesh = resonance_mesh
+		var resonance_material := StandardMaterial3D.new()
+		resonance_material.albedo_color = Color("#58b9d6" if index < 3 else "#8e7be0")
+		resonance_material.emission_enabled = true
+		resonance_material.emission = resonance_material.albedo_color
+		resonance_material.emission_energy_multiplier = 7.0 if index < 3 else 2.4
+		resonance_core.material_override = resonance_material
+		resonance_core.position = wayfinding_positions[index] + Vector3(0.0, 0.10, 0.0)
+		resonance_core.visible = index < 3
+		add_child(resonance_core)
 
 func _dampen_emissive_landmarks(root: Node) -> void:
 	for child in root.get_children():
