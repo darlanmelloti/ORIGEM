@@ -34,14 +34,16 @@ var orion_mountains: Node3D
 
 func _ready() -> void:
 	if has_node("TerrainPatch"):
+		# O mundo pode já ter sido restaurado na cena; os spawns de QA continuam obrigatórios para validar rotas físicas.
+		_queue_regional_qa_modes()
 		return
 	_create_materials()
 	_create_terrain()
 	_build_orion_mountains()
 	_build_voss_house()
 	# A captura técnica precisa da geografia regional já construída antes de ativar a câmara do take; o fluxo jogável mantém os atrasos cinematográficos normais.
-	if OS.has_environment("ORIGEM_CAPTURE_TAKE") or OS.has_environment("ORIGEM_QA_INTERACT"):
-		# Capturas e interações de QA requerem o mundo regional antes da contagem do roteiro; o jogo normal mantém o carregamento encenado.
+	if OS.has_environment("ORIGEM_CAPTURE_TAKE") or OS.has_environment("ORIGEM_QA_INTERACT") or OS.has_environment("ORIGEM_QA_ROUTE"):
+		# Capturas, rotas e interações de QA requerem o mundo regional antes da contagem do roteiro; o jogo normal mantém o carregamento encenado.
 		_enforce_voss_opening_daylight()
 		_build_world_after_voss_prologue()
 	else:
@@ -49,6 +51,9 @@ func _ready() -> void:
 		get_tree().create_timer(0.70).timeout.connect(_enforce_voss_opening_daylight)
 		# O vale diurno entra cedo para que o percurso, o rio e os marcos sejam visíveis logo depois da saída da Casa Voss.
 		get_tree().create_timer(1.20).timeout.connect(_build_world_after_voss_prologue)
+	_queue_regional_qa_modes()
+
+func _queue_regional_qa_modes() -> void:
 	if OS.get_environment("ORIGEM_QA_ROUTE") == "majestic_to_lake":
 		# Exclusivo de QA: posiciona Elias depois de o mundo regional existir, sem alterar o spawn do jogo normal.
 		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_lake_route_qa)
@@ -116,6 +121,10 @@ func _prepare_valley_bridge_route_qa() -> void:
 	var bridge_z: float = -57.0
 	player.global_position = Vector3(bridge_start_x, _terrain_height_for_qa(bridge_start_x, bridge_z) + 2.20, bridge_z)
 	player.rotation.y = -PI * 0.5
+	# O Player conserva a rotação de cabeça da Casa Voss; limpa-a apenas no modo QA para que W e a câmara apontem para o tabuleiro.
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
 	print("[ORIGEM_QA_ROUTE] Elias posicionado na entrada da Ponte de Pedra em %s" % player.global_position)
 
 func _prepare_majestic_lake_route_qa() -> void:
