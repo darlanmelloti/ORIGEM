@@ -1107,6 +1107,28 @@ func _build_riparian_margin() -> void:
 				fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 				fern.rotation.y = angle + 0.6
 				margin.add_child(fern)
+	# Rochas focais maiores quebram a borda elíptica vista da chegada sem criar uma muralha ou colisores adicionais.
+	var shore_accents: Array[Vector3] = [
+		Vector3(28.0, 0.0, 226.0), Vector3(42.0, 0.0, 218.5),
+		Vector3(57.0, 0.0, 215.5), Vector3(76.0, 0.0, 218.0), Vector3(93.0, 0.0, 226.0)
+	]
+	for accent_index: int in range(shore_accents.size()):
+		var accent_point: Vector3 = shore_accents[accent_index]
+		var accent_rock: Node3D = ROCK.instantiate() as Node3D
+		if accent_rock != null:
+			accent_rock.name = "AcentoRochosoMargem_%02d" % accent_index
+			accent_rock.position = Vector3(accent_point.x, _height_at(accent_point.x, accent_point.z) + 0.06, accent_point.z)
+			var accent_scale: float = 0.29 + float(accent_index % 3) * 0.055
+			accent_rock.scale = Vector3(accent_scale, accent_scale * 0.82, accent_scale)
+			accent_rock.rotation.y = 0.42 + float(accent_index) * 0.71
+			margin.add_child(accent_rock)
+		var accent_fern: Node3D = FERN.instantiate() as Node3D
+		if accent_fern != null:
+			accent_fern.name = "FetoDoAcentoMargem_%02d" % accent_index
+			accent_fern.position = Vector3(accent_point.x - 0.78, _height_at(accent_point.x - 0.78, accent_point.z + 0.54) + 0.03, accent_point.z + 0.54)
+			accent_fern.scale = Vector3(0.46, 0.46, 0.46)
+			accent_fern.rotation.y = 0.28 + float(accent_index) * 0.83
+			margin.add_child(accent_fern)
 
 func _build_lakeside_focal_vegetation() -> void:
 	# Grupos descontínuos de espécies reais: enquadram a água e mantêm a abertura do trilho ocidental livre.
