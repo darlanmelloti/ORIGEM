@@ -211,9 +211,12 @@ func _build_forest_wayfinding() -> void:
 		markers.add_child(light)
 
 func _lake_shore_x(world_z: float) -> float:
-	var t: float = clampf((world_z - 145.0) / 79.0, 0.0, 1.0)
+	var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+	var shore_start_z: float = lake_anchor.y - 107.0
+	var shore_end_z: float = lake_anchor.y - 28.0
+	var t: float = clampf((world_z - shore_start_z) / (shore_end_z - shore_start_z), 0.0, 1.0)
 	# Meandra controlada: o percurso afasta-se da leitura de lajes em linha reta, mas mantém a chegada à margem oeste livre e previsível.
-	return lerpf(_path_x(145.0), 14.0, t) + sin(t * PI) * 3.25 + sin(t * TAU) * 0.85
+	return lerpf(_path_x(shore_start_z), lake_anchor.x - 46.0, t) + sin(t * PI) * 3.25 + sin(t * TAU) * 0.85
 
 func _build_lake_shore_path() -> void:
 	var shore_road: Node3D = Node3D.new()
@@ -223,7 +226,8 @@ func _build_lake_shore_path() -> void:
 	rng.seed = 40652
 	for index: int in range(30):
 		var t: float = float(index) / 29.0
-		var z_value: float = lerpf(145.0, 224.0, t)
+		var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+		var z_value: float = lerpf(lake_anchor.y - 107.0, lake_anchor.y - 28.0, t)
 		var x_value: float = _lake_shore_x(z_value)
 		var slab: MeshInstance3D = MeshInstance3D.new()
 		slab.name = "LajeMargem_%02d" % index
@@ -240,8 +244,9 @@ func _build_shore_access_steps() -> void:
 	add_child(access)
 	for index: int in range(7):
 		var t: float = float(index) / 6.0
-		var z_value: float = lerpf(222.0, 240.0, t)
-		var x_value: float = lerpf(_lake_shore_x(222.0), 23.0, t) + sin(t * PI) * 0.45
+		var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+		var z_value: float = lerpf(lake_anchor.y - 30.0, lake_anchor.y - 12.0, t)
+		var x_value: float = lerpf(_lake_shore_x(lake_anchor.y - 30.0), lake_anchor.x - 37.0, t) + sin(t * PI) * 0.45
 		var ground_y: float = _height_at(x_value, z_value)
 		var step_mesh: BoxMesh = BoxMesh.new()
 		step_mesh.size = Vector3(2.05, 0.20, 1.58)
@@ -250,7 +255,7 @@ func _build_shore_access_steps() -> void:
 		step.mesh = step_mesh
 		step.material_override = shore_material
 		step.position = Vector3(x_value, ground_y + 0.10, z_value)
-		step.rotation.y = atan2(23.0 - _lake_shore_x(222.0), 18.0)
+		step.rotation.y = atan2(CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.x - 37.0 - _lake_shore_x(CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y - 30.0), 18.0)
 		access.add_child(step)
 		var body: StaticBody3D = StaticBody3D.new()
 		body.name = "ColisorLajeDeChegada_%02d" % index
@@ -446,8 +451,8 @@ func _build_dense_forest() -> void:
 		var spacing: float = 8.5 + fmod(float(index * 7), 20.0)
 		var x_value: float = _path_x(z_value) + side * spacing
 		# Mantém o corredor livre e evita árvores dentro da bacia elíptica das Ruínas Submersas.
-		var lake_dx: float = (x_value - 60.0) / 48.0
-		var lake_dz: float = (z_value - 252.0) / 38.0
+		var lake_dx: float = (x_value - CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.x) / 48.0
+		var lake_dz: float = (z_value - CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y) / 38.0
 		if abs(x_value - _path_x(z_value)) < 6.0 or lake_dx * lake_dx + lake_dz * lake_dz < 1.20:
 			continue
 		var tree_source: PackedScene
@@ -1101,8 +1106,9 @@ func _build_take6_corridor_accent() -> void:
 func _build_submerged_ruins() -> void:
 	var lake: Node3D = Node3D.new()
 	lake.name = "RuinasSubmersasDoLago"
-	var center_x: float = 60.0
-	var center_z: float = 252.0
+	var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+	var center_x: float = lake_anchor.x
+	var center_z: float = lake_anchor.y
 	# Cota elevada de forma contida: cobre a margem interna fragmentada e revela uma bacia lacustre contínua, preservando as lajes de chegada acima da água.
 	var water_y: float = _height_at(center_x, center_z) + 0.82
 	lake.position = Vector3(center_x, water_y, center_z)
