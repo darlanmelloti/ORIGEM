@@ -293,6 +293,14 @@ func _build_final_dome_traversal_proxy() -> void:
 			route_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			for route_mesh in route_marker.find_children("*", "MeshInstance3D", true, false):
 				route_mesh.set_surface_override_material(0, route_material)
+			var route_body := StaticBody3D.new()
+			var route_shape := CollisionShape3D.new()
+			var route_box := BoxShape3D.new()
+			route_box.size = Vector3(0.72, 0.22, 0.64)
+			route_shape.shape = route_box
+			route_shape.position = Vector3(0.0, -0.08, 0.0)
+			route_body.add_child(route_shape)
+			route_marker.add_child(route_body)
 			proxy.add_child(route_marker)
 	for wall_x in []:
 		var wall := ROCK_LARGE.instantiate() as Node3D
