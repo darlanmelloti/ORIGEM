@@ -13,6 +13,8 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 var terrain_patch: Node3D
 var stone_material: StandardMaterial3D
 var cube_material: StandardMaterial3D
+var recess_resonance_light: OmniLight3D
+var elapsed: float = 0.0
 
 func _ready() -> void:
 	terrain_patch = get_parent().get_node_or_null("TerrainPatch") as Node3D
@@ -478,6 +480,20 @@ func _build_final_dome() -> void:
 	heart_light.shadow_enabled = false
 	heart_light.position = Vector3(0.0, 5.0, 0.0)
 	dome.add_child(heart_light)
+	var recess_light := OmniLight3D.new()
+	recess_resonance_light = recess_light
+	recess_light.name = "RessonanciaRecessivoCupulaR12"
+	recess_light.light_color = Color("#3c8fb5")
+	recess_light.light_energy = 0.24
+	recess_light.omni_range = 2.8
+	recess_light.shadow_enabled = false
+	recess_light.position = Vector3(0.0, 2.25, 173.0 - dome_z)
+	dome.add_child(recess_light)
+
+func _process(delta: float) -> void:
+	elapsed += delta
+	if recess_resonance_light != null:
+		recess_resonance_light.light_energy = 0.20 + sin(elapsed * 1.7) * 0.055
 
 func _make_stone_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
