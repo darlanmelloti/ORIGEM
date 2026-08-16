@@ -30,6 +30,7 @@ func _ready() -> void:
 	_build_river()
 	_build_river_margins()
 	_build_ruin_arch()
+	_build_cartographic_southwest_readability()
 	_build_arch_crown_stones()
 	_build_river_fill_light()
 	_build_arch_base_ferns()
@@ -339,6 +340,39 @@ func _build_ruin_arch() -> void:
 	arch_fill.shadow_enabled = false
 	arch_fill.position = Vector3(0.0, 4.4, 2.6)
 	arch.add_child(arch_fill)
+
+func _build_cartographic_southwest_readability() -> void:
+	# CP 218 — Leitura cartográfica do sudoeste: Casa Voss → Estrada do Rio → Arco.
+	# Os marcos ficam fora das lajes para orientar o olhar pelo vale sem introduzir colisores no percurso principal.
+	var cues: Node3D = Node3D.new()
+	cues.name = "MarcosCartograficosSudoeste"
+	add_child(cues)
+	var cue_specs: Array[Dictionary] = [
+		{"z": 18.0, "side": -1.0, "scale": 0.22, "name": "MarcoDaSaidaVoss"},
+		{"z": 31.0, "side": 1.0, "scale": 0.26, "name": "MarcoDaCurvaDoRio"},
+		{"z": 40.0, "side": -1.0, "scale": 0.30, "name": "MarcoDaVistaDoArco"},
+	]
+	for cue_index: int in range(cue_specs.size()):
+		var spec: Dictionary = cue_specs[cue_index]
+		var z_value: float = float(spec["z"])
+		var side: float = float(spec["side"])
+		var base_x: float = _road_x(z_value) + side * 5.15
+		var base_y: float = _height_at(base_x, z_value)
+		var cairn: Node3D = Node3D.new()
+		cairn.name = str(spec["name"])
+		cairn.position = Vector3(base_x, base_y, z_value)
+		cues.add_child(cairn)
+		for stone_index: int in range(2):
+			var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+			if stone == null:
+				continue
+			stone.name = "PedraDeOrientacao_%02d" % stone_index
+			var scale_value: float = float(spec["scale"]) * (1.0 - float(stone_index) * 0.18)
+			stone.scale = Vector3(scale_value, scale_value * (0.68 + float(stone_index) * 0.18), scale_value)
+			stone.position = Vector3(side * (0.22 + float(stone_index) * 0.34), 0.06 + float(stone_index) * 0.34, 0.10 - float(stone_index) * 0.16)
+			stone.rotation = Vector3(0.05 * float(stone_index), side * (0.22 + float(stone_index) * 0.10), 0.08 * side)
+			_apply_material(stone, ruin_material)
+			cairn.add_child(stone)
 
 func _build_arch_crown_stones() -> void:
 	# CP 205: Pedras de topo no Arco das Ruínas para silhueta arqueológica mais rica.
