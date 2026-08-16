@@ -22,6 +22,7 @@ const FLAGSTONE: Texture2D = preload("res://assets/textures/generated/daylight_w
 const GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_ground_normal_gl.jpg")
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
+const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -117,11 +118,12 @@ func _build_cartographic_forest_threshold() -> void:
 	var threshold: Node3D = Node3D.new()
 	threshold.name = "LimiarCartograficoDaFloresta"
 	add_child(threshold)
+	var forest_entry_z: float = CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA.y
 	var tree_specs: Array[Dictionary] = [
-		{"z": 88.0, "side": -1.0, "offset": 10.4, "scale": 0.54},
-		{"z": 92.0, "side": 1.0, "offset": 11.2, "scale": 0.48},
-		{"z": 100.0, "side": -1.0, "offset": 12.8, "scale": 0.60},
-		{"z": 105.0, "side": 1.0, "offset": 10.6, "scale": 0.52},
+		{"z": forest_entry_z - 28.0, "side": -1.0, "offset": 10.4, "scale": 0.54},
+		{"z": forest_entry_z - 24.0, "side": 1.0, "offset": 11.2, "scale": 0.48},
+		{"z": forest_entry_z - 16.0, "side": -1.0, "offset": 12.8, "scale": 0.60},
+		{"z": forest_entry_z - 11.0, "side": 1.0, "offset": 10.6, "scale": 0.52},
 	]
 	for tree_index: int in range(tree_specs.size()):
 		var spec: Dictionary = tree_specs[tree_index]
@@ -139,7 +141,7 @@ func _build_cartographic_forest_threshold() -> void:
 		tree.rotation.y = side * (0.42 + float(tree_index) * 0.28)
 		threshold.add_child(tree)
 	for rock_index: int in range(5):
-		var z_value: float = 90.0 + float(rock_index) * 3.6
+		var z_value: float = forest_entry_z - 26.0 + float(rock_index) * 3.6
 		var side: float = -1.0 if rock_index % 2 == 0 else 1.0
 		var x_value: float = _path_x(z_value) + side * (5.1 + float(rock_index % 3) * 0.75)
 		var ground_y: float = _height_at(x_value, z_value)
@@ -621,8 +623,8 @@ func _build_forest_micro_details() -> void:
 func _build_majestic_camp() -> void:
 	var camp: Node3D = Node3D.new()
 	camp.name = "AcampamentoMajestic"
-	var camp_x: float = -88.0
-	var camp_z: float = 178.0
+	var camp_x: float = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC.x
+	var camp_z: float = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC.y
 	camp.position = Vector3(camp_x, _height_at(camp_x, camp_z), camp_z)
 	add_child(camp)
 	var canvas_material: StandardMaterial3D = StandardMaterial3D.new()
@@ -975,12 +977,13 @@ func _build_majestic_connector() -> void:
 	add_child(connector)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = 50506
-	var start_x: float = -78.0
-	var end_x: float = _path_x(178.0)
+	var camp_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC
+	var start_x: float = camp_anchor.x + 10.0
+	var end_x: float = _path_x(camp_anchor.y)
 	for index: int in range(29):
 		var t: float = float(index) / 28.0
 		var x_value: float = lerpf(start_x, end_x, t)
-		var z_value: float = 178.0 + sin(t * PI) * 3.4
+		var z_value: float = camp_anchor.y + sin(t * PI) * 3.4
 		var slab: MeshInstance3D = MeshInstance3D.new()
 		slab.name = "LajeLigacaoMajestic_%02d" % index
 		slab.mesh = _make_slab(2.05 + rng.randf_range(-0.16, 0.20), 1.52 + rng.randf_range(-0.13, 0.16), rng)
@@ -1013,7 +1016,7 @@ func _build_majestic_connector() -> void:
 	for cluster_index: int in range(10):
 		var cluster_t: float = float(cluster_index + 1) / 11.0
 		var path_x: float = lerpf(start_x, end_x, cluster_t)
-		var path_z: float = 178.0 + sin(cluster_t * PI) * 3.4
+		var path_z: float = camp_anchor.y + sin(cluster_t * PI) * 3.4
 		var side: float = -1.0 if cluster_index % 2 == 0 else 1.0
 		var offset: float = 3.35 + float(cluster_index % 3) * 0.55
 		var world_x: float = path_x + side * offset
