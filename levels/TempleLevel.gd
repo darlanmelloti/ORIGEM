@@ -498,12 +498,14 @@ func _build_region7_transition() -> void:
 	moss_mat.albedo_color = Color(0.095, 0.145, 0.070, 1.0)
 	moss_mat.roughness = 0.94
 	
-	# Trilho de acesso: 12 lajes de pedra de z=285 a z=345, eixo x≈140
+	# Trilho de acesso no lado Dev1: termina antes do handoff oficial e é derivado da âncora da Vila Elevada.
+	var handoff_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.VILA_ELEVADA
+	var trail_start_z: float = handoff_anchor.y - 67.0
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = 72801
 	for step: int in range(12):
-		var sz: float = 285.0 + float(step) * 5.0
-		var sx: float = 140.0 + rng.randf_range(-1.2, 1.2)
+		var sz: float = trail_start_z + float(step) * 5.0
+		var sx: float = handoff_anchor.x + rng.randf_range(-1.2, 1.2)
 		var sy: float = _terrain_height_for_qa(sx, sz) + 0.04
 		var slab: MeshInstance3D = MeshInstance3D.new()
 		slab.name = "LajeTrilhoR7_%02d" % step
