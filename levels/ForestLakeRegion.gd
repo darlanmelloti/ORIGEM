@@ -56,6 +56,7 @@ func _ready() -> void:
 	_build_take9_corridor_fill()
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
+	_build_cartographic_basin_silhouette()
 	_build_riparian_margin()
 	_build_lakeside_focal_vegetation()
 
@@ -1149,6 +1150,43 @@ func _build_take6_corridor_accent() -> void:
 			af.scale = Vector3(fs, fs, fs)
 			af.rotation.y = -(ad["yaw"] as float)
 			accent.add_child(af)
+
+func _build_cartographic_basin_silhouette() -> void:
+	# Promontório oriental e queda de água: traduzem a borda elevada da Bacia Central indicada no mapa sem bloquear o acesso oeste.
+	var silhouette: Node3D = Node3D.new()
+	silhouette.name = "SilhuetaCartograficaDaBacia"
+	add_child(silhouette)
+	var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+	var promontory_points: Array[Vector3] = [
+		Vector3(lake_anchor.x + 42.5, 0.0, lake_anchor.y - 11.0),
+		Vector3(lake_anchor.x + 45.0, 0.0, lake_anchor.y - 2.0),
+		Vector3(lake_anchor.x + 41.8, 0.0, lake_anchor.y + 9.0)
+	]
+	for index: int in range(promontory_points.size()):
+		var point: Vector3 = promontory_points[index]
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		rock.name = "PromontorioOrientalDaBacia_%02d" % index
+		rock.position = Vector3(point.x, _height_at(point.x, point.z) + 0.08, point.z)
+		var scale_value: float = 0.56 + float(index) * 0.10
+		rock.scale = Vector3(scale_value, scale_value * 1.65, scale_value)
+		rock.rotation = Vector3(0.08 * float(index), 0.72 + float(index) * 0.46, -0.12 + float(index) * 0.07)
+		_apply_material(rock, ruin_material)
+		silhouette.add_child(rock)
+	var fall_x: float = lake_anchor.x + 43.0
+	var fall_z: float = lake_anchor.y - 1.5
+	var fall_y: float = _height_at(fall_x, fall_z)
+	var waterfall_mesh: QuadMesh = QuadMesh.new()
+	waterfall_mesh.size = Vector2(4.2, 9.0)
+	waterfall_mesh.material = _create_lake_material()
+	var waterfall: MeshInstance3D = MeshInstance3D.new()
+	waterfall.name = "CascataDaBaciaOriental"
+	waterfall.mesh = waterfall_mesh
+	waterfall.position = Vector3(fall_x, fall_y + 4.5, fall_z)
+	waterfall.rotation.y = PI * 0.5
+	waterfall.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	silhouette.add_child(waterfall)
 
 func _build_submerged_ruins() -> void:
 	var lake: Node3D = Node3D.new()
