@@ -359,14 +359,17 @@ func _build_dense_forest() -> void:
 			tree_scale *= 1.48
 		elif index % 3 == 0:
 			tree_scale *= 1.20
-		tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
+		# Variação de altura independente: escala Y entre 0.85 e 1.35 × tree_scale para quebrar a uniformidade das coníferas económicas.
+		# A escala XZ mantém-se em tree_scale para preservar a silhueta de copa sem alargar os troncos.
+		var height_var: float = 0.85 + fmod(float(index * 13 + 7), 50.0) / 100.0
+		tree.scale = Vector3(tree_scale, tree_scale * height_var, tree_scale)
 		tree.rotation.y = rng.randf_range(-PI, PI)
 		forest.add_child(tree)
 		# Um subconjunto de troncos ganha colisão: a floresta torna-se física sem saturar o orçamento nem bloquear o corredor central.
 		if index % 3 == 0:
 			var trunk_body: StaticBody3D = StaticBody3D.new()
 			trunk_body.name = "ColisorTroncoFloresta_%02d" % index
-			var trunk_height: float = maxf(2.3, 7.2 * tree_scale)
+			var trunk_height: float = maxf(2.3, 7.2 * tree_scale * height_var)
 			trunk_body.position = tree.position + Vector3(0.0, trunk_height * 0.5, 0.0)
 			var trunk_collision: CollisionShape3D = CollisionShape3D.new()
 			var trunk_shape: CylinderShape3D = CylinderShape3D.new()
