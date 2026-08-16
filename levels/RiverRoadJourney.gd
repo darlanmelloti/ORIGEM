@@ -27,6 +27,7 @@ func _ready() -> void:
 	path_material = _make_path_material()
 	ruin_material = _make_ruin_material()
 	_build_compacted_roadbed()
+	_build_road_entry_orientation()
 	_build_river_road()
 	_build_river()
 	_build_river_margins()
@@ -91,6 +92,44 @@ func _build_compacted_roadbed() -> void:
 	roadbed.mesh = surface.commit()
 	roadbed.material_override = roadbed_material
 	add_child(roadbed)
+
+func _build_road_entry_orientation() -> void:
+	# Marcos laterais de entrada: a primeira decisão espacial após a Casa Voss é legível no mundo,
+	# sem criar um portão artificial nem estreitar as lajes da Estrada do Rio.
+	var markers: Node3D = Node3D.new()
+	markers.name = "MarcosDeOrientacaoCasaVoss"
+	add_child(markers)
+	var marker_data: Array[Dictionary] = [
+		{"z": 17.0, "side": -1.0, "scale": 0.30, "yaw": 0.18},
+		{"z": 24.0, "side": -1.0, "scale": 0.23, "yaw": -0.28},
+		{"z": 39.0, "side": 1.0, "scale": 0.25, "yaw": 0.12},
+	]
+	for index: int in range(marker_data.size()):
+		var marker: Dictionary = marker_data[index]
+		var z_value: float = marker["z"] as float
+		var side: float = marker["side"] as float
+		# O deslocamento de 3,25 m mantém todos os volumes fora do leito central de 4,15 m.
+		var x_value: float = _road_x(z_value) + side * 3.25
+		var pillar: Node3D = RUIN_PILLAR.instantiate() as Node3D
+		if pillar == null:
+			continue
+		pillar.name = "MarcoDeEstrada_%02d" % (index + 1)
+		pillar.position = Vector3(x_value, _height_at(x_value, z_value) - 0.06, z_value)
+		var uniform_scale: float = marker["scale"] as float
+		pillar.scale = Vector3(uniform_scale, uniform_scale * 1.14, uniform_scale)
+		pillar.rotation.y = marker["yaw"] as float
+		_apply_material(pillar, ruin_material)
+		markers.add_child(pillar)
+		# Uma rocha baixa anexa cada marco ao relevo e evita a aparência de objecto plantado.
+		var footing: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if footing == null:
+			continue
+		footing.name = "BaseNaturalMarco_%02d" % (index + 1)
+		footing.position = Vector3(x_value - side * 0.18, _height_at(x_value - side * 0.18, z_value + 0.28) - 0.03, z_value + 0.28)
+		footing.scale = Vector3(0.20, 0.12, 0.20)
+		footing.rotation.y = (marker["yaw"] as float) + 0.5
+		_apply_material(footing, ruin_material)
+		markers.add_child(footing)
 
 func _build_river_road() -> void:
 	var road: Node3D = Node3D.new()
