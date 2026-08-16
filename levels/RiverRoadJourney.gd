@@ -48,7 +48,8 @@ func _river_x(world_z: float) -> float:
 func _build_compacted_roadbed() -> void:
 	# Solo compactado contínuo: torna o percurso legível entre as lajes e evita a leitura de relvado aleatório.
 	var roadbed_material: StandardMaterial3D = StandardMaterial3D.new()
-	roadbed_material.albedo_color = Color(0.19, 0.14, 0.075, 1.0)
+	# Solo húmido legível: mantém o trilho integrado ao vale, mas evita que o leito físico se perca em preto no crepúsculo.
+	roadbed_material.albedo_color = Color(0.285, 0.245, 0.165, 1.0)
 	roadbed_material.roughness = 0.96
 	roadbed_material.normal_enabled = true
 	roadbed_material.normal_texture = GROUND_NORMAL
