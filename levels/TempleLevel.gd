@@ -18,6 +18,7 @@ const FOREST_LAKE_REGION_SCRIPT: Script = preload("res://levels/ForestLakeRegion
 const HIGHLAND_REGION_SCRIPT: Script = preload("res://levels/HighlandRegion.gd")
 const ORION_DESTINATION_REGION_SCRIPT: Script = preload("res://levels/OrionDestinationRegion.gd")
 const REGIONAL_CINEMATIC_DIRECTOR_SCRIPT: Script = preload("res://levels/RegionalCinematicDirector.gd")
+const CARTOGRAPHIC_HANDOFF_PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const DAYLIGHT_VARIANT_ENABLED: bool = true
 
 var terrain_patch: Node3D
@@ -193,6 +194,7 @@ func _build_world_after_voss_prologue() -> void:
 		add_child(highlands)
 		_build_region7_transition()
 		_build_region7_corridor_ecology()
+		_build_cartographic_region7_handoff_vista()
 		var orion_destinations: Node3D = ORION_DESTINATION_REGION_SCRIPT.new() as Node3D
 		orion_destinations.name = "DestinosOrionEHubTemporal"
 		add_child(orion_destinations)
@@ -649,6 +651,39 @@ func _build_region7_corridor_ecology() -> void:
 		fern.rotation.y = rng.randf_range(0.0, TAU)
 		eco_root.add_child(fern)
 
+
+func _build_cartographic_region7_handoff_vista() -> void:
+	# CP 221 — Última vista da Região 6: o lago fica atrás e a subida para a Vila Elevada torna-se legível à frente.
+	# Os vestígios ficam antes do handoff técnico (z<285), sem criar geometria, colisores ou luzes dentro da Região 7.
+	var vista_root: Node3D = Node3D.new()
+	vista_root.name = "VistaCartograficaLagoParaVila"
+	add_child(vista_root)
+	var marker_specs: Array[Dictionary] = [
+		{"x": 132.0, "z": 276.0, "scale": 0.38, "yaw": -0.46},
+		{"x": 148.0, "z": 281.0, "scale": 0.46, "yaw": 0.32},
+	]
+	for marker_index: int in range(marker_specs.size()):
+		var spec: Dictionary = marker_specs[marker_index]
+		var x_value: float = float(spec["x"])
+		var z_value: float = float(spec["z"])
+		var marker: Node3D = CARTOGRAPHIC_HANDOFF_PILLAR.instantiate() as Node3D
+		if marker == null:
+			continue
+		marker.name = "EstelaDaSubida_%02d" % marker_index
+		marker.position = Vector3(x_value, _terrain_height_for_qa(x_value, z_value), z_value)
+		var scale_value: float = float(spec["scale"])
+		marker.scale = Vector3(scale_value, scale_value * (1.08 + float(marker_index) * 0.10), scale_value)
+		marker.rotation = Vector3(0.05 * float(marker_index), float(spec["yaw"]), 0.04 * (1.0 if marker_index == 0 else -1.0))
+		vista_root.add_child(marker)
+		var base_mesh: BoxMesh = BoxMesh.new()
+		base_mesh.size = Vector3(1.15 + float(marker_index) * 0.18, 0.28, 1.05)
+		base_mesh.material = moss_material
+		var base: MeshInstance3D = MeshInstance3D.new()
+		base.name = "BaseDaEstelaDaSubida_%02d" % marker_index
+		base.mesh = base_mesh
+		base.position = marker.position + Vector3(0.0, 0.14, 0.0)
+		base.rotation.y = marker.rotation.y
+		vista_root.add_child(base)
 
 func _make_material(color: Color, roughness_value: float) -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
