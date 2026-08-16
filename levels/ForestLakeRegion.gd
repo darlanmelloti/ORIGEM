@@ -39,6 +39,7 @@ func _ready() -> void:
 	ruin_material = _create_ruin_material()
 	shore_material = _create_shore_material()
 	_build_forest_path()
+	_build_cartographic_forest_threshold()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
 	_build_shore_access_steps()
@@ -108,6 +109,55 @@ func _build_forest_path() -> void:
 		slab_collision.shape = slab_shape
 		slab_body.add_child(slab_collision)
 		road.add_child(slab_body)
+
+func _build_cartographic_forest_threshold() -> void:
+	# CP 219 — O limiar confirma no mundo físico a passagem Arco das Ruínas → Floresta Densa do mapa.
+	# As árvores e rochas formam uma massa de bosque com abertura central, nunca uma parede nem um bloqueio do trilho.
+	var threshold: Node3D = Node3D.new()
+	threshold.name = "LimiarCartograficoDaFloresta"
+	add_child(threshold)
+	var tree_specs: Array[Dictionary] = [
+		{"z": 88.0, "side": -1.0, "offset": 10.4, "scale": 0.54},
+		{"z": 92.0, "side": 1.0, "offset": 11.2, "scale": 0.48},
+		{"z": 100.0, "side": -1.0, "offset": 12.8, "scale": 0.60},
+		{"z": 105.0, "side": 1.0, "offset": 10.6, "scale": 0.52},
+	]
+	for tree_index: int in range(tree_specs.size()):
+		var spec: Dictionary = tree_specs[tree_index]
+		var z_value: float = float(spec["z"])
+		var side: float = float(spec["side"])
+		var x_value: float = _path_x(z_value) + side * float(spec["offset"])
+		var source: PackedScene = ISLAND_TREE if tree_index % 2 == 0 else OAK_DARK
+		var tree: Node3D = source.instantiate() as Node3D
+		if tree == null:
+			continue
+		tree.name = "ArvoreLimiarFlorestal_%02d" % tree_index
+		tree.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
+		var scale_value: float = float(spec["scale"])
+		tree.scale = Vector3(scale_value, scale_value * (0.92 + float(tree_index % 2) * 0.12), scale_value)
+		tree.rotation.y = side * (0.42 + float(tree_index) * 0.28)
+		threshold.add_child(tree)
+	for rock_index: int in range(5):
+		var z_value: float = 90.0 + float(rock_index) * 3.6
+		var side: float = -1.0 if rock_index % 2 == 0 else 1.0
+		var x_value: float = _path_x(z_value) + side * (5.1 + float(rock_index % 3) * 0.75)
+		var ground_y: float = _height_at(x_value, z_value)
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.name = "RochaLimiarFloresta_%02d" % rock_index
+			var rock_scale: float = 0.16 + float(rock_index % 3) * 0.045
+			rock.scale = Vector3(rock_scale, rock_scale * 0.66, rock_scale)
+			rock.position = Vector3(x_value, ground_y + 0.04, z_value)
+			rock.rotation = Vector3(0.05 * float(rock_index % 2), float(rock_index) * 0.76, 0.08 * side)
+			threshold.add_child(rock)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoLimiarFloresta_%02d" % rock_index
+			fern.position = Vector3(x_value + side * 0.78, ground_y + 0.025, z_value + 0.42)
+			var fern_scale: float = 0.42 + float(rock_index % 2) * 0.07
+			fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+			fern.rotation.y = float(rock_index) * 0.64
+			threshold.add_child(fern)
 
 func _build_forest_wayfinding() -> void:
 	# Balizas baixas, quentes e espaçadas: guiam Elias no sub-bosque sem transformar a floresta num corredor iluminado.
