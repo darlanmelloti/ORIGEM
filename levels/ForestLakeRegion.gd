@@ -44,6 +44,7 @@ func _ready() -> void:
 	_build_lake_shore_path()
 	_build_shore_access_steps()
 	_build_majestic_lake_transition()
+	_build_cartographic_lake_vistas()
 	_build_lake_wayfinding()
 	_build_dense_forest()
 	_build_forest_canopy_clusters()
@@ -333,6 +334,55 @@ func _build_majestic_lake_transition() -> void:
 		fill.shadow_enabled = false
 		fill.position = lamp.position
 		transition.add_child(fill)
+
+func _build_cartographic_lake_vistas() -> void:
+	# CP 220 — A vegetação abre para o centro hídrico do mapa sem perder a leitura do Acampamento no flanco oeste.
+	# Estes vestígios de observação são visuais e não têm colisão ou luzes, preservando a rota e o orçamento GTX 1050 Ti.
+	var vistas: Node3D = Node3D.new()
+	vistas.name = "MiradourosCartograficosDoLago"
+	add_child(vistas)
+	var vista_specs: Array[Dictionary] = [
+		{"z": 184.0, "side": -1.0, "offset": 6.8, "scale": 0.34},
+		{"z": 202.0, "side": 1.0, "offset": 7.4, "scale": 0.40},
+		{"z": 216.0, "side": -1.0, "offset": 6.6, "scale": 0.30},
+	]
+	for vista_index: int in range(vista_specs.size()):
+		var spec: Dictionary = vista_specs[vista_index]
+		var z_value: float = float(spec["z"])
+		var side: float = float(spec["side"])
+		var x_value: float = _lake_shore_x(z_value) + side * float(spec["offset"])
+		var ground_y: float = _height_at(x_value, z_value)
+		var vista: Node3D = Node3D.new()
+		vista.name = "VistaDoLago_%02d" % vista_index
+		vista.position = Vector3(x_value, ground_y, z_value)
+		vistas.add_child(vista)
+		var marker: Node3D = PILLAR.instantiate() as Node3D
+		if marker != null:
+			marker.name = "VestigioDeObservacao_%02d" % vista_index
+			var scale_value: float = float(spec["scale"])
+			marker.scale = Vector3(scale_value, scale_value * 1.42, scale_value)
+			marker.position = Vector3(side * 0.72, 0.88, 0.0)
+			marker.rotation = Vector3(0.06 * side, side * (0.32 + float(vista_index) * 0.16), 0.05 * side)
+			_apply_material(marker, ruin_material)
+			vista.add_child(marker)
+		for rock_index: int in range(2):
+			var rock: Node3D = ROCK.instantiate() as Node3D
+			if rock == null:
+				continue
+			rock.name = "PedraDaVista_%02d" % rock_index
+			var rock_scale: float = 0.14 + float(rock_index) * 0.055
+			rock.scale = Vector3(rock_scale, rock_scale * 0.70, rock_scale)
+			rock.position = Vector3(-side * (0.45 + float(rock_index) * 0.78), 0.05 + float(rock_index) * 0.06, 0.42 - float(rock_index) * 0.68)
+			rock.rotation = Vector3(0.08 * float(rock_index), float(vista_index + rock_index) * 0.73, 0.07 * side)
+			vista.add_child(rock)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoDaVista_%02d" % vista_index
+			fern.position = Vector3(side * 1.32, 0.02, -0.76)
+			var fern_scale: float = 0.44 + float(vista_index % 2) * 0.08
+			fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+			fern.rotation.y = side * (0.64 + float(vista_index) * 0.38)
+			vista.add_child(fern)
 
 func _build_lake_wayfinding() -> void:
 	# Quatro marcos de pedra com brilho Chronos baixo: orientam a curva da margem sem transformar o trilho em sinalização moderna.
