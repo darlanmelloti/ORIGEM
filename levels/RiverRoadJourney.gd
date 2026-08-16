@@ -399,22 +399,24 @@ func _build_arch_crown_stones() -> void:
 	]
 	for i: int in range(crown_positions.size()):
 		var pos: Vector3 = crown_positions[i]
-		var frag: MeshInstance3D = MeshInstance3D.new()
+		var frag: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if frag == null:
+			continue
 		frag.name = "FragmentoCroa_%02d" % i
-		var fmesh: BoxMesh = BoxMesh.new()
-		fmesh.size = Vector3(
-			rng.randf_range(0.35, 0.75),
-			rng.randf_range(0.25, 0.55),
-			rng.randf_range(0.30, 0.60)
+		# Fragmentos reais preservam o desgaste irregular da ruína, em vez de blocos rectangulares de greybox.
+		var scale_value: float = rng.randf_range(0.095, 0.165)
+		frag.scale = Vector3(
+			scale_value * rng.randf_range(0.86, 1.18),
+			scale_value * rng.randf_range(0.56, 0.88),
+			scale_value * rng.randf_range(0.82, 1.12)
 		)
-		frag.mesh = fmesh
-		frag.material_override = crown_mat
 		frag.position = pos
 		frag.rotation = Vector3(
 			rng.randf_range(-0.18, 0.18),
 			rng.randf_range(-0.35, 0.35),
 			rng.randf_range(-0.12, 0.12)
 		)
+		_apply_material(frag, crown_mat)
 		arch_root.add_child(frag)
 
 
