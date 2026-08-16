@@ -182,7 +182,7 @@ func _build_river_margins() -> void:
 			if fern != null:
 				fern.name = "FetoMargemRio_%02d" % index
 				fern.position = Vector3(x_value + side * 0.86, ground_y + 0.025, z_value + rng.randf_range(-0.82, 0.82))
-				var fern_scale: float = 0.30 + float(index % 3) * 0.055
+				var fern_scale: float = 0.38 + float(index % 3) * 0.065
 				fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 				fern.rotation.y = rng.randf_range(-PI, PI)
 				margins.add_child(fern)
@@ -357,7 +357,7 @@ func _build_roadside_vegetation() -> void:
 		if fern != null:
 			fern.name = "FetoEstrada_%02d" % index
 			fern.position = Vector3(x_value, _height_at(x_value, z_value) + 0.02, z_value)
-			var fern_scale: float = 0.22 + float(index % 3) * 0.04
+			var fern_scale: float = 0.32 + float(index % 3) * 0.055
 			fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 			fern.rotation.y = float(index) * 0.67
 			vegetation.add_child(fern)
