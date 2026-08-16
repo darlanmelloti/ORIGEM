@@ -457,6 +457,17 @@ func _build_final_dome() -> void:
 		gateway_base.scale = Vector3(5.8, 0.52, 1.65)
 		gateway_base.rotation = Vector3(0.02, 0.0, 0.0)
 		_apply_material(gateway_base, stone_material)
+		var gateway_body := StaticBody3D.new()
+		gateway_body.name = "ColisaoSoleiraGatewayCupula"
+		gateway_body.collision_layer = 1
+		gateway_body.collision_mask = 1
+		var gateway_shape := CollisionShape3D.new()
+		var gateway_box := BoxShape3D.new()
+		gateway_box.size = Vector3(11.6, 1.0, 3.3)
+		gateway_shape.shape = gateway_box
+		gateway_shape.position = Vector3(0.0, -0.22, 0.0)
+		gateway_body.add_child(gateway_shape)
+		gateway_base.add_child(gateway_body)
 		dome.add_child(gateway_base)
 	var heart := MeshInstance3D.new()
 	heart.name = "NucleoCoroaFinal"
