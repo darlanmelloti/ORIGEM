@@ -81,10 +81,12 @@ func _setup_environment() -> void:
 	environment.sdfgi_probe_bias = 1.08
 
 	environment.fog_enabled = true
-	environment.fog_light_color = Color(0.70, 0.81, 0.88)
+	# CP 211 — neblina litúrgica azulada, menos densa e mais integrada com o céu.
+	# A profundidade adicional mantém a montanha legível como destino distante.
+	environment.fog_light_color = Color(0.62, 0.76, 0.92)
 	environment.fog_light_energy = 0.34
-	environment.fog_density = 0.0018
-	environment.fog_sky_affect = 0.68
+	environment.fog_density = 0.0015
+	environment.fog_sky_affect = 0.72
 	environment.volumetric_fog_enabled = false
 	environment.adjustment_enabled = true
 	environment.adjustment_brightness = 0.98
