@@ -449,6 +449,17 @@ func _build_final_dome() -> void:
 		gateway_monolith.scale = Vector3(0.96, 3.45, 0.96)
 		gateway_monolith.rotation = Vector3(0.04, 0.10 * sign(gateway_x), 0.03 * sign(gateway_x))
 		_apply_material(gateway_monolith, stone_material)
+		var monolith_body := StaticBody3D.new()
+		monolith_body.name = "ColisaoMonolitoGatewayCupula_%s" % str(gateway_x)
+		monolith_body.collision_layer = 1
+		monolith_body.collision_mask = 1
+		var monolith_shape := CollisionShape3D.new()
+		var monolith_box := BoxShape3D.new()
+		monolith_box.size = Vector3(1.55, 6.9, 1.55)
+		monolith_shape.shape = monolith_box
+		monolith_shape.position = Vector3(0.0, 0.0, 0.0)
+		monolith_body.add_child(monolith_shape)
+		gateway_monolith.add_child(monolith_body)
 		dome.add_child(gateway_monolith)
 	var gateway_recess := ROCK_LARGE.instantiate() as Node3D
 	if gateway_recess != null:
