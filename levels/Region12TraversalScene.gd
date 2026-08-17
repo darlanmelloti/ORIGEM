@@ -554,6 +554,15 @@ func _build_final_dome_traversal_proxy() -> void:
 		for step_mesh in central_step.find_children("*", "MeshInstance3D", true, false):
 			step_mesh.set_surface_override_material(0, step_material)
 		proxy.add_child(central_step)
+		if step_index == 2:
+			var step_contact_light := OmniLight3D.new()
+			step_contact_light.name = "LuzContactoUltimoDegrauR12"
+			step_contact_light.light_color = Color("#5ab7d8")
+			step_contact_light.light_energy = 0.28
+			step_contact_light.omni_range = 2.8
+			step_contact_light.shadow_enabled = false
+			step_contact_light.position = Vector3(164.0, 0.96, 169.40)
+			add_child(step_contact_light)
 	var doorway_plane := ROCK_LARGE.instantiate() as Node3D
 	if doorway_plane != null:
 		doorway_plane.name = "PlanoPortaEscuraCupula"
