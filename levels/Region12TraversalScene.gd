@@ -567,6 +567,22 @@ func _build_final_dome_traversal_proxy() -> void:
 			step_contact_light.shadow_enabled = false
 			step_contact_light.position = Vector3(164.0, 0.96, 169.40)
 			add_child(step_contact_light)
+	var approach_body := StaticBody3D.new()
+	approach_body.name = "CollidersAproximacaoHubR12"
+	add_child(approach_body)
+	var approach_shapes: Array[Vector3] = [
+		Vector3(2.40, 0.48, 1.32), Vector3(2.18, 0.52, 1.28), Vector3(1.94, 0.58, 1.34)
+	]
+	var approach_positions: Array[Vector3] = [
+		Vector3(164.0, 0.24, 171.12), Vector3(164.0, 0.50, 170.38), Vector3(164.0, 0.80, 169.40)
+	]
+	for collider_index: int in range(approach_shapes.size()):
+		var collision := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = approach_shapes[collider_index]
+		collision.shape = shape
+		collision.position = approach_positions[collider_index]
+		approach_body.add_child(collision)
 	var doorway_plane := ROCK_LARGE.instantiate() as Node3D
 	if doorway_plane != null:
 		doorway_plane.name = "PlanoPortaEscuraCupula"
