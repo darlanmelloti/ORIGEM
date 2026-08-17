@@ -524,6 +524,19 @@ func _build_final_dome_traversal_proxy() -> void:
 		for link_mesh in link_stone.find_children("*", "MeshInstance3D", true, false):
 			link_mesh.set_surface_override_material(0, link_material)
 		proxy.add_child(link_stone)
+	var link_support_positions: Array[Vector3] = [
+		Vector3(-3.72, 0.58, -4.42), Vector3(3.72, 0.58, -4.42),
+		Vector3(-2.72, 0.48, -4.62), Vector3(2.72, 0.48, -4.62)
+	]
+	for link_support_index: int in range(link_support_positions.size()):
+		var link_support := PILLAR.instantiate() as Node3D
+		if link_support == null:
+			continue
+		link_support.name = "ApoioLigacaoLateralR12_%02d" % link_support_index
+		link_support.position = link_support_positions[link_support_index]
+		link_support.scale = Vector3(0.44, 0.62 if link_support_index < 2 else 0.48, 0.44)
+		link_support.rotation = Vector3(0.03, -0.14 + float(link_support_index) * 0.22, 0.02)
+		proxy.add_child(link_support)
 	var doorway_plane := ROCK_LARGE.instantiate() as Node3D
 	if doorway_plane != null:
 		doorway_plane.name = "PlanoPortaEscuraCupula"
