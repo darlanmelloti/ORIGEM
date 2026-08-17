@@ -48,12 +48,17 @@ func _build_orion_cave() -> void:
 		cliff.rotation = Vector3(0.12 * sin(angle), angle + PI * 0.5, 0.10 * cos(angle))
 		_apply_material(cliff, stone_material)
 		cave.add_child(cliff)
-	var darkness_mesh: BoxMesh = BoxMesh.new()
-	darkness_mesh.size = Vector3(8.5, 8.0, 1.0)
+	# CP-CINE-11: volume de profundidade real; evita um painel escuro plano na entrada da caverna.
+	var darkness_mesh: SphereMesh = SphereMesh.new()
+	darkness_mesh.radius = 4.4
+	darkness_mesh.height = 6.8
+	darkness_mesh.radial_segments = 20
+	darkness_mesh.rings = 12
 	var darkness: MeshInstance3D = MeshInstance3D.new()
-	darkness.name = "BocaEscuraDaCaverna"
+	darkness.name = "RecessoEscuroDaCaverna"
 	darkness.mesh = darkness_mesh
-	darkness.position = Vector3(0.0, 3.6, -7.8)
+	darkness.position = Vector3(0.0, 3.4, -7.2)
+	darkness.scale = Vector3(1.0, 0.88, 0.70)
 	var darkness_material: StandardMaterial3D = StandardMaterial3D.new()
 	darkness_material.albedo_color = Color(0.005, 0.009, 0.013, 1.0)
 	darkness_material.roughness = 1.0
