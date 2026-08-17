@@ -135,3 +135,9 @@ A captura da soleira com ambiente 0,88 preservou o tom escuro, mas não revelou 
 A veia mineral foi colocada no flanco enquadrado e validada durante 30 segundos sem luzes ou colisores adicionais. A composição revelou pequenos elementos lineares isolados na borda direita, em vez de uma formação geológica integrada; a rota central continuou sem ganho legível. A intervenção será removida.
 
 > **Candidato rejeitado:** veias minerais procedurais compostas por prismas/cilindros, mesmo com emissão mínima. O interior requer um activo geológico contínuo ou uma nova estrutura de rota, não detalhe pontual.
+
+## CP-CINE-74 — Reversão da neblina de profundidade
+
+A neblina de profundidade foi aplicada apenas ao `WorldEnvironment` e validada durante 30 segundos. No renderizador de compatibilidade, a mudança não criou volume ou legibilidade adicional discernível no eixo escuro do corredor. Será removida, preservando a base sem camada atmosférica artificial.
+
+> **Candidato rejeitado:** neblina de profundidade como solução de leitura do corredor Orion no modo OpenGL/Compatibility.
