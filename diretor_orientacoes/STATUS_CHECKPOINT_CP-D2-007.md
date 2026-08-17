@@ -47,3 +47,13 @@ Apenas ficheiros das Regiões 7–12 e documentação/evidências Dev2 foram alt
 - **SHA-256 print**: `bb7e0420f4f2b253112b3a5e27a9d48c921aa59b2192244a359b2e4054193669`.
 - **LEITURA**: a boca azul mantém prioridade visual; o terreno exterior ganha detalhe sem fechar a abertura.
 - **NEXT_ACTION_IMMEDIATE**: testar a continuidade visual deste ambiente com a Câmara do Cube e preparar o próximo pacote auditável.
+
+
+## Passe de leitura da rota de saída do Cube
+
+O harness da Região 11 recebeu `PreenchimentoRotaSaidaCube`, uma luz azul-violeta baixa posicionada além do altar para tornar a continuidade física da saída legível sem competir com o núcleo violeta. O QA passou com parser/headless limpo e gameplay de 30.000000 s.
+
+- **Gameplay SHA-256**: `c5b4afb072a3a22a961bb4de891d88f28f086c5b98f9f719571f7040ede9ae77`
+- **Print SHA-256**: `375616a33361f87740daa770f9e08fe99fe5d25b6ee3b33a2f2ba2082c88cdb4`
+- **Estado**: `PASSED_TECHNICAL / VISUAL_ADVANCE`
+- **Próxima acção**: empacotar, sincronizar este incremento e iniciar o passe de continuidade do Hub Temporal, mantendo o Cube como último marco legível da Região 11.

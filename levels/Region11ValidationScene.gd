@@ -94,6 +94,14 @@ func _build_environment() -> void:
 	base_fill.shadow_enabled = false
 	base_fill.position = Vector3(-116.0, 43.0, 562.0)
 	add_child(base_fill)
+	var route_fill := OmniLight3D.new()
+	route_fill.name = "PreenchimentoRotaSaidaCube"
+	route_fill.light_color = Color("#527cc8")
+	route_fill.light_energy = 0.46
+	route_fill.omni_range = 12.0
+	route_fill.shadow_enabled = false
+	route_fill.position = Vector3(-116.0, 41.8, 570.0)
+	add_child(route_fill)
 
 func _process(delta: float) -> void:
 	if camera == null:
