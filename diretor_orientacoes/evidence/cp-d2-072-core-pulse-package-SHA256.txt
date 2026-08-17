@@ -1,0 +1,1 @@
+12335d17ad52dc778b06df49f2194bb6ba7f32af838617af1a065b89ab40ce20  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-072-core-pulse-local.zip
