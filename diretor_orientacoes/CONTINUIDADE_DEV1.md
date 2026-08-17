@@ -1,17 +1,17 @@
 # Continuidade — Dev1
 
-Os **CP 281–284** foram validados com Godot headless e provas de gameplay de 30 segundos. A frente Dev1 refinou a soleira e os planos do vale inicial, gerou o ZIP CP 283 validado e reforçou a transição física Floresta Densa → Acampamento Majestic → Ruínas Submersas com agrupamentos descontínuos, aterrados e sem luzes adicionais.
+Os **CP 281–285** foram validados com Godot headless e provas de gameplay de 30 segundos. O vale inicial recebeu miradouro físico, planos de profundidade, água de rio calibrada e uma tomada depurada; o trajecto Majestic → Ruínas recebeu aterramento descontínuo; e as lajes rasas da Bacia usam agora a materialidade de pedra húmida.
 
-O **CP 285 — Materialidade da Bacia das Ruínas Submersas** está em execução. A tarefa imediata é auditar a água, as lajes húmidas e os encontros rochosos do lago, corrigindo leituras planas ou suspensas sem criar novos painéis, sem aumentar as luzes dinâmicas e sem fechar o trilho de chegada ocidental.
+O **CP 286 — Revisão Casa Voss → Estrada do Rio → Arco das Ruínas** está em execução. A tarefa imediata é confrontar a captura actual do vale com a matriz cartográfica, identificar qualquer marco que ainda leia como faixa plana ou ornamento técnico e aplicar apenas geometria, relevo, materiais ou vegetação física dentro das Regiões 1–3.
 
 | Critério obrigatório | Evidência exigida |
 |---|---|
-| Água e margens | Água com profundidade visual, pedras aterradas e lajes de chegada legíveis |
+| Leitura cartográfica | Captura que distinga Casa/soleira, rio/ponte, Estrada/Arco e horizonte físico |
 | Integridade técnica | Godot headless sem erros de parser, script ou recursos |
-| Jogabilidade | Prova segmentada de 30 segundos sem bloqueios na rota regional |
-| Desempenho | Não aumentar o orçamento de luzes dinâmicas simultâneas |
-| Escopo | Apenas Regiões 1–6; módulos das Regiões 7–12 permanecem inalterados |
+| Jogabilidade | Prova de 30 segundos Casa → Estrada → Arco sem bloqueio |
+| Desempenho | Sem aumento de luzes dinâmicas simultâneas |
+| Escopo | Exclusivamente Regiões 1–6; módulos das Regiões 7–12 ficam intocados |
 
-> O commit é uma evidência, não um fim. Após o CP 285, iniciar imediatamente a revisão de continuidade Casa → Estrada → Arco com a evidência mais recente do vale.
+> Cada checkpoint encadeia o seguinte. Depois do CP 286, abrir imediatamente o próximo passe de documentação visual e distribuição actualizada, sem aguardar validação verbal.
 
-**Estado:** `CP 285 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
+**Estado:** `CP 286 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.

@@ -1588,7 +1588,8 @@ func _build_submerged_ruins() -> void:
 		var shallow_slab: MeshInstance3D = MeshInstance3D.new()
 		shallow_slab.name = "LajeRasaDasRuinas_%02d" % shallow_index
 		shallow_slab.mesh = _make_slab(1.85, 1.48, RandomNumberGenerator.new())
-		shallow_slab.material_override = path_material
+		# A laje rasa pertence à margem submersa: usa a pedra húmida para não parecer um pavimento seco suspenso na água.
+		shallow_slab.material_override = shore_material
 		shallow_slab.position = shallow_pos
 		shallow_slab.rotation.y = 0.18 + float(shallow_index) * 0.11
 		shallow_path.add_child(shallow_slab)
