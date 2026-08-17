@@ -1003,6 +1003,10 @@ func _build_opening_camera() -> void:
 			opening_camera.fov = 64.0
 			opening_camera.position = Vector3(-10.0, _ground_height(-10.0, 38.0) + 5.4, 38.0)
 			opening_camera.look_at(Vector3(13.0, _ground_height(13.0, 58.0) + 1.0, 58.0), Vector3.UP)
+		elif qa_storyboard_stage == "ponte":
+			opening_camera.fov = 52.0
+			opening_camera.position = Vector3(3.0, _ground_height(3.0, 49.0) + 4.2, 49.0)
+			opening_camera.look_at(Vector3(12.6, _ground_height(12.6, 58.0) + 1.1, 58.0), Vector3.UP)
 		elif qa_storyboard_stage == "arco":
 			opening_camera.fov = 60.0
 			opening_camera.position = Vector3(-19.0, _ground_height(-19.0, 76.0) + 4.8, 76.0)
