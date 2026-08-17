@@ -1,9 +1,9 @@
 # Continuidade — Dev1
 
-O **CP 264 — Recomposição da Saída Macro Casa–Estrada–Arco** está em execução. O objectivo é recuperar a tomada de saída do Vale de Kheper sem voltar a comprimir o mapa: a Casa Voss deve moldurar a esquerda, a Estrada do Rio deve atravessar o primeiro e médio plano, o rio deve criar uma linha lateral e o Arco recuado deve permanecer reconhecível como destino.
+O **CP 265 — Legibilidade Atmosférica e Silhuetas de Plano Médio** está em execução. A Casa Voss, a Estrada do Rio, o rio lateral e o Arco macro devem passar a ler como camadas distintas do vale; a profundidade física alcançada no CP 263 não pode ser reduzida.
 
-O CP 263 foi concluído com reescala física do Arco para `z=92`, cinco marcos laterais de profundidade e material de estrada com leitura reforçada. A próxima validação deve usar a prova de rota segmentada de 30 segundos, pois o llvmpipe encerra renderização contínua longa no ambiente de teste. A captura cinematográfica só será aceite se mostrar pelo menos Casa, Estrada e Arco no mesmo quadro; profundidade geográfica sem marcos cartográficos não satisfaz a referência.
+O CP 264 entregou uma lente rebaixada e uma faixa de leitura física sobre o corredor entre a Casa e o Arco, mantendo o marco arqueológico em `z=92`. A validação técnica passou e a exploração total de 30 segundos foi realizada em três segmentos reais de 10 segundos, método necessário apenas no llvmpipe.
 
-**Escopo activo:** `levels/VossHouse.gd`, `levels/RiverRoadJourney.gd`, documentação e evidências Dev1. Módulos das Regiões 7–12 continuam proibidos.
+O próximo passe trabalha em `levels/LevelEnvironment.gd` e em silhuetas já pertencentes às Regiões 1–6. Não altera HighlandRegion, OrionDestinationRegion nem qualquer módulo das Regiões 7–12. A recaptura só será aceite quando Casa, Estrada e Arco possam ser diferenciados sem depender de marcadores azuis ou de ângulos aéreos.
 
 **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.

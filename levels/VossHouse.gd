@@ -76,7 +76,9 @@ func _ready() -> void:
 	_build_exterior_details(house)
 	_build_voss_panoramic_threshold(house)
 	_build_visible_opening_road()
+	_build_macro_road_readability()
 	_build_voss_river_revelation_bridge()
+
 	_build_mountain_road(house)
 	_build_opening_landscape(house)
 	_build_cinematic_exterior_depth(house)
@@ -203,6 +205,52 @@ func _build_visible_opening_road() -> void:
 	road.mesh = road_mesh
 	road.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(road)
+
+func _build_macro_road_readability() -> void:
+	# Camada de leitura física da Estrada: acompanha o mesmo corredor Dev1 até ao Arco macro.
+	# Não é um painel; é uma faixa conformada ao TerrainPatch, sem colisores e com largura menor que a estrada jogável.
+	var route_material: StandardMaterial3D = StandardMaterial3D.new()
+	route_material.albedo_color = Color(0.31, 0.245, 0.145, 1.0)
+	route_material.roughness = 0.94
+	route_material.normal_enabled = true
+	route_material.normal_texture = FOREST_GROUND_NORMAL
+	route_material.normal_scale = 0.24
+	route_material.emission_enabled = true
+	route_material.emission = Color(0.014, 0.010, 0.004, 1.0)
+	route_material.emission_energy_multiplier = 0.14
+	var surface: SurfaceTool = SurfaceTool.new()
+	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var width: float = 2.22
+	for index: int in range(32):
+		var z0: float = 26.0 + float(index) * 2.05
+		var z1: float = z0 + 2.05
+		var t0: float = clampf((z0 - 12.0) / 108.0, 0.0, 1.0)
+		var t1: float = clampf((z1 - 12.0) / 108.0, 0.0, 1.0)
+		var x0: float = lerpf(-21.4, -10.0, t0) + sin(t0 * PI * 2.5) * 1.8
+		var x1: float = lerpf(-21.4, -10.0, t1) + sin(t1 * PI * 2.5) * 1.8
+		var p00 := Vector3(x0 - width, _ground_height(x0 - width, z0) + 0.045, z0)
+		var p10 := Vector3(x0 + width, _ground_height(x0 + width, z0) + 0.045, z0)
+		var p01 := Vector3(x1 - width, _ground_height(x1 - width, z1) + 0.045, z1)
+		var p11 := Vector3(x1 + width, _ground_height(x1 + width, z1) + 0.045, z1)
+		surface.set_uv(Vector2(0.0, float(index) * 0.15))
+		surface.add_vertex(p00)
+		surface.set_uv(Vector2(0.0, float(index + 1) * 0.15))
+		surface.add_vertex(p01)
+		surface.set_uv(Vector2(1.0, float(index) * 0.15))
+		surface.add_vertex(p10)
+		surface.set_uv(Vector2(1.0, float(index) * 0.15))
+		surface.add_vertex(p10)
+		surface.set_uv(Vector2(0.0, float(index + 1) * 0.15))
+		surface.add_vertex(p01)
+		surface.set_uv(Vector2(1.0, float(index + 1) * 0.15))
+		surface.add_vertex(p11)
+	surface.generate_normals()
+	var route: MeshInstance3D = MeshInstance3D.new()
+	route.name = "FaixaDeLeituraEstradaMacro"
+	route.mesh = surface.commit()
+	route.material_override = route_material
+	route.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(route)
 
 func _build_real_forest_frame() -> void:
 	# Coníferas recuadas usam uma silhueta húmida mais escura, mantendo folhosas reais apenas nas margens do vale.
@@ -841,13 +889,14 @@ func _build_opening_camera() -> void:
 	# Variante diurna: câmara mais alta e ligeiramente à direita, deixando Casa Voss à esquerda, lajes ao centro e rio à direita.
 	if DAYLIGHT_VARIANT_ENABLED:
 		# A abertura mostra o percurso que Elias realmente seguirá: Casa Voss à esquerda, rio à direita e Arco das Ruínas no plano médio.
-		opening_camera.fov = 51.0
+		opening_camera.fov = 57.0
 		# A câmara permanece no flanco da Casa, mas abre o corredor norte em vez de encarar a sua parede lateral.
 		# O alvo coincide com a progressão real Casa → Estrada do Rio → Arco das Ruínas.
 		# Varanda intermédia: mantém a Casa como moldura, expõe a Estrada no eixo e conserva a serra como horizonte.
 		# A câmara evita tanto a cobertura dominante como a vista aérea que faria os marcos desaparecerem.
-		opening_camera.position = Vector3(-33.5, 8.9, 2.2)
-		opening_camera.look_at(Vector3(-14.4, 2.0, 64.0), Vector3.UP)
+		opening_camera.position = Vector3(-33.5, 8.1, 2.2)
+		# Alvo rebaixado: favorece a linha da estrada, a água lateral e o Arco, sem perder o horizonte volumétrico.
+		opening_camera.look_at(Vector3(-14.4, -4.5, 64.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
