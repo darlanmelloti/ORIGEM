@@ -229,11 +229,11 @@ func _build_road_entry_orientation() -> void:
 	markers.name = "MarcosDeOrientacaoCasaVoss"
 	add_child(markers)
 	var marker_data: Array[Dictionary] = [
-		{"z": 17.0, "side": -1.0, "scale": 0.30, "yaw": 0.18},
-		{"z": 33.0, "side": -1.0, "scale": 0.23, "yaw": -0.28},
-		{"z": 56.0, "side": 1.0, "scale": 0.25, "yaw": 0.12},
-		{"z": 74.0, "side": -1.0, "scale": 0.27, "yaw": -0.18},
-		{"z": 84.0, "side": 1.0, "scale": 0.22, "yaw": 0.26},
+		{"z": 17.0, "side": -1.0, "scale": 0.34, "yaw": 0.18},
+		{"z": 33.0, "side": -1.0, "scale": 0.34, "yaw": -0.28},
+		{"z": 56.0, "side": 1.0, "scale": 0.38, "yaw": 0.12},
+		{"z": 74.0, "side": -1.0, "scale": 0.36, "yaw": -0.18},
+		{"z": 84.0, "side": 1.0, "scale": 0.30, "yaw": 0.26},
 	]
 	for index: int in range(marker_data.size()):
 		var marker: Dictionary = marker_data[index]
@@ -257,7 +257,7 @@ func _build_road_entry_orientation() -> void:
 			continue
 		footing.name = "BaseNaturalMarco_%02d" % (index + 1)
 		footing.position = Vector3(x_value - side * 0.18, _height_at(x_value - side * 0.18, z_value + 0.28) - 0.03, z_value + 0.28)
-		footing.scale = Vector3(0.20, 0.12, 0.20)
+		footing.scale = Vector3(0.26, 0.16, 0.26)
 		footing.rotation.y = (marker["yaw"] as float) + 0.5
 		_apply_material(footing, ruin_material)
 		markers.add_child(footing)
