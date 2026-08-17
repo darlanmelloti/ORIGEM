@@ -17,9 +17,24 @@ func _ready() -> void:
 	_build_environment()
 	_build_camera()
 	_build_grounded_tunnel()
+	_build_support_collision()
 	_build_player()
 	if OS.get_environment("ORIGEM_QA_MEASURE_INTERIOR_ROCKS") == "1":
 		_measure_interior_rock_pivots()
+
+func _build_support_collision() -> void:
+	# Suporte físico contínuo abaixo do piso artístico: invisível, sem custo de renderização e sem alterar a silhueta do corredor.
+	var support: StaticBody3D = StaticBody3D.new()
+	support.name = "OrionInteriorSupport"
+	support.collision_layer = 1
+	support.collision_mask = 0
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = Vector3(6.8, 0.30, 13.6)
+	collision.shape = shape
+	collision.position = Vector3(-0.72, -0.15, 1.25)
+	support.add_child(collision)
+	add_child(support)
 
 func _build_player() -> void:
 	player = CharacterBody3D.new()

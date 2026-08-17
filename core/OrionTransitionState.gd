@@ -5,7 +5,8 @@ extends Node
 
 const EXTERIOR_SCENE: String = "res://scenes/main.tscn"
 const INTERIOR_SCENE: String = "res://scenes/orion_interior.tscn"
-const INTERIOR_SPAWN: Vector3 = Vector3(0.0, 0.18, 0.45)
+# O centro do CharacterBody fica acima do piso da soleira; 0,18 deixava a câmara enterrada ao abrir a cena directamente.
+const INTERIOR_SPAWN: Vector3 = Vector3(0.0, 0.90, 0.45)
 const EXTERIOR_RETURN: Vector3 = Vector3(-116.0, 0.0, 552.2)
 
 var _has_return_state: bool = false
@@ -27,7 +28,8 @@ func begin_return(player: Node3D) -> void:
 
 func restore_interior_player(player: Node3D) -> void:
 	player.global_position = INTERIOR_SPAWN
-	player.rotation.y = 0.0
+	# O corredor desenvolve-se no eixo +Z; Elias entra voltado para a rota, e não para o fundo selado em -Z.
+	player.rotation.y = PI
 	_restore_player_state(player)
 	EventBus.player_message_requested.emit("A garganta fecha-se atrás de Elias.", 1.8)
 
