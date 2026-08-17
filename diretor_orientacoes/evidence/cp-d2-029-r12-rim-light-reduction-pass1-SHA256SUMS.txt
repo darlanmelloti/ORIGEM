@@ -1,0 +1,2 @@
+cd4d022b8580cf55050bfaa63c2c11c9f88896db22ac79ffef34f53109ddbe00  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-029-r12-rim-light-reduction-pass1/gameplay-30s.mp4
+61679d4d4fb05b1661308a255087a81d145cc7aef73589b0b0d56c7c4098f78a  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-029-r12-rim-light-reduction-pass1/print-1600x900.jpg
