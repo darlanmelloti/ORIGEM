@@ -22,7 +22,7 @@ func _ready() -> void:
 	# A validação não usa uma plataforma cilíndrica como silhueta final; a base é composta por massas CC0 baixas.
 	var traversal_base := Node3D.new()
 	traversal_base.name = "BaseOrganicaTravessiaRegiao12"
-	traversal_base.position = Vector3(164.0, 0.0, 186.0)
+	traversal_base.position = Vector3(164.0, 0.0, 173.8)
 	add_child(traversal_base)
 	var base_positions: Array[Vector3] = [
 		Vector3(-10.0, 0.18, 0.0), Vector3(-6.0, 0.10, 3.2), Vector3(-1.8, 0.08, 4.0),
@@ -37,6 +37,39 @@ func _ready() -> void:
 		base_stone.scale = Vector3(1.45 + float(index % 3) * 0.22, 0.34 + float(index % 2) * 0.12, 1.10 + float(index % 2) * 0.18)
 		base_stone.rotation = Vector3(0.03 * float(index % 2), float(index) * 0.47, -0.02 * float(index % 3))
 		traversal_base.add_child(base_stone)
+	var foundation_positions: Array[Vector3] = [
+		Vector3(-4.8, -0.18, -1.8), Vector3(0.0, -0.28, -2.3), Vector3(4.8, -0.18, -1.8),
+		Vector3(-7.0, -0.08, 1.0), Vector3(7.0, -0.08, 1.0)
+	]
+	for foundation_index: int in range(foundation_positions.size()):
+		var foundation_stone := ROCK_LARGE.instantiate() as Node3D
+		if foundation_stone == null:
+			continue
+		foundation_stone.name = "FundacaoBaixaCupulaR12_%02d" % foundation_index
+		foundation_stone.position = foundation_positions[foundation_index]
+		foundation_stone.scale = Vector3(2.15 if foundation_index < 3 else 1.55, 0.48, 1.42)
+		foundation_stone.rotation = Vector3(0.02, -0.24 + float(foundation_index) * 0.31, 0.01)
+		traversal_base.add_child(foundation_stone)
+	var valley_floor := ROCK_LARGE.instantiate() as Node3D
+	if valley_floor != null:
+		valley_floor.name = "MassaValeOrganicoCupulaR12"
+		valley_floor.position = Vector3(0.0, -0.44, 0.25)
+		valley_floor.scale = Vector3(8.6, 0.52, 5.4)
+		valley_floor.rotation = Vector3(0.02, 0.08, -0.01)
+		traversal_base.add_child(valley_floor)
+	var support_positions: Array[Vector3] = [
+		Vector3(-4.6, 2.05, -1.8), Vector3(0.0, 1.82, -2.35), Vector3(4.6, 2.05, -1.8),
+		Vector3(-6.4, 1.55, 0.95), Vector3(6.4, 1.55, 0.95)
+	]
+	for support_index: int in range(support_positions.size()):
+		var support := PILLAR.instantiate() as Node3D
+		if support == null:
+			continue
+		support.name = "ContraforteVerticalCupulaR12_%02d" % support_index
+		support.position = support_positions[support_index]
+		support.scale = Vector3(0.82 if support_index < 3 else 0.68, 3.05 if support_index < 3 else 2.40, 0.82 if support_index < 3 else 0.68)
+		support.rotation = Vector3(0.04, -0.15 + float(support_index) * 0.23, 0.02)
+		traversal_base.add_child(support)
 	destination = DESTINATION_SCRIPT.new() as Node3D
 	destination.name = "DestinosOrionRegiao12Traversal"
 	add_child(destination)
@@ -485,7 +518,7 @@ func _build_final_dome_traversal_proxy() -> void:
 	var doorway_marker := OmniLight3D.new()
 	doorway_marker.name = "MarcadorInteriorAzulCupula"
 	doorway_marker.light_color = Color("#4f91bf")
-	doorway_marker.light_energy = 0.20
+	doorway_marker.light_energy = 0.34
 	doorway_marker.omni_range = 2.8
 	doorway_marker.shadow_enabled = false
 	doorway_marker.position = Vector3(164.0, 2.45, 173.6)
@@ -493,12 +526,12 @@ func _build_final_dome_traversal_proxy() -> void:
 	var threshold_light := OmniLight3D.new()
 	threshold_light.name = "LuzInteriorSoleiraCupula"
 	threshold_light.light_color = Color("#4b83a8")
-	threshold_light.light_energy = 0.34
+	threshold_light.light_energy = 0.48
 	threshold_light.omni_range = 4.2
 	threshold_light.shadow_enabled = false
 	threshold_light.position = Vector3(164.0, 0.78, 173.55)
 	add_child(threshold_light)
-	for contact_x in []:
+	for contact_x in [-2.2, 2.2]:
 		var contact_light := OmniLight3D.new()
 		contact_light.name = "LuzContactoArco_%s" % str(contact_x)
 		contact_light.light_color = Color("#6f9bc4")
@@ -524,11 +557,11 @@ func _build_environment() -> void:
 	environment.background_color = Color("#090d24")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#56618a")
-	environment.ambient_light_energy = 0.52
+	environment.ambient_light_energy = 0.68
 	environment.fog_enabled = true
 	environment.fog_light_color = Color("#53648b")
 	environment.fog_light_energy = 0.38
-	environment.fog_density = 0.0065
+	environment.fog_density = 0.0048
 	environment.fog_sky_affect = 0.42
 	environment.fog_height = 1.0
 	environment.fog_height_density = 0.035
@@ -540,7 +573,7 @@ func _build_environment() -> void:
 	add_child(world)
 	var moon := DirectionalLight3D.new()
 	moon.light_color = Color("#b7c5ee")
-	moon.light_energy = 0.58
+	moon.light_energy = 0.70
 	moon.rotation_degrees = Vector3(-48.0, 22.0, 0.0)
 	add_child(moon)
 
@@ -569,11 +602,11 @@ func _process(delta: float) -> void:
 func _set_camera(progress: float) -> void:
 	if camera == null:
 		return
-	var start := Vector3(164.42, 5.82, 182.6)
-	var finish := Vector3(164.18, 5.48, 179.9)
+	var start := Vector3(164.42, 4.78, 182.6)
+	var finish := Vector3(164.18, 4.52, 179.9)
 	var position := start.lerp(finish, progress)
 	position.x += sin(progress * TAU * 0.8) * 0.72
 	position.y += sin(progress * PI) * 0.48
 	camera.position = position
-	var target := Vector3(163.86, 3.38, 173.5)
+	var target := Vector3(163.86, 2.35, 173.5)
 	camera.look_at(target, Vector3.UP)
