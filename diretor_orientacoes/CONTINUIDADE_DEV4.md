@@ -1,7 +1,8 @@
 # Continuidade — Dev4
 
-- **Última lacuna recebida:** auditoria integrada CP261 encontrou que o caminho legado do harness já não existe fora do projecto; a cópia actual está em `ORIGEM_git_recovered/test_checkpoint143_regions1to6_continuity.sh`.
-- **Proprietário operacional:** Dev4 coordena a prova; Dev1 mantém a rota e os módulos das Regiões 1–6; Dev3 prepara a recaptura comparativa.
-- **Tarefa iniciada:** `CP-D4-001 — Recuperar a auditoria integrada pelo harness interno e emitir a grelha de retorno Dev3`.
-- **Verificação de retorno já prevista:** depois do log aprovado, conferir marcos 1–6 contra a matriz e abrir o Passe 0C ao Dev3; se a prova falhar, abrir correcção ao proprietário e continuar com prova alternativa.
-- **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
+- **Última tarefa concluída:** DIR-117 — auditoria de iluminação e atmosfera, com linter técnico registado.
+- **Tarefa em execução com artefacto material:** `DIR-118 — Transição e Legibilidade do Marco Seguinte`.
+- **Artefacto de início obrigatório:** `DIR118_TRANSICAO_E_LEGIBILIDADE.md`, contendo âncoras, proprietários, evidências e verificação de retorno para Bacia → Portão → Vila.
+- **Ordem de coordenação activa:** Dev1 prossegue no CP262 Casa–Estrada–Arco; Dev2 prossegue no CP-D2-006 panorâmico 7→9; Dev3 executa Takes 1–3 e preserva a recaptura 0C.
+- **Próxima verificação:** assim que Dev1 ou Dev2 publicar uma alteração espacial, comparar a mesma lente Dev3 contra 0B e actualizar a grelha DIR-118.
+- **Estado:** `EM EXECUÇÃO COM ARTEFACTO VERIFICÁVEL — NÃO AGUARDAR RESPOSTA`.
