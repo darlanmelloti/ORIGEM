@@ -45,3 +45,8 @@ A leitura descendente de -11° foi aceite depois de 30 segundos sem erros: o pis
 ## CINE-PAIR-05 concluído; CINE-PAIR-06 em execução
 
 A travessia integral de 30 segundos foi estável, mas a plataforma CC0 de ponte foi rejeitada por aparecer cinzenta, recortada e dissonante no fecho. A base de -11° foi restaurada e validada. Dev4 mede agora a parede terminal como parte da casca contínua; Dev3 escolhe uma solução esculpida na própria geometria. Não usar activos externos, painéis, marcadores isolados ou DIR autónomo.
+
+
+## CINE-PAIR-06 revertido; CINE-PAIR-07 em execução
+
+A reentrância na tampa terminal não produziu destino legível e foi revertida após 30 segundos sem erros. Dev4 inicia agora uma auditoria da transição exterior→interior para medir o último desvio antes do fecho; a nova composição não será forçada numa parede terminal. Dev3 preserva a base de -11° e só selecciona um momento narrativo comprovado por essa auditoria. Não abrir DIR autónomo.

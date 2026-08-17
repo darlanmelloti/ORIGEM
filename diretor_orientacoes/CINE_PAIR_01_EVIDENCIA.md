@@ -60,3 +60,10 @@ As duas primeiras capturas da trajectória integral confirmam que a base de -11�
 A trajectória integral de 30 segundos confirmou que Elias percorre soleira, primeiro desvio e chegada sobre o suporte físico contínuo sem erro runtime. A chegada, porém, revela que o fecho actual é uma parede mineral próxima. A plataforma CC0 de ponte foi testada como composição de destino, sem luzes ou colisores adicionais, mas apareceu como massa cinzenta recortada e materialmente dissonante contra a caverna. Foi rejeitada e será removida.
 
 **CINE-PAIR-06 já iniciado:** Dev4 fornece a leitura técnica da parede terminal; Dev3 selecciona uma composição de destino esculpida na própria casca do túnel, sem activos externos, sem painéis e sem geometria decorativa isolada.
+
+
+## Decisão CINE-PAIR-06 — Reentrância terminal revertida
+
+A reentrância mineral foi construída ao recuar somente o centro da tampa terminal e validada por 30 segundos sem erros. A captura da chegada mostrou variação tonal da rocha, mas não criou um destino, abertura ou profundidade reconhecível: a leitura continuou a ser de parede próxima. A alteração será revertida, preservando a casca e o suporte aprovados.
+
+**CINE-PAIR-07 já iniciado:** Dev4 prepara uma auditoria de transição exterior→interior para confirmar se a primeira composição de destino deve ocorrer antes do fecho, no último desvio, em vez de ser forçada na tampa terminal. Dev3 mantém a orientação de -11° e seleccionará um único momento narrativo dentro do corredor, não uma nova decoração.

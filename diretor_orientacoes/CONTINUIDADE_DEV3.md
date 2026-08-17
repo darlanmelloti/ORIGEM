@@ -53,3 +53,8 @@ A orientação inicial de -11° tornou a faixa de piso mais legível na soleira 
 ## CINE-PAIR-05 concluído; CINE-PAIR-06 em execução
 
 A rota integral foi validada, mas a plataforma de ponte CC0 no destino foi rejeitada por falta de integração visual. Dev3 preserva a base de -11° e deve escolher uma composição de destino que pertença à própria casca contínua da caverna. Dev4 mede a parede terminal e apoia uma única alteração estrutural. Não usar activos externos, painéis, marcadores isolados ou abrir DIR autónomo.
+
+
+## CINE-PAIR-06 revertido; CINE-PAIR-07 em execução
+
+A reentrância da tampa terminal foi revertida porque a chegada permaneceu uma parede próxima. Dev3 mantém a leitura de -11° e aguarda apenas a evidência activa que Dev4 recolhe no último desvio; a próxima composição deve ser um momento narrativo dentro da rota, não um objecto ou decoração empurrada contra o fecho. A auditoria abre a implementação seguinte no mesmo ciclo.
