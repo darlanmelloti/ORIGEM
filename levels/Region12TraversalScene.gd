@@ -220,7 +220,7 @@ func _build_clean_r12_portal() -> void:
 			core_material.albedo_color = Color("#466c98")
 			core_material.emission_enabled = true
 			core_material.emission = Color("#5b8fb5")
-			core_material.emission_energy_multiplier = 0.82
+			core_material.emission_energy_multiplier = 0.46
 			core_material.roughness = 0.72
 			for core_mesh in temporal_core.find_children("*", "MeshInstance3D", true, false):
 				core_mesh.set_surface_override_material(0, core_material)
@@ -246,7 +246,7 @@ func _build_clean_r12_portal() -> void:
 	var core_light := OmniLight3D.new()
 	core_light.name = "LuzNucleoTemporalR12"
 	core_light.light_color = Color("#5b8fb5")
-	core_light.light_energy = 0.16
+	core_light.light_energy = 0.08
 	core_light.omni_range = 2.8
 	core_light.shadow_enabled = false
 	core_light.position = Vector3(164.0, -0.18, 175.42)
@@ -860,7 +860,7 @@ func _process(delta: float) -> void:
 		for temporal_mesh in temporal_portal.find_children("*", "MeshInstance3D", true, false):
 			var temporal_material := temporal_mesh.get_surface_override_material(0) as StandardMaterial3D
 			if temporal_material != null:
-				temporal_material.emission_energy_multiplier = 0.72 + sin(elapsed * 1.12) * 0.16
+				temporal_material.emission_energy_multiplier = 0.40 + sin(elapsed * 1.12) * 0.10
 	for child in get_children():
 		if child is OmniLight3D and child.name.begins_with("PreenchimentoQuenteSoleira"):
 			(child as OmniLight3D).light_energy = 0.34 + sin(elapsed * 1.25) * 0.08
