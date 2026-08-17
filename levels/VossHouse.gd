@@ -842,8 +842,12 @@ func _build_opening_camera() -> void:
 	if DAYLIGHT_VARIANT_ENABLED:
 		# A abertura mostra o percurso que Elias realmente seguirá: Casa Voss à esquerda, rio à direita e Arco das Ruínas no plano médio.
 		opening_camera.fov = 51.0
-		opening_camera.position = Vector3(-34.0, 5.2, 4.0)
-		opening_camera.look_at(Vector3(-10.0, 1.5, 43.0), Vector3.UP)
+		# A câmara permanece no flanco da Casa, mas abre o corredor norte em vez de encarar a sua parede lateral.
+		# O alvo coincide com a progressão real Casa → Estrada do Rio → Arco das Ruínas.
+		# Varanda intermédia: mantém a Casa como moldura, expõe a Estrada no eixo e conserva a serra como horizonte.
+		# A câmara evita tanto a cobertura dominante como a vista aérea que faria os marcos desaparecerem.
+		opening_camera.position = Vector3(-33.5, 8.9, 2.2)
+		opening_camera.look_at(Vector3(-14.4, 2.0, 64.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
@@ -940,11 +944,14 @@ func _finish_opening_camera() -> void:
 		if elias is Node3D:
 			var elias_3d: Node3D = elias as Node3D
 			if opening_was_skipped:
-				# O salto deve ser uma entrada segura no vale, nunca uma câmara presa em geometria interior.
-				var recovery_x: float = -25.0
-				var recovery_z: float = 3.0
-				elias_3d.global_position = Vector3(recovery_x, _ground_height(recovery_x, recovery_z) + 1.30, recovery_z)
-				elias_3d.global_rotation.y = deg_to_rad(-32.0)
+					# O salto deve ser uma entrada segura no vale, nunca uma câmara presa em geometria interior.
+					# Salto de prólogo/QA entra no primeiro metro real da Estrada, já orientado para o Arco.
+					# Não altera o início normal dentro da Casa Voss, onde E continua a abrir a porta.
+					var recovery_x: float = CartographicAnchors.ESTRADA_RIO_INICIO.x
+					var recovery_z: float = CartographicAnchors.ESTRADA_RIO_INICIO.y - 1.15
+					elias_3d.global_position = Vector3(recovery_x, _ground_height(recovery_x, recovery_z) + 1.30, recovery_z)
+					elias_3d.global_rotation.y = deg_to_rad(-156.0)
+
 			elif house_node != null:
 				elias_3d.global_position = house_node.to_global(Vector3(0.0, 1.28, -1.80))
 				elias_3d.global_rotation.y = house_node.global_rotation.y

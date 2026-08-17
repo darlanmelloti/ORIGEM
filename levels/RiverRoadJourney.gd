@@ -17,6 +17,12 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 const GROUND_ROUGHNESS: Texture2D = preload("res://assets/textures/pbr/forest_ground_roughness.jpg")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 
+# Escala física do primeiro corredor: a âncora lógica do mapa mantém-se para UI e narrativa,
+# mas o marco arqueológico é recuado para criar uma viagem visível e percorrível.
+const ROAD_MACRO_ORIGIN_Z := 8.0
+const ROAD_MACRO_FACTOR := 2.1
+const ARCH_WORLD_Z := 92.0
+
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
 var ruin_material: StandardMaterial3D
@@ -57,8 +63,12 @@ func _build_compacted_roadbed() -> void:
 	# Solo compactado contínuo: torna o percurso legível entre as lajes e evita a leitura de relvado aleatório.
 	var roadbed_material: StandardMaterial3D = StandardMaterial3D.new()
 	# Solo húmido legível: mantém o trilho integrado ao vale, mas evita que o leito físico se perca em preto no crepúsculo.
-	roadbed_material.albedo_color = Color(0.175, 0.148, 0.098, 1.0)
-	roadbed_material.roughness = 0.96
+	# Cor mais clara no corredor macro: a Estrada permanece húmida, mas torna-se uma linha de profundidade legível desde a Casa.
+	roadbed_material.albedo_color = Color(0.255, 0.218, 0.142, 1.0)
+	roadbed_material.roughness = 0.92
+	roadbed_material.emission_enabled = true
+	roadbed_material.emission = Color(0.018, 0.015, 0.008, 1.0)
+	roadbed_material.emission_energy_multiplier = 0.16
 	roadbed_material.normal_enabled = true
 	roadbed_material.normal_texture = GROUND_NORMAL
 	roadbed_material.normal_scale = 0.22
@@ -101,8 +111,10 @@ func _build_road_entry_orientation() -> void:
 	add_child(markers)
 	var marker_data: Array[Dictionary] = [
 		{"z": 17.0, "side": -1.0, "scale": 0.30, "yaw": 0.18},
-		{"z": 24.0, "side": -1.0, "scale": 0.23, "yaw": -0.28},
-		{"z": 39.0, "side": 1.0, "scale": 0.25, "yaw": 0.12},
+		{"z": 33.0, "side": -1.0, "scale": 0.23, "yaw": -0.28},
+		{"z": 56.0, "side": 1.0, "scale": 0.25, "yaw": 0.12},
+		{"z": 74.0, "side": -1.0, "scale": 0.27, "yaw": -0.18},
+		{"z": 84.0, "side": 1.0, "scale": 0.22, "yaw": 0.26},
 	]
 	for index: int in range(marker_data.size()):
 		var marker: Dictionary = marker_data[index]
@@ -268,7 +280,7 @@ func _build_river_margins() -> void:
 func _build_ruin_arch() -> void:
 	var arch: Node3D = Node3D.new()
 	arch.name = "ArcoDasRuinas_EstradaDoRio"
-	var arch_z: float = 48.0
+	var arch_z: float = ARCH_WORLD_Z
 	var arch_x: float = _road_x(arch_z)
 	arch.position = Vector3(arch_x, _height_at(arch_x, arch_z), arch_z)
 	add_child(arch)
@@ -413,10 +425,10 @@ func _build_cartographic_southwest_readability() -> void:
 	cues.name = "MarcosCartograficosSudoeste"
 	add_child(cues)
 	var cue_specs: Array[Dictionary] = [
-		# A ordem e a distância vêm directamente das âncoras do mapa: Casa → Estrada → Arco.
-		{"z": CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.y + 2.0, "side": -1.0, "scale": 0.22, "name": "MarcoDaSaidaVoss"},
-		{"z": lerpf(CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.y, CARTOGRAPHIC_ANCHORS.ARCO_RUINAS.y, 0.52), "side": 1.0, "scale": 0.26, "name": "MarcoDaCurvaDoRio"},
-		{"z": CARTOGRAPHIC_ANCHORS.ARCO_RUINAS.y - 8.0, "side": -1.0, "scale": 0.30, "name": "MarcoDaVistaDoArco"},
+		# A ordem mantém o mapa como autoridade; as posições físicas distribuem a viagem em profundidade macro.
+		{"z": CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.y + 4.0, "side": -1.0, "scale": 0.22, "name": "MarcoDaSaidaVoss"},
+		{"z": 52.0, "side": 1.0, "scale": 0.26, "name": "MarcoDaCurvaDoRio"},
+		{"z": ARCH_WORLD_Z - 14.0, "side": -1.0, "scale": 0.30, "name": "MarcoDaVistaDoArco"},
 	]
 	for cue_index: int in range(cue_specs.size()):
 		var spec: Dictionary = cue_specs[cue_index]
@@ -453,13 +465,13 @@ func _build_arch_crown_stones() -> void:
 	var crown_mat: StandardMaterial3D = StandardMaterial3D.new()
 	crown_mat.albedo_color = Color(0.16, 0.135, 0.09, 1.0)
 	crown_mat.roughness = 0.93
-	# 5 fragmentos de pedra no topo e lados dos pilares do arco (z≈48, x≈±4.5)
+	# Fragmentos no topo e lados do arco macro, agora recuado na Estrada para sustentar a profundidade do vale.
 	var crown_positions: Array = [
-		Vector3(-4.5, 5.8, 48.0),
-		Vector3(4.5, 5.6, 48.0),
-		Vector3(-4.2, 4.2, 47.5),
-		Vector3(4.3, 4.0, 48.5),
-		Vector3(0.0, 6.4, 48.0),
+		Vector3(_road_x(ARCH_WORLD_Z) - 4.5, _height_at(_road_x(ARCH_WORLD_Z) - 4.5, ARCH_WORLD_Z) + 5.8, ARCH_WORLD_Z),
+		Vector3(_road_x(ARCH_WORLD_Z) + 4.5, _height_at(_road_x(ARCH_WORLD_Z) + 4.5, ARCH_WORLD_Z) + 5.6, ARCH_WORLD_Z),
+		Vector3(_road_x(ARCH_WORLD_Z) - 4.2, _height_at(_road_x(ARCH_WORLD_Z) - 4.2, ARCH_WORLD_Z - 0.5) + 4.2, ARCH_WORLD_Z - 0.5),
+		Vector3(_road_x(ARCH_WORLD_Z) + 4.3, _height_at(_road_x(ARCH_WORLD_Z) + 4.3, ARCH_WORLD_Z + 0.5) + 4.0, ARCH_WORLD_Z + 0.5),
+		Vector3(_road_x(ARCH_WORLD_Z), _height_at(_road_x(ARCH_WORLD_Z), ARCH_WORLD_Z) + 6.4, ARCH_WORLD_Z),
 	]
 	for i: int in range(crown_positions.size()):
 		var pos: Vector3 = crown_positions[i]
@@ -490,9 +502,9 @@ func _build_arch_approach_ecology() -> void:
 	ecology.name = "EcologiaDaAproximacaoDoArco"
 	add_child(ecology)
 	var placements: Array[Vector3] = [
-		Vector3(-1.0, 0.0, 35.5), Vector3(1.0, 0.0, 39.0),
-		Vector3(-1.0, 0.0, 43.5), Vector3(1.0, 0.0, 53.0),
-		Vector3(-1.0, 0.0, 57.0), Vector3(1.0, 0.0, 61.0)
+		Vector3(-1.0, 0.0, ARCH_WORLD_Z - 32.0), Vector3(1.0, 0.0, ARCH_WORLD_Z - 25.0),
+		Vector3(-1.0, 0.0, ARCH_WORLD_Z - 17.0), Vector3(1.0, 0.0, ARCH_WORLD_Z - 8.0),
+		Vector3(-1.0, 0.0, ARCH_WORLD_Z + 7.0), Vector3(1.0, 0.0, ARCH_WORLD_Z + 14.0)
 	]
 	for index: int in range(placements.size()):
 		var point: Vector3 = placements[index]
