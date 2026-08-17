@@ -594,6 +594,18 @@ func _build_final_dome_traversal_proxy() -> void:
 		handoff_marker.set_meta("dev2_scope", "regions_7_to_12")
 		handoff_marker.set_meta("sequence_order", handoff_index + 1)
 		add_child(handoff_marker)
+	var validation_anchors: Array[Dictionary] = [
+		{"name": "ValidationR11_CamaraOrionCube", "position": Vector3(164.0, 1.18, 171.12), "region": 11, "role": "cube_chamber_frame"},
+		{"name": "ValidationR12_HubTemporal", "position": Vector3(164.0, 1.34, 169.40), "region": 12, "role": "hub_approach_frame"}
+	]
+	for validation_anchor: Dictionary in validation_anchors:
+		var anchor := Marker3D.new()
+		anchor.name = validation_anchor["name"]
+		anchor.position = validation_anchor["position"]
+		anchor.set_meta("dev2_scope", "regions_7_to_12")
+		anchor.set_meta("validation_region", validation_anchor["region"])
+		anchor.set_meta("validation_role", validation_anchor["role"])
+		add_child(anchor)
 	var doorway_plane := ROCK_LARGE.instantiate() as Node3D
 	if doorway_plane != null:
 		doorway_plane.name = "PlanoPortaEscuraCupula"
