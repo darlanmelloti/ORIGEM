@@ -141,3 +141,9 @@ A veia mineral foi colocada no flanco enquadrado e validada durante 30 segundos 
 A neblina de profundidade foi aplicada apenas ao `WorldEnvironment` e validada durante 30 segundos. No renderizador de compatibilidade, a mudança não criou volume ou legibilidade adicional discernível no eixo escuro do corredor. Será removida, preservando a base sem camada atmosférica artificial.
 
 > **Candidato rejeitado:** neblina de profundidade como solução de leitura do corredor Orion no modo OpenGL/Compatibility.
+
+## CP-CINE-75 — Reversão de normais do sobrepiso PBR
+
+A alteração foi limitada ao sobrepiso PBR, sem tocar na casca do túnel rejeitada no CP-CINE-60. A validação de 30 segundos confirmou a execução técnica, mas não produziu ganho composicional suficiente na soleira: o eixo central continua sem rota legível. A ordem do sobrepiso será restaurada.
+
+> **Candidato rejeitado:** reordenação de faces do sobrepiso como solução isolada de legibilidade Orion.
