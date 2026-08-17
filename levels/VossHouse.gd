@@ -989,9 +989,9 @@ func _build_opening_camera() -> void:
 		opening_camera.fov = 78.0
 		# Câmara no miradouro físico: a diagonal para leste contém a ponte transversal, a Estrada de Elias e o Arco sem comprimir o vale.
 		var terrace_ground_y: float = _ground_height(-22.0, 14.0)
-		# Borda oeste do terraço: a parede e o telhado da Casa entram como moldura à esquerda, sem esconder o vale.
-		opening_camera.position = Vector3(-26.0, _ground_height(-26.0, 11.0) + 6.9, 11.0)
-		opening_camera.look_at(Vector3(5.0, _ground_height(5.0, 90.0) - 13.5, 90.0), Vector3.UP)
+		# Borda leste física do terraço: Casa Voss fica na moldura esquerda, enquanto ponte, rio e Arco entram no cone da lente.
+		opening_camera.position = Vector3(-18.0, _ground_height(-18.0, 14.0) + 6.6, 14.0)
+		opening_camera.look_at(Vector3(-1.0, _ground_height(-1.0, 84.0) - 10.8, 84.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
