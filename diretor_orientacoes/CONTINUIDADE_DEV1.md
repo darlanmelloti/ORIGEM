@@ -1,25 +1,23 @@
-# CONTINUIDADE DEV1 — ACTIVA
+# CONTINUIDADE_DEV1 — CP 296 EM EXECUÇÃO
 
 **Fronteira obrigatória:** Regiões 1–6 e Takes 1–11. Não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem qualquer módulo das Regiões 7–12.
 
-Os CP 281–288 foram validados com compilação Godot headless e execuções/capturas de abertura. A frente recuperada encontra-se na branch `feature/dev1-gameplay-core`, restaurada no commit remoto `e8a05b5` após a reinicialização do ambiente. O binário Godot 4.7.1 foi reinstalado para manter a validação local.
+## Base aceite
 
-## CP 288 concluído — limpeza de sinais técnicos
+O miradouro compacto de Casa Voss mantém a câmara física de abertura. O CP 294 passou a ocultar sinais técnicos do prólogo por nome e por material emissivo, com novas passagens tardias; a captura em `opengl3` é agora o método obrigatório de comparação estável no sandbox recuperado.
 
-`VossHouse.gd` passou a ocultar, apenas durante o prólogo, os marcadores Chronos e emissores remotos que contaminavam a leitura física do vale. A ocultação é repetida nos primeiros frames de construção regional e os nós são restaurados no fim normal da abertura. A validação headless passou e a cena principal foi executada por 34 segundos em ambiente gráfico virtual, com captura guardada em `qa_evidence_voss_vista/cp288_warm_main_scene.png`.
+## CP 296 — EM EXECUÇÃO IMEDIATA
 
-## CP 289 — EM EXECUÇÃO IMEDIATA
-
-**Objetivo:** tornar a Casa Voss uma moldura arquitectónica real na margem esquerda da tomada sem regressar a uma galeria rectangular artificial, sem reduzir distâncias e sem esconder rio, ponte, Estrada ou Arco.
+**Objectivo:** reforçar por geometria orgânica a leitura de primeiro plano Casa–soleira–ponte, sem deslocar a lente para dentro da casa, sem criar painéis e sem reduzir a profundidade cartográfica do vale.
 
 | Regra | Critério de aceitação |
 | --- | --- |
-| Geometria | Casa, soleira, cobertura, parede ou pilar real da Casa Voss entra no limite esquerdo; nenhum painel ou fundo plano. |
-| Profundidade | Rio/ponte, Estrada e Arco continuam em planos separados; montanhas mantêm escala distante. |
+| Geometria | A origem física do percurso torna-se reconhecível sem qualquer fundo plano ou galeria artificial. |
+| Profundidade | Rio/ponte, Estrada e Arco mantêm-se em planos separados; o vale conserva escala distante. |
 | Integridade | Godot 4.7.1 headless sem erros. |
-| Jogabilidade | Cena principal em execução por pelo menos 30 segundos e captura gráfica válida; sem colisores novos a bloquear a saída. |
-| Reversibilidade | Desfazer qualquer ajuste se a captura reduzir a leitura do vale. |
+| Jogabilidade | Execução gráfica mínima de 30 segundos e captura válida, sem colisores novos a bloquear a saída. |
+| Reversibilidade | Reverter qualquer alteração que reduza a leitura do vale. |
 
-**Próxima acção já iniciada:** medir uma posição de câmara física na soleira ou na borda compacta do terraço que deixe a fachada visível à esquerda, conservando a câmara actual como fallback.
+**Próxima acção já iniciada:** localizar a linha de geometria de soleira/ponte que pode ganhar silhueta de pedra real à esquerda sem bloquear a rota, depois comparar em `opengl3` e encaminhar o frame aceite à grelha CP-CINE-03 do Dev3.
 
 > Nenhum checkpoint é ponto de paragem. Depois de cada validação, publicar evidências, actualizar este ficheiro e abrir imediatamente o próximo passe dentro do escopo Dev1.

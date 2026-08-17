@@ -1055,7 +1055,7 @@ func _activate_opening_camera() -> void:
 	_apply_opening_storm()
 	get_tree().create_timer(0.35).timeout.connect(_apply_opening_storm)
 	# A construção regional é escalonada nos primeiros frames; passagens curtas removem sinais técnicos antes da primeira captura sem afectar a exploração posterior.
-	for delay_seconds: float in [0.12, 0.42, 0.90, 1.65]:
+	for delay_seconds: float in [0.12, 0.42, 0.90, 1.65, 3.20, 6.00, 12.00]:
 		get_tree().create_timer(delay_seconds).timeout.connect(_hide_late_opening_technical_markers)
 
 func _hide_late_opening_technical_markers() -> void:
@@ -1065,12 +1065,26 @@ func _hide_late_opening_technical_markers() -> void:
 	if scene_root == null:
 		return
 	# Inclui luzes e objetos remotos com nomes de Chronos: durante o prólogo são sinalização técnica; ao fim da cena são restaurados junto com os restantes nós ocultos.
-	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem*", "BrilhoAzulChronos", "BrilhoMarcoRuina*", "LuzDoObservatorio", "BrilhoChronosDaCaverna", "JanelaChronosAzul", "LuzDaJanelaChronos"]:
+	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem*", "BrilhoAzulChronos", "BrilhoMarcoRuina*", "LuzDoObservatorio", "BrilhoChronosDaCaverna", "JanelaChronosAzul", "LuzDaJanelaChronos", "*Chronos*", "*Beacon*", "*Brilho*", "*Marco*"]:
 		for technical_node: Node in scene_root.find_children(technical_marker_name, "Node3D", true, false):
 			var technical_marker: Node3D = technical_node as Node3D
 			if technical_marker != null and technical_marker.visible:
 				technical_marker.visible = false
 				opening_hidden_nodes.append(technical_marker)
+	# Defesa por material: alguns construtores regionais criam o emissor depois da árvore de nomes; no prólogo, só a emissão ciano técnica é ocultada.
+	for visual_node: Node in scene_root.find_children("*", "MeshInstance3D", true, false):
+		var technical_mesh: MeshInstance3D = visual_node as MeshInstance3D
+		if technical_mesh != null and technical_mesh.visible and _is_cyan_technical_mesh(technical_mesh):
+			technical_mesh.visible = false
+			opening_hidden_nodes.append(technical_mesh)
+
+func _is_cyan_technical_mesh(mesh_node: MeshInstance3D) -> bool:
+	var active_material: Material = mesh_node.get_active_material(0)
+	var standard_material: StandardMaterial3D = active_material as StandardMaterial3D
+	if standard_material == null or not standard_material.emission_enabled:
+		return false
+	var emission_colour: Color = standard_material.emission
+	return emission_colour.b > 0.09 and emission_colour.b > emission_colour.r * 1.35 and emission_colour.b > emission_colour.g * 1.15
 
 func _apply_opening_storm() -> void:
 
