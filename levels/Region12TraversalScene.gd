@@ -124,7 +124,7 @@ func _ready() -> void:
 		destination.call_deferred("_report_region12_render_inventory")
 	camera = Camera3D.new()
 	camera.name = "Region12TraversalCamera"
-	camera.fov = 50.0
+	camera.fov = 44.0
 	add_child(camera)
 	camera.current = true
 	_set_camera(0.0)
