@@ -48,3 +48,15 @@ A inclinação inicial de **-7°** aplicada à cabeça de Elias foi validada com
 A variante permanente de **-11°** foi aprovada após validação headless e 30 segundos de runtime sem erros. Em comparação com a base de -7°, o piso PBR ocupa uma área maior na soleira e depois do primeiro desvio, fornecendo uma leitura mais clara da superfície transitável sem adicionar luzes, colisores, painéis ou activos isolados. O orçamento mantém-se em três luzes locais.
 
 **CINE-PAIR-05 já iniciado:** Dev4 prepara a prova física de travessia completa da rota Orion com esta base; Dev3 define a primeira composição de destino que só será aplicada se a chegada permanecer legível durante o percurso inteiro. Não abrir DIR autónomo nem reiniciar candidatos rejeitados.
+
+
+## CINE-PAIR-05 — Leitura de percurso: soleira e desvio
+
+As duas primeiras capturas da trajectória integral confirmam que a base de -11° mantém a faixa de piso visível na soleira e no primeiro desvio. O corredor continua fechado por rocha real e não apresenta falha de colisão, céu exposto, painel ou objecto artificial. A próxima decisão depende exclusivamente da captura de chegada: não antecipar geometria de destino antes de verificar a leitura do último segmento.
+
+
+## Decisão CINE-PAIR-05 — Trajectória aprovada; plataforma rejeitada
+
+A trajectória integral de 30 segundos confirmou que Elias percorre soleira, primeiro desvio e chegada sobre o suporte físico contínuo sem erro runtime. A chegada, porém, revela que o fecho actual é uma parede mineral próxima. A plataforma CC0 de ponte foi testada como composição de destino, sem luzes ou colisores adicionais, mas apareceu como massa cinzenta recortada e materialmente dissonante contra a caverna. Foi rejeitada e será removida.
+
+**CINE-PAIR-06 já iniciado:** Dev4 fornece a leitura técnica da parede terminal; Dev3 selecciona uma composição de destino esculpida na própria casca do túnel, sem activos externos, sem painéis e sem geometria decorativa isolada.

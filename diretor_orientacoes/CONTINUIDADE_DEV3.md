@@ -48,3 +48,8 @@ A leitura inicial descendente de -7° foi aceite como base de composição após
 ## CINE-PAIR-04 aceite; CINE-PAIR-05 em execução
 
 A orientação inicial de -11° tornou a faixa de piso mais legível na soleira e no primeiro desvio, com validação de 30 segundos e sem regressão técnica. Dev3 deve agora preservar esta base e decidir a composição de destino apenas depois de Dev4 entregar a prova de travessia integral. A conclusão da prova abre a implementação seguinte no mesmo ciclo; não criar DIR isolado.
+
+
+## CINE-PAIR-05 concluído; CINE-PAIR-06 em execução
+
+A rota integral foi validada, mas a plataforma de ponte CC0 no destino foi rejeitada por falta de integração visual. Dev3 preserva a base de -11° e deve escolher uma composição de destino que pertença à própria casca contínua da caverna. Dev4 mede a parede terminal e apoia uma única alteração estrutural. Não usar activos externos, painéis, marcadores isolados ou abrir DIR autónomo.

@@ -40,3 +40,8 @@ A orientação inicial de -7° foi aceite após validação headless e 30 segund
 ## CINE-PAIR-04 aceite; CINE-PAIR-05 em execução
 
 A leitura descendente de -11° foi aceite depois de 30 segundos sem erros: o piso mantém área útil maior na soleira e após o primeiro desvio, sem alteração de luzes ou rota física. Dev4 inicia agora a prova de travessia integral do corredor com esta base. Dev3 só escolhe composição de destino a partir da chegada realmente validada. Não abrir DIR autónomo.
+
+
+## CINE-PAIR-05 concluído; CINE-PAIR-06 em execução
+
+A travessia integral de 30 segundos foi estável, mas a plataforma CC0 de ponte foi rejeitada por aparecer cinzenta, recortada e dissonante no fecho. A base de -11° foi restaurada e validada. Dev4 mede agora a parede terminal como parte da casca contínua; Dev3 escolhe uma solução esculpida na própria geometria. Não usar activos externos, painéis, marcadores isolados ou DIR autónomo.
