@@ -1015,10 +1015,10 @@ func _build_opening_camera() -> void:
 			opening_camera.position = Vector3(-19.0, _ground_height(-19.0, 76.0) + 4.8, 76.0)
 			opening_camera.look_at(Vector3(-16.7, _ground_height(-16.7, 92.0) + 5.8, 92.0), Vector3.UP)
 		elif qa_storyboard_stage == "orion_entrada":
-			# CP-CINE-21: estágio QA restrito; não intervém no prólogo ou no percurso normal.
+			# CP-CINE-23: aproximação pelo sul; os contrafortes da boca foram construídos a sul do marco e só se lêem deste eixo.
 			opening_camera.fov = 62.0
-			opening_camera.position = Vector3(-116.0, _ground_height(-116.0, 548.0) + 3.0, 548.0)
-			opening_camera.look_at(Vector3(-116.0, _ground_height(-116.0, 556.0) + 1.7, 556.0), Vector3.UP)
+			opening_camera.position = Vector3(-116.0, _ground_height(-116.0, 532.0) + 3.6, 532.0)
+			opening_camera.look_at(Vector3(-116.0, _ground_height(-116.0, 548.0) + 2.3, 548.0), Vector3.UP)
 		elif qa_storyboard_stage == "orion_camara":
 			opening_camera.fov = 58.0
 			# Afastada 10,5 m do altar: revela o artefacto como destino em vez de intersectar a malha do Cubo.

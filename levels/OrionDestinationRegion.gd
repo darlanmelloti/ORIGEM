@@ -4,7 +4,7 @@
 
 extends Node3D
 
-const CLIFF: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
+const CLIFF: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
 const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeB.glb")
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
@@ -54,28 +54,16 @@ func _build_orion_cave() -> void:
 		if cliff == null:
 			continue
 		cliff.name = "RochaDaCaverna_%02d" % index
-		cliff.position = Vector3(cos(angle) * radius, 2.4 + float(index % 3) * 1.8, sin(angle) * radius)
+		var local_x: float = cos(angle) * radius
+		var local_z: float = sin(angle) * radius
 		var scale_value: float = 0.72 + float(index % 3) * 0.18
+		# A origem do activo é aterrada pela altura mundial; não há elevação fixa que produza rochas suspensas.
+		cliff.position = Vector3(local_x, _height_at(cave_x + local_x, cave_z + local_z) - cave.position.y + 0.04 * scale_value, local_z)
 		cliff.scale = Vector3(scale_value, scale_value, scale_value)
 		cliff.rotation = Vector3(0.12 * sin(angle), angle + PI * 0.5, 0.10 * cos(angle))
 		_apply_material(cliff, stone_material)
 		cave.add_child(cliff)
-	# CP-CINE-11: volume de profundidade real; evita um painel escuro plano na entrada da caverna.
-	var darkness_mesh: SphereMesh = SphereMesh.new()
-	darkness_mesh.radius = 4.4
-	darkness_mesh.height = 6.8
-	darkness_mesh.radial_segments = 20
-	darkness_mesh.rings = 12
-	var darkness: MeshInstance3D = MeshInstance3D.new()
-	darkness.name = "RecessoEscuroDaCaverna"
-	darkness.mesh = darkness_mesh
-	darkness.position = Vector3(0.0, 3.4, -7.2)
-	darkness.scale = Vector3(1.0, 0.88, 0.70)
-	var darkness_material: StandardMaterial3D = StandardMaterial3D.new()
-	darkness_material.albedo_color = Color(0.005, 0.009, 0.013, 1.0)
-	darkness_material.roughness = 1.0
-	darkness.material_override = darkness_material
-	cave.add_child(darkness)
+	# CP-CINE-23B: sem volumes esféricos ou painéis escuros. A profundidade resulta exclusivamente dos contrafortes reais e do relevo.
 	var rune_light: OmniLight3D = OmniLight3D.new()
 	rune_light.name = "BrilhoChronosDaCaverna"
 	rune_light.light_color = Color(0.10, 0.42, 1.0, 1.0)
