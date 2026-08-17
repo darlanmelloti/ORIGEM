@@ -991,7 +991,7 @@ func _build_opening_camera() -> void:
 		var terrace_ground_y: float = _ground_height(-22.0, 14.0)
 		# Borda oeste do terraço: a parede e o telhado da Casa entram como moldura à esquerda, sem esconder o vale.
 		opening_camera.position = Vector3(-26.0, _ground_height(-26.0, 11.0) + 6.9, 11.0)
-		opening_camera.look_at(Vector3(5.0, _ground_height(5.0, 90.0) - 4.2, 90.0), Vector3.UP)
+		opening_camera.look_at(Vector3(5.0, _ground_height(5.0, 90.0) - 13.5, 90.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
@@ -1063,7 +1063,7 @@ func _hide_late_opening_technical_markers() -> void:
 	var scene_root: Node = get_tree().current_scene
 	if scene_root == null:
 		return
-	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "LuzChronosMargem", "JanelaChronosAzul", "LuzDaJanelaChronos"]:
+	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem", "JanelaChronosAzul", "LuzDaJanelaChronos"]:
 		for technical_node: Node in scene_root.find_children(technical_marker_name, "Node3D", true, false):
 			var technical_marker: Node3D = technical_node as Node3D
 			if technical_marker != null and technical_marker.visible:

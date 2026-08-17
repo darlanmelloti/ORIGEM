@@ -1,16 +1,17 @@
 # Continuidade — Dev1
 
-Os **CP 281 e CP 282** foram validados com Godot headless, captura da abertura e prova segmentada de 30 segundos. A Casa Voss dispõe agora de soleira elevada com degraus e colisores; o corredor inicial recebeu uma janela topográfica natural, silhuetas físicas no horizonte e material de água mais profundo. Todas as alterações mantiveram-se nas Regiões 1–6.
+Os **CP 281–283** foram validados com Godot headless, capturas da abertura e gameplay real de 30 segundos. A Casa Voss recebeu um miradouro físico; o corredor Casa → Estrada → Arco recebeu relevo de leitura, silhuetas rochosas, material de água aprofundado e uma tomada que elimina balizas técnicas do prólogo. As Regiões 7–12 permanecem fora desta frente.
 
-O **CP 283 — Planos intermédios da revelação Casa Voss** está em execução. A tarefa imediata é reforçar a cadeia visual entre a ponte lateral, as margens rochosas, a Estrada do Rio e o Arco das Ruínas. O trabalho deve reduzir a leitura de faixas lineares por meio de rochas, vegetação descontínua, água e ruínas já existentes; não pode aproximar os marcos, criar painéis de fundo, tocar módulos Dev2, nem introduzir luzes dinâmicas adicionais.
+O **CP 284 — Continuidade Floresta Densa → Acampamento Majestic → Ruínas Submersas** está em execução. A tarefa imediata é auditar e reforçar as transições de solo, água, vegetação e rocha entre os marcos 4–6, preservando o percurso físico, a escala do mapa e o orçamento da GTX 1050 Ti.
 
 | Critério obrigatório | Evidência exigida |
 |---|---|
-| Composição em profundidade | Captura 16:9 com Casa/soleira, ponte ou rio, Estrada/Arco e horizonte em planos distinguíveis |
+| Continuidade espacial | Captura que mostre passagem reconhecível entre Floresta, Acampamento e Bacia sem muro vegetal ou margem suspensa |
+| Geometria | Apenas malhas físicas, rochas, água, vegetação e ruínas; nenhum painel de fundo |
 | Integridade técnica | Godot headless sem erros de parser, script ou recursos |
-| Jogabilidade | Gameplay real segmentado de 30 segundos sem bloqueio Casa → Estrada → Arco |
-| Distribuição | Após a validação CP 283, gerar ZIP actualizado e executar teste de Novo Jogo antes de o publicar |
+| Jogabilidade | Prova segmentada de 30 segundos pela rota regional sem bloqueios |
+| Escopo | Nenhuma alteração em módulos/câmaras/activos das Regiões 7–12 |
 
-> Cada relatório ou commit é uma evidência do ciclo. Ao fechar o CP 283, iniciar imediatamente o passe de continuidade Floresta Densa → Acampamento Majestic → Ruínas Submersas.
+> O ZIP CP 283 será gerado a partir do estado já validado. Este empacotamento não encerra o desenvolvimento: o CP 284 mantém-se em execução após a publicação.
 
-**Estado:** `CP 283 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
+**Estado:** `CP 284 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
