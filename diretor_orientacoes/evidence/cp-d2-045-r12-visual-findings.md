@@ -12,3 +12,6 @@ A execução isolada de R12 passou parser Godot 4.7.1, gameplay exactamente 30 s
 **Evidência:** gameplay `640aa3fc956074ccc4c6430d1b441878b11fdf930674c58ccfad57c50055c1db`; print `63cc01d5ad62365fd72f04621a4663f93ebf0e42cea6f30dc84f9643ea183b66`.
 
 **Próxima acção imediata:** empacotar e sincronizar CP-D2-045 e iniciar a regressão final R10 → R11 → R12, mantendo o escopo Dev2 nas Regiões 7–12.
+
+
+A inspecção visual do print 1600×900 confirma que a base da Cúpula e a soleira permanecem legíveis, enquanto os colliders, marcadores e mensagens de inventário ficam exclusivamente no log runtime. Não há gizmos, texto ou overlays visíveis na composição. A leitura cromática azul/violeta continua consistente com o passe anterior.
