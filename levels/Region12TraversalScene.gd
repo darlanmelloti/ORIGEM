@@ -551,6 +551,10 @@ func _build_final_dome_traversal_proxy() -> void:
 		var step_material := StandardMaterial3D.new()
 		step_material.albedo_color = Color("#5e7890")
 		step_material.roughness = 0.90
+		if step_index == 2:
+			step_material.emission_enabled = true
+			step_material.emission = Color("#2c82aa")
+			step_material.emission_energy_multiplier = 0.18
 		for step_mesh in central_step.find_children("*", "MeshInstance3D", true, false):
 			step_mesh.set_surface_override_material(0, step_material)
 		proxy.add_child(central_step)
