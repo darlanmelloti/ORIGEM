@@ -30,9 +30,10 @@ func _build_support_collision() -> void:
 	support.collision_mask = 0
 	var collision: CollisionShape3D = CollisionShape3D.new()
 	var shape: BoxShape3D = BoxShape3D.new()
-	shape.size = Vector3(6.8, 0.30, 13.6)
+	# A extensão da curva desloca a rota para oeste; o suporte cobre todo o comprimento sem tocar na geometria visual.
+	shape.size = Vector3(9.4, 0.30, 23.0)
 	collision.shape = shape
-	collision.position = Vector3(-0.72, -0.15, 1.25)
+	collision.position = Vector3(-2.60, -0.15, 6.80)
 	support.add_child(collision)
 	add_child(support)
 
@@ -163,7 +164,8 @@ func _build_grounded_tunnel() -> void:
 	material.uv1_scale = Vector3(0.62, 0.62, 0.62)
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	var profile: Array[Vector2] = [Vector2(-2.4, 0.0), Vector2(-2.45, 1.5), Vector2(-1.4, 3.25), Vector2(0.25, 4.05), Vector2(1.72, 3.45), Vector2(2.38, 1.9), Vector2(2.30, 0.0)]
-	var rings: Array[float] = [-4.8, -2.5, 0.0, 2.4, 4.9, 7.4]
+	# A rota continua depois da curva inicial para criar profundidade explorável real, sem depender de um fundo próximo.
+	var rings: Array[float] = [-4.8, -2.5, 0.0, 2.4, 4.9, 7.4, 10.0, 12.8, 15.6, 18.4]
 	var surface: SurfaceTool = SurfaceTool.new()
 	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for ring_index: int in range(rings.size() - 1):
@@ -175,7 +177,7 @@ func _build_grounded_tunnel() -> void:
 			var d: Vector3 = _profile_point(profile[profile_index], rings[ring_index + 1], ring_index + 1)
 			surface.add_vertex(a); surface.add_vertex(b); surface.add_vertex(c)
 			surface.add_vertex(a); surface.add_vertex(c); surface.add_vertex(d)
-	var end_center: Vector3 = Vector3(-2.35, 1.9, rings[-1])
+	var end_center: Vector3 = Vector3(-maxf(rings[-1] - 1.0, 0.0) * 0.23, 1.9, rings[-1])
 	for profile_index: int in range(profile.size()):
 		var next_index: int = (profile_index + 1) % profile.size()
 		# Ordem virada para o interior: a normal da face de fundo aponta para a câmara e recebe a luz de profundidade.

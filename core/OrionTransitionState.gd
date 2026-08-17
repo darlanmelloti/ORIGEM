@@ -28,8 +28,8 @@ func begin_return(player: Node3D) -> void:
 
 func restore_interior_player(player: Node3D) -> void:
 	player.global_position = INTERIOR_SPAWN
-	# O corredor desenvolve-se no eixo +Z; Elias entra voltado para a rota, e não para o fundo selado em -Z.
-	player.rotation.y = PI
+	# A rota curva suavemente a oeste depois da soleira; a orientação inicial já enquadra o primeiro trecho navegável.
+	player.look_at(Vector3(-1.04, player.global_position.y, 5.50), Vector3.UP)
 	_restore_player_state(player)
 	EventBus.player_message_requested.emit("A garganta fecha-se atrás de Elias.", 1.8)
 
