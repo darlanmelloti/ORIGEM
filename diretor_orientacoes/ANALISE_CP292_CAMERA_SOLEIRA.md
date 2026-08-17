@@ -3,3 +3,31 @@
 A captura em modo de compatibilidade tornou a avaliação visual fiável. A posição sudoeste testada em CP 292 deve ser rejeitada: embora aproxime a arquitectura, introduz um pilar e cobertura em primeiro plano à direita, retira a Casa da margem esquerda e encobre o corredor do vale. A composição não atinge o limiar visual do projecto.
 
 A base anterior do miradouro compacto deve ser restaurada. A próxima tentativa não deve deslocar a câmara para dentro da própria Casa; deve trabalhar a linha de vista exterior, a remoção dos emissores técnicos e a leitura em camadas do rio, Estrada e Arco. A captura em `opengl3` é agora o método de comparação estável no sandbox.
+
+## CP 296 — Rotação oeste
+
+A rotação oeste melhorou a leitura da massa baixa da Casa/soleira no canto inferior esquerdo e manteve Estrada, rio e Arco visíveis. Contudo, a ponte transversal deixou de ser um marco legível e a Casa ainda não possui a leitura arquitectónica integral exigida. A candidata não deve ser aceite como tomada final; serve apenas como evidência de que a rotação deve ser ajustada em pequenos incrementos, mantendo a câmara física do miradouro.
+
+## CP 297 — Rotação intermédia
+
+A rotação intermédia preserva uma pequena leitura da soleira no canto inferior esquerdo e mantém o Arco e a estrada, mas ainda não torna a Casa Voss uma silhueta arquitectónica reconhecível nem recupera a ponte transversal como marco. Não satisfaz o limiar de aceitação e não deve ser publicada como tomada final. A próxima iteração deve reforçar a silhueta física do próprio marco ponte/soleira em vez de prolongar micro-rotações da lente.
+
+## CP 299 — Lente baixa
+
+A redução da altura da lente ampliou apenas a cobertura no primeiro plano inferior, sem revelar uma fachada reconhecível da Casa Voss e sem melhorar a leitura da ponte. O resultado não deve ser aceite. A altura de câmara deve regressar ao valor do miradouro compacto; a continuidade passa a exigir correcção de geometria e não outra redução de altura.
+
+## CP 300 — Posição exterior leste
+
+A posição exterior leste abriu o rio e tornou a ponte mais fácil de localizar, mas excluiu a Casa Voss da moldura. Como a referência exige explicitamente a Casa à esquerda, a candidata é rejeitada. A posição não será mantida; a evidência confirma que a próxima solução deve introduzir uma fachada física reconhecível sem afastar a lente do perímetro da casa.
+
+## CP 301 — Diagonal sudeste
+
+A diagonal sudeste provou que a Casa Voss é lida no lado direito da lente, com cobertura e pilar invasivos, enquanto a árvore ocupa a margem esquerda. Isto contradiz a composição desejada e elimina a candidata. A leitura confirma que a inversão de lado não é resolvida por deslocamentos da câmara; o próximo passe deve tratar a composição por geometria da soleira e da fachada, mantendo o vale desobstruído.
+
+## CP 303 — Tomada histórica refinada
+
+A tomada a oeste é a primeira captura a colocar uma massa inequívoca de cobertura da Casa Voss no lado esquerdo, preservando Estrada e Arco à direita. Contudo, a Casa continua a ser lida apenas pela cobertura, o rio/ponte não está suficientemente destacado e a parcela de céu continua excessiva. A configuração é a melhor base parcial, não a tomada final. O próximo refinamento deverá expor a fachada/ala abaixo da cobertura e reforçar uma leitura física da ponte sem ocultar o vale.
+
+## CP 304 — Tomada histórica inclinada
+
+A inclinação reduziu a proporção de céu e preservou a massa de cobertura da Casa Voss à esquerda, estrada e Arco. Ainda não revelou fachada suficiente nem deu leitura clara à ponte; é a melhor base parcial entre as tomadas testadas, mas não satisfaz a referência. O próximo ciclo deve parar de micro-ajustar a lente e trabalhar os marcos físicos intermédios da bacia.

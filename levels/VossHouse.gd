@@ -220,8 +220,8 @@ func _build_voss_river_revelation_bridge() -> void:
 		pier.name = "PilarDaPonteVisivel_%s" % ("Oeste" if pier_side < 0.0 else "Este")
 		var pier_x: float = river_x + pier_side * 9.8
 		pier.position = Vector3(pier_x, _ground_height(pier_x, bridge_z) - 0.05, bridge_z)
-		# Pilares altos mas quebrados: tornam a ponte lateral legível acima do talude sem criar uma torre nem bloquear o vale.
-		pier.scale = Vector3(0.64, 1.72, 0.64)
+		# Pilares altos mas quebrados: a elevação moderada separa a ponte lateral do talude e preserva o vale como espaço aberto.
+		pier.scale = Vector3(0.72, 2.18, 0.72)
 		pier.rotation.y = pier_side * 0.18
 		_tint_tree_silhouette(pier, stone_material)
 		add_child(pier)
@@ -989,9 +989,10 @@ func _build_opening_camera() -> void:
 		opening_camera.fov = 78.0
 		# Câmara no miradouro físico: a diagonal para leste contém a ponte transversal, a Estrada de Elias e o Arco sem comprimir o vale.
 		var terrace_ground_y: float = _ground_height(-22.0, 14.0)
-		# Borda leste física do terraço: Casa Voss fica na moldura esquerda, enquanto ponte, rio e Arco entram no cone da lente.
-		opening_camera.position = Vector3(-18.0, _ground_height(-18.0, 14.0) + 6.6, 14.0)
-		opening_camera.look_at(Vector3(-1.0, _ground_height(-1.0, 84.0) - 10.8, 84.0), Vector3.UP)
+		# Tomada histórica inclinada: conserva a massa da Casa à esquerda e privilegia os planos físicos do vale sobre o céu.
+		opening_camera.fov = 80.0
+		opening_camera.position = Vector3(-31.2, _ground_height(-31.2, 6.8) + 5.65, 6.8)
+		opening_camera.look_at(Vector3(4.0, _ground_height(4.0, 84.0) - 18.0, 84.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
@@ -1424,6 +1425,10 @@ func _build_side_annex(house: Node3D) -> void:
 	# Duas escoras antigas quebram a regularidade da ala sem acrescentar obstáculos físicos.
 	_add_box(house, "EscoraAlaOeste", Vector3(-6.10, 1.82, -2.27), Vector3(3.36, 0.13, 0.10), darken(timber_material, 0.70), false, Vector3(0.0, 0.0, -0.48))
 	_add_box(house, "EscoraAlaEste", Vector3(-6.10, 1.82, -2.29), Vector3(3.36, 0.13, 0.10), darken(timber_material, 0.70), false, Vector3(0.0, 0.0, 0.48))
+	# CP296 — Eixo vertical irregular da ala: chaminé e empena curta revelam que a massa no primeiro plano pertence à Casa, não a uma moldura isolada.
+	_add_box(house, "ChamineDaAlaOeste", Vector3(-7.10, 4.05, 1.55), Vector3(0.72, 3.55, 0.78), stone_material, false)
+	_add_box(house, "CoroaChamineDaAla", Vector3(-7.10, 5.86, 1.55), Vector3(1.00, 0.20, 1.02), darken(stone_material, 0.82), false)
+	_add_box(house, "EixoMadeiraDaAla", Vector3(-5.28, 3.56, -2.22), Vector3(0.18, 1.52, 0.12), timber_material, false, Vector3(0.0, 0.0, -0.22))
 
 func _build_interior(house: Node3D) -> void:
 	# A parede da espada é a primeira âncora narrativa da casa.

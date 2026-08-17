@@ -1,23 +1,25 @@
-# CONTINUIDADE_DEV1 — CP 296 EM EXECUÇÃO
+# CONTINUIDADE_DEV1 — CP 306 EM EXECUÇÃO
 
 **Fronteira obrigatória:** Regiões 1–6 e Takes 1–11. Não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem qualquer módulo das Regiões 7–12.
 
-## Base aceite
+## Base preservada
 
-O miradouro compacto de Casa Voss mantém a câmara física de abertura. O CP 294 passou a ocultar sinais técnicos do prólogo por nome e por material emissivo, com novas passagens tardias; a captura em `opengl3` é agora o método obrigatório de comparação estável no sandbox recuperado.
+O CP 294 ocultou os sinais técnicos do prólogo por nome e por material emissivo. O CP 305 ajustou a materialidade do Rio da Estrada para uma leitura azul-petróleo discreta, sem luzes, sem painéis e sem aproximar marcos. A validação headless Godot 4.7.1 e a execução gráfica de 30 segundos em compatibilidade passaram.
 
-## CP 296 — EM EXECUÇÃO IMEDIATA
+A tomada histórica inclinada mantém uma massa de cobertura Casa Voss à esquerda com Estrada e Arco no plano direito. É uma base **parcial**, não uma aprovação final: a fachada e a ponte ainda não satisfazem a referência de 12 marcos.
 
-**Objectivo:** reforçar por geometria orgânica a leitura de primeiro plano Casa–soleira–ponte, sem deslocar a lente para dentro da casa, sem criar painéis e sem reduzir a profundidade cartográfica do vale.
+## CP 306 — EM EXECUÇÃO IMEDIATA
 
-| Regra | Critério de aceitação |
+**Objectivo:** expor por geometria orgânica e realmente ligada à Casa Voss a leitura de fachada/ala no primeiro plano esquerdo, mantendo a ponte lateral, Estrada e Arco em planos separados. Não usar outdoors, painéis, luzes adicionais ou colisores que estreitem a rota.
+
+| Critério | Verificação obrigatória |
 | --- | --- |
-| Geometria | A origem física do percurso torna-se reconhecível sem qualquer fundo plano ou galeria artificial. |
-| Profundidade | Rio/ponte, Estrada e Arco mantêm-se em planos separados; o vale conserva escala distante. |
+| Geometria | A origem da Casa torna-se reconhecível sem criar moldura artificial. |
+| Profundidade | Rio/ponte, Estrada e Arco mantêm escala e planos distintos. |
 | Integridade | Godot 4.7.1 headless sem erros. |
-| Jogabilidade | Execução gráfica mínima de 30 segundos e captura válida, sem colisores novos a bloquear a saída. |
-| Reversibilidade | Reverter qualquer alteração que reduza a leitura do vale. |
+| Jogabilidade | Captura estável em `opengl3` e 30 segundos de execução sem erro GDScript. |
+| Reversibilidade | Reverter qualquer candidata sem ganho visual verificável. |
 
-**Próxima acção já iniciada:** localizar a linha de geometria de soleira/ponte que pode ganhar silhueta de pedra real à esquerda sem bloquear a rota, depois comparar em `opengl3` e encaminhar o frame aceite à grelha CP-CINE-03 do Dev3.
+**Próxima acção já iniciada:** testar uma continuidade física de fachada/ala que não entre no cone do vale e encaminhar o primeiro frame melhorado para a grelha CP-CINE-03 do Dev3.
 
-> Nenhum checkpoint é ponto de paragem. Depois de cada validação, publicar evidências, actualizar este ficheiro e abrir imediatamente o próximo passe dentro do escopo Dev1.
+> Nenhum checkpoint encerra o ciclo. Cada validação abre imediatamente o próximo passe dentro do escopo Dev1.
