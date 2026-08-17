@@ -251,6 +251,14 @@ func _build_clean_r12_portal() -> void:
 	core_light.shadow_enabled = false
 	core_light.position = Vector3(164.0, -0.18, 175.42)
 	add_child(core_light)
+	var contact_light := OmniLight3D.new()
+	contact_light.name = "LuzContactoNucleoR12"
+	contact_light.light_color = Color("#6d6fc4")
+	contact_light.light_energy = 0.06
+	contact_light.omni_range = 1.9
+	contact_light.shadow_enabled = false
+	contact_light.position = Vector3(164.0, -0.46, 175.10)
+	add_child(contact_light)
 
 func _build_region12_wayfinding_lights() -> void:
 	var wayfinding_positions: Array[Vector3] = [
@@ -866,6 +874,8 @@ func _process(delta: float) -> void:
 			(child as OmniLight3D).light_energy = 0.34 + sin(elapsed * 1.25) * 0.08
 		if child is OmniLight3D and child.name == "LuzNucleoTemporalR12":
 			(child as OmniLight3D).light_energy = 0.13 + sin(elapsed * 1.12) * 0.035
+		if child is OmniLight3D and child.name == "LuzContactoNucleoR12":
+			(child as OmniLight3D).light_energy = 0.05 + sin(elapsed * 1.12) * 0.014
 		if child is MeshInstance3D and child.name == "NucleoCoroaFinal":
 			var core_material := child.material_override as StandardMaterial3D
 			if core_material != null:
