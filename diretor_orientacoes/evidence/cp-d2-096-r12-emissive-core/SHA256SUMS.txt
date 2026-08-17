@@ -1,0 +1,2 @@
+9ad8d283869242d80f6364095bd680c4c9b72af51dbbf0a26daf6de2ee3c6a77  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-096-r12-emissive-core/gameplay-30s.mp4
+adb30b49e04c512db6443521adf8bd1ded9bf20f4c496ee12432c149d74555b2  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-096-r12-emissive-core/print-1600x900.jpg
