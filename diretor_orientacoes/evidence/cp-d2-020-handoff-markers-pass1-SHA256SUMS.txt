@@ -1,0 +1,2 @@
+e70423f61e510ba348a93973bb91bcffebc8f0c4d9e44d3412bb49d54eb46f34  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-020-handoff-markers-pass1/gameplay-30s.mp4
+a1d3a8ed691031c3b09f3094ba72fc1e357721cf8622ff6f97be1c2056d58119  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-020-handoff-markers-pass1/print-1600x900.jpg

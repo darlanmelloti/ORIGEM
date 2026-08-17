@@ -583,6 +583,17 @@ func _build_final_dome_traversal_proxy() -> void:
 		collision.shape = shape
 		collision.position = approach_positions[collider_index]
 		approach_body.add_child(collision)
+	var handoff_positions: Array[Vector3] = [
+		Vector3(164.0, 0.78, 171.12), Vector3(164.0, 0.92, 170.38), Vector3(164.0, 1.08, 169.40)
+	]
+	var handoff_names: Array[String] = ["HandoffCubeR11", "HandoffSoleiraR12", "HandoffHubR12"]
+	for handoff_index: int in range(handoff_positions.size()):
+		var handoff_marker := Marker3D.new()
+		handoff_marker.name = handoff_names[handoff_index]
+		handoff_marker.position = handoff_positions[handoff_index]
+		handoff_marker.set_meta("dev2_scope", "regions_7_to_12")
+		handoff_marker.set_meta("sequence_order", handoff_index + 1)
+		add_child(handoff_marker)
 	var doorway_plane := ROCK_LARGE.instantiate() as Node3D
 	if doorway_plane != null:
 		doorway_plane.name = "PlanoPortaEscuraCupula"
