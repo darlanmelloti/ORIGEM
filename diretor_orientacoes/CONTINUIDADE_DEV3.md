@@ -43,3 +43,8 @@ A decisão seguinte será validada no mesmo percurso por ambos. A publicação d
 ## CINE-PAIR-03B aceite; CINE-PAIR-04 em execução
 
 A leitura inicial descendente de -7° foi aceite como base de composição após 30 segundos sem erros: o piso PBR ocupa agora uma faixa clara de exploração imediata. Dev3 deve preservar esta orientação e seleccionar uma única melhoria de profundidade baseada na continuidade desse piso; Dev4 fornece a medição técnica após o primeiro desvio. Nenhum dos dois reabre DIRs isolados ou candidatos rejeitados.
+
+
+## CINE-PAIR-04 aceite; CINE-PAIR-05 em execução
+
+A orientação inicial de -11° tornou a faixa de piso mais legível na soleira e no primeiro desvio, com validação de 30 segundos e sem regressão técnica. Dev3 deve agora preservar esta base e decidir a composição de destino apenas depois de Dev4 entregar a prova de travessia integral. A conclusão da prova abre a implementação seguinte no mesmo ciclo; não criar DIR isolado.

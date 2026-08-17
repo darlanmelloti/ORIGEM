@@ -35,3 +35,8 @@ A orientação de superfície por cor de vértice foi revertida após duas sess�
 ## CINE-PAIR-03B aceite; CINE-PAIR-04 em execução
 
 A orientação inicial de -7° foi aceite após validação headless e 30 segundos sem erros. Dev4 mede agora a continuidade visual do piso após o primeiro desvio, mantendo o FOV 64, três luzes e a rota física. Dev3 prepara uma única solução de profundidade que parta desta base; não reiniciar FOV, não abrir DIR autónomo e não repetir candidatos já rejeitados.
+
+
+## CINE-PAIR-04 aceite; CINE-PAIR-05 em execução
+
+A leitura descendente de -11° foi aceite depois de 30 segundos sem erros: o piso mantém área útil maior na soleira e após o primeiro desvio, sem alteração de luzes ou rota física. Dev4 inicia agora a prova de travessia integral do corredor com esta base. Dev3 só escolhe composição de destino a partir da chegada realmente validada. Não abrir DIR autónomo.

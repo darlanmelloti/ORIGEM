@@ -41,3 +41,10 @@ A primeira leitura de silhueta usava alvos acima do centro do `CharacterBody3D`,
 A inclinação inicial de **-7°** aplicada à cabeça de Elias foi validada com headless e 30 segundos de runtime sem erros. A soleira passou a mostrar uma faixa ampla de piso PBR no terço inferior do enquadramento, preservando a rocha, o FOV 64, as três luzes e o percurso físico. A alteração não resolve sozinha toda a profundidade, mas ultrapassa os candidatos anteriores por tornar a direcção imediata da exploração materialmente visível.
 
 **CINE-PAIR-04 já iniciado:** Dev4 mede a continuidade visual do piso depois do primeiro desvio; Dev3 prepara uma única melhoria de profundidade que parta desta orientação de câmara aceite, sem a substituir ou reiniciar a cadeia de tentativas rejeitadas.
+
+
+## Decisão CINE-PAIR-04 — Calibração de enquadramento aceite
+
+A variante permanente de **-11°** foi aprovada após validação headless e 30 segundos de runtime sem erros. Em comparação com a base de -7°, o piso PBR ocupa uma área maior na soleira e depois do primeiro desvio, fornecendo uma leitura mais clara da superfície transitável sem adicionar luzes, colisores, painéis ou activos isolados. O orçamento mantém-se em três luzes locais.
+
+**CINE-PAIR-05 já iniciado:** Dev4 prepara a prova física de travessia completa da rota Orion com esta base; Dev3 define a primeira composição de destino que só será aplicada se a chegada permanecer legível durante o percurso inteiro. Não abrir DIR autónomo nem reiniciar candidatos rejeitados.

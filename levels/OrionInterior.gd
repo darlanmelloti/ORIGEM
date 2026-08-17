@@ -73,8 +73,8 @@ func _build_player() -> void:
 	player.add_child(footsteps)
 	add_child(player)
 	OrionTransitionState.restore_interior_player(player)
-	# CINE-PAIR-03B: leitura inicial ligeiramente descendente revela o piso físico antes da exploração livre de Elias.
-	head.rotation.x = deg_to_rad(-7.0)
+	# CINE-PAIR-04: orientação inicial descendente privilegia a leitura do piso e a continuidade imediata da exploração.
+	head.rotation.x = deg_to_rad(-11.0)
 	# A exploração pertence sempre à câmara de Elias; qualquer câmara estática só serve para composição técnica e fica inactiva.
 	var static_camera: Camera3D = get_node_or_null("CameraInteriorOrion") as Camera3D
 	if static_camera != null:
