@@ -165,3 +165,9 @@ A emissão muito baixa foi aplicada exclusivamente ao sobrepiso PBR e validada d
 O braseiro foi validado com a terceira luz local, ficando ainda dentro do orçamento. A luz reforçou a textura próxima, mas a taça e a brasa procedurais entraram cortadas na margem do enquadramento e revelaram uma leitura sintética incompatível com o interior orgânico. A unidade completa será removida.
 
 > **Candidato rejeitado:** braseiro construído por primitivas procedurais como marco visual Orion. Uma futura fonte narrativa só pode usar activo 3D integrado e enquadramento confirmado.
+
+## CP-CINE-79 — Reversão do afloramento geológico CC0
+
+O activo real `cliff_blockSlope_rock.glb` foi medido, recebeu o material PBR Orion e foi validado durante 30 segundos sem colisão adicional. Na composição da soleira, apenas uma silhueta parcial surgiu na margem direita, sem orientar a rota nem integrar a leitura do interior. A integração será revertida.
+
+> **Candidato rejeitado:** afloramento lateral CC0 isolado sem percurso, enquadramento ou secção de caverna correspondente.
