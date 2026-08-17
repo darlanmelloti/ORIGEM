@@ -39,3 +39,11 @@ A elevação e a escala adicional da ponte lateral passaram a validação técni
 ## CP 307 — Janela topográfica de ponte
 
 A janela topográfica natural foi implementada, compilada e recapturada, mas não expôs a ponte lateral de forma perceptível na tomada histórica. A alteração foi revertida integralmente em `TerrainPatch.gd`; o relevo validado anterior é a base vigente. O próximo passe deverá trabalhar exclusivamente a silhueta estrutural e as margens de encontro da ponte, sem alterar a escala do mapa ou a crista do vale.
+
+## CP 308–310 — Encontros de ponte e leitura diurna
+
+O deslocamento do pilar de aproximação e as bases rochosas de encontro da ponte foram testados e revertidos: não resultaram numa silhueta perceptível na tomada histórica. O CP 309 de calibração diurna foi preservado por melhorar a leitura da parede da Casa, água e vegetação sem acrescentar luzes, tendo passado também na prova de 30 segundos. O próximo passe desloca-se das micro-variações da ponte para uma variação ambiental orgânica nas margens, sem alterar a escala do vale.
+
+## CP 310–311 — Margens da ponte e fetos intermédios
+
+Os encontros rochosos dos pilares e os fetos adicionais da margem foram renderizados em `opengl3`, mas não produziram ganho perceptível na tomada histórica; ambos foram revertidos. A base actual mantém a leitura de fachada e a iluminação CP309. A próxima intervenção deverá trabalhar uma melhoria de grande escala que possa ser visualmente verificada no enquadramento, em vez de adicionar detalhe imperceptível.

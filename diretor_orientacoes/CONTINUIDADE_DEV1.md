@@ -1,4 +1,4 @@
-# CONTINUIDADE_DEV1 — CP 310 EM EXECUÇÃO
+# CONTINUIDADE_DEV1 — CP 314 EM EXECUÇÃO
 
 **Fronteira obrigatória:** Regiões 1–6 e Takes 1–11. Não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem qualquer módulo das Regiões 7–12.
 
@@ -8,9 +8,9 @@ O CP 294 ocultou os sinais técnicos do prólogo por nome e por material emissiv
 
 A tomada histórica inclinada mantém uma massa de cobertura Casa Voss à esquerda com Estrada e Arco no plano direito. É uma base **parcial**, não uma aprovação final: a fachada e a ponte ainda não satisfazem a referência de 12 marcos.
 
-## CP 310 — EM EXECUÇÃO IMEDIATA
+## CP 314 — EM EXECUÇÃO IMEDIATA
 
-**Objectivo:** preservar a leitura diurna e a fachada/ala conquistadas nos CPs 306–309 e recuperar a ponte lateral como marco físico de plano intermédio, mantendo rio, Estrada e Arco em planos separados. Não usar outdoors, painéis, luzes adicionais ou colisores que estreitem a rota.
+**Objectivo:** preservar a captura cinematográfica limpa e a leitura diurna/fachada dos CPs 306–313, convertendo a abertura em evidência comparável para o Dev3 antes do próximo ganho macro. Não usar outdoors, painéis, luzes adicionais ou colisores que estreitem a rota.
 
 | Critério | Verificação obrigatória |
 | --- | --- |
@@ -20,6 +20,6 @@ A tomada histórica inclinada mantém uma massa de cobertura Casa Voss à esquer
 | Jogabilidade | Captura estável em `opengl3` e 30 segundos de execução sem erro GDScript. |
 | Reversibilidade | Reverter qualquer candidata sem ganho visual verificável. |
 
-**Próxima acção já iniciada:** construir uma leitura arqueológica de encontro da ponte integrada na margem, sem aumentar a massa no primeiro plano da Casa, recapturar em `opengl3` e encaminhar o primeiro frame melhorado para a grelha CP-CINE-03 do Dev3.
+**Próxima acção já iniciada:** publicar a captura limpa no pacote de evidência Dev3 e isolar, pela matriz de 12 marcos, a primeira intervenção macro com ganho visual verificável antes de recapturar em `opengl3`.
 
 > Nenhum checkpoint encerra o ciclo. Cada validação abre imediatamente o próximo passe dentro do escopo Dev1.

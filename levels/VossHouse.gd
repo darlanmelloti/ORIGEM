@@ -652,6 +652,9 @@ func _complete_opening_for_qa() -> void:
 func _create_opening_skip_prompt() -> void:
 	if not opening_active:
 		return
+	# Captura cinematográfica de QA: preserva o prólogo e o gesto E no jogo normal, mas evita texto sobreposto à evidência visual.
+	if OS.get_environment("ORIGEM_QA_CINEMATIC_CAPTURE") == "1":
+		return
 	opening_skip_layer = CanvasLayer.new()
 	opening_skip_layer.name = "UI_SaltarPrologo"
 	opening_skip_layer.layer = 8
