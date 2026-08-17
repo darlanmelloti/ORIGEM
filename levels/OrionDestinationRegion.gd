@@ -476,6 +476,8 @@ func _build_temporal_hub() -> void:
 		monolith.rotation = Vector3(0.04 * sin(angle), angle, 0.03 * cos(angle))
 		_apply_material(monolith, stone_material)
 		hub.add_child(monolith)
+		for monolith_mesh in monolith.find_children("*", "GeometryInstance3D", true, false):
+			(monolith_mesh as GeometryInstance3D).visibility_range_end = 48.0
 		var rim_light := OmniLight3D.new()
 		rim_light.name = "LuzRimMonolitoTemporal_%02d" % index
 		rim_light.light_color = Color("#7f6bd6")
