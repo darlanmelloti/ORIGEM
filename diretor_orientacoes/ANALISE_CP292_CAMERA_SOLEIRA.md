@@ -51,3 +51,7 @@ Os encontros rochosos dos pilares e os fetos adicionais da margem foram renderiz
 ## CP 318 — Ponte positiva em z=58
 
 A escala da ponte positiva foi ampliada mantendo a posição cartográfica, e a tomada recuada foi recapturada. Não houve ganho perceptível de silhueta contra a bacia; a escala anterior foi restaurada. O próximo passe não repetirá alterações isoladas de escala da ponte: deve investigar a relação de câmara e cadeia de marcos com o módulo cinematográfico Dev3.
+
+## CP 325 — Encontros naturais da ponte positiva
+
+Dois encontros rochosos reais foram posicionados nas margens z=54 e z=62, fora do corredor jogável, e a tomada recuada foi recapturada. O ganho de silhueta permaneceu imperceptível; ambos foram revertidos em `RiverRoadJourney.gd`. A base da bacia manteve-se intacta. O CP 326 deve trabalhar apenas silhuetas arquitectónicas já presentes no cone da tomada, não margens ou taludes invisíveis.
