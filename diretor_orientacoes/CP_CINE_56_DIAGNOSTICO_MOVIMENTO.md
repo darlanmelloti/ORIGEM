@@ -129,3 +129,9 @@ Antes da publicação, a entrada será capturada com a mesma calibração para g
 ### Decisão final CP-CINE-72
 
 A captura da soleira com ambiente 0,88 preservou o tom escuro, mas não revelou o eixo central do percurso com ganho suficiente. Como a melhora ficou abaixo do limiar de aceitação, a calibração será revertida para **0,68**. A hipótese de aumentar apenas a luz ambiente fica encerrada para evitar achatar a caverna sem resolver a composição.
+
+## CP-CINE-73 — Reversão da veia mineral discreta
+
+A veia mineral foi colocada no flanco enquadrado e validada durante 30 segundos sem luzes ou colisores adicionais. A composição revelou pequenos elementos lineares isolados na borda direita, em vez de uma formação geológica integrada; a rota central continuou sem ganho legível. A intervenção será removida.
+
+> **Candidato rejeitado:** veias minerais procedurais compostas por prismas/cilindros, mesmo com emissão mínima. O interior requer um activo geológico contínuo ou uma nova estrutura de rota, não detalhe pontual.
