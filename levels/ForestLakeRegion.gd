@@ -48,6 +48,7 @@ func _ready() -> void:
 	_build_shore_access_steps()
 	_build_basin_arrival_frame()
 	_build_majestic_lake_transition()
+	_build_basin_approach_silhouettes()
 	_build_cartographic_lake_vistas()
 	_build_lake_wayfinding()
 	_build_dense_forest()
@@ -371,6 +372,40 @@ func _build_shore_access_steps() -> void:
 			guide_light.shadow_enabled = false
 			guide_light.position = Vector3(x_value - 0.74, ground_y + 0.54, z_value)
 			access.add_child(guide_light)
+
+func _build_basin_approach_silhouettes() -> void:
+	# Vestígios distantes surgem em dois planos antes do limiar: conduzem o olhar ao domo e à cascata sem fechar o trilho da margem.
+	var approach: Node3D = Node3D.new()
+	approach.name = "SilhuetasDeAproximacaoDaBacia"
+	add_child(approach)
+	var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+	var specs: Array[Dictionary] = [
+		{"z": lake_anchor.y - 52.0, "side": -1.0, "offset": 10.8, "scale": 0.54, "yaw": 0.22},
+		{"z": lake_anchor.y - 38.0, "side": 1.0, "offset": 11.8, "scale": 0.62, "yaw": -0.34},
+		{"z": lake_anchor.y - 31.0, "side": -1.0, "offset": 8.7, "scale": 0.47, "yaw": 0.48}
+	]
+	for index: int in range(specs.size()):
+		var spec: Dictionary = specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var x_value: float = _lake_shore_x(z_value) + side * (spec["offset"] as float)
+		var pillar: Node3D = PILLAR.instantiate() as Node3D
+		if pillar != null:
+			pillar.name = "VestigioDeAproximacaoBacia_%02d" % (index + 1)
+			pillar.position = Vector3(x_value, _height_at(x_value, z_value) + 0.18, z_value)
+			var scale_value: float = spec["scale"] as float
+			pillar.scale = Vector3(scale_value, scale_value * 1.46, scale_value)
+			pillar.rotation = Vector3(0.08 * side, spec["yaw"] as float, -0.05 * side)
+			_apply_material(pillar, ruin_material)
+			approach.add_child(pillar)
+		var footing: Node3D = ROCK.instantiate() as Node3D
+		if footing != null:
+			footing.name = "BaseDeAproximacaoBacia_%02d" % (index + 1)
+			footing.position = Vector3(x_value - side * 0.32, _height_at(x_value - side * 0.32, z_value + 0.42) + 0.03, z_value + 0.42)
+			footing.scale = Vector3(0.26, 0.17, 0.26)
+			footing.rotation.y = (spec["yaw"] as float) + 0.36
+			_apply_material(footing, ruin_material)
+			approach.add_child(footing)
 
 func _build_basin_arrival_frame() -> void:
 	# CP 259 — Dois vestígios emergentes enquadram a primeira vista do lago sem criar um portão nem estreitar as lajes de chegada.

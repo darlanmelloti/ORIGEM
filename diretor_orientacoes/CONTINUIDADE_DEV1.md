@@ -1,11 +1,11 @@
 # Continuidade — Dev1
 
-O **CP 271 — Perspectiva de chegada à Bacia** está em execução. A Bacia das Ruínas Submersas já possui água, margem, pilares emergentes, domo central e promontório, preservando a escala macro da rota desde o Acampamento Majestic.
+O **CP 272 — Auditoria de escala integrada Casa Voss → Bacia** está em execução. A sequência das Regiões 1–6 já possui estrada longa, rio lateral, Arco monumental, limiar de floresta, Acampamento Majestic, margem lacustre e Ruínas Submersas em camadas físicas.
 
-O próximo passe deve compor a aproximação pela margem ocidental: o domo, os pilares e a cascata precisam ser lidos como camadas físicas sem obstruir as lajes de acesso, sem adicionar luzes dinâmicas e sem alterar módulos das Regiões 7–12.
+O próximo passe deve auditar a coerência de distâncias, linhas de visão, elevação, água e silhuetas entre os seis marcos. Só serão alterados elementos que reduzam a leitura cartográfica; é proibido aproximar destinos, criar fundos artificiais, ultrapassar o orçamento de luzes ou alterar os módulos das Regiões 7–12.
 
 ## Critérios de continuação
 
-A tarefa só abre o CP seguinte depois de validação headless, prova de presença regional e gameplay real de 30 segundos. O checkpoint deve apontar para o primeiro artefacto da tarefa seguinte.
+A auditoria deve produzir uma matriz de lacunas, a ordem de correcção com proprietário e a primeira tarefa seguinte já iniciada. Cada correcção posterior exige validação headless e gameplay real de 30 segundos.
 
 **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
