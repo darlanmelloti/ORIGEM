@@ -997,6 +997,16 @@ func _build_opening_camera() -> void:
 		# CP317: a tomada recuada reduz o céu e concentra Casa, leito do vale e Arco no mesmo cone visual.
 		opening_camera.position = Vector3(-42.0, _ground_height(-42.0, 1.5) + 6.8, 1.5)
 		opening_camera.look_at(Vector3(3.0, _ground_height(3.0, 78.0) - 18.0, 78.0), Vector3.UP)
+		# CP327 — estágios exclusivos de QA; não são lidos nem alteram o prólogo normal do jogador.
+		var qa_storyboard_stage: String = OS.get_environment("ORIGEM_QA_STORYBOARD_STAGE")
+		if qa_storyboard_stage == "bacia":
+			opening_camera.fov = 64.0
+			opening_camera.position = Vector3(-10.0, _ground_height(-10.0, 38.0) + 5.4, 38.0)
+			opening_camera.look_at(Vector3(13.0, _ground_height(13.0, 58.0) + 1.0, 58.0), Vector3.UP)
+		elif qa_storyboard_stage == "arco":
+			opening_camera.fov = 60.0
+			opening_camera.position = Vector3(-19.0, _ground_height(-19.0, 76.0) + 4.8, 76.0)
+			opening_camera.look_at(Vector3(-16.7, _ground_height(-16.7, 92.0) + 5.8, 92.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
