@@ -113,3 +113,9 @@ A malha com secções orientadas e viragem lateral foi validada tecnicamente em 
 > **Candidato rejeitado:** curva espacial ampla sem marco PBR integrado ou nova composição material. A base aprovada permanece: corredor de 18,4 m, FOV 64 e ambiente 0,68, com duas luzes locais.
 
 O próximo incremento precisa começar pela integração de um activo PBR real que possa fornecer um destino visual sem aspecto de primitiva, antes de alterar novamente a topologia do corredor.
+
+## CP-CINE-70 — Reversão de marco CC0 com material integrado
+
+O activo `stone_tallC.glb` recebeu recursivamente o material PBR da caverna e foi validado por 30 segundos. Embora a dissonância cinzenta anterior tenha sido eliminada, o marco permaneceu fora da leitura útil do enquadramento e não criou orientação perceptível. Será revertido.
+
+> **Candidato rejeitado:** marcador lateral CC0, mesmo após integração material, sem reposicionamento sustentado por evidência de trajectória.
