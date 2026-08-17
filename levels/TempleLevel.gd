@@ -96,6 +96,8 @@ func _build_world_after_voss_prologue() -> void:
 		var orion_destinations: Node3D = ORION_DESTINATION_REGION_SCRIPT.new() as Node3D
 		orion_destinations.name = "DestinosOrionEHubTemporal"
 		add_child(orion_destinations)
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R9_R10_INTEGRATED_HANDOFF":
+			_apply_r9_r10_integrated_visual_culling(highlands, orion_destinations)
 		var cinematic_director: Node = REGIONAL_CINEMATIC_DIRECTOR_SCRIPT.new() as Node
 		cinematic_director.name = "DiretorCinematograficoRegional"
 		add_child(cinematic_director)
@@ -114,6 +116,38 @@ func _build_world_after_voss_prologue() -> void:
 	_build_waterfall()
 	_build_fireflies()
 	_build_sanctuary_interior()
+
+func _apply_r9_r10_integrated_visual_culling(highlands: Node3D, orion_destinations: Node3D) -> void:
+	# CP-D2-091: QA visual cleanup only; physics nodes remain present and collidable.
+	print("CPD2091_CULL_BEGIN highlands=", highlands.name, " orion=", orion_destinations.name)
+	for node_name: String in ["AfloramentosDaTrilha", "RecorteAlpinoTrilhaTake8"]:
+		var highland_visual := highlands.get_node_or_null(node_name) as Node3D
+		if highland_visual != null:
+			highland_visual.visible = false
+	for node in highlands.find_children("*", "OmniLight3D", true, false):
+		if str(node.name).begins_with("LuzWayfinding_"):
+			(node as OmniLight3D).visible = false
+	for node in orion_destinations.find_children("*", "MeshInstance3D", true, false):
+		var visual_name := str(node.name)
+		if visual_name.begins_with("FendaRessonanciaRegiao10_") or visual_name.begins_with("CPD2007_"):
+			(node as MeshInstance3D).visible = false
+	for node in orion_destinations.find_children("*", "Marker3D", true, false):
+		if str(node.name).begins_with("CPD2007_"):
+			(node as Marker3D).visible = false
+	for node in orion_destinations.find_children("*", "OmniLight3D", true, false):
+		if str(node.name).begins_with("WayfinderCPD2007_"):
+			(node as OmniLight3D).visible = false
+	var remaining_visuals: Array[String] = []
+	for node in find_children("*", "MeshInstance3D", true, false):
+		if (node as MeshInstance3D).visible and remaining_visuals.size() < 24:
+			remaining_visuals.append(str(node.name))
+	print("CPD2091_CULL_REMAINING", remaining_visuals)
+	var suspect_visuals: Array[String] = []
+	for node in find_children("*", "MeshInstance3D", true, false):
+		var suspect_name := str(node.name)
+		if (suspect_name.contains("Arco") or suspect_name.contains("Fenda") or suspect_name.contains("Degrau") or suspect_name.contains("Marco") or suspect_name.contains("Ombreira") or suspect_name.contains("Lintel") or suspect_name.contains("Luz")) and (node as MeshInstance3D).visible:
+			suspect_visuals.append(suspect_name)
+	print("CPD2091_CULL_SUSPECTS", suspect_visuals)
 
 func _register_region8_traversal_link(highlands: Node3D) -> void:
 	var route: Node3D = highlands.get_node_or_null("TrilhaDaMontanhaOrion") as Node3D

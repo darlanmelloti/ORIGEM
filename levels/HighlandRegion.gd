@@ -29,6 +29,9 @@ func _ready() -> void:
 	_build_observatory()
 	_build_mountain_trail()
 	_build_region9_threshold()
+	_build_observatory()
+	if OS.get_environment("QA_VALIDATION_ROUTE") == "R9_R10_INTEGRATED_HANDOFF":
+		_apply_r9_r10_integrated_visual_culling()
 	_build_cartographic_anchors()
 
 func _build_cartographic_anchors() -> void:
@@ -318,6 +321,16 @@ func _build_observatory() -> void:
 	frontal_fill.position = Vector3(0.0, 8.5, -8.0)
 	frontal_fill.shadow_enabled = false
 	observatory.add_child(frontal_fill)
+
+func _apply_r9_r10_integrated_visual_culling() -> void:
+	# CP-D2-091: reduzir ruído visual do handoff sem remover colisores da rota.
+	for node_name: String in ["AfloramentosDaTrilha", "RecorteAlpinoTrilhaTake8"]:
+		var visual_node := get_node_or_null(node_name) as Node3D
+		if visual_node != null:
+			visual_node.visible = false
+	for node in find_children("*", "OmniLight3D", true, false):
+		if str(node.name).begins_with("LuzWayfinding_"):
+			(node as OmniLight3D).visible = false
 
 func _build_mountain_trail() -> void:
 	var route: Array[Vector2] = [

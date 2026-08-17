@@ -23,6 +23,8 @@ func _ready() -> void:
 	_build_orion_cave()
 	_build_region9_to_10_approach()
 	_build_cp_d2_007_physical_handoff()
+	if OS.get_environment("QA_VALIDATION_ROUTE") == "R9_R10_INTEGRATED_HANDOFF":
+		_apply_r9_r10_visual_culling()
 	var validation_region := OS.get_environment("ORIGEM_VALIDATION_REGION")
 	if validation_region != "10":
 		_build_cube_chamber_marker()
@@ -31,7 +33,33 @@ func _ready() -> void:
 			_build_temporal_hub()
 			_build_hub_to_final_dome_approach()
 			_build_final_dome()
+			if _is_contextual_decor_validation():
+				_apply_contextual_decor_culling()
 		_build_cartographic_anchors()
+
+func _is_contextual_decor_validation() -> bool:
+	return OS.get_environment("QA_VALIDATION_ROUTE") == "R10_CAVE_TO_R12_HUB_FULL"
+
+func _apply_contextual_decor_culling() -> void:
+	# CP-D2-066: preserve physical handoffs and sanctuary landmarks; remove only distant decoration.
+	for node_name: String in ["DegrauHubTemporal_00", "DegrauHubTemporal_01", "DegrauHubTemporal_02", "DegrauHubTemporal_03", "DegrauHubTemporal_04", "DegrauHubTemporal_05", "DegrauHubTemporal_06", "LuzWayfindingHub_01", "LuzWayfindingHub_02", "LuzWayfindingHub_03", "LuzWayfindingHub_04", "LuzWayfindingHub_05", "LuzWayfindingHub_06"]:
+		var decorative_node := find_child(node_name, true, false)
+		if decorative_node != null:
+			decorative_node.queue_free()
+	for node_name: String in ["PilarCupulaFinal_02", "PilarCupulaFinal_03", "PilarCupulaFinal_04", "PilarCupulaFinal_05", "PilarCupulaFinal_06", "PilarCupulaFinal_07", "ArcoOrganicoCupula_00", "ArcoOrganicoCupula_01", "ArcoOrganicoCupula_02", "LuzCoroaCupula_00"]:
+		var dome_decorative_node := find_child(node_name, true, false)
+		if dome_decorative_node != null:
+			dome_decorative_node.queue_free()
+	for decorative_node in find_children("*", "", true, false):
+		var decorative_name := str(decorative_node.name)
+		if decorative_name.begins_with("NucleoVisivelMonolito_") or decorative_name.begins_with("LuzRimMonolitoTemporal_"):
+			decorative_node.queue_free()
+	var alpine_fill := find_child("PreenchimentoAlpinoSemSombrasR12", true, false) as DirectionalLight3D
+	if alpine_fill != null:
+		alpine_fill.light_energy = 0.12
+	var recess_decorative_light := find_child("RessonanciaRecessivoCupulaR12", true, false)
+	if recess_decorative_light != null:
+		recess_decorative_light.queue_free()
 
 func _report_region12_render_inventory() -> void:
 	var mesh_count: int = find_children("*", "GeometryInstance3D", true, false).size()
@@ -193,6 +221,7 @@ func _build_region9_to_10_approach() -> void:
 		stone.scale = Vector3(0.46 + float(index % 2) * 0.10, 0.12 + float(index % 3) * 0.04, 0.34)
 		stone.rotation = Vector3(0.03, -0.25 + float(index) * 0.18, -0.04)
 		_apply_material(stone, route_material)
+		_limit_geometry_visibility(stone, 72.0)
 		approach.add_child(stone)
 		if index == 1 or index == 3:
 			var marker_light: OmniLight3D = OmniLight3D.new()
@@ -264,6 +293,23 @@ func _build_region9_to_10_approach() -> void:
 		mouth_jamb.rotation = Vector3(0.12 * float(side), 0.26 * float(side), -0.08 * float(side))
 		_apply_material(mouth_jamb, stone_material)
 		approach.add_child(mouth_jamb)
+	var mouth_lintel: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if mouth_lintel != null:
+		mouth_lintel.name = "LintelOrganicoBocaCavernaOrion"
+		mouth_lintel.position = Vector3(-116.0, _height_at(-116.0, 545.0) + 5.3, 545.0)
+		mouth_lintel.scale = Vector3(1.65, 0.52, 0.48)
+		mouth_lintel.rotation = Vector3(0.02, 0.0, -0.03)
+		_apply_material(mouth_lintel, stone_material)
+		approach.add_child(mouth_lintel)
+	for brazier_side: int in [-1, 1]:
+		var brazier_light := OmniLight3D.new()
+		brazier_light.name = "BraseiroAzulHandoffR10_%s" % ("Norte" if brazier_side < 0 else "Sul")
+		brazier_light.position = Vector3(-116.0 + float(brazier_side) * 2.2, _height_at(-116.0 + float(brazier_side) * 2.2, 545.0) + 3.0, 544.4)
+		brazier_light.light_color = Color("#5cc8ff")
+		brazier_light.light_energy = 1.8
+		brazier_light.omni_range = 9.0
+		brazier_light.shadow_enabled = false
+		approach.add_child(brazier_light)
 	var mouth_rim_fill := OmniLight3D.new()
 	mouth_rim_fill.name = "PreenchimentoFrontalBocaCavernaOrion"
 	mouth_rim_fill.light_color = Color("#86dbea")
@@ -324,6 +370,19 @@ func _build_cp_d2_007_physical_handoff() -> void:
 			light.shadow_enabled = false
 			handoff.add_child(light)
 	print("CPD2007_HANDOFF_READY points=", handoff_points.size())
+
+func _apply_r9_r10_visual_culling() -> void:
+	# CP-D2-091: remover apenas adornos de QA que flutuam no handoff; a física permanece intacta.
+	for node_name: String in ["Take8WayfindingProxy", "FendaRessonanciaRegiao10_00", "FendaRessonanciaRegiao10_01", "FendaRessonanciaRegiao10_02"]:
+		var visual_node := find_child(node_name, true, false) as Node3D
+		if visual_node != null:
+			visual_node.visible = false
+	for node in find_children("*", "Marker3D", true, false):
+		if str(node.name).begins_with("CPD2007_"):
+			(node as Node3D).visible = false
+	for node in find_children("*", "OmniLight3D", true, false):
+		if str(node.name).begins_with("WayfinderCPD2007_"):
+			(node as OmniLight3D).visible = false
 
 func _make_resonance_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
@@ -455,8 +514,9 @@ func _build_region11_to_12_approach() -> void:
 		stone.scale = Vector3(0.46 + float(index % 3) * 0.08, 0.14 + float(index % 2) * 0.05, 0.34 + float(index % 2) * 0.08)
 		stone.rotation = Vector3(0.03, -0.26 + float(index) * 0.12, -0.04)
 		_apply_material(stone, stone_material)
+		_limit_geometry_visibility(stone, 72.0)
 		approach.add_child(stone)
-		if index % 3 == 1:
+		if index % 4 == 1:
 			var waypoint := OmniLight3D.new()
 			waypoint.name = "LuzWayfindingHub_%02d" % index
 			waypoint.light_color = Color("#7f6bd6")
@@ -498,7 +558,7 @@ func _build_temporal_hub() -> void:
 		hub.add_child(monolith)
 		for monolith_mesh in monolith.find_children("*", "GeometryInstance3D", true, false):
 			(monolith_mesh as GeometryInstance3D).visibility_range_end = 48.0
-		if index % 2 == 0:
+		if index % 4 == 0:
 			var rim_light := OmniLight3D.new()
 			rim_light.name = "LuzRimMonolitoTemporal_%02d" % index
 			rim_light.light_color = Color("#7f6bd6")
@@ -520,6 +580,7 @@ func _build_temporal_hub() -> void:
 		monolith_material.emission_energy_multiplier = 0.95
 		monolith_core.material_override = monolith_material
 		monolith_core.position = Vector3(cos(angle) * 12.5, 4.1, sin(angle) * 12.5)
+		monolith_core.visibility_range_end = 48.0
 		hub.add_child(monolith_core)
 	var core_mesh: SphereMesh = SphereMesh.new()
 	core_mesh.radius = 1.55
@@ -577,8 +638,9 @@ func _build_final_dome() -> void:
 	dome.position = Vector3(dome_x, _height_at(dome_x, dome_z), dome_z)
 	add_child(dome)
 	# An organic ring of CC0 pillars establishes the final sanctuary without greybox geometry.
-	for index: int in range(10):
-		var angle: float = float(index) * TAU / 10.0
+	# CP-D2-064: eight broad pillars preserve the monumental silhouette while reducing distant decoration.
+	for index: int in range(8):
+		var angle: float = float(index) * TAU / 8.0
 		var pillar := PILLAR.instantiate() as Node3D
 		if pillar == null:
 			continue
@@ -587,10 +649,11 @@ func _build_final_dome() -> void:
 		pillar.scale = Vector3(0.62 + float(index % 2) * 0.12, 0.92 + float(index % 3) * 0.12, 0.62 + float(index % 2) * 0.12)
 		pillar.rotation = Vector3(0.05 * sin(angle), angle, 0.04 * cos(angle))
 		_apply_material(pillar, stone_material)
+		_limit_geometry_visibility(pillar, 52.0)
 		dome.add_child(pillar)
 		for pillar_mesh in pillar.find_children("*", "GeometryInstance3D", true, false):
 			(pillar_mesh as GeometryInstance3D).visibility_range_end = 46.0
-		if index % 2 == 0:
+		if index == 0:
 			var beacon := OmniLight3D.new()
 			beacon.name = "LuzCoroaCupula_%02d" % index
 			beacon.light_color = Color("#8b78dc")
@@ -599,20 +662,21 @@ func _build_final_dome() -> void:
 			beacon.shadow_enabled = false
 			beacon.position = pillar.position + Vector3(0.0, 5.1, 0.0)
 			dome.add_child(beacon)
-		# The entrance crown uses the validated staggered organic masses from the R12 harness.
-		for crown_index: int in range(3):
-			var crown := ROCK_LARGE.instantiate() as Node3D
-			if crown == null:
-				continue
-			crown.name = "ArcoOrganicoCupula_%02d" % crown_index
-			crown.position = Vector3(-2.35 + float(crown_index) * 2.35, 3.55 if crown_index != 1 else 4.15, -4.48)
-			crown.scale = Vector3(2.9 if crown_index != 1 else 3.35, 1.65 if crown_index != 1 else 2.0, 1.85)
-			crown.rotation = Vector3(0.08 * sign(float(crown_index - 1)), 0.08 * float(crown_index - 1), -0.06 * sign(float(crown_index - 1)))
-			var crown_material := stone_material.duplicate() as StandardMaterial3D
-			crown_material.albedo_color = Color("#66839c")
-			crown_material.roughness = 0.86
-			_apply_material(crown, crown_material)
-			dome.add_child(crown)
+	# The entrance crown uses the validated staggered organic masses from the R12 harness.
+	for crown_index: int in range(3):
+		var crown := ROCK_LARGE.instantiate() as Node3D
+		if crown == null:
+			continue
+		crown.name = "ArcoOrganicoCupula_%02d" % crown_index
+		crown.position = Vector3(-2.35 + float(crown_index) * 2.35, 3.55 if crown_index != 1 else 4.15, -4.48)
+		crown.scale = Vector3(2.9 if crown_index != 1 else 3.35, 1.65 if crown_index != 1 else 2.0, 1.85)
+		crown.rotation = Vector3(0.08 * sign(float(crown_index - 1)), 0.08 * float(crown_index - 1), -0.06 * sign(float(crown_index - 1)))
+		var crown_material := stone_material.duplicate() as StandardMaterial3D
+		crown_material.albedo_color = Color("#66839c")
+		crown_material.roughness = 0.86
+		_apply_material(crown, crown_material)
+		_limit_geometry_visibility(crown, 48.0)
+		dome.add_child(crown)
 	# Validated Region 12 sanctuary gateway: organic side monoliths, staggered crown, and a recessed dark opening.
 	for gateway_x in [-4.2, 4.2]:
 		var gateway_monolith := PILLAR.instantiate() as Node3D
@@ -728,6 +792,12 @@ func _make_cube_material() -> StandardMaterial3D:
 	material.emission = Color(0.04, 0.36, 1.0, 1.0)
 	material.emission_energy_multiplier = 1.35
 	return material
+
+func _limit_geometry_visibility(root: Node, range_end: float) -> void:
+	for child in root.find_children("*", "GeometryInstance3D", true, false):
+		var geometry := child as GeometryInstance3D
+		if geometry != null:
+			geometry.visibility_range_end = range_end
 
 func _apply_material(root: Node, material: Material) -> void:
 	for child: Node in root.get_children():
