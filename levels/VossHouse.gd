@@ -989,10 +989,10 @@ func _build_opening_camera() -> void:
 		opening_camera.fov = 78.0
 		# Câmara no miradouro físico: a diagonal para leste contém a ponte transversal, a Estrada de Elias e o Arco sem comprimir o vale.
 		var terrace_ground_y: float = _ground_height(-22.0, 14.0)
-		# Tomada histórica inclinada: conserva a massa da Casa à esquerda e privilegia os planos físicos do vale sobre o céu.
+		# Tomada histórica baixa: lê a parede lateral real sob a cobertura, mantendo o Arco e o leito do vale no eixo de fuga.
 		opening_camera.fov = 80.0
-		opening_camera.position = Vector3(-31.2, _ground_height(-31.2, 6.8) + 5.65, 6.8)
-		opening_camera.look_at(Vector3(4.0, _ground_height(4.0, 84.0) - 18.0, 84.0), Vector3.UP)
+		opening_camera.position = Vector3(-31.2, _ground_height(-31.2, 6.8) + 3.25, 6.8)
+		opening_camera.look_at(Vector3(4.0, _ground_height(4.0, 84.0) - 12.0, 84.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
