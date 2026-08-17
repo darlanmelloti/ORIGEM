@@ -1141,8 +1141,8 @@ func _apply_opening_storm() -> void:
 	var level_environment: Node = scene_root.get_node_or_null("LevelEnvironment")
 	if level_environment == null:
 		return
-	if DAYLIGHT_VARIANT_ENABLED and level_environment.has_method("apply_voss_daylight"):
-		level_environment.call("apply_voss_daylight")
+	if DAYLIGHT_VARIANT_ENABLED and level_environment.has_method("apply_voss_opening_daylight"):
+		level_environment.call("apply_voss_opening_daylight")
 	elif level_environment.has_method("apply_voss_opening_storm"):
 		level_environment.call("apply_voss_opening_storm")
 

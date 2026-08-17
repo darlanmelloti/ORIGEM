@@ -1,25 +1,25 @@
-# CONTINUIDADE_DEV1 — CP 323 EM EXECUÇÃO
+# CONTINUIDADE_DEV1 — CP 325 EM EXECUÇÃO
 
-**Fronteira obrigatória:** Regiões 1–6 e Takes 1–11. Não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem qualquer módulo das Regiões 7–12.
+**Fronteira obrigatória:** Regiões 1–6 e Takes 1–11. Não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem módulos das Regiões 7–12.
 
 ## Base preservada
 
-O CP 294 ocultou os sinais técnicos do prólogo por nome e por material emissivo. O CP 305 ajustou a materialidade do Rio da Estrada para uma leitura azul-petróleo discreta, sem luzes, sem painéis e sem aproximar marcos. A validação headless Godot 4.7.1 e a execução gráfica de 30 segundos em compatibilidade passaram.
+Os CPs 317–324 preservaram a tomada recuada de Casa Voss, a prioridade explícita da câmara de prólogo, a limpeza de contentores técnicos legados e uma materialidade PBR de terreno com melhor separação entre solo, estrada e água. Todas as candidatas de câmara, ponte, talude, atmosfera e vegetação sem ganho visual foram revertidas.
 
-A tomada histórica inclinada mantém uma massa de cobertura Casa Voss à esquerda com Estrada e Arco no plano direito. É uma base **parcial**, não uma aprovação final: a fachada e a ponte ainda não satisfazem a referência de 12 marcos.
+A tomada é ainda **parcial**, não uma aprovação final de 12 marcos: Casa Voss tem leitura à esquerda e o Arco surge no horizonte, mas a ponte transversal requer maior leitura física no plano intermédio.
 
-## CP 323 — EM EXECUÇÃO IMEDIATA
+## CP 325 — Em execução imediata
 
-**Objectivo:** preservar a tomada recuada CP 317, a prioridade de câmara CP 321 e a limpeza técnica CP 322; melhorar contraste atmosférico e leitura macro com evidência mensurável, sem remover geometria real sem prova. Não usar outdoors, painéis, luzes adicionais ou colisores que estreitem a rota.
+**Objectivo:** construir continuidade física de margens entre a bacia Casa Voss e a ponte positiva z=58, usando rochas CC0 e transições de terreno fora do corredor jogável. A finalidade é criar planos intermédios legíveis sem aproximar marcos cartográficos, sem painéis e sem luzes adicionais.
 
 | Critério | Verificação obrigatória |
 | --- | --- |
-| Geometria | A origem da Casa torna-se reconhecível sem criar moldura artificial. |
-| Profundidade | Rio/ponte, Estrada e Arco mantêm escala e planos distintos. |
-| Integridade | Godot 4.7.1 headless sem erros. |
-| Jogabilidade | Captura estável em `opengl3` e 30 segundos de execução sem erro GDScript. |
+| Geometria | Margens irregulares e reais; nenhuma moldura artificial. |
+| Profundidade | Casa, água, ponte, Estrada e Arco mantêm planos distintos. |
+| Integridade | Godot 4.7.1 headless sem erro GDScript. |
+| Jogabilidade | Captura `opengl3` e execução de 30 segundos sem bloqueio. |
 | Reversibilidade | Reverter qualquer candidata sem ganho visual verificável. |
 
-**Próxima acção já iniciada:** comparar o contraste de nevoeiro, céu e silhuetas físicas na tomada CP 317 e aplicar somente um ajuste ambiental reversível que revele mais planos do vale.
+**Próxima acção já iniciada:** auditar a posição das margens e rochas da bacia para acrescentar apenas agrupamentos que entrem no cone da tomada recuada.
 
 > Nenhum checkpoint encerra o ciclo. Cada validação abre imediatamente o próximo passe dentro do escopo Dev1.

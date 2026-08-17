@@ -213,6 +213,11 @@ func apply_voss_daylight() -> void:
 		sun.light_energy = 1.02
 		sun.shadow_enabled = true
 
+func apply_voss_opening_daylight() -> void:
+	apply_voss_daylight()
+	# Bloqueia perfis Chronos concorrentes durante a revelação; restore_timeline_environment repõe este estado no fim.
+	opening_storm_active = true
+
 func apply_voss_opening_storm() -> void:
 	opening_storm_active = true
 	if environment == null:

@@ -156,7 +156,7 @@ void fragment() {
 	float broad = value_noise(p * 0.22);
 	float soil = value_noise(p * 1.7);
 	float leaf = smoothstep(0.57, 0.83, value_noise(p * 3.3));
-											vec3 wet_mud = mix(vec3(0.075, 0.110, 0.045), vec3(0.175, 0.185, 0.075), broad);
+											vec3 wet_mud = mix(vec3(0.105, 0.145, 0.060), vec3(0.220, 0.235, 0.105), broad);
 					vec3 forest_floor = mix(wet_mud, vec3(0.105, 0.215, 0.075), leaf * 0.42);
 
 			float pebbles = smoothstep(0.76, 0.91, value_noise(p * 6.5));
@@ -166,11 +166,11 @@ void fragment() {
 			vec3 pbr_ground = texture(ground_albedo, UV * 1.65).rgb;
 			float pbr_rough = texture(ground_roughness, UV * 1.65).r;
 				// Passe comparativo: solo de folha e lama menos verde, mais próximo de terra encharcada natural.
-					forest_floor = mix(forest_floor, pbr_ground * vec3(0.66, 0.78, 0.54), 0.58);
+					forest_floor = mix(forest_floor, pbr_ground * vec3(0.76, 0.88, 0.66), 0.68);
 					forest_floor = mix(forest_floor, vec3(0.135, 0.235, 0.085), leaf * 0.22);
 
 				// Passe comparativo: baixa refletância média de terra molhada, mantendo detalhe PBR e leitura de percurso.
-				ALBEDO = forest_floor * mix(0.74, 1.00, soil);
+				ALBEDO = forest_floor * mix(0.86, 1.08, soil);
 			ROUGHNESS = mix(mix(0.74, 0.96, broad + pebbles * 0.18), pbr_rough, 0.38);
 			NORMAL_MAP = texture(ground_normal, UV * 1.65).rgb;
 			NORMAL_MAP_DEPTH = 0.32;
