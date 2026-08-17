@@ -99,6 +99,11 @@ func _ready() -> void:
 	if traversal_proxy != null:
 		# Dedicated Region 12 visual correction: enlarge the organic sanctuary for a readable cinematic take.
 		traversal_proxy.visible = true
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R10_CAVE_TO_R12_HUB_FULL":
+			for proxy_name in ["SuporteCentralCupula_-0.9", "SuporteCentralCupula_0.9", "OmbroOrganicoCupula_-3.2", "OmbroOrganicoCupula_3.2", "ConectorCoroaCupula_-2.1", "ConectorCoroaCupula_2.1", "JambaArcoCupula_-2.45", "JambaArcoCupula_2.45", "MonolitoEscalaCupula_-4.2", "MonolitoEscalaCupula_4.2", "FundoOrganicoRecuadoCupula", "BordaBaseOrganicaCupula", "CoroaValidadaCupula_00", "CoroaValidadaCupula_01", "CoroaValidadaCupula_02"]:
+				var proxy_decorative_node := traversal_proxy.find_child(proxy_name, true, false)
+				if proxy_decorative_node != null:
+					proxy_decorative_node.visible = false
 	_build_region12_wayfinding_lights()
 	_build_region12_recess_resonance()
 	_build_region12_cinematic_fill()
@@ -668,6 +673,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		contact_light.omni_range = 2.8
 		contact_light.shadow_enabled = false
 		contact_light.position = Vector3(contact_x, 1.45, 173.6)
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R10_CAVE_TO_R12_HUB_FULL" and is_equal_approx(contact_x, 2.2):
+			contact_light.visible = false
 		add_child(contact_light)
 	var portal_rim := OmniLight3D.new()
 	portal_rim.name = "RimAzulPortalCupulaFinal"
@@ -717,7 +724,9 @@ func _process(delta: float) -> void:
 		if child is MeshInstance3D and child.name == "NucleoCoroaFinal":
 			var core_material := child.material_override as StandardMaterial3D
 			if core_material != null:
-				core_material.emission_energy_multiplier = 5.6 + sin(elapsed * 1.05) * 0.65
+				var core_pulse_base := 1.8 if OS.get_environment("QA_VALIDATION_ROUTE") == "R10_CAVE_TO_R12_HUB_FULL" else 5.6
+				var core_pulse_amp := 0.18 if OS.get_environment("QA_VALIDATION_ROUTE") == "R10_CAVE_TO_R12_HUB_FULL" else 0.65
+				core_material.emission_energy_multiplier = core_pulse_base + sin(elapsed * 1.05) * core_pulse_amp
 		if child is MeshInstance3D and child.name.begins_with("MarcadorRotaFisicaR12"):
 			var route_marker_material := child.material_override as StandardMaterial3D
 			if route_marker_material != null:

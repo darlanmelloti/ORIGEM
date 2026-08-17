@@ -1,0 +1,18 @@
+REGION12_HANDOFF_POSITION name=HandoffCubeR11 sequence=1 position=(164.0, 0.78, 171.12)
+REGION12_HANDOFF_POSITION name=HandoffSoleiraR12 sequence=2 position=(164.0, 0.92, 170.38)
+REGION12_HANDOFF_POSITION name=HandoffHubR12 sequence=3 position=(164.0, 1.08, 169.4)
+REGION12_RENDER_INVENTORY meshes=76 omni_lights=27 static_bodies=15
+REGION12_RENDER_GROUP name=CavernaDoOrion meshes=18 omni_lights=3
+REGION12_RENDER_GROUP name=CamaraDoOrionCube meshes=11 omni_lights=5
+REGION12_RENDER_GROUP name=HubTemporal meshes=10 omni_lights=0
+REGION12_RENDER_GROUP name=CupulaFinal meshes=7 omni_lights=1
+REGION12_HANDOFF_COLLIDER name=ColisaoHandoffCubeR11 present=true
+REGION12_HANDOFF_COLLIDER name=ColisaoHandoffSoleiraR12 present=true
+REGION12_HANDOFF_COLLIDER name=ColisaoHandoffHubR12 present=true
+[REGION12_PERF] fps=23.0 draw_calls=317.0 elapsed=5.0
+[REGION12_PERF] fps=24.0 draw_calls=306.0 elapsed=10.0
+[REGION12_PERF] fps=24.0 draw_calls=298.0 elapsed=15.1
+[REGION12_PERF] fps=22.0 draw_calls=292.0 elapsed=20.1
+[REGION12_PERF] fps=21.0 draw_calls=288.0 elapsed=25.1
+[REGION12_PERF] fps=20.0 draw_calls=304.0 elapsed=30.2
+[REGION12_PERF] fps=21.0 draw_calls=304.0 elapsed=35.2
