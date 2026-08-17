@@ -190,14 +190,14 @@ func _build_voss_river_revelation_bridge() -> void:
 	# A Estrada do Rio mantém a direcção norte até ao Arco; esta ponte antecipa a leitura transversal do vale no mapa oficial.
 	var bridge_z: float = 31.0
 	var river_x: float = 10.5 + sin(((bridge_z - 8.0) / 155.0) * PI * 2.2) * 3.6 + sin(((bridge_z - 8.0) / 155.0) * PI * 5.0) * 0.8
-	# A soleira do rio fica abaixo do leito próximo; a elevação estabiliza a leitura dos arcos e impede que a ponte se funda no talude.
-	var bridge_y: float = (_ground_height(river_x - 4.0, bridge_z) + _ground_height(river_x + 4.0, bridge_z)) * 0.5 + 1.18
+	# A soleira do rio fica abaixo do leito próximo; a elevação reforçada destaca os arcos reais acima do talude sem aproximar o marco.
+	var bridge_y: float = (_ground_height(river_x - 4.0, bridge_z) + _ground_height(river_x + 4.0, bridge_z)) * 0.5 + 1.62
 	var bridge: Node3D = STONE_BRIDGE_ASSET.instantiate() as Node3D
 	if bridge == null:
 		return
 	bridge.name = "PonteDePedraVisivelDaCasaVoss"
 	bridge.position = Vector3(river_x, bridge_y, bridge_z)
-	bridge.scale = Vector3(2.15, 1.02, 2.15)
+	bridge.scale = Vector3(2.34, 1.30, 2.34)
 	bridge.rotation.y = PI * 0.5
 	_tint_tree_silhouette(bridge, stone_material)
 	add_child(bridge)
@@ -221,7 +221,7 @@ func _build_voss_river_revelation_bridge() -> void:
 		var pier_x: float = river_x + pier_side * 9.8
 		pier.position = Vector3(pier_x, _ground_height(pier_x, bridge_z) - 0.05, bridge_z)
 		# Pilares altos mas quebrados: a elevação moderada separa a ponte lateral do talude e preserva o vale como espaço aberto.
-		pier.scale = Vector3(0.72, 2.18, 0.72)
+		pier.scale = Vector3(0.82, 2.62, 0.82)
 		pier.rotation.y = pier_side * 0.18
 		_tint_tree_silhouette(pier, stone_material)
 		add_child(pier)

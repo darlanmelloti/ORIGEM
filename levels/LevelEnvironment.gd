@@ -45,9 +45,10 @@ func _setup_environment() -> void:
 
 	environment.background_energy_multiplier = 1.0
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	environment.ambient_light_color = Color(0.64, 0.74, 0.69)
-	environment.ambient_light_sky_contribution = 0.92
-	environment.ambient_light_energy = 0.82
+	# Preenchimento diurno de baixo custo: revela pedra, vegetação e água na abertura sem criar uma luz dinâmica adicional.
+	environment.ambient_light_color = Color(0.70, 0.79, 0.76)
+	environment.ambient_light_sky_contribution = 0.96
+	environment.ambient_light_energy = 1.04
 	environment.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	environment.tonemap_exposure = 1.10
@@ -89,9 +90,9 @@ func _setup_environment() -> void:
 	environment.fog_sky_affect = 0.72
 	environment.volumetric_fog_enabled = false
 	environment.adjustment_enabled = true
-	environment.adjustment_brightness = 0.98
-	environment.adjustment_contrast = 1.11
-	environment.adjustment_saturation = 1.08
+	environment.adjustment_brightness = 1.04
+	environment.adjustment_contrast = 1.04
+	environment.adjustment_saturation = 1.10
 
 func _sync_chronos_profile() -> void:
 	if opening_storm_active:

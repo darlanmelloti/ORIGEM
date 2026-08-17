@@ -31,3 +31,11 @@ A tomada a oeste é a primeira captura a colocar uma massa inequívoca de cobert
 ## CP 304 — Tomada histórica inclinada
 
 A inclinação reduziu a proporção de céu e preservou a massa de cobertura da Casa Voss à esquerda, estrada e Arco. Ainda não revelou fachada suficiente nem deu leitura clara à ponte; é a melhor base parcial entre as tomadas testadas, mas não satisfaz a referência. O próximo ciclo deve parar de micro-ajustar a lente e trabalhar os marcos físicos intermédios da bacia.
+
+## CP 307 — Ponte lateral reforçada
+
+A elevação e a escala adicional da ponte lateral passaram a validação técnica, mas não produziram um ganho perceptível na tomada histórica: o marco continua encoberto pelo relevo e pelo primeiro plano da Casa. A candidata visual não deve ser aceite como solução cinematográfica. A geometria pode ser preservada para exploração, mas a próxima tentativa deve actuar na relação entre a crista topográfica e a linha de visão, não apenas escalar a ponte.
+
+## CP 307 — Janela topográfica de ponte
+
+A janela topográfica natural foi implementada, compilada e recapturada, mas não expôs a ponte lateral de forma perceptível na tomada histórica. A alteração foi revertida integralmente em `TerrainPatch.gd`; o relevo validado anterior é a base vigente. O próximo passe deverá trabalhar exclusivamente a silhueta estrutural e as margens de encontro da ponte, sem alterar a escala do mapa ou a crista do vale.
