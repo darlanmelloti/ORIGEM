@@ -36,6 +36,24 @@ func _build_threshold() -> void:
 	floor_shape.position = floor_visual.position
 	floor_body.add_child(floor_shape)
 	add_child(floor_body)
+	# CP-CINE-30: continuação adjacente a partir de z=3,5; sem sobreposição de piso ou de colisão.
+	var continuation_mesh: BoxMesh = BoxMesh.new()
+	continuation_mesh.size = Vector3(4.2, 0.32, 5.5)
+	var continuation_visual: MeshInstance3D = MeshInstance3D.new()
+	continuation_visual.name = "PisoFisicoSecao01"
+	continuation_visual.mesh = continuation_mesh
+	continuation_visual.material_override = stone_material
+	continuation_visual.position = Vector3(0.0, -0.16, 6.25)
+	add_child(continuation_visual)
+	var continuation_body: StaticBody3D = StaticBody3D.new()
+	continuation_body.name = "ColisaoDoPisoSecao01"
+	var continuation_shape: CollisionShape3D = CollisionShape3D.new()
+	var continuation_box: BoxShape3D = BoxShape3D.new()
+	continuation_box.size = continuation_mesh.size
+	continuation_shape.shape = continuation_box
+	continuation_shape.position = continuation_visual.position
+	continuation_body.add_child(continuation_shape)
+	add_child(continuation_body)
 	# Apenas duas paredes curtas e convergentes; o teto e o santuário pertencem a blocos posteriores.
 	for side: float in [-1.0, 1.0]:
 		var wall_mesh: BoxMesh = BoxMesh.new()
@@ -44,7 +62,7 @@ func _build_threshold() -> void:
 		wall.name = "ParedeDeRocha_%s" % ("Oeste" if side < 0.0 else "Este")
 		wall.mesh = wall_mesh
 		wall.material_override = stone_material
-		wall.position = Vector3(side * 2.3, 1.42, 0.45)
+		wall.position = Vector3(side * 2.3, 1.42, 3.1)
 		wall.rotation.y = side * 0.12
 		add_child(wall)
 		var wall_body: StaticBody3D = StaticBody3D.new()
