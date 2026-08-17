@@ -1,0 +1,12 @@
+REGION12_HANDOFF_POSITION name=HandoffSoleiraR12 sequence=2 position=(164.0, 0.92, 170.38)
+REGION12_HANDOFF_POSITION name=HandoffHubR12 sequence=3 position=(164.0, 1.08, 169.4)
+REGION12_RENDER_GROUP name=CupulaFinal meshes=16 omni_lights=3
+REGION12_HANDOFF_COLLIDER name=ColisaoHandoffSoleiraR12 present=true
+REGION12_HANDOFF_COLLIDER name=ColisaoHandoffHubR12 present=true
+[REGION12_PERF] fps=31.0 draw_calls=66.0 elapsed=5.0
+[REGION12_PERF] fps=30.0 draw_calls=65.0 elapsed=10.0
+[REGION12_PERF] fps=30.0 draw_calls=67.0 elapsed=15.0
+[REGION12_PERF] fps=33.0 draw_calls=67.0 elapsed=20.1
+[REGION12_PERF] fps=32.0 draw_calls=68.0 elapsed=25.1
+[REGION12_PERF] fps=34.0 draw_calls=58.0 elapsed=30.1
+[REGION12_PERF] fps=34.0 draw_calls=58.0 elapsed=35.1
