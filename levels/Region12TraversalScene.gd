@@ -839,9 +839,17 @@ func _process(delta: float) -> void:
 	_set_camera(clamp(elapsed / 30.0, 0.0, 1.0))
 	if recess_resonance_light != null:
 		recess_resonance_light.light_energy = 0.20 + sin(elapsed * 1.7) * 0.055
+	var temporal_portal := get_node_or_null("CupulaFinalCleanPortalR12/NucleoTemporalEncastradoR12")
+	if temporal_portal != null:
+		for temporal_mesh in temporal_portal.find_children("*", "MeshInstance3D", true, false):
+			var temporal_material := temporal_mesh.get_surface_override_material(0) as StandardMaterial3D
+			if temporal_material != null:
+				temporal_material.emission_energy_multiplier = 0.72 + sin(elapsed * 1.12) * 0.16
 	for child in get_children():
 		if child is OmniLight3D and child.name.begins_with("PreenchimentoQuenteSoleira"):
 			(child as OmniLight3D).light_energy = 0.34 + sin(elapsed * 1.25) * 0.08
+		if child is OmniLight3D and child.name == "LuzNucleoTemporalR12":
+			(child as OmniLight3D).light_energy = 0.13 + sin(elapsed * 1.12) * 0.035
 		if child is MeshInstance3D and child.name == "NucleoCoroaFinal":
 			var core_material := child.material_override as StandardMaterial3D
 			if core_material != null:
