@@ -1,17 +1,17 @@
 # Continuidade — Dev1
 
-Os **CP 281–286** foram validados com Godot headless e provas de gameplay de 30 segundos. A Casa Voss recebeu uma soleira física de revelação; o corredor inicial passou a ter relevo de leitura, água calibrada e pontes positivas mais legíveis; e as Regiões 4–6 receberam aterramento e materialidade de margem. Todos os commits foram sincronizados na branch `feature/dev1-gameplay-core`.
+Os **CP 281–287** foram validados com Godot headless, capturas e gameplay real de 30 segundos. A frente Dev1 concluiu soleira física, profundidade de relevo, água de rio, ponte positiva, transições Floresta–Majestic–Ruínas e reenquadramento do miradouro leste. Os commits encontram-se sincronizados em `feature/dev1-gameplay-core`.
 
-O **CP 287 — Consolidação Cartográfica Casa → Estrada → Arco** está em execução. A tarefa imediata é consolidar visualmente os quatro primeiros planos da saída, reduzindo qualquer aparência de faixa de água, ornamento técnico ou marco flutuante apenas com geometria e materiais físicos das Regiões 1–3.
+O **CP 288 — Moldura Física da Casa Voss** está em execução. A tarefa imediata é reforçar a presença arquitectónica da Casa na margem esquerda da tomada, sem deslocar o jogador para dentro de geometria, sem criar painéis e sem reduzir a profundidade física já criada entre rio, ponte, Estrada e Arco.
 
 | Critério obrigatório | Evidência exigida |
 |---|---|
-| Leitura espacial | Captura 16:9 com soleira, rio/ponte, estrada/arco e horizonte físico distinguíveis |
-| Integridade técnica | Validação Godot headless sem erros |
-| Jogabilidade | Prova segmentada de 30 segundos Casa → Estrada → Arco sem bloqueio |
-| Desempenho | Sem luzes dinâmicas adicionais |
-| Escopo | Não alterar módulos, câmaras ou activos das Regiões 7–12 |
+| Moldura da Casa | Parede, pilar, cobertura ou soleira reais entram no canto esquerdo sem ocultar o vale |
+| Composição | Ponte, rio, Estrada e Arco continuam em planos legíveis |
+| Integridade | Godot headless sem erros de parser, script ou recursos |
+| Jogabilidade | Prova de 30 segundos Casa → Estrada → Arco sem bloqueios |
+| Escopo | Apenas Regiões 1–6; Regiões 7–12 inalteradas |
 
-> O CP 287 está iniciado e não aguarda resposta. Ao concluir, deve abrir imediatamente a revisão de distribuição e evidências Dev1.
+> Ao validar o CP 288, abrir imediatamente o passe de consolidação de distribuição e evidências, mantendo o desenvolvimento em curso.
 
-**Estado:** `CP 287 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
+**Estado:** `CP 288 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
