@@ -47,3 +47,7 @@ O deslocamento do pilar de aproximação e as bases rochosas de encontro da pont
 ## CP 310–311 — Margens da ponte e fetos intermédios
 
 Os encontros rochosos dos pilares e os fetos adicionais da margem foram renderizados em `opengl3`, mas não produziram ganho perceptível na tomada histórica; ambos foram revertidos. A base actual mantém a leitura de fachada e a iluminação CP309. A próxima intervenção deverá trabalhar uma melhoria de grande escala que possa ser visualmente verificada no enquadramento, em vez de adicionar detalhe imperceptível.
+
+## CP 318 — Ponte positiva em z=58
+
+A escala da ponte positiva foi ampliada mantendo a posição cartográfica, e a tomada recuada foi recapturada. Não houve ganho perceptível de silhueta contra a bacia; a escala anterior foi restaurada. O próximo passe não repetirá alterações isoladas de escala da ponte: deve investigar a relação de câmara e cadeia de marcos com o módulo cinematográfico Dev3.
