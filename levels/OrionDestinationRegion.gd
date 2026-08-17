@@ -37,6 +37,13 @@ func _report_region12_render_inventory() -> void:
 	var light_count: int = find_children("*", "OmniLight3D", true, false).size()
 	var body_count: int = find_children("*", "StaticBody3D", true, false).size()
 	print("REGION12_RENDER_INVENTORY meshes=", mesh_count, " omni_lights=", light_count, " static_bodies=", body_count)
+	for region_node_name: String in ["CavernaDoOrion", "CamaraDoOrionCube", "HubTemporal", "CupulaFinal"]:
+		var region_node := get_node_or_null(region_node_name)
+		if region_node == null:
+			continue
+		var region_meshes: int = region_node.find_children("*", "GeometryInstance3D", true, false).size()
+		var region_lights: int = region_node.find_children("*", "OmniLight3D", true, false).size()
+		print("REGION12_RENDER_GROUP name=", region_node_name, " meshes=", region_meshes, " omni_lights=", region_lights)
 
 func _build_cartographic_anchors() -> void:
 	var anchors := Node3D.new()
