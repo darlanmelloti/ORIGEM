@@ -68,3 +68,8 @@ A auditoria confirmou que o último desvio não suporta um marco narrativo isola
 ## CINE-PAIR-08 aprovado; CINE-PAIR-09 em execução
 
 A navegação por teclado durante 30 segundos confirmou que o corredor permanece físico e legível com a orientação de -11°. Dev3 aguarda a prova de retorno por `E` que Dev4 já iniciou e só depois define o momento narrativo seguinte. O fim desta verificação abre directamente o próximo passe pareado, sem DIR autónomo.
+
+
+## CINE-PAIR-09 aprovado; CINE-PAIR-10 em execução
+
+O retorno interior→exterior por `E` foi confirmado durante 30 segundos sem erro. Dev3 preserva a transição e só selecciona nova composição depois de Dev4 confirmar que o estado e a leitura exterior do prólogo se mantêm coerentes. O ciclo seguinte permanece pareado, sem DIR autónomo.

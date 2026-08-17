@@ -91,3 +91,10 @@ As capturas aos 8 e 18 segundos mostram que a entrada de teclado foi aceite e qu
 O quadro final aos 28 segundos mantém Elias apoiado no piso da caverna e sem erro de runtime. A sequência de teclado demonstra exploração física contínua, sem teleporte, queda ou bloqueio técnico. A orientação de -11° continua a tornar o piso navegável reconhecível, embora o fecho visual da rota ainda não seja um destino narrativo completo.
 
 **CINE-PAIR-09 já iniciado:** Dev4 verifica o contracto de retorno por `E` depois da exploração interior; Dev3 define o primeiro momento narrativo somente após a travessia e o retorno serem comprovados no mesmo ciclo. Não abrir DIR autónomo.
+
+
+## Decisão CINE-PAIR-09 — Retorno por E aprovado
+
+A prova de 30 segundos accionou `E` a partir da soleira interior e carregou `scenes/main.tscn` sem erro runtime. A captura exterior mostra Elias regressado à área Casa Voss sob o prólogo activo, confirmando que o handoff interior→exterior permanece físico e funcional depois dos ajustes de câmara Orion.
+
+**CINE-PAIR-10 já iniciado:** Dev4 mede a continuidade visual e de estado entre regresso Orion e o prólogo exterior; Dev3 selecciona a próxima composição apenas se não quebrar esta transição aprovada. Não abrir DIR autónomo.

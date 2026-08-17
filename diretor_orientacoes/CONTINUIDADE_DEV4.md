@@ -60,3 +60,8 @@ A auditoria do último desvio confirmou que não existe espaço narrativo autón
 ## CINE-PAIR-08 aprovado; CINE-PAIR-09 em execução
 
 Dev4 completou a prova real de teclado por 30 segundos: Elias permaneceu apoiado e navegável no corredor sem teleporte, queda ou erro runtime. A tarefa seguinte verifica o retorno por `E` no mesmo ciclo de exploração interior. Dev3 só define o primeiro momento narrativo depois da travessia e retorno comprovados. Não abrir DIR autónomo.
+
+
+## CINE-PAIR-09 aprovado; CINE-PAIR-10 em execução
+
+O retorno por `E` a partir da soleira interior carregou o exterior sem erro e foi capturado durante a prova de 30 segundos. Dev4 mede agora a continuidade visual e de estado entre o regresso Orion e o prólogo exterior; Dev3 só propõe nova composição se a transição aprovada se mantiver intacta. Não abrir DIR autónomo.
