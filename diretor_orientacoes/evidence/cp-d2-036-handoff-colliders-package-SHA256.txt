@@ -1,0 +1,1 @@
+5197719e1c49ab0a747a17ef8e098d48d5758c7a6d6f981252a41d15f08da96f  validation/checkpoints/CP-D2-036-handoff-colliders-local.zip
