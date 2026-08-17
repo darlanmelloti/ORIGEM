@@ -1081,7 +1081,43 @@ func _build_majestic_camp() -> void:
 		camp.add_child(torch_light)
 		camp_light_sources.append(torch_light)
 
+	# Silhuetas de chegada: dois mastros e lonas inclinadas anunciam o acampamento no fim da ligação, sem criar qualquer luz adicional.
+	var arrival_markers: Node3D = Node3D.new()
+	arrival_markers.name = "SilhuetasDeChegadaMajestic"
+	camp.add_child(arrival_markers)
+	for marker_index: int in range(2):
+		var marker_side: float = -1.0 if marker_index == 0 else 1.0
+		var mast_mesh: CylinderMesh = CylinderMesh.new()
+		mast_mesh.top_radius = 0.07
+		mast_mesh.bottom_radius = 0.10
+		mast_mesh.height = 6.4
+		mast_mesh.radial_segments = 8
+		mast_mesh.material = camp_wood
+		var mast: MeshInstance3D = MeshInstance3D.new()
+		mast.name = "MastroDeChegadaMajestic_%02d" % (marker_index + 1)
+		mast.mesh = mast_mesh
+		mast.position = Vector3(10.2, 3.2, marker_side * 5.6)
+		mast.rotation.z = marker_side * 0.035
+		arrival_markers.add_child(mast)
+		var banner_mesh: PlaneMesh = PlaneMesh.new()
+		banner_mesh.size = Vector2(1.75, 1.12)
+		banner_mesh.material = canvas_material
+		var banner: MeshInstance3D = MeshInstance3D.new()
+		banner.name = "LonaDeChegadaMajestic_%02d" % (marker_index + 1)
+		banner.mesh = banner_mesh
+		banner.position = mast.position + Vector3(marker_side * 0.92, 1.18, 0.0)
+		banner.rotation = Vector3(PI * 0.5, 0.18 * marker_side, 0.0)
+		arrival_markers.add_child(banner)
+		var mast_rock: Node3D = ROCK.instantiate() as Node3D
+		if mast_rock != null:
+			mast_rock.name = "BaseMastroMajestic_%02d" % (marker_index + 1)
+			mast_rock.position = Vector3(10.2, 0.05, marker_side * 5.6)
+			mast_rock.scale = Vector3(0.24, 0.16, 0.24)
+			mast_rock.rotation.y = marker_side * 0.42
+			arrival_markers.add_child(mast_rock)
+
 	# Estela de memória: um ponto narrativo fora do anel de tendas, acessível por [E] sem bloquear a saída para o lago.
+
 	var camp_stela: StaticBody3D = StaticBody3D.new()
 	camp_stela.name = "RuneP0_01"
 	camp_stela.collision_layer = 4
