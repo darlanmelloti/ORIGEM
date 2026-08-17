@@ -29,6 +29,26 @@ func _ready() -> void:
 	_build_observatory()
 	_build_mountain_trail()
 	_build_region9_threshold()
+	_build_cartographic_anchors()
+
+func _build_cartographic_anchors() -> void:
+	var anchors := Node3D.new()
+	anchors.name = "CartographicAnchors_Regioes7a9"
+	anchors.set_meta("map_authority", "mapaorigem.webp")
+	anchors.set_meta("scope", "REGIONS_7_12_ONLY")
+	var anchor_data: Array[Dictionary] = [
+		{"name": "Marco07_VilaElevada", "position": Vector3(140.0, 0.0, 352.0), "role": "massa urbana em socalcos à direita"},
+		{"name": "Marco08_Observatorio", "position": Vector3(188.0, 0.0, 404.0), "role": "cupula no topo da vila"},
+		{"name": "Marco09_TrilhaDaMontanha", "position": Vector3(20.0, 0.0, 470.0), "role": "linha serpenteante até Orion"}
+	]
+	for data: Dictionary in anchor_data:
+		var marker := Marker3D.new()
+		marker.name = str(data["name"])
+		marker.position = data["position"] as Vector3
+		marker.set_meta("map_role", str(data["role"]))
+		marker.set_meta("visibility_rule", "silhueta ou continuidade; sem painel")
+		anchors.add_child(marker)
+	add_child(anchors)
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):

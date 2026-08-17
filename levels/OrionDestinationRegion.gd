@@ -22,12 +22,33 @@ func _ready() -> void:
 	cube_material = _make_cube_material()
 	_build_orion_cave()
 	_build_region9_to_10_approach()
+	_build_cp_d2_007_physical_handoff()
 	if OS.get_environment("ORIGEM_VALIDATION_REGION") != "10":
 		_build_cube_chamber_marker()
 		_build_region11_to_12_approach()
 		_build_temporal_hub()
 		_build_hub_to_final_dome_approach()
 		_build_final_dome()
+	_build_cartographic_anchors()
+
+func _build_cartographic_anchors() -> void:
+	var anchors := Node3D.new()
+	anchors.name = "CartographicAnchors_Regioes10a12"
+	anchors.set_meta("map_authority", "mapaorigem.webp")
+	anchors.set_meta("scope", "REGIONS_7_12_ONLY")
+	var anchor_data: Array[Dictionary] = [
+		{"name": "Marco10_CavernaDoOrion", "position": Vector3(-116.0, 0.0, 548.0), "role": "abertura tectonica escura na serra"},
+		{"name": "Marco11_CamaraOrionCube", "position": Vector3(-116.0, 0.0, 562.0), "role": "pico tridimensional e ponto luminescente"},
+		{"name": "Marco12_HubTemporal", "position": Vector3(164.0, 0.0, 210.0), "role": "anel de monolitos e nucleo temporal em perspectiva"}
+	]
+	for data: Dictionary in anchor_data:
+		var marker := Marker3D.new()
+		marker.name = str(data["name"])
+		marker.position = data["position"] as Vector3
+		marker.set_meta("map_role", str(data["role"]))
+		marker.set_meta("visibility_rule", "silhueta ou continuidade; sem painel")
+		anchors.add_child(marker)
+	add_child(anchors)
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -162,22 +183,33 @@ func _build_region9_to_10_approach() -> void:
 			marker_light.shadow_enabled = false
 			marker_light.position = Vector3(0.0, 1.15, 0.0)
 			stone.add_child(marker_light)
+	var warm_entry_light := OmniLight3D.new()
+	warm_entry_light.name = "LuzQuenteInicioTransicaoRegiao09"
+	warm_entry_light.light_color = Color("#d9a86c")
+	warm_entry_light.light_energy = 0.62
+	warm_entry_light.omni_range = 6.5
+	warm_entry_light.shadow_enabled = false
+	warm_entry_light.position = Vector3(-112.0, _height_at(-112.0, 532.0) + 1.3, 532.0)
+	approach.add_child(warm_entry_light)
 	for root_index: int in range(5):
 		var root: Node3D = ROCK_LARGE.instantiate() as Node3D
 		if root == null:
 			continue
 		root.name = "RaizPetrea_%02d" % root_index
+		var side_material := stone_material.duplicate() as StandardMaterial3D
+		side_material.albedo_color = Color("#3a5960")
+		side_material.roughness = 0.88
+		_apply_material(root, side_material)
 		var side: float = -1.0 if root_index % 2 == 0 else 1.0
 		root.position = Vector3(side * (8.2 - float(root_index % 2) * 1.3), 2.8 + float(root_index) * 0.85, 539.0 + float(root_index) * 1.65)
 		root.scale = Vector3(0.20 + float(root_index % 2) * 0.06, 0.95, 0.18)
 		root.rotation = Vector3(0.14 * side, side * (0.52 + float(root_index) * 0.16), 0.18 * side)
-		_apply_material(root, stone_material)
 		approach.add_child(root)
 	for fissure_index: int in range(3):
 		var fissure: MeshInstance3D = MeshInstance3D.new()
 		fissure.name = "FendaRessonanciaRegiao10_%02d" % fissure_index
 		var ribbon: QuadMesh = QuadMesh.new()
-		ribbon.size = Vector2(0.18 + float(fissure_index) * 0.06, 3.0 + float(fissure_index) * 0.7)
+		ribbon.size = Vector2(0.16 + float(fissure_index) * 0.05, 2.8 + float(fissure_index) * 0.62)
 		ribbon.material = _make_resonance_material()
 		fissure.mesh = ribbon
 		var fissure_x: float = -116.2 + float(fissure_index) * 0.9
@@ -188,11 +220,19 @@ func _build_region9_to_10_approach() -> void:
 	var entrance_light: OmniLight3D = OmniLight3D.new()
 	entrance_light.name = "LuzTransicaoCavernaOrion"
 	entrance_light.light_color = Color("#5cc8ff")
-	entrance_light.light_energy = 1.8
+	entrance_light.light_energy = 2.25
 	entrance_light.omni_range = 14.0
 	entrance_light.shadow_enabled = false
 	entrance_light.position = Vector3(-116.0, 4.2, 542.0)
 	approach.add_child(entrance_light)
+	var lateral_fill := OmniLight3D.new()
+	lateral_fill.name = "PreenchimentoLateralRotaRegiao09"
+	lateral_fill.light_color = Color("#3d91a6")
+	lateral_fill.light_energy = 0.72
+	lateral_fill.omni_range = 8.0
+	lateral_fill.shadow_enabled = false
+	lateral_fill.position = Vector3(-121.0, 3.2, 539.5)
+	approach.add_child(lateral_fill)
 	for side: int in [-1, 1]:
 		var mouth_jamb: Node3D = ROCK_LARGE.instantiate() as Node3D
 		if mouth_jamb == null:
@@ -207,18 +247,69 @@ func _build_region9_to_10_approach() -> void:
 	var mouth_rim_fill := OmniLight3D.new()
 	mouth_rim_fill.name = "PreenchimentoFrontalBocaCavernaOrion"
 	mouth_rim_fill.light_color = Color("#86dbea")
-	mouth_rim_fill.light_energy = 0.78
+	mouth_rim_fill.light_energy = 1.02
 	mouth_rim_fill.omni_range = 10.0
 	mouth_rim_fill.shadow_enabled = false
 	mouth_rim_fill.position = Vector3(-116.0, 3.0, 546.5)
 	approach.add_child(mouth_rim_fill)
+	var threshold_warm_fill := OmniLight3D.new()
+	threshold_warm_fill.name = "PreenchimentoQuenteTransicao09_10"
+	threshold_warm_fill.light_color = Color("#d6a46c")
+	threshold_warm_fill.light_energy = 0.66
+	threshold_warm_fill.omni_range = 9.5
+	threshold_warm_fill.shadow_enabled = false
+	threshold_warm_fill.position = Vector3(-112.0, _height_at(-112.0, 532.0) + 2.1, 532.0)
+	approach.add_child(threshold_warm_fill)
+
+func _build_cp_d2_007_physical_handoff() -> void:
+	var handoff := Node3D.new()
+	handoff.name = "CPD2007_HandoffFisico_Regiao09_10_11"
+	handoff.set_meta("scope", "REGIONS_7_12_ONLY")
+	handoff.set_meta("map_route", "09_TRILHA -> 10_CAVERNA -> 11_CAMARA_CUBE")
+	add_child(handoff)
+	var handoff_points: Array[Vector3] = [
+		Vector3(-112.0, _height_at(-112.0, 532.0) + 0.45, 532.0),
+		Vector3(-116.0, _height_at(-116.0, 542.0) + 0.45, 542.0),
+		Vector3(-116.0, _height_at(-116.0, 548.0) + 0.45, 548.0),
+		Vector3(-116.0, _height_at(-116.0, 555.0) + 0.45, 555.0),
+		Vector3(-116.0, _height_at(-116.0, 562.0) + 0.45, 562.0)
+	]
+	var roles: Array[String] = ["ENTRADA_TRILHA_09", "LIMIAR_CAVERNA_10", "BOCA_CAVERNA_10", "TRANSICAO_INTERIOR", "CAMARA_CUBE_11"]
+	for index: int in range(handoff_points.size()):
+		var marker := Marker3D.new()
+		marker.name = "CPD2007_%s" % roles[index]
+		marker.position = handoff_points[index]
+		marker.set_meta("physical_handoff", true)
+		marker.set_meta("map_region", 9 + mini(index, 2))
+		handoff.add_child(marker)
+		var body := StaticBody3D.new()
+		body.name = "ColliderCPD2007_%s" % roles[index]
+		body.collision_layer = 1
+		body.collision_mask = 1
+		var shape := CollisionShape3D.new()
+		var box := BoxShape3D.new()
+		box.size = Vector3(5.2 if index < 2 else 4.4, 0.9, 3.2)
+		shape.shape = box
+		shape.position = handoff_points[index]
+		body.add_child(shape)
+		handoff.add_child(body)
+		if index > 0:
+			var light := OmniLight3D.new()
+			light.name = "WayfinderCPD2007_%s" % roles[index]
+			light.position = handoff_points[index] + Vector3(0.0, 1.8, 0.0)
+			light.light_color = Color("#5cc8ff") if index < 4 else Color("#8c6cff")
+			light.light_energy = 0.72
+			light.omni_range = 6.5
+			light.shadow_enabled = false
+			handoff.add_child(light)
+	print("CPD2007_HANDOFF_READY points=", handoff_points.size())
 
 func _make_resonance_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
 	material.albedo_color = Color("#0d2630")
 	material.emission_enabled = true
 	material.emission = Color("#5cc8ff")
-	material.emission_energy_multiplier = 1.35
+	material.emission_energy_multiplier = 1.48
 	material.roughness = 0.40
 	return material
 

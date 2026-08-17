@@ -90,3 +90,98 @@
 - [ ] Executar QA headless, gameplay de 30 segundos e print 1600×900 para os Takes 6–7.
 - [ ] Criar ZIP compacto, SHA-256, STATUS_CHECKPOINT e commit/publicação remota.
 - [ ] Avançar para a próxima tarefa delegada sem tocar nas Regiões 1–6.
+
+
+## Ciclo detalhado Dev2 — Região 7 — HEAD 413a259
+
+- [ ] Ler `CICLO_DEV2_REGIAO7_DETALHADO.md` e confirmar os cinco checkpoints publicados.
+- [ ] Verificar a presença real de rua, quatro casas, fonte e colisores da CP-D2-001.
+- [ ] Verificar seis árvores e oito fetos da CP-D2-002.
+- [ ] Verificar lua fria e horizonte quente da CP-D2-003.
+- [ ] Verificar os dois NPCs placeholder da CP-D2-004.
+- [ ] Verificar a integração da Vila no `TempleLevel.gd` da CP-D2-005.
+- [ ] Executar QA headless, gameplay de 30 segundos e print 1600×900.
+- [ ] Corrigir apenas lacunas comprovadas, empacotar, commitar e sincronizar o resultado.
+
+
+## Correcção urgente — `trail_mat` em `TempleLevel.gd`
+
+- [ ] Confirmar todas as referências a `trail_mat` e o bloco onde é declarado.
+- [ ] Corrigir o escopo sem alterar a lógica regional ou reescrever o builder.
+- [ ] Executar parser/headless e simular o arranque de Novo Jogo.
+- [ ] Verificar que não existem outros erros de compilação encadeados.
+- [ ] Documentar, commitar e sincronizar a correcção com evidência de validação.
+
+
+## Pacote de download pós-correcção `7e904936`
+
+- [ ] Confirmar o commit corrigido e a documentação de `trail_mat`.
+- [ ] Construir ZIP do projecto sem `.git`, `.godot`, `.import` e caches temporários.
+- [ ] Verificar conteúdo, tamanho e SHA-256 do pacote.
+- [ ] Entregar o ZIP e o hash para download.
+
+
+## Continuidade operacional — próximo incremento
+
+- [ ] Consultar a delegação e as orientações activas na pasta `diretor_orientacoes/`.
+- [ ] Confirmar branch, escopo exclusivo e próxima tarefa concreta.
+- [ ] Implementar o incremento sem reescrever a base nem tocar em Regiões proibidas.
+- [ ] Executar headless, gameplay de aproximadamente 30 segundos e print 1600×900.
+- [ ] Avaliar visualmente, iterar se necessário, empacotar e sincronizar o checkpoint.
+
+
+## Continuidade — polimento da Cúpula Final Região 12
+
+- [ ] Consultar o estado CP-D2-CONTINUITY-R11-R12 e localizar a silhueta activa da Cúpula.
+- [ ] Aplicar passe incremental de material, escala e contraste sem remover a base CC0.
+- [ ] Executar headless, gameplay de aproximadamente 30 segundos e print 1600×900.
+- [ ] Avaliar, documentar, empacotar, commitar e sincronizar o próximo checkpoint.
+
+
+## Regra de continuidade reforçada — ciclo sem pausa
+
+- [ ] Consultar a orientação activa antes de iniciar o próximo passe.
+- [ ] Fazer alteração concreta no código antes de emitir relatório de checkpoint.
+- [ ] Validar headless, gameplay de aproximadamente 30 segundos e print 1600×900.
+- [ ] Publicar checkpoint e iniciar imediatamente a próxima tarefa concreta no mesmo fluxo.
+- [ ] Nunca tratar o relatório ou o commit como encerramento da produção.
+
+
+## Novo ciclo — Matriz de Espelho do Mapa / Regiões 7–12
+
+- [x] Tratar `mapaorigem.webp`, `origem_vale_12_pontos_casa_voss.webp` e `pasted_content.txt` como autoridade espacial e visual do ciclo.
+- [x] Confirmar a sequência exclusiva Dev2: Vila Elevada → Observatório → Trilha da Montanha → Caverna do Orion → Câmara do Orion Cube → Hub Temporal.
+- [x] Auditar `CartographicAnchors` e a leitura relativa dos seis marcos Dev2 sem alterar Regiões 1–6.
+- [x] Implementar o próximo passe cartográfico apenas em módulos Dev2, evitando paredes vegetais, planos de fundo, caixas e marcos flutuantes.
+- [x] Validar os harnesses 16:9, parser, gameplay de 30 segundos e print 1600×900.
+- [ ] Registar o estado cartográfico, empacotar ZIP + SHA-256 e iniciar a próxima acção no checkpoint regional correspondente.
+
+
+## CP-D2-006 — Take Panorâmico Região 7→9
+
+- [ ] Recuperar e auditar o commit local 8802585 sem reescrever histórico.
+- [ ] Ler as orientações mais recentes de `diretor_orientacoes/` antes do novo commit.
+- [ ] Criar tomada 16:9 de handoff com Vila Elevada, Observatório e início da Trilha da Montanha como volumes 3D alinhados às âncoras 7–9.
+- [ ] Garantir ausência de planos publicitários, caixas alongadas e marcos flutuantes.
+- [ ] Validar Godot 4.7.1, gameplay de 30 segundos e print 1600×900.
+- [ ] Empacotar CP-D2-006 em ZIP com SHA-256 e registar STATUS_CHECKPOINT.
+- [ ] Fazer commit local sem reescrever histórico e tentar sincronização remota.
+- [ ] Iniciar comprovadamente CP-D2-007 — cadeia física Região 9→10→11.
+
+
+## Estado Dev2 — CP-D2-006 fechado / CP-D2-007 activo
+
+- [x] Recuperar e auditar o commit local `8802585` sem reescrever histórico.
+- [x] Ler as orientações recentes e confirmar a fila Dev2.
+- [x] Criar o harness `TakePanoramicoRegiao7a9Validation` e executar passes visuais.
+- [x] Validar Godot 4.7.1, gameplay 30 segundos e print 1600×900.
+- [x] Empacotar `CP-D2-006-local.zip` com SHA-256 `d4f910b3c4281d79fab3dfe99810bb13ac7c958a4cabc42c31f905ff84eaba8a`.
+- [x] Commit local CP-D2-006: `6afcacf`.
+- [x] Iniciar CP-D2-007 com âncoras e colliders físicos Região 9→10→11.
+- [x] Validar Region10 e Region11; melhorar exposição da Região 11.
+- [x] Empacotar `CP-D2-007-local.zip` com SHA-256 `409547c4bae37c1c662b63290842688d31b811605bed756a58e2224aee9faba4`.
+- [x] Commit local CP-D2-007: `af22d4c`.
+- [ ] Sincronizar sem reescrita: remoto `5b0d317` e local `af22d4c` divergem; requer integração não destrutiva.
+- [ ] Próximo passe: contraste exterior/interior e validação integrada Caverna → Cube.
+
+**Fronteira:** apenas Regiões 7–12; Regiões 1–6 permanecem bloqueadas.

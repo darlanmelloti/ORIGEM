@@ -4,8 +4,10 @@ extends Node3D
 
 const TERRAIN_SCRIPT: Script = preload("res://levels/TerrainPatch.gd")
 const HIGHLAND_SCRIPT: Script = preload("res://levels/HighlandRegion.gd")
-const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
+const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeB.glb")
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
+const HOUSE_ROOF: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
+const ROUTE_STONE: PackedScene = preload("res://assets/models_cc0/stone_smallF.glb")
 
 var validation_camera: Camera3D
 var elapsed: float = 0.0
@@ -39,11 +41,11 @@ func _ready() -> void:
 		print("ORIGEM_REGION7_TERRAIN_PROBE ", terrain_probe, " ", terrain.call("height_at", terrain_probe.x, terrain_probe.y))
 	camera_start = Vector3(140.0, 24.0, 348.0)
 	camera_end = Vector3(140.0, 22.0, 353.0)
-	camera_target = Vector3(140.0, 18.5, 363.0)
+	camera_target = Vector3(140.0, 20.5, 359.0)
 	validation_camera = Camera3D.new()
 	validation_camera.name = "Region7VillageCamera"
 	validation_camera.current = true
-	validation_camera.fov = 48.0
+	validation_camera.fov = 44.0
 	validation_camera.position = camera_start
 	add_child(validation_camera)
 	validation_camera.look_at(camera_target, Vector3.UP)
@@ -51,8 +53,34 @@ func _ready() -> void:
 func _build_region7_cinematic_house_reveal() -> void:
 	var reveal := Node3D.new()
 	reveal.name = "Region7OrganicHouseReveal"
-	reveal.position = Vector3(140.0, 14.8, 357.0)
+	reveal.position = Vector3(140.0, 14.25, 357.0)
 	add_child(reveal)
+	var rim := SpotLight3D.new()
+	rim.name = "LuzRecorteVilaElevada"
+	rim.position = Vector3(-8.0, 10.0, -4.0)
+	rim.rotation_degrees = Vector3(-42.0, -28.0, 0.0)
+	rim.light_color = Color("#f0c98c")
+	rim.light_energy = 2.2
+	rim.spot_range = 28.0
+	rim.spot_angle = 52.0
+	rim.shadow_enabled = false
+	add_child(rim)
+	var route_positions: Array[Vector3] = [Vector3(-4.5, 1.2, 1.0), Vector3(-2.0, 1.6, 2.8), Vector3(0.5, 2.0, 4.6), Vector3(2.5, 2.4, 6.4)]
+	for route_index: int in range(route_positions.size()):
+		var route_light := OmniLight3D.new()
+		route_light.name = "FachoRotaVila_%02d" % route_index
+		route_light.position = Vector3(140.0, 14.8, 357.0) + route_positions[route_index]
+		route_light.light_color = Color("#f1c77a")
+		route_light.light_energy = 0.95
+		route_light.omni_range = 4.5
+		route_light.shadow_enabled = false
+		add_child(route_light)
+		var route_stone := ROUTE_STONE.instantiate() as Node3D
+		if route_stone != null:
+			route_stone.name = "MarcoRotaOrganico_%02d" % route_index
+			route_stone.position = Vector3(140.0, 14.8, 357.0) + route_positions[route_index] + Vector3(0.0, -0.12, 0.0)
+			route_stone.scale = Vector3.ONE * 0.58
+			reveal.add_child(route_stone)
 	var reveal_material := StandardMaterial3D.new()
 	reveal_material.albedo_color = Color("#b89d76")
 	reveal_material.roughness = 0.88
@@ -68,7 +96,6 @@ func _build_region7_cinematic_house_reveal() -> void:
 		base.position = house_positions[index]
 		base.scale = Vector3(2.2, 0.48, 1.65)
 		base.rotation = Vector3(0.02, 0.22 * float(index), -0.03)
-		_apply_region7_reveal_material(base, reveal_material)
 		reveal.add_child(base)
 		for pillar_index: int in range(3):
 			var pillar := PILLAR.instantiate() as Node3D
@@ -78,15 +105,13 @@ func _build_region7_cinematic_house_reveal() -> void:
 			pillar.position = house_positions[index] + Vector3(-1.4 + float(pillar_index) * 1.4, 1.65, 0.0)
 			pillar.scale = Vector3(0.42, 1.25 + 0.12 * float(pillar_index % 2), 0.42)
 			pillar.rotation = Vector3(0.02, 0.16 * float(index), -0.02)
-			_apply_region7_reveal_material(pillar, reveal_material)
 			reveal.add_child(pillar)
-		var roof := ROCK_LARGE.instantiate() as Node3D
+		var roof := HOUSE_ROOF.instantiate() as Node3D
 		if roof != null:
 			roof.name = "CasaRevealCobertura_%02d" % index
-			roof.position = house_positions[index] + Vector3(0.0, 3.05, 0.0)
-			roof.scale = Vector3(2.35, 0.34, 1.75)
+			roof.position = house_positions[index] + Vector3(0.0, 2.72, 0.0)
+			roof.scale = Vector3(1.95, 0.30, 1.48)
 			roof.rotation = Vector3(0.12, 0.28 * float(index), -0.08)
-			_apply_region7_reveal_material(roof, reveal_material)
 			reveal.add_child(roof)
 		var hearth := OmniLight3D.new()
 		hearth.name = "CasaRevealLuz_%02d" % index
@@ -118,13 +143,13 @@ func _build_environment() -> void:
 	environment.background_color = Color("#839caf")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#8baab4")
-	environment.ambient_light_energy = 1.12
+	environment.ambient_light_energy = 1.28
 	environment.fog_enabled = true
 	environment.fog_light_color = Color("#91aeb8")
 	environment.fog_light_energy = 0.56
-	environment.fog_density = 0.00025
+	environment.fog_density = 0.00014
 	environment.fog_height = 18.0
-	environment.fog_height_density = 0.012
+	environment.fog_height_density = 0.008
 	environment.volumetric_fog_enabled = false
 	world.environment = environment
 	add_child(world)
