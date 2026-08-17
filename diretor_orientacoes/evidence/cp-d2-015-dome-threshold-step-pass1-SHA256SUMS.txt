@@ -1,0 +1,2 @@
+442e9bd511227250687a286b58746f35a78f631412c4bfab32fb4cb5d4f53ef4  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-015-dome-threshold-step-pass1/gameplay-30s.mp4
+59747092d111becfd1d944f19f98b78acf8bf8a8e5e9ec39f975b2610dc0f464  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-015-dome-threshold-step-pass1/print-1600x900.jpg

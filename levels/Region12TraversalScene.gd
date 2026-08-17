@@ -538,7 +538,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		link_support.rotation = Vector3(0.03, -0.14 + float(link_support_index) * 0.22, 0.02)
 		proxy.add_child(link_support)
 	var central_steps: Array[Vector3] = [
-		Vector3(0.0, 0.32, -2.68), Vector3(0.0, 0.48, -3.38), Vector3(0.0, 0.62, -4.02)
+		Vector3(0.0, 0.32, -2.68), Vector3(0.0, 0.50, -3.42), Vector3(0.0, 0.74, -4.40)
 	]
 	for step_index: int in range(central_steps.size()):
 		var central_step := ROCK_LARGE.instantiate() as Node3D
@@ -546,7 +546,7 @@ func _build_final_dome_traversal_proxy() -> void:
 			continue
 		central_step.name = "DegrauCentralCupulaR12_%02d" % step_index
 		central_step.position = central_steps[step_index]
-		central_step.scale = Vector3(1.50 - float(step_index) * 0.12, 0.22, 0.76)
+		central_step.scale = Vector3(1.50 - float(step_index) * 0.12, 0.24 if step_index == 2 else 0.22, 0.82 if step_index == 2 else 0.76)
 		central_step.rotation = Vector3(0.025, 0.02 * float(step_index), 0.015)
 		var step_material := StandardMaterial3D.new()
 		step_material.albedo_color = Color("#5e7890")
