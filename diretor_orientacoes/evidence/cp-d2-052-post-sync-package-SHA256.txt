@@ -1,0 +1,1 @@
+cdcce759578124a2e77863f56ca7913b0596a81532568cfd8d02ac2d929c7036  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-052-post-sync-local.zip
