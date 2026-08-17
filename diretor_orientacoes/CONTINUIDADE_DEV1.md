@@ -23,3 +23,11 @@ A matriz obrigatória está em `CP_CINE_07_MATRIZ_RECAPTURA_CASA_VOSS.md`. A seq
 ## CP 336 — Orçamento local validado
 
 A auditoria runtime confirmou que a abertura usa 1 luz local activa (margem 15) e o handoff usa 4 luzes locais activas, das quais 2 têm sombra (margem 12), apesar de o inventário global regional conter luzes em sectores distantes. A configuração é compatível com o limite de 16 luzes simultâneas da GTX 1050 Ti e foi preservada. O **CP-CINE-07 permanece em execução imediata**: ao chegar a integração Dev2 R7–R9, repetir a tomada CP317 sem mudar posição, FOV ou escala e abrir CP-CINE-08 no mesmo ciclo.
+
+## CP 338 — Eixo R6→R7 validado
+
+`ArvoreFocalMargem_02` foi deslocada de `(61, 290)` para a margem exterior `(8, 306)`. A conífera continua física e lateral, mas deixou de bloquear o eixo de chegada à Região 7. A captura de handoff CP 338 confirma estrada, terraços e Vila Elevada legíveis; a prova OpenGL de 30 segundos passou sem erro de script. Esta alteração restringe-se a `ForestLakeRegion.gd` (R6) e não toca `HighlandRegion.gd` nem qualquer módulo R7–R12.
+
+## Próxima tarefa já em execução — CP-CINE-07 integrado
+
+A chain Dev2 R7–R9 foi publicada na sua branch e preparada num workspace de integração separado. Repetir a matriz congelada Casa Voss e o handoff R6→R7 com o eixo agora aberto, comparar a leitura da cadeia cartográfica e abrir CP-CINE-08 sem pausa. A branch Dev1 mantém exclusivamente as Regiões 1–6.

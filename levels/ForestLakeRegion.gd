@@ -1737,7 +1737,7 @@ func _build_lakeside_focal_vegetation() -> void:
 	add_child(foliage)
 	var placements: Array[Vector3] = [
 		Vector3(25.0, 0.0, 236.0), Vector3(33.0, 0.0, 278.0),
-		Vector3(61.0, 0.0, 290.0), Vector3(88.0, 0.0, 276.0),
+		Vector3(8.0, 0.0, 306.0), Vector3(88.0, 0.0, 276.0),
 		Vector3(101.0, 0.0, 253.0), Vector3(91.0, 0.0, 226.0)
 	]
 	for index: int in range(placements.size()):
