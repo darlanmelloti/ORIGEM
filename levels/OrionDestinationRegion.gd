@@ -7,6 +7,7 @@ extends Node3D
 const CLIFF: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
 const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeB.glb")
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
+const ORION_INTERIOR_THRESHOLD_SCRIPT: Script = preload("res://levels/OrionInteriorThreshold.gd")
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 
@@ -14,6 +15,7 @@ var terrain_patch: Node3D
 var stone_material: StandardMaterial3D
 var cube_material: StandardMaterial3D
 var cube_chamber: Node3D
+var interior_threshold: Node3D
 var interior_handoff_ready: bool = false
 const CUBE_CHAMBER_REVEAL_RADIUS: float = 10.5
 
@@ -22,6 +24,7 @@ func _ready() -> void:
 	stone_material = _make_stone_material()
 	cube_material = _make_cube_material()
 	_build_orion_cave()
+	_build_interior_threshold()
 	_build_cube_chamber_marker()
 	_build_temporal_hub()
 
@@ -79,7 +82,18 @@ func _on_orion_handoff_body_entered(body: Node3D) -> void:
 	if interior_handoff_ready:
 		return
 	interior_handoff_ready = true
+	if interior_threshold != null and interior_threshold.has_method("set_active"):
+		interior_threshold.call("set_active", true)
 	print("[CP-CINE-28] ORION_HANDOFF_READY player=%s" % body.name)
+
+func _build_interior_threshold() -> void:
+	# CP-CINE-29: módulo abaixo da crista; permanece invisível até ao gatilho físico e não contém Cube nem altar.
+	interior_threshold = ORION_INTERIOR_THRESHOLD_SCRIPT.new() as Node3D
+	if interior_threshold == null:
+		return
+	interior_threshold.call("configure", stone_material)
+	interior_threshold.position = Vector3(-116.0, _height_at(-116.0, 559.0) - 5.4, 570.0)
+	add_child(interior_threshold)
 
 func _build_cube_chamber_marker() -> void:
 	var chamber: Node3D = Node3D.new()
