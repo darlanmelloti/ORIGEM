@@ -153,3 +153,9 @@ A alteração foi limitada ao sobrepiso PBR, sem tocar na casca do túnel rejeit
 O deslocamento de 0,52 m para o flanco livre foi validado durante 30 segundos. Reduziu a assimetria da parede próxima, mas não revelou um percurso legível; o enquadramento passou a enfatizar um arco escuro simétrico, sem ganho narrativo ou espacial suficiente. A câmara regressará ao centro físico de Elias.
 
 > **Candidato rejeitado:** deslocamento lateral de câmara como solução isolada para a composição Orion.
+
+## CP-CINE-77 — Reversão da rota mineral emissiva
+
+A emissão muito baixa foi aplicada exclusivamente ao sobrepiso PBR e validada durante 30 segundos. A composição não revelou um caminho suficientemente claro e manter a técnica exigiria elevar a emissão a um nível artificial. A emissão será removida.
+
+> **Candidato rejeitado:** emissão mínima do sobrepiso como guia de rota Orion.
