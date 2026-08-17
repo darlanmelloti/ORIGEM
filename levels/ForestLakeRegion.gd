@@ -1479,8 +1479,10 @@ func _build_submerged_ruins() -> void:
 	var dome: MeshInstance3D = MeshInstance3D.new()
 	dome.name = "DomoSubmersoDoHub"
 	dome.mesh = dome_mesh
-	dome.position = Vector3(0.0, -2.6, 0.0)
-	dome.scale = Vector3(1.0, 0.38, 1.0)
+	# O coroamento do domo emerge discretamente: é a silhueta central da Bacia no mapa, não um objecto oculto sob a lâmina.
+	dome.position = Vector3(0.0, -0.10, 0.0)
+	dome.scale = Vector3(1.32, 0.46, 1.32)
+
 	dome.material_override = ruin_material
 	lake.add_child(dome)
 	# Estela de chegada: dá ao jogador um primeiro ponto de leitura/interação ao alcançar a margem ocidental.

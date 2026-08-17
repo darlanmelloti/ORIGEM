@@ -1,8 +1,8 @@
 # Continuidade — Dev1
 
-O **CP 270 — Bacia das Ruínas Submersas como destino visível** está em execução. A rota Casa Voss → Estrada do Rio → Arco → Floresta Densa → Acampamento Majestic passa a ter camadas de profundidade física e destinos reconhecíveis em cada transição.
+O **CP 271 — Perspectiva de chegada à Bacia** está em execução. A Bacia das Ruínas Submersas já possui água, margem, pilares emergentes, domo central e promontório, preservando a escala macro da rota desde o Acampamento Majestic.
 
-O próximo passe trabalha na continuidade entre o Acampamento, a margem de lago e as Ruínas Submersas. Deve reforçar água, ruínas emergentes, pedras de acesso e a leitura do destino sem comprimir a escala regional, sem criar fundos artificiais e sem tocar nos módulos das Regiões 7–12.
+O próximo passe deve compor a aproximação pela margem ocidental: o domo, os pilares e a cascata precisam ser lidos como camadas físicas sem obstruir as lajes de acesso, sem adicionar luzes dinâmicas e sem alterar módulos das Regiões 7–12.
 
 ## Critérios de continuação
 
