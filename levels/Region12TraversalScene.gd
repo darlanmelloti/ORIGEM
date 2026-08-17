@@ -157,6 +157,15 @@ func _build_clean_r12_portal() -> void:
 		jamb.scale = Vector3(0.58, 1.85, 0.58)
 		jamb.rotation = Vector3(0.03, side * 0.08, side * 0.02)
 		portal.add_child(jamb)
+	for wing_side in [-1.0, 1.0]:
+		var wing := ROCK_LARGE.instantiate() as Node3D
+		if wing == null:
+			continue
+		wing.name = "AlaBaixaOrganicaR12_%s" % str(wing_side)
+		wing.position = Vector3(wing_side * 2.18, -0.18, -2.36)
+		wing.scale = Vector3(0.62, 0.22, 0.52)
+		wing.rotation = Vector3(0.04, wing_side * 0.18, wing_side * 0.06)
+		portal.add_child(wing)
 	var lintel := ROCK_LARGE.instantiate() as Node3D
 	if lintel != null:
 		lintel.name = "LintelPortalLimpoR12"
