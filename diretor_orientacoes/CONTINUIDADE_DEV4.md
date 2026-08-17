@@ -50,3 +50,13 @@ A travessia integral de 30 segundos foi estável, mas a plataforma CC0 de ponte 
 ## CINE-PAIR-06 revertido; CINE-PAIR-07 em execução
 
 A reentrância na tampa terminal não produziu destino legível e foi revertida após 30 segundos sem erros. Dev4 inicia agora uma auditoria da transição exterior→interior para medir o último desvio antes do fecho; a nova composição não será forçada numa parede terminal. Dev3 preserva a base de -11° e só selecciona um momento narrativo comprovado por essa auditoria. Não abrir DIR autónomo.
+
+
+## CINE-PAIR-07 concluído; CINE-PAIR-08 em execução
+
+A auditoria do último desvio confirmou que não existe espaço narrativo autónomo antes da parede terminal; não foi adicionada decoração. Dev4 inicia agora movimento real de Elias por teclado durante 30 segundos, medindo a progressão sem teleporte. Dev3 avalia a legibilidade da rota com a leitura de piso aprovada. Não abrir DIR autónomo.
+
+
+## CINE-PAIR-08 aprovado; CINE-PAIR-09 em execução
+
+Dev4 completou a prova real de teclado por 30 segundos: Elias permaneceu apoiado e navegável no corredor sem teleporte, queda ou erro runtime. A tarefa seguinte verifica o retorno por `E` no mesmo ciclo de exploração interior. Dev3 só define o primeiro momento narrativo depois da travessia e retorno comprovados. Não abrir DIR autónomo.

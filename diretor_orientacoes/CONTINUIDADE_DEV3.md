@@ -58,3 +58,13 @@ A rota integral foi validada, mas a plataforma de ponte CC0 no destino foi rejei
 ## CINE-PAIR-06 revertido; CINE-PAIR-07 em execução
 
 A reentrância da tampa terminal foi revertida porque a chegada permaneceu uma parede próxima. Dev3 mantém a leitura de -11° e aguarda apenas a evidência activa que Dev4 recolhe no último desvio; a próxima composição deve ser um momento narrativo dentro da rota, não um objecto ou decoração empurrada contra o fecho. A auditoria abre a implementação seguinte no mesmo ciclo.
+
+
+## CINE-PAIR-07 concluído; CINE-PAIR-08 em execução
+
+A auditoria confirmou que o último desvio não suporta um marco narrativo isolado. Dev3 não introduz decoração terminal e passa a avaliar a prova de movimento real que Dev4 iniciou: 30 segundos de Elias a percorrer a rota por teclado, sem teleporte. A leitura de piso de -11° permanece a base de aceitação.
+
+
+## CINE-PAIR-08 aprovado; CINE-PAIR-09 em execução
+
+A navegação por teclado durante 30 segundos confirmou que o corredor permanece físico e legível com a orientação de -11°. Dev3 aguarda a prova de retorno por `E` que Dev4 já iniciou e só depois define o momento narrativo seguinte. O fim desta verificação abre directamente o próximo passe pareado, sem DIR autónomo.

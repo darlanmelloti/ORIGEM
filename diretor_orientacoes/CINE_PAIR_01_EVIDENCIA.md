@@ -67,3 +67,27 @@ A trajectória integral de 30 segundos confirmou que Elias percorre soleira, pri
 A reentrância mineral foi construída ao recuar somente o centro da tampa terminal e validada por 30 segundos sem erros. A captura da chegada mostrou variação tonal da rocha, mas não criou um destino, abertura ou profundidade reconhecível: a leitura continuou a ser de parede próxima. A alteração será revertida, preservando a casca e o suporte aprovados.
 
 **CINE-PAIR-07 já iniciado:** Dev4 prepara uma auditoria de transição exterior→interior para confirmar se a primeira composição de destino deve ocorrer antes do fecho, no último desvio, em vez de ser forçada na tampa terminal. Dev3 mantém a orientação de -11° e seleccionará um único momento narrativo dentro do corredor, não uma nova decoração.
+
+
+## CINE-PAIR-07 — Último desvio: entrada e curva
+
+A entrada do último desvio mantém piso visível, mas a leitura lateral de rocha ainda domina. Na curva final, a casca volta a ocupar quase todo o enquadramento e não oferece um marco narrativo autónomo. A decisão depende do pré-fecho: não introduzir geometria ou iluminação antes de confirmar se existe uma zona de composição útil imediatamente antes da tampa.
+
+
+## Decisão CINE-PAIR-07 — Sem momento narrativo isolado no último desvio
+
+A entrada, a curva e o pré-fecho foram capturados durante a trajectória de 30 segundos. Nenhum dos três pontos oferece espaço visual autónomo: a casca de rocha continua a dominar e o pré-fecho é a própria parede terminal. Não será introduzido um marco decorativo artificial neste segmento.
+
+**CINE-PAIR-08 já iniciado:** substituir a trajectória por teleporte por uma prova de movimento real de Elias com teclado durante 30 segundos. Dev4 mede a progressão física; Dev3 avalia se a leitura de piso aprovada permite ao jogador perceber e seguir a rota sem assistência visual adicional.
+
+
+## CINE-PAIR-08 — Movimento físico: primeiros 18 segundos
+
+As capturas aos 8 e 18 segundos mostram que a entrada de teclado foi aceite e que Elias progride fisicamente sobre o suporte contínuo, sem queda ou erro runtime. A faixa de piso de -11° mantém a direcção de avanço legível. A decisão final depende do quadro aos 28 segundos, que confirmará se a rota mantém continuidade antes do fecho.
+
+
+## Decisão CINE-PAIR-08 — Navegação física aprovada
+
+O quadro final aos 28 segundos mantém Elias apoiado no piso da caverna e sem erro de runtime. A sequência de teclado demonstra exploração física contínua, sem teleporte, queda ou bloqueio técnico. A orientação de -11° continua a tornar o piso navegável reconhecível, embora o fecho visual da rota ainda não seja um destino narrativo completo.
+
+**CINE-PAIR-09 já iniciado:** Dev4 verifica o contracto de retorno por `E` depois da exploração interior; Dev3 define o primeiro momento narrativo somente após a travessia e o retorno serem comprovados no mesmo ciclo. Não abrir DIR autónomo.
