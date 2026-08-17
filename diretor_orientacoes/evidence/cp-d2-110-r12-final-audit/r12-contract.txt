@@ -1,0 +1,14 @@
+39:		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+54:		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+76:		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+79:	if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+106:		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+111:		traversal_proxy.visible = OS.get_environment("QA_VALIDATION_ROUTE") != "R11_R12_HUB_DEDICATED"
+112:		if OS.get_environment("QA_VALIDATION_ROUTE") in ["R10_CAVE_TO_R12_HUB_FULL", "R11_R12_HUB_DEDICATED"]:
+212:		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+216:			temporal_core.name = "NucleoTemporalEncastradoR12"
+255:	contact_light.name = "LuzContactoNucleoR12"
+293:		resonance_core.visible = index < 4 and (index != 3 or OS.get_environment("QA_VALIDATION_ROUTE") != "R11_R12_HUB_DEDICATED")
+866:	var temporal_portal := get_node_or_null("CupulaFinalCleanPortalR12/NucleoTemporalEncastradoR12")
+877:		if child is OmniLight3D and child.name == "LuzContactoNucleoR12":
+893:		print("[REGION12_PERF] fps=", Engine.get_frames_per_second(), " draw_calls=", draw_calls, " elapsed=", snapped(elapsed, 0.1))
