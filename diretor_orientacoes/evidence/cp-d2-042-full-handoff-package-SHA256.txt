@@ -1,0 +1,1 @@
+60517f16ec4db42d24732eb18ed2cdbffd0320ee28337cb107216674bf384018  validation/checkpoints/CP-D2-042-full-handoff-local.zip
