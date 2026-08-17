@@ -1,0 +1,1 @@
+d294ccfb21098613579ee787445a3299bf9e977407ed038b59a7a6da5b070563  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-071-route-local.zip

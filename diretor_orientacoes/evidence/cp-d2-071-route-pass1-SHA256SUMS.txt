@@ -1,0 +1,2 @@
+4de7aecffadf0cb3fea4f073716c47c1e23de452c6aae1d279d55f7ed9f5b397  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-071-route-pass1/gameplay-30s.mp4
+859023de82307fa613fe261367a65b53f24a9a8f1e63f982716cfce41650ae97  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-071-route-pass1/print-1600x900.jpg
