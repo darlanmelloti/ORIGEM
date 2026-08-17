@@ -12,6 +12,10 @@ func _ready() -> void:
 	btn_settings.pressed.connect(func(): print("Definições - em breve"))
 	btn_quit.pressed.connect(func(): get_tree().quit())
 	btn_new_game.grab_focus()
+	# Exclusivo de QA automatizado: evita que limitações de entrada do Xvfb invalidem a prova de Novo Jogo.
+	# Não altera o menu em qualquer execução sem a variável de ambiente explícita.
+	if OS.get_environment("ORIGEM_QA_AUTOSTART_NEW_GAME") == "1":
+		call_deferred("_on_new_game_pressed")
 
 func _on_new_game_pressed() -> void:
 	var path := "res://scenes/main.tscn"

@@ -61,7 +61,13 @@ func height_at(world_x: float, world_z: float) -> float:
 		var lateral_distance: float = abs(world_x - road_center)
 		var shoulder_ratio: float = clampf((lateral_distance - 4.35) / 10.0, 0.0, 1.0)
 		var shoulder_height: float = shoulder_ratio * shoulder_ratio * (2.30 + road_progress * 2.10)
-		height += shoulder_height
+		# Contrafortes de vale em escala macro: começam fora de 11 m do eixo, deixam a estrada totalmente navegável
+		# e crescem só depois da Casa para que Arco e floresta sejam lidos em planos sucessivos, não como cenário comprimido.
+		var macro_progress: float = clampf((world_z - 38.0) / 96.0, 0.0, 1.0)
+		var valley_rim_ratio: float = clampf((lateral_distance - 10.8) / 26.0, 0.0, 1.0)
+		var valley_rim_height: float = valley_rim_ratio * valley_rim_ratio * macro_progress * 12.5
+		height += shoulder_height + valley_rim_height
+
 	# Corredor ribeirinho de baixa inclinação: liga a Floresta Densa à margem ocidental do lago regional.
 	elif world_x > -38.0 and world_x < 25.0 and world_z >= 145.0 and world_z <= 252.0:
 		var shore_noise: float = land_noise.get_noise_2d(world_x * 0.55, world_z * 0.55) * 0.22

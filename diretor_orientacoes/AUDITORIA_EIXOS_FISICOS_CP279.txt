@@ -1,0 +1,330 @@
+=== RIVER ROAD: constantes e estrada ===
+24:const ARCH_WORLD_Z := 92.0
+35:	_build_compacted_roadbed()
+59:		{"z": 35.0, "side": -1.0, "offset": 9.5, "scale": 0.72, "yaw": 0.22},
+60:		{"z": 47.0, "side": 1.0, "offset": 10.5, "scale": 0.88, "yaw": -0.46},
+61:		{"z": 60.0, "side": -1.0, "offset": 11.2, "scale": 1.00, "yaw": 0.71},
+62:		{"z": 73.0, "side": 1.0, "offset": 12.4, "scale": 1.12, "yaw": -0.18},
+63:		{"z": 84.0, "side": -1.0, "offset": 10.8, "scale": 0.94, "yaw": 0.38}
+67:		var z_value: float = layer["z"] as float
+69:		var x_value: float = _road_x(z_value) + side * (layer["offset"] as float)
+76:		rock.scale = Vector3(rock_scale, rock_scale * 0.78, rock_scale)
+85:				fragment.position = Vector3(x_value - side * 1.25, _height_at(x_value - side * 1.25, z_value + 0.8) - 0.04, z_value + 0.8)
+86:				fragment.scale = Vector3(0.32, 0.78, 0.32)
+98:		{"z": 105.0, "side": -1.0, "offset": 15.0, "scale": 1.85, "yaw": 0.36},
+99:		{"z": 109.0, "side": 1.0, "offset": 16.5, "scale": 2.15, "yaw": -0.58},
+100:		{"z": 113.0, "side": -1.0, "offset": 20.0, "scale": 2.35, "yaw": 0.74},
+101:		{"z": 115.0, "side": 1.0, "offset": 22.0, "scale": 2.60, "yaw": -0.24}
+105:		var z_value: float = spec["z"] as float
+107:		var x_value: float = _road_x(z_value) + side * (spec["offset"] as float)
+114:		cliff.scale = Vector3(scale_value * 1.08, scale_value * 1.42, scale_value)
+123:				tree.position = Vector3(x_value - side * 2.6, _height_at(x_value - side * 2.6, z_value + 1.8), z_value + 1.8)
+124:				tree.scale = Vector3(0.42, 0.42, 0.42)
+135:		{"z": 50.0, "side": -1.0, "offset": 16.0, "scale": 0.78, "yaw": 0.32},
+136:		{"z": 66.0, "side": 1.0, "offset": 17.5, "scale": 1.02, "yaw": -0.61},
+137:		{"z": 80.0, "side": -1.0, "offset": 19.0, "scale": 1.24, "yaw": 0.74},
+138:		{"z": 98.0, "side": 1.0, "offset": 20.5, "scale": 1.46, "yaw": -0.28},
+139:		{"z": 112.0, "side": -1.0, "offset": 23.0, "scale": 1.70, "yaw": 0.49}
+143:		var z_value: float = spec["z"] as float
+145:		var x_value: float = _road_x(z_value) + side * (spec["offset"] as float)
+152:		outcrop.scale = Vector3(scale_value * 1.34, scale_value * 1.12, scale_value)
+160:				vestige.position = Vector3(x_value - side * 1.5, _height_at(x_value - side * 1.5, z_value + 0.8), z_value + 0.8)
+161:				vestige.scale = Vector3(0.30, 0.48, 0.30)
+162:				vestige.rotation = Vector3(0.08 * side, (spec["yaw"] as float) + 0.35, 0.05)
+171:func _road_x(world_z: float) -> float:
+179:func _build_compacted_roadbed() -> void:
+181:	var roadbed_material: StandardMaterial3D = StandardMaterial3D.new()
+184:	roadbed_material.albedo_color = Color(0.42, 0.34, 0.22, 1.0)
+185:	roadbed_material.roughness = 0.90
+186:	roadbed_material.emission_enabled = true
+187:	roadbed_material.emission = Color(0.030, 0.022, 0.010, 1.0)
+188:	roadbed_material.emission_energy_multiplier = 0.20
+189:	roadbed_material.normal_enabled = true
+190:	roadbed_material.normal_texture = GROUND_NORMAL
+191:	roadbed_material.normal_scale = 0.22
+198:		var x0: float = _road_x(z0)
+199:		var x1: float = _road_x(z1)
+200:		var p00: Vector3 = Vector3(x0 - width * 0.5, _height_at(x0 - width * 0.5, z0) + 0.018, z0)
+201:		var p10: Vector3 = Vector3(x0 + width * 0.5, _height_at(x0 + width * 0.5, z0) + 0.018, z0)
+202:		var p01: Vector3 = Vector3(x1 - width * 0.5, _height_at(x1 - width * 0.5, z1) + 0.018, z1)
+203:		var p11: Vector3 = Vector3(x1 + width * 0.5, _height_at(x1 + width * 0.5, z1) + 0.018, z1)
+217:	var roadbed: MeshInstance3D = MeshInstance3D.new()
+218:	roadbed.name = "SoloCompactadoEstradaDoRio"
+219:	roadbed.mesh = surface.commit()
+220:	roadbed.material_override = roadbed_material
+221:	add_child(roadbed)
+230:		{"z": 17.0, "side": -1.0, "scale": 0.30, "yaw": 0.18},
+231:		{"z": 33.0, "side": -1.0, "scale": 0.23, "yaw": -0.28},
+232:		{"z": 56.0, "side": 1.0, "scale": 0.25, "yaw": 0.12},
+233:		{"z": 74.0, "side": -1.0, "scale": 0.27, "yaw": -0.18},
+234:		{"z": 84.0, "side": 1.0, "scale": 0.22, "yaw": 0.26},
+238:		var z_value: float = marker["z"] as float
+241:		var x_value: float = _road_x(z_value) + side * 3.25
+248:		pillar.scale = Vector3(uniform_scale, uniform_scale * 1.14, uniform_scale)
+257:		footing.position = Vector3(x_value - side * 0.18, _height_at(x_value - side * 0.18, z_value + 0.28) - 0.03, z_value + 0.28)
+258:		footing.scale = Vector3(0.20, 0.12, 0.20)
+272:		var x_value: float = _road_x(z_value)
+278:		slab.rotation.y = atan2((_road_x(z_value + 1.0) - _road_x(z_value - 1.0)) * 0.5, 2.0) + rng.randf_range(-0.08, 0.08)
+283:		slab_body.position = slab.position + Vector3(0.0, -0.045, 0.0)
+287:		slab_shape.size = Vector3(1.58, 0.16, 1.18)
+308:		_add_water_triangle(surface, Vector3(x0 - width * 0.5, y0, z0), Vector3(x0 - width * 0.5, y1, z1), Vector3(x0 + width * 0.5, y0, z0), Vector2(0.0, float(index) * 0.18), Vector2(0.0, float(index + 1) * 0.18), Vector2(1.0, float(index) * 0.18))
+309:		_add_water_triangle(surface, Vector3(x0 + width * 0.5, y0, z0), Vector3(x0 - width * 0.5, y1, z1), Vector3(x1 + width * 0.5, y1, z1), Vector2(1.0, float(index) * 0.18), Vector2(0.0, float(index + 1) * 0.18), Vector2(1.0, float(index + 1) * 0.18))
+326:		{"z": 28.0, "dx": -1.4, "scale": 0.32, "yaw": 0.42},
+327:		{"z": 52.0, "dx": 1.8, "scale": 0.28, "yaw": -1.12},
+328:		{"z": 76.0, "dx": -0.6, "scale": 0.36, "yaw": 2.34},
+329:		{"z": 102.0, "dx": 1.2, "scale": 0.30, "yaw": -0.78},
+331:		{"z": 38.0, "dx": 0.6, "scale": 0.44, "yaw": 1.22},
+332:		{"z": 64.0, "dx": -1.0, "scale": 0.38, "yaw": -0.55},
+333:		{"z": 88.0, "dx": 1.5, "scale": 0.42, "yaw": 2.80},
+336:		var bz: float = bed_data["z"] as float
+345:		bed_rock.scale = Vector3(bscale, bscale * 0.62, bscale)
+372:			rock.position = Vector3(x_value, ground_y + 0.06, z_value + rng.randf_range(-1.0, 1.0))
+374:			rock.scale = Vector3(rock_scale, rock_scale * 0.76, rock_scale)
+381:				rock_body.position = rock.position + Vector3(0.0, 0.35, 0.0)
+384:				rock_shape.size = Vector3(0.92, 0.70, 0.90)
+392:				fern.position = Vector3(x_value + side * 0.86, ground_y + 0.025, z_value + rng.randf_range(-0.82, 0.82))
+407:		{"z": 31.0, "scale": 0.58, "yaw": 0.35},
+408:		{"z": 49.0, "scale": 0.78, "yaw": -0.42},
+409:		{"z": 68.0, "scale": 0.68, "yaw": 0.74},
+410:		{"z": 87.0, "scale": 0.86, "yaw": -0.18},
+411:		{"z": 106.0, "scale": 0.64, "yaw": 0.52}
+415:		var z_value: float = data["z"] as float
+423:		rock.scale = Vector3(scale_value, scale_value * 0.72, scale_value)
+431:	var arch_z: float = ARCH_WORLD_Z
+432:	var arch_x: float = _road_x(arch_z)
+440:		pillar.position = Vector3(offset_x, 0.0, 0.0)
+442:		pillar.scale = Vector3(1.70, 3.55, 1.70)
+449:		masonry_mesh.size = Vector3(1.48, 12.40, 1.72)
+453:		masonry.position = Vector3(offset_x, 6.20, 0.0)
+462:		pillar_shape.size = Vector3(1.48, 12.40, 1.72)
+467:	lintel_mesh.size = Vector3(10.60, 1.08, 1.68)
+471:	lintel.position = Vector3(0.0, 12.72, 0.0)
+480:		debris.position = Vector3(side * (4.15 + float(debris_index % 2) * 0.70), 0.0, -1.7 + float(debris_index % 2) * 2.4)
+482:		debris.scale = Vector3(debris_scale, debris_scale * 0.76, debris_scale)
+490:			base_rock.position = Vector3(base_side, -0.12, 0.55)
+492:			base_rock.scale = Vector3(base_scale, base_scale * 0.58, base_scale)
+512:		ember.position = Vector3(ember_side, 3.15, -0.78)
+529:		crown.position = Vector3(crown_side * (3.35 + float(crown_index % 3) * 1.22), 13.05 + float(crown_index % 2) * 0.46, -0.12 + float(crown_index % 2) * 0.48)
+531:		crown.scale = Vector3(crown_scale, crown_scale * 0.78, crown_scale)
+532:		crown.rotation = Vector3(0.16 * float(crown_index % 2), float(crown_index) * 0.68, 0.12 * crown_side)
+543:	arch_fill.position = Vector3(0.0, 7.8, 2.6)
+551:		{"x": -4.50, "z": -1.28, "s": 0.28, "yaw": 0.36},
+552:		{"x": -4.92, "z": 0.32, "s": 0.22, "yaw": -0.72},
+553:		{"x": -4.30, "z": 1.56, "s": 0.17, "yaw": 1.08},
+554:		{"x": 4.50, "z": 1.22, "s": 0.27, "yaw": -0.44},
+555:		{"x": 4.94, "z": -0.34, "s": 0.20, "yaw": 0.88},
+556:		{"x": 4.26, "z": -1.46, "s": 0.16, "yaw": -1.18},
+565:		rubble.position = Vector3(spec["x"] as float, -0.11, spec["z"] as float)
+566:		rubble.scale = Vector3(scale_value, scale_value * 0.60, scale_value * 0.92)
+579:		{"z": CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.y + 4.0, "side": -1.0, "scale": 0.22, "name": "MarcoDaSaidaVoss"},
+580:		{"z": 52.0, "side": 1.0, "scale": 0.26, "name": "MarcoDaCurvaDoRio"},
+581:		{"z": ARCH_WORLD_Z - 14.0, "side": -1.0, "scale": 0.30, "name": "MarcoDaVistaDoArco"},
+
+=== DAYLIGHT VALLEY: rio, ponte e caminho ===
+43:func _river_center_x(z_value: float) -> float:
+59:		var x0: float = _river_center_x(z0)
+60:		var x1: float = _river_center_x(z1)
+63:		var left0: Vector3 = Vector3(x0 - width * 0.5, y0, z0)
+64:		var right0: Vector3 = Vector3(x0 + width * 0.5, y0, z0)
+65:		var left1: Vector3 = Vector3(x1 - width * 0.5, y1, z1)
+66:		var right1: Vector3 = Vector3(x1 + width * 0.5, y1, z1)
+93:		var center_x: float = _river_center_x(z_value)
+102:		rock.scale = Vector3(rock_scale, rock_scale * (0.72 + fmod(float(index), 2.0) * 0.12), rock_scale)
+112:	var bridge_z: float = -57.0
+113:	var bridge_x: float = _river_center_x(bridge_z)
+114:	bridge.position = Vector3(bridge_x, _height_at(bridge_x, bridge_z) + 0.10, bridge_z)
+115:	bridge.scale = Vector3(2.35, 1.05, 2.35)
+121:	bridge_body.position = bridge.position + Vector3(0.0, 1.35, 0.0)
+125:	bridge_shape.size = Vector3(29.0, 0.70, 4.80)
+148:		var x_value: float = _river_center_x(z_value) + (data["dx"] as float)
+155:		stone.position = Vector3(x_value, water_level + 0.08, z_value)
+157:		stone.scale = Vector3(scale_value, scale_value * 0.58, scale_value)
+172:		var z_value: float = lerpf(12.2, -112.0, t)
+173:		var x_value: float = lerpf(-21.4, 4.0, t) + sin(t * PI * 4.2) * 2.3
+184:		Vector3(-width * 0.52, rng.randf_range(-0.020, 0.035), -depth * 0.48),
+185:		Vector3(width * 0.46, rng.randf_range(-0.020, 0.035), -depth * 0.52),
+186:		Vector3(width * 0.54, rng.randf_range(-0.020, 0.035), depth * 0.45),
+187:		Vector3(-width * 0.44, rng.randf_range(-0.020, 0.035), depth * 0.54)
+267:		pillar.position = Vector3(offset_x, 0.0, 0.0)
+268:		pillar.scale = Vector3(1.46, 1.70, 1.46)
+274:	lintel_mesh.size = Vector3(8.30, 0.86, 1.35)
+278:	lintel.position = Vector3(0.0, 6.15, 0.0)
+288:		step.position = Vector3(0.0, 0.04 + float(step_index) * 0.05, 2.10 - float(step_index) * 0.72)
+297:		rubble.position = Vector3(side * (4.0 + float(rubble_index % 2) * 0.65), 0.0, -1.4 + float(rubble_index % 2) * 1.75)
+299:		rubble.scale = Vector3(rubble_scale, rubble_scale * 0.80, rubble_scale)
+328:		pillar.scale = Vector3(scale_value, scale_value * (0.92 + float(index % 2) * 0.22), scale_value)
+335:		rock.position = Vector3(16.0, _height_at(16.0, -68.0), -68.0)
+336:		rock.scale = Vector3(1.25, 1.25, 1.25)
+349:	material.uv1_scale = Vector3(0.34, 0.34, 0.34)
+
+=== FLORESTA E BACIA: âncoras e limites ===
+80:			flame.scale = Vector3(flicker * 0.92, flicker, flicker * 0.92)
+87:func _path_x(world_z: float) -> float:
+100:		var x_value: float = _path_x(z_value)
+107:		slab.rotation.y = atan2((_path_x(z_value + 1.0) - _path_x(z_value - 1.0)) * 0.5, 2.8) + rng.randf_range(-0.18, 0.18)
+112:		slab_body.position = slab.position + Vector3(0.0, -0.045, 0.0)
+116:		slab_shape.size = Vector3(1.48, 0.16, 1.06)
+129:		{"z": forest_entry_z - 28.0, "side": -1.0, "offset": 10.4, "scale": 0.54},
+130:		{"z": forest_entry_z - 24.0, "side": 1.0, "offset": 11.2, "scale": 0.48},
+131:		{"z": forest_entry_z - 16.0, "side": -1.0, "offset": 12.8, "scale": 0.60},
+132:		{"z": forest_entry_z - 11.0, "side": 1.0, "offset": 10.6, "scale": 0.52},
+136:		var z_value: float = float(spec["z"])
+138:		var x_value: float = _path_x(z_value) + side * float(spec["offset"])
+146:		tree.scale = Vector3(scale_value, scale_value * (0.92 + float(tree_index % 2) * 0.12), scale_value)
+152:		var x_value: float = _path_x(z_value) + side * (5.1 + float(rock_index % 3) * 0.75)
+158:			rock.scale = Vector3(rock_scale, rock_scale * 0.66, rock_scale)
+159:			rock.position = Vector3(x_value, ground_y + 0.04, z_value)
+160:			rock.rotation = Vector3(0.05 * float(rock_index % 2), float(rock_index) * 0.76, 0.08 * side)
+165:			fern.position = Vector3(x_value + side * 0.78, ground_y + 0.025, z_value + 0.42)
+177:		{"z": 101.0, "side": -1.0, "offset": 8.6, "scale": 0.54, "yaw": 0.18},
+178:		{"z": 106.0, "side": 1.0, "offset": 10.8, "scale": 0.46, "yaw": -0.36},
+179:		{"z": 111.0, "side": -1.0, "offset": 12.4, "scale": 0.60, "yaw": 0.54},
+180:		{"z": 115.0, "side": 1.0, "offset": 9.7, "scale": 0.50, "yaw": -0.22}
+184:		var z_value: float = group["z"] as float
+186:		var x_value: float = _path_x(z_value) + side * (group["offset"] as float)
+193:			tree.scale = Vector3(tree_scale, tree_scale * (0.92 + float(index % 2) * 0.14), tree_scale)
+197:		var rock_x: float = _path_x(z_value) + side * 4.3
+202:			rock.scale = Vector3(0.24 + float(index % 2) * 0.04, 0.16, 0.24 + float(index % 2) * 0.04)
+208:			fern.position = Vector3(rock_x + side * 0.55, _height_at(rock_x + side * 0.55, z_value + 0.75) + 0.02, z_value + 0.75)
+209:			fern.scale = Vector3(0.36, 0.36, 0.36)
+229:		var x_value: float = _path_x(z_value) + side * 2.75
+240:		base.position = Vector3(x_value, ground_y + 0.44, z_value)
+251:		glow.position = Vector3(x_value, ground_y + 0.94, z_value)
+267:	return lerpf(_path_x(shore_start_z), lake_anchor.x - 46.0, t) + sin(t * PI) * 3.25 + sin(t * TAU) * 0.85
+330:				inlet_rock.position = Vector3(bank_x, ground_y + 0.055, bank_z)
+332:				inlet_rock.scale = Vector3(inlet_scale, inlet_scale * 0.78, inlet_scale)
+340:					inlet_fern.position = Vector3(bank_x - bank_right.x * side * 0.64, _height_at(bank_x - bank_right.x * side * 0.64, bank_z - bank_right.y * side * 0.64) + 0.02, bank_z - bank_right.y * side * 0.64)
+375:		var step_position: Vector3 = Vector3(x_value, ground_y + 0.10, z_value)
+381:			step.scale = Vector3(0.21 + float(index % 2) * 0.018, 0.080 + float(index % 3) * 0.010, 0.18)
+383:			step.rotation = Vector3(0.03 * float((index % 3) - 1), step_rotation_y + 0.10 * float((index % 2) - 1), 0.025 * float((index % 2) - 1))
+392:		shape.size = Vector3(2.05, 0.22, 1.58)
+403:			guide_light.position = Vector3(x_value - 0.74, ground_y + 0.54, z_value)
+413:		{"z": lake_anchor.y - 52.0, "side": -1.0, "offset": 10.8, "scale": 0.54, "yaw": 0.22},
+414:		{"z": lake_anchor.y - 38.0, "side": 1.0, "offset": 11.8, "scale": 0.62, "yaw": -0.34},
+415:		{"z": lake_anchor.y - 31.0, "side": -1.0, "offset": 8.7, "scale": 0.47, "yaw": 0.48}
+419:		var z_value: float = spec["z"] as float
+427:			pillar.scale = Vector3(scale_value, scale_value * 1.46, scale_value)
+428:			pillar.rotation = Vector3(0.08 * side, spec["yaw"] as float, -0.05 * side)
+434:			footing.position = Vector3(x_value - side * 0.32, _height_at(x_value - side * 0.32, z_value + 0.42) + 0.03, z_value + 0.42)
+435:			footing.scale = Vector3(0.26, 0.17, 0.26)
+456:		pillar.position = Vector3(pillar_x, ground_y + 0.34, arrival_z + side * 0.72)
+458:		pillar.scale = Vector3(scale_value, scale_value * 1.30, scale_value)
+459:		pillar.rotation = Vector3(0.09 * side, side * (0.30 + float(frame_index) * 0.22), -0.05 * side)
+467:			rock.position = Vector3(pillar_x - side * (0.42 + float(base_index) * 0.34), ground_y + 0.035, arrival_z + side * (0.38 - float(base_index) * 0.52))
+469:			rock.scale = Vector3(rock_scale, rock_scale * 0.66, rock_scale)
+476:		fern.position = Vector3(arrival_x - 5.10, _height_at(arrival_x - 5.10, arrival_z + 1.6) + 0.02, arrival_z + 1.6)
+494:	corridor_fill.position = Vector3(7.0, 10.0, 204.0)
+513:			rock.position = Vector3(x_value + side * 1.18, ground_y + 0.07, z_value + 1.15)
+519:		crate_mesh.size = Vector3(0.95, 0.62, 0.82)
+524:		crate.position = Vector3(x_value, ground_y + 0.31, z_value)
+535:		lamp.position = Vector3(x_value, ground_y + 0.94, z_value)
+553:		{"z": 184.0, "side": -1.0, "offset": 6.8, "scale": 0.34},
+554:		{"z": 202.0, "side": 1.0, "offset": 7.4, "scale": 0.40},
+555:		{"z": 216.0, "side": -1.0, "offset": 6.6, "scale": 0.30},
+559:		var z_value: float = float(spec["z"])
+571:			marker.scale = Vector3(scale_value, scale_value * 1.42, scale_value)
+572:			marker.position = Vector3(side * 0.72, 0.88, 0.0)
+573:			marker.rotation = Vector3(0.06 * side, side * (0.32 + float(vista_index) * 0.16), 0.05 * side)
+582:			rock.scale = Vector3(rock_scale, rock_scale * 0.70, rock_scale)
+583:			rock.position = Vector3(-side * (0.45 + float(rock_index) * 0.78), 0.05 + float(rock_index) * 0.06, 0.42 - float(rock_index) * 0.68)
+584:			rock.rotation = Vector3(0.08 * float(rock_index), float(vista_index + rock_index) * 0.73, 0.07 * side)
+589:			fern.position = Vector3(side * 1.32, 0.02, -0.76)
+622:		pillar.position = Vector3(x_value, ground_y + 1.18, z_value)
+633:		beacon.position = Vector3(x_value, ground_y + 2.42, z_value)
+653:		var x_value: float = _path_x(z_value) + side * spacing
+657:		if abs(x_value - _path_x(z_value)) < 6.0 or lake_dx * lake_dx + lake_dz * lake_dz < 1.20:
+700:			trunk_body.position = tree.position + Vector3(0.0, trunk_height * 0.5, 0.0)
+711:		var x_value: float = _path_x(z_value) + side * (5.15 + fmod(float(index), 5.0) * 0.82)
+728:		{"z": 138.0, "side": -1.0, "offset": 7.4, "scale": 0.60, "yaw": -0.28},
+729:		{"z": 146.0, "side": 1.0, "offset": 8.2, "scale": 0.56, "yaw": 0.86},
+730:		{"z": 155.0, "side": -1.0, "offset": 9.1, "scale": 0.52, "yaw": -1.24},
+731:		{"z": 163.0, "side": 1.0, "offset": 7.8, "scale": 0.64, "yaw": 2.18},
+732:		{"z": 173.0, "side": -1.0, "offset": 8.6, "scale": 0.56, "yaw": 0.34},
+733:		{"z": 184.0, "side": 1.0, "offset": 9.4, "scale": 0.54, "yaw": -2.02},
+734:		{"z": 196.0, "side": -1.0, "offset": 7.6, "scale": 0.58, "yaw": 1.42}
+738:		var z_value: float = data["z"] as float
+740:		var x_value: float = _path_x(z_value) + side * (data["offset"] as float)
+755:			trunk.position = tree.position + Vector3(0.0, 1.90, 0.0)
+780:		var x_value: float = _path_x(z_value) + side * (4.95 + float(index % 3) * 0.44)
+783:		root_mesh.size = Vector3(0.30 + float(index % 3) * 0.06, 0.16, 1.55 + float(index % 4) * 0.24)
+788:		root.position = Vector3(x_value, ground_y + 0.075, z_value + rng.randf_range(-0.68, 0.68))
+789:		root.rotation = Vector3(rng.randf_range(-0.06, 0.06), rng.randf_range(-0.92, 0.92), rng.randf_range(-0.12, 0.12))
+795:				wet_rock.position = Vector3(x_value + side * 0.64, ground_y + 0.035, z_value + rng.randf_range(-0.84, 0.84))
+797:				wet_rock.scale = Vector3(rock_scale, rock_scale * 0.78, rock_scale)
+810:		var marker_x: float = _path_x(marker_z) + marker_side * 3.65
+815:			p0_stone.position = Vector3(marker_x, marker_y + 0.62, marker_z)
+816:			p0_stone.scale = Vector3(0.28, 0.36, 0.28)
+817:			p0_stone.rotation = Vector3(0.03, 0.34 + float(marker_index) * 0.58, 0.02)
+826:			p0_light.position = p0_stone.position + Vector3(0.0, 0.80, 0.0)
+832:	var camp_x: float = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC.x
+833:	var camp_z: float = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC.y
+842:		canvas_material.uv1_scale = Vector3(1.18, 1.05, 1.0)
+862:		tent_mesh.size = Vector3(4.8, 2.4, 5.6)
+874:		groundsheet_mesh.size = Vector3(4.55, 0.07, 5.28)
+877:		groundsheet.position = Vector3(tent.position.x, 0.035, tent.position.z)
+890:			var local_pole: Vector3 = Vector3(pole_side * 1.92, 1.325, -1.88)
+896:		seam_mesh.size = Vector3(0.052, 1.78, 0.036)
+902:			seam.position = tent.position + Vector3(seam_side * 1.38, 1.18, -1.48).rotated(Vector3.UP, tent.rotation.y)
+913:		tent_shape.size = Vector3(4.20, 2.10, 4.85)
+930:	fire.position = Vector3(0.0, 0.48, 0.0)
+946:	ember_core.position = Vector3(0.0, 0.14, 0.0)
+956:	fire_light.position = Vector3(0.0, 1.5, 0.0)
+967:	ember_light.position = Vector3(0.0, 0.22, 0.0)
+979:	camp_fill.position = Vector3(0.0, 5.2, 0.0)
+991:	moonlight.position = Vector3(-1.8, 8.6, 1.4)
+992:	moonlight.rotation_degrees = Vector3(-67.0, -24.0, 0.0)
+1018:		fire_rock.scale = Vector3(0.16, 0.12, 0.16)
+1023:		fire_rock_body.position = fire_rock.position + Vector3(0.0, 0.12, 0.0)
+1035:		supply_mesh.size = Vector3(1.15, 0.76, 0.82)
+1040:		supply.position = Vector3(-2.0 + float(supply_index) * 1.25, 0.38, -2.35)
+1049:		supply_shape.size = Vector3(1.15, 0.76, 0.82)
+1063:	chart_table_mesh.size = Vector3(1.75, 0.13, 1.12)
+1066:	chart_table.position = Vector3(2.72, 1.28, -2.78)
+1079:			leg.position = chart_table.position + Vector3(leg_x, -0.61, leg_z).rotated(Vector3.UP, chart_table.rotation.y)
+1084:	map_mesh.size = Vector3(1.38, 0.026, 0.84)
+1087:	map_sheet.position = chart_table.position + Vector3(0.0, 0.083, 0.0)
+1100:		roll.position = Vector3(-3.20 + float(roll_index) * 0.52, 0.18, 2.82)
+1114:		rack_pole.position = Vector3(rack_x, 1.18, 3.18)
+1124:	rack_beam.position = Vector3(-1.50, 2.18, 3.18)
+1144:		torch_light.position = torch.position + Vector3(0.0, 1.05, 0.0)
+1164:		mast.position = Vector3(10.2, 3.2, marker_side * 5.6)
+1173:		banner.position = mast.position + Vector3(marker_side * 0.92, 1.18, 0.0)
+1174:		banner.rotation = Vector3(PI * 0.5, 0.18 * marker_side, 0.0)
+1179:			mast_rock.position = Vector3(10.2, 0.05, marker_side * 5.6)
+1180:			mast_rock.scale = Vector3(0.24, 0.16, 0.24)
+1190:	camp_stela.position = Vector3(8.4, 0.0, -5.5)
+1194:		stela_model.scale = Vector3(0.44, 0.56, 0.44)
+1202:	stela_collision.position = Vector3(0.0, 1.32, 0.0)
+1210:	stela_light.position = Vector3(0.0, 1.92, 0.0)
+1222:	var camp_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC
+1224:	var end_x: float = _path_x(camp_anchor.y)
+1241:		slab_shape.size = Vector3(2.18, 0.20, 1.70)
+1252:			marker.position = slab.position + Vector3(0.0, 0.68, 0.68)
+1270:			margin_rock.position = Vector3(world_x, ground_y + 0.05, world_z)
+1272:			margin_rock.scale = Vector3(rock_scale, rock_scale * 0.82, rock_scale)
+1278:			margin_fern.position = Vector3(world_x - side * 0.56, ground_y + 0.03, world_z + rng.randf_range(-0.44, 0.44))
+1302:	var turn_z: float = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC.y
+1303:	var turn_x: float = _path_x(turn_z)
+1309:		stela.position = Vector3(marker_x, marker_y + 0.42, turn_z - 0.64)
+1310:		stela.scale = Vector3(0.31, 0.48, 0.31)
+1311:		stela.rotation = Vector3(0.04, -PI * 0.5, -0.06)
+
+=== ÂNCORAS CANÓNICAS ===
+8:const CASA_VOSS := Vector2(-22.0, 8.0)
+9:const ESTRADA_RIO_INICIO := Vector2(-21.4, 12.0)
+10:const ARCO_RUINAS := Vector2(-16.741, 48.0)
+11:const FLORESTA_DENSA_ENTRADA := Vector2(-9.0, 116.0)
+12:const ACAMPAMENTO_MAJESTIC := Vector2(-88.0, 178.0)
+13:const RUINAS_SUBMERSAS := Vector2(60.0, 252.0)
+36:		CASA_VOSS, ESTRADA_RIO_INICIO, ARCO_RUINAS, FLORESTA_DENSA_ENTRADA,
+37:		ACAMPAMENTO_MAJESTIC, RUINAS_SUBMERSAS, VILA_ELEVADA, OBSERVATORIO,
+56:	if player_z < ESTRADA_RIO_INICIO.y + 8.0:
+57:		return {"anchor": ESTRADA_RIO_INICIO, "label": "RUMO À ESTRADA DO RIO", "anchor_id": 2}
+58:	if player_z >= RUINAS_SUBMERSAS.y - 18.0:
+60:	if player_z >= ACAMPAMENTO_MAJESTIC.y - 12.0:
+61:		return {"anchor": RUINAS_SUBMERSAS, "label": "RUMO ÀS RUÍNAS", "anchor_id": 6}
+62:	if player_z >= FLORESTA_DENSA_ENTRADA.y + 20.0:
+63:		return {"anchor": ACAMPAMENTO_MAJESTIC, "label": "RUMO AO MAJESTIC", "anchor_id": 5}
+64:	if player_z >= ARCO_RUINAS.y + 12.0:
+65:		return {"anchor": FLORESTA_DENSA_ENTRADA, "label": "RUMO À FLORESTA", "anchor_id": 4}
+66:	return {"anchor": ARCO_RUINAS, "label": "RUMO AO ARCO", "anchor_id": 3}

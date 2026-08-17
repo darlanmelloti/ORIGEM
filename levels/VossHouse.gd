@@ -75,6 +75,7 @@ func _ready() -> void:
 	_build_interior(house)
 	_build_exterior_details(house)
 	_build_voss_panoramic_threshold(house)
+	_build_voss_revelation_terrace()
 	_build_visible_opening_road()
 	_build_macro_road_readability()
 	_build_voss_river_revelation_bridge()
@@ -129,12 +130,66 @@ func _build_voss_panoramic_threshold(house: Node3D) -> void:
 		fern.rotation.y = side * 0.62
 		threshold.add_child(fern)
 
+func _build_voss_revelation_terrace() -> void:
+	# Miradouro físico CP281: fica no lado exterior da fachada, elevado o suficiente para ler a bacia sem comprimir a escala real do vale.
+	var terrace: StaticBody3D = StaticBody3D.new()
+	terrace.name = "TerracoDeRevelacaoDaCasaVoss"
+	var ground_y: float = _ground_height(-22.0, 14.0)
+	terrace.position = Vector3(-22.0, ground_y + 2.28, 14.0)
+	add_child(terrace)
+
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(8.2, 0.44, 6.2)
+	slab_mesh.material = stone_material
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajePrincipalDoTerraco"
+	slab.mesh = slab_mesh
+	terrace.add_child(slab)
+	var slab_collision: CollisionShape3D = CollisionShape3D.new()
+	var slab_shape: BoxShape3D = BoxShape3D.new()
+	slab_shape.size = slab_mesh.size
+	slab_collision.shape = slab_shape
+	terrace.add_child(slab_collision)
+
+	# Três degraus largos garantem uma subida natural desde a soleira, sem obstruir a saída pela porta interactiva.
+	for step_index: int in range(3):
+		var step: StaticBody3D = StaticBody3D.new()
+		step.name = "DegrauDoTerraco_%02d" % (step_index + 1)
+		var step_height: float = 0.38 + float(step_index) * 0.56
+		step.position = Vector3(-22.0, ground_y + step_height * 0.5, 9.55 + float(step_index) * 1.15)
+		var step_mesh: BoxMesh = BoxMesh.new()
+		step_mesh.size = Vector3(3.8 + float(step_index) * 0.62, step_height, 1.38)
+		step_mesh.material = stone_material
+		var step_visual: MeshInstance3D = MeshInstance3D.new()
+		step_visual.mesh = step_mesh
+		step.add_child(step_visual)
+		var step_collision: CollisionShape3D = CollisionShape3D.new()
+		var step_shape: BoxShape3D = BoxShape3D.new()
+		step_shape.size = step_mesh.size
+		step_collision.shape = step_shape
+		step.add_child(step_collision)
+		add_child(step)
+
+	# Restos baixos de ruína enquadram a lente e preservam as diagonais de saída para a Estrada e o rio.
+	for corner_index: int in range(3):
+		var pillar: Node3D = RUIN_PILLAR_ASSET.instantiate() as Node3D
+		if pillar == null:
+			continue
+		pillar.name = "PilarDoMiradouro_%02d" % (corner_index + 1)
+		var offsets: Array[Vector3] = [Vector3(-3.55, 0.0, 2.3), Vector3(3.55, 0.0, 2.3), Vector3(-3.6, 0.0, -2.25)]
+		var offset: Vector3 = offsets[corner_index]
+		pillar.position = Vector3(-22.0 + offset.x, _ground_height(-22.0 + offset.x, 14.0 + offset.z) - 0.04, 14.0 + offset.z)
+		pillar.scale = Vector3(0.34, 0.58 if corner_index < 2 else 0.42, 0.34)
+		pillar.rotation.y = [-0.20, 0.24, -0.42][corner_index]
+		add_child(pillar)
+
 func _build_voss_river_revelation_bridge() -> void:
 	# Marco 2 na borda da revelação: ponte CC0 real sobre o rio, visível a partir da saída mas fora do eixo da rota inicial.
 	# A Estrada do Rio mantém a direcção norte até ao Arco; esta ponte antecipa a leitura transversal do vale no mapa oficial.
 	var bridge_z: float = 31.0
 	var river_x: float = 10.5 + sin(((bridge_z - 8.0) / 155.0) * PI * 2.2) * 3.6 + sin(((bridge_z - 8.0) / 155.0) * PI * 5.0) * 0.8
-	var bridge_y: float = (_ground_height(river_x - 4.0, bridge_z) + _ground_height(river_x + 4.0, bridge_z)) * 0.5 + 0.18
+	# A soleira do rio fica abaixo do leito próximo; a elevação estabiliza a leitura dos arcos e impede que a ponte se funda no talude.
+	var bridge_y: float = (_ground_height(river_x - 4.0, bridge_z) + _ground_height(river_x + 4.0, bridge_z)) * 0.5 + 1.18
 	var bridge: Node3D = STONE_BRIDGE_ASSET.instantiate() as Node3D
 	if bridge == null:
 		return
@@ -142,11 +197,12 @@ func _build_voss_river_revelation_bridge() -> void:
 	bridge.position = Vector3(river_x, bridge_y, bridge_z)
 	bridge.scale = Vector3(2.15, 1.02, 2.15)
 	bridge.rotation.y = PI * 0.5
+	_tint_tree_silhouette(bridge, stone_material)
 	add_child(bridge)
 	# A superfície física coincide com a ponte e não interfere no corredor da Estrada, situado bem a oeste do rio.
 	var bridge_body: StaticBody3D = StaticBody3D.new()
 	bridge_body.name = "ColisorPonteVisivelDaCasaVoss"
-	bridge_body.position = bridge.position + Vector3(0.0, 1.24, 0.0)
+	bridge_body.position = bridge.position + Vector3(0.0, 0.62, 0.0)
 	bridge_body.rotation.y = bridge.rotation.y
 	var bridge_collision: CollisionShape3D = CollisionShape3D.new()
 	var bridge_shape: BoxShape3D = BoxShape3D.new()
@@ -162,8 +218,10 @@ func _build_voss_river_revelation_bridge() -> void:
 		pier.name = "PilarDaPonteVisivel_%s" % ("Oeste" if pier_side < 0.0 else "Este")
 		var pier_x: float = river_x + pier_side * 9.8
 		pier.position = Vector3(pier_x, _ground_height(pier_x, bridge_z) - 0.05, bridge_z)
-		pier.scale = Vector3(0.42, 0.66, 0.42)
+		# Pilares altos mas quebrados: tornam a ponte lateral legível acima do talude sem criar uma torre nem bloquear o vale.
+		pier.scale = Vector3(0.64, 1.72, 0.64)
 		pier.rotation.y = pier_side * 0.18
+		_tint_tree_silhouette(pier, stone_material)
 		add_child(pier)
 
 func _build_visible_opening_road() -> void:
@@ -889,14 +947,12 @@ func _build_opening_camera() -> void:
 	# Variante diurna: câmara mais alta e ligeiramente à direita, deixando Casa Voss à esquerda, lajes ao centro e rio à direita.
 	if DAYLIGHT_VARIANT_ENABLED:
 		# A abertura mostra o percurso que Elias realmente seguirá: Casa Voss à esquerda, rio à direita e Arco das Ruínas no plano médio.
-		opening_camera.fov = 57.0
-		# A câmara permanece no flanco da Casa, mas abre o corredor norte em vez de encarar a sua parede lateral.
-		# O alvo coincide com a progressão real Casa → Estrada do Rio → Arco das Ruínas.
-		# Varanda intermédia: mantém a Casa como moldura, expõe a Estrada no eixo e conserva a serra como horizonte.
-		# A câmara evita tanto a cobertura dominante como a vista aérea que faria os marcos desaparecerem.
-		opening_camera.position = Vector3(-33.5, 8.1, 2.2)
-		# Alvo rebaixado: favorece a linha da estrada, a água lateral e o Arco, sem perder o horizonte volumétrico.
-		opening_camera.look_at(Vector3(-14.4, -4.5, 64.0), Vector3.UP)
+		opening_camera.fov = 72.0
+		# Câmara no miradouro físico: a diagonal para leste contém a ponte transversal, a Estrada de Elias e o Arco sem comprimir o vale.
+		var terrace_ground_y: float = _ground_height(-22.0, 14.0)
+		# Borda oeste do terraço: a parede e o telhado da Casa entram como moldura à esquerda, sem esconder o vale.
+		opening_camera.position = Vector3(-26.0, _ground_height(-26.0, 11.0) + 6.9, 11.0)
+		opening_camera.look_at(Vector3(8.0, _ground_height(8.0, 65.0) - 1.5, 65.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
@@ -948,11 +1004,35 @@ func _activate_opening_camera() -> void:
 			if legacy_node != null and legacy_node.visible:
 				legacy_node.visible = false
 				opening_hidden_nodes.append(legacy_node)
+		# Sinais Chronos e protótipos dos marcos só surgem depois da revelação; no primeiro quadro seriam pontos técnicos ciano, não geometria do vale.
+		for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "JanelaChronosAzul", "LuzDaJanelaChronos"]:
+			for technical_node: Node in scene_root.find_children(technical_marker_name, "Node3D", true, false):
+				var technical_marker: Node3D = technical_node as Node3D
+				if technical_marker != null and technical_marker.visible:
+					technical_marker.visible = false
+					opening_hidden_nodes.append(technical_marker)
+
 	# A tempestade é aplicada imediatamente à câmara de prólogo; o reforço diferido vence qualquer sincronização Chronos tardia.
 	_apply_opening_storm()
 	get_tree().create_timer(0.35).timeout.connect(_apply_opening_storm)
+	# A construção regional ocorre após esta activação; uma passagem tardia remove apenas sinais técnicos entretanto instanciados.
+	get_tree().create_timer(1.65).timeout.connect(_hide_late_opening_technical_markers)
+
+func _hide_late_opening_technical_markers() -> void:
+	if not opening_active:
+		return
+	var scene_root: Node = get_tree().current_scene
+	if scene_root == null:
+		return
+	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "LuzChronosMargem", "JanelaChronosAzul", "LuzDaJanelaChronos"]:
+		for technical_node: Node in scene_root.find_children(technical_marker_name, "Node3D", true, false):
+			var technical_marker: Node3D = technical_node as Node3D
+			if technical_marker != null and technical_marker.visible:
+				technical_marker.visible = false
+				opening_hidden_nodes.append(technical_marker)
 
 func _apply_opening_storm() -> void:
+
 	var scene_root: Node = get_tree().current_scene
 	if scene_root == null:
 		return

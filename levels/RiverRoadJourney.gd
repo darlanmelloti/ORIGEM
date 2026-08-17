@@ -6,6 +6,7 @@ extends Node3D
 
 const RUIN_PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const RUIN_ROCK: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
+const STONE_BRIDGE: PackedScene = preload("res://assets/models_cc0/bridge_stone.glb")
 const FERN: PackedScene = preload("res://assets/models_polyhaven/fern_02/fern_02_1k.gltf")
 const PINE_MEDIUM: PackedScene = preload("res://assets/models_generated/ez_pine_medium_pbr.glb")
 const DARK_TREE: PackedScene = preload("res://assets/models_cc0/tree_detailed_dark.glb")
@@ -37,6 +38,7 @@ func _ready() -> void:
 	_build_river_road()
 	_build_river()
 	_build_river_margins()
+	_build_positive_valley_bridge()
 	_build_macro_river_cutbanks()
 	_build_ruin_arch()
 	_build_cartographic_southwest_readability()
@@ -47,6 +49,8 @@ func _ready() -> void:
 	_build_arch_approach_ecology()
 	_build_roadside_vegetation()
 	_build_macro_ridge_layers()
+	_build_arch_backdrop_foothills()
+	_build_valley_rim_outcrops()
 
 func _build_macro_ridge_layers() -> void:
 	# Camadas laterais de relevo: criam profundidade real entre a Casa Voss e o Arco, sem aproximar o destino nem ocupar a faixa de 4,15 m da Estrada.
@@ -85,6 +89,81 @@ func _build_macro_ridge_layers() -> void:
 				fragment.rotation.y = (layer["yaw"] as float) + 0.24
 				_apply_material(fragment, ruin_material)
 				ridge_root.add_child(fragment)
+
+func _build_arch_backdrop_foothills() -> void:
+	# Contrafortes reais de plano intermédio: criam relevo após o Arco sem fingir a Montanha Orion, reservada às Regiões 7–12.
+	# Todos ficam fora da faixa de rota e não possuem colisores, para a viagem Casa → Estrada → Arco se manter desimpedida.
+	var foothills: Node3D = Node3D.new()
+	foothills.name = "ContrafortesAposArco"
+	add_child(foothills)
+	var specs: Array[Dictionary] = [
+		{"z": 105.0, "side": -1.0, "offset": 15.0, "scale": 1.85, "yaw": 0.36},
+		{"z": 109.0, "side": 1.0, "offset": 16.5, "scale": 2.15, "yaw": -0.58},
+		{"z": 113.0, "side": -1.0, "offset": 20.0, "scale": 2.35, "yaw": 0.74},
+		{"z": 115.0, "side": 1.0, "offset": 22.0, "scale": 2.60, "yaw": -0.24}
+	]
+	for index: int in range(specs.size()):
+		var spec: Dictionary = specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var x_value: float = _road_x(z_value) + side * (spec["offset"] as float)
+		var cliff: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if cliff == null:
+			continue
+		cliff.name = "ContraforteDoArco_%02d" % (index + 1)
+		cliff.position = Vector3(x_value, _height_at(x_value, z_value) - 0.18, z_value)
+		var scale_value: float = spec["scale"] as float
+		cliff.scale = Vector3(scale_value * 1.08, scale_value * 1.42, scale_value)
+		cliff.rotation.y = spec["yaw"] as float
+		_apply_material(cliff, ruin_material)
+		foothills.add_child(cliff)
+		# Uma copa isolada em cada segundo contraforte dá escala, mas mantém as clareiras de entrada na Floresta Densa.
+		if index % 2 == 0:
+			var tree: Node3D = DARK_TREE.instantiate() as Node3D
+			if tree != null:
+				tree.name = "ArvoreDoContraforte_%02d" % (index + 1)
+				tree.position = Vector3(x_value - side * 2.6, _height_at(x_value - side * 2.6, z_value + 1.8), z_value + 1.8)
+				tree.scale = Vector3(0.42, 0.42, 0.42)
+				tree.rotation.y = 0.48 + float(index) * 0.73
+				foothills.add_child(tree)
+
+func _build_valley_rim_outcrops() -> void:
+	# Afloramentos em planos alternados tornam os taludes recém-esculpidos legíveis como geografia real, não como uma parede de terreno.
+	# As posições ficam a mais de 15 m do eixo da estrada e não recebem colisores.
+	var rims: Node3D = Node3D.new()
+	rims.name = "AfloramentosDoValeMacro"
+	add_child(rims)
+	var specs: Array[Dictionary] = [
+		{"z": 50.0, "side": -1.0, "offset": 16.0, "scale": 0.78, "yaw": 0.32},
+		{"z": 66.0, "side": 1.0, "offset": 17.5, "scale": 1.02, "yaw": -0.61},
+		{"z": 80.0, "side": -1.0, "offset": 19.0, "scale": 1.24, "yaw": 0.74},
+		{"z": 98.0, "side": 1.0, "offset": 20.5, "scale": 1.46, "yaw": -0.28},
+		{"z": 112.0, "side": -1.0, "offset": 23.0, "scale": 1.70, "yaw": 0.49}
+	]
+	for index: int in range(specs.size()):
+		var spec: Dictionary = specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var x_value: float = _road_x(z_value) + side * (spec["offset"] as float)
+		var outcrop: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if outcrop == null:
+			continue
+		outcrop.name = "AfloramentoMacro_%02d" % (index + 1)
+		outcrop.position = Vector3(x_value, _height_at(x_value, z_value) - 0.15, z_value)
+		var scale_value: float = spec["scale"] as float
+		outcrop.scale = Vector3(scale_value * 1.34, scale_value * 1.12, scale_value)
+		outcrop.rotation.y = spec["yaw"] as float
+		_apply_material(outcrop, ruin_material)
+		rims.add_child(outcrop)
+		if index == 1 or index == 3:
+			var vestige: Node3D = RUIN_PILLAR.instantiate() as Node3D
+			if vestige != null:
+				vestige.name = "VestigioDoTalude_%02d" % (index + 1)
+				vestige.position = Vector3(x_value - side * 1.5, _height_at(x_value - side * 1.5, z_value + 0.8), z_value + 0.8)
+				vestige.scale = Vector3(0.30, 0.48, 0.30)
+				vestige.rotation = Vector3(0.08 * side, (spec["yaw"] as float) + 0.35, 0.05)
+				_apply_material(vestige, ruin_material)
+				rims.add_child(vestige)
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -269,6 +348,35 @@ func _build_river() -> void:
 		bed_rock.rotation.y = bed_data["yaw"] as float
 		_apply_material(bed_rock, bed_rock_mat)
 		river_root.add_child(bed_rock)
+
+func _build_positive_valley_bridge() -> void:
+	# CP280 — ponte de leitura no eixo positivo: integra Casa, rio, Estrada e Arco na sequência do mapa.
+	# É uma silhueta lateral sem colisor; a rota principal permanece na estrada ocidental e a ponte legada negativa não é tocada.
+	var bridge_z: float = 58.0
+	var bridge_x: float = _river_x(bridge_z)
+	var bridge_y: float = (_height_at(bridge_x - 4.8, bridge_z) + _height_at(bridge_x + 4.8, bridge_z)) * 0.5 + 0.14
+	var bridge_root: Node3D = Node3D.new()
+	bridge_root.name = "PonteDeLeituraDoValePositivo"
+	bridge_root.position = Vector3(bridge_x, bridge_y, bridge_z)
+	bridge_root.rotation.y = PI * 0.5
+	add_child(bridge_root)
+	var bridge: Node3D = STONE_BRIDGE.instantiate() as Node3D
+	if bridge != null:
+		bridge.name = "PonteDePedraDoEixoPositivo"
+		bridge.scale = Vector3(1.20, 0.92, 1.20)
+		_apply_material(bridge, ruin_material)
+		bridge_root.add_child(bridge)
+	for side: float in [-1.0, 1.0]:
+		var footing_x: float = bridge_x + side * 7.05
+		var footing: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if footing == null:
+			continue
+		footing.name = "EncontroDaPonte_%s" % ("Oeste" if side < 0.0 else "Este")
+		footing.position = Vector3(footing_x, _height_at(footing_x, bridge_z) + 0.02, bridge_z + side * 0.58)
+		footing.scale = Vector3(0.78, 0.54, 0.84)
+		footing.rotation = Vector3(0.05 * side, side * 0.46, -0.04 * side)
+		_apply_material(footing, ruin_material)
+		bridge_root.add_child(footing)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
@@ -612,12 +720,11 @@ func _build_roadside_vegetation() -> void:
 		var z_value: float = 26.0 + float(index) * 9.0
 		var side: float = -1.0 if index % 2 == 0 else 1.0
 		var x_value: float = _road_x(z_value) + side * (7.0 + float(index % 3) * 1.1)
-		# Alternância de espécies reais: cria profundidade de margem sem concentrar árvores no eixo do percurso.
-		var tree_source: PackedScene = PINE_MEDIUM
-		if index % 5 == 0:
+		# As coníferas geradas serviam ao protótipo, mas liam como cones planos na revelação macro.
+		# Árvores CC0 de tronco e copa orgânicos mantêm a margem aberta e sem parede vegetal.
+		var tree_source: PackedScene = DARK_TREE
+		if index % 3 == 0:
 			tree_source = OAK_DARK
-		elif index % 3 == 0:
-			tree_source = DARK_TREE
 		var tree: Node3D = tree_source.instantiate() as Node3D
 		if tree != null:
 			tree.name = "ArvoreEstrada_%02d" % index
