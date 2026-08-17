@@ -31,3 +31,25 @@ A calibração mais forte da luz direccional já anexa à câmara de Elias foi t
 > **Candidato rejeitado:** aumentar energia, alcance e cone da luz pessoal sem alterar a linguagem espacial do corredor.
 
 **Próxima melhoria aberta:** criar um marco tridimensional de orientação, aproveitando geometria existente e sem emitir nova luz dinâmica; a decisão será validada primeiro em captura estática e depois em movimento.
+
+## CP-CINE-59 — Reversão do marco mineral CC0
+
+A formação `stone_tallC.glb` foi testada no bordo do primeiro desvio com validação de 30 segundos. Embora seja geometria volumétrica real e não afecte a rota física, apareceu como uma massa cinzenta sem integração material com a caverna. Foi removida.
+
+> **Candidato rejeitado:** inserir directamente o activo CC0 de rocha sem uma passagem de material e escala específica do interior.
+
+O próximo marco terá de nascer da própria malha do túnel ou ser integrado com o mesmo material PBR de rocha, sem recorrer a um modelo isolado visualmente dissonante.
+
+## CP-CINE-60 — Reversão da hipótese de normais do piso
+
+A inversão da ordem dos triângulos do piso foi validada por 30 segundos. No renderizador de compatibilidade, a nova ordem eliminou visualmente o piso devido à cullagem; a topologia anterior foi restaurada. Esta tentativa não resolve a leitura da rota.
+
+> **Candidato rejeitado:** inverter a ordem das faces do piso sobreposto como passe de iluminação.
+
+## CP-CINE-61 — Sonda de orientação
+
+As orientações para o flanco negativo e para o centro foram capturadas a partir do mesmo spawn. Ambas mantêm a massa de rocha próxima em primeiro plano e não fornecem um destino legível. A terceira orientação positiva será usada para confirmar se a entrada óptima é o eixo oposto.
+
+A orientação oeste (`target=(-1.55, y, 5.30)`) foi a mais legível das três opções: organiza o arco de rocha e concentra o piso de avanço no centro inferior do enquadramento. Foi promovida para a orientação permanente da transição e validada durante 30 segundos sem erros.
+
+**Próxima hipótese aberta — CP-CINE-62:** calibrar apenas o FOV da câmara de Elias no interior, pois o FOV padrão muito aberto amplifica as paredes laterais. Não serão alterados geometria, materiais, colisores nem luzes durante este teste.

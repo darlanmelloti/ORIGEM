@@ -28,8 +28,8 @@ func begin_return(player: Node3D) -> void:
 
 func restore_interior_player(player: Node3D) -> void:
 	player.global_position = INTERIOR_SPAWN
-	# A rota curva suavemente a oeste depois da soleira; a orientação inicial já enquadra o primeiro trecho navegável.
-	player.look_at(Vector3(-1.04, player.global_position.y, 5.50), Vector3.UP)
+	# A captura CP-CINE-61 confirmou que o eixo oeste enquadra o arco navegável com maior clareza desde a soleira.
+	player.look_at(Vector3(-1.55, player.global_position.y, 5.30), Vector3.UP)
 	_restore_player_state(player)
 	EventBus.player_message_requested.emit("A garganta fecha-se atrás de Elias.", 1.8)
 
