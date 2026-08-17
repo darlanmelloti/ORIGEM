@@ -13,6 +13,8 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 var terrain_patch: Node3D
 var stone_material: StandardMaterial3D
 var cube_material: StandardMaterial3D
+var cube_chamber: Node3D
+const CUBE_CHAMBER_REVEAL_RADIUS: float = 10.5
 
 func _ready() -> void:
 	terrain_patch = get_parent().get_node_or_null("TerrainPatch") as Node3D
@@ -21,6 +23,16 @@ func _ready() -> void:
 	_build_orion_cave()
 	_build_cube_chamber_marker()
 	_build_temporal_hub()
+
+func _process(_delta: float) -> void:
+	# O artefacto só integra a narrativa depois da travessia: não pode contaminar a vista da montanha ou da boca Orion.
+	if cube_chamber == null:
+		return
+	var player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
+	if player == null and get_tree().current_scene != null:
+		player = get_tree().current_scene.find_child("Player", true, false) as Node3D
+	var qa_interior_reveal: bool = OS.get_environment("ORIGEM_QA_ORION_REVEAL") == "1"
+	cube_chamber.visible = qa_interior_reveal or (player != null and player.global_position.distance_to(cube_chamber.global_position) <= CUBE_CHAMBER_REVEAL_RADIUS)
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -79,6 +91,7 @@ func _build_cube_chamber_marker() -> void:
 	var chamber_x: float = -116.0
 	var chamber_z: float = 562.0
 	chamber.position = Vector3(chamber_x, _height_at(chamber_x, chamber_z) + 2.8, chamber_z)
+	cube_chamber = chamber
 	add_child(chamber)
 	var altar_mesh: CylinderMesh = CylinderMesh.new()
 	altar_mesh.top_radius = 3.2

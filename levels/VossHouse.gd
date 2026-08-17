@@ -1014,6 +1014,16 @@ func _build_opening_camera() -> void:
 			opening_camera.fov = 60.0
 			opening_camera.position = Vector3(-19.0, _ground_height(-19.0, 76.0) + 4.8, 76.0)
 			opening_camera.look_at(Vector3(-16.7, _ground_height(-16.7, 92.0) + 5.8, 92.0), Vector3.UP)
+		elif qa_storyboard_stage == "orion_entrada":
+			# CP-CINE-21: estágio QA restrito; não intervém no prólogo ou no percurso normal.
+			opening_camera.fov = 62.0
+			opening_camera.position = Vector3(-116.0, _ground_height(-116.0, 548.0) + 3.0, 548.0)
+			opening_camera.look_at(Vector3(-116.0, _ground_height(-116.0, 556.0) + 1.7, 556.0), Vector3.UP)
+		elif qa_storyboard_stage == "orion_camara":
+			opening_camera.fov = 58.0
+			# Afastada 10,5 m do altar: revela o artefacto como destino em vez de intersectar a malha do Cubo.
+			opening_camera.position = Vector3(-116.0, _ground_height(-116.0, 551.5) + 2.25, 551.5)
+			opening_camera.look_at(Vector3(-116.0, _ground_height(-116.0, 562.0) + 1.25, 562.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)
@@ -1119,6 +1129,9 @@ func _audit_opening_residuals() -> void:
 
 func _hide_late_opening_technical_markers() -> void:
 	if not opening_active:
+		return
+	# O estágio QA Orion é uma auditoria interior explícita; no prólogo normal, a limpeza permanece integral.
+	if OS.get_environment("ORIGEM_QA_ORION_REVEAL") == "1":
 		return
 	var scene_root: Node = get_tree().current_scene
 	if scene_root == null:
