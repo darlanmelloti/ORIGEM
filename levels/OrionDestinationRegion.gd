@@ -14,6 +14,7 @@ var terrain_patch: Node3D
 var stone_material: StandardMaterial3D
 var cube_material: StandardMaterial3D
 var cube_chamber: Node3D
+var interior_handoff_ready: bool = false
 const CUBE_CHAMBER_REVEAL_RADIUS: float = 10.5
 
 func _ready() -> void:
@@ -58,6 +59,27 @@ func _build_orion_cave() -> void:
 	rune_light.position = Vector3(0.0, 3.5, -6.6)
 	rune_light.shadow_enabled = false
 	cave.add_child(rune_light)
+	# CP-CINE-28: volume físico invisível; não teletransporta nem altera a câmara, apenas confirma a entrada no futuro módulo.
+	var handoff: Area3D = Area3D.new()
+	handoff.name = "GatilhoFisicoInteriorOrion"
+	handoff.collision_layer = 0
+	handoff.collision_mask = 1
+	handoff.position = Vector3(0.0, 1.7, 5.4)
+	var handoff_shape: CollisionShape3D = CollisionShape3D.new()
+	var handoff_box: BoxShape3D = BoxShape3D.new()
+	handoff_box.size = Vector3(4.2, 3.4, 1.4)
+	handoff_shape.shape = handoff_box
+	handoff.add_child(handoff_shape)
+	handoff.body_entered.connect(_on_orion_handoff_body_entered)
+	cave.add_child(handoff)
+
+func _on_orion_handoff_body_entered(body: Node3D) -> void:
+	if not body.is_in_group("player") and body.name != "Player":
+		return
+	if interior_handoff_ready:
+		return
+	interior_handoff_ready = true
+	print("[CP-CINE-28] ORION_HANDOFF_READY player=%s" % body.name)
 
 func _build_cube_chamber_marker() -> void:
 	var chamber: Node3D = Node3D.new()
