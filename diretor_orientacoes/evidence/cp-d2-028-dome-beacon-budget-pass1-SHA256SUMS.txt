@@ -1,0 +1,2 @@
+29c1f79b32dd19ea47f4bbb9b0640bbddd7b5d9690fc27db87ef8ccf6771fbf3  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-028-dome-beacon-budget-pass1/gameplay-30s.mp4
+38ec7afac40985a3dd7ac755a49b04a86dc6a61c9839e645374157a03b3091f0  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-028-dome-beacon-budget-pass1/print-1600x900.jpg

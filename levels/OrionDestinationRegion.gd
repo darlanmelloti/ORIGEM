@@ -571,8 +571,8 @@ func _build_final_dome() -> void:
 			var beacon := OmniLight3D.new()
 			beacon.name = "LuzCoroaCupula_%02d" % index
 			beacon.light_color = Color("#8b78dc")
-			beacon.light_energy = 1.15
-			beacon.omni_range = 8.0
+			beacon.light_energy = 0.95
+			beacon.omni_range = 6.5
 			beacon.shadow_enabled = false
 			beacon.position = pillar.position + Vector3(0.0, 5.1, 0.0)
 			dome.add_child(beacon)
