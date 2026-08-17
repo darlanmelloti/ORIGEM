@@ -159,3 +159,9 @@ O deslocamento de 0,52 m para o flanco livre foi validado durante 30 segundos. R
 A emissão muito baixa foi aplicada exclusivamente ao sobrepiso PBR e validada durante 30 segundos. A composição não revelou um caminho suficientemente claro e manter a técnica exigiria elevar a emissão a um nível artificial. A emissão será removida.
 
 > **Candidato rejeitado:** emissão mínima do sobrepiso como guia de rota Orion.
+
+## CP-CINE-78 — Reversão do braseiro mural procedural
+
+O braseiro foi validado com a terceira luz local, ficando ainda dentro do orçamento. A luz reforçou a textura próxima, mas a taça e a brasa procedurais entraram cortadas na margem do enquadramento e revelaram uma leitura sintética incompatível com o interior orgânico. A unidade completa será removida.
+
+> **Candidato rejeitado:** braseiro construído por primitivas procedurais como marco visual Orion. Uma futura fonte narrativa só pode usar activo 3D integrado e enquadramento confirmado.
