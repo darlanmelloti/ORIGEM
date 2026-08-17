@@ -576,8 +576,10 @@ func _build_final_dome_traversal_proxy() -> void:
 	var approach_positions: Array[Vector3] = [
 		Vector3(164.0, 0.24, 171.12), Vector3(164.0, 0.50, 170.38), Vector3(164.0, 0.80, 169.40)
 	]
+	var collider_names: Array[String] = ["ColisaoHandoffCubeR11", "ColisaoHandoffSoleiraR12", "ColisaoHandoffHubR12"]
 	for collider_index: int in range(approach_shapes.size()):
 		var collision := CollisionShape3D.new()
+		collision.name = collider_names[collider_index]
 		var shape := BoxShape3D.new()
 		shape.size = approach_shapes[collider_index]
 		collision.shape = shape
