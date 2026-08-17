@@ -18,6 +18,7 @@ const EZ_PINE_CANDIDATE: PackedScene = preload("res://assets/models_generated/ez
 const EZ_PINE_TALL_CANDIDATE: PackedScene = preload("res://assets/models_generated/ez_pine_tall_pbr.glb")
 const RUIN_PILLAR_ASSET: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const RUIN_WALL_ASSET: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
+const STONE_BRIDGE_ASSET: PackedScene = preload("res://assets/models_cc0/bridge_stone.glb")
 const FOREST_SECTOR_SCRIPT: Script = preload("res://levels/ForestSector3D.gd")
 const DAYLIGHT_VARIANT_ENABLED: bool = true
 const FOREST_GROUND_DIFF: Texture2D = preload("res://assets/textures/pbr/forest_ground_diff.jpg")
@@ -75,6 +76,7 @@ func _ready() -> void:
 	_build_exterior_details(house)
 	_build_voss_panoramic_threshold(house)
 	_build_visible_opening_road()
+	_build_voss_river_revelation_bridge()
 	_build_mountain_road(house)
 	_build_opening_landscape(house)
 	_build_cinematic_exterior_depth(house)
@@ -124,6 +126,43 @@ func _build_voss_panoramic_threshold(house: Node3D) -> void:
 		fern.scale = Vector3.ONE * 0.42
 		fern.rotation.y = side * 0.62
 		threshold.add_child(fern)
+
+func _build_voss_river_revelation_bridge() -> void:
+	# Marco 2 na borda da revelação: ponte CC0 real sobre o rio, visível a partir da saída mas fora do eixo da rota inicial.
+	# A Estrada do Rio mantém a direcção norte até ao Arco; esta ponte antecipa a leitura transversal do vale no mapa oficial.
+	var bridge_z: float = 31.0
+	var river_x: float = 10.5 + sin(((bridge_z - 8.0) / 155.0) * PI * 2.2) * 3.6 + sin(((bridge_z - 8.0) / 155.0) * PI * 5.0) * 0.8
+	var bridge_y: float = (_ground_height(river_x - 4.0, bridge_z) + _ground_height(river_x + 4.0, bridge_z)) * 0.5 + 0.18
+	var bridge: Node3D = STONE_BRIDGE_ASSET.instantiate() as Node3D
+	if bridge == null:
+		return
+	bridge.name = "PonteDePedraVisivelDaCasaVoss"
+	bridge.position = Vector3(river_x, bridge_y, bridge_z)
+	bridge.scale = Vector3(2.15, 1.02, 2.15)
+	bridge.rotation.y = PI * 0.5
+	add_child(bridge)
+	# A superfície física coincide com a ponte e não interfere no corredor da Estrada, situado bem a oeste do rio.
+	var bridge_body: StaticBody3D = StaticBody3D.new()
+	bridge_body.name = "ColisorPonteVisivelDaCasaVoss"
+	bridge_body.position = bridge.position + Vector3(0.0, 1.24, 0.0)
+	bridge_body.rotation.y = bridge.rotation.y
+	var bridge_collision: CollisionShape3D = CollisionShape3D.new()
+	var bridge_shape: BoxShape3D = BoxShape3D.new()
+	bridge_shape.size = Vector3(26.5, 0.62, 4.65)
+	bridge_collision.shape = bridge_shape
+	bridge_body.add_child(bridge_collision)
+	add_child(bridge_body)
+	# Dois pilares baixos prendem a silhueta ao rio sem a converter numa estrutura isolada ou num painel distante.
+	for pier_side: float in [-1.0, 1.0]:
+		var pier: Node3D = RUIN_PILLAR_ASSET.instantiate() as Node3D
+		if pier == null:
+			continue
+		pier.name = "PilarDaPonteVisivel_%s" % ("Oeste" if pier_side < 0.0 else "Este")
+		var pier_x: float = river_x + pier_side * 9.8
+		pier.position = Vector3(pier_x, _ground_height(pier_x, bridge_z) - 0.05, bridge_z)
+		pier.scale = Vector3(0.42, 0.66, 0.42)
+		pier.rotation.y = pier_side * 0.18
+		add_child(pier)
 
 func _build_visible_opening_road() -> void:
 	# Percurso contínuo no espaço mundial: acompanha o relevo e usa o mesmo PBR de solo, sem placas ou planos de fundo.
