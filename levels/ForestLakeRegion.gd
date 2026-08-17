@@ -311,6 +311,36 @@ func _build_cartographic_river_inlet() -> void:
 	water.mesh = water_mesh
 	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	inlet.add_child(water)
+	# Margens em progressão: rochas e fetos quebram a leitura linear do afluente e confirmam que o rio da Estrada alimenta a Bacia.
+	for point_index: int in range(points.size()):
+		var bank_point: Vector2 = points[point_index]
+		var next_point: Vector2 = points[min(point_index + 1, points.size() - 1)]
+		var previous_point: Vector2 = points[max(point_index - 1, 0)]
+		var bank_direction: Vector2 = (next_point - previous_point).normalized()
+		var bank_right: Vector2 = Vector2(-bank_direction.y, bank_direction.x)
+		var half_width: float = 3.55 + float(point_index) * 0.42
+		for side_index: int in range(2):
+			var side: float = -1.0 if side_index == 0 else 1.0
+			var bank_x: float = bank_point.x + bank_right.x * (half_width + side * 0.72)
+			var bank_z: float = bank_point.y + bank_right.y * (half_width + side * 0.72)
+			var ground_y: float = _height_at(bank_x, bank_z)
+			var inlet_rock: Node3D = ROCK.instantiate() as Node3D
+			if inlet_rock != null:
+				inlet_rock.name = "RochaDaMargemDoAfluente_%02d_%02d" % [point_index, side_index]
+				inlet_rock.position = Vector3(bank_x, ground_y + 0.055, bank_z)
+				var inlet_scale: float = 0.17 + float((point_index + side_index) % 3) * 0.052
+				inlet_rock.scale = Vector3(inlet_scale, inlet_scale * 0.78, inlet_scale)
+				inlet_rock.rotation.y = atan2(bank_direction.y, bank_direction.x) + side * 0.58
+				_apply_material(inlet_rock, shore_material)
+				inlet.add_child(inlet_rock)
+			if (point_index + side_index) % 2 == 0:
+				var inlet_fern: Node3D = FERN.instantiate() as Node3D
+				if inlet_fern != null:
+					inlet_fern.name = "FetoDaMargemDoAfluente_%02d_%02d" % [point_index, side_index]
+					inlet_fern.position = Vector3(bank_x - bank_right.x * side * 0.64, _height_at(bank_x - bank_right.x * side * 0.64, bank_z - bank_right.y * side * 0.64) + 0.02, bank_z - bank_right.y * side * 0.64)
+					inlet_fern.scale = Vector3.ONE * (0.34 + float(point_index % 2) * 0.06)
+					inlet_fern.rotation.y = 0.34 + float(point_index) * 0.47
+					inlet.add_child(inlet_fern)
 
 func _build_lake_shore_path() -> void:
 	var shore_road: Node3D = Node3D.new()

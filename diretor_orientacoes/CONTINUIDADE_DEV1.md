@@ -1,11 +1,11 @@
 # Continuidade — Dev1
 
-O **CP 273 — Integração da leitura hídrica Estrada → Bacia** está em execução. A auditoria CP272 confirmou que as distâncias físicas dos seis marcos Dev1 devem permanecer longas, percorríveis e legíveis em camadas.
+O **CP 274 — Linhas de visão do vale Dev1** está em execução. A Estrada, o rio, o Arco, a floresta, o Acampamento e a Bacia possuem agora progressão física e hídrica em escala macro.
 
-O próximo passe deve unificar a linguagem da água: rio lateral da Estrada, afluente da floresta, margens de chegada e Bacia das Ruínas devem formar uma sequência material e direccional. Não pode reduzir distâncias, acrescentar luzes dinâmicas, criar um painel de fundo ou modificar módulos das Regiões 7–12.
+O próximo passe deve auditar e reforçar as linhas de visão entre as seis camadas do vale. A correcção permitida é composta de relevo, rochas, vegetação descontínua, ruínas e materiais; não pode encurtar o mapa, usar painéis de fundo, exceder o orçamento de luzes ou tocar nas Regiões 7–12.
 
 ## Critérios de continuação
 
-A correcção deve ser validada em Godot headless, por sonda regional e por gameplay real de 30 segundos. Ao fechar o checkpoint, a primeira tarefa do CP seguinte tem de estar registada e iniciada.
+O CP 274 tem de produzir uma matriz de vistas e implementar a primeira correcção de linha de visão antes de publicar o checkpoint. Validação headless, sonda regional e gameplay real de 30 segundos são obrigatórios.
 
 **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
