@@ -582,6 +582,8 @@ func _build_final_dome() -> void:
 		pillar.rotation = Vector3(0.05 * sin(angle), angle, 0.04 * cos(angle))
 		_apply_material(pillar, stone_material)
 		dome.add_child(pillar)
+		for pillar_mesh in pillar.find_children("*", "GeometryInstance3D", true, false):
+			(pillar_mesh as GeometryInstance3D).visibility_range_end = 46.0
 		if index % 2 == 0:
 			var beacon := OmniLight3D.new()
 			beacon.name = "LuzCoroaCupula_%02d" % index
