@@ -1,0 +1,2 @@
+07af2bf986cdf2994ed377235658b1a3bbd53f96465fdffe53dc3a5ca06e8820  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-033-r10-runtime-inventory-pass1/gameplay-30s.mp4
+6b81ce67da1e8ce82794366b425028dff8fadd6487a8804baf1ea6ffce8a3fe3  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-033-r10-runtime-inventory-pass1/print-1600x900.jpg
