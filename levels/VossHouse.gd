@@ -73,6 +73,8 @@ func _ready() -> void:
 	_build_side_annex(house)
 	_build_interior(house)
 	_build_exterior_details(house)
+	_build_voss_panoramic_threshold(house)
+	_build_visible_opening_road()
 	_build_mountain_road(house)
 	_build_opening_landscape(house)
 	_build_cinematic_exterior_depth(house)
@@ -82,6 +84,46 @@ func _ready() -> void:
 	_build_forest_ground_integration_92(house)
 	_build_opening_camera()
 	_build_exterior_porch_light()
+
+func _build_voss_panoramic_threshold(house: Node3D) -> void:
+	# Soleira CP255: pedras orgânicas baixas prolongam o vão da porta até à Estrada do Rio.
+	# Não recebem colisores próprios: o TerrainPatch mantém o chão físico contínuo e evita degraus que prendam Elias.
+	var threshold: Node3D = Node3D.new()
+	threshold.name = "SoleiraPanoramicaDaCasaVoss"
+	house.add_child(threshold)
+	var stone_data: Array[Dictionary] = [
+		{"pos": Vector3(-1.45, 0.0, -4.42), "scale": 0.28, "yaw": -0.42},
+		{"pos": Vector3(1.18, 0.0, -4.66), "scale": 0.24, "yaw": 0.36},
+		{"pos": Vector3(-1.62, 0.0, -6.22), "scale": 0.34, "yaw": -0.15},
+		{"pos": Vector3(1.54, 0.0, -6.72), "scale": 0.30, "yaw": 0.58},
+		{"pos": Vector3(-0.54, 0.0, -8.14), "scale": 0.26, "yaw": -0.62},
+		{"pos": Vector3(1.72, 0.0, -8.54), "scale": 0.22, "yaw": 0.22},
+	]
+	for index: int in range(stone_data.size()):
+		var data: Dictionary = stone_data[index]
+		var local_pos: Vector3 = data["pos"] as Vector3
+		var stone: Node3D = MOSS_ROCK_SET.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraSoleira_%02d" % (index + 1)
+		stone.position = Vector3(local_pos.x, _house_ground_y(house, local_pos.x, local_pos.z) + 0.035, local_pos.z)
+		var scale_value: float = data["scale"] as float
+		stone.scale = Vector3(scale_value, scale_value * 0.62, scale_value)
+		stone.rotation.y = data["yaw"] as float
+		threshold.add_child(stone)
+	# Fetos laterais confirmam a passagem para a Estrada sem estreitar os 3,9m do vão da porta.
+	for fern_index: int in range(2):
+		var fern: Node3D = FERN_REAL_ASSET.instantiate() as Node3D
+		if fern == null:
+			continue
+		var side: float = -1.0 if fern_index == 0 else 1.0
+		var fern_x: float = side * 3.05
+		var fern_z: float = -6.7 - float(fern_index) * 1.15
+		fern.name = "FetoSoleira_%02d" % (fern_index + 1)
+		fern.position = Vector3(fern_x, _house_ground_y(house, fern_x, fern_z) + 0.02, fern_z)
+		fern.scale = Vector3.ONE * 0.42
+		fern.rotation.y = side * 0.62
+		threshold.add_child(fern)
 
 func _build_visible_opening_road() -> void:
 	# Percurso contínuo no espaço mundial: acompanha o relevo e usa o mesmo PBR de solo, sem placas ou planos de fundo.
