@@ -1,0 +1,2 @@
+7c5e459e7855214d48e7848d699cc60f5977c811ee77aa712358926b0a6f3674  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-103-r12-camera-handoff/gameplay-30s.mp4
+0946a7c421b75f0753fad3a4729d3d75011c75434bcfdffc7423efaa6b6b24c2  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-103-r12-camera-handoff/print-1600x900.jpg
