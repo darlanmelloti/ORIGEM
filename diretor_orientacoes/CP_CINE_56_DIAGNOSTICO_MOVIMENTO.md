@@ -93,3 +93,15 @@ A próxima investigação deverá analisar a tampa terminal e a geometria do seg
 A energia ambiente aumentada de **0,52 para 0,68** revelou a textura contínua das paredes e do trecho profundo sem acrescentar luzes dinâmicas nem eliminar o contraste escuro da caverna. A validação de 30 segundos não reportou erros. O segundo segmento continua a necessitar de um destino narrativo, mas já deixa de ser uma massa preta sem material.
 
 **Próximo passe aberto — CP-CINE-67:** criar a primeira ante-câmara através da própria malha contínua, introduzindo uma abertura lateral e uma secção de destino real depois do anel de 12,8 m. A base física, o FOV 64, as duas luzes locais e a iluminação ambiente aprovada devem ser preservados.
+
+## CP-CINE-67 — Ante-câmara contínua, fecho ainda ilegível
+
+A extensão para 24,8 m e a expansão progressiva da secção foram validadas tecnicamente por 30 segundos; Elias manteve-se apoiado no novo suporte físico. Contudo, a chegada enquadra a tampa terminal como uma parede de rocha uniforme, sem oferecer um destino narrativo. A malha contínua e o suporte não são revertidos ainda, porque constituem a base física necessária para a ante-câmara; o tratamento do fecho precisa ser corrigido antes da publicação.
+
+**Próximo passe aberto — CP-CINE-68:** integrar no fecho uma formação mineral tridimensional, modelada no próprio interior e com emissão de superfície muito baixa, para criar um ponto de orientação real sem adicionar luz dinâmica, painéis ou outdoor.
+
+## CP-CINE-68 — Reversão da formação mineral procedural
+
+O agregado de cinco cristais prismáticos, embora volumétrico e sem luz dinâmica, apresentou uma leitura visual de primitivas laranja desligadas da rocha. Foi removido antes de qualquer publicação.
+
+> **Candidato rejeitado:** cristais procedurais emissivos de baixa complexidade como marco terminal. O próximo destino terá de reutilizar um activo PBR integrado ou uma variação da própria malha de rocha, sem superfícies artificiais isoladas.
