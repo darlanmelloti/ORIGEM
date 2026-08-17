@@ -53,6 +53,7 @@ func _ready() -> void:
 	_build_forest_micro_details()
 	_build_majestic_camp()
 	_build_majestic_connector()
+	_build_majestic_turn_marker()
 	_build_take9_corridor_fill()
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
@@ -1105,6 +1106,44 @@ func _build_majestic_connector() -> void:
 				margin_tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
 				margin_tree.rotation.y = rng.randf_range(-PI, PI)
 				connector_margin.add_child(margin_tree)
+
+func _build_majestic_turn_marker() -> void:
+	# CP 258 — Bifurcação física para Majestic: uma estela baixa orienta a saída oeste do trilho florestal.
+	# Não emite luz, não tem colisão e não reduz a passagem central; o acampamento continua a ser alcançado pelas lajes reais do conector.
+	var marker_root: Node3D = Node3D.new()
+	marker_root.name = "BifurcacaoFisicaParaMajestic"
+	add_child(marker_root)
+	var turn_z: float = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC.y
+	var turn_x: float = _path_x(turn_z)
+	var marker_x: float = turn_x - 3.85
+	var marker_y: float = _height_at(marker_x, turn_z)
+	var stela: Node3D = PILLAR.instantiate() as Node3D
+	if stela != null:
+		stela.name = "EstelaDeDireccaoMajestic"
+		stela.position = Vector3(marker_x, marker_y + 0.42, turn_z - 0.64)
+		stela.scale = Vector3(0.31, 0.48, 0.31)
+		stela.rotation = Vector3(0.04, -PI * 0.5, -0.06)
+		_apply_material(stela, ruin_material)
+		marker_root.add_child(stela)
+	for rock_index: int in range(3):
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var side: float = -1.0 if rock_index != 1 else 1.0
+		rock.name = "PedraDaBifurcacaoMajestic_%02d" % rock_index
+		rock.position = Vector3(marker_x + side * (0.52 + float(rock_index) * 0.18), marker_y + 0.035, turn_z + 0.48 - float(rock_index) * 0.56)
+		var scale_value: float = 0.13 + float(rock_index) * 0.032
+		rock.scale = Vector3(scale_value, scale_value * 0.62, scale_value)
+		rock.rotation.y = 0.48 + float(rock_index) * 0.86
+		_apply_material(rock, ruin_material)
+		marker_root.add_child(rock)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoDaBifurcacaoMajestic"
+		fern.position = Vector3(marker_x - 0.88, marker_y + 0.02, turn_z + 0.92)
+		fern.scale = Vector3.ONE * 0.48
+		fern.rotation.y = -0.72
+		marker_root.add_child(fern)
 
 func _build_take9_corridor_fill() -> void:
 	# Luz de preenchimento do Take 9: ilumina o solo frontal do conector Majestic–lago.
