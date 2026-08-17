@@ -98,3 +98,12 @@ O quadro final aos 28 segundos mantém Elias apoiado no piso da caverna e sem er
 A prova de 30 segundos accionou `E` a partir da soleira interior e carregou `scenes/main.tscn` sem erro runtime. A captura exterior mostra Elias regressado à área Casa Voss sob o prólogo activo, confirmando que o handoff interior→exterior permanece físico e funcional depois dos ajustes de câmara Orion.
 
 **CINE-PAIR-10 já iniciado:** Dev4 mede a continuidade visual e de estado entre regresso Orion e o prólogo exterior; Dev3 selecciona a próxima composição apenas se não quebrar esta transição aprovada. Não abrir DIR autónomo.
+
+
+## Decisão CINE-PAIR-10 — Restauração exterior corrigida e aprovada
+
+A auditoria revelou que `OrionTransitionState.restore_exterior_player()` existia, mas não era chamado pelo controlador de `scenes/main.tscn`. Foi adicionada uma verificação explícita de retorno pendente no `_ready()` principal. A restauração só ocorre após uma saída legítima do interior; o spawn normal da Casa Voss permanece intacto.
+
+A passagem QA capturou e restaurou estado real de Elias: saúde `63`, stamina capturada `32,17`, posição e rotação de retorno. A validação limpa posterior executou 30 segundos tanto em `scenes/main.tscn` como em `scenes/orion_interior.tscn`, sem erros de parse ou runtime.
+
+**CINE-PAIR-11 já iniciado:** Dev4 confirma o orçamento de luzes e a estabilidade da câmara no percurso integrado exterior→interior→exterior; Dev3 só inicia nova composição após esta prova sistémica. Não abrir DIR autónomo.

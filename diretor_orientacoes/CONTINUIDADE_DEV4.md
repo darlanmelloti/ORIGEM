@@ -65,3 +65,8 @@ Dev4 completou a prova real de teclado por 30 segundos: Elias permaneceu apoiado
 ## CINE-PAIR-09 aprovado; CINE-PAIR-10 em execução
 
 O retorno por `E` a partir da soleira interior carregou o exterior sem erro e foi capturado durante a prova de 30 segundos. Dev4 mede agora a continuidade visual e de estado entre o regresso Orion e o prólogo exterior; Dev3 só propõe nova composição se a transição aprovada se mantiver intacta. Não abrir DIR autónomo.
+
+
+## CINE-PAIR-10 aprovado; CINE-PAIR-11 em execução
+
+Dev4 localizou a omissão de restauração no controlador exterior e a correção foi validada: saúde, stamina, posição e rotação sobrevivem ao retorno Orion. O spawn normal da Casa Voss não foi substituído. A tarefa seguinte mede orçamento de luzes e estabilidade de câmara no ciclo exterior→interior→exterior. Não abrir DIR autónomo.

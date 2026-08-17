@@ -15,6 +15,9 @@ var _return_rotation_y: float = PI
 var _saved_health: int = 100
 var _saved_stamina: float = 100.0
 
+func has_pending_exterior_return() -> bool:
+	return _has_return_state
+
 func begin_entry(player: Node3D) -> void:
 	_has_return_state = true
 	_return_position = player.global_position

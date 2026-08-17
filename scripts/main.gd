@@ -68,6 +68,10 @@ func _ready():
 	EventBus.player_stamina_changed.connect(_on_player_stamina_changed)
 	hud_status.text = "ELIAS  100 / 100"
 	stamina_label.text = "STAMINA  100 / 100"
+	# CINE-PAIR-10: apenas um retorno real do interior deve substituir o spawn normal da Casa Voss.
+	var exterior_player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
+	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
+		OrionTransitionState.restore_exterior_player(exterior_player)
 	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
 	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF"):
 		_start_narrative()

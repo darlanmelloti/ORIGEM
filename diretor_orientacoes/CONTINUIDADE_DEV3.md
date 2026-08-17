@@ -73,3 +73,8 @@ A navegação por teclado durante 30 segundos confirmou que o corredor permanece
 ## CINE-PAIR-09 aprovado; CINE-PAIR-10 em execução
 
 O retorno interior→exterior por `E` foi confirmado durante 30 segundos sem erro. Dev3 preserva a transição e só selecciona nova composição depois de Dev4 confirmar que o estado e a leitura exterior do prólogo se mantêm coerentes. O ciclo seguinte permanece pareado, sem DIR autónomo.
+
+
+## CINE-PAIR-10 aprovado; CINE-PAIR-11 em execução
+
+A transição Orion agora restaura o estado de Elias no exterior apenas quando existe retorno pendente, preservando o início normal. Dev3 mantém a base de câmara de -11° e aguarda a prova sistémica Dev4 de luzes e estabilidade no ciclo completo antes de escolher nova composição. O próximo passe abre directamente desta validação, sem DIR autónomo.
