@@ -1,0 +1,1 @@
+7fb9dad3639a3fdb1f91daa66e6bda77fc27337b5fdcaf3409307d267889c588  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-061-performance-local.zip
