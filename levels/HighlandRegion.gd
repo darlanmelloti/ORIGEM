@@ -24,6 +24,7 @@ func _ready() -> void:
 	stone_material = _make_stone_material()
 	roof_material = _make_roof_material()
 	path_material = _make_path_material()
+	_build_region7_handoff_chain()
 	_build_lake_to_village_path()
 	_build_elevated_village()
 	_build_observatory()
@@ -57,6 +58,95 @@ func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
 		return float(terrain_patch.call("height_at", world_x, world_z))
 	return 0.0
+
+func _build_region7_handoff_chain() -> void:
+	# CP-CINE-06: primeiras massas físicas da Região 7. Estendem a escala real R6→R7 sem aproximar a Vila ou Orion.
+	# Não usam luzes, painéis ou colisores na faixa da rota; cada agrupamento é uma massa 3D explorável no bordo da subida.
+	var handoff: Node3D = Node3D.new()
+	handoff.name = "HandoffRemotoRegiao7"
+	add_child(handoff)
+
+	# Terraços baixos e descontínuos: lêem-se depois das Ruínas Submersas, mas deixam a estrada de x≈16→48 aberta.
+	var passage_specs: Array[Dictionary] = [
+		{"p": Vector2(34.0, 290.0), "s": 0.74, "yaw": 0.30},
+		{"p": Vector2(48.0, 298.0), "s": 0.88, "yaw": -0.42},
+		{"p": Vector2(66.0, 306.0), "s": 0.96, "yaw": 0.18}
+	]
+	var passage: Node3D = Node3D.new()
+	passage.name = "TerracosDePassagemR7"
+	handoff.add_child(passage)
+	for index: int in range(passage_specs.size()):
+		var spec: Dictionary = passage_specs[index]
+		var point: Vector2 = spec["p"] as Vector2
+		var base: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if base != null:
+			base.name = "TerracoR7_%02d" % (index + 1)
+			base.position = Vector3(point.x, _height_at(point.x, point.y) - 0.12, point.y)
+			var scale_value: float = spec["s"] as float
+			base.scale = Vector3(scale_value * 1.55, scale_value * 0.78, scale_value * 1.18)
+			base.rotation.y = spec["yaw"] as float
+			_apply_material(base, stone_material)
+			passage.add_child(base)
+		var remnant: Node3D = PILLAR.instantiate() as Node3D
+		if remnant != null:
+			remnant.name = "VestigioTerracoR7_%02d" % (index + 1)
+			remnant.position = Vector3(point.x - 1.45, _height_at(point.x - 1.45, point.y + 0.7) - 0.05, point.y + 0.7)
+			remnant.scale = Vector3(0.34, 0.70 + float(index) * 0.07, 0.34)
+			remnant.rotation = Vector3(0.06, (spec["yaw"] as float) + 0.22, -0.05)
+			_apply_material(remnant, stone_material)
+			passage.add_child(remnant)
+
+	# A borda inferior da Vila em socalcos antecipa a cidade principal de z≈352, sem criar uma muralha contínua.
+	var village_edge: Node3D = Node3D.new()
+	village_edge.name = "BordaBaixaDaVilaR7"
+	handoff.add_child(village_edge)
+	var edge_specs: Array[Dictionary] = [
+		{"p": Vector2(88.0, 318.0), "s": 0.58, "yaw": -0.24},
+		{"p": Vector2(104.0, 326.0), "s": 0.64, "yaw": 0.38},
+		{"p": Vector2(118.0, 334.0), "s": 0.71, "yaw": -0.16}
+	]
+	for index: int in range(edge_specs.size()):
+		var spec: Dictionary = edge_specs[index]
+		var point: Vector2 = spec["p"] as Vector2
+		var fragment: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if fragment != null:
+			fragment.name = "MuroQuebradoR7_%02d" % (index + 1)
+			fragment.position = Vector3(point.x, _height_at(point.x, point.y) - 0.06, point.y)
+			var scale_value: float = spec["s"] as float
+			fragment.scale = Vector3(scale_value * 1.75, scale_value * 0.98, scale_value * 0.86)
+			fragment.rotation.y = spec["yaw"] as float
+			_apply_material(fragment, stone_material)
+			village_edge.add_child(fragment)
+		var cap: Node3D = PILLAR.instantiate() as Node3D
+		if cap != null:
+			cap.name = "PilarBordaVilaR7_%02d" % (index + 1)
+			cap.position = Vector3(point.x + 1.85, _height_at(point.x + 1.85, point.y - 0.9) - 0.05, point.y - 0.9)
+			cap.scale = Vector3(0.30, 0.62 + float(index) * 0.06, 0.30)
+			cap.rotation = Vector3(-0.04, (spec["yaw"] as float) - 0.28, 0.08)
+			_apply_material(cap, stone_material)
+			village_edge.add_child(cap)
+
+	# Contrafortes: última camada antes da vila. Permanecem rochosos para manter aberto o eixo visual da estrada.
+	var foothills: Node3D = Node3D.new()
+	foothills.name = "ContrafortesDaSubidaR7"
+	handoff.add_child(foothills)
+	var foothill_specs: Array[Dictionary] = [
+		{"p": Vector2(122.0, 338.0), "s": 1.06, "yaw": 0.34},
+		{"p": Vector2(137.0, 346.0), "s": 1.22, "yaw": -0.40},
+		{"p": Vector2(151.0, 354.0), "s": 1.34, "yaw": 0.20}
+	]
+	for index: int in range(foothill_specs.size()):
+		var spec: Dictionary = foothill_specs[index]
+		var point: Vector2 = spec["p"] as Vector2
+		var cliff: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if cliff != null:
+			cliff.name = "ContraforteR7_%02d" % (index + 1)
+			cliff.position = Vector3(point.x, _height_at(point.x, point.y) - 0.18, point.y)
+			var scale_value: float = spec["s"] as float
+			cliff.scale = Vector3(scale_value * 1.15, scale_value * 1.45, scale_value)
+			cliff.rotation.y = spec["yaw"] as float
+			_apply_material(cliff, stone_material)
+			foothills.add_child(cliff)
 
 func _build_lake_to_village_path() -> void:
 	var route: Array[Vector2] = [Vector2(16.0, 288.0), Vector2(48.0, 302.0), Vector2(83.0, 318.0), Vector2(116.0, 336.0), Vector2(138.0, 354.0)]
