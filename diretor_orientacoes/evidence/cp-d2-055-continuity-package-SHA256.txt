@@ -1,0 +1,1 @@
+905b411a09cbdc7d6ee80ccefa7ac99adea82f0c59821c82e9cb4ddb9745cd27  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-055-continuity-local.zip
