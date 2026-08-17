@@ -1,0 +1,1 @@
+acec7938111ea916c5bee4d0a3cea32bb6b0425364d84a5172d2da4f1b080810  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-070-recess-light-local.zip

@@ -1,0 +1,2 @@
+dc4d87592fa6dcdc47305101de81f611841e764dcd34755010d7b44d79ed5447  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-070-recess-light-pass1/gameplay-30s.mp4
+51ed7ea7efe7e720f4ca6015aa84e51cee12e9b5affdb7f0856410f9a94eec0a  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-070-recess-light-pass1/print-1600x900.jpg
