@@ -140,6 +140,7 @@ func _build_clean_r12_portal() -> void:
 		base.position = Vector3(0.0, 0.34, -2.55)
 		base.scale = Vector3(4.4, 0.30, 1.05)
 		portal.add_child(base)
+		base.visible = false
 	var ground := ROCK_LARGE.instantiate() as Node3D
 	if ground != null:
 		ground.name = "ChaoAterramentoPortalLimpoR12"
@@ -152,7 +153,7 @@ func _build_clean_r12_portal() -> void:
 		if jamb == null:
 			continue
 		jamb.name = "JambaPortalLimpoR12_%s" % str(side)
-		jamb.position = Vector3(side * 1.90, 1.48, -2.75)
+		jamb.position = Vector3(side * 1.90, 0.48, -2.75)
 		jamb.scale = Vector3(0.58, 1.85, 0.58)
 		jamb.rotation = Vector3(0.03, side * 0.08, side * 0.02)
 		portal.add_child(jamb)
@@ -163,10 +164,11 @@ func _build_clean_r12_portal() -> void:
 		lintel.scale = Vector3(2.35, 0.34, 0.74)
 		lintel.rotation = Vector3(0.02, 0.0, 0.0)
 		portal.add_child(lintel)
+		lintel.visible = false
 	var recess := ROCK_LARGE.instantiate() as Node3D
 	if recess != null:
 		recess.name = "RecessoPortalLimpoR12"
-		recess.position = Vector3(0.0, 2.10, -2.92)
+		recess.position = Vector3(0.0, 1.08, -2.92)
 		recess.scale = Vector3(1.75, 1.55, 0.18)
 		var material := StandardMaterial3D.new()
 		material.albedo_color = Color("#101a2c")
