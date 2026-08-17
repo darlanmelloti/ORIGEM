@@ -1,0 +1,2 @@
+0aec5646988284763fe14e2965c25ff3b012b78c185cbb06649ea6872beb8991  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-069-dome-fill-pass1/gameplay-30s.mp4
+519fca47f32d087a8fa1098b49fae9ed7d5cd3baabe21b7efd9cdb8331c7d0a8  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-069-dome-fill-pass1/print-1600x900.jpg

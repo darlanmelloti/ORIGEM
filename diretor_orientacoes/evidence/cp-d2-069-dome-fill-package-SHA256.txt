@@ -1,0 +1,1 @@
+2d0b1e7ee743252f88d67af0e807d0150607616e3fe8d479915096f8103025d6  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-069-dome-fill-local.zip
