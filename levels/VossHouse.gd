@@ -1019,6 +1019,10 @@ func _build_opening_camera() -> void:
 			opening_camera.fov = 62.0
 			opening_camera.position = Vector3(-116.0, _ground_height(-116.0, 532.0) + 3.6, 532.0)
 			opening_camera.look_at(Vector3(-116.0, _ground_height(-116.0, 548.0) + 2.3, 548.0), Vector3.UP)
+		elif qa_storyboard_stage == "orion_colo":
+			opening_camera.fov = 60.0
+			opening_camera.position = Vector3(-116.0, _ground_height(-116.0, 546.0) + 2.45, 546.0)
+			opening_camera.look_at(Vector3(-116.0, _ground_height(-116.0, 554.0) + 1.75, 554.0), Vector3.UP)
 		elif qa_storyboard_stage == "orion_camara":
 			opening_camera.fov = 58.0
 			# Afastada 10,5 m do altar: revela o artefacto como destino em vez de intersectar a malha do Cubo.
