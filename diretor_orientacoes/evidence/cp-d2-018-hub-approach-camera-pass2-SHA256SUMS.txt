@@ -1,0 +1,2 @@
+0f7294e41b8d81042e5b5d2e1469058138d1b557cce700f519421823640b5d6d  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-018-hub-approach-camera-pass2/gameplay-30s.mp4
+c560b7b5b1d29fef0e6da50a8044e62c228967fa7d3f4c2c638ef6c6b1e8f4ef  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-018-hub-approach-camera-pass2/print-1600x900.jpg
