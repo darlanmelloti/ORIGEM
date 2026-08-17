@@ -45,6 +45,7 @@ func _ready() -> void:
 	_build_lake_shore_path()
 	_build_cartographic_river_inlet()
 	_build_shore_access_steps()
+	_build_basin_arrival_frame()
 	_build_majestic_lake_transition()
 	_build_cartographic_lake_vistas()
 	_build_lake_wayfinding()
@@ -327,6 +328,47 @@ func _build_shore_access_steps() -> void:
 			guide_light.shadow_enabled = false
 			guide_light.position = Vector3(x_value - 0.74, ground_y + 0.54, z_value)
 			access.add_child(guide_light)
+
+func _build_basin_arrival_frame() -> void:
+	# CP 259 — Dois vestígios emergentes enquadram a primeira vista do lago sem criar um portão nem estreitar as lajes de chegada.
+	var frame: Node3D = Node3D.new()
+	frame.name = "LimiarDasRuinasSubmersas"
+	add_child(frame)
+	var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+	var arrival_z: float = lake_anchor.y - 26.0
+	var arrival_x: float = _lake_shore_x(arrival_z)
+	for frame_index: int in range(2):
+		var side: float = -1.0 if frame_index == 0 else 1.0
+		var pillar_x: float = arrival_x + side * 4.35
+		var ground_y: float = _height_at(pillar_x, arrival_z)
+		var pillar: Node3D = PILLAR.instantiate() as Node3D
+		if pillar == null:
+			continue
+		pillar.name = "VestigioDaEntradaDaBacia_%02d" % frame_index
+		pillar.position = Vector3(pillar_x, ground_y + 0.34, arrival_z + side * 0.72)
+		var scale_value: float = 0.50 if frame_index == 0 else 0.42
+		pillar.scale = Vector3(scale_value, scale_value * 1.30, scale_value)
+		pillar.rotation = Vector3(0.09 * side, side * (0.30 + float(frame_index) * 0.22), -0.05 * side)
+		_apply_material(pillar, ruin_material)
+		frame.add_child(pillar)
+		for base_index: int in range(2):
+			var rock: Node3D = ROCK.instantiate() as Node3D
+			if rock == null:
+				continue
+			rock.name = "BaseDoVestigioDaBacia_%02d_%02d" % [frame_index, base_index]
+			rock.position = Vector3(pillar_x - side * (0.42 + float(base_index) * 0.34), ground_y + 0.035, arrival_z + side * (0.38 - float(base_index) * 0.52))
+			var rock_scale: float = 0.16 + float(base_index) * 0.052
+			rock.scale = Vector3(rock_scale, rock_scale * 0.66, rock_scale)
+			rock.rotation.y = 0.44 + float(frame_index) * 0.72 + float(base_index) * 0.38
+			_apply_material(rock, ruin_material)
+			frame.add_child(rock)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoDaEntradaDaBacia"
+		fern.position = Vector3(arrival_x - 5.10, _height_at(arrival_x - 5.10, arrival_z + 1.6) + 0.02, arrival_z + 1.6)
+		fern.scale = Vector3.ONE * 0.50
+		fern.rotation.y = 0.46
+		frame.add_child(fern)
 
 func _build_majestic_lake_transition() -> void:
 	# Vestígios de observação da Majestic acompanham a chegada ao lago: tornam a transição narrativa física sem bloquear o trilho.
