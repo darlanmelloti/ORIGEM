@@ -1,0 +1,2 @@
+168f594786d5288d4d88d779fa8e34038dbe2a396f4de6bed2b54cc7d158ab61  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-067-crown-dedup-pass1/gameplay-30s.mp4
+d9855ccf971afba9a5435477554490e7b737ceeab9059371387a180eda7f1fa1  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-067-crown-dedup-pass1/print-1600x900.jpg

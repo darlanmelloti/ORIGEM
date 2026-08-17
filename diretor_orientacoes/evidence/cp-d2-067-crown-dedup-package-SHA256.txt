@@ -1,0 +1,1 @@
+cffe12b0848cbbac2b9ace8744494b9fd90b552469cda0cdce67a00c28785fa6  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-067-crown-dedup-local.zip
