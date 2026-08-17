@@ -36,6 +36,8 @@ func _ready() -> void:
 		base_stone.position = base_positions[index]
 		base_stone.scale = Vector3(1.45 + float(index % 3) * 0.22, 0.34 + float(index % 2) * 0.12, 1.10 + float(index % 2) * 0.18)
 		base_stone.rotation = Vector3(0.03 * float(index % 2), float(index) * 0.47, -0.02 * float(index % 3))
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+			base_stone.visible = false
 		traversal_base.add_child(base_stone)
 	var foundation_positions: Array[Vector3] = [
 		Vector3(-4.8, -0.18, -1.8), Vector3(0.0, -0.28, -2.3), Vector3(4.8, -0.18, -1.8),
@@ -49,6 +51,8 @@ func _ready() -> void:
 		foundation_stone.position = foundation_positions[foundation_index]
 		foundation_stone.scale = Vector3(2.15 if foundation_index < 3 else 1.55, 0.48, 1.42)
 		foundation_stone.rotation = Vector3(0.02, -0.24 + float(foundation_index) * 0.31, 0.01)
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+			foundation_stone.visible = false
 		traversal_base.add_child(foundation_stone)
 	var valley_floor := ROCK_LARGE.instantiate() as Node3D
 	if valley_floor != null:
@@ -69,7 +73,11 @@ func _ready() -> void:
 		support.position = support_positions[support_index]
 		support.scale = Vector3(0.82 if support_index < 3 else 0.68, 3.05 if support_index < 3 else 2.40, 0.82 if support_index < 3 else 0.68)
 		support.rotation = Vector3(0.04, -0.15 + float(support_index) * 0.23, 0.02)
-		traversal_base.add_child(support)
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+			support.visible = false
+			traversal_base.add_child(support)
+	if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+		traversal_base.visible = false
 	destination = DESTINATION_SCRIPT.new() as Node3D
 	destination.name = "DestinosOrionRegiao12Traversal"
 	add_child(destination)
@@ -95,15 +103,20 @@ func _ready() -> void:
 		_dampen_emissive_landmarks(destination)
 		destination.visible = false
 		_build_final_dome_traversal_proxy()
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+			_build_clean_r12_portal()
 	var traversal_proxy := get_node_or_null("CupulaFinalTraversalOrganicReveal") as Node3D
 	if traversal_proxy != null:
 		# Dedicated Region 12 visual correction: enlarge the organic sanctuary for a readable cinematic take.
-		traversal_proxy.visible = true
-		if OS.get_environment("QA_VALIDATION_ROUTE") == "R10_CAVE_TO_R12_HUB_FULL":
+		traversal_proxy.visible = OS.get_environment("QA_VALIDATION_ROUTE") != "R11_R12_HUB_DEDICATED"
+		if OS.get_environment("QA_VALIDATION_ROUTE") in ["R10_CAVE_TO_R12_HUB_FULL", "R11_R12_HUB_DEDICATED"]:
 			for proxy_name in ["SuporteCentralCupula_-0.9", "SuporteCentralCupula_0.9", "OmbroOrganicoCupula_-3.2", "OmbroOrganicoCupula_3.2", "ConectorCoroaCupula_-2.1", "ConectorCoroaCupula_2.1", "JambaArcoCupula_-2.45", "JambaArcoCupula_2.45", "MonolitoEscalaCupula_-4.2", "MonolitoEscalaCupula_4.2", "FundoOrganicoRecuadoCupula", "BordaBaseOrganicaCupula", "CoroaValidadaCupula_00", "CoroaValidadaCupula_01", "CoroaValidadaCupula_02"]:
-				var proxy_decorative_node := traversal_proxy.find_child(proxy_name, true, false)
-				if proxy_decorative_node != null:
-					proxy_decorative_node.visible = false
+					var proxy_decorative_node := traversal_proxy.find_child(proxy_name, true, false)
+					if proxy_decorative_node != null:
+						proxy_decorative_node.visible = false
+			for proxy_child in traversal_proxy.get_children():
+				var keep_dedicated_silhouette := proxy_child.name.begins_with("ArcoOrganico") or proxy_child.name == "LintelOrganicoCupulaFinal" or proxy_child.name == "SoleiraOrganicaCupulaFinal" or proxy_child.name.begins_with("JambaVerticalPortalCupula_") or proxy_child.name == "RecessoEscuroCentralCupula" or proxy_child.name.begins_with("DegrauCentralCupulaR12_") or proxy_child.name.begins_with("MarcadorRotaFisicaR12") or proxy_child.name == "ApoioBaixoSoleiraR12_-3.8"
+				proxy_child.visible = keep_dedicated_silhouette
 	_build_region12_wayfinding_lights()
 	_build_region12_recess_resonance()
 	_build_region12_cinematic_fill()
@@ -115,6 +128,60 @@ func _ready() -> void:
 	add_child(camera)
 	camera.current = true
 	_set_camera(0.0)
+
+func _build_clean_r12_portal() -> void:
+	var portal := Node3D.new()
+	portal.name = "CupulaFinalCleanPortalR12"
+	portal.position = Vector3(164.0, -0.85, 178.0)
+	add_child(portal)
+	var base := ROCK_LARGE.instantiate() as Node3D
+	if base != null:
+		base.name = "BaseAterradaPortalLimpoR12"
+		base.position = Vector3(0.0, 0.34, -2.55)
+		base.scale = Vector3(4.4, 0.30, 1.05)
+		portal.add_child(base)
+	var ground := ROCK_LARGE.instantiate() as Node3D
+	if ground != null:
+		ground.name = "ChaoAterramentoPortalLimpoR12"
+		ground.position = Vector3(0.0, -0.38, -2.25)
+		ground.scale = Vector3(6.8, 0.18, 3.2)
+		ground.rotation = Vector3(0.015, 0.04, -0.01)
+		portal.add_child(ground)
+	for side in [-1.0, 1.0]:
+		var jamb := PILLAR.instantiate() as Node3D
+		if jamb == null:
+			continue
+		jamb.name = "JambaPortalLimpoR12_%s" % str(side)
+		jamb.position = Vector3(side * 1.90, 1.48, -2.75)
+		jamb.scale = Vector3(0.58, 1.85, 0.58)
+		jamb.rotation = Vector3(0.03, side * 0.08, side * 0.02)
+		portal.add_child(jamb)
+	var lintel := ROCK_LARGE.instantiate() as Node3D
+	if lintel != null:
+		lintel.name = "LintelPortalLimpoR12"
+		lintel.position = Vector3(0.0, 2.38, -2.75)
+		lintel.scale = Vector3(2.35, 0.34, 0.74)
+		lintel.rotation = Vector3(0.02, 0.0, 0.0)
+		portal.add_child(lintel)
+	var recess := ROCK_LARGE.instantiate() as Node3D
+	if recess != null:
+		recess.name = "RecessoPortalLimpoR12"
+		recess.position = Vector3(0.0, 2.10, -2.92)
+		recess.scale = Vector3(1.75, 1.55, 0.18)
+		var material := StandardMaterial3D.new()
+		material.albedo_color = Color("#101a2c")
+		material.roughness = 0.96
+		for recess_mesh in recess.find_children("*", "MeshInstance3D", true, false):
+			recess_mesh.set_surface_override_material(0, material)
+		portal.add_child(recess)
+	var portal_light := OmniLight3D.new()
+	portal_light.name = "LuzPortalLimpoR12"
+	portal_light.light_color = Color("#5b9fc0")
+	portal_light.light_energy = 0.28
+	portal_light.omni_range = 5.0
+	portal_light.shadow_enabled = false
+	portal_light.position = Vector3(164.0, 2.0, 175.2)
+	add_child(portal_light)
 
 func _build_region12_wayfinding_lights() -> void:
 	var wayfinding_positions: Array[Vector3] = [
@@ -740,11 +807,11 @@ func _process(delta: float) -> void:
 func _set_camera(progress: float) -> void:
 	if camera == null:
 		return
-	var start := Vector3(164.42, 4.78, 182.6)
-	var finish := Vector3(164.18, 4.18, 178.9)
+	var start := Vector3(164.0, 2.72, 181.6)
+	var finish := Vector3(164.0, 2.48, 179.0)
 	var position := start.lerp(finish, progress)
 	position.x += sin(progress * TAU * 0.8) * 0.72
 	position.y += sin(progress * PI) * 0.48
 	camera.position = position
-	var target := Vector3(163.86 + sin(progress * PI) * 0.22, 1.92 + progress * 0.18, 173.72)
+	var target := Vector3(164.0 + sin(progress * PI) * 0.12, 0.92 + progress * 0.10, 175.35)
 	camera.look_at(target, Vector3.UP)

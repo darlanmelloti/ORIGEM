@@ -1,0 +1,2 @@
+8d514ea5a4ac02a45b0f0fb01b6a43d4bba9a3035089a97978855112072fa02d  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-093-r11-r12-diagnostic-pass3-culling/gameplay-30s.mp4
+c3d91d2c31e70f79d9c59b7ef6ee664003a2cb83b8fbacdc927e3e83d57414c2  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-093-r11-r12-diagnostic-pass3-culling/print-1600x900.jpg
