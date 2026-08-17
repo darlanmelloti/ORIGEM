@@ -1,0 +1,1 @@
+2507d2c8aad484d2f9934cba322ed2d379567ad85e871a7c882165611621cbef  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-079-next-local.zip
