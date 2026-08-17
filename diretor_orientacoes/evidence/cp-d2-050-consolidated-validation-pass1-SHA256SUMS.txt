@@ -1,0 +1,2 @@
+8509d43358c4a4f119ff6253e93cfbaea070d5182a7a4c996957d8c4771c7c0e  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-050-consolidated-validation-pass1/gameplay-30s.mp4
+f62857ef36c5ec905fa8b5f9149dd628ceb8e60c867d3f451edcb1f0dc555416  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-050-consolidated-validation-pass1/print-1600x900.jpg
