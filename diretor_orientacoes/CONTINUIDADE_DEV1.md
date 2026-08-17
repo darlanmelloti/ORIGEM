@@ -1,17 +1,17 @@
 # Continuidade — Dev1
 
-Os **CP 281–285** foram validados com Godot headless e provas de gameplay de 30 segundos. O vale inicial recebeu miradouro físico, planos de profundidade, água de rio calibrada e uma tomada depurada; o trajecto Majestic → Ruínas recebeu aterramento descontínuo; e as lajes rasas da Bacia usam agora a materialidade de pedra húmida.
+Os **CP 281–286** foram validados com Godot headless e provas de gameplay de 30 segundos. A Casa Voss recebeu uma soleira física de revelação; o corredor inicial passou a ter relevo de leitura, água calibrada e pontes positivas mais legíveis; e as Regiões 4–6 receberam aterramento e materialidade de margem. Todos os commits foram sincronizados na branch `feature/dev1-gameplay-core`.
 
-O **CP 286 — Revisão Casa Voss → Estrada do Rio → Arco das Ruínas** está em execução. A tarefa imediata é confrontar a captura actual do vale com a matriz cartográfica, identificar qualquer marco que ainda leia como faixa plana ou ornamento técnico e aplicar apenas geometria, relevo, materiais ou vegetação física dentro das Regiões 1–3.
+O **CP 287 — Consolidação Cartográfica Casa → Estrada → Arco** está em execução. A tarefa imediata é consolidar visualmente os quatro primeiros planos da saída, reduzindo qualquer aparência de faixa de água, ornamento técnico ou marco flutuante apenas com geometria e materiais físicos das Regiões 1–3.
 
 | Critério obrigatório | Evidência exigida |
 |---|---|
-| Leitura cartográfica | Captura que distinga Casa/soleira, rio/ponte, Estrada/Arco e horizonte físico |
-| Integridade técnica | Godot headless sem erros de parser, script ou recursos |
-| Jogabilidade | Prova de 30 segundos Casa → Estrada → Arco sem bloqueio |
-| Desempenho | Sem aumento de luzes dinâmicas simultâneas |
-| Escopo | Exclusivamente Regiões 1–6; módulos das Regiões 7–12 ficam intocados |
+| Leitura espacial | Captura 16:9 com soleira, rio/ponte, estrada/arco e horizonte físico distinguíveis |
+| Integridade técnica | Validação Godot headless sem erros |
+| Jogabilidade | Prova segmentada de 30 segundos Casa → Estrada → Arco sem bloqueio |
+| Desempenho | Sem luzes dinâmicas adicionais |
+| Escopo | Não alterar módulos, câmaras ou activos das Regiões 7–12 |
 
-> Cada checkpoint encadeia o seguinte. Depois do CP 286, abrir imediatamente o próximo passe de documentação visual e distribuição actualizada, sem aguardar validação verbal.
+> O CP 287 está iniciado e não aguarda resposta. Ao concluir, deve abrir imediatamente a revisão de distribuição e evidências Dev1.
 
-**Estado:** `CP 286 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
+**Estado:** `CP 287 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
