@@ -31,3 +31,10 @@ Dev4 foi reatribuído como parceiro técnico directo do interior Orion. O checko
 Dev3 deve usar a sonda física temporária criada por Dev4 para seleccionar uma única melhoria cinematográfica que não repita candidatos rejeitados em `CP_CINE_56_DIAGNOSTICO_MOVIMENTO.md`. A decisão, a alteração, a validação de 30 segundos e a próxima hipótese já aberta pertencem ao mesmo ciclo `CINE-PAIR-01`.
 
 > A conclusão de uma captura ou um diagnóstico não encerra a frente: inicia imediatamente `CINE-PAIR-02` com Dev4 para a implementação/revisão da próxima alteração comprovada.
+
+
+## CINE-PAIR-03 — Silhueta estrutural contínua em execução
+
+A solução material CINE-PAIR-02 foi rejeitada e revertida após validação conjunta de 30 segundos. Dev4 mede agora a contribuição das secções da casca contínua para o enquadramento em soleira, desvio e profundidade. Dev3 deve escolher uma única alteração de silhueta que não repita activos isolados, luzes, neblina, emissão, FOV ou alargamento de perfil já rejeitados.
+
+A decisão seguinte será validada no mesmo percurso por ambos. A publicação do diagnóstico abre a implementação CINE-PAIR-03B; não é um ponto de paragem.

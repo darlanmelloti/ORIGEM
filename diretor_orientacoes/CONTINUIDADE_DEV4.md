@@ -23,3 +23,10 @@ A alegação de bloqueio do Dev3 por repositório ausente está ultrapassada nes
 Quando a sonda for removida e a melhoria seleccionada for validada ou revertida, Dev4 abre **CINE-PAIR-02 — Implementação e revisão técnica da alteração escolhida**, no mesmo marcador e sem criar um DIR autónomo. Dev3 preserva o diagnóstico visual e inicia o candidato seguinte antes de publicar o checkpoint.
 
 > Ver `ORDEM_PAREADA_DEV3_DEV4_ORION.md` para divisão de responsabilidades, restrições e critérios de aceitação.
+
+
+## Estado actualizado — CINE-PAIR-02 concluído; CINE-PAIR-03 já iniciado
+
+A orientação de superfície por cor de vértice foi revertida após duas sessões reais de 30 segundos sem ganho visual suficiente. A sonda temporária foi removida e a base Orion voltou a validar sem erros.
+
+**CINE-PAIR-03 — Auditoria de silhueta integrada da rota.** Dev4 deve agora medir quais secções da própria casca contínua entram no cone de câmara em cada ponto físico e entregar a Dev3 uma proposta de alteração **da silhueta estrutural contínua**, sem inserir activos isolados, marcadores, luzes ou bandas materiais. Dev3 selecciona um único perfil candidato e ambos validam a mesma trajectória de 30 segundos. Esta tarefa está em execução; não abrir DIR autónomo.
