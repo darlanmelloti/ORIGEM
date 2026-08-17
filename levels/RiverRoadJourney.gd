@@ -37,6 +37,7 @@ func _ready() -> void:
 	_build_river_road()
 	_build_river()
 	_build_river_margins()
+	_build_macro_river_cutbanks()
 	_build_ruin_arch()
 	_build_cartographic_southwest_readability()
 	_build_arch_crown_stones()
@@ -215,7 +216,8 @@ func _build_river() -> void:
 	var river_root: Node3D = Node3D.new()
 	river_root.name = "RioDaEstrada_Norte"
 	add_child(river_root)
-	var width: float = 10.5
+	# Largura macro: o rio é uma camada de vale visível desde a Estrada, sem invadir a rota que se mantém a oeste.
+	var width: float = 14.0
 	var surface: SurfaceTool = SurfaceTool.new()
 	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for index: int in range(32):
@@ -315,6 +317,36 @@ func _build_river_margins() -> void:
 				fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 				fern.rotation.y = rng.randf_range(-PI, PI)
 				margins.add_child(fern)
+
+func _build_macro_river_cutbanks() -> void:
+	# Afloramentos de margem em escala intermédia: quebram a leitura de faixa plana de água e deixam a hidrologia orientar a vista.
+	var cutbanks: Node3D = Node3D.new()
+	cutbanks.name = "TaludesMacroDoRio"
+	add_child(cutbanks)
+	var wet_rock: StandardMaterial3D = StandardMaterial3D.new()
+	wet_rock.albedo_color = Color(0.082, 0.115, 0.105, 1.0)
+	wet_rock.roughness = 0.80
+	var bank_data: Array[Dictionary] = [
+		{"z": 31.0, "scale": 0.58, "yaw": 0.35},
+		{"z": 49.0, "scale": 0.78, "yaw": -0.42},
+		{"z": 68.0, "scale": 0.68, "yaw": 0.74},
+		{"z": 87.0, "scale": 0.86, "yaw": -0.18},
+		{"z": 106.0, "scale": 0.64, "yaw": 0.52}
+	]
+	for index: int in range(bank_data.size()):
+		var data: Dictionary = bank_data[index]
+		var z_value: float = data["z"] as float
+		var x_value: float = _river_x(z_value) - 8.1
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		rock.name = "AfloramentoTaludeRio_%02d" % (index + 1)
+		rock.position = Vector3(x_value, _height_at(x_value, z_value) - 0.05, z_value)
+		var scale_value: float = data["scale"] as float
+		rock.scale = Vector3(scale_value, scale_value * 0.72, scale_value)
+		rock.rotation.y = data["yaw"] as float
+		_apply_material(rock, wet_rock)
+		cutbanks.add_child(rock)
 
 func _build_ruin_arch() -> void:
 	var arch: Node3D = Node3D.new()
