@@ -18,7 +18,7 @@ A validação Godot 4.7.1 terminou com parser/headless limpo, gameplay de 30 seg
 |---|---|
 | `gameplay-30s.mp4` | `67a276d482c3ebb0b5baaad0ca96df6742a8678d28539cbfdab414a60373010c` |
 | `print-1600x900.jpg` | `3abb6fce675d12ecb86020ea805642e2c15932eb8f2d6df3ab2b4b4e86484d98` |
-| `CP-D2-094-r12-portal-grounded.zip` | `536e84377c449c94e34f3b7f9a64d809a1ff06332cc996edd0038d45be653c9f` |
+| `CP-D2-094-r12-portal-grounded.zip` | `Consultar o ficheiro adjacente CP-D2-094-r12-portal-grounded.zip.sha256 |
 
 ## NEXT_ACTION_IMMEDIATE
 
