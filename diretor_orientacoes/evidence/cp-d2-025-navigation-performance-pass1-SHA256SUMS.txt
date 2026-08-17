@@ -1,0 +1,2 @@
+4fb504d1abf1bd0559eb0c42a5b1bc3e2118a12426716a7864f8f2763bec77e3  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-025-navigation-performance-pass1/gameplay-30s.mp4
+13da55dd6bcd7cca2343b2fc04f2d2d18e474e128760972eaff9d1332f6f6f97  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-025-navigation-performance-pass1/print-1600x900.jpg
