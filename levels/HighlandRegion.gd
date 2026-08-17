@@ -330,7 +330,7 @@ func _build_highland_silhouette() -> void:
 	forest.name = "SilhuetasDaVilaElevada"
 	add_child(forest)
 	var placements: Array[Vector3] = [
-		Vector3(108.0, 0.0, 331.0), Vector3(119.0, 0.0, 372.0), Vector3(154.0, 0.0, 325.0),
+		Vector3(119.0, 0.0, 372.0), Vector3(154.0, 0.0, 325.0),
 		Vector3(172.0, 0.0, 362.0), Vector3(209.0, 0.0, 385.0), Vector3(216.0, 0.0, 423.0)
 	]
 	for index: int in range(placements.size()):
