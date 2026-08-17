@@ -41,6 +41,7 @@ func _ready() -> void:
 	shore_material = _create_shore_material()
 	_build_forest_path()
 	_build_cartographic_forest_threshold()
+	_build_arch_to_forest_transition()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
 	_build_cartographic_river_inlet()
@@ -165,6 +166,48 @@ func _build_cartographic_forest_threshold() -> void:
 			fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 			fern.rotation.y = float(rock_index) * 0.64
 			threshold.add_child(fern)
+
+func _build_arch_to_forest_transition() -> void:
+	# Três clareiras sucessivas deixam o Arco ceder lugar à Floresta Densa por profundidade, não por uma parede de árvores.
+	var transition: Node3D = Node3D.new()
+	transition.name = "TransicaoOrganicaArcoFloresta"
+	add_child(transition)
+	var groups: Array[Dictionary] = [
+		{"z": 101.0, "side": -1.0, "offset": 8.6, "scale": 0.54, "yaw": 0.18},
+		{"z": 106.0, "side": 1.0, "offset": 10.8, "scale": 0.46, "yaw": -0.36},
+		{"z": 111.0, "side": -1.0, "offset": 12.4, "scale": 0.60, "yaw": 0.54},
+		{"z": 115.0, "side": 1.0, "offset": 9.7, "scale": 0.50, "yaw": -0.22}
+	]
+	for index: int in range(groups.size()):
+		var group: Dictionary = groups[index]
+		var z_value: float = group["z"] as float
+		var side: float = group["side"] as float
+		var x_value: float = _path_x(z_value) + side * (group["offset"] as float)
+		var tree_source: PackedScene = DARK_TREE if index % 2 == 0 else OAK_DARK
+		var tree: Node3D = tree_source.instantiate() as Node3D
+		if tree != null:
+			tree.name = "ArvoreTransicaoArco_%02d" % (index + 1)
+			tree.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
+			var tree_scale: float = group["scale"] as float
+			tree.scale = Vector3(tree_scale, tree_scale * (0.92 + float(index % 2) * 0.14), tree_scale)
+			tree.rotation.y = group["yaw"] as float
+			transition.add_child(tree)
+		# Uma rocha baixa próxima ao caminho aterra a mudança de bioma; fica além de 3,6 m do centro do trilho.
+		var rock_x: float = _path_x(z_value) + side * 4.3
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.name = "RochaTransicaoArco_%02d" % (index + 1)
+			rock.position = Vector3(rock_x, _height_at(rock_x, z_value) - 0.03, z_value + 0.5)
+			rock.scale = Vector3(0.24 + float(index % 2) * 0.04, 0.16, 0.24 + float(index % 2) * 0.04)
+			rock.rotation.y = (group["yaw"] as float) + 0.42
+			transition.add_child(rock)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoTransicaoArco_%02d" % (index + 1)
+			fern.position = Vector3(rock_x + side * 0.55, _height_at(rock_x + side * 0.55, z_value + 0.75) + 0.02, z_value + 0.75)
+			fern.scale = Vector3(0.36, 0.36, 0.36)
+			fern.rotation.y = float(index) * 0.83
+			transition.add_child(fern)
 
 func _build_forest_wayfinding() -> void:
 	# Balizas baixas, quentes e espaçadas: guiam Elias no sub-bosque sem transformar a floresta num corredor iluminado.

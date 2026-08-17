@@ -1,11 +1,11 @@
 # Continuidade — Dev1
 
-O **CP 268 — Silhueta de transição Arco → Floresta Densa** está em execução. O corredor Casa Voss → Estrada → Arco agora dispõe de profundidade topográfica, rio lateral e taludes físicos; estas camadas devem ser preservadas.
+O **CP 269 — Clareira de leitura do Acampamento Majestic** está em execução. A sequência Casa Voss → Estrada do Rio → Arco → Floresta já dispõe de profundidade física, margens de água e uma transição florestal em clareiras. Essas camadas não podem ser comprimidas nem substituídas por painéis de fundo.
 
-O próximo passe cria uma passagem gradual do marco arqueológico para a floresta, usando agrupamentos orgânicos escalonados, rochas de margem e clareiras de trajecto. A execução não pode formar uma parede de árvores, reduzir o percurso, criar marcadores de interface no mundo nem alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` ou qualquer módulo das Regiões 7–12.
+O próximo passe deve tornar o Acampamento Majestic reconhecível a partir da floresta através de silhuetas espaciais de tendas, rochas e da fogueira já existente. Não acrescenta luzes dinâmicas; reutiliza a leitura física e o orçamento presentes. Não altera `HighlandRegion.gd`, `OrionDestinationRegion.gd` ou módulos das Regiões 7–12.
 
 ## Critérios de continuação
 
-A tarefa só abre o CP seguinte depois de validação headless, prova de presença regional e gameplay real de 30 segundos. O checkpoint deve apontar explicitamente para o primeiro artefacto da tarefa seguinte.
+A tarefa só abre o CP seguinte depois de validação headless, prova de presença regional e gameplay real de 30 segundos. A conclusão deve apontar para o primeiro artefacto da tarefa seguinte.
 
 **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
