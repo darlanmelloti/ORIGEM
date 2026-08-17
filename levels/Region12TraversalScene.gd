@@ -166,6 +166,15 @@ func _build_clean_r12_portal() -> void:
 		wing.scale = Vector3(0.62, 0.22, 0.52)
 		wing.rotation = Vector3(0.04, wing_side * 0.18, wing_side * 0.06)
 		portal.add_child(wing)
+	for monolith_side in [-1.0, 1.0]:
+		var monolith := PILLAR.instantiate() as Node3D
+		if monolith == null:
+			continue
+		monolith.name = "MonolitoCoroaR12_%s" % str(monolith_side)
+		monolith.position = Vector3(monolith_side * 1.18, 0.42, -2.62)
+		monolith.scale = Vector3(0.42, 1.26 + (0.10 if monolith_side < 0.0 else 0.0), 0.42)
+		monolith.rotation = Vector3(0.04, monolith_side * 0.10, monolith_side * 0.04)
+		portal.add_child(monolith)
 	var lintel := ROCK_LARGE.instantiate() as Node3D
 	if lintel != null:
 		lintel.name = "LintelPortalLimpoR12"

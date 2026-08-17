@@ -1,0 +1,2 @@
+fdf8a12c66b62b706ad10f84d00a8a1398ad23933c67edbab7a187e3dfdefdb0  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-099-r12-monolith-crown/gameplay-30s.mp4
+83c37f46f1140cd5dac7362f4c6b029137d9852dc52ed740a11abed938a62264  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-099-r12-monolith-crown/print-1600x900.jpg
