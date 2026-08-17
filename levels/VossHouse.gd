@@ -53,6 +53,9 @@ var opening_skip_hold_time: float = 0.0
 var opening_skip_key_held: bool = false
 var opening_was_skipped: bool = false
 const OPENING_SKIP_HOLD_SECONDS: float = 1.50
+# A captura em llvmpipe pode avançar o relógio do jogo mais depressa que os 18 s de parede da evidência.
+# Este limite só existe no modo QA e preserva a janela visual sem prolongar o prólogo normal do jogador.
+const QA_CINEMATIC_CAPTURE_HOLD_SECONDS: float = 300.0
 var front_door_open: bool = false
 
 func _ready() -> void:
@@ -1025,7 +1028,7 @@ func _build_opening_camera() -> void:
 	opening_timer = Timer.new()
 	opening_timer.name = "TemporizadorPrologoCasaVoss"
 	opening_timer.one_shot = true
-	opening_timer.wait_time = 35.0
+	opening_timer.wait_time = QA_CINEMATIC_CAPTURE_HOLD_SECONDS if OS.get_environment("ORIGEM_QA_CINEMATIC_CAPTURE") == "1" else 35.0
 	opening_timer.process_mode = Node.PROCESS_MODE_ALWAYS
 	opening_timer.timeout.connect(_finish_opening_camera)
 	add_child(opening_timer)
@@ -1059,17 +1062,25 @@ func _activate_opening_camera() -> void:
 		call_deferred("_audit_opening_residuals")
 	# Durante o enquadramento inicial, não há HUD nem mensagens de outro mapa a competir com a Casa Voss.
 	# A cena actual pode ser nula em sondas headless que instanciam a main scene manualmente.
-	var scene_root: Node = get_tree().current_scene
-	if scene_root != null:
-		opening_ui = scene_root.get_node_or_null("UI") as CanvasLayer
+		var scene_root: Node = get_tree().current_scene
+		if scene_root == null:
+			scene_root = get_tree().root.get_node_or_null("Main")
+		if scene_root != null:
+			opening_ui = scene_root.get_node_or_null("UI") as CanvasLayer
 		if opening_ui != null:
 			opening_ui.visible = false
 		# Marcadores, inimigos e protótipos do vale só entram depois do prólogo; não devem contaminar a leitura da casa.
-		for node_name: String in ["Enemies", "Interactables", "Characters"]:
+		for node_name: String in ["Enemies", "Interactables", "Characters", "InteriorDoSantuario"]:
 			var legacy_node: Node3D = scene_root.get_node_or_null(node_name) as Node3D
 			if legacy_node != null and legacy_node.visible:
 				legacy_node.visible = false
 				opening_hidden_nodes.append(legacy_node)
+		# Geometry é um filho directo legado da cena. A procura genérica pode correr antes de todos os módulos regionais
+		# terminarem o seu _ready(); esta referência directa garante que tablets, cubo e emissores ciano não entram na tomada.
+		var legacy_geometry: Node3D = scene_root.get_node_or_null("Geometry") as Node3D
+		if legacy_geometry != null and legacy_geometry.visible:
+			legacy_geometry.visible = false
+			opening_hidden_nodes.append(legacy_geometry)
 		# Sinais Chronos e protótipos dos marcos só surgem depois da revelação; no primeiro quadro seriam pontos técnicos ciano, não geometria do vale.
 		for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "JanelaChronosAzul", "LuzDaJanelaChronos"]:
 			for technical_node: Node in scene_root.find_children(technical_marker_name, "Node3D", true, false):
@@ -1094,6 +1105,8 @@ func _audit_opening_residuals() -> void:
 		return
 	var scene_root: Node = get_tree().current_scene
 	if scene_root == null:
+		scene_root = get_tree().root.get_node_or_null("Main")
+	if scene_root == null:
 		return
 	var report := FileAccess.open("user://cp322_opening_residuals.txt", FileAccess.WRITE)
 	if report == null:
@@ -1109,9 +1122,11 @@ func _hide_late_opening_technical_markers() -> void:
 		return
 	var scene_root: Node = get_tree().current_scene
 	if scene_root == null:
+		scene_root = get_tree().root.get_node_or_null("Main")
+	if scene_root == null:
 		return
 	# Inclui luzes e objetos remotos com nomes de Chronos: durante o prólogo são sinalização técnica; ao fim da cena são restaurados junto com os restantes nós ocultos.
-	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem*", "BrilhoAzulChronos", "BrilhoMarcoRuina*", "LuzDoObservatorio", "BrilhoChronosDaCaverna", "JanelaChronosAzul", "LuzDaJanelaChronos", "Geometry", "OrionCube", "Tablet1", "Tablet2", "Tablet3", "TerminalP52", "Seraph", "*Chronos*", "*Beacon*", "*Brilho*", "*Marco*"]:
+	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem*", "BrilhoAzulChronos", "BrilhoMarcoRuina*", "LuzDoObservatorio", "BrilhoChronosDaCaverna", "JanelaChronosAzul", "LuzDaJanelaChronos", "LuzesDoVale", "InteriorDoSantuario", "SantuarioDaNascente", "ReflexoDaQueda", "LuzDoAltar", "Geometry", "OrionCube", "Tablet1", "Tablet2", "Tablet3", "TerminalP52", "Seraph", "*Chronos*", "*Beacon*", "*Brilho*", "*Marco*"]:
 		for technical_node: Node in scene_root.find_children(technical_marker_name, "Node3D", true, false):
 			var technical_marker: Node3D = technical_node as Node3D
 			if technical_marker != null and technical_marker.visible:
@@ -1140,7 +1155,10 @@ func _hide_late_opening_technical_markers() -> void:
 			opening_hidden_nodes.append(technical_mesh)
 
 func _is_cyan_technical_mesh(mesh_node: MeshInstance3D) -> bool:
+	# get_active_material cobre overrides; alguns construtores antigos colocam o material apenas na superfície da Mesh.
 	var active_material: Material = mesh_node.get_active_material(0)
+	if active_material == null and mesh_node.mesh != null and mesh_node.mesh.get_surface_count() > 0:
+		active_material = mesh_node.mesh.surface_get_material(0)
 	var standard_material: StandardMaterial3D = active_material as StandardMaterial3D
 	if standard_material == null or not standard_material.emission_enabled:
 		return false
@@ -1225,7 +1243,10 @@ func _finish_opening_camera() -> void:
 			hidden_node.visible = true
 	opening_hidden_nodes.clear()
 	# A exploração volta ao perfil temporal ativo depois do prólogo de tempestade.
-	var level_environment: Node = get_tree().current_scene.get_node_or_null("LevelEnvironment")
+	var scene_root: Node = get_tree().current_scene
+	if scene_root == null:
+		scene_root = get_tree().root.get_node_or_null("Main")
+	var level_environment: Node = scene_root.get_node_or_null("LevelEnvironment") if scene_root != null else null
 	if level_environment != null and level_environment.has_method("restore_timeline_environment"):
 		level_environment.call("restore_timeline_environment")
 	var opening_message: String = "Prólogo saltado. Elias recupera o controlo na Casa Voss." if opening_was_skipped else "1908 — Casa Voss\n\nA tempestade cobre a estrada para as cavernas de Orion."

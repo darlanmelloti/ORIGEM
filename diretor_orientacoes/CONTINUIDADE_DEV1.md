@@ -4,12 +4,12 @@
 
 ## Base preservada
 
-Os CPs 317–329 consolidaram a tomada recuada de Casa Voss, a prioridade da câmara de prólogo, a limpeza de elementos técnicos e a materialidade PBR de terreno. A ponte positiva em `z=58` permanece um marco lateral real; a rota espacial e visual principal é Casa Voss → Estrada do Rio → Arco das Ruínas em `z=92`.
+Os CPs 317–330 consolidaram a tomada recuada de Casa Voss, a prioridade da câmara de prólogo, a materialidade PBR de terreno e a confirmação da chegada arqueológica ao Arco das Ruínas. A ponte positiva em `z=58` permanece um marco lateral real; a rota espacial e visual principal é Casa Voss → Estrada do Rio → Arco das Ruínas em `z=92`.
 
-O CP 329 reforçou moderadamente os marcos de ruína físicos que ladeiam a Estrada do Rio, sem introduzir caminho paralelo, colisores no leito ou alteração da escala cartográfica. A validação headless e 30 segundos de execução passaram.
+O CP 331 corrigiu a abertura em instâncias normais e QA. O contentor `Geometry`, `Interactables`, o protótipo do interior do santuário e os emissores Chronos são ocultados de forma determinística durante a abertura; a restituição depois do handoff devolve Geometry, interacções e a câmara de Elias. A validação headless, a auditoria de emissões QA, a captura aos 18 segundos e 30 segundos de gameplay normal passaram.
 
-## CP 330 — Em execução imediata
+## CP 332 — Em execução imediata
 
-**Objectivo:** avaliar e reforçar apenas a continuidade de planos intermédios da Estrada para a chegada ao Arco das Ruínas. A intervenção deve usar geometria tridimensional real, manter a faixa de passagem livre, não acrescentar luzes nem sinalização técnica e ser revertida sem evidência visual verificável.
+**Objectivo:** auditar a composição macro da tomada recuada da Casa Voss contra a referência cartográfica oficial. Escolher no máximo uma melhoria física de alto impacto para a leitura simultânea de Casa, rio, Estrada do Rio e Arco das Ruínas; não repetir candidatos de câmara, ponte, talude, atmosfera, vegetação ou escala já revertidos.
 
-A sequência de evidência para Dev3 mantém três pontos físicos: Casa Voss, aproximação da ponte positiva como marco lateral e Arco das Ruínas como destino. Nenhum checkpoint encerra o ciclo; a próxima captura deve comparar a estrada com a chegada arqueológica antes de qualquer alteração.
+A sequência de evidência para Dev3 mantém três pontos físicos: Casa Voss, aproximação da ponte positiva como marco lateral e Arco das Ruínas como destino. Nenhum checkpoint encerra o ciclo. O CP 332 deve manter a escala real do vale, a faixa jogável e a fronteira exclusiva das Regiões 1–6/Takes 1–11.
