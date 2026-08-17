@@ -1,4 +1,4 @@
-# CONTINUIDADE_DEV1 — CP 320 EM EXECUÇÃO
+# CONTINUIDADE_DEV1 — CP 321 EM EXECUÇÃO
 
 **Fronteira obrigatória:** Regiões 1–6 e Takes 1–11. Não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem qualquer módulo das Regiões 7–12.
 
@@ -8,9 +8,9 @@ O CP 294 ocultou os sinais técnicos do prólogo por nome e por material emissiv
 
 A tomada histórica inclinada mantém uma massa de cobertura Casa Voss à esquerda com Estrada e Arco no plano direito. É uma base **parcial**, não uma aprovação final: a fachada e a ponte ainda não satisfazem a referência de 12 marcos.
 
-## CP 320 — EM EXECUÇÃO IMEDIATA
+## CP 321 — EM EXECUÇÃO IMEDIATA
 
-**Objectivo:** preservar o take encadeado CP 319, obter frames temporais robustos de Casa, ponte e Arco no ambiente aquecido e alimentar a grelha CP-CINE-03. Não usar outdoors, painéis, luzes adicionais ou colisores que estreitem a rota.
+**Objectivo:** preservar a tomada recuada CP 317 e a abertura limpa CP 313; auditar a câmara de prólogo versus a câmara de runtime antes de qualquer novo movimento cinematográfico. Não usar outdoors, painéis, luzes adicionais ou colisores que estreitem a rota.
 
 | Critério | Verificação obrigatória |
 | --- | --- |
@@ -20,6 +20,6 @@ A tomada histórica inclinada mantém uma massa de cobertura Casa Voss à esquer
 | Jogabilidade | Captura estável em `opengl3` e 30 segundos de execução sem erro GDScript. |
 | Reversibilidade | Reverter qualquer candidata sem ganho visual verificável. |
 
-**Próxima acção já iniciada:** capturar as três posições temporais controladas do take no motor já aquecido e publicar a evidência comparativa para o Dev3, antes de qualquer nova geometria.
+**Próxima acção já iniciada:** comparar a activação da câmara de prólogo e da câmara do jogador na cena principal, localizar a substituição que anulou o CP 320 e publicar uma correcção somente se a evidência for verificável.
 
 > Nenhum checkpoint encerra o ciclo. Cada validação abre imediatamente o próximo passe dentro do escopo Dev1.
