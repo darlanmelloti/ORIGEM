@@ -1,0 +1,1 @@
+a185a727425adff87a27fcc540c442186503d14991c297fb6c989b40ed6d03cc  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-076-full-chain-local.zip

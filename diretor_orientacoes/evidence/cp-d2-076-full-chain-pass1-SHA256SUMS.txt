@@ -1,0 +1,2 @@
+0659b23bd095fddf2ed03ff4e957cf773a00dc79c2a0963ba0eb8fe6d9b517ff  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-076-full-chain-pass1/gameplay-30s.mp4
+a24cd9f42abc7b14d9cc773c7b17d36888958d379e7a616f00a60eb890e1c102  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-076-full-chain-pass1/print-1600x900.jpg
