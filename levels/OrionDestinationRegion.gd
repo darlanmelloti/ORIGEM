@@ -23,14 +23,16 @@ func _ready() -> void:
 	_build_orion_cave()
 	_build_region9_to_10_approach()
 	_build_cp_d2_007_physical_handoff()
-	if OS.get_environment("ORIGEM_VALIDATION_REGION") != "10":
+	var validation_region := OS.get_environment("ORIGEM_VALIDATION_REGION")
+	if validation_region != "10":
 		_build_cube_chamber_marker()
 		_build_region11_to_12_approach()
-		_build_temporal_hub()
-		_build_hub_to_final_dome_approach()
-		_build_final_dome()
-		_build_cartographic_anchors()
-		_report_region12_render_inventory()
+		if validation_region != "11":
+			_build_temporal_hub()
+			_build_hub_to_final_dome_approach()
+			_build_final_dome()
+	_build_cartographic_anchors()
+	_report_region12_render_inventory()
 
 func _report_region12_render_inventory() -> void:
 	var mesh_count: int = find_children("*", "GeometryInstance3D", true, false).size()

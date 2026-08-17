@@ -1,0 +1,2 @@
+8972b96d8aa30e95b167c97bc8e0faa88f5136f2ceca5181c3428aaa44cddf7e  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-034-conditional-r11-pass1/gameplay-30s.mp4
+634418dd0356adbe24790dbc70e3fd927393cdf131cef2fee3051b8dd8955619  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-034-conditional-r11-pass1/print-1600x900.jpg
