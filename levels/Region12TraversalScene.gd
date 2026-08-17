@@ -168,14 +168,24 @@ func _build_clean_r12_portal() -> void:
 	var recess := ROCK_LARGE.instantiate() as Node3D
 	if recess != null:
 		recess.name = "RecessoPortalLimpoR12"
-		recess.position = Vector3(0.0, 1.08, -2.92)
-		recess.scale = Vector3(1.75, 1.55, 0.18)
+		recess.position = Vector3(0.0, 0.18, -2.92)
+		recess.scale = Vector3(1.75, 1.20, 0.18)
 		var material := StandardMaterial3D.new()
 		material.albedo_color = Color("#101a2c")
 		material.roughness = 0.96
 		for recess_mesh in recess.find_children("*", "MeshInstance3D", true, false):
 			recess_mesh.set_surface_override_material(0, material)
 		portal.add_child(recess)
+	for crown_side in [-1.0, 1.0]:
+		var crown := PILLAR.instantiate() as Node3D
+		if crown == null:
+			continue
+		crown.name = "CoroaVerticalR12_%s" % str(crown_side)
+		crown.position = Vector3(crown_side * 1.08, 0.92, -2.84)
+		crown.scale = Vector3(0.32, 0.68, 0.32)
+		crown.rotation = Vector3(0.02, crown_side * 0.06, crown_side * 0.03)
+		portal.add_child(crown)
+		crown.visible = false
 	var portal_light := OmniLight3D.new()
 	portal_light.name = "LuzPortalLimpoR12"
 	portal_light.light_color = Color("#5b9fc0")
