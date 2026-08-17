@@ -1042,6 +1042,7 @@ func _activate_opening_camera() -> void:
 				player_camera.current = false
 		opening_camera.make_current()
 		opening_camera.current = true
+		call_deferred("_audit_opening_residuals")
 	# Durante o enquadramento inicial, não há HUD nem mensagens de outro mapa a competir com a Casa Voss.
 	# A cena actual pode ser nula em sondas headless que instanciam a main scene manualmente.
 	var scene_root: Node = get_tree().current_scene
@@ -1070,7 +1071,24 @@ func _activate_opening_camera() -> void:
 	# Os módulos regionais podem criar marcos em frames diferentes; uma limpeza leve e temporária mantém a revelação livre de sinalização técnica.
 	for cleanup_index: int in range(1, 71):
 		get_tree().create_timer(float(cleanup_index) * 0.5).timeout.connect(_hide_late_opening_technical_markers)
+	# CP322: o llvmpipe pode reduzir o tempo de simulação; a fotografia aos 4 s ainda apanha a cena regional criada e permite auditoria na sessão curta.
+	get_tree().create_timer(4.0).timeout.connect(_audit_opening_residuals)
 	# CP319: o take começa na Casa e percorre, sem teleporte, os planos físicos da ponte positiva e do Arco.
+
+func _audit_opening_residuals() -> void:
+	if not opening_active:
+		return
+	var scene_root: Node = get_tree().current_scene
+	if scene_root == null:
+		return
+	var report := FileAccess.open("user://cp322_opening_residuals.txt", FileAccess.WRITE)
+	if report == null:
+		return
+	for node: Node in scene_root.find_children("*", "Node3D", true, false):
+		var node_3d: Node3D = node as Node3D
+		if node_3d != null and node_3d.visible and node_3d.global_position.distance_to(opening_camera.global_position) < 180.0:
+			report.store_line("%s | %s | %s" % [node_3d.name, node_3d.get_class(), node_3d.global_position])
+	report.close()
 
 func _hide_late_opening_technical_markers() -> void:
 	if not opening_active:
@@ -1079,7 +1097,7 @@ func _hide_late_opening_technical_markers() -> void:
 	if scene_root == null:
 		return
 	# Inclui luzes e objetos remotos com nomes de Chronos: durante o prólogo são sinalização técnica; ao fim da cena são restaurados junto com os restantes nós ocultos.
-	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem*", "BrilhoAzulChronos", "BrilhoMarcoRuina*", "LuzDoObservatorio", "BrilhoChronosDaCaverna", "JanelaChronosAzul", "LuzDaJanelaChronos", "*Chronos*", "*Beacon*", "*Brilho*", "*Marco*"]:
+	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem*", "BrilhoAzulChronos", "BrilhoMarcoRuina*", "LuzDoObservatorio", "BrilhoChronosDaCaverna", "JanelaChronosAzul", "LuzDaJanelaChronos", "Geometry", "OrionCube", "Tablet1", "Tablet2", "Tablet3", "TerminalP52", "Seraph", "*Chronos*", "*Beacon*", "*Brilho*", "*Marco*"]:
 		for technical_node: Node in scene_root.find_children(technical_marker_name, "Node3D", true, false):
 			var technical_marker: Node3D = technical_node as Node3D
 			if technical_marker != null and technical_marker.visible:
