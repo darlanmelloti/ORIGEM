@@ -46,24 +46,8 @@ func _build_orion_cave() -> void:
 	var cave_z: float = 548.0
 	cave.position = Vector3(cave_x, _height_at(cave_x, cave_z), cave_z)
 	add_child(cave)
-	# Rocha disposta em ferradura: forma entrada física sem cartão plano e deixa o percurso de Orion legível à distância.
-	for index: int in range(9):
-		var angle: float = lerpf(-2.35, -0.78, float(index) / 8.0)
-		var radius: float = 12.0 + float(index % 2) * 2.0
-		var cliff: Node3D = CLIFF.instantiate() as Node3D
-		if cliff == null:
-			continue
-		cliff.name = "RochaDaCaverna_%02d" % index
-		var local_x: float = cos(angle) * radius
-		var local_z: float = sin(angle) * radius
-		var scale_value: float = 0.72 + float(index % 3) * 0.18
-		# A origem do activo é aterrada pela altura mundial; não há elevação fixa que produza rochas suspensas.
-		cliff.position = Vector3(local_x, _height_at(cave_x + local_x, cave_z + local_z) - cave.position.y + 0.04 * scale_value, local_z)
-		cliff.scale = Vector3(scale_value, scale_value, scale_value)
-		cliff.rotation = Vector3(0.12 * sin(angle), angle + PI * 0.5, 0.10 * cos(angle))
-		_apply_material(cliff, stone_material)
-		cave.add_child(cliff)
-	# CP-CINE-23B: sem volumes esféricos ou painéis escuros. A profundidade resulta exclusivamente dos contrafortes reais e do relevo.
+	# CP-CINE-24: a boca é agora um colo de terreno contínuo. Nenhum activo isolado é usado enquanto o kit de caverna definitivo não estiver validado.
+	# Isto remove os poucos pivôs de rocha ainda visíveis como objectos suspensos na crista.
 	var rune_light: OmniLight3D = OmniLight3D.new()
 	rune_light.name = "BrilhoChronosDaCaverna"
 	rune_light.light_color = Color(0.10, 0.42, 1.0, 1.0)

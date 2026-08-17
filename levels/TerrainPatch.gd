@@ -50,6 +50,15 @@ func height_at(world_x: float, world_z: float) -> float:
 	var micro_noise: float = detail_noise.get_noise_2d(world_x, world_z) * 0.45
 	var height: float = side_hills + legacy_hills + northern_hills + macro_noise + micro_noise
 
+	# CP-CINE-24: dois contrafortes naturais esculpem uma garganta real na aproximação Orion.
+	# São função contínua da altura do terreno: sem painéis, volumes implantados ou compressão da escala regional.
+	var orion_longitudinal: float = exp(-pow((world_z - 548.0) / 38.0, 2.0))
+	var orion_west_spur: float = exp(-pow((world_x + 126.0) / 8.0, 2.0))
+	var orion_east_spur: float = exp(-pow((world_x + 106.0) / 8.0, 2.0))
+	var orion_central_collar: float = exp(-pow((world_x + 116.0) / 5.2, 2.0))
+	height += (orion_west_spur + orion_east_spur) * orion_longitudinal * 8.4
+	height -= orion_central_collar * orion_longitudinal * 1.15
+	
 	# Casa Voss e Estrada do Rio: um corredor navegável, com micro-relevo apenas nas margens.
 	if abs(world_x) < 30.0 and world_z > -112.0 and world_z < 145.0:
 		var corridor_noise: float = land_noise.get_noise_2d(world_x * 0.65, world_z * 0.65) * 0.30
