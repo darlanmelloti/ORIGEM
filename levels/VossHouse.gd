@@ -1034,6 +1034,13 @@ func _activate_opening_camera() -> void:
 	if elias != null:
 		elias.global_position = HOUSE_ORIGIN + Vector3(0.0, 1.75, 0.0)
 	if opening_camera != null:
+		# A câmara de Elias nasce marcada como actual na cena; desligá-la evita que volte a vencer a tomada no frame seguinte.
+		var opening_elias: Node3D = get_tree().get_first_node_in_group("player") as Node3D
+		if opening_elias != null:
+			var player_camera: Camera3D = opening_elias.get_node_or_null("Head/Camera3D") as Camera3D
+			if player_camera != null:
+				player_camera.current = false
+		opening_camera.make_current()
 		opening_camera.current = true
 	# Durante o enquadramento inicial, não há HUD nem mensagens de outro mapa a competir com a Casa Voss.
 	# A cena actual pode ser nula em sondas headless que instanciam a main scene manualmente.
@@ -1060,8 +1067,9 @@ func _activate_opening_camera() -> void:
 	_apply_opening_storm()
 	get_tree().create_timer(0.35).timeout.connect(_apply_opening_storm)
 	# A construção regional é escalonada nos primeiros frames; passagens curtas removem sinais técnicos antes da primeira captura sem afectar a exploração posterior.
-	for delay_seconds: float in [0.12, 0.42, 0.90, 1.65, 3.20, 6.00, 12.00, 17.50, 23.00, 30.00]:
-		get_tree().create_timer(delay_seconds).timeout.connect(_hide_late_opening_technical_markers)
+	# Os módulos regionais podem criar marcos em frames diferentes; uma limpeza leve e temporária mantém a revelação livre de sinalização técnica.
+	for cleanup_index: int in range(1, 71):
+		get_tree().create_timer(float(cleanup_index) * 0.5).timeout.connect(_hide_late_opening_technical_markers)
 	# CP319: o take começa na Casa e percorre, sem teleporte, os planos físicos da ponte positiva e do Arco.
 
 func _hide_late_opening_technical_markers() -> void:
@@ -1077,6 +1085,21 @@ func _hide_late_opening_technical_markers() -> void:
 			if technical_marker != null and technical_marker.visible:
 				technical_marker.visible = false
 				opening_hidden_nodes.append(technical_marker)
+	# Segurança visual: beacons técnicos criados por módulos tardios podem não cumprir a convenção de nome.
+	for light_node: Node in scene_root.find_children("*", "Light3D", true, false):
+		var technical_light: Light3D = light_node as Light3D
+		if technical_light == null or not technical_light.visible:
+			continue
+		var light_colour: Color = technical_light.light_color
+		if light_colour.b > 0.65 and light_colour.b > light_colour.r * 1.35 and light_colour.b > light_colour.g * 1.10:
+			technical_light.visible = false
+			opening_hidden_nodes.append(technical_light)
+	# Partículas de depuração e de Chronos não pertencem à revelação paisagística; são reactivadas no handoff normal.
+	for particle_node: Node in scene_root.find_children("*", "GPUParticles3D", true, false):
+		var technical_particles: GPUParticles3D = particle_node as GPUParticles3D
+		if technical_particles != null and technical_particles.visible:
+			technical_particles.visible = false
+			opening_hidden_nodes.append(technical_particles)
 	# Defesa por material: alguns construtores regionais criam o emissor depois da árvore de nomes; no prólogo, só a emissão ciano técnica é ocultada.
 	for visual_node: Node in scene_root.find_children("*", "MeshInstance3D", true, false):
 		var technical_mesh: MeshInstance3D = visual_node as MeshInstance3D
