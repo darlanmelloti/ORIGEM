@@ -55,6 +55,11 @@ func _build_player() -> void:
 	player.add_child(footsteps)
 	add_child(player)
 	OrionTransitionState.restore_interior_player(player)
+	# A exploração pertence sempre à câmara de Elias; qualquer câmara estática só serve para composição técnica e fica inactiva.
+	var static_camera: Camera3D = get_node_or_null("CameraInteriorOrion") as Camera3D
+	if static_camera != null:
+		static_camera.current = false
+	camera.current = true
 
 func _process(_delta: float) -> void:
 	if player == null or not is_instance_valid(player):
@@ -97,7 +102,8 @@ func _build_camera() -> void:
 	camera.name = "CameraInteriorOrion"
 	camera.fov = 64.0
 	camera.position = Vector3(0.0, 1.20, -1.65)
-	camera.current = true
+	# A câmara estática não participa no fluxo de jogo; a câmara de Elias assume controlo no final de _build_player().
+	camera.current = false
 	add_child(camera)
 	camera.look_at(Vector3(-1.10, 0.95, 5.55), Vector3.UP)
 
