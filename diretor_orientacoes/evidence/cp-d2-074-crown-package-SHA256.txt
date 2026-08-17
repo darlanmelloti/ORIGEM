@@ -1,0 +1,1 @@
+e0b3e90d41e196fe354264ca8bb379ac48fa4774067225d4e6e7ba9e94783c2f  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-074-crown-local.zip
