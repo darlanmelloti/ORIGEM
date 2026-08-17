@@ -27,3 +27,17 @@ Dev3 seleccionará uma intervenção de **orientação de superfície contínua*
 A subdivisão do sobrepiso e a variação de cor por vértice foram tecnicamente válidas e não acrescentaram luzes, colisores ou objectos separados. Contudo, nas capturas de soleira e profundidade o ganho não foi perceptível: o vazio central continuou a dominar e a faixa não se distinguiu como superfície natural de orientação. A alteração será revertida e a sonda Dev4 será removida antes do próximo commit.
 
 > **Novo candidato rejeitado:** orientação material do piso por cor de vértice como solução isolada da legibilidade Orion.
+
+
+## Correcção da sonda CINE-PAIR-03
+
+A primeira leitura de silhueta usava alvos acima do centro do `CharacterBody3D`, inclinando artificialmente a câmara de Elias para cima. O `OrionTransitionState` real usa a altura do próprio jogador; a sonda foi corrigida para essa orientação horizontal. A captura canónica sem sonda confirma que a lacuna permanece: o enquadramento tem rocha detalhada e corredor fechado, mas o piso ocupa apenas a faixa inferior e não comunica a direcção de avanço.
+
+**Candidato CINE-PAIR-03B em execução:** testar uma inclinação inicial descendente, discreta e específica do interior, aplicada à cabeça de Elias. Não altera FOV, posição, luzes, colisores, materiais, malha ou controlo de rato; apenas centra a leitura no piso físico que já existe.
+
+
+## Decisão CINE-PAIR-03B — Aceite como base melhorada
+
+A inclinação inicial de **-7°** aplicada à cabeça de Elias foi validada com headless e 30 segundos de runtime sem erros. A soleira passou a mostrar uma faixa ampla de piso PBR no terço inferior do enquadramento, preservando a rocha, o FOV 64, as três luzes e o percurso físico. A alteração não resolve sozinha toda a profundidade, mas ultrapassa os candidatos anteriores por tornar a direcção imediata da exploração materialmente visível.
+
+**CINE-PAIR-04 já iniciado:** Dev4 mede a continuidade visual do piso depois do primeiro desvio; Dev3 prepara uma única melhoria de profundidade que parta desta orientação de câmara aceite, sem a substituir ou reiniciar a cadeia de tentativas rejeitadas.

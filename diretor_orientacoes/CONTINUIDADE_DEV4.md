@@ -30,3 +30,8 @@ Quando a sonda for removida e a melhoria seleccionada for validada ou revertida,
 A orientação de superfície por cor de vértice foi revertida após duas sessões reais de 30 segundos sem ganho visual suficiente. A sonda temporária foi removida e a base Orion voltou a validar sem erros.
 
 **CINE-PAIR-03 — Auditoria de silhueta integrada da rota.** Dev4 deve agora medir quais secções da própria casca contínua entram no cone de câmara em cada ponto físico e entregar a Dev3 uma proposta de alteração **da silhueta estrutural contínua**, sem inserir activos isolados, marcadores, luzes ou bandas materiais. Dev3 selecciona um único perfil candidato e ambos validam a mesma trajectória de 30 segundos. Esta tarefa está em execução; não abrir DIR autónomo.
+
+
+## CINE-PAIR-03B aceite; CINE-PAIR-04 em execução
+
+A orientação inicial de -7° foi aceite após validação headless e 30 segundos sem erros. Dev4 mede agora a continuidade visual do piso após o primeiro desvio, mantendo o FOV 64, três luzes e a rota física. Dev3 prepara uma única solução de profundidade que parta desta base; não reiniciar FOV, não abrir DIR autónomo e não repetir candidatos já rejeitados.

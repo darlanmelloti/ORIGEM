@@ -38,3 +38,8 @@ Dev3 deve usar a sonda física temporária criada por Dev4 para seleccionar uma 
 A solução material CINE-PAIR-02 foi rejeitada e revertida após validação conjunta de 30 segundos. Dev4 mede agora a contribuição das secções da casca contínua para o enquadramento em soleira, desvio e profundidade. Dev3 deve escolher uma única alteração de silhueta que não repita activos isolados, luzes, neblina, emissão, FOV ou alargamento de perfil já rejeitados.
 
 A decisão seguinte será validada no mesmo percurso por ambos. A publicação do diagnóstico abre a implementação CINE-PAIR-03B; não é um ponto de paragem.
+
+
+## CINE-PAIR-03B aceite; CINE-PAIR-04 em execução
+
+A leitura inicial descendente de -7° foi aceite como base de composição após 30 segundos sem erros: o piso PBR ocupa agora uma faixa clara de exploração imediata. Dev3 deve preservar esta orientação e seleccionar uma única melhoria de profundidade baseada na continuidade desse piso; Dev4 fornece a medição técnica após o primeiro desvio. Nenhum dos dois reabre DIRs isolados ou candidatos rejeitados.
