@@ -105,3 +105,11 @@ A extensão para 24,8 m e a expansão progressiva da secção foram validadas te
 O agregado de cinco cristais prismáticos, embora volumétrico e sem luz dinâmica, apresentou uma leitura visual de primitivas laranja desligadas da rocha. Foi removido antes de qualquer publicação.
 
 > **Candidato rejeitado:** cristais procedurais emissivos de baixa complexidade como marco terminal. O próximo destino terá de reutilizar um activo PBR integrado ou uma variação da própria malha de rocha, sem superfícies artificiais isoladas.
+
+## CP-CINE-69 — Reversão da curva espacial experimental
+
+A malha com secções orientadas e viragem lateral foi validada tecnicamente em 30 segundos, incluindo o ponto de inflexão. A parede terminal deixou de estar frontal, mas a rota lateral permaneceu pouco legível no renderizador de compatibilidade; a alteração não atingiu o ganho visual exigido e não será publicada.
+
+> **Candidato rejeitado:** curva espacial ampla sem marco PBR integrado ou nova composição material. A base aprovada permanece: corredor de 18,4 m, FOV 64 e ambiente 0,68, com duas luzes locais.
+
+O próximo incremento precisa começar pela integração de um activo PBR real que possa fornecer um destino visual sem aspecto de primitiva, antes de alterar novamente a topologia do corredor.
