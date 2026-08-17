@@ -1,0 +1,2 @@
+9679ecd2b63517b700970a38f110f8d03a0a0af081434b5ac1ecde84ac36b7c1  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-009-dome-material-pass1/gameplay-30s.mp4
+bdac982ea09d4817a203beb03f8805de6043e17ce8cfc0089d19353905342d6d  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-009-dome-material-pass1/print-1600x900.jpg

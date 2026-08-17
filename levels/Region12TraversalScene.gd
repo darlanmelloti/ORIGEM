@@ -422,8 +422,11 @@ func _build_final_dome_traversal_proxy() -> void:
 		threshold.scale = Vector3(3.65, 0.30, 1.05)
 		threshold.rotation = Vector3(0.02, 0.0, 0.0)
 		var threshold_material := StandardMaterial3D.new()
-		threshold_material.albedo_color = Color("#65778b")
-		threshold_material.roughness = 0.86
+		threshold_material.albedo_color = Color("#788fa3")
+		threshold_material.roughness = 0.82
+		threshold_material.emission_enabled = true
+		threshold_material.emission = Color("#315a79")
+		threshold_material.emission_energy_multiplier = 0.16
 		for threshold_mesh in threshold.find_children("*", "MeshInstance3D", true, false):
 			threshold_mesh.set_surface_override_material(0, threshold_material)
 		var threshold_body := StaticBody3D.new()
@@ -477,7 +480,10 @@ func _build_final_dome_traversal_proxy() -> void:
 		crown_stone.rotation = Vector3(0.08 * sign(float(crown_index - 1)), 0.08 * float(crown_index - 1), -0.06 * sign(float(crown_index - 1)))
 		var crown_material := StandardMaterial3D.new()
 		crown_material.albedo_color = Color("#5b718b") if crown_index != 1 else Color("#708aa5")
-		crown_material.roughness = 0.89
+		crown_material.roughness = 0.82
+		crown_material.emission_enabled = true
+		crown_material.emission = Color("#3d6281")
+		crown_material.emission_energy_multiplier = 0.12
 		for crown_mesh in crown_stone.find_children("*", "MeshInstance3D", true, false):
 			crown_mesh.set_surface_override_material(0, crown_material)
 		proxy.add_child(crown_stone)
