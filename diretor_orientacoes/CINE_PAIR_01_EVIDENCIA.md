@@ -107,3 +107,12 @@ A auditoria revelou que `OrionTransitionState.restore_exterior_player()` existia
 A passagem QA capturou e restaurou estado real de Elias: saúde `63`, stamina capturada `32,17`, posição e rotação de retorno. A validação limpa posterior executou 30 segundos tanto em `scenes/main.tscn` como em `scenes/orion_interior.tscn`, sem erros de parse ou runtime.
 
 **CINE-PAIR-11 já iniciado:** Dev4 confirma o orçamento de luzes e a estabilidade da câmara no percurso integrado exterior→interior→exterior; Dev3 só inicia nova composição após esta prova sistémica. Não abrir DIR autónomo.
+
+
+## Decisão CINE-PAIR-11 — Orçamento de luzes corrigido e aprovado
+
+A auditoria inicial contou 20 nós de luz no exterior, dos quais 19 estavam visíveis, excedendo a margem definida para GTX 1050 Ti. A câmara de prólogo permanecia `CameraPrologoCasaVoss`; o interior tinha três luzes e a câmara activa correcta de Elias.
+
+Foram desactivadas três fontes secundárias de janelas da Casa Voss — `JanelaFrontalEste_Luz`, `LuzDoSotao` e `JanelaDaAla_Luz` — porque a leitura é coberta pelos preenchimentos interiores, lareira, lanterna e luzes narrativas já existentes. A contagem exterior caiu para **16 luzes visíveis**; o interior permaneceu com **3**. A captura exterior e as sessões limpas de 30 segundos em `main.tscn` e `orion_interior.tscn` mantiveram-se sem erros.
+
+**CINE-PAIR-12 já iniciado:** Dev4 mede a estabilidade física e visual do retorno na posição exterior real da Garganta Orion; Dev3 só avança para nova composição quando a transição de regresso, agora com orçamento correcto, estiver comprovada na geografia do mapa.

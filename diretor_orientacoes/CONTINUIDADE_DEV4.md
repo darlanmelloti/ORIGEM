@@ -70,3 +70,8 @@ O retorno por `E` a partir da soleira interior carregou o exterior sem erro e fo
 ## CINE-PAIR-10 aprovado; CINE-PAIR-11 em execução
 
 Dev4 localizou a omissão de restauração no controlador exterior e a correção foi validada: saúde, stamina, posição e rotação sobrevivem ao retorno Orion. O spawn normal da Casa Voss não foi substituído. A tarefa seguinte mede orçamento de luzes e estabilidade de câmara no ciclo exterior→interior→exterior. Não abrir DIR autónomo.
+
+
+## CINE-PAIR-11 aprovado; CINE-PAIR-12 em execução
+
+Dev4 corrigiu o orçamento exterior para 16 luzes visíveis e confirmou três luzes no interior, com câmaras activas correctas e sessões de 30 segundos sem erro. A tarefa seguinte mede retorno, estabilidade física e leitura na posição exterior real da Garganta Orion. Dev3 só compõe depois da prova geográfica. Não abrir DIR autónomo.

@@ -9,6 +9,8 @@ extends Node3D
 # ═══════════════════════════════════════════════════════════════
 
 const CARTOGRAPHIC_MAP_UI_SCRIPT: Script = preload("res://ui/menus/CartographicMapUI.gd")
+# Orçamento GTX 1050 Ti: estas janelas secundárias são absorvidas pelos preenchimentos da Casa Voss.
+var exterior_budget_culled_lights: PackedStringArray = PackedStringArray(["JanelaFrontalEste_Luz", "LuzDoSotao", "JanelaDaAla_Luz"])
 
 # ─── UI ───────────────────────────────────────────────────────
 @onready var interact_label: Label = $UI/HUD/InteractLabel
@@ -68,6 +70,7 @@ func _ready():
 	EventBus.player_stamina_changed.connect(_on_player_stamina_changed)
 	hud_status.text = "ELIAS  100 / 100"
 	stamina_label.text = "STAMINA  100 / 100"
+	_apply_exterior_light_budget()
 	# CINE-PAIR-10: apenas um retorno real do interior deve substituir o spawn normal da Casa Voss.
 	var exterior_player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
@@ -75,6 +78,20 @@ func _ready():
 	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
 	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF"):
 		_start_narrative()
+
+func _apply_exterior_light_budget() -> void:
+	var all_lights: Array[Node] = []
+	_collect_lights_recursive(get_tree().current_scene, all_lights)
+	for light_node: Node in all_lights:
+		var light: Light3D = light_node as Light3D
+		if light.name in exterior_budget_culled_lights:
+			light.visible = false
+
+func _collect_lights_recursive(node: Node, result: Array[Node]) -> void:
+	if node is Light3D:
+		result.append(node)
+	for child: Node in node.get_children():
+		_collect_lights_recursive(child, result)
 
 func _start_narrative():
 	# A cartela narrativa inicia apenas depois do prólogo da Casa Voss: o comando de saltar e a câmara de abertura ficam livres de UI concorrente.

@@ -78,3 +78,8 @@ O retorno interior→exterior por `E` foi confirmado durante 30 segundos sem err
 ## CINE-PAIR-10 aprovado; CINE-PAIR-11 em execução
 
 A transição Orion agora restaura o estado de Elias no exterior apenas quando existe retorno pendente, preservando o início normal. Dev3 mantém a base de câmara de -11° e aguarda a prova sistémica Dev4 de luzes e estabilidade no ciclo completo antes de escolher nova composição. O próximo passe abre directamente desta validação, sem DIR autónomo.
+
+
+## CINE-PAIR-11 aprovado; CINE-PAIR-12 em execução
+
+O exterior opera agora com 16 luzes visíveis; o interior permanece em três, e as câmaras foram confirmadas. Dev3 mantém a orientação de -11° e espera a prova geográfica de regresso que Dev4 iniciou na Garganta Orion exterior antes de seleccionar qualquer nova composição. A próxima acção abre directamente do resultado, sem DIR autónomo.
