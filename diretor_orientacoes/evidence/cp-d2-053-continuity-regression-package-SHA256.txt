@@ -1,0 +1,1 @@
+24647bea3afbdbaa719c23172c6587d32292085cd8c918bbb584dee4623d3c09  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-053-continuity-regression-local.zip
