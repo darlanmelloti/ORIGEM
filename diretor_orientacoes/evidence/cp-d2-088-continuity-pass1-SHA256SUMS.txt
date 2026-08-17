@@ -1,0 +1,2 @@
+0e49ad04b313144c4464eede740951dbeae08b6d86df69b2a3aba06b1068b863  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-088-continuity-pass1/gameplay-30s.mp4
+feb105dce772bedc500e3423bb98edee821e720bbe093fc95a84101cddf8b46f  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-088-continuity-pass1/print-1600x900.jpg
