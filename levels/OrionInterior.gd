@@ -91,7 +91,8 @@ func _build_environment() -> void:
 	environment.background_color = Color(0.027, 0.020, 0.014, 1.0)
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color(0.27, 0.205, 0.135, 1.0)
-	environment.ambient_light_energy = 0.52
+	# CP-CINE-66: elevação ambiente moderada; não cria novas luzes dinâmicas e preserva a atmosfera escura.
+	environment.ambient_light_energy = 0.68
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	var world_environment: WorldEnvironment = WorldEnvironment.new()
 	world_environment.environment = environment

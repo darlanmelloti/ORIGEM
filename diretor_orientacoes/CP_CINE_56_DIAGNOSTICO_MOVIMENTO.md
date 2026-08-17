@@ -79,3 +79,17 @@ O estágio profundo não mostrou ganho suficiente com o projector prolongado. A 
 > **Candidato rejeitado:** prolongar o projector de entrada para resolver sozinho a profundidade do segundo segmento.
 
 A próxima investigação deverá verificar a própria construção do fecho profundo — material, cullagem e silhueta da tampa terminal — antes de construir uma ante-câmara adicional.
+
+## CP-CINE-65 — Reversão de dupla face do piso
+
+A dupla face no material do piso foi testada no segundo segmento durante 30 segundos. A captura de profundidade não mostrou ganho perceptível; a propriedade foi removida.
+
+> **Candidato rejeitado:** dupla face no piso PBR como solução para a rota profunda.
+
+A próxima investigação deverá analisar a tampa terminal e a geometria do segundo segmento, porque a falta de leitura persiste após excluir orientação, FOV, luz pessoal, projector prolongado, perfil aberto, marco isolado e cullagem do piso.
+
+## CP-CINE-66 — Ambiente moderado validado
+
+A energia ambiente aumentada de **0,52 para 0,68** revelou a textura contínua das paredes e do trecho profundo sem acrescentar luzes dinâmicas nem eliminar o contraste escuro da caverna. A validação de 30 segundos não reportou erros. O segundo segmento continua a necessitar de um destino narrativo, mas já deixa de ser uma massa preta sem material.
+
+**Próximo passe aberto — CP-CINE-67:** criar a primeira ante-câmara através da própria malha contínua, introduzindo uma abertura lateral e uma secção de destino real depois do anel de 12,8 m. A base física, o FOV 64, as duas luzes locais e a iluminação ambiente aprovada devem ser preservados.
