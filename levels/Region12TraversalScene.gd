@@ -488,6 +488,24 @@ func _build_final_dome_traversal_proxy() -> void:
 			crown_mesh.set_surface_override_material(0, crown_material)
 		proxy.add_child(crown_stone)
 		print("[REGION12_CROWN_DEBUG] index=", crown_index, " global=", crown_stone.global_position, " scale=", crown_stone.scale)
+	var shoulder_positions: Array[Vector3] = [
+		Vector3(-4.25, 1.92, -4.18), Vector3(4.25, 1.92, -4.18),
+		Vector3(-3.15, 2.12, -4.76), Vector3(3.15, 2.12, -4.76)
+	]
+	for shoulder_index: int in range(shoulder_positions.size()):
+		var shoulder := ROCK_LARGE.instantiate() as Node3D
+		if shoulder == null:
+			continue
+		shoulder.name = "OmbroOrganicoCupulaR12_%02d" % shoulder_index
+		shoulder.position = shoulder_positions[shoulder_index]
+		shoulder.scale = Vector3(1.45 if shoulder_index < 2 else 1.18, 0.68 if shoulder_index < 2 else 0.54, 1.12)
+		shoulder.rotation = Vector3(0.05, -0.18 + float(shoulder_index) * 0.26, 0.03)
+		var shoulder_material := StandardMaterial3D.new()
+		shoulder_material.albedo_color = Color("#4e667d")
+		shoulder_material.roughness = 0.88
+		for shoulder_mesh in shoulder.find_children("*", "MeshInstance3D", true, false):
+			shoulder_mesh.set_surface_override_material(0, shoulder_material)
+		proxy.add_child(shoulder)
 	var doorway_plane := ROCK_LARGE.instantiate() as Node3D
 	if doorway_plane != null:
 		doorway_plane.name = "PlanoPortaEscuraCupula"
