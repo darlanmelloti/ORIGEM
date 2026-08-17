@@ -34,8 +34,8 @@ func _ready() -> void:
 			cube_reveal.albedo_color = Color("#496e78")
 			cube_reveal.roughness = 0.72
 			cube_reveal.emission_enabled = true
-			cube_reveal.emission = Color("#3aa9c5")
-			cube_reveal.emission_energy_multiplier = 0.52
+			cube_reveal.emission = Color("#8c6cff")
+			cube_reveal.emission_energy_multiplier = 0.72
 			cube.scale = Vector3(0.95, 1.25, 0.95)
 			if destination.has_method("_apply_material"):
 				destination.call("_apply_material", cube, cube_reveal)
@@ -47,8 +47,8 @@ func _ready() -> void:
 				support_reveal.albedo_color = Color("#3f626b")
 				support_reveal.roughness = 0.78
 				support_reveal.emission_enabled = true
-				support_reveal.emission = Color("#246f84")
-				support_reveal.emission_energy_multiplier = 0.28
+				support_reveal.emission = Color("#356a9a")
+				support_reveal.emission_energy_multiplier = 0.36
 				chamber_child.scale *= 1.18
 				if destination.has_method("_apply_material"):
 					destination.call("_apply_material", chamber_child, support_reveal)
