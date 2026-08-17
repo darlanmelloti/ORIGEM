@@ -806,9 +806,11 @@ void vertex() {
 }
 void fragment() {
 	float ripple = sin(UV.y * 18.0 + TIME * 0.85) * 0.5 + 0.5;
-	ALBEDO = mix(vec3(0.015, 0.10, 0.12), vec3(0.035, 0.30, 0.33), ripple * 0.40 + 0.30);
-	ROUGHNESS = 0.25;
-	SPECULAR = 0.58;
+			// Água de vale profunda: mantém variação de ondulação, mas elimina a faixa azul-clara que achatava a profundidade macro.
+		ALBEDO = mix(vec3(0.010, 0.058, 0.064), vec3(0.024, 0.155, 0.165), ripple * 0.38 + 0.26);
+		ROUGHNESS = 0.38;
+		SPECULAR = 0.26;
+
 	ALPHA = 1.0;
 }
 """

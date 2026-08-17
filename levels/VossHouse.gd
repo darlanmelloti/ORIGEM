@@ -79,8 +79,10 @@ func _ready() -> void:
 	_build_visible_opening_road()
 	_build_macro_road_readability()
 	_build_voss_river_revelation_bridge()
-
+	_build_voss_distant_horizon_landmarks()
+	
 	_build_mountain_road(house)
+
 	_build_opening_landscape(house)
 	_build_cinematic_exterior_depth(house)
 	_build_real_forest_frame()
@@ -223,6 +225,43 @@ func _build_voss_river_revelation_bridge() -> void:
 		pier.rotation.y = pier_side * 0.18
 		_tint_tree_silhouette(pier, stone_material)
 		add_child(pier)
+
+func _build_voss_distant_horizon_landmarks() -> void:
+	# CP282: cadeia de rocha real no horizonte da tomada. É uma leitura de destino distante, não uma parede nem um fundo plano.
+	var horizon: Node3D = Node3D.new()
+	horizon.name = "SilhuetasFisicasDoHorizonteVoss"
+	add_child(horizon)
+	var formations: Array[Dictionary] = [
+		{"pos": Vector2(-12.0, 126.0), "scale": Vector3(7.4, 8.8, 7.4), "yaw": -0.20},
+		{"pos": Vector2(10.0, 142.0), "scale": Vector3(10.8, 13.8, 10.2), "yaw": 0.36},
+		{"pos": Vector2(33.0, 158.0), "scale": Vector3(8.6, 10.2, 8.4), "yaw": -0.44},
+		{"pos": Vector2(52.0, 177.0), "scale": Vector3(12.4, 16.5, 11.8), "yaw": 0.18},
+	]
+	for formation_index: int in range(formations.size()):
+		var formation: Dictionary = formations[formation_index]
+		var world_pos: Vector2 = formation["pos"] as Vector2
+		var rock: Node3D = MOSS_ROCK_SET.instantiate() as Node3D
+		if rock == null:
+			continue
+		rock.name = "MaciçoDistante_%02d" % (formation_index + 1)
+		rock.position = Vector3(world_pos.x, _ground_height(world_pos.x, world_pos.y) - 0.80, world_pos.y)
+		rock.scale = formation["scale"] as Vector3
+		rock.rotation.y = formation["yaw"] as float
+		_tint_tree_silhouette(rock, stone_material)
+		horizon.add_child(rock)
+	# Dois pilares pequenos quebram a base da cadeia e sugerem a Vila Elevada sem invadir módulos nem colisores Dev2.
+	for ruin_index: int in range(2):
+		var ruin: Node3D = RUIN_PILLAR_ASSET.instantiate() as Node3D
+		if ruin == null:
+			continue
+		var ruin_x: float = 20.0 + float(ruin_index) * 18.0
+		var ruin_z: float = 116.0 + float(ruin_index) * 12.0
+		ruin.name = "RuinaDeHorizonte_%02d" % (ruin_index + 1)
+		ruin.position = Vector3(ruin_x, _ground_height(ruin_x, ruin_z) - 0.10, ruin_z)
+		ruin.scale = Vector3(0.42, 1.55 - float(ruin_index) * 0.22, 0.42)
+		ruin.rotation.y = -0.28 + float(ruin_index) * 0.48
+		_tint_tree_silhouette(ruin, stone_material)
+		horizon.add_child(ruin)
 
 func _build_visible_opening_road() -> void:
 	# Percurso contínuo no espaço mundial: acompanha o relevo e usa o mesmo PBR de solo, sem placas ou planos de fundo.
@@ -947,12 +986,12 @@ func _build_opening_camera() -> void:
 	# Variante diurna: câmara mais alta e ligeiramente à direita, deixando Casa Voss à esquerda, lajes ao centro e rio à direita.
 	if DAYLIGHT_VARIANT_ENABLED:
 		# A abertura mostra o percurso que Elias realmente seguirá: Casa Voss à esquerda, rio à direita e Arco das Ruínas no plano médio.
-		opening_camera.fov = 72.0
+		opening_camera.fov = 78.0
 		# Câmara no miradouro físico: a diagonal para leste contém a ponte transversal, a Estrada de Elias e o Arco sem comprimir o vale.
 		var terrace_ground_y: float = _ground_height(-22.0, 14.0)
 		# Borda oeste do terraço: a parede e o telhado da Casa entram como moldura à esquerda, sem esconder o vale.
 		opening_camera.position = Vector3(-26.0, _ground_height(-26.0, 11.0) + 6.9, 11.0)
-		opening_camera.look_at(Vector3(8.0, _ground_height(8.0, 65.0) - 1.5, 65.0), Vector3.UP)
+		opening_camera.look_at(Vector3(5.0, _ground_height(5.0, 90.0) - 4.2, 90.0), Vector3.UP)
 	else:
 		opening_camera.position = Vector3(-5.0, 1.72, 29.0)
 		opening_camera.look_at(Vector3(-11.5, 1.16, -1.0), Vector3.UP)

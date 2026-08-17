@@ -67,6 +67,13 @@ func height_at(world_x: float, world_z: float) -> float:
 		var valley_rim_ratio: float = clampf((lateral_distance - 10.8) / 26.0, 0.0, 1.0)
 		var valley_rim_height: float = valley_rim_ratio * valley_rim_ratio * macro_progress * 12.5
 		height += shoulder_height + valley_rim_height
+		# Janela topográfica do miradouro Voss: um colo natural no ombro oriental deixa a bacia revelar-se em planos sucessivos.
+		# Não é um corte plano: conserva ruído, inclinação e colisão, mas impede que a primeira crista oculte todo o mundo cartográfico.
+		var vista_progress: float = clampf((world_z - 18.0) / 118.0, 0.0, 1.0)
+		var vista_center_x: float = lerpf(-17.0, 33.0, vista_progress)
+		var vista_distance: float = abs(world_x - vista_center_x)
+		var vista_opening: float = 1.0 - clampf(vista_distance / 17.0, 0.0, 1.0)
+		height -= vista_opening * vista_opening * (1.25 + vista_progress * 2.15)
 
 	# Corredor ribeirinho de baixa inclinação: liga a Floresta Densa à margem ocidental do lago regional.
 	elif world_x > -38.0 and world_x < 25.0 and world_z >= 145.0 and world_z <= 252.0:
