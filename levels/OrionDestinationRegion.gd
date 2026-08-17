@@ -32,7 +32,9 @@ func _process(_delta: float) -> void:
 	if player == null and get_tree().current_scene != null:
 		player = get_tree().current_scene.find_child("Player", true, false) as Node3D
 	var qa_interior_reveal: bool = OS.get_environment("ORIGEM_QA_ORION_REVEAL") == "1"
-	cube_chamber.visible = qa_interior_reveal or (player != null and player.global_position.distance_to(cube_chamber.global_position) <= CUBE_CHAMBER_REVEAL_RADIUS)
+	# Enquanto não existir um corredor interior físico, a proximidade em terreno aberto não pode revelar o artefacto na superfície.
+	# A futura câmara subterrânea substituirá este bloqueio por uma condição de entrada real.
+	cube_chamber.visible = qa_interior_reveal
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
