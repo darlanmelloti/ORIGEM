@@ -53,3 +53,11 @@ As orientações para o flanco negativo e para o centro foram capturadas a parti
 A orientação oeste (`target=(-1.55, y, 5.30)`) foi a mais legível das três opções: organiza o arco de rocha e concentra o piso de avanço no centro inferior do enquadramento. Foi promovida para a orientação permanente da transição e validada durante 30 segundos sem erros.
 
 **Próxima hipótese aberta — CP-CINE-62:** calibrar apenas o FOV da câmara de Elias no interior, pois o FOV padrão muito aberto amplifica as paredes laterais. Não serão alterados geometria, materiais, colisores nem luzes durante este teste.
+
+## CP-CINE-62 — FOV moderado validado
+
+A câmara de Elias foi ajustada de 75 graus (padrão) para **64 graus** apenas no interior Orion. A validação técnica e 30 segundos de runtime não reportaram erros. A captura apresenta o arco do corredor de forma mais centrada, reduz a dominância das paredes periféricas e mantém o piso de avanço visível no centro inferior.
+
+Esta é a primeira melhoria composicional persistente confirmada após a auditoria de movimento. Não acrescenta luzes, colisores, vértices ou activos; afecta exclusivamente a projecção da câmara activa de Elias dentro da cena independente Orion.
+
+**Próximo passe aberto — CP-CINE-63:** capturar deslocação de 30 segundos com FOV 64 e verificar se a legibilidade do arco se preserva para além da soleira antes de iniciar a ante-câmara.

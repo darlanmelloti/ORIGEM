@@ -53,6 +53,8 @@ func _build_player() -> void:
 	player.add_child(head)
 	var camera: Camera3D = Camera3D.new()
 	camera.name = "Camera3D"
+	# CP-CINE-62: FOV moderado reduz a distorção periférica das paredes sem alterar controlo, rota ou geometria.
+	camera.fov = 64.0
 	camera.current = true
 	head.add_child(camera)
 	var interaction_ray: RayCast3D = RayCast3D.new()
