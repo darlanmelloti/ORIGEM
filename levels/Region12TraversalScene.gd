@@ -897,14 +897,14 @@ func _process(delta: float) -> void:
 		for temporal_mesh in temporal_portal.find_children("*", "MeshInstance3D", true, false):
 			var temporal_material := temporal_mesh.get_surface_override_material(0) as StandardMaterial3D
 			if temporal_material != null:
-				temporal_material.emission_energy_multiplier = 0.40 + sin(elapsed * 1.12) * 0.10
+				temporal_material.emission_energy_multiplier = 0.76 + sin(elapsed * 1.12) * 0.22
 	for child in get_children():
 		if child is OmniLight3D and child.name.begins_with("PreenchimentoQuenteSoleira"):
 			(child as OmniLight3D).light_energy = 0.34 + sin(elapsed * 1.25) * 0.08
 		if child is OmniLight3D and child.name == "LuzNucleoTemporalR12":
-			(child as OmniLight3D).light_energy = 0.13 + sin(elapsed * 1.12) * 0.035
+			(child as OmniLight3D).light_energy = 0.24 + sin(elapsed * 1.12) * 0.08
 		if child is OmniLight3D and child.name == "LuzContactoNucleoR12":
-			(child as OmniLight3D).light_energy = 0.05 + sin(elapsed * 1.12) * 0.014
+			(child as OmniLight3D).light_energy = 0.10 + sin(elapsed * 1.12) * 0.03
 		if child is MeshInstance3D and child.name == "NucleoCoroaFinal":
 			var core_material := child.material_override as StandardMaterial3D
 			if core_material != null:
@@ -924,11 +924,11 @@ func _process(delta: float) -> void:
 func _set_camera(progress: float) -> void:
 	if camera == null:
 		return
-	var start := Vector3(164.0, 2.42, 180.4)
-	var finish := Vector3(164.0, 2.18, 178.35)
+	var start := Vector3(164.0, 2.36, 179.7)
+	var finish := Vector3(164.0, 2.12, 177.85)
 	var position := start.lerp(finish, progress)
 	position.x += sin(progress * TAU * 0.8) * 0.72
 	position.y += sin(progress * PI) * 0.48
 	camera.position = position
-	var target := Vector3(164.0 + sin(progress * PI) * 0.12, 0.52 + progress * 0.08, 175.35)
+	var target := Vector3(164.0 + sin(progress * PI) * 0.12, 0.44 + progress * 0.06, 174.90)
 	camera.look_at(target, Vector3.UP)
