@@ -923,10 +923,10 @@ func _build_opening_camera() -> void:
 	opening_skip_timer.process_mode = Node.PROCESS_MODE_ALWAYS
 	opening_skip_timer.timeout.connect(_complete_opening_skip)
 	add_child(opening_skip_timer)
-	# Exclusivo de validação automatizada: acelera apenas a apresentação de QA depois de Novo Jogo.
+	# Exclusivo de validação automatizada: devolve a câmara de Elias no frame seguinte sem depender de temporizador quando o processo gráfico está em pausa transitória.
 	# Não é lido numa execução normal nem altera o gesto E destinado ao jogador.
 	if OS.get_environment("ORIGEM_QA_SKIP_OPENING") == "1":
-		get_tree().create_timer(2.0).timeout.connect(_complete_opening_for_qa)
+		call_deferred("_complete_opening_for_qa")
 
 func _activate_opening_camera() -> void:
 	# Elias acorda no interior: depois do prólogo, a exploração começa realmente na Casa Voss.
@@ -996,10 +996,12 @@ func _finish_opening_camera() -> void:
 					# O salto deve ser uma entrada segura no vale, nunca uma câmara presa em geometria interior.
 					# Salto de prólogo/QA entra no primeiro metro real da Estrada, já orientado para o Arco.
 					# Não altera o início normal dentro da Casa Voss, onde E continua a abrir a porta.
-					var recovery_x: float = CartographicAnchors.ESTRADA_RIO_INICIO.x
-					var recovery_z: float = CartographicAnchors.ESTRADA_RIO_INICIO.y - 1.15
+					# QA inicia no primeiro segmento livre da Estrada, já fora da fundação da Casa e voltado para o Arco macro em +Z.
+					var recovery_x: float = CartographicAnchors.ESTRADA_RIO_INICIO.x + 1.35
+					var recovery_z: float = CartographicAnchors.ESTRADA_RIO_INICIO.y + 10.0
 					elias_3d.global_position = Vector3(recovery_x, _ground_height(recovery_x, recovery_z) + 1.30, recovery_z)
-					elias_3d.global_rotation.y = deg_to_rad(-156.0)
+					# A linha de visão QA é calculada sobre o Arco físico recuado, não sobre uma rotação assumida.
+					elias_3d.look_at(Vector3(-13.8, elias_3d.global_position.y, 92.0), Vector3.UP)
 
 			elif house_node != null:
 				elias_3d.global_position = house_node.to_global(Vector3(0.0, 1.28, -1.80))
@@ -1010,7 +1012,9 @@ func _finish_opening_camera() -> void:
 				(elias as CharacterBody3D).velocity = Vector3.ZERO
 		var player_head: Node3D = elias.get_node_or_null("Head") as Node3D
 		if player_head != null:
-			player_head.rotation.x = 0.0
+			# Após salto, a inclinação discreta revela o leito da Estrada em vez de prender a primeira vista no horizonte.
+			player_head.rotation.x = deg_to_rad(-14.0) if opening_was_skipped else 0.0
+
 		var player_camera: Camera3D = elias.get_node_or_null("Head/Camera3D") as Camera3D
 		if player_camera != null:
 			# make_current garante o viewport da primeira pessoa no próprio frame do salto.

@@ -45,6 +45,45 @@ func _ready() -> void:
 	_build_riparian_color_variation()
 	_build_arch_approach_ecology()
 	_build_roadside_vegetation()
+	_build_macro_ridge_layers()
+
+func _build_macro_ridge_layers() -> void:
+	# Camadas laterais de relevo: criam profundidade real entre a Casa Voss e o Arco, sem aproximar o destino nem ocupar a faixa de 4,15 m da Estrada.
+	var ridge_root: Node3D = Node3D.new()
+	ridge_root.name = "CamadasRochosasDoValeMacro"
+	add_child(ridge_root)
+	var layers: Array[Dictionary] = [
+		{"z": 35.0, "side": -1.0, "offset": 9.5, "scale": 0.72, "yaw": 0.22},
+		{"z": 47.0, "side": 1.0, "offset": 10.5, "scale": 0.88, "yaw": -0.46},
+		{"z": 60.0, "side": -1.0, "offset": 11.2, "scale": 1.00, "yaw": 0.71},
+		{"z": 73.0, "side": 1.0, "offset": 12.4, "scale": 1.12, "yaw": -0.18},
+		{"z": 84.0, "side": -1.0, "offset": 10.8, "scale": 0.94, "yaw": 0.38}
+	]
+	for index: int in range(layers.size()):
+		var layer: Dictionary = layers[index]
+		var z_value: float = layer["z"] as float
+		var side: float = layer["side"] as float
+		var x_value: float = _road_x(z_value) + side * (layer["offset"] as float)
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		rock.name = "AfloramentoMacro_%02d" % (index + 1)
+		rock.position = Vector3(x_value, _height_at(x_value, z_value) - 0.10, z_value)
+		var rock_scale: float = layer["scale"] as float
+		rock.scale = Vector3(rock_scale, rock_scale * 0.78, rock_scale)
+		rock.rotation.y = layer["yaw"] as float
+		_apply_material(rock, ruin_material)
+		ridge_root.add_child(rock)
+		# Fragmentos verticais tornam a mesma camada reconhecível como ruína antiga, não como uma parede contínua.
+		if index % 2 == 0:
+			var fragment: Node3D = RUIN_PILLAR.instantiate() as Node3D
+			if fragment != null:
+				fragment.name = "VestigioMacro_%02d" % (index + 1)
+				fragment.position = Vector3(x_value - side * 1.25, _height_at(x_value - side * 1.25, z_value + 0.8) - 0.04, z_value + 0.8)
+				fragment.scale = Vector3(0.32, 0.78, 0.32)
+				fragment.rotation.y = (layer["yaw"] as float) + 0.24
+				_apply_material(fragment, ruin_material)
+				ridge_root.add_child(fragment)
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -64,11 +103,11 @@ func _build_compacted_roadbed() -> void:
 	var roadbed_material: StandardMaterial3D = StandardMaterial3D.new()
 	# Solo húmido legível: mantém o trilho integrado ao vale, mas evita que o leito físico se perca em preto no crepúsculo.
 	# Cor mais clara no corredor macro: a Estrada permanece húmida, mas torna-se uma linha de profundidade legível desde a Casa.
-	roadbed_material.albedo_color = Color(0.255, 0.218, 0.142, 1.0)
-	roadbed_material.roughness = 0.92
+	roadbed_material.albedo_color = Color(0.42, 0.34, 0.22, 1.0)
+	roadbed_material.roughness = 0.90
 	roadbed_material.emission_enabled = true
-	roadbed_material.emission = Color(0.018, 0.015, 0.008, 1.0)
-	roadbed_material.emission_energy_multiplier = 0.16
+	roadbed_material.emission = Color(0.030, 0.022, 0.010, 1.0)
+	roadbed_material.emission_energy_multiplier = 0.20
 	roadbed_material.normal_enabled = true
 	roadbed_material.normal_texture = GROUND_NORMAL
 	roadbed_material.normal_scale = 0.22
@@ -290,18 +329,19 @@ func _build_ruin_arch() -> void:
 			continue
 		pillar.name = "PilarArcoEstrada_%.1f" % offset_x
 		pillar.position = Vector3(offset_x, 0.0, 0.0)
-		pillar.scale = Vector3(1.45, 1.85, 1.45)
+		# Escala monumental: a ruína permanece em z=92, mas a silhueta supera o relevo intermédio e confirma o destino distante.
+		pillar.scale = Vector3(1.70, 3.55, 1.70)
 		pillar.rotation.y = signf(offset_x) * 0.08
 		_apply_material(pillar, ruin_material)
 		arch.add_child(pillar)
 	# Núcleos de alvenaria regulares mantêm a silhueta do arco legível a partir da Estrada do Rio.
 	for offset_x: float in [-3.25, 3.25]:
 		var masonry_mesh: BoxMesh = BoxMesh.new()
-		masonry_mesh.size = Vector3(1.12, 6.65, 1.45)
+		masonry_mesh.size = Vector3(1.48, 12.40, 1.72)
 		var masonry: MeshInstance3D = MeshInstance3D.new()
 		masonry.name = "NucleoDeAlvenaria_%.1f" % offset_x
 		masonry.mesh = masonry_mesh
-		masonry.position = Vector3(offset_x, 3.32, 0.0)
+		masonry.position = Vector3(offset_x, 6.20, 0.0)
 		masonry.material_override = ruin_material
 		arch.add_child(masonry)
 		# Volume físico coincidente com a alvenaria; mantém o vão central da estrada inteiramente livre.
@@ -310,16 +350,16 @@ func _build_ruin_arch() -> void:
 		pillar_body.position = masonry.position
 		var pillar_collision: CollisionShape3D = CollisionShape3D.new()
 		var pillar_shape: BoxShape3D = BoxShape3D.new()
-		pillar_shape.size = Vector3(1.12, 6.65, 1.45)
+		pillar_shape.size = Vector3(1.48, 12.40, 1.72)
 		pillar_collision.shape = pillar_shape
 		pillar_body.add_child(pillar_collision)
 		arch.add_child(pillar_body)
 	var lintel_mesh: BoxMesh = BoxMesh.new()
-	lintel_mesh.size = Vector3(8.45, 0.92, 1.40)
+	lintel_mesh.size = Vector3(10.60, 1.08, 1.68)
 	var lintel: MeshInstance3D = MeshInstance3D.new()
 	lintel.name = "LintelDoArcoEstrada"
 	lintel.mesh = lintel_mesh
-	lintel.position = Vector3(0.0, 6.85, 0.0)
+	lintel.position = Vector3(0.0, 12.72, 0.0)
 	lintel.material_override = ruin_material
 	arch.add_child(lintel)
 	for debris_index: int in range(4):
@@ -377,7 +417,7 @@ func _build_ruin_arch() -> void:
 			continue
 		var crown_side: float = -1.0 if crown_index % 2 == 0 else 1.0
 		crown.name = "FragmentoDaCoroaDoArco_%02d" % crown_index
-		crown.position = Vector3(crown_side * (2.65 + float(crown_index % 3) * 1.08), 6.98 + float(crown_index % 2) * 0.34, -0.12 + float(crown_index % 2) * 0.48)
+		crown.position = Vector3(crown_side * (3.35 + float(crown_index % 3) * 1.22), 13.05 + float(crown_index % 2) * 0.46, -0.12 + float(crown_index % 2) * 0.48)
 		var crown_scale: float = 0.14 + float(crown_index % 3) * 0.035
 		crown.scale = Vector3(crown_scale, crown_scale * 0.78, crown_scale)
 		crown.rotation = Vector3(0.16 * float(crown_index % 2), float(crown_index) * 0.68, 0.12 * crown_side)
@@ -391,7 +431,8 @@ func _build_ruin_arch() -> void:
 	arch_fill.omni_range = 16.0
 	arch_fill.omni_attenuation = 1.32
 	arch_fill.shadow_enabled = false
-	arch_fill.position = Vector3(0.0, 4.4, 2.6)
+	arch_fill.position = Vector3(0.0, 7.8, 2.6)
+	arch_fill.omni_range = 20.0
 	arch.add_child(arch_fill)
 
 func _build_arch_grounding_clusters(arch: Node3D) -> void:
@@ -467,11 +508,11 @@ func _build_arch_crown_stones() -> void:
 	crown_mat.roughness = 0.93
 	# Fragmentos no topo e lados do arco macro, agora recuado na Estrada para sustentar a profundidade do vale.
 	var crown_positions: Array = [
-		Vector3(_road_x(ARCH_WORLD_Z) - 4.5, _height_at(_road_x(ARCH_WORLD_Z) - 4.5, ARCH_WORLD_Z) + 5.8, ARCH_WORLD_Z),
-		Vector3(_road_x(ARCH_WORLD_Z) + 4.5, _height_at(_road_x(ARCH_WORLD_Z) + 4.5, ARCH_WORLD_Z) + 5.6, ARCH_WORLD_Z),
-		Vector3(_road_x(ARCH_WORLD_Z) - 4.2, _height_at(_road_x(ARCH_WORLD_Z) - 4.2, ARCH_WORLD_Z - 0.5) + 4.2, ARCH_WORLD_Z - 0.5),
-		Vector3(_road_x(ARCH_WORLD_Z) + 4.3, _height_at(_road_x(ARCH_WORLD_Z) + 4.3, ARCH_WORLD_Z + 0.5) + 4.0, ARCH_WORLD_Z + 0.5),
-		Vector3(_road_x(ARCH_WORLD_Z), _height_at(_road_x(ARCH_WORLD_Z), ARCH_WORLD_Z) + 6.4, ARCH_WORLD_Z),
+		Vector3(_road_x(ARCH_WORLD_Z) - 4.8, _height_at(_road_x(ARCH_WORLD_Z) - 4.8, ARCH_WORLD_Z) + 11.3, ARCH_WORLD_Z),
+		Vector3(_road_x(ARCH_WORLD_Z) + 4.8, _height_at(_road_x(ARCH_WORLD_Z) + 4.8, ARCH_WORLD_Z) + 11.0, ARCH_WORLD_Z),
+		Vector3(_road_x(ARCH_WORLD_Z) - 4.5, _height_at(_road_x(ARCH_WORLD_Z) - 4.5, ARCH_WORLD_Z - 0.5) + 8.4, ARCH_WORLD_Z - 0.5),
+		Vector3(_road_x(ARCH_WORLD_Z) + 4.6, _height_at(_road_x(ARCH_WORLD_Z) + 4.6, ARCH_WORLD_Z + 0.5) + 8.0, ARCH_WORLD_Z + 0.5),
+		Vector3(_road_x(ARCH_WORLD_Z), _height_at(_road_x(ARCH_WORLD_Z), ARCH_WORLD_Z) + 12.2, ARCH_WORLD_Z),
 	]
 	for i: int in range(crown_positions.size()):
 		var pos: Vector3 = crown_positions[i]

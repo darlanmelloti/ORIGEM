@@ -185,34 +185,31 @@ func apply_voss_daylight() -> void:
 		opening_forest_fill.queue_free()
 		opening_forest_fill = null
 	environment.background_mode = Environment.BG_SKY
-	environment.sky = _create_liturgical_twilight_sky()
-	environment.background_energy_multiplier = 0.98
+	# Revelação de dia: o céu mantém a referência dourada, mas a distância continua legível por contraste de valor, não por neblina azul pesada.
+	environment.sky = _create_daylight_sky()
+	environment.background_energy_multiplier = 1.00
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	# Fill global moderado para o modo GL Compatibility: devolve informação a solo, pedra e folhagem sem apagar o contraste litúrgico.
-	environment.ambient_light_color = Color(0.36, 0.46, 0.58, 1.0)
-	environment.ambient_light_energy = 1.10
+	environment.ambient_light_color = Color(0.50, 0.58, 0.52, 1.0)
+	environment.ambient_light_energy = 0.94
 	environment.fog_enabled = true
-	environment.fog_light_color = Color(0.28, 0.38, 0.49, 1.0)
-	environment.fog_light_energy = 0.48
-	environment.fog_density = 0.0020
+	environment.fog_light_color = Color(0.66, 0.74, 0.78, 1.0)
+	environment.fog_light_energy = 0.26
+	environment.fog_density = 0.0011
 
-	environment.fog_sky_affect = 0.73
+	environment.fog_sky_affect = 0.60
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.tonemap_exposure = 1.25
+	environment.tonemap_exposure = 1.15
 
-	environment.glow_enabled = true
-	environment.glow_intensity = 0.26
-	environment.glow_strength = 0.34
-	environment.glow_bloom = 0.04
+	environment.glow_enabled = false
 	environment.adjustment_enabled = true
-	environment.adjustment_brightness = 1.10
-	environment.adjustment_contrast = 1.05
-	environment.adjustment_saturation = 0.95
+	environment.adjustment_brightness = 1.00
+	environment.adjustment_contrast = 1.11
+	environment.adjustment_saturation = 0.96
 
 	if sun != null:
-		sun.rotation_degrees = Vector3(-14.0, -38.0, 0.0)
-		sun.light_color = Color(1.0, 0.65, 0.42, 1.0)
-		sun.light_energy = 0.78
+		sun.rotation_degrees = Vector3(-32.0, -38.0, 0.0)
+		sun.light_color = Color(1.0, 0.80, 0.60, 1.0)
+		sun.light_energy = 1.02
 		sun.shadow_enabled = true
 
 func apply_voss_opening_storm() -> void:

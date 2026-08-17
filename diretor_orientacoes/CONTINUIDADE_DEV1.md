@@ -1,9 +1,11 @@
 # Continuidade — Dev1
 
-O **CP 265 — Legibilidade Atmosférica e Silhuetas de Plano Médio** está em execução. A Casa Voss, a Estrada do Rio, o rio lateral e o Arco macro devem passar a ler como camadas distintas do vale; a profundidade física alcançada no CP 263 não pode ser reduzida.
+O **CP 267 — Hidrologia lateral e profundidade da margem Casa Voss → Estrada → Arco** está em execução. O passe macro anterior preservou o Arco em `z=92`, camadas laterais de relevo e uma faixa jogável de Estrada. Esta profundidade não pode ser reduzida nem compensada pela aproximação de destinos.
 
-O CP 264 entregou uma lente rebaixada e uma faixa de leitura física sobre o corredor entre a Casa e o Arco, mantendo o marco arqueológico em `z=92`. A validação técnica passou e a exploração total de 30 segundos foi realizada em três segmentos reais de 10 segundos, método necessário apenas no llvmpipe.
+O próximo refinamento trabalha no rio do flanco oriental, nas pedras de transição e nas margens visíveis desde a rota. Deve manter o eixo de circulação aberto, não criar painéis de fundo, não acrescentar luzes dinâmicas desnecessárias e não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` ou qualquer módulo das Regiões 7–12.
 
-O próximo passe trabalha em `levels/LevelEnvironment.gd` e em silhuetas já pertencentes às Regiões 1–6. Não altera HighlandRegion, OrionDestinationRegion nem qualquer módulo das Regiões 7–12. A recaptura só será aceite quando Casa, Estrada e Arco possam ser diferenciados sem depender de marcadores azuis ou de ângulos aéreos.
+## Critérios de continuação
+
+A tarefa só abre o CP seguinte depois de validação headless, prova de presença regional e evidência de exploração de 30 segundos, por segmentos reais quando o limite conhecido do llvmpipe exigir. A conclusão deve identificar o primeiro artefacto da tarefa seguinte.
 
 **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.

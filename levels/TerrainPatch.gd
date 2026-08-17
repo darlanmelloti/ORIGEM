@@ -55,6 +55,13 @@ func height_at(world_x: float, world_z: float) -> float:
 		var corridor_noise: float = land_noise.get_noise_2d(world_x * 0.65, world_z * 0.65) * 0.30
 		var corridor_detail: float = detail_noise.get_noise_2d(world_x, world_z) * 0.22
 		height = corridor_noise + corridor_detail
+		# A faixa jogável permanece baixa; os ombros afastados elevam-se gradualmente e devolvem ao corredor a profundidade do vale.
+		var road_progress: float = clampf((world_z - 12.0) / 108.0, 0.0, 1.0)
+		var road_center: float = lerpf(-21.4, -10.0, road_progress) + sin(road_progress * PI * 2.5) * 1.8
+		var lateral_distance: float = abs(world_x - road_center)
+		var shoulder_ratio: float = clampf((lateral_distance - 4.35) / 10.0, 0.0, 1.0)
+		var shoulder_height: float = shoulder_ratio * shoulder_ratio * (2.30 + road_progress * 2.10)
+		height += shoulder_height
 	# Corredor ribeirinho de baixa inclinação: liga a Floresta Densa à margem ocidental do lago regional.
 	elif world_x > -38.0 and world_x < 25.0 and world_z >= 145.0 and world_z <= 252.0:
 		var shore_noise: float = land_noise.get_noise_2d(world_x * 0.55, world_z * 0.55) * 0.22
