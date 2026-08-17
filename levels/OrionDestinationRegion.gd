@@ -31,8 +31,7 @@ func _ready() -> void:
 			_build_temporal_hub()
 			_build_hub_to_final_dome_approach()
 			_build_final_dome()
-	_build_cartographic_anchors()
-	_report_region12_render_inventory()
+		_build_cartographic_anchors()
 
 func _report_region12_render_inventory() -> void:
 	var mesh_count: int = find_children("*", "GeometryInstance3D", true, false).size()
@@ -46,6 +45,11 @@ func _report_region12_render_inventory() -> void:
 		var region_meshes: int = region_node.find_children("*", "GeometryInstance3D", true, false).size()
 		var region_lights: int = region_node.find_children("*", "OmniLight3D", true, false).size()
 		print("REGION12_RENDER_GROUP name=", region_node_name, " meshes=", region_meshes, " omni_lights=", region_lights)
+	var handoff_colliders: Array[String] = ["ColisaoHandoffCubeR11", "ColisaoHandoffSoleiraR12", "ColisaoHandoffHubR12"]
+	var audit_root: Node = get_parent() if get_parent() != null else self
+	for collider_name: String in handoff_colliders:
+		var collider_node := audit_root.find_child(collider_name, true, false)
+		print("REGION12_HANDOFF_COLLIDER name=", collider_name, " present=", collider_node != null)
 
 func _build_cartographic_anchors() -> void:
 	var anchors := Node3D.new()
