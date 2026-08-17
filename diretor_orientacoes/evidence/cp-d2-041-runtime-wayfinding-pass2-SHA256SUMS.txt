@@ -1,0 +1,2 @@
+cdd472b195aa110f683a3f7811803ce4ca4d547f067b771c1ad5ac842900ae48  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-041-runtime-wayfinding-pass2/gameplay-30s.mp4
+9a580313176e3d9ad443aca22cf7db25b7b130dd518e52d3f09c3b574224b0df  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-041-runtime-wayfinding-pass2/print-1600x900.jpg

@@ -598,6 +598,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		handoff_marker.set_meta("dev2_scope", "regions_7_to_12")
 		handoff_marker.set_meta("sequence_order", handoff_index + 1)
 		add_child(handoff_marker)
+		print("REGION12_HANDOFF_POSITION name=", handoff_marker.name, " sequence=", handoff_index + 1, " position=", handoff_marker.position)
 	var validation_anchors: Array[Dictionary] = [
 		{"name": "ValidationR11_CamaraOrionCube", "position": Vector3(164.0, 1.18, 171.12), "region": 11, "role": "cube_chamber_frame"},
 		{"name": "ValidationR12_HubTemporal", "position": Vector3(164.0, 1.34, 169.40), "region": 12, "role": "hub_approach_frame"}
