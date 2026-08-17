@@ -479,8 +479,8 @@ func _build_temporal_hub() -> void:
 		var rim_light := OmniLight3D.new()
 		rim_light.name = "LuzRimMonolitoTemporal_%02d" % index
 		rim_light.light_color = Color("#7f6bd6")
-		rim_light.light_energy = 1.8
-		rim_light.omni_range = 8.0
+		rim_light.light_energy = 1.55
+		rim_light.omni_range = 6.5
 		rim_light.shadow_enabled = false
 		rim_light.position = Vector3(cos(angle) * 12.5, 3.8, sin(angle) * 12.5)
 		hub.add_child(rim_light)
