@@ -1,0 +1,2 @@
+645a886bb8684de4bfb6b9158a0ebe829ef43f19f9a22d6b6e7016717f8b06f8  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-066-contextual-decor-pass1/gameplay-30s.mp4
+9c0b29bd2af0673011bc489ca2500cc03c5e22ff0bf7e6f5024932b8537006b1  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-066-contextual-decor-pass1/print-1600x900.jpg

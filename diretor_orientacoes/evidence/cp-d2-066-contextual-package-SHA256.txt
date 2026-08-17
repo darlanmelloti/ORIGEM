@@ -1,0 +1,1 @@
+08e739d06b9a62033e35af66c81d0da1e2833a7e0b54ce0116b29c7cb9792780  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-066-contextual-decor-local.zip
