@@ -275,6 +275,7 @@ func _build_cp_d2_007_physical_handoff() -> void:
 		Vector3(-116.0, _height_at(-116.0, 562.0) + 0.45, 562.0)
 	]
 	var roles: Array[String] = ["ENTRADA_TRILHA_09", "LIMIAR_CAVERNA_10", "BOCA_CAVERNA_10", "TRANSICAO_INTERIOR", "CAMARA_CUBE_11"]
+	var transition_colors: Array[Color] = [Color("#5cc8ff"), Color("#63bce8"), Color("#6a9fda"), Color("#777fd0"), Color("#8c6cff")]
 	for index: int in range(handoff_points.size()):
 		var marker := Marker3D.new()
 		marker.name = "CPD2007_%s" % roles[index]
@@ -297,7 +298,7 @@ func _build_cp_d2_007_physical_handoff() -> void:
 			var light := OmniLight3D.new()
 			light.name = "WayfinderCPD2007_%s" % roles[index]
 			light.position = handoff_points[index] + Vector3(0.0, 1.8, 0.0)
-			light.light_color = Color("#5cc8ff") if index < 4 else Color("#8c6cff")
+			light.light_color = transition_colors[index]
 			light.light_energy = 0.72
 			light.omni_range = 6.5
 			light.shadow_enabled = false

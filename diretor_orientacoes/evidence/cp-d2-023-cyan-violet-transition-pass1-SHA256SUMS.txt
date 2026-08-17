@@ -1,0 +1,2 @@
+4eb1b02b4d805673fd9b961da8bf533ad2bcd9747141794c4987c719fb484144  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-023-cyan-violet-transition-pass1/gameplay-30s.mp4
+87b43751eeaa3ec43820cdcf6b875e3ffb6159ab3e090889876626a90dcb8180  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-023-cyan-violet-transition-pass1/print-1600x900.jpg
