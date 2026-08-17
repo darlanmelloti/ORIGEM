@@ -1,0 +1,1 @@
+19b61ca360f0395d6dab0a0746e31feab16e89de9544b6750274b75c86dc7a86  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-045-r12-visual-local.zip
