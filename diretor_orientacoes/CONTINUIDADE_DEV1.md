@@ -1,4 +1,4 @@
-# CONTINUIDADE_DEV1 — CP 314 EM EXECUÇÃO
+# CONTINUIDADE_DEV1 — CP 318 EM EXECUÇÃO
 
 **Fronteira obrigatória:** Regiões 1–6 e Takes 1–11. Não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem qualquer módulo das Regiões 7–12.
 
@@ -8,9 +8,9 @@ O CP 294 ocultou os sinais técnicos do prólogo por nome e por material emissiv
 
 A tomada histórica inclinada mantém uma massa de cobertura Casa Voss à esquerda com Estrada e Arco no plano direito. É uma base **parcial**, não uma aprovação final: a fachada e a ponte ainda não satisfazem a referência de 12 marcos.
 
-## CP 314 — EM EXECUÇÃO IMEDIATA
+## CP 318 — EM EXECUÇÃO IMEDIATA
 
-**Objectivo:** preservar a captura cinematográfica limpa e a leitura diurna/fachada dos CPs 306–313, convertendo a abertura em evidência comparável para o Dev3 antes do próximo ganho macro. Não usar outdoors, painéis, luzes adicionais ou colisores que estreitem a rota.
+**Objectivo:** preservar a tomada macro recuada CP 317 e a leitura diurna/fachada dos CPs 306–317, melhorando a cadeia real de água e passagem de margem antes do próximo ganho macro. Não usar outdoors, painéis, luzes adicionais ou colisores que estreitem a rota.
 
 | Critério | Verificação obrigatória |
 | --- | --- |
@@ -20,6 +20,6 @@ A tomada histórica inclinada mantém uma massa de cobertura Casa Voss à esquer
 | Jogabilidade | Captura estável em `opengl3` e 30 segundos de execução sem erro GDScript. |
 | Reversibilidade | Reverter qualquer candidata sem ganho visual verificável. |
 
-**Próxima acção já iniciada:** publicar a captura limpa no pacote de evidência Dev3 e isolar, pela matriz de 12 marcos, a primeira intervenção macro com ganho visual verificável antes de recapturar em `opengl3`.
+**Próxima acção já iniciada:** usar a tomada limpa recuada como referência, reforçar somente a continuidade física água–margem–ponte e recapturar em `opengl3` antes de actualizar a grelha CP-CINE-03 do Dev3.
 
 > Nenhum checkpoint encerra o ciclo. Cada validação abre imediatamente o próximo passe dentro do escopo Dev1.
