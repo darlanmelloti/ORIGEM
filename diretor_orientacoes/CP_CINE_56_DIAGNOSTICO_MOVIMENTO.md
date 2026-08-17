@@ -61,3 +61,21 @@ A câmara de Elias foi ajustada de 75 graus (padrão) para **64 graus** apenas n
 Esta é a primeira melhoria composicional persistente confirmada após a auditoria de movimento. Não acrescenta luzes, colisores, vértices ou activos; afecta exclusivamente a projecção da câmara activa de Elias dentro da cena independente Orion.
 
 **Próximo passe aberto — CP-CINE-63:** capturar deslocação de 30 segundos com FOV 64 e verificar se a legibilidade do arco se preserva para além da soleira antes de iniciar a ante-câmara.
+
+## CP-CINE-63 — Movimento com FOV 64
+
+A soleira mantém o arco de rocha centrado e o piso de avanço identificável. No primeiro desvio, a silhueta continua coerente, mas a abertura adiante permanece demasiadamente negra para funcionar como destino narrativo. A avaliação do ponto profundo decidirá se a próxima intervenção deve ser ante-câmara ou um tratamento material localizado de fundo.
+
+O estágio profundo confirma que a composição FOV 64 melhora a soleira, mas não é suficiente para transformar o corredor prolongado em destino legível: a abertura no segundo segmento permanece preta.
+
+**Próximo passe aberto — CP-CINE-64:** sem acrescentar luzes, ajustar exclusivamente o alcance e o alvo do projector já existente `ProjectorDaCurvaInterior` para cobrir a profundidade física até ao anel de 12,8 m. A energia será conservadora e a decisão será tomada pela comparação de movimento, não apenas pelo frame inicial.
+
+## CP-CINE-64 — Projector existente prolongado
+
+A soleira preserva a composição FOV 64 e o primeiro desvio recebe ligeiramente mais leitura de textura, sem sobreiluminar o corredor. A confirmação relevante é o estágio profundo, onde a intervenção precisa transformar a abertura preta em trajectória reconhecível sem criar novas luzes.
+
+O estágio profundo não mostrou ganho suficiente com o projector prolongado. A alteração de alcance, ângulo e alvo foi revertida, preservando as duas luzes locais originais.
+
+> **Candidato rejeitado:** prolongar o projector de entrada para resolver sozinho a profundidade do segundo segmento.
+
+A próxima investigação deverá verificar a própria construção do fecho profundo — material, cullagem e silhueta da tampa terminal — antes de construir uma ante-câmara adicional.
