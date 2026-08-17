@@ -716,6 +716,20 @@ func _build_cartographic_region7_handoff_vista() -> void:
 		base.position = marker.position + Vector3(0.0, 0.14, 0.0)
 		base.rotation.y = marker.rotation.y
 		vista_root.add_child(base)
+	# Dois vestígios laterais confirmam a subida no horizonte da Bacia, deixando o eixo x=140 inteiramente livre.
+	# Permanecem em z<285: são orientação Dev1, não geometria da Vila Elevada.
+	for side: float in [-1.0, 1.0]:
+		var edge_x: float = CARTOGRAPHIC_ANCHORS.VILA_ELEVADA.x + side * 6.2
+		var edge_z: float = 272.0 + side * 1.4
+		var edge: Node3D = CARTOGRAPHIC_HANDOFF_PILLAR.instantiate() as Node3D
+		if edge == null:
+			continue
+		edge.name = "VestigioLateralDaVistaVila_%s" % ("Oeste" if side < 0.0 else "Este")
+		edge.position = Vector3(edge_x, _terrain_height_for_qa(edge_x, edge_z) + 0.05, edge_z)
+		edge.scale = Vector3(0.34, 0.62 + 0.06 * side, 0.34)
+		edge.rotation = Vector3(0.06 * side, side * 0.30, -0.04 * side)
+		_apply_material(edge, moss_material)
+		vista_root.add_child(edge)
 
 func _make_material(color: Color, roughness_value: float) -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
