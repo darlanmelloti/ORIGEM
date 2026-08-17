@@ -119,3 +119,13 @@ O próximo incremento precisa começar pela integração de um activo PBR real q
 O activo `stone_tallC.glb` recebeu recursivamente o material PBR da caverna e foi validado por 30 segundos. Embora a dissonância cinzenta anterior tenha sido eliminada, o marco permaneceu fora da leitura útil do enquadramento e não criou orientação perceptível. Será revertido.
 
 > **Candidato rejeitado:** marcador lateral CC0, mesmo após integração material, sem reposicionamento sustentado por evidência de trajectória.
+
+## CP-CINE-72 — Ambiente profundo reforçado
+
+A segunda calibração ambiente para **0,88** foi testada no ponto profundo por 30 segundos. A rocha mantém contraste e ganha detalhe material suficiente para deixar de se fundir num vazio preto. A alteração não acrescenta luzes dinâmicas nem novos vértices.
+
+Antes da publicação, a entrada será capturada com a mesma calibração para garantir que a soleira preserva a atmosfera e a leitura FOV 64. Se o contraste inicial se mantiver, 0,88 substitui a calibração 0,68.
+
+### Decisão final CP-CINE-72
+
+A captura da soleira com ambiente 0,88 preservou o tom escuro, mas não revelou o eixo central do percurso com ganho suficiente. Como a melhora ficou abaixo do limiar de aceitação, a calibração será revertida para **0,68**. A hipótese de aumentar apenas a luz ambiente fica encerrada para evitar achatar a caverna sem resolver a composição.
