@@ -8,8 +8,14 @@ Os CPs 317–330 consolidaram a tomada recuada de Casa Voss, a prioridade da câ
 
 O CP 331 corrigiu a abertura em instâncias normais e QA. O contentor `Geometry`, `Interactables`, o protótipo do interior do santuário e os emissores Chronos são ocultados de forma determinística durante a abertura; a restituição depois do handoff devolve Geometry, interacções e a câmara de Elias. A validação headless, a auditoria de emissões QA, a captura aos 18 segundos e 30 segundos de gameplay normal passaram.
 
-## CP 332 — Em execução imediata
+## CPs 332–335 — Auditorias e reversões registadas
 
-**Objectivo:** auditar a composição macro da tomada recuada da Casa Voss contra a referência cartográfica oficial. Escolher no máximo uma melhoria física de alto impacto para a leitura simultânea de Casa, rio, Estrada do Rio e Arco das Ruínas; não repetir candidatos de câmara, ponte, talude, atmosfera, vegetação ou escala já revertidos.
+O CP 332 comparou a tomada com a referência e determinou que o próximo ganho estrutural não poderia vir de câmara, ponte, talude, atmosfera, vegetação ou escala. O CP-CINE-05 testou uma cadeia arqueológica intermédia no CP 333; a captura não demonstrou ganho perceptível, logo a alteração foi revertida. O CP 334 testou macrotextura de solo sem ganho perceptível e também foi revertido. O CP 335 mapeou os nós da abertura e testou a ocultação de balizas remotas; essa hipótese foi igualmente revertida por não alterar a leitura do frame.
 
-A sequência de evidência para Dev3 mantém três pontos físicos: Casa Voss, aproximação da ponte positiva como marco lateral e Arco das Ruínas como destino. Nenhum checkpoint encerra o ciclo. O CP 332 deve manter a escala real do vale, a faixa jogável e a fronteira exclusiva das Regiões 1–6/Takes 1–11.
+As reversões preservam a base CP317/CP331 e impedem reabertura de candidatos já esgotados. Todos os testes técnicos headless das hipóteses transitórias passaram; nenhum código de runtime destes três testes permaneceu no ramo.
+
+## CP-CINE-07 — Em execução imediata
+
+**Objectivo activo:** recapturar a tomada Casa Voss no FOV e posição CP317 quando o Dev2 integrar a cadeia remota R7–R9 ordenada em `DEV2_CP_CINE_06_CADEIA_MARCOS_REMOTOS.md`. O Dev1 não altera `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem módulos R7–R12; valida somente que a integração não regressa sobre Casa, Estrada, Arco, água, colisores ou escala do vale.
+
+A matriz obrigatória está em `CP_CINE_07_MATRIZ_RECAPTURA_CASA_VOSS.md`. A sequência de evidência mantém Casa Voss, ponte positiva como marco lateral e Arco das Ruínas como destino Dev1, seguida por Vila/Observatório/contrafortes Dev2 em profundidade. Nenhum checkpoint encerra o ciclo: o retorno CP-CINE-07 abre CP-CINE-08 imediatamente.
