@@ -29,7 +29,14 @@ func _ready() -> void:
 		_build_temporal_hub()
 		_build_hub_to_final_dome_approach()
 		_build_final_dome()
-	_build_cartographic_anchors()
+		_build_cartographic_anchors()
+		_report_region12_render_inventory()
+
+func _report_region12_render_inventory() -> void:
+	var mesh_count: int = find_children("*", "GeometryInstance3D", true, false).size()
+	var light_count: int = find_children("*", "OmniLight3D", true, false).size()
+	var body_count: int = find_children("*", "StaticBody3D", true, false).size()
+	print("REGION12_RENDER_INVENTORY meshes=", mesh_count, " omni_lights=", light_count, " static_bodies=", body_count)
 
 func _build_cartographic_anchors() -> void:
 	var anchors := Node3D.new()
