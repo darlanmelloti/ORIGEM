@@ -1,0 +1,1 @@
+9cae5f8f32fb50fc4ef8f075516e865a473ac86921033540e51f52e13026a24c  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-043-scope-guard-local.zip
