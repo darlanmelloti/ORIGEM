@@ -193,8 +193,8 @@ func _build_clean_r12_portal() -> void:
 	var lintel := ROCK_LARGE.instantiate() as Node3D
 	if lintel != null:
 		lintel.name = "LintelPortalLimpoR12"
-		lintel.position = Vector3(0.0, 2.38, -2.75)
-		lintel.scale = Vector3(2.35, 0.34, 0.74)
+		lintel.position = Vector3(0.0, 1.34, -2.75)
+		lintel.scale = Vector3(2.35, 0.52, 0.74)
 		lintel.rotation = Vector3(0.02, 0.0, 0.0)
 		portal.add_child(lintel)
 		lintel.visible = false
@@ -214,17 +214,30 @@ func _build_clean_r12_portal() -> void:
 		var temporal_core := ROCK_LARGE.instantiate() as Node3D
 		if temporal_core != null:
 			temporal_core.name = "NucleoTemporalEncastradoR12"
-			temporal_core.position = Vector3(0.0, 0.42, -2.58)
-			temporal_core.scale = Vector3(0.30, 0.20, 0.30)
+			temporal_core.position = Vector3(0.0, 0.32, -2.58)
+			temporal_core.scale = Vector3(0.44, 0.30, 0.44)
 			var core_material := StandardMaterial3D.new()
 			core_material.albedo_color = Color("#466c98")
 			core_material.emission_enabled = true
 			core_material.emission = Color("#5b8fb5")
-			core_material.emission_energy_multiplier = 0.46
+			core_material.emission_energy_multiplier = 1.15
 			core_material.roughness = 0.72
 			for core_mesh in temporal_core.find_children("*", "MeshInstance3D", true, false):
 				core_mesh.set_surface_override_material(0, core_material)
 			portal.add_child(temporal_core)
+			var core_pedestal := ROCK_LARGE.instantiate() as Node3D
+			if core_pedestal != null:
+				core_pedestal.name = "BaseOrganicaNucleoR12"
+				core_pedestal.position = Vector3(0.0, 0.22, -2.55)
+				core_pedestal.scale = Vector3(0.78, 0.18, 0.62)
+				var pedestal_material := StandardMaterial3D.new()
+				pedestal_material.albedo_color = Color("#36556f")
+				pedestal_material.emission_enabled = true
+				pedestal_material.emission = Color("#244a6e")
+				pedestal_material.emission_energy_multiplier = 0.30
+				for pedestal_mesh in core_pedestal.find_children("*", "MeshInstance3D", true, false):
+					pedestal_mesh.set_surface_override_material(0, pedestal_material)
+				portal.add_child(core_pedestal)
 	for crown_side in [-1.0, 1.0]:
 		var crown := PILLAR.instantiate() as Node3D
 		if crown == null:
@@ -249,7 +262,7 @@ func _build_clean_r12_portal() -> void:
 	core_light.light_energy = 0.08
 	core_light.omni_range = 2.8
 	core_light.shadow_enabled = false
-	core_light.position = Vector3(164.0, -0.18, 175.42)
+	core_light.position = Vector3(164.0, 0.08, 175.42)
 	add_child(core_light)
 	var contact_light := OmniLight3D.new()
 	contact_light.name = "LuzContactoNucleoR12"
@@ -257,8 +270,24 @@ func _build_clean_r12_portal() -> void:
 	contact_light.light_energy = 0.06
 	contact_light.omni_range = 1.9
 	contact_light.shadow_enabled = false
-	contact_light.position = Vector3(164.0, -0.46, 175.10)
+	contact_light.position = Vector3(164.0, -0.12, 175.10)
 	add_child(contact_light)
+	var left_rim := OmniLight3D.new()
+	left_rim.name = "RecorteAzulPilarEsquerdoR12"
+	left_rim.light_color = Color("#4f8fc4")
+	left_rim.light_energy = 0.42
+	left_rim.omni_range = 5.4
+	left_rim.shadow_enabled = false
+	left_rim.position = Vector3(161.15, 0.84, 175.72)
+	add_child(left_rim)
+	var right_rim := OmniLight3D.new()
+	right_rim.name = "RecorteVioletaPilarDireitoR12"
+	right_rim.light_color = Color("#7562c8")
+	right_rim.light_energy = 0.34
+	right_rim.omni_range = 5.4
+	right_rim.shadow_enabled = false
+	right_rim.position = Vector3(166.85, 0.84, 175.72)
+	add_child(right_rim)
 
 func _build_region12_wayfinding_lights() -> void:
 	var wayfinding_positions: Array[Vector3] = [
@@ -901,5 +930,5 @@ func _set_camera(progress: float) -> void:
 	position.x += sin(progress * TAU * 0.8) * 0.72
 	position.y += sin(progress * PI) * 0.48
 	camera.position = position
-	var target := Vector3(164.0 + sin(progress * PI) * 0.12, 0.56 + progress * 0.10, 175.35)
+	var target := Vector3(164.0 + sin(progress * PI) * 0.12, 0.52 + progress * 0.08, 175.35)
 	camera.look_at(target, Vector3.UP)
