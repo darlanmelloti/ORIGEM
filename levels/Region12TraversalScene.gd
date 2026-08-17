@@ -147,6 +147,11 @@ func _build_clean_r12_portal() -> void:
 		ground.position = Vector3(0.0, -0.38, -2.25)
 		ground.scale = Vector3(6.8, 0.18, 3.2)
 		ground.rotation = Vector3(0.015, 0.04, -0.01)
+		var ground_material := StandardMaterial3D.new()
+		ground_material.albedo_color = Color("#506579")
+		ground_material.roughness = 0.92
+		for ground_mesh in ground.find_children("*", "MeshInstance3D", true, false):
+			ground_mesh.set_surface_override_material(0, ground_material)
 		portal.add_child(ground)
 	for side in [-1.0, 1.0]:
 		var jamb := PILLAR.instantiate() as Node3D
@@ -156,6 +161,11 @@ func _build_clean_r12_portal() -> void:
 		jamb.position = Vector3(side * 1.90, 0.48, -2.75)
 		jamb.scale = Vector3(0.58, 1.85, 0.58)
 		jamb.rotation = Vector3(0.03, side * 0.08, side * 0.02)
+		var jamb_material := StandardMaterial3D.new()
+		jamb_material.albedo_color = Color("#6d8798")
+		jamb_material.roughness = 0.88
+		for jamb_mesh in jamb.find_children("*", "MeshInstance3D", true, false):
+			jamb_mesh.set_surface_override_material(0, jamb_material)
 		portal.add_child(jamb)
 	for wing_side in [-1.0, 1.0]:
 		var wing := ROCK_LARGE.instantiate() as Node3D
@@ -174,6 +184,11 @@ func _build_clean_r12_portal() -> void:
 		monolith.position = Vector3(monolith_side * 1.18, 0.42, -2.62)
 		monolith.scale = Vector3(0.42, 1.26 + (0.10 if monolith_side < 0.0 else 0.0), 0.42)
 		monolith.rotation = Vector3(0.04, monolith_side * 0.10, monolith_side * 0.04)
+		var monolith_material := StandardMaterial3D.new()
+		monolith_material.albedo_color = Color("#526b7d")
+		monolith_material.roughness = 0.90
+		for monolith_mesh in monolith.find_children("*", "MeshInstance3D", true, false):
+			monolith_mesh.set_surface_override_material(0, monolith_material)
 		portal.add_child(monolith)
 	var lintel := ROCK_LARGE.instantiate() as Node3D
 	if lintel != null:
