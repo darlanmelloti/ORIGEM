@@ -1060,8 +1060,36 @@ func _activate_opening_camera() -> void:
 	_apply_opening_storm()
 	get_tree().create_timer(0.35).timeout.connect(_apply_opening_storm)
 	# A construção regional é escalonada nos primeiros frames; passagens curtas removem sinais técnicos antes da primeira captura sem afectar a exploração posterior.
-	for delay_seconds: float in [0.12, 0.42, 0.90, 1.65, 3.20, 6.00, 12.00]:
+	for delay_seconds: float in [0.12, 0.42, 0.90, 1.65, 3.20, 6.00, 12.00, 17.50, 23.00, 30.00]:
 		get_tree().create_timer(delay_seconds).timeout.connect(_hide_late_opening_technical_markers)
+	# CP319: o take começa na Casa e percorre, sem teleporte, os planos físicos da ponte positiva e do Arco.
+	if DAYLIGHT_VARIANT_ENABLED:
+		get_tree().create_timer(4.0).timeout.connect(_sweep_opening_camera_to_bridge)
+		get_tree().create_timer(10.5).timeout.connect(_sweep_opening_camera_to_arch)
+
+func _aim_opening_camera(target: Vector3) -> void:
+	if opening_camera != null and opening_active:
+		opening_camera.look_at(target, Vector3.UP)
+
+func _sweep_opening_camera_to_bridge() -> void:
+	if opening_camera == null or not opening_active:
+		return
+	var current_focus: Vector3 = opening_camera.global_position + (-opening_camera.global_transform.basis.z) * 24.0
+	var bridge_focus := Vector3(13.5, _ground_height(13.5, 58.0) - 4.0, 58.0)
+	var pan := create_tween()
+	pan.set_trans(Tween.TRANS_SINE)
+	pan.set_ease(Tween.EASE_IN_OUT)
+	pan.tween_method(Callable(self, "_aim_opening_camera"), current_focus, bridge_focus, 4.8)
+
+func _sweep_opening_camera_to_arch() -> void:
+	if opening_camera == null or not opening_active:
+		return
+	var current_focus: Vector3 = opening_camera.global_position + (-opening_camera.global_transform.basis.z) * 24.0
+	var arch_focus := Vector3(1.0, _ground_height(1.0, 88.0) - 12.0, 88.0)
+	var pan := create_tween()
+	pan.set_trans(Tween.TRANS_SINE)
+	pan.set_ease(Tween.EASE_IN_OUT)
+	pan.tween_method(Callable(self, "_aim_opening_camera"), current_focus, arch_focus, 5.6)
 
 func _hide_late_opening_technical_markers() -> void:
 	if not opening_active:
