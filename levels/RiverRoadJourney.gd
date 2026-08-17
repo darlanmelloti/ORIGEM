@@ -354,7 +354,8 @@ func _build_positive_valley_bridge() -> void:
 	# É uma silhueta lateral sem colisor; a rota principal permanece na estrada ocidental e a ponte legada negativa não é tocada.
 	var bridge_z: float = 58.0
 	var bridge_x: float = _river_x(bridge_z)
-	var bridge_y: float = (_height_at(bridge_x - 4.8, bridge_z) + _height_at(bridge_x + 4.8, bridge_z)) * 0.5 + 0.14
+	# Elevação de leitura CP286: separa a silhueta da ponte do talude e do curso de água sem aproximar o marco cartográfico.
+	var bridge_y: float = (_height_at(bridge_x - 4.8, bridge_z) + _height_at(bridge_x + 4.8, bridge_z)) * 0.5 + 0.92
 	var bridge_root: Node3D = Node3D.new()
 	bridge_root.name = "PonteDeLeituraDoValePositivo"
 	bridge_root.position = Vector3(bridge_x, bridge_y, bridge_z)
@@ -363,7 +364,7 @@ func _build_positive_valley_bridge() -> void:
 	var bridge: Node3D = STONE_BRIDGE.instantiate() as Node3D
 	if bridge != null:
 		bridge.name = "PonteDePedraDoEixoPositivo"
-		bridge.scale = Vector3(1.20, 0.92, 1.20)
+		bridge.scale = Vector3(1.34, 1.05, 1.34)
 		_apply_material(bridge, ruin_material)
 		bridge_root.add_child(bridge)
 	for side: float in [-1.0, 1.0]:
