@@ -382,16 +382,24 @@ func _build_region9_threshold() -> void:
 		if jamb == null:
 			continue
 		jamb.name = "OmbreiraRegiao09_%s" % ("Norte" if side < 0 else "Sul")
-		jamb.position = Vector3(float(side) * 4.2, 3.2, 0.0)
-		jamb.scale = Vector3(0.62, 0.70, 0.58)
+		jamb.position = Vector3(float(side) * 4.2, 1.05, 0.0)
+		jamb.scale = Vector3(1.6, 1.8, 1.2)
 		jamb.rotation = Vector3(0.06, 0.18 * float(side), -0.04)
 		_apply_material(jamb, stone_material)
 		threshold.add_child(jamb)
+	var threshold_cap: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if threshold_cap != null:
+		threshold_cap.name = "ArcoOrganicoRegiao09"
+		threshold_cap.position = Vector3(0.0, 2.3, 0.0)
+		threshold_cap.scale = Vector3(3.5, 0.8, 1.2)
+		threshold_cap.rotation = Vector3(0.04, 0.0, -0.02)
+		_apply_material(threshold_cap, stone_material)
+		threshold.add_child(threshold_cap)
 	var threshold_beacon := OmniLight3D.new()
 	threshold_beacon.name = "BeaconContinuidadeRegiao09"
-	threshold_beacon.position = Vector3(0.0, 6.2, 0.0)
+	threshold_beacon.position = Vector3(0.0, 4.0, 0.0)
 	threshold_beacon.light_color = Color("#5cc8ff")
-	threshold_beacon.light_energy = 1.05
+	threshold_beacon.light_energy = 0.75
 	threshold_beacon.omni_range = 12.0
 	threshold_beacon.shadow_enabled = false
 	threshold.add_child(threshold_beacon)

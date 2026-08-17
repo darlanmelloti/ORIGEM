@@ -6,12 +6,18 @@ extends Node3D
 
 const TERRAIN_PATCH_SCRIPT: Script = preload("res://levels/TerrainPatch.gd")
 const HIGHLAND_REGION_SCRIPT: Script = preload("res://levels/HighlandRegion.gd")
-const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
+const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeB.glb")
+const ROUTE_ANCHOR: PackedScene = preload("res://assets/models_cc0/stone_largeB.glb")
+const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
+const HOUSE_ROOF: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
+const ROUTE_STONE: PackedScene = preload("res://assets/models_cc0/stone_smallF.glb")
 
 var validation_camera: Camera3D
 var elapsed: float = 0.0
-var route_start := Vector3(198.0, 40.0, 408.0)
-var route_end := Vector3(76.0, 43.0, 443.0)
+var region9_gate_light: OmniLight3D
+var route_start := Vector3(169.0, 31.2, 398.0)
+var route_end := Vector3(148.0, 32.4, 438.0)
+var r9_camera_position := Vector3(-184.0, 0.0, 548.0)
 
 func _ready() -> void:
 	_build_environment()
@@ -21,37 +27,186 @@ func _ready() -> void:
 	var highlands := HIGHLAND_REGION_SCRIPT.new() as Node3D
 	highlands.name = "Take8HighlandRegion"
 	add_child(highlands)
-	_build_validation_wayfinding()
+	_prepare_real_trail_reveal(highlands, terrain)
+	_build_cinematic_village_reveal()
+	var start_ground: float = float(terrain.call("height_at", route_start.x, route_start.z))
+	var end_ground: float = float(terrain.call("height_at", route_end.x, route_end.z))
+	route_start.y = start_ground + 2.1
+	route_end.y = end_ground + 2.1
+	var threshold_for_camera := highlands.get_node_or_null("LimiarOrganicoRegiao09") as Node3D
+	if threshold_for_camera != null:
+		r9_camera_position.y = threshold_for_camera.global_position.y + 4.0
+	else:
+		r9_camera_position.y = float(terrain.call("height_at", r9_camera_position.x, r9_camera_position.z)) + 4.0
 	validation_camera = Camera3D.new()
 	validation_camera.name = "Take8RouteCamera"
 	validation_camera.current = true
-	validation_camera.fov = 45.0
+	validation_camera.fov = 50.0
 	validation_camera.position = route_start
 	add_child(validation_camera)
-	validation_camera.look_at(route_start + Vector3(-20.0, -5.0, 28.0), Vector3.UP)
+	validation_camera.look_at(Vector3(169.0, route_start.y - 0.7, 414.0), Vector3.UP)
+
+func _build_cinematic_village_reveal() -> void:
+	var reveal := Node3D.new()
+	reveal.name = "CP090OrganicVillageReveal"
+	reveal.position = Vector3(140.0, 14.25, 357.0)
+	add_child(reveal)
+	var house_positions: Array[Vector3] = [Vector3(-3.8, 0.0, 1.0), Vector3(3.8, 0.8, 4.5), Vector3(0.0, 1.8, 8.0)]
+	for index: int in range(house_positions.size()):
+		var base := ROCK_LARGE.instantiate() as Node3D
+		if base != null:
+			base.name = "CP090CasaBase_%02d" % index
+			base.position = house_positions[index]
+			base.scale = Vector3(2.2, 0.48, 1.65)
+			reveal.add_child(base)
+			_apply_cp090_material(base)
+		for pillar_index: int in range(3):
+			var pillar := PILLAR.instantiate() as Node3D
+			if pillar != null:
+				pillar.name = "CP090CasaPilar_%02d_%02d" % [index, pillar_index]
+				pillar.position = house_positions[index] + Vector3(-1.4 + float(pillar_index) * 1.4, 1.65, 0.0)
+				pillar.scale = Vector3(0.42, 1.25, 0.42)
+				reveal.add_child(pillar)
+				_apply_cp090_material(pillar)
+		var roof := HOUSE_ROOF.instantiate() as Node3D
+		if roof != null:
+			roof.name = "CP090CasaCobertura_%02d" % index
+			roof.position = house_positions[index] + Vector3(0.0, 2.42, 0.0)
+			roof.scale = Vector3(1.95, 0.30, 1.48)
+			reveal.add_child(roof)
+			_apply_cp090_material(roof)
+		var hearth := OmniLight3D.new()
+		hearth.name = "CP090CasaLuz_%02d" % index
+		hearth.position = house_positions[index] + Vector3(0.0, 2.1, 0.4)
+		hearth.light_color = Color("#d9a95f")
+		hearth.light_energy = 1.45
+		hearth.omni_range = 8.0
+		hearth.shadow_enabled = false
+		add_child(hearth)
+	var route_positions: Array[Vector3] = [Vector3(-4.5, 1.2, 1.0), Vector3(-2.0, 1.6, 2.8), Vector3(0.5, 2.0, 4.6), Vector3(2.5, 2.4, 6.4)]
+	for route_index: int in range(route_positions.size()):
+		var route_light := OmniLight3D.new()
+		route_light.name = "CP090FachoRota_%02d" % route_index
+		route_light.position = Vector3(140.0, 14.8, 357.0) + route_positions[route_index]
+		route_light.light_color = Color("#f1c77a")
+		route_light.light_energy = 0.8
+		route_light.omni_range = 4.5
+		route_light.shadow_enabled = false
+		add_child(route_light)
+		var route_stone := ROUTE_STONE.instantiate() as Node3D
+		if route_stone != null:
+			route_stone.name = "CP090MarcoRota_%02d" % route_index
+			route_stone.position = Vector3(140.0, 14.8, 357.0) + route_positions[route_index]
+			route_stone.scale = Vector3.ONE * 0.58
+			reveal.add_child(route_stone)
+
+func _apply_cp090_material(node: Node3D) -> void:
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color("#8a806d")
+	material.roughness = 0.92
+	material.metallic = 0.0
+	material.emission_enabled = true
+	material.emission = Color("#3c3328")
+	material.emission_energy_multiplier = 0.22
+	for mesh in node.find_children("*", "MeshInstance3D", true, false):
+		(mesh as MeshInstance3D).material_override = material
 
 func _process(delta: float) -> void:
 	if validation_camera == null:
 		return
 	elapsed += delta
-	var progress: float = clampf(elapsed / 30.0, 0.0, 1.0)
-	var eased: float = smoothstep(0.0, 1.0, progress)
-	validation_camera.position = route_start.lerp(route_end, eased)
-	var look_target: Vector3 = validation_camera.position + Vector3(-20.0, -5.0, 28.0)
-	validation_camera.look_at(look_target, Vector3.UP)
+	var trail_progress: float = smoothstep(0.0, 1.0, clampf(elapsed / 30.0, 0.0, 1.0))
+	if elapsed <= 20.0:
+		validation_camera.position = route_start.lerp(route_end, smoothstep(0.0, 1.0, clampf(elapsed / 20.0, 0.0, 1.0)))
+		var trail_target := Vector3(169.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.65, 414.0).lerp(Vector3(148.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.55, 438.0), trail_progress)
+		validation_camera.look_at(trail_target, Vector3.UP)
+	else:
+		validation_camera.fov = 38.0
+		validation_camera.position = r9_camera_position
+		validation_camera.look_at(Vector3(-164.0, 53.5, 564.0), Vector3.UP)
+		var r9_terrain := get_node_or_null("TerrainPatch") as Node3D
+		if r9_terrain != null:
+			r9_terrain.visible = true
+		var r9_route := get_node_or_null("Take8HighlandRegion/TrilhaDaMontanhaOrion") as Node3D
+		if r9_route != null:
+			r9_route.visible = false
+		var r9_outcrops := get_node_or_null("Take8HighlandRegion/AfloramentosDaTrilha") as Node3D
+		if r9_outcrops != null:
+			r9_outcrops.visible = false
+		for r9_decor_name in ["MarcoOrganicoEntradaTrilhaTake8", "ArcoOrganicoEntradaTake8_0", "ArcoOrganicoEntradaTake8_1", "ArcoOrganicoEntradaTake8_2", "Take8AncoraVerticalOrganica"]:
+			var r9_decor := get_node_or_null("Take8HighlandRegion/" + r9_decor_name) as Node3D
+			if r9_decor != null:
+				r9_decor.visible = false
+	if region9_gate_light != null:
+		region9_gate_light.light_energy = 0.56 + sin(elapsed * 1.7) * 0.10
+
+func _prepare_real_trail_reveal(highlands: Node3D, terrain: Node3D) -> void:
+	var real_route := highlands.get_node_or_null("TrilhaDaMontanhaOrion") as Node3D
+	if real_route != null:
+		real_route.visible = true
+		_enhance_real_trail_material(real_route)
+	for node_name in [		"MarcoOrganicoEntradaTrilhaTake8", "ArcoOrganicoEntradaTake8_0", "ArcoOrganicoEntradaTake8_1", "ArcoOrganicoEntradaTake8_2", "AfloramentosDaTrilha", "LimiarOrganicoRegiao09"]:
+		var landmark := highlands.get_node_or_null(node_name) as Node3D
+		if landmark != null:
+			landmark.visible = true
+			if node_name == "LimiarOrganicoRegiao09":
+				print("ORIGEM_REGION9_THRESHOLD_GLOBAL ", landmark.global_position)
+				for jamb_name in ["OmbreiraRegiao09_Norte", "OmbreiraRegiao09_Sul"]:
+					var jamb_debug := landmark.get_node_or_null(jamb_name) as Node3D
+					if jamb_debug != null:
+						print("ORIGEM_REGION9_JAMB_GLOBAL ", jamb_name, " ", jamb_debug.global_position)
+			var beacon := landmark.get_node_or_null("BeaconContinuidadeRegiao09") as OmniLight3D
+			if beacon != null:
+				beacon.light_energy = 0.9
+	var proxy := get_node_or_null("Take8WayfindingProxy") as Node3D
+	if proxy != null:
+		proxy.visible = false
+
+func _enhance_real_trail_material(route: Node3D) -> void:
+	var path_material := StandardMaterial3D.new()
+	path_material.albedo_color = Color("#566454")
+	path_material.roughness = 0.94
+	path_material.emission_enabled = true
+	path_material.emission = Color("#284c43")
+	path_material.emission_energy_multiplier = 0.65
+	for mesh in route.find_children("*", "MeshInstance3D", true, false):
+		(mesh as MeshInstance3D).material_override = path_material
 
 func _build_validation_wayfinding() -> void:
-	var points: Array[Vector3] = [Vector3(170.0, 44.0, 432.0), Vector3(160.0, 43.0, 440.0), Vector3(150.0, 42.0, 448.0), Vector3(140.0, 41.0, 456.0)]
+	var points: Array[Vector3] = [Vector3(188.0, 31.25, 407.0), Vector3(185.5, 31.38, 410.0), Vector3(183.0, 31.52, 413.5), Vector3(180.5, 31.66, 417.0)]
 	for index: int in range(points.size()):
 		var rock: Node3D = ROCK_LARGE.instantiate() as Node3D
 		if rock == null:
 			continue
 		rock.name = "Take8WayfindingRock_%02d" % index
-		var ground_y: float = float(get_node("TerrainPatch").call("height_at", points[index].x, points[index].z))
-		rock.position = Vector3(points[index].x, ground_y + 0.7, points[index].z)
-		rock.scale = Vector3(1.8 - float(index) * 0.16, 2.2 - float(index) * 0.16, 1.55 - float(index) * 0.12)
+		var ground_y: float = points[index].y
+		rock.position = Vector3(points[index].x, ground_y, points[index].z)
+		rock.scale = Vector3(0.78 - float(index) * 0.05, 0.59 - float(index) * 0.035, 0.70 - float(index) * 0.04)
 		rock.rotation = Vector3(0.03, -0.18 + float(index) * 0.32, -0.04)
 		add_child(rock)
+		var route_light := OmniLight3D.new()
+		route_light.name = "Take8FachoRota_%02d" % index
+		route_light.position = rock.position + Vector3(0.0, 1.4, 0.0)
+		route_light.light_color = Color("#d9b26f") if index < 3 else Color("#78b9c6")
+		route_light.light_energy = 0.86 if index == 0 else 0.62
+		route_light.omni_range = 8.0
+		route_light.shadow_enabled = false
+		add_child(route_light)
+	var anchor := ROUTE_ANCHOR.instantiate() as Node3D
+	if anchor != null:
+		anchor.name = "Take8AncoraVerticalOrganica"
+		anchor.position = Vector3(181.0, 33.55, 421.2)
+		anchor.scale = Vector3(0.68, 0.82, 0.62)
+		anchor.rotation = Vector3(0.08, 0.42, -0.05)
+		add_child(anchor)
+	region9_gate_light = OmniLight3D.new()
+	region9_gate_light.name = "Take8TransicaoRegiao9"
+	region9_gate_light.position = route_end + Vector3(0.0, 1.8, 0.0)
+	region9_gate_light.light_color = Color("#72c3cf")
+	region9_gate_light.light_energy = 0.68
+	region9_gate_light.omni_range = 7.5
+	region9_gate_light.shadow_enabled = false
+	add_child(region9_gate_light)
 
 func _build_environment() -> void:
 	var world := WorldEnvironment.new()
@@ -61,11 +216,11 @@ func _build_environment() -> void:
 	environment.background_color = Color("#839caf")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#8baab4")
-	environment.ambient_light_energy = 0.78
+	environment.ambient_light_energy = 0.98
 	environment.fog_enabled = true
 	environment.fog_light_color = Color("#91aeb8")
 	environment.fog_light_energy = 0.72
-	environment.fog_density = 0.0008
+	environment.fog_density = 0.00045
 	environment.fog_height = 18.0
 	environment.fog_height_density = 0.012
 	environment.volumetric_fog_enabled = false
