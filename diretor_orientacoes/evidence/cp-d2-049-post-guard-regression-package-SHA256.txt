@@ -1,0 +1,1 @@
+289d47a18ed0e8405e278e119f869a917cfa95462a25b47bd223f7331fb7ede6  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-049-post-guard-regression-local.zip
