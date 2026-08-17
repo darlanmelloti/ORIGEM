@@ -8,13 +8,59 @@ const ROCK_TALL_SCENE: PackedScene = preload("res://assets/models_cc0/stone_tall
 const FLOOR_DIFFUSE_PATH: String = "res://assets/textures/ambientcg_rock004/Rock004_1K-JPG_Color.jpg"
 const FLOOR_NORMAL_PATH: String = "res://assets/textures/ambientcg_rock004/Rock004_1K-JPG_NormalGL.jpg"
 const FLOOR_ROUGHNESS_PATH: String = "res://assets/textures/ambientcg_rock004/Rock004_1K-JPG_Roughness.jpg"
+const PLAYER_SCRIPT: Script = preload("res://entities/player/Player.gd")
+
+var player: CharacterBody3D
+const RETURN_GATE_POSITION: Vector3 = Vector3(0.0, 0.0, 0.85)
 
 func _ready() -> void:
 	_build_environment()
 	_build_camera()
 	_build_grounded_tunnel()
+	_build_player()
 	if OS.get_environment("ORIGEM_QA_MEASURE_INTERIOR_ROCKS") == "1":
 		_measure_interior_rock_pivots()
+
+func _build_player() -> void:
+	player = CharacterBody3D.new()
+	player.name = "Player"
+	player.set_script(PLAYER_SCRIPT)
+	var player_shape: CollisionShape3D = CollisionShape3D.new()
+	var capsule: CapsuleShape3D = CapsuleShape3D.new()
+	capsule.radius = 0.35
+	capsule.height = 1.70
+	player_shape.shape = capsule
+	player.add_child(player_shape)
+	var head: Node3D = Node3D.new()
+	head.name = "Head"
+	head.position = Vector3(0.0, 0.62, 0.0)
+	player.add_child(head)
+	var camera: Camera3D = Camera3D.new()
+	camera.name = "Camera3D"
+	camera.current = true
+	head.add_child(camera)
+	var interaction_ray: RayCast3D = RayCast3D.new()
+	interaction_ray.name = "InteractRay"
+	interaction_ray.target_position = Vector3(0.0, 0.0, -2.2)
+	interaction_ray.enabled = true
+	camera.add_child(interaction_ray)
+	var flashlight: SpotLight3D = SpotLight3D.new()
+	flashlight.name = "Flashlight"
+	flashlight.light_energy = 0.55
+	flashlight.spot_range = 8.0
+	flashlight.shadow_enabled = false
+	camera.add_child(flashlight)
+	var footsteps: Timer = Timer.new()
+	footsteps.name = "FootstepTimer"
+	player.add_child(footsteps)
+	add_child(player)
+	OrionTransitionState.restore_interior_player(player)
+
+func _process(_delta: float) -> void:
+	if player == null or not is_instance_valid(player):
+		return
+	if player.global_position.distance_to(RETURN_GATE_POSITION) < 2.1 and Input.is_action_just_pressed("interact"):
+		OrionTransitionState.begin_return(player)
 
 func _build_environment() -> void:
 	var environment: Environment = Environment.new()

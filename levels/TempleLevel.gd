@@ -44,7 +44,7 @@ func _ready() -> void:
 	_build_orion_mountains()
 	_build_voss_house()
 	# A captura técnica precisa da geografia regional já construída antes de ativar a câmara do take; o fluxo jogável mantém os atrasos cinematográficos normais.
-	if OS.has_environment("ORIGEM_CAPTURE_TAKE") or OS.has_environment("ORIGEM_QA_INTERACT") or OS.has_environment("ORIGEM_QA_ROUTE"):
+	if OS.has_environment("ORIGEM_CAPTURE_TAKE") or OS.has_environment("ORIGEM_QA_INTERACT") or OS.has_environment("ORIGEM_QA_ROUTE") or OS.has_environment("ORIGEM_QA_CINE48_HANDOFF"):
 		# Capturas, rotas e interações de QA requerem o mundo regional antes da contagem do roteiro; o jogo normal mantém o carregamento encenado.
 		_enforce_voss_opening_daylight()
 		_build_world_after_voss_prologue()

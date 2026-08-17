@@ -27,7 +27,6 @@ func _ready() -> void:
 	_build_interior_threshold()
 	_build_cube_chamber_marker()
 	_build_temporal_hub()
-
 func _process(_delta: float) -> void:
 	# O artefacto só integra a narrativa depois da travessia: não pode contaminar a vista da montanha ou da boca Orion.
 	if cube_chamber == null:
@@ -84,7 +83,13 @@ func _on_orion_handoff_body_entered(body: Node3D) -> void:
 	interior_handoff_ready = true
 	if interior_threshold != null and interior_threshold.has_method("set_active"):
 		interior_threshold.call("set_active", true)
-	print("[CP-CINE-28] ORION_HANDOFF_READY player=%s" % body.name)
+	print("[CP-CINE-48] ORION_HANDOFF_READY player=%s" % body.name)
+	call_deferred("_enter_orion_interior", body)
+
+func _enter_orion_interior(player: Node3D) -> void:
+	if not is_instance_valid(player):
+		return
+	OrionTransitionState.begin_entry(player)
 
 func _build_interior_threshold() -> void:
 	# CP-CINE-29: módulo abaixo da crista; permanece invisível até ao gatilho físico e não contém Cube nem altar.

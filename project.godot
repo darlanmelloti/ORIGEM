@@ -30,6 +30,7 @@ InventoryManager="*uid://s76x3vuyuibh"
 TimelineManager="*uid://tu5kwyqf5am3"
 WorldEvents="*res://core/events/WorldEventManager.gd"
 AudioManager="*res://_autoloads/AudioManager.gd"
+OrionTransitionState="*res://core/OrionTransitionState.gd"
 
 [display]
 
