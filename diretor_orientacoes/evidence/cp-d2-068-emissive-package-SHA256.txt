@@ -1,0 +1,1 @@
+e7350e6d6814140686718741f2d3ea293a6ee7080c737c5b68a9b1f8c077e4d9  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-068-emissive-local.zip

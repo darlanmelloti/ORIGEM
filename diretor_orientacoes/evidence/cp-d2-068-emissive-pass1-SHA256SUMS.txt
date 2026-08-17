@@ -1,0 +1,2 @@
+a686a36da0fb0185690603532158522f7dfd9737abaa52a556bf9e3bdbfb3c84  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-068-emissive-pass1/gameplay-30s.mp4
+b599c25cc6c86139ff54a6eadda3775afcb8a253c73a0337ae8ab438bbe74b39  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-068-emissive-pass1/print-1600x900.jpg
