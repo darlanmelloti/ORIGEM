@@ -1,17 +1,25 @@
-# Continuidade — Dev1
+# CONTINUIDADE DEV1 — ACTIVA
 
-Os **CP 281–287** foram validados com Godot headless, capturas e gameplay real de 30 segundos. A frente Dev1 concluiu soleira física, profundidade de relevo, água de rio, ponte positiva, transições Floresta–Majestic–Ruínas e reenquadramento do miradouro leste. Os commits encontram-se sincronizados em `feature/dev1-gameplay-core`.
+**Fronteira obrigatória:** Regiões 1–6 e Takes 1–11. Não alterar `HighlandRegion.gd`, `OrionDestinationRegion.gd` nem qualquer módulo das Regiões 7–12.
 
-O **CP 288 — Moldura Física da Casa Voss** está em execução. A tarefa imediata é reforçar a presença arquitectónica da Casa na margem esquerda da tomada, sem deslocar o jogador para dentro de geometria, sem criar painéis e sem reduzir a profundidade física já criada entre rio, ponte, Estrada e Arco.
+Os CP 281–288 foram validados com compilação Godot headless e execuções/capturas de abertura. A frente recuperada encontra-se na branch `feature/dev1-gameplay-core`, restaurada no commit remoto `e8a05b5` após a reinicialização do ambiente. O binário Godot 4.7.1 foi reinstalado para manter a validação local.
 
-| Critério obrigatório | Evidência exigida |
-|---|---|
-| Moldura da Casa | Parede, pilar, cobertura ou soleira reais entram no canto esquerdo sem ocultar o vale |
-| Composição | Ponte, rio, Estrada e Arco continuam em planos legíveis |
-| Integridade | Godot headless sem erros de parser, script ou recursos |
-| Jogabilidade | Prova de 30 segundos Casa → Estrada → Arco sem bloqueios |
-| Escopo | Apenas Regiões 1–6; Regiões 7–12 inalteradas |
+## CP 288 concluído — limpeza de sinais técnicos
 
-> Ao validar o CP 288, abrir imediatamente o passe de consolidação de distribuição e evidências, mantendo o desenvolvimento em curso.
+`VossHouse.gd` passou a ocultar, apenas durante o prólogo, os marcadores Chronos e emissores remotos que contaminavam a leitura física do vale. A ocultação é repetida nos primeiros frames de construção regional e os nós são restaurados no fim normal da abertura. A validação headless passou e a cena principal foi executada por 34 segundos em ambiente gráfico virtual, com captura guardada em `qa_evidence_voss_vista/cp288_warm_main_scene.png`.
 
-**Estado:** `CP 288 EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
+## CP 289 — EM EXECUÇÃO IMEDIATA
+
+**Objetivo:** tornar a Casa Voss uma moldura arquitectónica real na margem esquerda da tomada sem regressar a uma galeria rectangular artificial, sem reduzir distâncias e sem esconder rio, ponte, Estrada ou Arco.
+
+| Regra | Critério de aceitação |
+| --- | --- |
+| Geometria | Casa, soleira, cobertura, parede ou pilar real da Casa Voss entra no limite esquerdo; nenhum painel ou fundo plano. |
+| Profundidade | Rio/ponte, Estrada e Arco continuam em planos separados; montanhas mantêm escala distante. |
+| Integridade | Godot 4.7.1 headless sem erros. |
+| Jogabilidade | Cena principal em execução por pelo menos 30 segundos e captura gráfica válida; sem colisores novos a bloquear a saída. |
+| Reversibilidade | Desfazer qualquer ajuste se a captura reduzir a leitura do vale. |
+
+**Próxima acção já iniciada:** medir uma posição de câmara física na soleira ou na borda compacta do terraço que deixe a fachada visível à esquerda, conservando a câmara actual como fallback.
+
+> Nenhum checkpoint é ponto de paragem. Depois de cada validação, publicar evidências, actualizar este ficheiro e abrir imediatamente o próximo passe dentro do escopo Dev1.

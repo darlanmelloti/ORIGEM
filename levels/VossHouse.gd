@@ -1054,8 +1054,9 @@ func _activate_opening_camera() -> void:
 	# A tempestade é aplicada imediatamente à câmara de prólogo; o reforço diferido vence qualquer sincronização Chronos tardia.
 	_apply_opening_storm()
 	get_tree().create_timer(0.35).timeout.connect(_apply_opening_storm)
-	# A construção regional ocorre após esta activação; uma passagem tardia remove apenas sinais técnicos entretanto instanciados.
-	get_tree().create_timer(1.65).timeout.connect(_hide_late_opening_technical_markers)
+	# A construção regional é escalonada nos primeiros frames; passagens curtas removem sinais técnicos antes da primeira captura sem afectar a exploração posterior.
+	for delay_seconds: float in [0.12, 0.42, 0.90, 1.65]:
+		get_tree().create_timer(delay_seconds).timeout.connect(_hide_late_opening_technical_markers)
 
 func _hide_late_opening_technical_markers() -> void:
 	if not opening_active:
@@ -1063,7 +1064,8 @@ func _hide_late_opening_technical_markers() -> void:
 	var scene_root: Node = get_tree().current_scene
 	if scene_root == null:
 		return
-	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem", "JanelaChronosAzul", "LuzDaJanelaChronos"]:
+	# Inclui luzes e objetos remotos com nomes de Chronos: durante o prólogo são sinalização técnica; ao fim da cena são restaurados junto com os restantes nós ocultos.
+	for technical_marker_name: String in ["MarcoChronosAzulRemoto", "MarcosDoVale", "MarcosDaMargemDoLago", "MarcosDeOrientacaoCasaVoss", "MarcosCartograficosSudoeste", "LuzChronosMargem*", "BrilhoAzulChronos", "BrilhoMarcoRuina*", "LuzDoObservatorio", "BrilhoChronosDaCaverna", "JanelaChronosAzul", "LuzDaJanelaChronos"]:
 		for technical_node: Node in scene_root.find_children(technical_marker_name, "Node3D", true, false):
 			var technical_marker: Node3D = technical_node as Node3D
 			if technical_marker != null and technical_marker.visible:
