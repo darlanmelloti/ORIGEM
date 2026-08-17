@@ -506,6 +506,24 @@ func _build_final_dome_traversal_proxy() -> void:
 		for shoulder_mesh in shoulder.find_children("*", "MeshInstance3D", true, false):
 			shoulder_mesh.set_surface_override_material(0, shoulder_material)
 		proxy.add_child(shoulder)
+	var lateral_links: Array[Vector3] = [
+		Vector3(-3.72, 1.12, -4.42), Vector3(3.72, 1.12, -4.42),
+		Vector3(-2.72, 0.92, -4.62), Vector3(2.72, 0.92, -4.62)
+	]
+	for link_index: int in range(lateral_links.size()):
+		var link_stone := ROCK_LARGE.instantiate() as Node3D
+		if link_stone == null:
+			continue
+		link_stone.name = "LigacaoLateralCupulaR12_%02d" % link_index
+		link_stone.position = lateral_links[link_index]
+		link_stone.scale = Vector3(1.08, 0.40, 0.82)
+		link_stone.rotation = Vector3(0.05, -0.20 + float(link_index) * 0.26, 0.04)
+		var link_material := StandardMaterial3D.new()
+		link_material.albedo_color = Color("#526d84")
+		link_material.roughness = 0.90
+		for link_mesh in link_stone.find_children("*", "MeshInstance3D", true, false):
+			link_mesh.set_surface_override_material(0, link_material)
+		proxy.add_child(link_stone)
 	var doorway_plane := ROCK_LARGE.instantiate() as Node3D
 	if doorway_plane != null:
 		doorway_plane.name = "PlanoPortaEscuraCupula"
