@@ -1,0 +1,2 @@
+7671fbc0142f49692b4e70ff0ea1060f5c921ffd7b85ef3bd1bacda7a90f82ac  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-097-r12-visible-core/gameplay-30s.mp4
+4b2d82386c3e4c722e63896cb20443cccc9d499ddc6f6f12583b9d8e541a1cef  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-097-r12-visible-core/print-1600x900.jpg

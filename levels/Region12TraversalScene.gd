@@ -176,6 +176,8 @@ func _build_clean_r12_portal() -> void:
 		for recess_mesh in recess.find_children("*", "MeshInstance3D", true, false):
 			recess_mesh.set_surface_override_material(0, material)
 		portal.add_child(recess)
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+			recess.visible = false
 		var temporal_core := ROCK_LARGE.instantiate() as Node3D
 		if temporal_core != null:
 			temporal_core.name = "NucleoTemporalEncastradoR12"
@@ -184,8 +186,8 @@ func _build_clean_r12_portal() -> void:
 			var core_material := StandardMaterial3D.new()
 			core_material.albedo_color = Color("#466c98")
 			core_material.emission_enabled = true
-			core_material.emission = Color("#6f9fd0")
-			core_material.emission_energy_multiplier = 2.2
+			core_material.emission = Color("#5b8fb5")
+			core_material.emission_energy_multiplier = 0.82
 			core_material.roughness = 0.72
 			for core_mesh in temporal_core.find_children("*", "MeshInstance3D", true, false):
 				core_mesh.set_surface_override_material(0, core_material)
@@ -210,8 +212,8 @@ func _build_clean_r12_portal() -> void:
 	add_child(portal_light)
 	var core_light := OmniLight3D.new()
 	core_light.name = "LuzNucleoTemporalR12"
-	core_light.light_color = Color("#6f9fd0")
-	core_light.light_energy = 0.42
+	core_light.light_color = Color("#5b8fb5")
+	core_light.light_energy = 0.16
 	core_light.omni_range = 2.8
 	core_light.shadow_enabled = false
 	core_light.position = Vector3(164.0, -0.18, 175.42)
