@@ -1,0 +1,2 @@
+7dd847b673808f4cb7c466749c16eb47a7cee04e8e3dcbfde7e3aa06b0d4e769  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-102-r12-wayfinding-core/gameplay-30s.mp4
+696434862e81e334a439d3077baf0fa1c50225f33461321aec300ad6b8d9372e  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-102-r12-wayfinding-core/print-1600x900.jpg
