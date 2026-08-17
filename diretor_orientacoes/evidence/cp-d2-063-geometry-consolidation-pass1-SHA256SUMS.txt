@@ -1,0 +1,2 @@
+a4627c91d60f5706a2e0ea7b5215b9cc06daf8ea9ac916b7ba5c03b643411d22  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-063-geometry-consolidation-pass1/gameplay-30s.mp4
+31661b791047a201f9831081d32354470ba1cd5c2b9b0ffd9547a5389e6762b6  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-063-geometry-consolidation-pass1/print-1600x900.jpg

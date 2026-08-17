@@ -1,0 +1,1 @@
+b7becdc0d517d42608290837123132a51637cb43e82ab4d29bc5f735c738c300  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/validation/checkpoints/CP-D2-063-geometry-local.zip
