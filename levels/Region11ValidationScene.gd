@@ -36,28 +36,49 @@ func _ready() -> void:
 			cube_reveal.emission_enabled = true
 			cube_reveal.emission = Color("#8c6cff")
 			cube_reveal.emission_energy_multiplier = 0.72
-			cube.scale = Vector3(0.95, 1.25, 0.95)
+			cube.scale = Vector3(0.82, 1.08, 0.82)
 			if destination.has_method("_apply_material"):
 				destination.call("_apply_material", cube, cube_reveal)
-		for chamber_child in chamber.get_children():
-			if chamber_child is OmniLight3D and chamber_child.name.begins_with("BraseiroAnelCube"):
-				chamber_child.light_energy = 0.62
-			elif chamber_child is Node3D and chamber_child.name.begins_with("SuporteOrganicoOrionCube"):
-				var support_reveal := StandardMaterial3D.new()
-				support_reveal.albedo_color = Color("#3f626b")
-				support_reveal.roughness = 0.78
-				support_reveal.emission_enabled = true
-				support_reveal.emission = Color("#356a9a")
-				support_reveal.emission_energy_multiplier = 0.36
-				chamber_child.scale *= 1.18
-				if destination.has_method("_apply_material"):
-					destination.call("_apply_material", chamber_child, support_reveal)
+			var cube_core := MeshInstance3D.new()
+			cube_core.name = "NucleoCuboOrionVisivel"
+			var cube_mesh := BoxMesh.new()
+			cube_mesh.size = Vector3(1.55, 1.55, 1.55)
+			var cube_core_material := StandardMaterial3D.new()
+			cube_core_material.albedo_color = Color("#241d3f")
+			cube_core_material.roughness = 0.48
+			cube_core_material.metallic = 0.18
+			cube_core_material.emission_enabled = true
+			cube_core_material.emission = Color("#8c6cff")
+			cube_core_material.emission_energy_multiplier = 0.62
+			cube_mesh.material = cube_core_material
+			cube_core.mesh = cube_mesh
+			cube_core.position = Vector3(0.0, 0.72, 0.0)
+			cube_core.rotation = Vector3(0.12, 0.54, -0.08)
+			cube.add_child(cube_core)
+			for chamber_child in chamber.get_children():
+				if chamber_child is OmniLight3D and chamber_child.name.begins_with("BraseiroAnelCube"):
+					chamber_child.light_energy = 0.28
+					chamber_child.position *= 0.78
+				elif chamber_child is MeshInstance3D and chamber_child.name.begins_with("NucleoVisivelAnelCube"):
+					chamber_child.visible = false
+				elif chamber_child is Node3D and chamber_child.name.begins_with("SuporteOrganicoOrionCube"):
+					var support_reveal := StandardMaterial3D.new()
+					support_reveal.albedo_color = Color("#202b31")
+					support_reveal.roughness = 0.78
+					support_reveal.emission_enabled = true
+					support_reveal.emission = Color("#356a9a")
+					support_reveal.emission_energy_multiplier = 0.02
+					chamber_child.scale *= Vector3(1.22, 1.18, 1.22)
+					chamber_child.position *= 0.72
+					chamber_child.visible = false
+					if destination.has_method("_apply_material"):
+						destination.call("_apply_material", chamber_child, support_reveal)
 	camera = Camera3D.new()
 	camera.name = "Region11ValidationCamera"
-	camera.position = Vector3(-100.0, 56.0, 580.0)
-	camera.fov = 54.0
+	camera.position = Vector3(-107.0, 49.0, 575.0)
+	camera.fov = 46.0
 	add_child(camera)
-	camera.look_at(Vector3(-116.0, 45.5, 562.0), Vector3.UP)
+	camera.look_at(Vector3(-116.0, 45.0, 562.0), Vector3.UP)
 	camera.current = true
 
 func _build_environment() -> void:
@@ -107,5 +128,5 @@ func _process(delta: float) -> void:
 	if camera == null:
 		return
 	elapsed += delta
-	camera.position = Vector3(-101.0 + sin(elapsed * 0.24) * 1.6, 54.0 + sin(elapsed * 0.19) * 0.3, 576.0 + cos(elapsed * 0.24) * 1.5)
-	camera.look_at(Vector3(-116.0, 45.5, 562.0), Vector3.UP)
+	camera.position = Vector3(-107.0 + sin(elapsed * 0.24) * 1.1, 49.0 + sin(elapsed * 0.19) * 0.2, 575.0 + cos(elapsed * 0.24) * 1.0)
+	camera.look_at(Vector3(-116.0, 45.0, 562.0), Vector3.UP)
