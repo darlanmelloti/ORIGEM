@@ -63,6 +63,7 @@ func _ready() -> void:
 	_build_cartographic_basin_silhouette()
 	_build_riparian_margin()
 	_build_lakeside_focal_vegetation()
+	_build_majestic_ruins_approach_grounding()
 
 func _process(delta: float) -> void:
 	# Oscilação lenta e determinística: dá vida ao acampamento sem partículas pesadas nem custo de sombras dinâmicas.
@@ -1686,6 +1687,47 @@ func _build_riparian_margin() -> void:
 			accent_fern.scale = Vector3(0.46, 0.46, 0.46)
 			accent_fern.rotation.y = 0.28 + float(accent_index) * 0.83
 			margin.add_child(accent_fern)
+
+func _build_majestic_ruins_approach_grounding() -> void:
+	# CP284: três grupos irregulares costuram o fim da expedição Majestic à margem das Ruínas sem fechar a aproximação ocidental.
+	var grounding: Node3D = Node3D.new()
+	grounding.name = "AterramentoDaChegadaMajesticRuinas"
+	add_child(grounding)
+	var groups: Array[Dictionary] = [
+		{"z": 207.0, "side": -1.0, "offset": 5.4, "rock": 0.30, "tree": 0.42},
+		{"z": 219.0, "side": 1.0, "offset": 6.1, "rock": 0.36, "tree": 0.48},
+		{"z": 231.0, "side": -1.0, "offset": 5.9, "rock": 0.33, "tree": 0.40},
+	]
+	for group_index: int in range(groups.size()):
+		var group: Dictionary = groups[group_index]
+		var z_value: float = group["z"] as float
+		var side: float = group["side"] as float
+		var x_value: float = _path_x(z_value) + side * (group["offset"] as float)
+		var ground_y: float = _height_at(x_value, z_value)
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.name = "AfloramentoChegadaRuinas_%02d" % (group_index + 1)
+			var rock_scale: float = group["rock"] as float
+			rock.position = Vector3(x_value, ground_y + 0.035, z_value)
+			rock.scale = Vector3(rock_scale, rock_scale * 0.72, rock_scale)
+			rock.rotation.y = -0.34 + float(group_index) * 0.76
+			grounding.add_child(rock)
+		var tree_source: PackedScene = OAK_DARK if group_index == 1 else DARK_TREE
+		var tree: Node3D = tree_source.instantiate() as Node3D
+		if tree != null:
+			tree.name = "ArvoreChegadaRuinas_%02d" % (group_index + 1)
+			var tree_scale: float = group["tree"] as float
+			tree.position = Vector3(x_value + side * 2.15, _height_at(x_value + side * 2.15, z_value + 1.4), z_value + 1.4)
+			tree.scale = Vector3(tree_scale, tree_scale * (0.92 + float(group_index % 2) * 0.14), tree_scale)
+			tree.rotation.y = side * (0.48 + float(group_index) * 0.32)
+			grounding.add_child(tree)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoChegadaRuinas_%02d" % (group_index + 1)
+			fern.position = Vector3(x_value - side * 0.86, _height_at(x_value - side * 0.86, z_value - 0.45) + 0.025, z_value - 0.45)
+			fern.scale = Vector3(0.46, 0.46, 0.46)
+			fern.rotation.y = 0.22 + float(group_index) * 0.80
+			grounding.add_child(fern)
 
 func _build_lakeside_focal_vegetation() -> void:
 	# Grupos descontínuos de espécies reais: enquadram a água e mantêm a abertura do trilho ocidental livre.
