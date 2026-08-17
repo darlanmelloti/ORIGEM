@@ -1,0 +1,1 @@
+SCOPE_GUARD=PASS regions=7-12 map_authority=mapaorigem.webp

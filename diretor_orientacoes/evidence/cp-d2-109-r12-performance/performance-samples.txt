@@ -1,0 +1,7 @@
+[REGION12_PERF] fps=30.0 draw_calls=66.0 elapsed=5.0
+[REGION12_PERF] fps=30.0 draw_calls=65.0 elapsed=10.0
+[REGION12_PERF] fps=29.0 draw_calls=67.0 elapsed=15.0
+[REGION12_PERF] fps=31.0 draw_calls=67.0 elapsed=20.0
+[REGION12_PERF] fps=32.0 draw_calls=68.0 elapsed=25.1
+[REGION12_PERF] fps=33.0 draw_calls=58.0 elapsed=30.1
+[REGION12_PERF] fps=32.0 draw_calls=58.0 elapsed=35.1
