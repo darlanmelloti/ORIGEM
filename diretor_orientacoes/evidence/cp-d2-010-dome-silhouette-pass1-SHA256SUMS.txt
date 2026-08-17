@@ -1,0 +1,2 @@
+35d57dffe670bd6f4c4b3ccefe348da15e324e7f932aa51c5e9087ed4f082707  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-010-dome-silhouette-pass1/gameplay-30s.mp4
+a49512cafe45455c2b802727a91a8380997437da006bceb56d783d06c59d0443  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-010-dome-silhouette-pass1/print-1600x900.jpg

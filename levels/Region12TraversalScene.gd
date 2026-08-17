@@ -419,7 +419,7 @@ func _build_final_dome_traversal_proxy() -> void:
 	if threshold != null:
 		threshold.name = "SoleiraOrganicaCupulaFinal"
 		threshold.position = Vector3(0.0, 0.68, -4.55)
-		threshold.scale = Vector3(3.65, 0.30, 1.05)
+		threshold.scale = Vector3(4.10, 0.32, 1.16)
 		threshold.rotation = Vector3(0.02, 0.0, 0.0)
 		var threshold_material := StandardMaterial3D.new()
 		threshold_material.albedo_color = Color("#788fa3")
@@ -475,8 +475,8 @@ func _build_final_dome_traversal_proxy() -> void:
 			continue
 		crown_stone.name = "CoroaValidadaCupula_%02d" % crown_index
 		# A coroa assenta no conjunto vertical; o passe reduz a leitura de pedras flutuantes.
-		crown_stone.position = Vector3(-2.35 + float(crown_index) * 2.35, 2.62 if crown_index != 1 else 3.06, -4.48)
-		crown_stone.scale = Vector3(2.55 if crown_index != 1 else 2.95, 1.30 if crown_index != 1 else 1.52, 1.62)
+		crown_stone.position = Vector3(-2.45 + float(crown_index) * 2.45, 2.72 if crown_index != 1 else 3.32, -4.48)
+		crown_stone.scale = Vector3(2.75 if crown_index != 1 else 3.40, 1.45 if crown_index != 1 else 1.80, 1.75 if crown_index != 1 else 1.95)
 		crown_stone.rotation = Vector3(0.08 * sign(float(crown_index - 1)), 0.08 * float(crown_index - 1), -0.06 * sign(float(crown_index - 1)))
 		var crown_material := StandardMaterial3D.new()
 		crown_material.albedo_color = Color("#5b718b") if crown_index != 1 else Color("#708aa5")
