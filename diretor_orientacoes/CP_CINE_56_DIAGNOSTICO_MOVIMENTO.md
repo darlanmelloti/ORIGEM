@@ -147,3 +147,9 @@ A neblina de profundidade foi aplicada apenas ao `WorldEnvironment` e validada d
 A alteração foi limitada ao sobrepiso PBR, sem tocar na casca do túnel rejeitada no CP-CINE-60. A validação de 30 segundos confirmou a execução técnica, mas não produziu ganho composicional suficiente na soleira: o eixo central continua sem rota legível. A ordem do sobrepiso será restaurada.
 
 > **Candidato rejeitado:** reordenação de faces do sobrepiso como solução isolada de legibilidade Orion.
+
+## CP-CINE-76 — Reversão do desfasamento lateral de câmara
+
+O deslocamento de 0,52 m para o flanco livre foi validado durante 30 segundos. Reduziu a assimetria da parede próxima, mas não revelou um percurso legível; o enquadramento passou a enfatizar um arco escuro simétrico, sem ganho narrativo ou espacial suficiente. A câmara regressará ao centro físico de Elias.
+
+> **Candidato rejeitado:** deslocamento lateral de câmara como solução isolada para a composição Orion.
