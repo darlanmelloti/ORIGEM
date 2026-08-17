@@ -1,0 +1,2 @@
+ea23d43aee86586abfa53429fa09374107c0e9ae57103b33d573ae8117aea5df  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-042-full-handoff-pass1/gameplay-30s.mp4
+9478ac8d184c5ba65f817f40fb4849ecaa73916bfada72fc337fdd79820b9d14  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-042-full-handoff-pass1/print-1600x900.jpg
