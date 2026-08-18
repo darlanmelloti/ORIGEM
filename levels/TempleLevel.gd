@@ -309,6 +309,8 @@ func _prepare_lake_approach_route_qa() -> void:
 		head.rotation = Vector3.ZERO
 	var route_label: String = "Chegada Ruínas" if arrival_focus else "Floresta–Ruínas"
 	print("[ORIGEM_QA_ROUTE] Spawn %s ativo em %s; alvo=%s" % [route_label, player.global_position, Vector3(target_x, player.global_position.y, target_z)])
+	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
+		call_deferred("_save_viewport_snapshot_qa")
 
 func _prepare_arch_forest_route_qa() -> void:
 	# Exclusivo de QA: a prova inicia poucos metros antes do marco 4, no eixo de saída do Arco para a Floresta Densa.

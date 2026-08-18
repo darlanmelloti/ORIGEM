@@ -59,6 +59,10 @@ static func next_dev1_destination(world: Vector2) -> Dictionary:
 		return {"anchor": ESTRADA_RIO_INICIO, "label": "RUMO À ESTRADA DO RIO", "anchor_id": 2}
 	if player_z >= RUINAS_SUBMERSAS.y - 18.0:
 		return {"anchor": VILA_ELEVADA, "label": "PASSAGEM: VILA ELEVADA", "anchor_id": 7}
+	# A aproximação imediata ao sexto marco deve confirmar a chegada às Ruínas; não pode reorientar Elias de volta a Majestic.
+	# A passagem física para R7 continua a ser indicada apenas depois do limiar cartográfico R6, sem criar conteúdo Dev2 nesta branch.
+	if player_z >= RUINAS_SUBMERSAS.y - 42.0:
+		return {"anchor": RUINAS_SUBMERSAS, "label": "CHEGADA ÀS RUÍNAS", "anchor_id": 6}
 	# Entre a floresta e a bacia, o ramo começa a leste e atravessa o vale para o acampamento ocidental.
 	# Após alcançar o lado oeste, a mesma leitura reconverge de forma explícita para as Ruínas Submersas.
 	if player_z >= 150.0 and player_z <= 202.0:

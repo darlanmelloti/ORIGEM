@@ -188,3 +188,11 @@ O harness `ORIGEM_QA_CARTO_LINK_WALK=1` percorreu a nova ligação R5→R6 com `
 A telemetria só activa no harness, não altera o jogo normal. Não foram mudadas luzes, água, árvores, fetos, rochas, estelas, cairns ou Regiões 7–12. Evidência: `qa_evidence_carto84/CP_CARTO85_MAJESTIC_RUINS_LINK_WALK.md`.
 
 **Próximo passo activo:** CP-CARTO-86 — auditar a chegada visual a R6 desde o eixo Majestic, usando a captura interna e promovendo apenas uma causa visual nova; o piloto Meshy continua pendente de GLB recuperável.
+
+## CP-CARTO-86 — Chegada R6 deixa de regressar ao Majestic
+
+A tomada `ruins_arrival` revelou uma contradição cartográfica: Elias já estava no marco 6, mas `next_dev1_destination()` devolvia `RUMO AO MAJESTIC`. A causa era a ausência de uma janela específica de aproximação R6 entre `z=210` e `z<234`. A regra agora devolve `6: CHEGADA ÀS RUÍNAS`; somente depois do limiar `z>=234` continua a mostrar `PASSAGEM: VILA ELEVADA`, sem criar nem tocar módulos R7–R12.
+
+Parser Godot 4.7.1, Menu→Novo Jogo, 36 s de runtime, captura interna 1920×1080 e régua X/Z foram aprovados. Evidência: `qa_evidence_carto86/CP_CARTO86_RUINS_ARRIVAL_DESTINATION.md`.
+
+**Próximo passo activo:** CP-CARTO-87 — auditar a coerência do mapa UI no estado de chegada R6 e manter a passagem R7 sob a checklist pareada Dev2.
