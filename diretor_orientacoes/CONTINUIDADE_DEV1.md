@@ -160,3 +160,7 @@ A captura Floresta→Majestic, em 1600×900 e 36 segundos, confirma a rota físi
 ## CP-CARTO-81 — Estela Majestic: piloto rejeitado
 
 A estela base foi temporariamente recuada e ampliada apenas em QA na rota Floresta→Majestic. A sessão de 36 segundos passou e a régua X/Z continuou a apontar para o marco 5, mas a silhueta maior não tornou a bifurcação inequivocamente legível nem atingiu o ganho mínimo de 85%. A sonda foi removida e o modelo de produção ficou inalterado. Não repetir escala ou posição desta estela com a malha `stone_tallC.glb`; o próximo candidato é um GLB assimétrico dedicado, descrito em `PLANO_PILOTO_MESHY_CP_CARTO81.md`, quando estiver descarregável.
+
+## CP-CARTO-82 — Eixo Majestic→Ruínas validado
+
+A rota `majestic_to_lake` passou 36 segundos no Godot 4.7.1 e a régua X/Z definiu correctamente as Ruínas Submersas como marco 6 a partir de `(-77.40, 178.00)`. A primeira perna mostra lajes físicas rumo à margem regional; a bacia não é forçada para o horizonte antes da curva oriental, preservando a distância macro do mapa. Nenhuma geometria, água, vegetação, ruína ou luz foi alterada. Evidência: `qa_evidence_carto82/CP_CARTO82_MAJESTIC_TO_RUINS.md`.
