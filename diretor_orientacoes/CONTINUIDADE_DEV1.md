@@ -118,3 +118,9 @@ A rota QA válida `forest_to_majestic` passou por 36 segundos de gameplay sem er
 O harness válido `ruins_arrival` passou em 36 segundos, com spawn `(13.67871, 1.253814, 222.0)` e alvo `(54.0, 1.253814, 252.0)`. A tomada confirma a chegada física à bacia. Os pontos azul-ciano, a estela e os marcos emergentes são elementos já atribuídos: as balizas não podem ser reabertas após CP-CARTO-58 e os materiais de margem/fetos foram corrigidos nos CP-CARTO-49/50. Não há causa visual nova, logo nenhuma alteração de água, marcadores, luzes, rochas ou câmara foi promovida. Evidência: `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO76_RUINS_ARRIVAL_SCAN.md`.
 
 **Próxima tarefa contínua:** manter esta chegada como base de CP-CARTO-56 e verificar a entrega Dev2 antes de criar outro passe. A primeira alteração futura exige uma fonte causal distinta das hipóteses já rejeitadas.
+
+## CP-CARTO-77 — Aterramento Majestic→Ruínas excluído como causa
+
+A rota `forest_to_ruins` passou duas sessões de 36 segundos. Ao ocultar somente a raiz `AterramentoDaChegadaMajesticRuinas` no harness, os props laterais observados permaneceram visualmente idênticos; este agrupamento não é a causa. A guarda QA foi removida e não se alteraram as rochas, árvores ou fetos da aproximação. A matriz está em `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO77_FOREST_TO_RUINS_CAUSALITY.md`.
+
+**Próxima tarefa contínua:** não repetir esta exclusão. A fonte dos props restantes deve ser atribuída por nó exacto antes de qualquer alteração; CP-CARTO-56 continua dependente de Dev2 posterior a `fd31a63`.
