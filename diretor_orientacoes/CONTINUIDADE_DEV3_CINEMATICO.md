@@ -1,6 +1,8 @@
 # CONTINUIDADE DEV3 — POLIMENTO CINEMATOGRÁFICO
 
-**Branch:** `feature/director-cinematic-polish`  
+> **HISTÓRICO — NÃO USAR PARA DELEGAR OU PARAR TRABALHO.** A continuidade operacional Dev3 é exclusivamente `CONTINUIDADE_DEV3.md` e o protocolo vigente é `PROTOCOLO_CONTINUIDADE_CANONICO.md`. Os caminhos, CPs e workspaces abaixo servem apenas como evidência de uma frente anterior.
+
+**Branch histórica:** `feature/director-cinematic-polish`
 **Escopo de edição:** `levels/RegionalCinematicDirector.gd`, relatórios e evidências cinematográficas.  
 **Fronteira:** Dev3 não cria ou altera terreno, colisores, água, floresta, Casa Voss, regiões ou activos pertencentes a Dev1/Dev2.
 
