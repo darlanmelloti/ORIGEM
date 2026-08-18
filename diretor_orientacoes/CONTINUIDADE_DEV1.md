@@ -106,3 +106,9 @@ A investigação por exclusão identificou a raiz causal: `FlorestaDensaRegional
 A primeira varredura usou o valor de rota não reconhecido `majestic_lake`; as imagens dessa execução não representam a travessia regional e foram invalidadas como prova. A rota reconhecida `majestic_to_lake` completou 36 segundos sem erro fatal e mostrou terreno, lajes e vegetação consistentes, sem a superfície clara aparente na execução inválida. A auditoria QA de malhas grandes não encontrou planos extensos próximos. Não foi alterada água, terreno, luzes, campamento ou rota; todas as sondas foram removidas. O detalhe está em `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO74_MAJESTIC_LAKE_WHITE_SURFACE.md`.
 
 **Próxima tarefa contínua:** usar apenas os identificadores QA reconhecidos no orquestrador. A busca por uma lacuna R1–R6 nova deve partir de uma captura válida; CP-CARTO-56 permanece à espera da entrega Dev2 posterior a `fd31a63`.
+
+## CP-CARTO-75 — Varredura Floresta→Majestic sem promoção
+
+A rota QA válida `forest_to_majestic` passou por 36 segundos de gameplay sem erro fatal e confirma lajes físicas, margens de floresta e direcção espacial para Majestic. Os pontos ciano no quadro são sinais P0 já investigados, não uma causa nova; a massa de árvores é a continuidade florestal validada e não justifica repetir pilotos de árvore, relva, fetos, trilho ou mastros Majestic já rejeitados. Nenhuma alteração de produção foi feita. Evidência: `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO75_FOREST_TO_MAJESTIC_SCAN.md`.
+
+**Próxima tarefa contínua:** preservar R4→R5 e repetir a verificação Dev2 antes de qualquer integração CP-CARTO-56; só abrir um novo passe R1–R6 com causa visual distinta e uma rota QA reconhecida.
