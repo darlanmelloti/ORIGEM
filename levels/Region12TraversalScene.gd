@@ -162,8 +162,11 @@ func _build_clean_r12_portal() -> void:
 		jamb.scale = Vector3(1.12, 1.62, 0.82)
 		jamb.rotation = Vector3(0.03, side * 0.08, side * 0.02)
 		var jamb_material := StandardMaterial3D.new()
-		jamb_material.albedo_color = Color("#6d8798")
-		jamb_material.roughness = 0.88
+		jamb_material.albedo_color = Color("#344d63")
+		jamb_material.emission_enabled = true
+		jamb_material.emission = Color("#17324c")
+		jamb_material.emission_energy_multiplier = 0.22
+		jamb_material.roughness = 0.94
 		for jamb_mesh in jamb.find_children("*", "MeshInstance3D", true, false):
 			jamb_mesh.set_surface_override_material(0, jamb_material)
 		portal.add_child(jamb)
@@ -236,10 +239,10 @@ func _build_clean_r12_portal() -> void:
 			temporal_core.position = Vector3(0.0, 0.32, -2.58)
 			temporal_core.scale = Vector3(0.44, 0.30, 0.44)
 			var core_material := StandardMaterial3D.new()
-			core_material.albedo_color = Color("#4e5da0")
+			core_material.albedo_color = Color("#38447f")
 			core_material.emission_enabled = true
-			core_material.emission = Color("#6c62d7")
-			core_material.emission_energy_multiplier = 1.42
+			core_material.emission = Color("#8178ee")
+			core_material.emission_energy_multiplier = 2.05
 			core_material.roughness = 0.72
 			for core_mesh in temporal_core.find_children("*", "MeshInstance3D", true, false):
 				core_mesh.set_surface_override_material(0, core_material)
@@ -278,7 +281,7 @@ func _build_clean_r12_portal() -> void:
 	var core_light := OmniLight3D.new()
 	core_light.name = "LuzNucleoTemporalR12"
 	core_light.light_color = Color("#6c62d7")
-	core_light.light_energy = 0.2822
+	core_light.light_energy = 0.42
 	core_light.omni_range = 3.6
 	core_light.shadow_enabled = false
 	core_light.position = Vector3(164.0, 0.08, 175.42)
@@ -286,7 +289,7 @@ func _build_clean_r12_portal() -> void:
 	var contact_light := OmniLight3D.new()
 	contact_light.name = "LuzContactoNucleoR12"
 	contact_light.light_color = Color("#8176d6")
-	contact_light.light_energy = 0.20
+	contact_light.light_energy = 0.28
 	contact_light.omni_range = 1.9
 	contact_light.shadow_enabled = false
 	contact_light.position = Vector3(164.0, -0.12, 175.10)
