@@ -15,6 +15,7 @@
 | **Dev1 (Desenvolvedor Principal)** | Arquitectura, motor de jogo, Regiões 1–6 | `feature/dev1-gameplay-core` | Regiões 1–6, Takes 1–11, módulos: VossHouse, RiverRoadJourney, ForestLakeRegion, DaylightValley, LevelEnvironment, TempleLevel, RegionalCinematicDirector |
 | **Dev2 (Desenvolvedor de Montanha)** | Regiões 7–12, combate avançado, puzzles temporais | `feature/dev2-mountain-canyon` | Regiões 7–12, Takes 12–22, módulos: HighlandRegion, OrionDestinationRegion e novos módulos das Regiões 8–12 |
 | **Dev03 (Diretor Cinematográfico)** | Takes cinematográficos, câmaras, composição visual, cutscenes | `feature/dev1-gameplay-core` (leitura) + PR para main | RegionalCinematicDirector.gd — Takes 1–11 já existentes; propor novos ângulos e transições |
+| **Dev5 (Mundo Cartesiano e Elias 3.ª Pessoa)** | Objectos 3D adicionais do mapa, biblioteca de activos e apresentação isolada de Elias | `feature/dev5-cartographic-world-third-person` | Só novos módulos em `levels/dev5/`, `assets/models_dev5/` e `entities/player/third_person/`; não editar R1–R6 existentes nem R7–R12 sem integração aprovada |
 | **Diretor Geral** | Coordenação, briefings, auditoria de qualidade, comunicação CEO | Todas as branches (leitura) | `diretor_orientacoes/` — publicar briefings, validar entregas, coordenar integrações |
 
 ---
@@ -106,6 +107,28 @@ O Dev03 é responsável pela direcção visual e cinematográfica do projecto. O
     "label": "Casa Voss — Prólogo"
 }
 ```
+
+---
+
+## Dev5 — Mundo Cartesiano e Elias em Terceira Pessoa
+
+### Função
+
+O Dev5 acelera a conversão do mapa cartográfico em mundo jogável, criando objectos 3D reais e desacoplados que reforçam a leitura dos marcos sem substituir geometria regional existente. Também mantém a apresentação isolada de **Elias** em terceira pessoa, orientada pela referência fornecida pelo CEO. A imagem é uma referência artística; o substituto final exige um GLB humano rigado e licenciado.
+
+### Escopo e integração
+
+O Dev5 cria apenas novos ficheiros em `levels/dev5/`, `assets/models_dev5/`, `entities/player/third_person/`, `references/dev5/` e os seus marcadores em `diretor_orientacoes/`. Não edita `Player.gd`, `TempleLevel.gd`, `ForestLakeRegion.gd`, `RiverRoadJourney.gd`, `VossHouse.gd`, `CartographicAnchors.gd`, `ui/menus/` nem módulos R7–R12 na primeira fase. A integração é feita por pedido de pull ou cherry-pick para a branch cinematográfica depois de parser Godot, 30 segundos de gameplay/captura e avaliação visual.
+
+### Fila contínua
+
+- **CP-D5-001** — consolidar `CartographicLandmarkObjects.gd` e o orçamento de objectos.
+- **CP-D5-002** — ponte de pedra tridimensional do marco 2, em módulo isolado, com colisores próprios e zero luzes.
+- **CP-D5-003** — apresentação `EliasThirdPersonPresentation`, sem substituir o controlador actual.
+- **CP-D5-004** — cena QA de Elias em terceira pessoa no marco 1, sem afectar Casa Voss, porta E, salto ou stamina.
+- **CP-D5-005** — integrar um GLB humano rigado apenas se licenciado, recuperável, até 10 MB e dentro do orçamento GTX 1050 Ti.
+
+A instrução detalhada, os anexos e os checksums estão em `ONBOARDING_DEV5_MUNDO_CARTESIANO.md`, `CONTINUIDADE_DEV5.md` e `references/dev5/README.md`.
 
 ---
 
