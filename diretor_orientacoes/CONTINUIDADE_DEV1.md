@@ -150,3 +150,9 @@ Foi integrada em `TempleLevel.gd` uma telemetria QA exclusiva que regista posiç
 As rotas `road_return_voss` e `road_to_arch` passaram sessões de 36 segundos com Menu→Novo Jogo e a régua X/Z activa. A Casa Voss é legível no retorno físico da Estrada; o Arco é legível no eixo das lajes no sentido norte, sem redução artificial de distância. Não surgiu nova oclusão causal que justifique tocar em terreno, água, árvores, lajes ou luzes. Relatório: `qa_evidence_carto79/CP_CARTO79_FIRST_HORIZON.md`.
 
 **Próxima tarefa contínua:** CP-CARTO-80 — leitura cartográfica Arco→Floresta→Majestic. Validar o desvio oeste e a reconvergência para R6 com a régua X/Z, sem criar sinalização artificial nem editar Regiões 7–12.
+
+## CP-CARTO-80 — Eixo intermédio Arco→Floresta→Majestic
+
+A régua X/Z confirmou a passagem real Arco→Floresta: a posição inicial `(-9.0, 107.0)` está a 9 m da âncora Floresta Densa e aponta correctamente para o marco 4. Em llvmpipe, a colisão concava regional não estabiliza antes do teleporte QA e a cápsula fica sem `is_on_floor()`; não se promoveu plataforma, laje ou geometria especulativa. O flag `ORIGEM_QA_CARTO_STABILIZE=1` apenas retém a gravidade no harness `arch_to_forest`, foi validado em 36 segundos e não existe na execução normal.
+
+A captura Floresta→Majestic, em 1600×900 e 36 segundos, confirma a rota física e a decisão X/Z rumo a Majestic, mas a bifurcação ocidental ainda não tem um marco tridimensional suficientemente legível no horizonte. A próxima correcção causal será o piloto **Estela de Direcção Majestic**, especificado em `PLANO_PILOTO_MESHY_CP_CARTO81.md`, exclusivamente quando estiver disponível um GLB descarregável; até lá, a composição de produção fica preservada. Evidências: `qa_evidence_carto80/CP_CARTO80_INTERMEDIATE_AXIS.md`, `arch_to_forest_stabilized_960x540.png` e `forest_to_majestic_1600x900.png`.

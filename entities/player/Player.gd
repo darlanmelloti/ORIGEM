@@ -250,7 +250,10 @@ func restore_health(amount: int) -> void:
 	EventBus.player_message_requested.emit("A energia da nascente restaura Elias.", 1.4)
 
 func _handle_player(delta: float) -> void:
-	var grounded: bool = is_on_floor()
+	# CP-CARTO-80: o renderer llvmpipe pode avançar a física antes de a colisão concava regional estabilizar.
+	# A retenção é exclusiva do harness de leitura cartográfica e não existe numa execução normal.
+	var qa_arch_forest_hold: bool = OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest" and OS.get_environment("ORIGEM_QA_CARTO_STABILIZE") == "1"
+	var grounded: bool = is_on_floor() or qa_arch_forest_hold
 	if grounded:
 		player_velocity.y = 0.0
 		if Input.is_action_just_pressed("jump") and not is_blocking and attack_recovery_timer <= 0.0:

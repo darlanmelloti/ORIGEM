@@ -77,13 +77,30 @@ func _queue_regional_qa_modes() -> void:
 		# Isto evita que o llvmpipe consuma a janela de captura sem chegar ao spawn técnico.
 		call_deferred("_prepare_arch_forest_route_qa")
 	var carto_route: String = OS.get_environment("ORIGEM_QA_ROUTE")
-	if carto_route != "" and OS.get_environment("ORIGEM_QA_CARTO_RULER") == "1":
+	if carto_route != "" and carto_route != "arch_to_forest" and OS.get_environment("ORIGEM_QA_CARTO_RULER") == "1":
 		# A telemetria só corre no harness e aguarda o spawn específico de cada rota.
 		get_tree().create_timer(1.10).timeout.connect(_emit_cartographic_ruler_qa.bind(carto_route))
 	if OS.get_environment("ORIGEM_QA_INTERACT") == "lake_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_lake_stela_interaction_qa)
 	elif OS.get_environment("ORIGEM_QA_INTERACT") == "majestic_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_stela_interaction_qa)
+
+func _run_arch_forest_floor_probe_qa() -> void:
+	# A sonda conta frames de física, não segundos de render, para sobreviver ao llvmpipe lento.
+	var previous_frame: int = 0
+	for sample_frame: int in [0, 30, 90, 180, 360]:
+		for _frame in range(sample_frame - previous_frame):
+			await get_tree().physics_frame
+		_emit_arch_forest_floor_probe(float(sample_frame) / 60.0)
+		previous_frame = sample_frame
+
+func _emit_arch_forest_floor_probe(sample_seconds: float) -> void:
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		print("[CP_CARTO80_FLOOR] t=%.1fs jogador=ausente" % sample_seconds)
+		return
+	var expected_y: float = _terrain_height_for_qa(player.global_position.x, player.global_position.z) + 1.25
+	print("[CP_CARTO80_FLOOR] t=%.1fs pos=(%.2f,%.2f,%.2f) esperado_y=%.2f no_chao=%s" % [sample_seconds, player.global_position.x, player.global_position.y, player.global_position.z, expected_y, str(player.is_on_floor())])
 
 func _emit_cartographic_ruler_qa(route_name: String) -> void:
 	# CP-CARTO-78: converte a posição física de Elias numa leitura auditável do mapa oficial.
@@ -289,11 +306,18 @@ func _prepare_arch_forest_route_qa() -> void:
 	# Player.gd mantém a velocidade de queda num acumulador próprio; anulá-lo evita que um frame anterior ao teleport atravesse o TerrainPatch.
 	player.set("player_velocity", Vector3.ZERO)
 	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.25, spawn_z)
-	player.rotation.y = PI
+	# `look_at` fixa uma linha de horizonte física; evita reutilizar qualquer orientação de câmara da Casa Voss no harness.
+	player.look_at(Vector3(spawn_x, player.global_position.y, spawn_z + 22.0), Vector3.UP)
 	var head: Node3D = player.get_node_or_null("Head") as Node3D
 	if head != null:
 		head.rotation = Vector3.ZERO
 	print("[ORIGEM_QA_ROUTE] Spawn Arco–Floresta ativo em %s" % player.global_position)
+	# Este spawn é enfileirado por `call_deferred`; em alguns ambientes llvmpipe, timers globais podem ser suprimidos após o take.
+	# Emite a régua directamente quando o jogador já existe, mantendo a telemetria restrita ao modo QA.
+	if OS.get_environment("ORIGEM_QA_CARTO_RULER") == "1":
+		call_deferred("_emit_cartographic_ruler_qa", "arch_to_forest")
+	if OS.get_environment("ORIGEM_QA_FLOOR_PROBE") == "1":
+		call_deferred("_run_arch_forest_floor_probe_qa")
 
 func _prepare_village_handoff_route_qa() -> void:
 	# Exclusivo de QA: começa no início do trilho Dev1 e desloca-se para a abertura central do portão.
