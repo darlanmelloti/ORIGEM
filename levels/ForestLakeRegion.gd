@@ -1474,16 +1474,30 @@ func _build_cartographic_basin_silhouette() -> void:
 	var fall_x: float = lake_anchor.x + 43.0
 	var fall_z: float = lake_anchor.y - 1.5
 	var fall_y: float = _height_at(fall_x, fall_z)
-	var waterfall_mesh: QuadMesh = QuadMesh.new()
-	waterfall_mesh.size = Vector2(4.2, 9.0)
-	waterfall_mesh.material = _create_lake_material()
-	var waterfall: MeshInstance3D = MeshInstance3D.new()
-	waterfall.name = "CascataDaBaciaOriental"
-	waterfall.mesh = waterfall_mesh
-	waterfall.position = Vector3(fall_x, fall_y + 4.5, fall_z)
-	waterfall.rotation.y = PI * 0.5
-	waterfall.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	silhouette.add_child(waterfall)
+	# CP-CARTO-30: filetes volumétricos eliminam a cascata de painel plano e acompanham o promontório em profundidade.
+	var water_material: StandardMaterial3D = StandardMaterial3D.new()
+	water_material.albedo_color = Color(0.10, 0.38, 0.50, 0.70)
+	water_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	water_material.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
+	water_material.roughness = 0.24
+	water_material.emission_enabled = true
+	water_material.emission = Color(0.008, 0.050, 0.070, 1.0)
+	water_material.emission_energy_multiplier = 0.16
+	for stream_index: int in range(5):
+		var stream_mesh: CylinderMesh = CylinderMesh.new()
+		stream_mesh.top_radius = 0.09 + float(stream_index % 2) * 0.025
+		stream_mesh.bottom_radius = 0.15 + float((stream_index + 1) % 2) * 0.025
+		stream_mesh.height = 7.4 + float(stream_index % 3) * 0.55
+		stream_mesh.radial_segments = 8
+		stream_mesh.material = water_material
+		var stream: MeshInstance3D = MeshInstance3D.new()
+		stream.name = "FileteDaCascataOriental_%02d" % stream_index
+		stream.mesh = stream_mesh
+		var stream_offset: float = -1.35 + float(stream_index) * 0.68
+		stream.position = Vector3(fall_x + stream_offset, fall_y + 3.7 + float(stream_index % 2) * 0.22, fall_z + sin(float(stream_index) * 1.7) * 0.28)
+		stream.rotation = Vector3(0.04 * float((stream_index % 3) - 1), 0.12 * float(stream_index), 0.05 * float((stream_index % 2) * 2 - 1))
+		stream.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		silhouette.add_child(stream)
 
 func _build_submerged_ruins() -> void:
 	var lake: Node3D = Node3D.new()
