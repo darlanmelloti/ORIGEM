@@ -166,8 +166,8 @@ func _place_route_marker(destination: Vector2) -> void:
 	if route_marker_label != null:
 		route_marker_label.position = route_marker.position + Vector2(12.0, -5.0)
 
-func _update_route_destination(player_z: float) -> void:
-	var route: Dictionary = CARTOGRAPHIC_ANCHORS.next_dev1_destination(player_z)
+func _update_route_destination(world: Vector2) -> void:
+	var route: Dictionary = CARTOGRAPHIC_ANCHORS.next_dev1_destination(world)
 	var destination: Vector2 = route["anchor"] as Vector2
 	_place_route_marker(destination)
 	if route_marker_label != null:
@@ -187,7 +187,7 @@ func update_player_world_position(world_position: Vector3, player_yaw: float = 0
 			player_heading_shadow.rotation = player_yaw + PI
 	if player_marker_label != null:
 		player_marker_label.position = player_marker.position + Vector2(10.0, -5.0)
-	_update_route_destination(world_position.z)
+	_update_route_destination(Vector2(world_position.x, world_position.z))
 
 func toggle_map() -> void:
 	_set_open(not is_open)

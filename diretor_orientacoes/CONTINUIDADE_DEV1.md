@@ -138,3 +138,9 @@ A auditoria QA de nós próximos no spawn Floresta→Ruínas identificou os cand
 ### Fecho CP-CARTO-77 — Prop laranja atribuído
 
 A auditoria espacial e a construção do sector atribuem o prop laranja/escuro à dupla física `RoloDeCampoMajestic` + `LanternaDeCampoMajestic` em `TransicaoMajesticParaRuinasSubmersas`. É a brasa âmbar discreta aprovada no CP-CARTO-39, não um prop de debug. Não reabrir emissão, material, posição ou quantidade de lanternas sem nova directiva; o diagnóstico CP-CARTO-77 encerra sem alteração de produção.
+
+## CP-CARTO-78 — Régua cartográfica X/Z aprovada
+
+Foi integrada em `TempleLevel.gd` uma telemetria QA exclusiva que regista posição física, marco mais próximo, posição no mapa e destino seguinte para as rotas R1–R6. A primeira prova identificou uma falha real: o destino cartográfico dependia apenas de Z e ignorava o ramo ocidental Majestic. `CartographicAnchors.next_dev1_destination` e `CartographicMapUI.gd` passaram a receber `Vector2(X,Z)`. Na faixa do conector (`z=150–202`), a orientação aponta para o Majestic no lado leste e para as Ruínas após cruzar para oeste. Parser e sessões de 36 segundos passaram; a repetição Floresta→Majestic confirmou `RUMO AO MAJESTIC` sem erro.
+
+**Próxima tarefa contínua:** CP-CARTO-79 — leituras de horizonte Casa Voss→Estrada→Arco com a régua X/Z activa. Medir o marco seguinte no sentido cartesiano antes de qualquer mudança física; manter R7–R12 fora desta branch.

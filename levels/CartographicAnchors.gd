@@ -50,14 +50,20 @@ static func map_texture_position(world: Vector2) -> Vector2:
 		return MAP_TEXTURE_POSITIONS[1] as Vector2
 	return weighted_position / total_weight
 
-static func next_dev1_destination(player_z: float) -> Dictionary:
-	# A sequência pertence à cartografia, não à UI: todas as telas e sistemas consultam a mesma rota.
+static func next_dev1_destination(world: Vector2) -> Dictionary:
+	# A sequência pertence à cartografia, não à UI: a direcção usa X/Z, pois o Majestic é um desvio real a oeste.
 	# O ponto 2 é um marco jogável real entre a Casa Voss e o Arco; não pode ser saltado pela orientação.
+	var player_x: float = world.x
+	var player_z: float = world.y
 	if player_z < ESTRADA_RIO_INICIO.y + 8.0:
 		return {"anchor": ESTRADA_RIO_INICIO, "label": "RUMO À ESTRADA DO RIO", "anchor_id": 2}
 	if player_z >= RUINAS_SUBMERSAS.y - 18.0:
 		return {"anchor": VILA_ELEVADA, "label": "PASSAGEM: VILA ELEVADA", "anchor_id": 7}
-	if player_z >= ACAMPAMENTO_MAJESTIC.y - 12.0:
+	# Entre a floresta e a bacia, o ramo começa a leste e atravessa o vale para o acampamento ocidental.
+	# Após alcançar o lado oeste, a mesma leitura reconverge de forma explícita para as Ruínas Submersas.
+	if player_z >= 150.0 and player_z <= 202.0:
+		if player_x > -45.0:
+			return {"anchor": ACAMPAMENTO_MAJESTIC, "label": "RUMO AO MAJESTIC", "anchor_id": 5}
 		return {"anchor": RUINAS_SUBMERSAS, "label": "RUMO ÀS RUÍNAS", "anchor_id": 6}
 	if player_z >= FLORESTA_DENSA_ENTRADA.y + 20.0:
 		return {"anchor": ACAMPAMENTO_MAJESTIC, "label": "RUMO AO MAJESTIC", "anchor_id": 5}

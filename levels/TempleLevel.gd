@@ -76,10 +76,42 @@ func _queue_regional_qa_modes() -> void:
 		# O modo cartográfico não aguarda tempo de jogo: a construção regional já terminou antes desta fila.
 		# Isto evita que o llvmpipe consuma a janela de captura sem chegar ao spawn técnico.
 		call_deferred("_prepare_arch_forest_route_qa")
+	var carto_route: String = OS.get_environment("ORIGEM_QA_ROUTE")
+	if carto_route != "" and OS.get_environment("ORIGEM_QA_CARTO_RULER") == "1":
+		# A telemetria só corre no harness e aguarda o spawn específico de cada rota.
+		get_tree().create_timer(1.10).timeout.connect(_emit_cartographic_ruler_qa.bind(carto_route))
 	if OS.get_environment("ORIGEM_QA_INTERACT") == "lake_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_lake_stela_interaction_qa)
 	elif OS.get_environment("ORIGEM_QA_INTERACT") == "majestic_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_stela_interaction_qa)
+
+func _emit_cartographic_ruler_qa(route_name: String) -> void:
+	# CP-CARTO-78: converte a posição física de Elias numa leitura auditável do mapa oficial.
+	# Não desloca actores, não altera geometria e não é chamado no jogo normal.
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		push_warning("[CP_CARTO78] Jogador indisponível para a régua cartográfica.")
+		return
+	var world: Vector2 = Vector2(player.global_position.x, player.global_position.z)
+	var specs: Array[Dictionary] = [
+		{"id": 1, "name": "Casa Voss", "anchor": CARTOGRAPHIC_ANCHORS.CASA_VOSS},
+		{"id": 2, "name": "Estrada do Rio", "anchor": CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO},
+		{"id": 3, "name": "Arco das Ruínas", "anchor": CARTOGRAPHIC_ANCHORS.ARCO_RUINAS},
+		{"id": 4, "name": "Floresta Densa", "anchor": CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA},
+		{"id": 5, "name": "Acampamento Majestic", "anchor": CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC},
+		{"id": 6, "name": "Ruínas Submersas", "anchor": CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS}
+	]
+	var nearest: Dictionary = specs[0]
+	var nearest_distance: float = world.distance_to(nearest["anchor"] as Vector2)
+	for spec: Dictionary in specs:
+		var distance: float = world.distance_to(spec["anchor"] as Vector2)
+		print("[CP_CARTO78_DISTANCE] rota=%s marco=%d:%s distancia=%.2fm" % [route_name, spec["id"], spec["name"], distance])
+		if distance < nearest_distance:
+			nearest = spec
+			nearest_distance = distance
+	var map_position: Vector2 = CARTOGRAPHIC_ANCHORS.map_texture_position(world)
+	var next_destination: Dictionary = CARTOGRAPHIC_ANCHORS.next_dev1_destination(world)
+	print("[CP_CARTO78_RULER] rota=%s mundo=(%.2f,%.2f) marco_proximo=%d:%s distancia=%.2fm mapa=(%.1f,%.1f) proximo=%d:%s" % [route_name, world.x, world.y, nearest["id"], nearest["name"], nearest_distance, map_position.x, map_position.y, next_destination["anchor_id"], next_destination["label"]])
 
 func _prepare_majestic_stela_interaction_qa() -> void:
 	# Prova isolada da Estela de Memória: o jogador nasce fora do anel de tendas e de frente para o colisor interactivo.
