@@ -63,3 +63,10 @@ Os CP-CARTO-48 e CP-CARTO-52 foram rejeitados e revertidos: a tonalização alfa
 ## Próxima tarefa já em execução — prova macro Casa Voss→Estrada→Arco
 
 Preparar uma prova de QA que conserve no mesmo eixo a saída da Casa Voss, a Estrada do Rio e a silhueta do Arco. Não promover mudanças em vegetação, escala, água, lajes, iluminação ou módulos Dev2 até a captura demonstrar a oclusão causal. A dependência Dev2 CP-D2-214 continua pendente na ponta `fd31a63` e não bloqueia este passe R1–R6.
+
+
+## CP-CARTO-54 e CP-CARTO-55 — Prova macro e Harness Arco
+
+O CP-CARTO-54 reuniu duas sessões reais de 30 segundos para Casa Voss e Estrada→Arco; confirmou as âncoras físicas, mas não autorizou alteração cega do mundo. O CP-CARTO-55 confirmou que o alvo físico `z=92` é a projecção escalada da âncora cartográfica do Arco em `z=48` e corrigiu apenas a posição do estágio QA `arco`, que intersectava uma copa. O novo take mostra o arco completo sem alterar prólogo de produção, FOV de produção, rota, colisores, luzes ou Regiões 7–12.
+
+A próxima alteração R1–R6 exige uma lacuna demonstrada por evidência macro de produção; a integração R6→R7 continua pendente em Dev2.
