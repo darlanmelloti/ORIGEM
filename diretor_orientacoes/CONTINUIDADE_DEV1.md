@@ -100,3 +100,9 @@ A investigação por exclusão identificou a raiz causal: `FlorestaDensaRegional
 **Próxima tarefa contínua:** preservar esta abertura como linha de visão canónica Casa Voss→Estrada→Arco; não reintroduzir instâncias da Floresta Densa em `z=72–92` sem nova prova de leitura superior. CP-CARTO-56 continua condicionado à publicação Dev2 posterior a `fd31a63`.
 
 **Verificação complementar CP-CARTO-73:** o harness `arch_to_forest` concluiu mais 36 segundos sem erro fatal. A captura confirma densidade de bosque, troncos e trilho no lado posterior do Arco; a clareira pré-Arco não introduziu um corredor vazio na entrada da Floresta Densa.
+
+## CP-CARTO-74 — Majestic→Lago: tomada válida, sem lacuna promovida
+
+A primeira varredura usou o valor de rota não reconhecido `majestic_lake`; as imagens dessa execução não representam a travessia regional e foram invalidadas como prova. A rota reconhecida `majestic_to_lake` completou 36 segundos sem erro fatal e mostrou terreno, lajes e vegetação consistentes, sem a superfície clara aparente na execução inválida. A auditoria QA de malhas grandes não encontrou planos extensos próximos. Não foi alterada água, terreno, luzes, campamento ou rota; todas as sondas foram removidas. O detalhe está em `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO74_MAJESTIC_LAKE_WHITE_SURFACE.md`.
+
+**Próxima tarefa contínua:** usar apenas os identificadores QA reconhecidos no orquestrador. A busca por uma lacuna R1–R6 nova deve partir de uma captura válida; CP-CARTO-56 permanece à espera da entrega Dev2 posterior a `fd31a63`.
