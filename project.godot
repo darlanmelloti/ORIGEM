@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*uid://bb5l65ihd1v7k"
+EventBus="*res://_autoloads/EventBus.gd"
 GameManager="*uid://cgvmf0nmd16ah"
 SaveManager="*uid://dl25lat4grhog"
 QuestManager="*uid://cqd43wq5jeicn"
