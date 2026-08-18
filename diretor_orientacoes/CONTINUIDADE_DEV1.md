@@ -78,3 +78,9 @@ A validação deste ciclo produziu três sessões de aproximadamente 36 segundos
 O harness exterior `ORIGEM_QA_SKIP_OPENING=1 ORIGEM_QA_ROUTE=road_return_voss` completou 36 segundos sem erro fatal, e a captura 1600×900 confirma o jogador já no espaço exterior, com Casa Voss, trilho e terreno carregados. Assim, a área exterior não contém uma parede física global; a validação end-to-end literal de E fica pendente apenas de um ambiente com foco de teclado funcional. As evidências e o registo completo estão em `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO70_VOSS_DOOR_VALIDATION.md`.
 
 **Próxima tarefa contínua:** aguardar uma entrega Dev2 posterior a `fd31a63` para executar CP-CARTO-56 no checkout de integração. Enquanto ela não existir, não reabrir hipóteses visuais rejeitadas nem alterar R7–R12 pela branch cinematográfica.
+
+## CP-CARTO-71 — Ponte canónica: diagnóstico causal, sem promoção
+
+O harness dedicado da ponte positiva em `z=58` completou gameplay real de 36 segundos e confirmou que a tomada Estrada→Arco normal não enquadra esse marco lateral. A captura dedicada revelou uma faixa azul horizontal. Uma sonda QA reversível ocultou apenas `SuperficieRioEstrada` e demonstrou que a faixa desaparece, atribuindo-a à lâmina de água e não à ponte. Porém, mesmo sem água a ponte não adquiriu leitura arquitectónica suficiente; por isso, não foi alterada a água, a altura do leito, a emissão, a ponte ou a rota. A sonda foi removida, o checkout voltou a código de produção idêntico e a hipótese «alterar a água para evidenciar a ponte» fica rejeitada. As três capturas de 36 s e o relatório causal estão em `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO71_CANONICAL_BRIDGE_CAUSALITY.md`.
+
+**Próximo ciclo contínuo:** conservar a ponte como marco lateral físico, sem usá-la como pretexto para reabrir água; verificar periodicamente Dev2 para CP-CARTO-56 e seleccionar apenas uma lacuna R1–R6 ainda não coberta por hipótese rejeitada.
