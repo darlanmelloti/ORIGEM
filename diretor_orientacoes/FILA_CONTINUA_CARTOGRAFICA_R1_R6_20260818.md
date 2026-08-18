@@ -8,9 +8,9 @@ A branch cinematográfica encontra-se publicada em `47430ed`, sem alterações p
 
 | Prioridade | Checkpoint | Proprietário | Acção concreta | Critério de promoção |
 | --- | --- | --- | --- | --- |
-| 1 | CP-CARTO-54 | Dev1 / R1–R6 | Produzir uma prova macro com campos de visão sobrepostos a partir da saída QA: um enquadramento para Casa Voss→Estrada e outro para Estrada→Arco, sem mover geometrias. | Godot 4.7.1, duas capturas 1600×900 e 30 segundos de gameplay sem erro; a leitura deve separar a origem, o corredor e o marco arqueológico. |
-| 2 | CP-CARTO-55 | Dev1 / R1–R6 | Se CP-54 identificar um oclusor por nó/projecção, corrigir exclusivamente esse nó fora do trilho; caso contrário, manter o mundo sem alteração. | Diferença visual positiva clara, rota física intacta, nenhuma luz nova e reversão imediata se não houver ganho. |
-| 3 | CP-CARTO-56 | Dev1 + Dev2 | Assim que a ponta Dev2 superar `fd31a63`, executar `CHECKLIST_R6_R7_DEV4_CP_D2_214.md` num checkout de integração, sem editar R7 pela branch cinematográfica. | Scope guard, parser Godot, prova R6→R7 de 30 segundos e captura 1600×900. |
+| 1 | CP-CARTO-54 | Dev1 / R1–R6 | **Concluído:** prova macro Casa Voss e Estrada→Arco realizada sem alterar geometria. | Duas sessões de 30 s e capturas 1600×900 publicadas. |
+| 2 | CP-CARTO-55 | Dev1 / R1–R6 | **Concluído:** o alvo z=92 foi confirmado como escala física da âncora e o harness `arco` foi retirado da intersecção de copa. | Godot e 30 s aprovados; arco completo no take QA, sem alteração de produção. |
+| 3 | CP-CARTO-56 | Dev1 + Dev2 | **Aguardando publicação Dev2:** assim que a ponta Dev2 superar `fd31a63`, executar `CHECKLIST_R6_R7_DEV4_CP_D2_214.md` num checkout de integração, sem editar R7 pela branch cinematográfica. | Scope guard, parser Godot, prova R6→R7 de 30 segundos e captura 1600×900. |
 
 ## Guardas obrigatórios
 
@@ -18,4 +18,4 @@ Não repetir os ensaios rejeitados de neblina adicional, relva procedural latera
 
 ## Regra de continuidade
 
-Um checkpoint aceite, revertido ou bloqueado só encerra a sua subtarefa; deve imediatamente abrir o item seguinte desta fila. A ausência de entrega Dev2 não suspende CP-CARTO-54 e CP-CARTO-55.
+Um checkpoint aceite, revertido ou bloqueado só encerra a sua subtarefa; deve imediatamente abrir o item seguinte desta fila. CP-CARTO-54 e CP-CARTO-55 estão concluídos. A ausência de entrega Dev2 mantém CP-CARTO-56 como dependência verificável, sem autorizar alterações nas Regiões 7–12 pela branch cinematográfica.
