@@ -258,3 +258,19 @@ A silhueta de protótipo no canto inferior da tomada macro foi identificada como
 | Evidência | Editor headless + gameplay normal de aproximadamente 30 segundos |
 
 **Próxima tarefa já iniciada — CP-CARTO-16:** consolidar a leitura da ponte e do rio no plano médio Casa Voss → Arco, verificando se os elementos laterais comunicam profundidade sem se tornarem uma faixa ou barreira. A correcção, se necessária, será exclusivamente estrutural e fora da rota navegável.
+
+### Conclusão operacional do CP-CARTO-16
+
+A primeira prova de ponte usava o marco legado de coordenada negativa e não era representativa da sequência Casa Voss–Arco. Foi criado o modo QA `positive_bridge`, posicionado no próprio trilho junto de z=51 e orientado para a ponte canónica lateral em z=58. As capturas `cp_carto16_positive_bridge30.png` e `cp_carto16_positive_bridge_center30.png` confirmam a ponte de leitura, os encontros rochosos e o rio como elementos laterais do plano médio, sem ocupar a rota principal e sem criar uma barreira atravessável indevida.
+
+A escala de profundidade foi preservada: por estar fora do eixo principal e distante do jogador, a ponte deve ler-se como uma linha estrutural lateral, não como um novo destino comprimido em primeiro plano. Não foi aplicada alteração de material, largura de água, FOV, terreno, luz ou geometria da ponte; a única adição persistente é a prova QA canónica para regressões futuras.
+
+| Critério | Resultado |
+| --- | --- |
+| Ponte validada | Eixo positivo canónico, z=58 |
+| Rota de Elias | Mantida na Estrada ocidental |
+| Rio | Mantido lateral e não obstrutivo |
+| Distância macro | Preservada; sem aproximação artificial do marco |
+| Evidência | Duas capturas de 30 segundos, incluindo tomada recenterada |
+
+**Próxima tarefa já iniciada — CP-CARTO-17:** inspeccionar a leitura de hierarquia dos marcos Casa Voss, Arco e Floresta a partir do percurso normal, com prioridade em remover apenas objectos próximos que se confundam com marcos cartográficos. Não repetir alterações de água, solo, FOV, densidade de lajes, câmara ou materiais já aceites/rejeitados.
