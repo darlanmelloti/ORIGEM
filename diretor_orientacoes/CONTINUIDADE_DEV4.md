@@ -1,11 +1,19 @@
 # Continuidade — Dev4
 
-- **Último checkpoint publicado:** `405b5c5` — CINE-PAIR-13, retorno Orion com câmara preservada.
-- **Validação concluída:** Godot headless, travessia física Garganta → Interior → Garganta, captura e 30 segundos sem erros.
-- **Próxima tarefa iniciada:** `CINE-PAIR-14 — telemetria de luzes locais e leitura da Garganta na câmara de retorno`.
-- **Ficheiros dentro do escopo:** validação Godot, orçamento GTX 1050 Ti, ferramentas QA, estabilidade de transição, documentos CINE-PAIR e correcções transversais autorizadas.
-- **Critério de aceitação:** prova de 30 segundos confirma a leitura da Garganta, a câmara activa de Elias, no máximo 16 luzes visíveis no exterior e ausência de regressão no handoff Orion.
-- **Próxima leitura de orientações:** 2026-08-18 00:30 UTC.
+- **Último checkpoint publicado:** `5c5f7e8` — correcção de autoload e GameManager; `CINE-PAIR-14` alegado por relatório ainda não tem commit verificável.
+- **Validação concluída:** `QA-PACKAGE-01` aprovado: ZIP limpo, validação headless, Menu Principal → Novo Jogo e 30 segundos sem `game_paused` nulo, erro de script ou recurso ausente.
+- **Próxima tarefa iniciada:** `QA-INPUT-01 — provar E, pausa, cursor, porta e retorno Orion numa sessão física de 30 segundos`.
+- **Ficheiros dentro do escopo:** `tools/qa/verify_clean_package.sh`, ferramentas QA, estabilidade de input, orçamento GTX 1050 Ti, transições e documentos de evidência.
+- **Critério de aceitação:** log de input, capturas e commit verificável confirmam que cada acção de E, Esc e cursor preserva o estado correcto e o retorno Orion funciona sem regressão.
+- **Próxima leitura de orientações:** 2026-08-18 00:45 UTC.
 - **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
 
-Dev4 é apoio técnico directo de Dev3. Cada auditoria deve produzir a prova ou alteração do CINE-PAIR activo e abrir imediatamente a subtarefa seguinte. Dev4 não pode criar `DIR-###` como trabalho autónomo, declarar espera por instruções, alegar bloqueio por workspace já existente ou encerrar um ciclo sem actualizar este marcador e iniciar a próxima prova.
+## Motivo objectivo de inactividade
+
+- **Motivo objectivo de inactividade:** nenhum. O relato CINE-PAIR-14 não está publicado, portanto não existe checkpoint aceite que permita espera.
+- **Dependência proprietária:** nenhuma para `QA-INPUT-01`.
+- **Verificação executada:** `git fetch origin --prune`, histórico de `feature/cine07-final`, inspecção de marcadores e evidências CINE-PAIR.
+- **Tarefa paralela Dev4 em execução:** `QA-INPUT-01`.
+- **Hora de nova leitura:** 2026-08-18 00:45 UTC.
+
+Dev4 deve escolher a próxima subtarefa na fila `QA-PACKAGE-01`, `QA-INPUT-01`, `QA-BUDGET-01`, `QA-STATE-01`, `QA-ASSET-01` antes de encerrar uma prova. Não declarar CINE-PAIR concluído sem commit, evidência e marcador actualizados na branch canónica.

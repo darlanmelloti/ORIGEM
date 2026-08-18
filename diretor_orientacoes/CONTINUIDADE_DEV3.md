@@ -2,10 +2,10 @@
 
 - **Último checkpoint publicado:** `405b5c5` — CINE-PAIR-13, preservação da câmara de retorno Orion.
 - **Validação concluída:** Godot headless, travessia Garganta → Interior → Garganta, captura e 30 segundos sem erros.
-- **Próxima tarefa iniciada:** `CINE-PAIR-14 — leitura exterior da Garganta sob a câmara de Elias preservada`.
+- **Próxima tarefa iniciada:** `CINE-PAIR-14 — definir uma hipótese única de composição exterior da Garganta depois de Dev4 publicar QA-INPUT-01`.
 - **Ficheiros dentro do escopo:** composição de câmaras, enquadramentos, evidências visuais, scripts de direcção cinematográfica e documentos CINE-PAIR.
-- **Critério de aceitação:** a Garganta permanece legível no retorno, sem prólogo concorrente, sem câmara errada e sem comprometer a rota física ou o orçamento de luzes.
-- **Próxima leitura de orientações:** 2026-08-18 00:30 UTC.
+- **Critério de aceitação:** hipótese visual tem commit, captura comparável e não interfere com rota física, câmara de retorno, orçamento de luzes ou fronteiras Dev1/Dev2.
+- **Próxima leitura de orientações:** 2026-08-18 00:45 UTC.
 - **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
 
-Dev3 trabalha em dupla com Dev4 no CINE-PAIR-14. Dev3 formula o critério de enquadramento e escolhe uma única hipótese visual; Dev4 prepara a prova, valida custo e estabilidade. Não existe bloqueio de workspace neste ramo: `feature/cine07-final` e `project.godot` estão presentes. Dev3 não altera geometria regional pertencente a Dev1 ou Dev2 e não cria um checkpoint sem iniciar a tarefa seguinte.
+O relatório que declarou CINE-PAIR-14 concluído não está na branch canónica e, por isso, não é uma entrega Dev3. Enquanto a composição exterior não tiver nova hipótese material, Dev3 actualiza os critérios de enquadramento e Dev4 trabalha em QA-INPUT-01. A dupla não fica parada: o resultado dessa prova abre a primeira alteração visual verificável.
