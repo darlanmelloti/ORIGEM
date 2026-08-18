@@ -134,3 +134,7 @@ A segunda sonda causal ocultou `AfluenteCartograficoRioParaBacia` apenas no harn
 A auditoria QA de nós próximos no spawn Floresta→Ruínas identificou os candidatos no corredor, incluindo `SilhuetasDeAproximacaoDaBacia`. Ao ocultar somente essa raiz em uma sessão válida de 36 segundos, o prop laranja/escuro de primeiro plano permaneceu. As silhuetas de aproximação ficam excluídas como causa, sem alteração de pilares ou bases. Todas as sondas e a auditoria foram removidas de `ForestLakeRegion.gd` e `TempleLevel.gd`; o checkout de produção voltou a limpo. A matriz actualizada está em `qa_evidence_voss_vista/CP_CARTO77_FOREST_TO_RUINS_CAUSALITY.md`.
 
 **Próxima tarefa contínua:** não reabrir afluente, aterramento ou silhuetas de aproximação. O prop não identificado só pode ser tratado após associação inequívoca a um nó; CP-CARTO-56 mantém a prioridade de integração assim que Dev2 publicar R7.
+
+### Fecho CP-CARTO-77 — Prop laranja atribuído
+
+A auditoria espacial e a construção do sector atribuem o prop laranja/escuro à dupla física `RoloDeCampoMajestic` + `LanternaDeCampoMajestic` em `TransicaoMajesticParaRuinasSubmersas`. É a brasa âmbar discreta aprovada no CP-CARTO-39, não um prop de debug. Não reabrir emissão, material, posição ou quantidade de lanternas sem nova directiva; o diagnóstico CP-CARTO-77 encerra sem alteração de produção.
