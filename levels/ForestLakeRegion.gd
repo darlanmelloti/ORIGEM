@@ -96,9 +96,12 @@ func _build_forest_path() -> void:
 	add_child(road)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = 40606
-	for index: int in range(45):
-		var t: float = float(index) / 44.0
-		var z_value: float = lerpf(116.0, 240.0, t)
+	# O trilho florestal termina onde a rota de margem começa; assim evitam-se duas cadeias de lajes a ocupar o mesmo corredor físico.
+	var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+	var forest_end_z: float = lake_anchor.y - 107.0
+	for index: int in range(12):
+		var t: float = float(index) / 11.0
+		var z_value: float = lerpf(116.0, forest_end_z, t)
 		var x_value: float = _path_x(z_value)
 		var slab: MeshInstance3D = MeshInstance3D.new()
 		slab.name = "LajeFloresta_%02d" % index
@@ -398,6 +401,17 @@ func _build_lake_shore_path() -> void:
 		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.055, z_value)
 		slab.rotation.y = atan2((_lake_shore_x(z_value + 1.0) - _lake_shore_x(z_value - 1.0)) * 0.5, 2.7) + rng.randf_range(-0.10, 0.10)
 		shore_road.add_child(slab)
+		# Apoio físico sobreposto: mantém uma passada contínua mesmo quando as lajes visuais são irregulares.
+		var slab_body: StaticBody3D = StaticBody3D.new()
+		slab_body.name = "ColisorLajeMargem_%02d" % index
+		slab_body.position = slab.position + Vector3(0.0, -0.045, 0.0)
+		slab_body.rotation.y = slab.rotation.y
+		var slab_collision: CollisionShape3D = CollisionShape3D.new()
+		var slab_shape: BoxShape3D = BoxShape3D.new()
+		slab_shape.size = Vector3(1.72, 0.18, 3.05)
+		slab_collision.shape = slab_shape
+		slab_body.add_child(slab_collision)
+		shore_road.add_child(slab_body)
 
 func _build_shore_access_steps() -> void:
 	# As lajes terminam num patamar físico na margem oeste; cada passo tem colisor próprio para a chegada ao lago não depender apenas da malha do terreno.
