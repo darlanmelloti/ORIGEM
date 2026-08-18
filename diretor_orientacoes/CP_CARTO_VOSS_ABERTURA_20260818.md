@@ -305,3 +305,19 @@ A instrumentação de aceleração foi removida e a validação headless final c
 | Limpeza | Instrumentação de prova removida antes de publicar |
 
 **Próxima tarefa já iniciada — CP-CARTO-19:** validar a legibilidade da Casa Voss como origem no olhar de retorno a partir da Estrada, preservando a porta, a montanha distante e a hierarquia Casa → Estrada → Arco. Não alterar a casa ou o prólogo sem uma regressão concreta demonstrada.
+
+### Conclusão operacional do CP-CARTO-19
+
+A tomada de retorno `cp_carto19_return30.png` confirma a Casa Voss como marco de origem inequívoco: a fachada e o telhado formam uma silhueta reconhecível no fim da Estrada, a rota de lajes conduz o olhar de volta à porta e a massa arbórea enquadra o edifício sem ocultá-lo. O jogador mantém, portanto, orientação nos dois sentidos: a Casa explica de onde veio; o Arco, a Estrada e a Floresta explicam para onde segue.
+
+Não houve necessidade de alteração de geometria, iluminação, materiais, porta ou escala. A tomada QA `road_return_voss` é a única adição, isolada do jogo normal e reutilizável para detectar regressões de visibilidade da origem.
+
+| Critério | Resultado |
+| --- | --- |
+| Casa Voss | Silhueta de origem clara e central |
+| Estrada de retorno | Legível e fisicamente contínua |
+| Vegetação de enquadramento | Periférica; não fecha a fachada |
+| Porta e mundo normal | Sem alteração |
+| Evidência | Captura de cena de 30 segundos a partir da Estrada real |
+
+**Próxima tarefa já iniciada — CP-CARTO-20:** validar a leitura bidireccional final Casa ↔ Arco com duas tomadas canónicas e preparar o próximo pacote integral das Regiões 1–6, somente depois de nova execução de menu, Novo Jogo e gameplay normal sem erros.

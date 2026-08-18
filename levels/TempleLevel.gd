@@ -66,6 +66,8 @@ func _queue_regional_qa_modes() -> void:
 		get_tree().create_timer(2.40).timeout.connect(_prepare_valley_bridge_route_qa)
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "positive_bridge":
 		call_deferred("_prepare_positive_bridge_route_qa")
+	elif OS.get_environment("ORIGEM_QA_ROUTE") == "road_return_voss":
+		call_deferred("_prepare_road_return_voss_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "handoff_to_village":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_village_handoff_route_qa)
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest":
@@ -124,6 +126,23 @@ func _prepare_lake_stela_interaction_qa() -> void:
 	if head != null:
 		head.rotation = Vector3.ZERO
 	print("[ORIGEM_QA_INTERACT] Elias posicionado diante da Estela do Lago em %s; estela=%s" % [player.global_position, stela.global_position])
+
+func _prepare_road_return_voss_qa() -> void:
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		get_tree().create_timer(0.25).timeout.connect(_prepare_road_return_voss_qa)
+		return
+	# Vista de retorno no eixo real da Estrada: Casa Voss é observada como origem, sem alterar a rota do jogo.
+	var spawn: Vector3 = Vector3(-20.4, 0.0, 34.0)
+	var focus: Vector3 = Vector3(-22.0, 0.0, 8.0)
+	player.velocity = Vector3.ZERO
+	player.set("player_velocity", Vector3.ZERO)
+	player.global_position = Vector3(spawn.x, _terrain_height_for_qa(spawn.x, spawn.z) + 1.25, spawn.z)
+	player.look_at(Vector3(focus.x, player.global_position.y, focus.z), Vector3.UP)
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_ROUTE] Spawn RetornoCasaVoss ativo em %s; foco=%s" % [player.global_position, focus])
 
 func _prepare_positive_bridge_route_qa() -> void:
 	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
