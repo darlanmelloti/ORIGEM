@@ -317,3 +317,12 @@
 - [ ] Produzir gameplay de 30 segundos, print 1600x900, log, scope guard e hash.
 - [ ] Fechar o checkpoint com estado honesto e commit/evidência.
 - [ ] Iniciar imediatamente DEV4-ACT4-003, mesmo em caso de rejeição visual.
+
+
+## DEV4-ACT4-003 — primeiro take cinematográfico do Ato 4
+
+- [ ] Auditar o contrato e o ficheiro activo do take.
+- [ ] Implementar a auditoria de câmara, sujeito narrativo e continuidade física.
+- [ ] Validar estaticamente e, quando o checkout cinematográfico estiver disponível, executar gameplay 30s e print 1600x900.
+- [ ] Registar estado honesto sem fabricar evidências.
+- [ ] Criar e activar DEV4-ACT4-004 antes de fechar o bloco.
