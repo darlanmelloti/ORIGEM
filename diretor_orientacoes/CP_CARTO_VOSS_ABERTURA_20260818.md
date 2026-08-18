@@ -337,3 +337,19 @@ O verificador `QA-PACKAGE-01` criou e extraiu um ZIP limpo, passou o editor head
 | Log de validação | `qa_evidence_voss_vista/cp_carto20_package_verify.log` |
 
 **Próxima tarefa já iniciada — CP-CARTO-21:** auditoria visual de marcos em distâncias macro no vale, priorizando apenas uma lacuna objectiva por ciclo e mantendo a escala cartográfica real. O pacote final desta revisão só será distribuído quando o hash do ZIP do commit publicado for registado.
+
+### Conclusão operacional do CP-CARTO-21
+
+A auditoria macro foi publicada em `CP_CARTO21_AUDITORIA_MACRO_E_HANDOFF_20260818.md`. As tomadas canónicas confirmam que a cadeia **Casa Voss → Estrada → Arco → Floresta** está legível nos planos próprios, mas também confirmam que Majestic, Ruínas e as Regiões 7–12 não podem ser apresentados como marcos distintos na tomada inicial sem reduzir artificialmente as distâncias. Essa lacuna deve ser resolvida pela integração de geometria real dos respectivos proprietários, nunca por painéis, teleporte de marcos ou compressão do vale.
+
+Foi testado um mastro tridimensional de expedição no Acampamento Majestic, sem colisão e sem luz dinâmica. A comparação `cp_carto22_forest_majestic_base30.png` / `cp_carto22_forest_majestic_mast_tall30.png` não mostrou ganho perceptível na tomada canónica, pois a massa permanece ocultada pela topografia e vegetação reais. A variante foi revertida integralmente antes do checkpoint. O script regional voltou ao estado funcional e a validação headless final passou.
+
+| Critério | Resultado |
+| --- | --- |
+| Hierarquia Casa → Arco | Mantida e validada |
+| Escala real do vale | Preservada; nenhum marco foi aproximado |
+| Mastro Majestic experimental | Revertido — sem ganho visual perceptível |
+| Água, câmaras, FOV, lajes e Regiões 7–12 | Sem alteração |
+| Parser Godot após reversão | Aprovado |
+
+**Próxima tarefa já iniciada — CP-CARTO-22:** validar a linha de visão e a passagem física entre a saída do Arco, a Floresta Densa e a bifurcação real para Majestic; remover apenas uma obstrução que seja comprovada por evidência. O Dev2 recebe, em paralelo, a ordem de integrar massas reais das Regiões 7–12 nas âncoras canónicas para que a futura tomada macro possa revelar o vale completo sem falsificar a escala.
