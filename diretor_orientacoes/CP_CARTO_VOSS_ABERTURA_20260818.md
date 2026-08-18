@@ -106,3 +106,20 @@ A captura `cp_carto05_arch_forest_narrow_river30.png` mostra a água mantida com
 | Regiões 7–12 | Sem alteração |
 
 **Próxima tarefa já iniciada — CP-CARTO-06:** aprofundar a leitura de entrada da Floresta Densa por estratos reais de vegetação baixa e rocha, sem criar parede de árvores, sem reduzir a largura do trilho e sem mexer na água ou no raccord de câmara. O desenvolvimento permanece contínuo.
+
+### Conclusão operacional do CP-CARTO-06
+
+A entrada Arco–Floresta recebeu um estrato contínuo, mas não linear, de seis núcleos reais de feto e rocha entre `z=104` e `z=121,5`. Todos permanecem fora de 3,40 m do eixo do trilho, sem colisores e sem novas luzes. A escala dos fetos foi reforçada apenas depois da primeira captura ter mostrado ganho insuficiente; a segunda prova mantém o corredor aberto, aumenta a leitura de solo vivo e evita a formação de uma parede vegetal.
+
+As provas `cp_carto06_arch_forest_understory_scale30.png` e `cp_carto06_normal30.png` confirmam Godot 4.7.1 sem erros de runtime, 30 segundos de travessia no limiar e 30 segundos de jogo normal sem regressão entre Casa Voss, Estrada do Rio e Arco.
+
+| Critério | Resultado |
+| --- | --- |
+| Estrato de feto/rocha no limiar | Aprovado; seis agrupamentos irregulares |
+| Corredor navegável | Preservado; sem colisores novos |
+| Parede de árvores | Não criada |
+| Luzes dinâmicas | Nenhuma adicionada |
+| Jogo normal Casa Voss–Arco | Aprovado em 30 segundos |
+| Regiões 7–12 | Sem alteração |
+
+**Próxima tarefa já iniciada — CP-CARTO-07:** verificar a leitura do Acampamento Majestic e da chegada às Ruínas Submersas como sequência espacial única. O passe deve privilegiar silhuetas, margem e continuidade física, sem alterar os módulos das Regiões 7–12.

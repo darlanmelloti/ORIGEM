@@ -42,6 +42,7 @@ func _ready() -> void:
 	_build_forest_path()
 	_build_cartographic_forest_threshold()
 	_build_arch_to_forest_transition()
+	_build_arch_forest_understory()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
 	_build_cartographic_river_inlet()
@@ -210,6 +211,42 @@ func _build_arch_to_forest_transition() -> void:
 			fern.scale = Vector3(0.36, 0.36, 0.36)
 			fern.rotation.y = float(index) * 0.83
 			transition.add_child(fern)
+
+func _build_arch_forest_understory() -> void:
+	# Estrato de entrada do bosque: fetos e rochas baixos acompanham a passagem sem bloquear o eixo ou criar uma parede de árvores.
+	var understory: Node3D = Node3D.new()
+	understory.name = "SubBosqueDoLimiarArcoFloresta"
+	add_child(understory)
+	var specs: Array[Dictionary] = [
+		{"z": 104.0, "side": -1.0, "offset": 3.40, "fern": 0.52, "rock": 0.18},
+		{"z": 107.5, "side": 1.0, "offset": 3.85, "fern": 0.60, "rock": 0.22},
+		{"z": 111.0, "side": -1.0, "offset": 4.15, "fern": 0.55, "rock": 0.24},
+		{"z": 114.5, "side": 1.0, "offset": 3.55, "fern": 0.62, "rock": 0.19},
+		{"z": 118.0, "side": -1.0, "offset": 4.35, "fern": 0.56, "rock": 0.25},
+		{"z": 121.5, "side": 1.0, "offset": 3.70, "fern": 0.50, "rock": 0.20}
+	]
+	for index: int in range(specs.size()):
+		var spec: Dictionary = specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var x_value: float = _path_x(z_value) + side * (spec["offset"] as float)
+		var ground_y: float = _height_at(x_value, z_value)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoSubBosqueLimiar_%02d" % (index + 1)
+			fern.position = Vector3(x_value, ground_y + 0.02, z_value)
+			var fern_scale: float = spec["fern"] as float
+			fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+			fern.rotation.y = 0.42 + float(index) * 0.73
+			understory.add_child(fern)
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.name = "RochaSubBosqueLimiar_%02d" % (index + 1)
+			rock.position = Vector3(x_value + side * 0.72, _height_at(x_value + side * 0.72, z_value + 0.48) + 0.025, z_value + 0.48)
+			var rock_scale: float = spec["rock"] as float
+			rock.scale = Vector3(rock_scale, rock_scale * 0.76, rock_scale)
+			rock.rotation.y = -0.28 + float(index) * 0.61
+			understory.add_child(rock)
 
 func _build_forest_wayfinding() -> void:
 	# Balizas baixas, quentes e espaçadas: guiam Elias no sub-bosque sem transformar a floresta num corredor iluminado.
