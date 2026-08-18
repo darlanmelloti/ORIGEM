@@ -1895,15 +1895,15 @@ func _create_path_material() -> StandardMaterial3D:
 
 func _create_ruin_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
+	# Tonalidade mineral húmida: impede que a textura de ruína rebente em branco sob a luz do modo GL Compatibility.
+	material.albedo_color = Color(0.48, 0.52, 0.45, 1.0)
 	material.albedo_texture = MOSSY_RUIN_DIFF
 	material.normal_enabled = true
 	material.normal_texture = MOSSY_RUIN_NORMAL
 	material.normal_scale = 0.32
 	material.roughness = 0.95
-	# Resposta material quase neutra: conserva o musgo no crepúsculo de compatibilidade sem tornar as ruínas autoiluminadas.
-	material.emission_enabled = true
-	material.emission = Color(0.028, 0.052, 0.060, 1.0)
-	material.emission_energy_multiplier = 0.34
+	# Ruínas recebem apenas luz do mundo; a emissão anterior sobre-expondo a estela foi removida.
+	material.emission_enabled = false
 	material.uv1_scale = Vector3(0.28, 0.28, 0.28)
 	return material
 
