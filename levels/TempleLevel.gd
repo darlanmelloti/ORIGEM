@@ -56,7 +56,7 @@ func _ready() -> void:
 	_queue_regional_qa_modes()
 
 func _queue_regional_qa_modes() -> void:
-	if OS.get_environment("ORIGEM_QA_ROUTE") == "majestic_to_lake":
+	if OS.get_environment("ORIGEM_QA_ROUTE") == "majestic_to_lake" or OS.get_environment("ORIGEM_QA_ROUTE") == "forest_to_majestic":
 		# O mundo regional já foi construído antes desta fila; o spawn imediato deixa a janela de captura disponível para a travessia.
 		call_deferred("_prepare_majestic_lake_route_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "forest_to_ruins" or OS.get_environment("ORIGEM_QA_ROUTE") == "ruins_arrival":
@@ -143,19 +143,21 @@ func _prepare_majestic_lake_route_qa() -> void:
 	if player == null:
 		push_warning("[ORIGEM_QA_ROUTE] Jogador indisponível para a rota Majestic–lago.")
 		return
-	var spawn_x: float = -77.4
+	var reverse_from_forest: bool = OS.get_environment("ORIGEM_QA_ROUTE") == "forest_to_majestic"
+	var spawn_x: float = -2.5 if reverse_from_forest else -77.4
 	var spawn_z: float = 178.0
 	# Anula a queda acumulada antes do teleport, tal como no harness Arco–Floresta.
 	player.velocity = Vector3.ZERO
 	player.set("player_velocity", Vector3.ZERO)
 	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.25, spawn_z)
-	# A primeira perna segue a ligação real de lajes de Majestic ao eixo do trilho; não corta diagonalmente pelo terreno aberto.
-	var connector_target: Vector3 = Vector3(-2.5, player.global_position.y, spawn_z)
+	# A mesma sequência de lajes é atravessada nas duas direcções, sem corte diagonal pelo terreno aberto.
+	var connector_target: Vector3 = Vector3(-77.4 if reverse_from_forest else -2.5, player.global_position.y, spawn_z)
 	player.look_at(connector_target, Vector3.UP)
 	var head: Node3D = player.get_node_or_null("Head") as Node3D
 	if head != null:
 		head.rotation = Vector3.ZERO
-	print("[ORIGEM_QA_ROUTE] Spawn Majestic–lago ativo em %s; primeira_perna=%s" % [player.global_position, connector_target])
+	var route_label: String = "Floresta–Majestic" if reverse_from_forest else "Majestic–lago"
+	print("[ORIGEM_QA_ROUTE] Spawn %s ativo em %s; primeira_perna=%s" % [route_label, player.global_position, connector_target])
 
 func _prepare_lake_approach_route_qa() -> void:
 	var region: Node3D = get_node_or_null("RegiaoFlorestaLagoExploravel") as Node3D

@@ -213,3 +213,17 @@ O levantamento do módulo confirma que os estratos estruturais já existentes co
 | Evidência | Gameplay de aproximadamente 30 segundos e captura 960×540 |
 
 **Próxima tarefa já iniciada — CP-CARTO-13:** validar o corredor interno Floresta Densa → Acampamento Majestic com o harness físico existente, concentrando-se em continuidade de lajes, aterramento e leitura do próximo marco sem adicionar nova iluminação nem alterar a bacia das Ruínas.
+
+### Conclusão operacional do CP-CARTO-13
+
+O harness passou a suportar os dois sentidos da ligação real entre o eixo da floresta e o Acampamento Majestic. A nova rota `ORIGEM_QA_ROUTE=forest_to_majestic` nasce no fim da sequência florestal, orienta Elias pelas lajes existentes no sentido de Majestic e limpa a velocidade herdada antes do teleport. A evidência `cp_carto13_forest_to_majestic30.png` confirma aproximadamente 30 segundos de deslocação real sobre a ligação física, sem cortar diagonalmente pelo terreno, sem novas luzes e sem tocar na bacia das Ruínas ou nas Regiões 7–12.
+
+| Critério | Resultado |
+| --- | --- |
+| Ligação Floresta–Majestic | Percorrida no sentido cartográfico correcto |
+| Lajes e apoio físico | Contínuos e estáveis na prova |
+| Câmara, luzes e bacia das Ruínas | Sem alteração |
+| Harness | Reutilizável nos dois sentidos da mesma rota real |
+| Evidência | Gameplay de aproximadamente 30 segundos e captura 960×540 |
+
+**Próxima tarefa já iniciada — CP-CARTO-14:** executar uma auditoria compacta do pacote das Regiões 1–6: confirmar que os modos QA não contaminam o jogo normal, contar o acréscimo de colisores CP-CARTO-11, confirmar o limite de luzes visíveis e preparar o próximo passe visual de activos sem criar nova geometria regional não validada.
