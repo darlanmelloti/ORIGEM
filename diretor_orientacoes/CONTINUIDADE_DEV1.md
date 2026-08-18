@@ -92,3 +92,9 @@ Uma tomada QA temporária em `z≈30`, orientada para o Arco físico em `z=92`, 
 **Próxima tarefa contínua:** não deslocar árvores sem causa. A próxima investigação deve atribuir os nós das coníferas no plano médio pela sua raiz exacta; somente depois se avalia uma hipótese de leitura que não repita pilotos de árvore nem modifique R7–R12.
 
 **Extensão CP-CARTO-72:** a raiz `TransicaoOrganicaArcoFloresta` também foi ocultada apenas em QA durante 36 segundos. As coníferas no plano médio e a oclusão do Arco permaneceram; esta raiz foi excluída como causa. A guarda foi removida e não há alteração de produção. A investigação futura deve atribuir a massa restante por nó exacto, não repetir esta exclusão.
+
+## CP-CARTO-73 — Clareira focal do Arco aprovada
+
+A investigação por exclusão identificou a raiz causal: `FlorestaDensaRegional` criava coníferas entre `z=72–92`, ocultando por completo o Marco 3. Em vez de remover a floresta, foi promovida uma clareira focal espacial nesse intervalo, equivalente às clareiras já existentes para rota, lago e Majestic. A captura de produção mostra o Arco completo ao final das lajes, com árvores laterais e massa florestal posterior ainda presentes; a melhoria não altera água, câmara, colisores de rota, Regiões 7–12 ou escala do Arco. Parser Godot 4.7.1 e gameplay real de 36 segundos passaram sem erro. As capturas e a matriz causal estão em `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO73_ARCH_SIGHTLINE_CLEARANCE.md`.
+
+**Próxima tarefa contínua:** preservar esta abertura como linha de visão canónica Casa Voss→Estrada→Arco; não reintroduzir instâncias da Floresta Densa em `z=72–92` sem nova prova de leitura superior. CP-CARTO-56 continua condicionado à publicação Dev2 posterior a `fd31a63`.

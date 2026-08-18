@@ -742,7 +742,9 @@ func _build_dense_forest() -> void:
 		# A ligação Majestic é horizontal em torno de z=178; sem esta pequena clareira, árvores da dispersão regional entram na câmara e escondem as lajes.
 		var majestic_connector_clearance: bool = z_value >= 173.0 and z_value <= 183.0 and x_value >= -82.0 and x_value <= 1.0
 		# As clareiras revelam o destino e a margem sem rarefazer a floresta inteira.
-		if abs(x_value - _path_x(z_value)) < 6.0 or shore_clearance or majestic_connector_clearance or lake_dx * lake_dx + lake_dz * lake_dz < 1.20:
+		# Clareira focal do Arco: abre os últimos 20 m antes do marco 3, preservando bosque lateral e a massa florestal posterior.
+		var arch_sightline_clearance: bool = z_value >= 72.0 and z_value <= 92.0
+		if abs(x_value - _path_x(z_value)) < 6.0 or shore_clearance or majestic_connector_clearance or lake_dx * lake_dx + lake_dz * lake_dz < 1.20 or arch_sightline_clearance:
 			continue
 		var tree_source: PackedScene
 		var is_conifer: bool = false
