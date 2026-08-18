@@ -157,3 +157,9 @@ Os modos QA `forest_to_ruins` e `ruins_arrival` permitem inspecção reprodutív
 | Regiões 7–12 | Sem alteração |
 
 **Próxima tarefa já iniciada — CP-CARTO-09:** consolidar a leitura macro da sequência Casa Voss–Estrada–Arco–Floresta–Majestic–Ruínas através de uma matriz de âncoras, distâncias e evidências, identificando apenas as lacunas físicas ainda abertas para os passes seguintes. O ciclo permanece contínuo.
+
+### Conclusão operacional do CP-CARTO-09
+
+Foi publicada a matriz `MATRIZ_CONTINUIDADE_CARTOGRAFICA_R1_R6_20260818.md`, que consolida as seis âncoras canónicas, as distâncias directas e as últimas evidências de cada transição. A validação cruzada confirmou que todos os ficheiros de captura referidos existem e que o projecto abre em Godot 4.7.1 sem erro de parser ou carregamento de recurso.
+
+O **CP-CARTO-10** fica formalmente iniciado: provar a leitura macro Casa Voss → Estrada do Rio → Arco das Ruínas no mundo normal, sem comprimir a distância nem regressar aos ajustes de material rejeitados. O resultado deve manter o rio lateral, o vale legível e a silhueta do Arco como destino distante.
