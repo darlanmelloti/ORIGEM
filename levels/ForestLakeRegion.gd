@@ -65,6 +65,27 @@ func _ready() -> void:
 	_build_riparian_margin()
 	_build_lakeside_focal_vegetation()
 	_build_majestic_ruins_approach_grounding()
+	_apply_riparian_fern_alpha_test()
+
+func _apply_riparian_fern_alpha_test() -> void:
+	# CP-CARTO-50: os fetos ribeirinhos não fizeram parte do teste anterior; preserva-se textura PBR e aplica-se apenas o corte alfa compatível.
+	for fern: Node in find_children("FetoRibeirinho_*", "Node3D", true, false):
+		for mesh_node: Node in fern.find_children("*", "MeshInstance3D", true, false):
+			var mesh: MeshInstance3D = mesh_node as MeshInstance3D
+			if mesh == null:
+				continue
+			var source_material: StandardMaterial3D = mesh.get_active_material(0) as StandardMaterial3D
+			if source_material == null:
+				continue
+			var foliage_material: StandardMaterial3D = source_material.duplicate() as StandardMaterial3D
+			foliage_material.albedo_color = Color(0.30, 0.56, 0.24, 1.0)
+			foliage_material.metallic = 0.0
+			foliage_material.roughness = 0.90
+			foliage_material.emission_enabled = false
+			foliage_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+			foliage_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+			foliage_material.alpha_scissor_threshold = 0.36
+			mesh.material_override = foliage_material
 
 func _process(delta: float) -> void:
 	# Oscilação lenta e determinística: dá vida ao acampamento sem partículas pesadas nem custo de sombras dinâmicas.
