@@ -73,7 +73,10 @@ func _start_narrative():
 		var validation_take: String = OS.get_environment("ORIGEM_VALIDATION_TAKE")
 		var validation_region: String = OS.get_environment("ORIGEM_VALIDATION_REGION")
 		if validation_player != null:
-			if validation_take == "6":
+			if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
+				validation_player.global_position = Vector3(60.0, 8.0, 252.0)
+				validation_player.rotation.y = -0.72
+			elif validation_take == "6":
 				validation_player.global_position = Vector3(0.0, 1.8, -73.0)
 			elif validation_take == "7":
 				validation_player.global_position = Vector3(0.0, 1.8, -104.0)
@@ -87,9 +90,12 @@ func _start_narrative():
 				validation_player.global_position = Vector3(-116.0, 43.0, 532.0)
 			else:
 				validation_player.global_position = Vector3(0.0, 1.4, -28.0)
-			validation_player.rotation.y = -1.92 if validation_take == "8" else PI
+			if validation_take != "8" and OS.get_environment("QA_VALIDATION_ROUTE") != "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
+				validation_player.rotation.y = PI
 		mission_phase = 1
-		if validation_region == "8":
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
+			_show_msg("HANDOFF R6 → R7 — Ruínas Submersas para Vila Elevada.", 4.0)
+		elif validation_region == "8":
 			_show_msg("REGIÃO 8 — Observatório da Orion e leitura do céu alpino.", 4.0)
 		elif validation_region == "7":
 			_show_msg("REGIÃO 7 — Vila Elevada e rota para o Observatório.", 4.0)
