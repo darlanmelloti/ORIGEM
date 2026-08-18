@@ -31,3 +31,14 @@ A auditoria runtime confirmou que a abertura usa 1 luz local activa (margem 15) 
 ## Próxima tarefa já em execução — CP-CINE-07 integrado
 
 A chain Dev2 R7–R9 foi publicada na sua branch e preparada num workspace de integração separado. Repetir a matriz congelada Casa Voss e o handoff R6→R7 com o eixo agora aberto, comparar a leitura da cadeia cartográfica e abrir CP-CINE-08 sem pausa. A branch Dev1 mantém exclusivamente as Regiões 1–6.
+
+
+## CP-CARTO-30 — Bacia R6 sem painel plano
+
+No passe mais recente, a cascata oriental `QuadMesh` foi substituída por cinco filetes tridimensionais apoiados no promontório, eliminando a leitura de outdoor azul detectada em gameplay. O parser Godot 4.7.1 e o gameplay autónomo de 30 segundos na chegada às Ruínas passaram sem erro; a captura 1600×900 confirma a remoção do painel. A alteração permaneceu exclusivamente em `ForestLakeRegion.gd`.
+
+## Próxima tarefa já em execução — CP-CARTO-31
+
+Refinar a leitura material e a escala orgânica do limiar ocidental das Ruínas Submersas, preservando a rota física única, a estela de chegada e o orçamento de 16 luzes dinâmicas visíveis. Não repetir emissão de água, altura do leito, escurecimento das lajes, densificação linear do trilho, mastro Majestic ou alteração de balizas rejeitados em ciclos anteriores. A tarefa exige parser Godot 4.7.1, gameplay real mínimo de 30 segundos, captura 1600×900 e avaliação visual antes de abrir o próximo checkpoint.
+
+A integração R6→R7 permanece pronta pelo checklist pareado e aguarda publicação Dev2 CP-D2-214; esta dependência não interrompe CP-CARTO-31.
