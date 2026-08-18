@@ -32,6 +32,8 @@ A captura confirma o mundo principal, o percurso físico e o espelho activo, mas
 | `gameplay-30s.mp4` | `63765cbdebd26a1fc9cbf475b5549b009dc706bcee467adbfd113bcc9ea680eb` |
 | `print-1600x900.jpg` | `45fa9b0f29429a43931e14037c62b1d8e05fcc237f020337ed814ee3af6b7d0f` |
 | `gameplay.log` | `6f5cab814997d8b5ad68d7eabb8e324eea122f3115a230e1d5dd29fa1e69b0ae` |
+| `CP-D2-204-cartographic-mirror.zip` | `579ffc03286df16b47f11db475c1e780651525688a9b9e8ade7f8172f3b0e338` |
+| Branch pública Dev2 | `feature/dev2-mountain-canyon`, HEAD `750f995e02394fcbb2195542906baef503a01f20` |
 
 ## Estado de continuidade
 
