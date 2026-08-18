@@ -29,3 +29,13 @@ A calibração de altura, escurecimento e variante sem iluminação directa do m
 ## Próxima tarefa já iniciada
 
 **CP-CARTO-02 — Arco das Ruínas:** medir a silhueta arqueológica no horizonte da saída Casa Voss e reforçar apenas a sua massa tridimensional apoiada, sem aproximar o marco nem invadir as Regiões 4–12.
+
+## CP-CARTO-02 — Arco das Ruínas
+
+A captura válida após `ORIGEM_QA_SKIP_OPENING=1` confirmou que o Arco já se lê como marco vertical a partir da Estrada. O contraforte lateral real foi **revertido**: não alterou a silhueta percepcionada à distância e acrescentaria detalhe sem benefício claro.
+
+Evidência: `qa_evidence_voss_vista/cp_carto02_arch_buttress_qa_skip.png`.
+
+### Próxima tarefa já iniciada
+
+**CP-CARTO-03 — Continuidade Casa Voss–Estrada:** substituir a leitura fragmentada de lajes isoladas por uma ligação de solo contínua, mantendo a estrada e o rio separados, sem criar nova luz e sem alterar a distância física até ao Arco.
