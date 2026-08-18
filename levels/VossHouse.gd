@@ -78,7 +78,7 @@ func _ready() -> void:
 	_build_interior(house)
 	_build_exterior_details(house)
 	_build_voss_panoramic_threshold(house)
-	_build_voss_revelation_terrace()
+	# O antigo miradouro visual dominava a vista macro sem contribuir para a rota física; a bacia deve abrir directamente após a soleira.
 	_build_visible_opening_road()
 	_build_macro_road_readability()
 	_build_voss_river_revelation_bridge()
@@ -136,6 +136,9 @@ func _build_voss_panoramic_threshold(house: Node3D) -> void:
 		threshold.add_child(fern)
 
 func _build_voss_revelation_terrace() -> void:
+	# QA cartográfico: isola a massa visual do miradouro sem afectar a porta, o terreno ou a rota exterior.
+	if OS.get_environment("ORIGEM_QA_HIDE_VOSS_TERRACE") == "1":
+		return
 	# Miradouro físico CP281: fica no lado exterior da fachada, elevado o suficiente para ler a bacia sem comprimir a escala real do vale.
 	var terrace: StaticBody3D = StaticBody3D.new()
 	terrace.name = "TerracoDeRevelacaoDaCasaVoss"
