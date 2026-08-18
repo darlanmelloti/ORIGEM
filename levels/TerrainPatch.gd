@@ -24,6 +24,18 @@ func _ready() -> void:
 	_build_terrain()
 	# O lago permanece fora da abertura: a referência pede solo húmido, não um espelho de água no primeiro plano.
 
+func _physics_process(_delta: float) -> void:
+	# Recuperação de segurança: a colisão concava é o piso normal; este ramo só actua se um salto de frame extremo
+	# colocar a cápsula abaixo da altura analítica do relevo. Evita quedas infinitas sem criar plataformas visíveis.
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		return
+	var terrain_y: float = height_at(player.global_position.x, player.global_position.z)
+	if player.global_position.y < terrain_y - 0.70:
+		player.global_position.y = terrain_y + 1.25
+		player.velocity = Vector3.ZERO
+		player.set("player_velocity", Vector3.ZERO)
+
 func _setup_noises() -> void:
 	land_noise = FastNoiseLite.new()
 	land_noise.seed = 34271
@@ -104,6 +116,10 @@ func _build_terrain() -> void:
 
 	var surface: SurfaceTool = SurfaceTool.new()
 	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	# A renderização histórica usa a ordem original de faces; a física recebe uma cópia com frente para +Y.
+	# Assim preservamos a imagem aprovada e impedimos a cápsula de Elias de atravessar lacunas entre lajes.
+	var collision_surface: SurfaceTool = SurfaceTool.new()
+	collision_surface.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for z_index: int in range(CELLS_Z):
 		for x_index: int in range(CELLS_X):
 			var x0: float = -SIZE_X * 0.5 + SIZE_X * float(x_index) / float(CELLS_X)
@@ -118,11 +134,15 @@ func _build_terrain() -> void:
 			var p11: Vector3 = Vector3(x1, height_at(x1, z1), z1)
 			_add_terrain_triangle(surface, p00, p01, p10)
 			_add_terrain_triangle(surface, p10, p01, p11)
+			# A forma concava de colisão deve ver o solo pela face superior.
+			_add_terrain_triangle(collision_surface, p00, p10, p01)
+			_add_terrain_triangle(collision_surface, p10, p11, p01)
 
 	surface.generate_normals()
 	surface.generate_tangents()
 	var terrain_mesh: ArrayMesh = surface.commit()
 	terrain_mesh.surface_set_material(0, terrain_material)
+	var collision_mesh: ArrayMesh = collision_surface.commit()
 
 	var terrain_visual: MeshInstance3D = MeshInstance3D.new()
 	terrain_visual.name = "TerrenoEsculpido"
@@ -133,7 +153,7 @@ func _build_terrain() -> void:
 	var terrain_body: StaticBody3D = StaticBody3D.new()
 	terrain_body.name = "ColisaoDoTerreno"
 	var terrain_shape: CollisionShape3D = CollisionShape3D.new()
-	terrain_shape.shape = terrain_mesh.create_trimesh_shape()
+	terrain_shape.shape = collision_mesh.create_trimesh_shape()
 	terrain_body.add_child(terrain_shape)
 	add_child(terrain_body)
 

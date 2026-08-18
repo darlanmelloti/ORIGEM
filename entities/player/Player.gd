@@ -59,8 +59,11 @@ func _ready() -> void:
 	EventBus.player_stamina_changed.emit(current_stamina, MAX_STAMINA)
 
 func _physics_process(delta: float) -> void:
-	_update_combat(delta)
-	_handle_player(delta)
+	# Evita que uma pausa de renderização num hardware de compatibilidade converta gravidade e movimento em um salto físico através do terreno.
+	# A simulação continua determinística, mas cada integração de CharacterBody3D fica limitada a aproximadamente 30 Hz.
+	var safe_delta: float = minf(delta, 0.033)
+	_update_combat(safe_delta)
+	_handle_player(safe_delta)
 	_handle_interaction()
 
 func _input(event: InputEvent) -> void:

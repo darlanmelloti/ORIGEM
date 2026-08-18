@@ -63,6 +63,10 @@ func _queue_regional_qa_modes() -> void:
 		get_tree().create_timer(2.40).timeout.connect(_prepare_valley_bridge_route_qa)
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "handoff_to_village":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_village_handoff_route_qa)
+	elif OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest":
+		# O modo cartográfico não aguarda tempo de jogo: a construção regional já terminou antes desta fila.
+		# Isto evita que o llvmpipe consuma a janela de captura sem chegar ao spawn técnico.
+		call_deferred("_prepare_arch_forest_route_qa")
 	if OS.get_environment("ORIGEM_QA_INTERACT") == "lake_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_lake_stela_interaction_qa)
 	elif OS.get_environment("ORIGEM_QA_INTERACT") == "majestic_stela":
@@ -142,6 +146,28 @@ func _prepare_majestic_lake_route_qa() -> void:
 	player.rotation.y = -PI * 0.5
 	print("[ORIGEM_QA_ROUTE] Spawn Majestic–lago ativo em %s" % player.global_position)
 
+func _prepare_arch_forest_route_qa() -> void:
+	# Exclusivo de QA: a prova inicia poucos metros antes do marco 4, no eixo de saída do Arco para a Floresta Densa.
+	# Não altera a rota Casa Voss → Arco usada no jogo normal e mantém a orientação local -Z de Elias voltada para Z crescente.
+	if not has_node("RegiaoFlorestaLagoExploravel"):
+		get_tree().create_timer(0.75).timeout.connect(_prepare_arch_forest_route_qa)
+		return
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		get_tree().create_timer(0.25).timeout.connect(_prepare_arch_forest_route_qa)
+		return
+	var spawn_x: float = CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA.x
+	var spawn_z: float = CARTOGRAPHIC_ANCHORS.FLORESTA_DENSA_ENTRADA.y - 9.0
+	player.velocity = Vector3.ZERO
+	# Player.gd mantém a velocidade de queda num acumulador próprio; anulá-lo evita que um frame anterior ao teleport atravesse o TerrainPatch.
+	player.set("player_velocity", Vector3.ZERO)
+	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.25, spawn_z)
+	player.rotation.y = PI
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_ROUTE] Spawn Arco–Floresta ativo em %s" % player.global_position)
+
 func _prepare_village_handoff_route_qa() -> void:
 	# Exclusivo de QA: começa no início do trilho Dev1 e desloca-se para a abertura central do portão.
 	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
@@ -209,6 +235,11 @@ func _build_world_after_voss_prologue() -> void:
 		var forest_lake: Node3D = FOREST_LAKE_REGION_SCRIPT.new() as Node3D
 		forest_lake.name = "RegiaoFlorestaLagoExploravel"
 		add_child(forest_lake)
+		# A prova Arco–Floresta avalia exclusivamente o corredor Dev1 (Regiões 1–6). A omissão temporária dos módulos Dev2
+		# reduz o custo de arranque em llvmpipe e não altera o mundo, os activos ou os limites de produção das Regiões 7–12.
+		if OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest":
+			print("[ORIGEM_QA_ROUTE] Mundo reduzido às Regiões 1–6 para a validação Arco–Floresta.")
+			return
 		var highlands: Node3D = HIGHLAND_REGION_SCRIPT.new() as Node3D
 		highlands.name = "RegiaoVilaMontanhaExploravel"
 		add_child(highlands)

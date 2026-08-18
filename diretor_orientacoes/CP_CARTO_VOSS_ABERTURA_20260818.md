@@ -57,3 +57,35 @@ Evidências: `qa_evidence_voss_vista/cp_carto03_roadbed_headless.log`, `qa_evide
 ### Próxima tarefa já iniciada
 
 **CP-CARTO-04 — Profundidade Arco–Floresta Densa:** verificar, a partir da rota física depois do Arco, se a entrada na Região 4 é lida como corredor tridimensional contínuo. O passe limita-se a observação e, apenas se a cadeia estiver ilegível, a uma correcção estrutural apoiada no terreno; não deve repetir as calibrações de material, elevação de faixa, água ou escala das lajes rejeitadas.
+
+## CP-CARTO-04 — Profundidade Arco–Floresta Densa
+
+Foi criado o modo técnico `ORIGEM_QA_ROUTE=arch_to_forest` em `TempleLevel.gd`. O modo coloca Elias em `(-9, y, 107)`, virado para o marco cartográfico da **Floresta Densa** em `(-9, 116)`, e não altera o arranque nem o percurso normal. Quando esse modo é usado, o mundo de QA limita-se às Regiões 1–6; as Regiões 7–12 permanecem intactas e continuam a ser carregadas em qualquer sessão normal.
+
+A validação headless confirmou o spawn e não detectou erros de parser, recursos ou runtime. A captura gráfica no llvmpipe continua limitada pela construção procedural da cena antes de o temporizador de 30 segundos do sandbox completar; esta limitação não é assumida como prova visual. O próximo passe permanece **em execução**: reduzir o custo de inicialização somente no modo QA, sem remover geometria de produção, até produzir a captura física do limiar Arco–Floresta.
+
+| Verificação | Estado |
+| --- | --- |
+| Godot 4.7.1 headless | Aprovado |
+| Spawn `arch_to_forest` em runtime headless | Aprovado |
+| Regiões 7–12 em jogo normal | Não alteradas |
+| Captura visual do limiar no llvmpipe | Em execução — aquecimento excede a janela útil |
+
+Evidências: `qa_evidence_voss_vista/cp_carto04_arch_forest_headless.log`, `qa_evidence_voss_vista/cp_carto04_arch_forest_headless_runtime.log` e `qa_evidence_voss_vista/cp_carto04_arch_forest_stable30.png`.
+
+### Conclusão operacional do CP-CARTO-04
+
+A prova foi concluída no mundo integrado das Regiões 1–6. O modo `ORIGEM_QA_ROUTE=arch_to_forest` agora agenda o spawn no primeiro frame disponível depois de a região existir, elimina a velocidade interna acumulada de Elias e limita o mundo de QA às Regiões 1–6. Nenhuma dessas condições é activada no jogo normal.
+
+A estabilidade física foi reforçada em duas camadas: `Player.gd` limita passos físicos excepcionalmente grandes no renderizador de compatibilidade e `TerrainPatch.gd` mantém uma malha visual inalterada, uma malha de colisão dedicada e recuperação discreta apenas se a cápsula ficar abaixo do relevo analítico. A captura **`cp_carto04_arch_forest_immediate_walk30.png`** comprova Elias apoiado no terreno ao avançar pelo limiar Arco–Floresta; a stamina permanece cheia, sem erro de runtime. A captura normal **`cp_carto04_normal_after_physics30.png`** confirma que a Estrada do Rio, o Arco e a imagem aprovada da Casa Voss não sofreram regressão durante 30 segundos.
+
+| Critério | Resultado |
+| --- | --- |
+| Parser Godot 4.7.1 | Aprovado |
+| Mundo normal Casa Voss–Arco | Aprovado em 30 segundos |
+| Spawn técnico Arco–Floresta | Aprovado |
+| Travessia física no limiar | Aprovado |
+| Regiões 7–12 | Sem alterações de produção |
+| Orçamento de luzes | Sem novas luzes dinâmicas |
+
+**Próxima tarefa já iniciada — CP-CARTO-05:** corrigir a leitura visual do limiar Arco–Floresta sem mudar a câmara nem a geografia: identificar e remover a lâmina ciano plana periférica, reduzir a repetição imediata de lajes e preservar a profundidade criada por árvores, contrafortes e trilho físico. A evidência do CP-CARTO-04 não encerra o ciclo.
