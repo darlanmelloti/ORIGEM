@@ -726,7 +726,9 @@ func _build_dense_forest() -> void:
 		var is_conifer: bool = false
 		# A maioria dos pontos focais usa malhas orgânicas reais; as coníferas EZ ficam como profundidade económica.
 		if index % 7 == 0:
-			tree_source = ISLAND_TREE
+			# Instâncias próximas usam o pinheiro PBR local; evita a silhueta de folhagem plana do Island Tree no percurso jogável.
+			tree_source = PINE_TALL
+			is_conifer = true
 		elif index % 5 == 0:
 			tree_source = OAK_DARK
 		elif index % 3 == 0:
