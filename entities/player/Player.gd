@@ -93,9 +93,9 @@ func _create_combat_nodes() -> void:
 
 	var blade_material: StandardMaterial3D = StandardMaterial3D.new()
 	# Aço frio envelhecido: mantém a leitura metálica, mas evita que a lâmina reflita o céu como um emissor ciano no GL Compatibility.
-	blade_material.albedo_color = Color(0.39, 0.45, 0.50)
-	blade_material.metallic = 0.72
-	blade_material.roughness = 0.52
+	blade_material.albedo_color = Color(0.22, 0.27, 0.30)
+	blade_material.metallic = 0.34
+	blade_material.roughness = 0.78
 
 	# Lâmina de secção losangular: evita a leitura de barra rectangular no canto da câmara.
 	var blade_mesh: CylinderMesh = CylinderMesh.new()
@@ -114,9 +114,9 @@ func _create_combat_nodes() -> void:
 
 	var guard_material: StandardMaterial3D = StandardMaterial3D.new()
 	# Bronze envelhecido para guarda e pomo, com aspereza suficiente para manter detalhe em luz de dia.
-	guard_material.albedo_color = Color(0.34, 0.20, 0.055)
-	guard_material.metallic = 0.68
-	guard_material.roughness = 0.50
+	guard_material.albedo_color = Color(0.22, 0.12, 0.030)
+	guard_material.metallic = 0.38
+	guard_material.roughness = 0.72
 
 	var guard_mesh: CylinderMesh = CylinderMesh.new()
 	guard_mesh.top_radius = 0.042
