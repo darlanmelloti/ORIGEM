@@ -185,3 +185,17 @@
 - [ ] Próximo passe: contraste exterior/interior e validação integrada Caverna → Cube.
 
 **Fronteira:** apenas Regiões 7–12; Regiões 1–6 permanecem bloqueadas.
+
+
+## CP-D2-202 — auditoria independente e correcção obrigatória
+
+- [ ] Auditar o commit `9846060` e localizar o checkout canónico completo das Regiões 7–12.
+- [ ] Confirmar que o checkout Dev2 contém o projecto Godot completo, não apenas script e evidências.
+- [ ] Reduzir as luzes dinâmicas da Região 12 para `omni_lights <= 16`.
+- [ ] Criar uma única massa vertical de portal apoiada na plataforma R12.
+- [ ] Preservar estritamente as Regiões 1–6 e validar o scope guard.
+- [ ] Executar parser/headless, travessia, gameplay de 30 segundos e print 1600x900.
+- [ ] Avaliar visualmente e repetir o ciclo se a composição continuar rejeitada.
+- [ ] Criar ZIP do projecto completo R7–R12 e calcular SHA-256.
+- [ ] Actualizar o relatório com estado único e próxima acção já iniciada.
+- [ ] Sincronizar o resultado na branch Dev2 publicamente verificável.
