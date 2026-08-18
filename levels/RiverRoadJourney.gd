@@ -291,6 +291,30 @@ func _build_river_road() -> void:
 		slab_collision.shape = slab_shape
 		slab_body.add_child(slab_collision)
 		road.add_child(slab_body)
+	# CP-CARTO-11 — o primeiro corredor é a leitura imediata da saída da Casa Voss. Lajes intermédias compactas fecham os intervalos iniciais
+	# sem mudar a escala dos 108 m até ao Arco, a largura do solo contínuo ou a posição lateral do rio.
+	var infill_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	infill_rng.seed = 10112
+	for infill_index: int in range(7):
+		var infill_z: float = 12.0 + (float(infill_index) + 0.5) * 108.0 / 37.0
+		var infill_x: float = _road_x(infill_z)
+		var infill: MeshInstance3D = MeshInstance3D.new()
+		infill.name = "LajeContinuidadeEstradaRio_%02d" % infill_index
+		infill.mesh = _make_slab(1.56 + infill_rng.randf_range(-0.10, 0.12), 1.70 + infill_rng.randf_range(-0.08, 0.10), infill_rng)
+		infill.material_override = path_material
+		infill.position = Vector3(infill_x, _height_at(infill_x, infill_z) + 0.039, infill_z)
+		infill.rotation.y = atan2((_road_x(infill_z + 1.0) - _road_x(infill_z - 1.0)) * 0.5, 2.0) + infill_rng.randf_range(-0.055, 0.055)
+		road.add_child(infill)
+		var infill_body: StaticBody3D = StaticBody3D.new()
+		infill_body.name = "ColisorLajeContinuidadeEstradaRio_%02d" % infill_index
+		infill_body.position = infill.position + Vector3(0.0, -0.045, 0.0)
+		infill_body.rotation.y = infill.rotation.y
+		var infill_collision: CollisionShape3D = CollisionShape3D.new()
+		var infill_shape: BoxShape3D = BoxShape3D.new()
+		infill_shape.size = Vector3(1.40, 0.16, 1.66)
+		infill_collision.shape = infill_shape
+		infill_body.add_child(infill_collision)
+		road.add_child(infill_body)
 
 func _build_river() -> void:
 	var river_root: Node3D = Node3D.new()

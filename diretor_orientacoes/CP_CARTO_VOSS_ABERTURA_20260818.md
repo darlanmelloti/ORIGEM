@@ -180,3 +180,20 @@ A comparação `cp_carto10_voss_rocks_pbr30.png` comprova a redução das massas
 | Gameplay técnico | 30 segundos, sem erro de runtime |
 
 **Próxima tarefa já iniciada — CP-CARTO-11:** densificar estruturalmente somente as lajes iniciais da Estrada do Rio entre `z=12` e `z=30`, preservando a faixa contínua, o rio lateral e a escala até ao Arco. A comparação deve medir se a rota deixa de se ler como pedras isoladas sem repetir calibrações de material já rejeitadas.
+
+### Conclusão operacional do CP-CARTO-11
+
+A Estrada do Rio mantinha lajes principais a cada aproximadamente 2,92 m entre `z=12` e `z=30`; nessa primeira vista, o trajecto surgia como objectos isolados. Foram acrescentadas sete lajes intermédias, mais estreitas e com comprimento de continuidade, acompanhadas de sete volumes físicos baixos. A alteração é exclusivamente estrutural: não modifica material, faixa de solo compactado, rio, Arco, âncoras nem a escala total até ao marco arqueológico.
+
+A captura `cp_carto11_infill30.png` confirma 30 segundos de gameplay normal sem erro de runtime. A aproximação passou a ler-se como corredor de pedra contínuo na primeira janela Casa Voss → Estrada → Arco, mantendo relva e rio lateral separados. O orçamento adicionou apenas sete colisores no primeiro segmento, sem luz dinâmica nova.
+
+| Critério | Resultado |
+| --- | --- |
+| Intervalo visual inicial das lajes | Reduzido por sete lajes intermédias |
+| Apoio físico | Sete colisores baixos adicionados |
+| Rio e margem | Inalterados |
+| Distância até ao Arco | Preservada |
+| Gameplay normal | 30 segundos, sem erro de runtime |
+| Regiões 7–12 | Sem alteração |
+
+**Próxima tarefa já iniciada — CP-CARTO-12:** verificar a leitura de profundidade depois do Arco, entre a silhueta arqueológica e a entrada da Floresta Densa, usando o spawn QA estável sem repetir ajustes de FOV, câmara, água ou materiais rejeitados. O ciclo permanece contínuo.
