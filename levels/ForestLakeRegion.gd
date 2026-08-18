@@ -57,6 +57,7 @@ func _ready() -> void:
 	_build_forest_micro_details()
 	_build_majestic_camp()
 	_build_majestic_connector()
+	_build_majestic_lake_link()
 	_build_majestic_turn_marker()
 	_build_take9_corridor_fill()
 	_build_take6_corridor_accent()
@@ -1390,6 +1391,40 @@ func _build_majestic_connector() -> void:
 				margin_tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
 				margin_tree.rotation.y = rng.randf_range(-PI, PI)
 				connector_margin.add_child(margin_tree)
+
+func _build_majestic_lake_link() -> void:
+	# CP-CARTO-84: a rota R5→R6 tinha uma lacuna curta entre o fim da ligação Majestic e a primeira laje da margem.
+	# Esta ponte de lajes fecha apenas esse intervalo, sem reduzir a distância macro Casa→Arco→Floresta→Majestic→Ruínas.
+	var link: Node3D = Node3D.new()
+	link.name = "LigacaoFisicaMajesticParaMargem"
+	add_child(link)
+	var camp_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC
+	var link_z: float = camp_anchor.y
+	var start_x: float = _path_x(link_z)
+	var end_x: float = _lake_shore_x(link_z)
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 84006
+	for index: int in range(6):
+		var t: float = float(index + 1) / 7.0
+		var x_value: float = lerpf(start_x, end_x, t)
+		var z_value: float = link_z + sin(t * PI) * 0.62
+		var ground_y: float = _height_at(x_value, z_value)
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeLigacaoMajesticMargem_%02d" % index
+		slab.mesh = _make_slab(1.76 + rng.randf_range(-0.08, 0.10), 1.42 + rng.randf_range(-0.06, 0.07), rng)
+		slab.material_override = shore_material
+		slab.position = Vector3(x_value, ground_y + 0.06, z_value)
+		slab.rotation.y = rng.randf_range(-0.035, 0.035)
+		link.add_child(slab)
+		var slab_body: StaticBody3D = StaticBody3D.new()
+		slab_body.name = "ColisorLigacaoMajesticMargem_%02d" % index
+		slab_body.position = slab.position + Vector3(0.0, -0.045, 0.0)
+		var collision: CollisionShape3D = CollisionShape3D.new()
+		var shape: BoxShape3D = BoxShape3D.new()
+		shape.size = Vector3(1.90, 0.20, 1.64)
+		collision.shape = shape
+		slab_body.add_child(collision)
+		link.add_child(slab_body)
 
 func _build_majestic_turn_marker() -> void:
 	# CP 258 — Bifurcação física para Majestic: uma estela baixa orienta a saída oeste do trilho florestal.

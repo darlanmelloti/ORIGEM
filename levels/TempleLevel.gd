@@ -272,6 +272,12 @@ func _prepare_majestic_lake_route_qa() -> void:
 	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.25, spawn_z)
 	# A mesma sequência de lajes é atravessada nas duas direcções, sem corte diagonal pelo terreno aberto.
 	var connector_target: Vector3 = Vector3(-77.4 if reverse_from_forest else -2.5, player.global_position.y, spawn_z)
+	if not reverse_from_forest:
+		# CP-CARTO-84: o take de saída Majestic deve olhar para a nova ligação e a primeira laje real da margem R6, não regressar para a Floresta.
+		var region: Node3D = get_node_or_null("RegiaoFlorestaLagoExploravel") as Node3D
+		if region != null and region.has_method("_lake_shore_x"):
+			var shore_x: float = float(region.call("_lake_shore_x", spawn_z))
+			connector_target = Vector3(shore_x, player.global_position.y, spawn_z + 8.0)
 	player.look_at(connector_target, Vector3.UP)
 	var head: Node3D = player.get_node_or_null("Head") as Node3D
 	if head != null:

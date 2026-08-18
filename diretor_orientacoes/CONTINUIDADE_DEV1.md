@@ -172,3 +172,11 @@ A rota `majestic_to_lake` passou 36 segundos no Godot 4.7.1 e a régua X/Z defin
 - **Ferramenta QA aprovada:** `ORIGEM_QA_VIEWPORT_SNAPSHOT` apenas actua com a variável de ambiente, espera dois frames de composição e elimina o falso splash do Xvfb sem afectar jogo normal.
 - **Meshy:** o piloto de estela assimétrica continua especificado, mas não existe GLB recuperável depois do reset da sessão/conta. Não recriar cairn, não alterar a estela actual e não tocar lanternas, água, fetos, rochas ou árvores aprovados.
 - **Próximo passo activo:** CP-CARTO-84 — validar a margem Majestic→Ruínas pelo viewport QA e investigar somente uma divergência visual causal nova.
+
+## CP-CARTO-84 — Ligação física Majestic→Margem R6 aprovada
+
+O diagnóstico da rota `majestic_to_lake` revelou uma lacuna curta entre `LigacaoMajesticAoTrilhoFlorestal` e `TrilhoAteAMargemDoLago`. Foi promovida `LigacaoFisicaMajesticParaMargem`: seis lajes tridimensionais e colisores baixos no único intervalo local que impedia a continuidade literal R5→R6. A alteração não acrescenta luzes, água, vegetação, placas, colisores laterais nem módulos R7–R12.
+
+O harness QA passou a apontar o take Majestic para a primeira laje real de R6. Parser Godot 4.7.1, Menu→Novo Jogo, 36 segundos de gameplay e captura interna 1920×1080 passaram. A régua X/Z confirma `proximo=6:RUMO ÀS RUÍNAS` a partir do marco 5. A evidência encontra-se em `qa_evidence_carto84/CP_CARTO84_MAJESTIC_TO_RUINS_PHYSICAL_LINK.md`.
+
+**Próximo passo activo:** CP-CARTO-85 — validar a entrada em movimento da margem R6, preservando a nova continuidade e sem repetir estelas, cairns, lanternas, fetos, rochas, água ou árvores já rejeitados.
