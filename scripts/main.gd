@@ -77,7 +77,7 @@ func _start_narrative():
 				validation_player.global_position = Vector3(60.0, 8.0, 252.0)
 				validation_player.rotation.y = -0.72
 			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY":
-				validation_player.global_position = Vector3(128.0, 14.0, 332.0)
+				validation_player.global_position = Vector3(170.0, 15.0, 382.0)
 				validation_player.rotation.y = -2.38
 			elif validation_take == "6":
 				validation_player.global_position = Vector3(0.0, 1.8, -73.0)
@@ -99,7 +99,8 @@ func _start_narrative():
 		if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY" and validation_player != null:
 			var validation_camera := validation_player.get_node_or_null("Head/Camera3D") as Camera3D
 			if validation_camera != null:
-				validation_camera.look_at(Vector3(194.0, 24.0, 404.0), Vector3.UP)
+				validation_camera.look_at(Vector3(194.0, 20.0, 404.0), Vector3.UP)
+				validation_camera.fov = 48.0
 		if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
 			_show_msg("HANDOFF R6 → R7 — Ruínas Submersas para Vila Elevada.", 4.0)
 		elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY":
