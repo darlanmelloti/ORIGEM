@@ -56,8 +56,12 @@ var is_paused: bool = false
 # ============================================================
 
 func _ready() -> void:
-	# Liga-se ao EventBus para ouvir eventos globais
-	EventBus.game_paused.connect(_on_game_paused)
+	# O caminho explícito em project.godot garante a criação de EventBus. A guarda evita encerrar o jogo caso um projecto recém-extraído ainda esteja a reconstruir autoloads.
+	var event_bus: Node = get_node_or_null("/root/EventBus")
+	if event_bus != null and event_bus.has_signal("game_paused"):
+		event_bus.connect("game_paused", Callable(self, "_on_game_paused"))
+	else:
+		push_warning("EventBus indisponível durante a inicialização; o GameManager continuará sem o sinal de pausa até ao próximo arranque.")
 
 ## Muda o estado atual do jogo e notifica os sistemas.
 func change_state(new_state: GameState) -> void:
@@ -70,7 +74,9 @@ func change_era(new_era: GameEra) -> void:
 	var from_era: String = GameEra.keys()[current_era]
 	var to_era: String = GameEra.keys()[new_era]
 	current_era = new_era
-	EventBus.timeline_era_changed.emit(from_era, to_era)
+	var event_bus: Node = get_node_or_null("/root/EventBus")
+	if event_bus != null and event_bus.has_signal("timeline_era_changed"):
+		event_bus.emit_signal("timeline_era_changed", from_era, to_era)
 
 ## Retorna o nome da era atual como String.
 func get_current_era_name() -> String:
@@ -79,7 +85,11 @@ func get_current_era_name() -> String:
 ## Pausa ou retoma o jogo.
 func toggle_pause() -> void:
 	is_paused = !is_paused
-	EventBus.game_paused.emit(is_paused)
+	var event_bus: Node = get_node_or_null("/root/EventBus")
+	if event_bus != null and event_bus.has_signal("game_paused"):
+		event_bus.emit_signal("game_paused", is_paused)
+	else:
+		_on_game_paused(is_paused)
 
 # ============================================================
 # FUNÇÕES PRIVADAS

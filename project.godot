@@ -22,12 +22,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*uid://bb5l65ihd1v7k"
-GameManager="*uid://cgvmf0nmd16ah"
-SaveManager="*uid://dl25lat4grhog"
-QuestManager="*uid://cqd43wq5jeicn"
-InventoryManager="*uid://s76x3vuyuibh"
-TimelineManager="*uid://tu5kwyqf5am3"
+EventBus="*res://_autoloads/EventBus.gd"
+GameManager="*res://_autoloads/GameManager.gd"
+SaveManager="*res://_autoloads/SaveManager.gd"
+QuestManager="*res://core/quests/QuestManager.gd"
+InventoryManager="*res://core/inventory/InventoryManager.gd"
+TimelineManager="*res://core/timeline/TimelineManager.gd"
 WorldEvents="*res://core/events/WorldEventManager.gd"
 AudioManager="*res://_autoloads/AudioManager.gd"
 OrionTransitionState="*res://core/OrionTransitionState.gd"
