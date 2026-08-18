@@ -153,13 +153,13 @@ func _build_clean_r12_portal() -> void:
 		for ground_mesh in ground.find_children("*", "MeshInstance3D", true, false):
 			ground_mesh.set_surface_override_material(0, ground_material)
 		portal.add_child(ground)
-	for side in [-1.0, 1.0]:
+	for side in [0.0]:
 		var jamb := PILLAR.instantiate() as Node3D
 		if jamb == null:
 			continue
-		jamb.name = "JambaPortalLimpoR12_%s" % str(side)
-		jamb.position = Vector3(side * 1.90, 0.48, -2.75)
-		jamb.scale = Vector3(0.58, 1.85, 0.58)
+		jamb.name = "MassaVerticalPortalLimpoR12"
+		jamb.position = Vector3(0.0, 0.62, -2.70)
+		jamb.scale = Vector3(1.12, 1.62, 0.82)
 		jamb.rotation = Vector3(0.03, side * 0.08, side * 0.02)
 		var jamb_material := StandardMaterial3D.new()
 		jamb_material.albedo_color = Color("#6d8798")
@@ -167,22 +167,22 @@ func _build_clean_r12_portal() -> void:
 		for jamb_mesh in jamb.find_children("*", "MeshInstance3D", true, false):
 			jamb_mesh.set_surface_override_material(0, jamb_material)
 		portal.add_child(jamb)
-	for wing_side in [-1.0, 1.0]:
+	for wing_side in []:
 		var wing := ROCK_LARGE.instantiate() as Node3D
 		if wing == null:
 			continue
 		wing.name = "AlaBaixaOrganicaR12_%s" % str(wing_side)
-		wing.position = Vector3(wing_side * 2.18, -0.18, -2.36)
-		wing.scale = Vector3(0.62, 0.22, 0.52)
+		wing.position = Vector3(wing_side * 1.62, -0.16, -2.52)
+		wing.scale = Vector3(0.78, 0.26, 0.62)
 		wing.rotation = Vector3(0.04, wing_side * 0.18, wing_side * 0.06)
 		portal.add_child(wing)
-	for monolith_side in [-1.0, 1.0]:
+	for monolith_side in [0.0]:
 		var monolith := PILLAR.instantiate() as Node3D
 		if monolith == null:
 			continue
-		monolith.name = "MonolitoCoroaR12_%s" % str(monolith_side)
-		monolith.position = Vector3(monolith_side * 1.18, 0.42, -2.62)
-		monolith.scale = Vector3(0.42, 1.26 + (0.10 if monolith_side < 0.0 else 0.0), 0.42)
+		monolith.name = "CoroamentoMassaVerticalPortalR12"
+		monolith.position = Vector3(0.0, 1.82, -2.62)
+		monolith.scale = Vector3(0.48, 0.72, 0.42)
 		monolith.rotation = Vector3(0.04, monolith_side * 0.10, monolith_side * 0.04)
 		var monolith_material := StandardMaterial3D.new()
 		monolith_material.albedo_color = Color("#526b7d")
@@ -190,37 +190,56 @@ func _build_clean_r12_portal() -> void:
 		for monolith_mesh in monolith.find_children("*", "MeshInstance3D", true, false):
 			monolith_mesh.set_surface_override_material(0, monolith_material)
 		portal.add_child(monolith)
-	var lintel := ROCK_LARGE.instantiate() as Node3D
-	if lintel != null:
-		lintel.name = "LintelPortalLimpoR12"
-		lintel.position = Vector3(0.0, 1.34, -2.75)
-		lintel.scale = Vector3(2.35, 0.52, 0.74)
-		lintel.rotation = Vector3(0.02, 0.0, 0.0)
-		portal.add_child(lintel)
-		lintel.visible = false
+		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
+			monolith.visible = false
+		var grounded_crown := ROCK_LARGE.instantiate() as Node3D
+		if grounded_crown != null:
+			grounded_crown.name = "CoroamentoBaixoAterradoR12"
+			grounded_crown.position = Vector3(0.0, 0.10, -2.72)
+			grounded_crown.scale = Vector3(1.32, 0.22, 0.62)
+			grounded_crown.rotation = Vector3(0.02, 0.0, 0.0)
+			var crown_material := StandardMaterial3D.new()
+			crown_material.albedo_color = Color("#526f88")
+			crown_material.roughness = 0.82
+			for crown_mesh in grounded_crown.find_children("*", "MeshInstance3D", true, false):
+				crown_mesh.set_surface_override_material(0, crown_material)
+			portal.add_child(grounded_crown)
+		var lintel := ROCK_LARGE.instantiate() as Node3D
+		if lintel != null:
+			lintel.name = "LintelPortalLimpoR12"
+			lintel.position = Vector3(0.0, 0.32, -2.48)
+			lintel.scale = Vector3(1.08, 0.22, 0.46)
+			lintel.rotation = Vector3(0.02, 0.0, 0.0)
+			var lintel_material := StandardMaterial3D.new()
+			lintel_material.albedo_color = Color("#4b668c")
+			lintel_material.roughness = 0.84
+			for lintel_mesh in lintel.find_children("*", "MeshInstance3D", true, false):
+				lintel_mesh.set_surface_override_material(0, lintel_material)
+			portal.add_child(lintel)
+			lintel.visible = true
 	var recess := ROCK_LARGE.instantiate() as Node3D
 	if recess != null:
 		recess.name = "RecessoPortalLimpoR12"
-		recess.position = Vector3(0.0, 0.18, -2.92)
-		recess.scale = Vector3(1.75, 1.20, 0.18)
+		recess.position = Vector3(0.0, -0.10, -2.96)
+		recess.scale = Vector3(1.24, 0.30, 0.14)
 		var material := StandardMaterial3D.new()
-		material.albedo_color = Color("#101a2c")
-		material.roughness = 0.96
+		material.albedo_color = Color("#16294a")
+		material.roughness = 0.92
 		for recess_mesh in recess.find_children("*", "MeshInstance3D", true, false):
 			recess_mesh.set_surface_override_material(0, material)
 		portal.add_child(recess)
 		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
-			recess.visible = false
+			recess.visible = true
 		var temporal_core := ROCK_LARGE.instantiate() as Node3D
 		if temporal_core != null:
 			temporal_core.name = "NucleoTemporalEncastradoR12"
 			temporal_core.position = Vector3(0.0, 0.32, -2.58)
 			temporal_core.scale = Vector3(0.44, 0.30, 0.44)
 			var core_material := StandardMaterial3D.new()
-			core_material.albedo_color = Color("#466c98")
+			core_material.albedo_color = Color("#4e5da0")
 			core_material.emission_enabled = true
-			core_material.emission = Color("#5b8fb5")
-			core_material.emission_energy_multiplier = 1.15
+			core_material.emission = Color("#6c62d7")
+			core_material.emission_energy_multiplier = 1.42
 			core_material.roughness = 0.72
 			for core_mesh in temporal_core.find_children("*", "MeshInstance3D", true, false):
 				core_mesh.set_surface_override_material(0, core_material)
@@ -234,7 +253,7 @@ func _build_clean_r12_portal() -> void:
 				pedestal_material.albedo_color = Color("#36556f")
 				pedestal_material.emission_enabled = true
 				pedestal_material.emission = Color("#244a6e")
-				pedestal_material.emission_energy_multiplier = 0.30
+				pedestal_material.emission_energy_multiplier = 0.52
 				for pedestal_mesh in core_pedestal.find_children("*", "MeshInstance3D", true, false):
 					pedestal_mesh.set_surface_override_material(0, pedestal_material)
 				portal.add_child(core_pedestal)
@@ -250,24 +269,24 @@ func _build_clean_r12_portal() -> void:
 		crown.visible = false
 	var portal_light := OmniLight3D.new()
 	portal_light.name = "LuzPortalLimpoR12"
-	portal_light.light_color = Color("#5b9fc0")
-	portal_light.light_energy = 0.28
-	portal_light.omni_range = 5.0
+	portal_light.light_color = Color("#6d83d7")
+	portal_light.light_energy = 0.30
+	portal_light.omni_range = 4.2
 	portal_light.shadow_enabled = false
-	portal_light.position = Vector3(164.0, 2.0, 175.2)
+	portal_light.position = Vector3(164.0, 2.55, 175.2)
 	add_child(portal_light)
 	var core_light := OmniLight3D.new()
 	core_light.name = "LuzNucleoTemporalR12"
-	core_light.light_color = Color("#5b8fb5")
-	core_light.light_energy = 0.08
-	core_light.omni_range = 2.8
+	core_light.light_color = Color("#6c62d7")
+	core_light.light_energy = 0.2822
+	core_light.omni_range = 3.6
 	core_light.shadow_enabled = false
 	core_light.position = Vector3(164.0, 0.08, 175.42)
 	add_child(core_light)
 	var contact_light := OmniLight3D.new()
 	contact_light.name = "LuzContactoNucleoR12"
-	contact_light.light_color = Color("#6d6fc4")
-	contact_light.light_energy = 0.06
+	contact_light.light_color = Color("#8176d6")
+	contact_light.light_energy = 0.20
 	contact_light.omni_range = 1.9
 	contact_light.shadow_enabled = false
 	contact_light.position = Vector3(164.0, -0.12, 175.10)
@@ -275,7 +294,7 @@ func _build_clean_r12_portal() -> void:
 	var left_rim := OmniLight3D.new()
 	left_rim.name = "RecorteAzulPilarEsquerdoR12"
 	left_rim.light_color = Color("#4f8fc4")
-	left_rim.light_energy = 0.42
+	left_rim.light_energy = 0.14
 	left_rim.omni_range = 5.4
 	left_rim.shadow_enabled = false
 	left_rim.position = Vector3(161.15, 0.84, 175.72)
@@ -283,7 +302,7 @@ func _build_clean_r12_portal() -> void:
 	var right_rim := OmniLight3D.new()
 	right_rim.name = "RecorteVioletaPilarDireitoR12"
 	right_rim.light_color = Color("#7562c8")
-	right_rim.light_energy = 0.34
+	right_rim.light_energy = 0.12
 	right_rim.omni_range = 5.4
 	right_rim.shadow_enabled = false
 	right_rim.position = Vector3(166.85, 0.84, 175.72)
@@ -392,14 +411,14 @@ func _build_final_dome_traversal_proxy() -> void:
 	var crown := ROCK_LARGE.instantiate() as Node3D
 	if left_arch != null:
 		left_arch.name = "ArcoOrganicoEsquerdo"
-		left_arch.position = Vector3(-2.35, 2.15, -4.38)
+		left_arch.position = Vector3(-2.35, 1.42, -4.38)
 		left_arch.scale = Vector3(1.35, 2.55, 1.45)
 		left_arch.rotation = Vector3(0.0, -0.08, 0.0)
 		left_arch.visible = true
 		proxy.add_child(left_arch)
 	if right_arch != null:
 		right_arch.name = "ArcoOrganicoDireito"
-		right_arch.position = Vector3(2.35, 2.15, -4.38)
+		right_arch.position = Vector3(2.35, 1.42, -4.38)
 		right_arch.scale = Vector3(1.35, 2.55, 1.45)
 		right_arch.rotation = Vector3(0.0, 0.08, 0.0)
 		right_arch.visible = true
@@ -407,7 +426,7 @@ func _build_final_dome_traversal_proxy() -> void:
 		if crown != null:
 			crown.name = "ArcoOrganicoCoroa"
 			crown.visible = true
-			crown.position = Vector3(0.0, 2.86, -4.34)
+			crown.position = Vector3(0.0, 1.92, -4.34)
 			crown.scale = Vector3(1.48, 0.78, 1.16)
 			crown.rotation = Vector3(-0.22, 0.08, 0.06)
 			proxy.add_child(crown)
@@ -415,7 +434,7 @@ func _build_final_dome_traversal_proxy() -> void:
 	var lintel := ROCK_LARGE.instantiate() as Node3D
 	if lintel != null:
 		lintel.name = "LintelOrganicoCupulaFinal"
-		lintel.position = Vector3(0.0, 2.72, -4.18)
+		lintel.position = Vector3(0.0, 1.78, -4.18)
 		lintel.scale = Vector3(3.15, 1.08, 1.7)
 		lintel.rotation = Vector3(0.0, 0.0, 0.02)
 		lintel.visible = true
@@ -924,11 +943,11 @@ func _process(delta: float) -> void:
 func _set_camera(progress: float) -> void:
 	if camera == null:
 		return
-	var start := Vector3(164.0, 2.36, 179.7)
-	var finish := Vector3(164.0, 2.12, 177.85)
+	var start := Vector3(163.82, 2.34, 180.78)
+	var finish := Vector3(164.32, 1.98, 176.02)
 	var position := start.lerp(finish, progress)
-	position.x += sin(progress * TAU * 0.8) * 0.72
-	position.y += sin(progress * PI) * 0.48
+	position.x += sin(progress * TAU * 0.8) * 0.10
+	position.y += sin(progress * PI) * 0.10
 	camera.position = position
-	var target := Vector3(164.0 + sin(progress * PI) * 0.12, 0.44 + progress * 0.06, 174.90)
+	var target := Vector3(164.00 + sin(progress * PI) * 0.02, -0.10 + progress * 0.03, 175.42)
 	camera.look_at(target, Vector3.UP)
