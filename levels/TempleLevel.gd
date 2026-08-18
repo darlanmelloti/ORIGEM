@@ -68,6 +68,8 @@ func _queue_regional_qa_modes() -> void:
 		call_deferred("_prepare_positive_bridge_route_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "road_return_voss":
 		call_deferred("_prepare_road_return_voss_qa")
+	elif OS.get_environment("ORIGEM_QA_ROUTE") == "road_to_arch":
+		call_deferred("_prepare_road_to_arch_route_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "handoff_to_village":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_village_handoff_route_qa)
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest":
@@ -143,6 +145,25 @@ func _prepare_road_return_voss_qa() -> void:
 	if head != null:
 		head.rotation = Vector3.ZERO
 	print("[ORIGEM_QA_ROUTE] Spawn RetornoCasaVoss ativo em %s; foco=%s" % [player.global_position, focus])
+
+func _prepare_road_to_arch_route_qa() -> void:
+	# Harness de evidência macro R1–R3: Elias nasce no mesmo primeiro segmento livre da Estrada e aponta para o Arco físico recuado.
+	# A tomada usa a câmara do jogador, evitando o conflito de câmara que produziu um frame negro no modo cinematic capture OpenGL.
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		get_tree().create_timer(0.25).timeout.connect(_prepare_road_to_arch_route_qa)
+		return
+	var spawn_x: float = CartographicAnchors.ESTRADA_RIO_INICIO.x + 1.35
+	var spawn_z: float = CartographicAnchors.ESTRADA_RIO_INICIO.y + 10.0
+	var focus: Vector3 = Vector3(-13.8, 0.0, 92.0)
+	player.velocity = Vector3.ZERO
+	player.set("player_velocity", Vector3.ZERO)
+	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.30, spawn_z)
+	player.look_at(Vector3(focus.x, player.global_position.y, focus.z), Vector3.UP)
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_ROUTE] Spawn Estrada–Arco ativo em %s; foco=%s" % [player.global_position, focus])
 
 func _prepare_positive_bridge_route_qa() -> void:
 	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
@@ -312,7 +333,7 @@ func _build_world_after_voss_prologue() -> void:
 		# A prova Arco–Floresta avalia exclusivamente o corredor Dev1 (Regiões 1–6). A omissão temporária dos módulos Dev2
 		# reduz o custo de arranque em llvmpipe e não altera o mundo, os activos ou os limites de produção das Regiões 7–12.
 		var qa_route: String = OS.get_environment("ORIGEM_QA_ROUTE")
-		if qa_route == "arch_to_forest" or qa_route == "majestic_to_lake" or qa_route == "forest_to_ruins" or qa_route == "ruins_arrival":
+		if qa_route == "road_to_arch" or qa_route == "arch_to_forest" or qa_route == "majestic_to_lake" or qa_route == "forest_to_ruins" or qa_route == "ruins_arrival":
 			print("[ORIGEM_QA_ROUTE] Mundo reduzido às Regiões 1–6 para a validação cartográfica.")
 			return
 		var highlands: Node3D = HIGHLAND_REGION_SCRIPT.new() as Node3D
