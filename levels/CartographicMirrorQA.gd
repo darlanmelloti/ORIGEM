@@ -85,8 +85,28 @@ func _build_mirror() -> void:
 	boundary_7_8_label.no_depth_test = true
 	mirror_root.add_child(boundary_7_8_label)
 	print("MAP_MIRROR_BOUNDARY from=7 to=8 state=QA_BOUNDARY_PENDING distance=", boundary_7_8["distance"])
+	_add_subject_beacon(boundary_7_8["handoff_out"] as Vector3, "MapMirrorSubject_R08", Color("#27d8ef"), 12.0)
+	_add_subject_beacon(boundary_7_8["handoff_in"] as Vector3, "MapMirrorSubject_R07", Color("#f6c453"), 5.0)
 	get_tree().create_timer(3.0).timeout.connect(_add_runtime_start_label)
 	get_tree().create_timer(2.0).timeout.connect(_report_integrated_inventory.bind(contract.size()))
+
+func _add_subject_beacon(world_position: Vector3, node_name: String, color: Color, height: float) -> void:
+	var beacon := MeshInstance3D.new()
+	beacon.name = node_name
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = 0.42
+	mesh.bottom_radius = 0.72
+	mesh.height = height
+	beacon.mesh = mesh
+	beacon.position = world_position + Vector3(0.0, height * 0.5, 0.0)
+	var material := StandardMaterial3D.new()
+	material.albedo_color = color
+	material.emission_enabled = true
+	material.emission = color
+	material.emission_energy_multiplier = 3.0
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	beacon.material_override = material
+	add_child(beacon)
 
 func _add_runtime_start_label() -> void:
 	var player := get_tree().get_first_node_in_group("player") as Node3D
