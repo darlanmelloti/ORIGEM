@@ -694,8 +694,10 @@ func _build_dense_forest() -> void:
 		var lake_dx: float = (x_value - CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.x) / 48.0
 		var lake_dz: float = (z_value - CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y) / 38.0
 		var shore_clearance: bool = z_value >= 194.0 and z_value <= 232.0 and abs(x_value - _lake_shore_x(z_value)) < 6.2
-		# A clareira só acompanha a última curva do trilho de margem: revela a bacia e os vestígios sem rarefazer a floresta inteira.
-		if abs(x_value - _path_x(z_value)) < 6.0 or shore_clearance or lake_dx * lake_dx + lake_dz * lake_dz < 1.20:
+		# A ligação Majestic é horizontal em torno de z=178; sem esta pequena clareira, árvores da dispersão regional entram na câmara e escondem as lajes.
+		var majestic_connector_clearance: bool = z_value >= 173.0 and z_value <= 183.0 and x_value >= -82.0 and x_value <= 1.0
+		# As clareiras revelam o destino e a margem sem rarefazer a floresta inteira.
+		if abs(x_value - _path_x(z_value)) < 6.0 or shore_clearance or majestic_connector_clearance or lake_dx * lake_dx + lake_dz * lake_dz < 1.20:
 			continue
 		var tree_source: PackedScene
 		var is_conifer: bool = false
@@ -1330,7 +1332,7 @@ func _build_majestic_connector() -> void:
 			var margin_tree: Node3D = (DARK_TREE if cluster_index % 2 == 0 else OAK_DARK).instantiate() as Node3D
 			if margin_tree != null:
 				margin_tree.name = "ArvoreLigacaoMajestic_%02d" % cluster_index
-				var tree_x: float = path_x + side * (6.80 + float(cluster_index % 2) * 1.10)
+				var tree_x: float = path_x + side * (9.20 + float(cluster_index % 2) * 1.20)
 				var tree_z: float = path_z + rng.randf_range(-2.0, 2.0)
 				margin_tree.position = Vector3(tree_x, _height_at(tree_x, tree_z), tree_z)
 				var tree_scale: float = 0.34 + float(cluster_index % 3) * 0.075

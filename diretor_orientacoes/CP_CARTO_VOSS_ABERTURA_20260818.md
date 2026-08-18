@@ -353,3 +353,19 @@ Foi testado um mastro tridimensional de expedição no Acampamento Majestic, sem
 | Parser Godot após reversão | Aprovado |
 
 **Próxima tarefa já iniciada — CP-CARTO-22:** validar a linha de visão e a passagem física entre a saída do Arco, a Floresta Densa e a bifurcação real para Majestic; remover apenas uma obstrução que seja comprovada por evidência. O Dev2 recebe, em paralelo, a ordem de integrar massas reais das Regiões 7–12 nas âncoras canónicas para que a futura tomada macro possa revelar o vale completo sem falsificar a escala.
+
+### Conclusão operacional do CP-CARTO-22
+
+A prova de deslocação `cp_carto22_forest_majestic_walk30.png` demonstrou uma obstrução visual concreta no conector Floresta–Majestic: uma árvore da dispersão regional entrava na câmara junto às lajes, apesar de permanecer fora do colisor central. O primeiro ajuste de árvores específicas do conector não gerou ganho e foi absorvido pela clareira estrutural correcta: `ForestLakeRegion.gd` passa a excluir da dispersão densa apenas árvores entre `z=173–183` e `x=-82–1`, a faixa lateral da ligação horizontal Majestic.
+
+A captura final `cp_carto22_connector_clearance_walk30.png` comprova 30 segundos de deslocação por W com a copa afastada, lajes visíveis em profundidade e a margem vegetal ainda presente. Não foram alterados água, bacia, FOV, câmara, materiais, luzes, colisores do trilho ou Regiões 7–12.
+
+| Critério | Resultado |
+| --- | --- |
+| Obstrução de copa no conector | Identificada por evidência e removida localmente |
+| Faixa de lajes Floresta–Majestic | Visível e transitável durante 30 s |
+| Floresta lateral | Preservada fora da faixa de clareira |
+| Luzes, colisores e água | Sem acréscimo ou alteração |
+| Regiões 7–12 | Sem alteração |
+
+**Próxima tarefa já iniciada — CP-CARTO-23:** validar a transição física Majestic → margem das Ruínas Submersas no sentido de avanço, mantendo a clareira de chegada, a escala real da bacia e a rota física contínua.
