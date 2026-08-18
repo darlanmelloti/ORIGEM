@@ -112,3 +112,9 @@ A primeira varredura usou o valor de rota não reconhecido `majestic_lake`; as i
 A rota QA válida `forest_to_majestic` passou por 36 segundos de gameplay sem erro fatal e confirma lajes físicas, margens de floresta e direcção espacial para Majestic. Os pontos ciano no quadro são sinais P0 já investigados, não uma causa nova; a massa de árvores é a continuidade florestal validada e não justifica repetir pilotos de árvore, relva, fetos, trilho ou mastros Majestic já rejeitados. Nenhuma alteração de produção foi feita. Evidência: `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO75_FOREST_TO_MAJESTIC_SCAN.md`.
 
 **Próxima tarefa contínua:** preservar R4→R5 e repetir a verificação Dev2 antes de qualquer integração CP-CARTO-56; só abrir um novo passe R1–R6 com causa visual distinta e uma rota QA reconhecida.
+
+## CP-CARTO-76 — Chegada R6 validada sem alteração especulativa
+
+O harness válido `ruins_arrival` passou em 36 segundos, com spawn `(13.67871, 1.253814, 222.0)` e alvo `(54.0, 1.253814, 252.0)`. A tomada confirma a chegada física à bacia. Os pontos azul-ciano, a estela e os marcos emergentes são elementos já atribuídos: as balizas não podem ser reabertas após CP-CARTO-58 e os materiais de margem/fetos foram corrigidos nos CP-CARTO-49/50. Não há causa visual nova, logo nenhuma alteração de água, marcadores, luzes, rochas ou câmara foi promovida. Evidência: `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO76_RUINS_ARRIVAL_SCAN.md`.
+
+**Próxima tarefa contínua:** manter esta chegada como base de CP-CARTO-56 e verificar a entrega Dev2 antes de criar outro passe. A primeira alteração futura exige uma fonte causal distinta das hipóteses já rejeitadas.
