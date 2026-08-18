@@ -326,7 +326,7 @@ Não houve necessidade de alteração de geometria, iluminação, materiais, por
 
 As duas tomadas canónicas foram repetidas no estado publicado: `cp_carto20_voss_to_arch30.png` confirma Estrada contínua e Arco como destino frontal; `cp_carto20_return_to_voss30.png` confirma a Casa Voss como origem no sentido inverso. A validação de fluxo normal também foi concluída: a sequência Menu → Novo Jogo → manter [E] durante a inicialização do prólogo → controlo de Elias → deslocação por W foi executada sem variáveis QA; a captura `cp_carto20_normal_menu_hold_e30.png` mostra Elias em gameplay sobre a Estrada, com HUD activo e Arco legível.
 
-O verificador `QA-PACKAGE-01` criou e extraiu um ZIP limpo, passou o editor headless e passou Menu/Novo Jogo durante 30 segundos. O ZIP verificado recebeu SHA-256 `0559c96193a1f03d3acce06e8f91f5c027f3c84b0fad809f5caa4b4252849de6`. Será gerado um ZIP final equivalente a partir do commit deste checkpoint, após publicar este registo.
+O verificador `QA-PACKAGE-01` criou e extraiu um ZIP limpo, passou o editor headless e passou Menu/Novo Jogo durante 30 segundos. O SHA-256 exacto do ZIP distribuível é guardado separadamente em `qa_evidence_voss_vista/cp_carto20_final_package.sha256`, para que o marcador de continuidade não associe um hash intermédio a um commit posterior.
 
 | Prova | Resultado |
 | --- | --- |
