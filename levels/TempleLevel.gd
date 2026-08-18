@@ -84,6 +84,18 @@ func _queue_regional_qa_modes() -> void:
 		get_tree().create_timer(2.40).timeout.connect(_prepare_lake_stela_interaction_qa)
 	elif OS.get_environment("ORIGEM_QA_INTERACT") == "majestic_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_stela_interaction_qa)
+	# CP-CARTO-83 QA: a captura é chamada pelo spawn específico após a câmara receber a posição final.
+
+func _save_viewport_snapshot_qa() -> void:
+	var snapshot_path: String = OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT")
+	if snapshot_path == "":
+		return
+	# Aguarda duas composições reais do viewport; evita gravar o splash do Xvfb antes do mundo ser apresentado.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var image: Image = get_viewport().get_texture().get_image()
+	var result: Error = image.save_png(snapshot_path)
+	print("[ORIGEM_QA_SNAPSHOT] path=%s result=%s" % [snapshot_path, result])
 
 func _run_arch_forest_floor_probe_qa() -> void:
 	# A sonda conta frames de física, não segundos de render, para sobreviver ao llvmpipe lento.
@@ -266,6 +278,8 @@ func _prepare_majestic_lake_route_qa() -> void:
 		head.rotation = Vector3.ZERO
 	var route_label: String = "Floresta–Majestic" if reverse_from_forest else "Majestic–lago"
 	print("[ORIGEM_QA_ROUTE] Spawn %s ativo em %s; primeira_perna=%s" % [route_label, player.global_position, connector_target])
+	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
+		call_deferred("_save_viewport_snapshot_qa")
 
 func _prepare_lake_approach_route_qa() -> void:
 	var region: Node3D = get_node_or_null("RegiaoFlorestaLagoExploravel") as Node3D

@@ -164,3 +164,11 @@ A estela base foi temporariamente recuada e ampliada apenas em QA na rota Flores
 ## CP-CARTO-82 — Eixo Majestic→Ruínas validado
 
 A rota `majestic_to_lake` passou 36 segundos no Godot 4.7.1 e a régua X/Z definiu correctamente as Ruínas Submersas como marco 6 a partir de `(-77.40, 178.00)`. A primeira perna mostra lajes físicas rumo à margem regional; a bacia não é forçada para o horizonte antes da curva oriental, preservando a distância macro do mapa. Nenhuma geometria, água, vegetação, ruína ou luz foi alterada. Evidência: `qa_evidence_carto82/CP_CARTO82_MAJESTIC_TO_RUINS.md`.
+
+## CP-CARTO-83 — Bifurcação Floresta→Majestic: cairn rejeitado, captura QA aprovada
+
+- **Cairn direccional:** `REJECTED_VISUAL`. A sessão `forest_to_majestic` de 36 s confirmou a direcção X/Z correcta (`próximo=5:RUMO AO MAJESTIC`), mas a pilha de rochas não adquiriu leitura focal no horizonte; a sonda foi integralmente removida de `ForestLakeRegion.gd`.
+- **Evidência válida:** `qa_evidence_carto83/forest_to_majestic_cairn_viewport_960x540.png` foi gravada pelo viewport já renderizado, depois do spawn; log confirma `result=0` e telemetria de distâncias.
+- **Ferramenta QA aprovada:** `ORIGEM_QA_VIEWPORT_SNAPSHOT` apenas actua com a variável de ambiente, espera dois frames de composição e elimina o falso splash do Xvfb sem afectar jogo normal.
+- **Meshy:** o piloto de estela assimétrica continua especificado, mas não existe GLB recuperável depois do reset da sessão/conta. Não recriar cairn, não alterar a estela actual e não tocar lanternas, água, fetos, rochas ou árvores aprovados.
+- **Próximo passo activo:** CP-CARTO-84 — validar a margem Majestic→Ruínas pelo viewport QA e investigar somente uma divergência visual causal nova.
