@@ -355,6 +355,19 @@ func _build_observatory() -> void:
 		shell.rotation = Vector3(0.08, shell_angle, -0.04)
 		_apply_material(shell, observatory_stone)
 		observatory.add_child(shell)
+	var observatory_spine: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if observatory_spine != null:
+		observatory_spine.name = "MassaVerticalApoiadaObservatorioR8"
+		observatory_spine.position = Vector3(0.0, 4.4, 0.8)
+		observatory_spine.scale = Vector3(1.18, 2.65, 0.82)
+		observatory_spine.rotation = Vector3(-0.10, 0.18, 0.06)
+		var spine_material: StandardMaterial3D = observatory_stone.duplicate() as StandardMaterial3D
+		spine_material.albedo_color = Color("#263f45")
+		spine_material.emission_enabled = true
+		spine_material.emission = Color("#0c5e6e")
+		spine_material.emission_energy_multiplier = 0.55
+		_apply_material(observatory_spine, spine_material)
+		observatory.add_child(observatory_spine)
 	for crown_index: int in range(3):
 		var crown: Node3D = ROCK_LARGE.instantiate() as Node3D
 		if crown == null:
