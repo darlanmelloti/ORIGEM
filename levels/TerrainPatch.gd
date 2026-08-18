@@ -194,12 +194,12 @@ void fragment() {
 			forest_floor = mix(forest_floor, vec3(0.155, 0.098, 0.042), leaf_litter * 0.16);
 			vec3 pbr_ground = texture(ground_albedo, UV * 1.65).rgb;
 			float pbr_rough = texture(ground_roughness, UV * 1.65).r;
-				// Passe comparativo: solo de folha e lama menos verde, mais próximo de terra encharcada natural.
-					forest_floor = mix(forest_floor, pbr_ground * vec3(0.76, 0.88, 0.66), 0.68);
-					forest_floor = mix(forest_floor, vec3(0.135, 0.235, 0.085), leaf * 0.22);
+					// CP-CARTO-38: prioriza a textura PBR de terra húmida e reduz a leitura negra/uniforme no corredor R4–R6.
+					forest_floor = mix(forest_floor, pbr_ground * vec3(1.04, 1.02, 0.88), 0.86);
+					forest_floor = mix(forest_floor, vec3(0.128, 0.170, 0.066), leaf * 0.12);
 
-				// Passe comparativo: baixa refletância média de terra molhada, mantendo detalhe PBR e leitura de percurso.
-				ALBEDO = forest_floor * mix(0.86, 1.08, soil);
+					// Solo continua pouco especular, mas recupera leitura terrosa e micro-relevo no GL Compatibility.
+					ALBEDO = forest_floor * mix(1.00, 1.14, soil);
 			ROUGHNESS = mix(mix(0.74, 0.96, broad + pebbles * 0.18), pbr_rough, 0.38);
 			NORMAL_MAP = texture(ground_normal, UV * 1.65).rgb;
 			NORMAL_MAP_DEPTH = 0.32;
