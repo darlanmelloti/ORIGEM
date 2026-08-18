@@ -42,3 +42,13 @@ No passe mais recente, a cascata oriental `QuadMesh` foi substituída por cinco 
 Refinar a leitura material e a escala orgânica do limiar ocidental das Ruínas Submersas, preservando a rota física única, a estela de chegada e o orçamento de 16 luzes dinâmicas visíveis. Não repetir emissão de água, altura do leito, escurecimento das lajes, densificação linear do trilho, mastro Majestic ou alteração de balizas rejeitados em ciclos anteriores. A tarefa exige parser Godot 4.7.1, gameplay real mínimo de 30 segundos, captura 1600×900 e avaliação visual antes de abrir o próximo checkpoint.
 
 A integração R6→R7 permanece pronta pelo checklist pareado e aguarda publicação Dev2 CP-D2-214; esta dependência não interrompe CP-CARTO-31.
+
+## CP-CARTO-38 a CP-CARTO-44 — Continuidade recuperada e validações publicadas
+
+Após a recuperação do checkout cinematográfico foram publicados os CP-CARTO-38 (solo PBR), CP-CARTO-39 (leitura discreta das lanternas Majestic), CP-CARTO-40 (espada PBR de Elias), CP-CARTO-43 (referência de script do menu sem UID obsoleto) e CP-CARTO-44 (guardas nulos no limitador adaptativo de luzes). Cada alteração aceite passou por Godot 4.7.1, por captura 1600×900 e por gameplay real mínimo de 30 segundos. O fluxo público **Menu → Novo Jogo → exploração** foi revalidado sem erro de parser, carga ou runtime.
+
+Os ensaios CP-CARTO-41 (relva procedural lateral) e CP-CARTO-42 (tonalização global de fetos) foram rejeitados e revertidos porque a evidência não demonstrou ganho visual: não reabrir estes candidatos sem um activo de geometria superior e uma hipótese mensurável.
+
+## Próxima tarefa já em execução — CP-CARTO-45
+
+**Objectivo:** identificar, por nó, posição e função, os pequenos elementos claros ainda visíveis na tomada estacionária de chegada às Ruínas Submersas (`cp_carto42_ruins_stationary_1600x900.png`). O passe deve actuar somente sobre a fonte real do artefacto; não alterar novamente os fetos, a relva, a emissão de água, a cota do leito, as lajes, a estela ou a fronteira R6→R7 sem uma prova causal. Antes de qualquer promoção: parser Godot 4.7.1, gameplay real de 30 segundos, captura 1600×900 e avaliação visual. A dependência Dev2 CP-D2-214 continua não bloqueante para esta investigação R6.
