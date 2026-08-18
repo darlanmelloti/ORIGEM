@@ -55,6 +55,21 @@ func _build_mirror() -> void:
 		mirror_root.add_child(label)
 		if index > 0:
 			_add_segment(mirror_root, contract[index - 1]["world_position"] as Vector3, marker.position, index)
+	var boundary: Dictionary = CartographicAnchors.continuity_6_to_7()
+	_add_segment(mirror_root, boundary["handoff_in"] as Vector3, boundary["handoff_out"] as Vector3, 0)
+	var boundary_label := Label3D.new()
+	boundary_label.name = "MapMirrorBoundary_R06_R07"
+	boundary_label.text = "QA  R06 → R07  |  HANDOFF BOUNDARY"
+	boundary_label.position = (boundary["handoff_out"] as Vector3) + Vector3(0.0, LABEL_OFFSET + 1.0, 0.0)
+	boundary_label.modulate = Color("#f6c453")
+	boundary_label.font_size = 52
+	boundary_label.pixel_size = 0.012
+	boundary_label.outline_size = 12
+	boundary_label.outline_modulate = Color("#09121f")
+	boundary_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	boundary_label.no_depth_test = true
+	mirror_root.add_child(boundary_label)
+	print("MAP_MIRROR_BOUNDARY from=6 to=7 state=QA_BOUNDARY_PENDING distance=", boundary["distance"])
 	get_tree().create_timer(2.0).timeout.connect(_report_integrated_inventory.bind(contract.size()))
 
 func _report_integrated_inventory(marker_count: int) -> void:
