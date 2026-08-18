@@ -92,9 +92,10 @@ func _create_combat_nodes() -> void:
 	camera.add_child(sword_pivot)
 
 	var blade_material: StandardMaterial3D = StandardMaterial3D.new()
-	blade_material.albedo_color = Color(0.72, 0.78, 0.85)
-	blade_material.metallic = 0.9
-	blade_material.roughness = 0.28
+	# Aço frio envelhecido: mantém a leitura metálica, mas evita que a lâmina reflita o céu como um emissor ciano no GL Compatibility.
+	blade_material.albedo_color = Color(0.39, 0.45, 0.50)
+	blade_material.metallic = 0.72
+	blade_material.roughness = 0.52
 
 	# Lâmina de secção losangular: evita a leitura de barra rectangular no canto da câmara.
 	var blade_mesh: CylinderMesh = CylinderMesh.new()
@@ -112,9 +113,10 @@ func _create_combat_nodes() -> void:
 	sword_pivot.add_child(blade)
 
 	var guard_material: StandardMaterial3D = StandardMaterial3D.new()
-	guard_material.albedo_color = Color(0.72, 0.46, 0.12)
-	guard_material.metallic = 0.65
-	guard_material.roughness = 0.36
+	# Bronze envelhecido para guarda e pomo, com aspereza suficiente para manter detalhe em luz de dia.
+	guard_material.albedo_color = Color(0.34, 0.20, 0.055)
+	guard_material.metallic = 0.68
+	guard_material.roughness = 0.50
 
 	var guard_mesh: CylinderMesh = CylinderMesh.new()
 	guard_mesh.top_radius = 0.042
