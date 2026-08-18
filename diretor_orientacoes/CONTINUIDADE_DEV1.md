@@ -70,3 +70,11 @@ Preparar uma prova de QA que conserve no mesmo eixo a saída da Casa Voss, a Est
 O CP-CARTO-54 reuniu duas sessões reais de 30 segundos para Casa Voss e Estrada→Arco; confirmou as âncoras físicas, mas não autorizou alteração cega do mundo. O CP-CARTO-55 confirmou que o alvo físico `z=92` é a projecção escalada da âncora cartográfica do Arco em `z=48` e corrigiu apenas a posição do estágio QA `arco`, que intersectava uma copa. O novo take mostra o arco completo sem alterar prólogo de produção, FOV de produção, rota, colisores, luzes ou Regiões 7–12.
 
 A próxima alteração R1–R6 exige uma lacuna demonstrada por evidência macro de produção; a integração R6→R7 continua pendente em Dev2.
+
+## CP-CARTO-70 — Saída Casa Voss: exterior validado, gesto E isolado
+
+A validação deste ciclo produziu três sessões de aproximadamente 36 segundos. As duas tentativas de enviar `E` e `W` para o jogo com Xvfb foram inconclusivas: ambas preservaram o prompt de salto do prólogo e o servidor devolveu a limitação `XGetInputFocus ... window of 1`. Não se trata esta falha de foco como regressão da porta. A rotina `open_front_door()` foi revista: desactiva e remove explicitamente os três corpos de colisão da porta, desactiva as formas filhas e elimina as folhas visuais ao terminar a animação.
+
+O harness exterior `ORIGEM_QA_SKIP_OPENING=1 ORIGEM_QA_ROUTE=road_return_voss` completou 36 segundos sem erro fatal, e a captura 1600×900 confirma o jogador já no espaço exterior, com Casa Voss, trilho e terreno carregados. Assim, a área exterior não contém uma parede física global; a validação end-to-end literal de E fica pendente apenas de um ambiente com foco de teclado funcional. As evidências e o registo completo estão em `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO70_VOSS_DOOR_VALIDATION.md`.
+
+**Próxima tarefa contínua:** aguardar uma entrega Dev2 posterior a `fd31a63` para executar CP-CARTO-56 no checkout de integração. Enquanto ela não existir, não reabrir hipóteses visuais rejeitadas nem alterar R7–R12 pela branch cinematográfica.
