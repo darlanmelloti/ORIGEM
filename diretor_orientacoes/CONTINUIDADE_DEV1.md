@@ -52,3 +52,14 @@ Os ensaios CP-CARTO-41 (relva procedural lateral) e CP-CARTO-42 (tonalização g
 ## Próxima tarefa já em execução — CP-CARTO-45
 
 **Objectivo:** identificar, por nó, posição e função, os pequenos elementos claros ainda visíveis na tomada estacionária de chegada às Ruínas Submersas (`cp_carto42_ruins_stationary_1600x900.png`). O passe deve actuar somente sobre a fonte real do artefacto; não alterar novamente os fetos, a relva, a emissão de água, a cota do leito, as lajes, a estela ou a fronteira R6→R7 sem uma prova causal. Antes de qualquer promoção: parser Godot 4.7.1, gameplay real de 30 segundos, captura 1600×900 e avaliação visual. A dependência Dev2 CP-D2-214 continua não bloqueante para esta investigação R6.
+
+
+## CP-CARTO-45 a CP-CARTO-53 — Evidência material e macro
+
+O CP-CARTO-49 eliminou a fonte causal dos pequenos props claros da bacia: rochas de margem, acentos e afloramentos R6 herdavam o material claro do activo base; receberam o `ruin_material` sem alterar água, rota ou colisores. O CP-CARTO-50 eliminou a folha clara remanescente aplicando corte alfa PBR exclusivamente aos `FetoRibeirinho_*`. Ambos passaram no Godot 4.7.1 e em gameplay real de 30 segundos, com capturas 1600×900, e foram publicados em `afe49b8` e `6351b5b`.
+
+Os CP-CARTO-48 e CP-CARTO-52 foram rejeitados e revertidos: a tonalização alfa dos fetos de entrada não alterou o artefacto e o recuo de uma árvore ribeirinha não melhorou a leitura macro do Arco. Não repetir estas hipóteses sem prova causal nova. As evidências CP-CARTO-51 e CP-CARTO-53 confirmam que a Estrada é física e estável, mas o Arco permanece pouco dominante no enquadramento macro de QA.
+
+## Próxima tarefa já em execução — prova macro Casa Voss→Estrada→Arco
+
+Preparar uma prova de QA que conserve no mesmo eixo a saída da Casa Voss, a Estrada do Rio e a silhueta do Arco. Não promover mudanças em vegetação, escala, água, lajes, iluminação ou módulos Dev2 até a captura demonstrar a oclusão causal. A dependência Dev2 CP-D2-214 continua pendente na ponta `fd31a63` e não bloqueia este passe R1–R6.
