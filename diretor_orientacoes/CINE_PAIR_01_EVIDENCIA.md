@@ -116,3 +116,12 @@ A auditoria inicial contou 20 nós de luz no exterior, dos quais 19 estavam vis�
 Foram desactivadas três fontes secundárias de janelas da Casa Voss — `JanelaFrontalEste_Luz`, `LuzDoSotao` e `JanelaDaAla_Luz` — porque a leitura é coberta pelos preenchimentos interiores, lareira, lanterna e luzes narrativas já existentes. A contagem exterior caiu para **16 luzes visíveis**; o interior permaneceu com **3**. A captura exterior e as sessões limpas de 30 segundos em `main.tscn` e `orion_interior.tscn` mantiveram-se sem erros.
 
 **CINE-PAIR-12 já iniciado:** Dev4 mede a estabilidade física e visual do retorno na posição exterior real da Garganta Orion; Dev3 só avança para nova composição quando a transição de regresso, agora com orçamento correcto, estiver comprovada na geografia do mapa.
+
+
+## Decisão CINE-PAIR-12 — Travessia real da Garganta Orion aprovada
+
+A prova iniciou Elias na aproximação física real da Garganta Orion em `(-116.0, 40.04, 551.60)`. O jogador avançou por teclado através do `GatilhoFisicoInteriorOrion`; o log confirmou `ORION_HANDOFF_READY`, a captura seguinte confirmou o corredor interior, e `E` devolveu Elias ao exterior. A captura de retorno mostra a Garganta tridimensional real, sem painel, tela plana ou cena interior persistente.
+
+O ciclo de 30 segundos terminou sem erros de runtime. O suporte do corredor e o retorno exterior permaneceram estáveis; o orçamento exterior já aprovado de 16 luzes visíveis foi preservado. Instrumentação QA foi removida e a base limpa foi novamente validada em 30 segundos no mundo principal e no interior.
+
+**CINE-PAIR-13 já iniciado:** Dev4 prepara a matriz de continuidade de câmaras para a chegada exterior; Dev3 utiliza a prova física para seleccionar somente uma melhoria de composição do último enquadramento da Garganta, sem regressar a marcadores interiores rejeitados.

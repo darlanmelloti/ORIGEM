@@ -75,3 +75,8 @@ Dev4 localizou a omissão de restauração no controlador exterior e a correçã
 ## CINE-PAIR-11 aprovado; CINE-PAIR-12 em execução
 
 Dev4 corrigiu o orçamento exterior para 16 luzes visíveis e confirmou três luzes no interior, com câmaras activas correctas e sessões de 30 segundos sem erro. A tarefa seguinte mede retorno, estabilidade física e leitura na posição exterior real da Garganta Orion. Dev3 só compõe depois da prova geográfica. Não abrir DIR autónomo.
+
+
+## CINE-PAIR-12 aprovado; CINE-PAIR-13 em execução
+
+Dev4 comprovou a passagem física pela Garganta Orion, a carga do interior e o retorno por E na posição exterior real. A base limpa passou 30 segundos no exterior e interior, mantendo a margem de 16 luzes visíveis no mundo. A tarefa seguinte cria a matriz de continuidade das câmaras na chegada exterior para que Dev3 escolha um único ajuste de composição. Não abrir DIR autónomo.
