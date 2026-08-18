@@ -30,5 +30,6 @@ A captura real em `main.tscn` mostra o label `R07 Vila Elevada [PHYSICAL_VALIDAT
 | `gameplay-30s.mp4` | `b9ac06290169aa641fdddebad7fd5f470e223f2734adea92d39eee6abf34d4ef` |
 | `print-1600x900.jpg` | `ce8c8bc0427d7a523bca8f5565ced1f3bec497fdd724ffc9fd4cd59c17c1b088` |
 | `gameplay.log` | `6f5cab814997d8b5ad68d7eabb8e324eea122f3115a230e1d5dd29fa1e69b0ae` |
+| `CP-D2-205-map-mirror-legible.zip` | `d1eb6867f3d28b8e631b1d4eaba4b676b5a74ed4274e4a1d3313538ffc8ae06c` |
 
 O estado `PASSED` fecha apenas este incremento de legibilidade do espelho. A fila continua imediatamente com a validação 6→7, mantendo a fronteira proprietária: o Dev2 valida o handoff, mas não reescreve geometria das Regiões 1–6.
