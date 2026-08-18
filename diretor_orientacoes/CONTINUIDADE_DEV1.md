@@ -196,3 +196,9 @@ A tomada `ruins_arrival` revelou uma contradição cartográfica: Elias já esta
 Parser Godot 4.7.1, Menu→Novo Jogo, 36 s de runtime, captura interna 1920×1080 e régua X/Z foram aprovados. Evidência: `qa_evidence_carto86/CP_CARTO86_RUINS_ARRIVAL_DESTINATION.md`.
 
 **Próximo passo activo:** CP-CARTO-87 — auditar a coerência do mapa UI no estado de chegada R6 e manter a passagem R7 sob a checklist pareada Dev2.
+
+## CP-CARTO-87 — Mapa UI coerente no estado R6
+
+A captura QA com o mapa aberto confirmou no mesmo quadro o marcador ELIAS na área do marco 6 e o destino `CHEGADA ÀS RUÍNAS`. A UI consome a mesma regra X/Z corrigida no CP-CARTO-86; não houve discrepância de posição, destino ou etiqueta, e nenhuma mudança de produção foi necessária. A imagem mantém os doze marcos do mapa oficial visíveis, mas a branch continua limitada às Regiões 1–6. Evidência: `qa_evidence_carto87/CP_CARTO87_R6_MAP_UI_COHERENCE.md`.
+
+**Próximo passo activo:** CP-CARTO-88 — verificar a continuidade macro do marcador ELIAS entre Majestic e Ruínas no mapa oficial, sem reabrir elementos ambientais já rejeitados.
