@@ -70,7 +70,41 @@ func _build_mirror() -> void:
 	boundary_label.no_depth_test = true
 	mirror_root.add_child(boundary_label)
 	print("MAP_MIRROR_BOUNDARY from=6 to=7 state=QA_BOUNDARY_PENDING distance=", boundary["distance"])
+	var boundary_7_8: Dictionary = CartographicAnchors.continuity_7_to_8()
+	_add_segment(mirror_root, boundary_7_8["handoff_in"] as Vector3, boundary_7_8["handoff_out"] as Vector3, 8)
+	var boundary_7_8_label := Label3D.new()
+	boundary_7_8_label.name = "MapMirrorBoundary_R07_R08"
+	boundary_7_8_label.text = "QA  R07 → R08  |  OBSERVATORIO A NORTE"
+	boundary_7_8_label.position = (boundary_7_8["handoff_in"] as Vector3) + Vector3(0.0, LABEL_OFFSET + 1.0, 0.0)
+	boundary_7_8_label.modulate = Color("#f6c453")
+	boundary_7_8_label.font_size = 52
+	boundary_7_8_label.pixel_size = 0.012
+	boundary_7_8_label.outline_size = 12
+	boundary_7_8_label.outline_modulate = Color("#09121f")
+	boundary_7_8_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	boundary_7_8_label.no_depth_test = true
+	mirror_root.add_child(boundary_7_8_label)
+	print("MAP_MIRROR_BOUNDARY from=7 to=8 state=QA_BOUNDARY_PENDING distance=", boundary_7_8["distance"])
+	get_tree().create_timer(3.0).timeout.connect(_add_runtime_start_label)
 	get_tree().create_timer(2.0).timeout.connect(_report_integrated_inventory.bind(contract.size()))
+
+func _add_runtime_start_label() -> void:
+	var player := get_tree().get_first_node_in_group("player") as Node3D
+	if player == null:
+		return
+	var near_label := Label3D.new()
+	near_label.name = "MapMirrorQAStart_R07_R08"
+	near_label.text = "QA START R07 → R08"
+	near_label.position = player.global_position + Vector3(0.0, 3.5, 0.0)
+	near_label.modulate = Color("#f6c453")
+	near_label.font_size = 64
+	near_label.pixel_size = 0.014
+	near_label.outline_size = 16
+	near_label.outline_modulate = Color("#09121f")
+	near_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	near_label.no_depth_test = true
+	add_child(near_label)
+	print("MAP_MIRROR_QA_START player_position=", player.global_position)
 
 func _report_integrated_inventory(marker_count: int) -> void:
 	var scene_root: Node = get_tree().current_scene if get_tree().current_scene != null else self
