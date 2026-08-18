@@ -197,3 +197,19 @@ A captura `cp_carto11_infill30.png` confirma 30 segundos de gameplay normal sem 
 | Regiões 7–12 | Sem alteração |
 
 **Próxima tarefa já iniciada — CP-CARTO-12:** verificar a leitura de profundidade depois do Arco, entre a silhueta arqueológica e a entrada da Floresta Densa, usando o spawn QA estável sem repetir ajustes de FOV, câmara, água ou materiais rejeitados. O ciclo permanece contínuo.
+
+### Conclusão operacional do CP-CARTO-12
+
+A prova `cp_carto12_arch_forest_retry30.png` executou o spawn técnico estável Arco–Floresta com entrada real durante aproximadamente 30 segundos. O trilho de lajes, as árvores laterais, o sub-bosque e as massas rochosas confirmam a profundidade da transição depois do Arco sem cortar pelo relevo, sem revelar conteúdos das Regiões 7–12 e sem alterar FOV, posição de câmara, água ou materiais.
+
+O levantamento do módulo confirma que os estratos estruturais já existentes cobrem o limiar entre `z=101` e `z=121,5`, enquanto a floresta regional continua a partir desse corredor. Não foi adicionada geometria redundante: a captura mostrou uma entrada aberta e escalonada, não uma parede vegetal. Esta decisão preserva a rota navegável e evita repetir candidatos rejeitados.
+
+| Critério | Resultado |
+| --- | --- |
+| Travessia pós-Arco | Aprovada no spawn QA estável |
+| Entrada da Floresta | Trilho, árvores e sub-bosque legíveis por planos sucessivos |
+| Câmara, FOV e água | Sem alteração |
+| Regiões 7–12 | Sem alteração |
+| Evidência | Gameplay de aproximadamente 30 segundos e captura 960×540 |
+
+**Próxima tarefa já iniciada — CP-CARTO-13:** validar o corredor interno Floresta Densa → Acampamento Majestic com o harness físico existente, concentrando-se em continuidade de lajes, aterramento e leitura do próximo marco sem adicionar nova iluminação nem alterar a bacia das Ruínas.
