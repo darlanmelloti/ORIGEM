@@ -89,3 +89,20 @@ A estabilidade física foi reforçada em duas camadas: `Player.gd` limita passos
 | Orçamento de luzes | Sem novas luzes dinâmicas |
 
 **Próxima tarefa já iniciada — CP-CARTO-05:** corrigir a leitura visual do limiar Arco–Floresta sem mudar a câmara nem a geografia: identificar e remover a lâmina ciano plana periférica, reduzir a repetição imediata de lajes e preservar a profundidade criada por árvores, contrafortes e trilho físico. A evidência do CP-CARTO-04 não encerra o ciclo.
+
+### Conclusão operacional do CP-CARTO-05
+
+A lâmina periférica observada no limiar Arco–Floresta foi identificada como uma falha estrutural do `RiverRoadJourney.gd`: um triângulo da água reutilizava o bordo `x0` no segmento seguinte. A malha passou a usar quatro vértices coerentes por segmento. Como reforço de profundidade, o leito do rio afunila gradualmente entre `z=82` e `z=112`, de 14,0 m para 3,8 m, e três agrupamentos ribeirinhos reais foram introduzidos na margem oeste. Não foi alterado o material da água, a cota da água, a câmara, o eixo do trilho, o Arco ou as Regiões 7–12.
+
+A captura `cp_carto05_arch_forest_narrow_river30.png` mostra a água mantida como elemento lateral subordinado; o trilho de lajes, os contrafortes e as árvores passam a conduzir a leitura para a Floresta. A captura normal `cp_carto05_normal30.png` comprova que a composição Casa Voss–Estrada–Arco permanece estável durante 30 segundos.
+
+| Critério | Resultado |
+| --- | --- |
+| Malha do Rio da Estrada | Corrigida, sem triângulo diagonal |
+| Lâmina ciano no limiar | Reduzida a leitura lateral de rio, sem competir com o trilho |
+| Travessia Arco–Floresta | Aprovada em 30 segundos |
+| Jogo normal Casa Voss–Arco | Aprovado em 30 segundos |
+| Câmaras e âncoras cartográficas | Inalteradas |
+| Regiões 7–12 | Sem alteração |
+
+**Próxima tarefa já iniciada — CP-CARTO-06:** aprofundar a leitura de entrada da Floresta Densa por estratos reais de vegetação baixa e rocha, sem criar parede de árvores, sem reduzir a largura do trilho e sem mexer na água ou no raccord de câmara. O desenvolvimento permanece contínuo.

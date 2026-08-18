@@ -38,6 +38,7 @@ func _ready() -> void:
 	_build_river_road()
 	_build_river()
 	_build_river_margins()
+	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_macro_river_cutbanks()
 	_build_ruin_arch()
@@ -296,7 +297,9 @@ func _build_river() -> void:
 	river_root.name = "RioDaEstrada_Norte"
 	add_child(river_root)
 	# Largura macro: o rio é uma camada de vale visível desde a Estrada, sem invadir a rota que se mantém a oeste.
-	var width: float = 14.0
+	# A montante do limiar da Floresta a água afunila entre margens reais, em vez de surgir como uma faixa plana dominante.
+	var width_start: float = 14.0
+	var width_forest: float = 3.8
 	var surface: SurfaceTool = SurfaceTool.new()
 	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for index: int in range(32):
@@ -304,11 +307,21 @@ func _build_river() -> void:
 		var z1: float = z0 + 5.0
 		var x0: float = _river_x(z0)
 		var x1: float = _river_x(z1)
+		var forest_t0: float = smoothstep(82.0, 112.0, z0)
+		var forest_t1: float = smoothstep(82.0, 112.0, z1)
+		var width0: float = lerpf(width_start, width_forest, forest_t0)
+		var width1: float = lerpf(width_start, width_forest, forest_t1)
 		# Lâmina ligeiramente acima do terreno local: mantém o curso contínuo no modo de compatibilidade sem invadir a estrada distante.
-		var y0: float = (_height_at(x0 - width * 0.35, z0) + _height_at(x0 + width * 0.35, z0)) * 0.5 + 0.20
-		var y1: float = (_height_at(x1 - width * 0.35, z1) + _height_at(x1 + width * 0.35, z1)) * 0.5 + 0.20
-		_add_water_triangle(surface, Vector3(x0 - width * 0.5, y0, z0), Vector3(x0 - width * 0.5, y1, z1), Vector3(x0 + width * 0.5, y0, z0), Vector2(0.0, float(index) * 0.18), Vector2(0.0, float(index + 1) * 0.18), Vector2(1.0, float(index) * 0.18))
-		_add_water_triangle(surface, Vector3(x0 + width * 0.5, y0, z0), Vector3(x0 - width * 0.5, y1, z1), Vector3(x1 + width * 0.5, y1, z1), Vector2(1.0, float(index) * 0.18), Vector2(0.0, float(index + 1) * 0.18), Vector2(1.0, float(index + 1) * 0.18))
+		var y0: float = (_height_at(x0 - width0 * 0.35, z0) + _height_at(x0 + width0 * 0.35, z0)) * 0.5 + 0.20
+		var y1: float = (_height_at(x1 - width1 * 0.35, z1) + _height_at(x1 + width1 * 0.35, z1)) * 0.5 + 0.20
+		# Cada segmento usa os quatro vértices da sua própria faixa. A versão anterior reutilizava x0 no bordo esquerdo seguinte,
+		# esticando um triângulo na curva do rio e criando uma lâmina ciano plana no limiar Arco–Floresta.
+		var left0: Vector3 = Vector3(x0 - width0 * 0.5, y0, z0)
+		var right0: Vector3 = Vector3(x0 + width0 * 0.5, y0, z0)
+		var left1: Vector3 = Vector3(x1 - width1 * 0.5, y1, z1)
+		var right1: Vector3 = Vector3(x1 + width1 * 0.5, y1, z1)
+		_add_water_triangle(surface, left0, left1, right0, Vector2(0.0, float(index) * 0.18), Vector2(0.0, float(index + 1) * 0.18), Vector2(1.0, float(index) * 0.18))
+		_add_water_triangle(surface, right0, left1, right1, Vector2(1.0, float(index) * 0.18), Vector2(0.0, float(index + 1) * 0.18), Vector2(1.0, float(index + 1) * 0.18))
 	var mesh: ArrayMesh = surface.commit()
 	mesh.surface_set_material(0, _make_water_material())
 	var water: MeshInstance3D = MeshInstance3D.new()
@@ -337,7 +350,8 @@ func _build_river() -> void:
 	for bed_data: Dictionary in bed_rock_data:
 		var bz: float = bed_data["z"] as float
 		var bx: float = _river_x(bz) + (bed_data["dx"] as float)
-		var by: float = (_height_at(bx - width * 0.35, bz) + _height_at(bx + width * 0.35, bz)) * 0.5 + 0.08
+		var rock_width: float = lerpf(width_start, width_forest, smoothstep(82.0, 112.0, bz))
+		var by: float = (_height_at(bx - rock_width * 0.35, bz) + _height_at(bx + rock_width * 0.35, bz)) * 0.5 + 0.08
 		var bed_rock: Node3D = RUIN_ROCK.instantiate() as Node3D
 		if bed_rock == null:
 			continue
@@ -426,6 +440,39 @@ func _build_river_margins() -> void:
 				fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 				fern.rotation.y = rng.randf_range(-PI, PI)
 				margins.add_child(fern)
+
+func _build_arch_forest_riparian_screen() -> void:
+	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,
+	# interrompem a leitura de faixa plana e preservam uma abertura ampla para o trilho cartográfico.
+	var screen_root: Node3D = Node3D.new()
+	screen_root.name = "NucleosRibeirinhosArcoFloresta"
+	add_child(screen_root)
+	var specs: Array[Dictionary] = [
+		{"z": 94.0, "offset": -4.8, "scale": 0.30, "yaw": -0.28},
+		{"z": 103.0, "offset": -5.7, "scale": 0.38, "yaw": 0.42},
+		{"z": 112.0, "offset": -4.6, "scale": 0.28, "yaw": -0.56}
+	]
+	for index: int in range(specs.size()):
+		var spec: Dictionary = specs[index]
+		var z_value: float = spec["z"] as float
+		var x_value: float = _river_x(z_value) + (spec["offset"] as float)
+		var ground_y: float = _height_at(x_value, z_value)
+		var tree: Node3D = DARK_TREE.instantiate() as Node3D
+		if tree != null:
+			tree.name = "ArvoreRibeirinhaDoLimiar_%02d" % (index + 1)
+			tree.position = Vector3(x_value, ground_y, z_value)
+			var tree_scale: float = spec["scale"] as float
+			tree.scale = Vector3(tree_scale, tree_scale * (1.05 + float(index % 2) * 0.12), tree_scale)
+			tree.rotation.y = spec["yaw"] as float
+			screen_root.add_child(tree)
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.name = "RochaRibeirinhaDoLimiar_%02d" % (index + 1)
+			rock.position = Vector3(x_value - 1.05, _height_at(x_value - 1.05, z_value + 0.75) + 0.03, z_value + 0.75)
+			rock.scale = Vector3(0.22 + float(index) * 0.035, 0.16 + float(index) * 0.024, 0.22 + float(index) * 0.035)
+			rock.rotation.y = (spec["yaw"] as float) + 0.38
+			_apply_material(rock, ruin_material)
+			screen_root.add_child(rock)
 
 func _build_macro_river_cutbanks() -> void:
 	# Afloramentos de margem em escala intermédia: quebram a leitura de faixa plana de água e deixam a hidrologia orientar a vista.
