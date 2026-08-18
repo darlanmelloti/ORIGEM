@@ -27,5 +27,7 @@ O CP-D2-203 escureceu a massa vertical orgânica apoiada e reforçou a emissão 
 |---|---|
 | `gameplay-30s.mp4` | `87b85c221c750b50f0202dbe46cfbad8aaaa0281d0ccd9bcc1078bbe7c01bd22` |
 | `print-1600x900.jpg` | `5eafdb2d8c34674596cd8a95174b46a0296733b1c13e4ae9919e2e4f00dbd4c8` |
+| `CP-D2-203-R7-R12-executable.zip` | `2abe250cc97192525509329c2608c34b6dc0aafeb52ff88023e3f8e6671888df` |
+| Branch pública Dev2 | `feature/dev2-mountain-canyon`, HEAD `bf8d10ab1a306b03acdc4bf6aadcc64440d3510d` |
 
 A fila não é encerrada pelo estado `PASSED`; o próximo passe começa pela auditoria do enquadramento de continuidade R11→R12, mantendo o limite de luzes e a fronteira regional.
