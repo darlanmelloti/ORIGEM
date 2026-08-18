@@ -77,6 +77,20 @@ static func dev2_anchor_positions() -> Array[Vector3]:
 		positions.append(item["world_position"] as Vector3)
 	return positions
 
+static func continuity_6_to_7(terrain_y: float = 0.0) -> Dictionary:
+	var start := world_position(RUINAS_SUBMERSAS, terrain_y)
+	var finish := world_position(VILA_ELEVADA, terrain_y)
+	return {
+		"from_region": 6,
+		"to_region": 7,
+		"handoff_in": start,
+		"handoff_out": finish,
+		"direction": (finish - start).normalized(),
+		"distance": start.distance_to(finish),
+		"subject_visual": "Transição Ruínas Submersas → Vila Elevada",
+		"validation_state": "QA_BOUNDARY_PENDING"
+	}
+
 
 static func world_position(anchor: Vector2, terrain_y: float, vertical_offset: float = 0.0) -> Vector3:
 	return Vector3(anchor.x, terrain_y + vertical_offset, anchor.y)
