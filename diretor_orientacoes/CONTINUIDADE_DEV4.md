@@ -80,3 +80,8 @@ Dev4 corrigiu o orçamento exterior para 16 luzes visíveis e confirmou três lu
 ## CINE-PAIR-12 aprovado; CINE-PAIR-13 em execução
 
 Dev4 comprovou a passagem física pela Garganta Orion, a carga do interior e o retorno por E na posição exterior real. A base limpa passou 30 segundos no exterior e interior, mantendo a margem de 16 luzes visíveis no mundo. A tarefa seguinte cria a matriz de continuidade das câmaras na chegada exterior para que Dev3 escolha um único ajuste de composição. Não abrir DIR autónomo.
+
+
+## CINE-PAIR-13 aprovado; CINE-PAIR-14 em execução
+
+Dev4 confirmou a transição exterior sob a câmara de Elias e eliminou a reactivação indevida do prólogo Casa Voss. O retorno agora preserva yaw, inclinação de cabeça, posição, saúde e stamina. A tarefa seguinte audita luzes locais e leitura da Garganta sob esta câmara preservada; Dev3 só escolhe uma melhoria exterior apoiada nessa evidência. Não abrir DIR autónomo.

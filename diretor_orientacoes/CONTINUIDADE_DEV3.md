@@ -88,3 +88,8 @@ O exterior opera agora com 16 luzes visíveis; o interior permanece em três, e 
 ## CINE-PAIR-12 aprovado; CINE-PAIR-13 em execução
 
 Dev3 recebe uma prova física completa: Garganta exterior real → interior Orion → retorno por E à Garganta. A composição de retorno existe no mundo contínuo e a base de câmara de -11° permanece aprovada. Dev3 aguarda a matriz Dev4 de continuidade de câmaras para escolher uma única melhoria exterior; não regressar a objectos interiores, luzes isoladas ou marcadores rejeitados.
+
+
+## CINE-PAIR-13 aprovado; CINE-PAIR-14 em execução
+
+Dev3 recebe uma câmara de retorno estável: a Garganta reaparece sob a orientação de Elias, sem prólogo competitivo. A leitura exterior pode agora ser avaliada sem interferência de UI ou câmara narrativa. Dev4 mede luzes locais e zonas de leitura; Dev3 escolhe uma única melhoria exterior a partir da prova. Não voltar a marcadores interiores rejeitados nem abrir DIR autónomo.

@@ -12,6 +12,7 @@ const EXTERIOR_RETURN: Vector3 = Vector3(-116.0, 0.0, 552.2)
 var _has_return_state: bool = false
 var _return_position: Vector3 = EXTERIOR_RETURN
 var _return_rotation_y: float = PI
+var _return_head_pitch: float = 0.0
 var _saved_health: int = 100
 var _saved_stamina: float = 100.0
 
@@ -22,6 +23,8 @@ func begin_entry(player: Node3D) -> void:
 	_has_return_state = true
 	_return_position = player.global_position
 	_return_rotation_y = player.rotation.y
+	var player_head: Node3D = player.get_node_or_null("Head") as Node3D
+	_return_head_pitch = player_head.rotation.x if player_head != null else 0.0
 	_capture_player_state(player)
 	get_tree().change_scene_to_file(INTERIOR_SCENE)
 
@@ -40,6 +43,9 @@ func restore_exterior_player(player: Node3D) -> void:
 	if _has_return_state:
 		player.global_position = _return_position
 		player.rotation.y = _return_rotation_y
+		var player_head: Node3D = player.get_node_or_null("Head") as Node3D
+		if player_head != null:
+			player_head.rotation.x = _return_head_pitch
 	else:
 		player.global_position = EXTERIOR_RETURN
 	_restore_player_state(player)

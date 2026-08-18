@@ -983,6 +983,12 @@ func _build_opening_camera() -> void:
 	opening_camera.current = false
 	opening_camera.fov = 52.0
 	add_child(opening_camera)
+	# Um regresso real de Orion recarrega a cena exterior junto da Garganta; o prólogo não pode roubar a câmara já restaurada de Elias.
+	if OrionTransitionState.has_pending_exterior_return():
+		opening_camera.queue_free()
+		opening_camera = null
+		opening_active = false
+		return
 	# Os modos de QA ignoram apenas o prólogo para permitir testar takes e travessias físicas; o fluxo normal do jogo permanece inalterado.
 	if OS.has_environment("ORIGEM_CAPTURE_TAKE") or OS.has_environment("ORIGEM_QA_ROUTE") or OS.has_environment("ORIGEM_QA_INTERACT"):
 		opening_camera.queue_free()

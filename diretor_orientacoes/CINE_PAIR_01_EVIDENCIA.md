@@ -125,3 +125,12 @@ A prova iniciou Elias na aproximação física real da Garganta Orion em `(-116.
 O ciclo de 30 segundos terminou sem erros de runtime. O suporte do corredor e o retorno exterior permaneceram estáveis; o orçamento exterior já aprovado de 16 luzes visíveis foi preservado. Instrumentação QA foi removida e a base limpa foi novamente validada em 30 segundos no mundo principal e no interior.
 
 **CINE-PAIR-13 já iniciado:** Dev4 prepara a matriz de continuidade de câmaras para a chegada exterior; Dev3 utiliza a prova física para seleccionar somente uma melhoria de composição do último enquadramento da Garganta, sem regressar a marcadores interiores rejeitados.
+
+
+## Decisão CINE-PAIR-13 — Câmara de retorno preservada e aprovada
+
+A medição da Garganta encontrou Elias orientado para a entrada com `yaw≈π`, inclinação de cabeça de `-0,2443 rad` e vector de avanço `(0, -0,242, 0,970)`. O retorno mantinha a geografia correta, mas o recarregamento de `main.tscn` podia reiniciar o prólogo Casa Voss e substituir a câmara restaurada.
+
+O estado Orion passa agora a preservar também a inclinação vertical da cabeça. Além disso, `VossHouse.gd` detecta retorno pendente e não activa `CameraPrologoCasaVoss`. A nova captura de retorno mostra a Garganta sem cartela de prólogo e sob a câmara de Elias. A base limpa voltou a passar 30 segundos no mundo e no interior, sem erros.
+
+**CINE-PAIR-14 já iniciado:** Dev4 audita as luzes locais e a orientação de leitura da Garganta após o retorno; Dev3 selecciona uma única melhoria exterior baseada na câmara preservada, sem reabrir qualquer DIR autónomo.
