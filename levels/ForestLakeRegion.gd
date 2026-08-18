@@ -1260,8 +1260,10 @@ func _build_majestic_connector() -> void:
 	var camp_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.ACAMPAMENTO_MAJESTIC
 	var start_x: float = camp_anchor.x + 10.0
 	var end_x: float = _path_x(camp_anchor.y)
-	for index: int in range(29):
-		var t: float = float(index) / 28.0
+	# Densidade de 41 lajes: a distância longitudinal fica abaixo do comprimento dos respectivos colisores,
+	# garantindo uma ligação física contínua entre a estação Majestic e o trilho regional.
+	for index: int in range(41):
+		var t: float = float(index) / 40.0
 		var x_value: float = lerpf(start_x, end_x, t)
 		var z_value: float = camp_anchor.y + sin(t * PI) * 3.4
 		var slab: MeshInstance3D = MeshInstance3D.new()
@@ -1280,7 +1282,7 @@ func _build_majestic_connector() -> void:
 		slab_collision.shape = slab_shape
 		slab_body.add_child(slab_collision)
 		connector.add_child(slab_body)
-		if index in [4, 14, 24]:
+		if index in [6, 20, 34]:
 			var marker: OmniLight3D = OmniLight3D.new()
 			marker.name = "SinalDaExpedicao_%02d" % index
 			marker.light_color = Color(0.73, 0.28, 0.08, 1.0)

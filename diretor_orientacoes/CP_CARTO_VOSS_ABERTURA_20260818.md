@@ -123,3 +123,20 @@ As provas `cp_carto06_arch_forest_understory_scale30.png` e `cp_carto06_normal30
 | Regiões 7–12 | Sem alteração |
 
 **Próxima tarefa já iniciada — CP-CARTO-07:** verificar a leitura do Acampamento Majestic e da chegada às Ruínas Submersas como sequência espacial única. O passe deve privilegiar silhuetas, margem e continuidade física, sem alterar os módulos das Regiões 7–12.
+
+### Conclusão operacional do CP-CARTO-07
+
+A auditoria da sequência Majestic–Ruínas encontrou uma descontinuidade material no conector do Acampamento Majestic: 29 lajes separadas por cerca de 2,7 m excediam a cobertura de 2,18 m dos respectivos colisores. O conector passou a usar 41 lajes; a separação longitudinal fica agora abaixo da largura dos colisores, criando uma faixa física ininterrupta desde `(-78, 178)` até ao eixo florestal `x≈-2,5`.
+
+O harness `majestic_to_lake` foi acelerado sem alterar o jogo normal: carrega somente Regiões 1–6, reinicia a velocidade de Elias antes do teleport e orienta a primeira perna para a ligação real ao trilho. A sonda temporária foi removida antes da publicação. A validação técnica passou em Godot 4.7.1; a entrada W foi recebida, Elias encontrava-se apoiado e começou a mover-se no sentido positivo de X. O ritmo reduzido observado é limitado ao `llvmpipe` do sandbox, não a um bloqueio de colisão.
+
+| Critério | Resultado |
+| --- | --- |
+| Conector Majestic–trilho | Densificado de 29 para 41 lajes |
+| Cobertura de colisores | Contínua no eixo longitudinal |
+| Queda no spawn técnico | Corrigida com reposição de velocidade |
+| Gameplay de prova | 30 segundos com W, sem erro de runtime |
+| Água, lago e câmaras | Inalterados |
+| Regiões 7–12 | Sem alteração |
+
+**Próxima tarefa já iniciada — CP-CARTO-08:** validar a aproximação final às Ruínas Submersas a partir do trilho de floresta, priorizando a silhueta de chegada e a legibilidade da margem, sem repor ou alterar a água e sem introduzir obstáculos na rota.

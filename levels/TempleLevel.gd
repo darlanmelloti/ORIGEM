@@ -57,8 +57,8 @@ func _ready() -> void:
 
 func _queue_regional_qa_modes() -> void:
 	if OS.get_environment("ORIGEM_QA_ROUTE") == "majestic_to_lake":
-		# Exclusivo de QA: posiciona Elias depois de o mundo regional existir, sem alterar o spawn do jogo normal.
-		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_lake_route_qa)
+		# O mundo regional já foi construído antes desta fila; o spawn imediato deixa a janela de captura disponível para a travessia.
+		call_deferred("_prepare_majestic_lake_route_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "bridge_crossing":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_valley_bridge_route_qa)
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "handoff_to_village":
@@ -142,9 +142,17 @@ func _prepare_majestic_lake_route_qa() -> void:
 		return
 	var spawn_x: float = -77.4
 	var spawn_z: float = 178.0
+	# Anula a queda acumulada antes do teleport, tal como no harness Arco–Floresta.
+	player.velocity = Vector3.ZERO
+	player.set("player_velocity", Vector3.ZERO)
 	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.25, spawn_z)
-	player.rotation.y = -PI * 0.5
-	print("[ORIGEM_QA_ROUTE] Spawn Majestic–lago ativo em %s" % player.global_position)
+	# A primeira perna segue a ligação real de lajes de Majestic ao eixo do trilho; não corta diagonalmente pelo terreno aberto.
+	var connector_target: Vector3 = Vector3(-2.5, player.global_position.y, spawn_z)
+	player.look_at(connector_target, Vector3.UP)
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_ROUTE] Spawn Majestic–lago ativo em %s; primeira_perna=%s" % [player.global_position, connector_target])
 
 func _prepare_arch_forest_route_qa() -> void:
 	# Exclusivo de QA: a prova inicia poucos metros antes do marco 4, no eixo de saída do Arco para a Floresta Densa.
@@ -237,8 +245,9 @@ func _build_world_after_voss_prologue() -> void:
 		add_child(forest_lake)
 		# A prova Arco–Floresta avalia exclusivamente o corredor Dev1 (Regiões 1–6). A omissão temporária dos módulos Dev2
 		# reduz o custo de arranque em llvmpipe e não altera o mundo, os activos ou os limites de produção das Regiões 7–12.
-		if OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest":
-			print("[ORIGEM_QA_ROUTE] Mundo reduzido às Regiões 1–6 para a validação Arco–Floresta.")
+		var qa_route: String = OS.get_environment("ORIGEM_QA_ROUTE")
+		if qa_route == "arch_to_forest" or qa_route == "majestic_to_lake":
+			print("[ORIGEM_QA_ROUTE] Mundo reduzido às Regiões 1–6 para a validação cartográfica.")
 			return
 		var highlands: Node3D = HIGHLAND_REGION_SCRIPT.new() as Node3D
 		highlands.name = "RegiaoVilaMontanhaExploravel"
