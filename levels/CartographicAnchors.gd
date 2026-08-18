@@ -91,6 +91,20 @@ static func continuity_6_to_7(terrain_y: float = 0.0) -> Dictionary:
 		"validation_state": "QA_BOUNDARY_PENDING"
 	}
 
+static func continuity_7_to_8(terrain_y: float = 0.0) -> Dictionary:
+	var start := world_position(VILA_ELEVADA, terrain_y)
+	var finish := world_position(OBSERVATORIO, terrain_y)
+	return {
+		"from_region": 7,
+		"to_region": 8,
+		"handoff_in": start,
+		"handoff_out": finish,
+		"direction": (finish - start).normalized(),
+		"distance": start.distance_to(finish),
+		"subject_visual": "Transição Vila Elevada → Observatório",
+		"validation_state": "QA_BOUNDARY_PENDING"
+	}
+
 
 static func world_position(anchor: Vector2, terrain_y: float, vertical_offset: float = 0.0) -> Vector3:
 	return Vector3(anchor.x, terrain_y + vertical_offset, anchor.y)
