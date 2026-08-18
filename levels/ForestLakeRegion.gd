@@ -1730,6 +1730,7 @@ func _build_riparian_margin() -> void:
 			var rock_scale: float = 0.19 + fmod(float(index), 4.0) * 0.050
 			rock.scale = Vector3(rock_scale, rock_scale, rock_scale)
 			rock.rotation = Vector3(0.0, angle + 0.4, 0.0)
+			_apply_material(rock, ruin_material)
 			margin.add_child(rock)
 			if index % 3 == 0:
 				var rock_body: StaticBody3D = StaticBody3D.new()
@@ -1766,6 +1767,7 @@ func _build_riparian_margin() -> void:
 			var accent_scale: float = 0.29 + float(accent_index % 3) * 0.055
 			accent_rock.scale = Vector3(accent_scale, accent_scale * 0.82, accent_scale)
 			accent_rock.rotation.y = 0.42 + float(accent_index) * 0.71
+			_apply_material(accent_rock, ruin_material)
 			margin.add_child(accent_rock)
 		var accent_fern: Node3D = FERN.instantiate() as Node3D
 		if accent_fern != null:
@@ -1798,6 +1800,7 @@ func _build_majestic_ruins_approach_grounding() -> void:
 			rock.position = Vector3(x_value, ground_y + 0.035, z_value)
 			rock.scale = Vector3(rock_scale, rock_scale * 0.72, rock_scale)
 			rock.rotation.y = -0.34 + float(group_index) * 0.76
+			_apply_material(rock, ruin_material)
 			grounding.add_child(rock)
 		var tree_source: PackedScene = OAK_DARK if group_index == 1 else DARK_TREE
 		var tree: Node3D = tree_source.instantiate() as Node3D
