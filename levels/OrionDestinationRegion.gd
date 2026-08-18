@@ -33,12 +33,36 @@ func _ready() -> void:
 			_build_temporal_hub()
 			_build_hub_to_final_dome_approach()
 			_build_final_dome()
+			_enforce_region12_light_budget()
 			if _is_contextual_decor_validation():
 				_apply_contextual_decor_culling()
 		_build_cartographic_anchors()
 
 func _is_contextual_decor_validation() -> bool:
 	return OS.get_environment("QA_VALIDATION_ROUTE") == "R10_CAVE_TO_R12_HUB_FULL"
+
+func _enforce_region12_light_budget() -> void:
+	# CP-D2-202: orçamento estrito Dev2; preserva iluminação estrutural e remove apenas preenchimentos decorativos.
+	var lights: Array[Node] = find_children("*", "OmniLight3D", true, false)
+	var keep_names: Array[String] = [
+		"BraseiroLimiarOrion", "BrilhoChronosDaCaverna", "LuzPreenchimentoBocaOrion",
+		"LuzTransicaoCavernaOrion", "LuzNucleoOrion", "LuzNucleoCupulaFinal",
+		"RessonanciaRecessivoCupulaR12", "LuzNucleoTemporalR12", "LuzContactoNucleoR12",
+		"LuzWayfindingCamara_00", "LuzWayfindingCamara_01", "LuzWayfindingHub_01",
+		"LuzWayfindingCupula_00", "LuzCoroaCupula_00", 
+		"WayfinderCPD2007_HubTemporal"
+	]
+	var kept: int = 0
+	for node in lights:
+		var light := node as OmniLight3D
+		if light == null:
+			continue
+		var preserve: bool = str(light.name) in keep_names and kept < 16
+		if preserve:
+			kept += 1
+		else:
+			light.queue_free()
+	print("REGION12_LIGHT_BUDGET kept=", kept, " max=16 removed=", lights.size() - kept)
 
 func _apply_contextual_decor_culling() -> void:
 	# CP-D2-066: preserve physical handoffs and sanctuary landmarks; remove only distant decoration.
@@ -678,22 +702,22 @@ func _build_final_dome() -> void:
 		_limit_geometry_visibility(crown, 48.0)
 		dome.add_child(crown)
 	# Validated Region 12 sanctuary gateway: organic side monoliths, staggered crown, and a recessed dark opening.
-	for gateway_x in [-4.2, 4.2]:
+	for gateway_x in [0.0]:
 		var gateway_monolith := PILLAR.instantiate() as Node3D
 		if gateway_monolith == null:
 			continue
-		gateway_monolith.name = "MonolitoGatewayCupula_%s" % str(gateway_x)
-		gateway_monolith.position = Vector3(gateway_x, 1.85, -4.45)
-		gateway_monolith.scale = Vector3(0.96, 3.45, 0.96)
+		gateway_monolith.name = "MassaVerticalPortalCupulaR12"
+		gateway_monolith.position = Vector3(gateway_x, 2.52, -4.45)
+		gateway_monolith.scale = Vector3(1.72, 4.65, 1.08)
 		gateway_monolith.rotation = Vector3(0.04, 0.10 * sign(gateway_x), 0.03 * sign(gateway_x))
 		_apply_material(gateway_monolith, stone_material)
 		var monolith_body := StaticBody3D.new()
-		monolith_body.name = "ColisaoMonolitoGatewayCupula_%s" % str(gateway_x)
+		monolith_body.name = "ColisaoMassaVerticalPortalCupulaR12"
 		monolith_body.collision_layer = 1
 		monolith_body.collision_mask = 1
 		var monolith_shape := CollisionShape3D.new()
 		var monolith_box := BoxShape3D.new()
-		monolith_box.size = Vector3(1.55, 6.9, 1.55)
+		monolith_box.size = Vector3(2.65, 9.3, 2.1)
 		monolith_shape.shape = monolith_box
 		monolith_shape.position = Vector3(0.0, 0.0, 0.0)
 		monolith_body.add_child(monolith_shape)
