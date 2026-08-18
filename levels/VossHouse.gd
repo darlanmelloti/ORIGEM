@@ -1041,8 +1041,10 @@ func _build_opening_camera() -> void:
 			opening_camera.position = Vector3(3.0, _ground_height(3.0, 49.0) + 4.2, 49.0)
 			opening_camera.look_at(Vector3(12.6, _ground_height(12.6, 58.0) + 1.1, 58.0), Vector3.UP)
 		elif qa_storyboard_stage == "arco":
+			# Harness exclusivo: a posição anterior intersectava a copa próxima e invalidava a evidência.
+			# Mantém o alvo físico escalado do Arco em z=92 e não afecta a câmara de produção.
 			opening_camera.fov = 60.0
-			opening_camera.position = Vector3(-19.0, _ground_height(-19.0, 76.0) + 4.8, 76.0)
+			opening_camera.position = Vector3(-7.5, _ground_height(-7.5, 70.0) + 7.2, 70.0)
 			opening_camera.look_at(Vector3(-16.7, _ground_height(-16.7, 92.0) + 5.8, 92.0), Vector3.UP)
 		elif qa_storyboard_stage == "orion_entrada":
 			# CP-CINE-23: aproximação pelo sul; os contrafortes da boca foram construídos a sul do marco e só se lêem deste eixo.
