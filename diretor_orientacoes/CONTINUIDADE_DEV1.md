@@ -124,3 +124,7 @@ O harness válido `ruins_arrival` passou em 36 segundos, com spawn `(13.67871, 1
 A rota `forest_to_ruins` passou duas sessões de 36 segundos. Ao ocultar somente a raiz `AterramentoDaChegadaMajesticRuinas` no harness, os props laterais observados permaneceram visualmente idênticos; este agrupamento não é a causa. A guarda QA foi removida e não se alteraram as rochas, árvores ou fetos da aproximação. A matriz está em `/home/ubuntu/qa_evidence_voss_vista/CP_CARTO77_FOREST_TO_RUINS_CAUSALITY.md`.
 
 **Próxima tarefa contínua:** não repetir esta exclusão. A fonte dos props restantes deve ser atribuída por nó exacto antes de qualquer alteração; CP-CARTO-56 continua dependente de Dev2 posterior a `fd31a63`.
+
+### Extensão CP-CARTO-77 — Afluente cartográfico
+
+A segunda sonda causal ocultou `AfluenteCartograficoRioParaBacia` apenas no harness `forest_to_ruins`. A água lateral desapareceu, confirmando a sua fonte; o prop laranja/escuro permaneceu, pelo que não pertence ao afluente. O material e a geometria da água não foram alterados, pois as variantes de água já foram rejeitadas. A guarda QA foi removida e a matriz CP-CARTO-77 foi actualizada.
