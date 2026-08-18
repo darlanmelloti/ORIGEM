@@ -144,3 +144,9 @@ A auditoria espacial e a construção do sector atribuem o prop laranja/escuro �
 Foi integrada em `TempleLevel.gd` uma telemetria QA exclusiva que regista posição física, marco mais próximo, posição no mapa e destino seguinte para as rotas R1–R6. A primeira prova identificou uma falha real: o destino cartográfico dependia apenas de Z e ignorava o ramo ocidental Majestic. `CartographicAnchors.next_dev1_destination` e `CartographicMapUI.gd` passaram a receber `Vector2(X,Z)`. Na faixa do conector (`z=150–202`), a orientação aponta para o Majestic no lado leste e para as Ruínas após cruzar para oeste. Parser e sessões de 36 segundos passaram; a repetição Floresta→Majestic confirmou `RUMO AO MAJESTIC` sem erro.
 
 **Próxima tarefa contínua:** CP-CARTO-79 — leituras de horizonte Casa Voss→Estrada→Arco com a régua X/Z activa. Medir o marco seguinte no sentido cartesiano antes de qualquer mudança física; manter R7–R12 fora desta branch.
+
+## CP-CARTO-79 — Primeiro horizonte cartográfico aceite
+
+As rotas `road_return_voss` e `road_to_arch` passaram sessões de 36 segundos com Menu→Novo Jogo e a régua X/Z activa. A Casa Voss é legível no retorno físico da Estrada; o Arco é legível no eixo das lajes no sentido norte, sem redução artificial de distância. Não surgiu nova oclusão causal que justifique tocar em terreno, água, árvores, lajes ou luzes. Relatório: `qa_evidence_carto79/CP_CARTO79_FIRST_HORIZON.md`.
+
+**Próxima tarefa contínua:** CP-CARTO-80 — leitura cartográfica Arco→Floresta→Majestic. Validar o desvio oeste e a reconvergência para R6 com a régua X/Z, sem criar sinalização artificial nem editar Regiões 7–12.
