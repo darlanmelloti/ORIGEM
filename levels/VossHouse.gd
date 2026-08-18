@@ -139,8 +139,13 @@ func _build_voss_revelation_terrace() -> void:
 	# Miradouro físico CP281: fica no lado exterior da fachada, elevado o suficiente para ler a bacia sem comprimir a escala real do vale.
 	var terrace: StaticBody3D = StaticBody3D.new()
 	terrace.name = "TerracoDeRevelacaoDaCasaVoss"
-	var ground_y: float = _ground_height(-22.0, 14.0)
-	terrace.position = Vector3(-22.0, ground_y + 2.28, 14.0)
+	# O terraço é leitura panorâmica exterior; não pode interceptar a soleira jogável da Casa Voss.
+	terrace.collision_layer = 0
+	terrace.collision_mask = 0
+	# O marco panorâmico começa depois do primeiro corredor exterior, deixando a saída e o céu imediatamente livres.
+	var terrace_z: float = 21.0
+	var ground_y: float = _ground_height(-22.0, terrace_z)
+	terrace.position = Vector3(-22.0, ground_y + 2.28, terrace_z)
 	add_child(terrace)
 
 	var slab_mesh: BoxMesh = BoxMesh.new()
@@ -154,14 +159,18 @@ func _build_voss_revelation_terrace() -> void:
 	var slab_shape: BoxShape3D = BoxShape3D.new()
 	slab_shape.size = slab_mesh.size
 	slab_collision.shape = slab_shape
+	slab_collision.disabled = true
 	terrace.add_child(slab_collision)
 
 	# Três degraus largos garantem uma subida natural desde a soleira, sem obstruir a saída pela porta interactiva.
 	for step_index: int in range(3):
 		var step: StaticBody3D = StaticBody3D.new()
 		step.name = "DegrauDoTerraco_%02d" % (step_index + 1)
+		# Mantêm a leitura do miradouro, mas não podem erguer uma parede física diante da saída.
+		step.collision_layer = 0
+		step.collision_mask = 0
 		var step_height: float = 0.38 + float(step_index) * 0.56
-		step.position = Vector3(-22.0, ground_y + step_height * 0.5, 9.55 + float(step_index) * 1.15)
+		step.position = Vector3(-22.0, ground_y + step_height * 0.5, terrace_z - 4.45 + float(step_index) * 1.15)
 		var step_mesh: BoxMesh = BoxMesh.new()
 		step_mesh.size = Vector3(3.8 + float(step_index) * 0.62, step_height, 1.38)
 		step_mesh.material = stone_material
@@ -172,6 +181,7 @@ func _build_voss_revelation_terrace() -> void:
 		var step_shape: BoxShape3D = BoxShape3D.new()
 		step_shape.size = step_mesh.size
 		step_collision.shape = step_shape
+		step_collision.disabled = true
 		step.add_child(step_collision)
 		add_child(step)
 
@@ -183,7 +193,7 @@ func _build_voss_revelation_terrace() -> void:
 		pillar.name = "PilarDoMiradouro_%02d" % (corner_index + 1)
 		var offsets: Array[Vector3] = [Vector3(-3.55, 0.0, 2.3), Vector3(3.55, 0.0, 2.3), Vector3(-3.6, 0.0, -2.25)]
 		var offset: Vector3 = offsets[corner_index]
-		pillar.position = Vector3(-22.0 + offset.x, _ground_height(-22.0 + offset.x, 14.0 + offset.z) - 0.04, 14.0 + offset.z)
+		pillar.position = Vector3(-22.0 + offset.x, _ground_height(-22.0 + offset.x, terrace_z + offset.z) - 0.04, terrace_z + offset.z)
 		pillar.scale = Vector3(0.34, 0.58 if corner_index < 2 else 0.42, 0.34)
 		pillar.rotation.y = [-0.20, 0.24, -0.42][corner_index]
 		add_child(pillar)
@@ -719,17 +729,15 @@ func open_front_door() -> bool:
 
 	var left_panel: Node3D = house.get_node_or_null("PortaVossEsquerda") as Node3D
 	var right_panel: Node3D = house.get_node_or_null("PortaVossDireita") as Node3D
-	# Os três corpos abaixo eram as únicas colisões do vão: desativam-se no mesmo frame e são removidos da cena.
-	for collision_name: String in ["PortaVossEsquerda_Colisao", "PortaVossDireita_Colisao", "VossFrontDoor"]:
-		var collision_body: StaticBody3D = house.get_node_or_null(collision_name) as StaticBody3D
-		if collision_body == null:
-			continue
-		collision_body.collision_layer = 0
-		collision_body.collision_mask = 0
-		for child: Node in collision_body.get_children():
-			if child is CollisionShape3D:
-				(child as CollisionShape3D).set_deferred("disabled", true)
-		collision_body.queue_free()
+	# Abertura física absoluta: remove qualquer corpo da porta, mesmo se a hierarquia for alterada num passe visual futuro.
+	for collision_body: StaticBody3D in house.find_children("*", "StaticBody3D", true, false):
+		if collision_body.name in ["PortaVossEsquerda_Colisao", "PortaVossDireita_Colisao", "VossFrontDoor"]:
+			collision_body.collision_layer = 0
+			collision_body.collision_mask = 0
+			for child: Node in collision_body.get_children():
+				if child is CollisionShape3D:
+					(child as CollisionShape3D).set_deferred("disabled", true)
+			collision_body.queue_free()
 
 	var door_tween: Tween = create_tween().set_parallel(true)
 	if left_panel != null:
@@ -738,7 +746,15 @@ func open_front_door() -> bool:
 	if right_panel != null:
 		door_tween.tween_property(right_panel, "position:x", 2.45, 0.62).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		door_tween.tween_property(right_panel, "rotation:y", deg_to_rad(24.0), 0.62).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	# As folhas não devem continuar como tábuas de barricada depois da abertura: são removidas após a animação.
+	door_tween.finished.connect(_clear_open_door_leaves.bind(left_panel, right_panel))
 	return true
+
+func _clear_open_door_leaves(left_panel: Node3D, right_panel: Node3D) -> void:
+	if is_instance_valid(left_panel):
+		left_panel.queue_free()
+	if is_instance_valid(right_panel):
+		right_panel.queue_free()
 
 func _build_opening_landscape(house: Node3D) -> void:
 	# Moldura física: copas reais cortam o céu e rochas criam a transição para a estrada da serra.
