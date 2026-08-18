@@ -27,6 +27,57 @@ const MAP_TEXTURE_POSITIONS: Dictionary = {
 	10: Vector2(466.0, 78.0), 11: Vector2(514.0, 33.0), 12: Vector2(564.0, 497.0)
 }
 
+# Contrato único consumido pelo mundo integrado e pelos harnesses de QA.
+# Não duplica coordenadas: todas as posições são derivadas das constantes acima.
+const DEV2_REGION_IDS: Array[int] = [7, 8, 9, 10, 11, 12]
+const VALIDATION_STATES: Array[String] = ["UNBUILT", "BLOCKOUT_VALIDATED", "PHYSICAL_VALIDATED", "VISUAL_PASS", "INTEGRATED"]
+
+static func _anchor_for_region(region_id: int) -> Vector2:
+	match region_id:
+		7: return VILA_ELEVADA
+		8: return OBSERVATORIO
+		9: return TRILHA_MONTANHA_INICIO
+		10: return CAVERNA_ORION
+		11: return CAMARA_ORION_CUBE
+		12: return HUB_TEMPORAL
+	return Vector2.ZERO
+
+static func dev2_contract(terrain_heights: Dictionary = {}) -> Array[Dictionary]:
+	var subjects: Dictionary = {
+		7: "Vila Elevada", 8: "Observatório", 9: "Trilha da Montanha",
+		10: "Caverna do Orion", 11: "Câmara do Orion Cube", 12: "Hub Temporal / Cúpula Final"
+	}
+	var states: Dictionary = {
+		7: "PHYSICAL_VALIDATED", 8: "PHYSICAL_VALIDATED", 9: "PHYSICAL_VALIDATED",
+		10: "PHYSICAL_VALIDATED", 11: "PHYSICAL_VALIDATED", 12: "VISUAL_PASS"
+	}
+	var contract: Array[Dictionary] = []
+	for region_id: int in DEV2_REGION_IDS:
+		var world_anchor := _anchor_for_region(region_id)
+		var previous_anchor := _anchor_for_region(maxi(region_id - 1, 7)) if region_id > 7 else VILA_ELEVADA
+		var next_anchor := _anchor_for_region(mini(region_id + 1, 12))
+		var direction := (next_anchor - world_anchor).normalized() if region_id < 12 else (world_anchor - previous_anchor).normalized()
+		var terrain_y: float = float(terrain_heights.get(region_id, 0.0))
+		contract.append({
+			"region_id": region_id,
+			"world_position": world_position(world_anchor, terrain_y),
+			"altitude_derived": terrain_y,
+			"approach_direction": direction,
+			"handoff_in": world_position(previous_anchor, terrain_y),
+			"handoff_out": world_position(next_anchor, terrain_y),
+			"subject_visual": subjects[region_id],
+			"validation_state": states[region_id],
+			"map_texture_position": MAP_TEXTURE_POSITIONS[region_id]
+		})
+	return contract
+
+static func dev2_anchor_positions() -> Array[Vector3]:
+	var positions: Array[Vector3] = []
+	for item: Dictionary in dev2_contract():
+		positions.append(item["world_position"] as Vector3)
+	return positions
+
+
 static func world_position(anchor: Vector2, terrain_y: float, vertical_offset: float = 0.0) -> Vector3:
 	return Vector3(anchor.x, terrain_y + vertical_offset, anchor.y)
 
