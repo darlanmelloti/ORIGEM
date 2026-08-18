@@ -140,3 +140,20 @@ O harness `majestic_to_lake` foi acelerado sem alterar o jogo normal: carrega so
 | Regiões 7–12 | Sem alteração |
 
 **Próxima tarefa já iniciada — CP-CARTO-08:** validar a aproximação final às Ruínas Submersas a partir do trilho de floresta, priorizando a silhueta de chegada e a legibilidade da margem, sem repor ou alterar a água e sem introduzir obstáculos na rota.
+
+### Conclusão operacional do CP-CARTO-08
+
+A prova cartográfica Floresta–Ruínas revelou que árvores e fetos da dispersão densa invadiam a última curva do trilho de margem, ocultando a bacia. Foi introduzida uma clareira local, limitada a `z=194–232` e à proximidade da curva `_lake_shore_x`; a densidade restante da floresta e a água não foram alteradas. O limiar arqueológico das Ruínas recebeu dois vestígios verticais maiores e respectivas bases, mantendo-os fora da faixa navegável.
+
+Os modos QA `forest_to_ruins` e `ruins_arrival` permitem inspecção reprodutível em Regiões 1–6 sem carregar módulos das Regiões 7–12. As capturas `cp_carto08_ruins_approach30.png` e `cp_carto08_ruins_tall_silhouette30.png` confirmam 30 segundos de execução sem erro de runtime e uma chegada com clareira, marco arqueológico e margem reconhecíveis. A água foi preservada como elemento lateral escuro: nenhum material, cota ou luz da bacia foi modificado.
+
+| Critério | Resultado |
+| --- | --- |
+| Última curva do trilho de margem | Clareada de árvores/fetos invasivos |
+| Vestígios da entrada da bacia | Silhueta vertical reforçada |
+| Colisores da margem e água | Inalterados |
+| Luzes dinâmicas | Nenhuma adicionada |
+| Gameplay/captura QA | 30 segundos, sem erro de runtime |
+| Regiões 7–12 | Sem alteração |
+
+**Próxima tarefa já iniciada — CP-CARTO-09:** consolidar a leitura macro da sequência Casa Voss–Estrada–Arco–Floresta–Majestic–Ruínas através de uma matriz de âncoras, distâncias e evidências, identificando apenas as lacunas físicas ainda abertas para os passes seguintes. O ciclo permanece contínuo.

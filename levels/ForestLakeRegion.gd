@@ -492,8 +492,9 @@ func _build_basin_arrival_frame() -> void:
 			continue
 		pillar.name = "VestigioDaEntradaDaBacia_%02d" % frame_index
 		pillar.position = Vector3(pillar_x, ground_y + 0.34, arrival_z + side * 0.72)
-		var scale_value: float = 0.50 if frame_index == 0 else 0.42
-		pillar.scale = Vector3(scale_value, scale_value * 1.30, scale_value)
+		# Silhueta aumentada para que os dois vestígios possam ser lidos antes da margem, mas continuam exteriores à faixa de lajes.
+		var scale_value: float = 1.05 if frame_index == 0 else 0.88
+		pillar.scale = Vector3(scale_value, scale_value * 1.60, scale_value)
 		pillar.rotation = Vector3(0.09 * side, side * (0.30 + float(frame_index) * 0.22), -0.05 * side)
 		_apply_material(pillar, ruin_material)
 		frame.add_child(pillar)
@@ -503,8 +504,8 @@ func _build_basin_arrival_frame() -> void:
 				continue
 			rock.name = "BaseDoVestigioDaBacia_%02d_%02d" % [frame_index, base_index]
 			rock.position = Vector3(pillar_x - side * (0.42 + float(base_index) * 0.34), ground_y + 0.035, arrival_z + side * (0.38 - float(base_index) * 0.52))
-			var rock_scale: float = 0.16 + float(base_index) * 0.052
-			rock.scale = Vector3(rock_scale, rock_scale * 0.66, rock_scale)
+			var rock_scale: float = 0.22 + float(base_index) * 0.064
+			rock.scale = Vector3(rock_scale, rock_scale * 0.72, rock_scale)
 			rock.rotation.y = 0.44 + float(frame_index) * 0.72 + float(base_index) * 0.38
 			_apply_material(rock, ruin_material)
 			frame.add_child(rock)
@@ -692,7 +693,9 @@ func _build_dense_forest() -> void:
 		# Mantém o corredor livre e evita árvores dentro da bacia elíptica das Ruínas Submersas.
 		var lake_dx: float = (x_value - CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.x) / 48.0
 		var lake_dz: float = (z_value - CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y) / 38.0
-		if abs(x_value - _path_x(z_value)) < 6.0 or lake_dx * lake_dx + lake_dz * lake_dz < 1.20:
+		var shore_clearance: bool = z_value >= 194.0 and z_value <= 232.0 and abs(x_value - _lake_shore_x(z_value)) < 6.2
+		# A clareira só acompanha a última curva do trilho de margem: revela a bacia e os vestígios sem rarefazer a floresta inteira.
+		if abs(x_value - _path_x(z_value)) < 6.0 or shore_clearance or lake_dx * lake_dx + lake_dz * lake_dz < 1.20:
 			continue
 		var tree_source: PackedScene
 		var is_conifer: bool = false
@@ -747,6 +750,8 @@ func _build_dense_forest() -> void:
 		var z_value: float = 70.0 + float(index) * 1.55
 		var side: float = -1.0 if index % 2 == 0 else 1.0
 		var x_value: float = _path_x(z_value) + side * (5.15 + fmod(float(index), 5.0) * 0.82)
+		if z_value >= 194.0 and z_value <= 232.0 and abs(x_value - _lake_shore_x(z_value)) < 4.8:
+			continue
 		var fern: Node3D = FERN.instantiate() as Node3D
 		if fern == null:
 			continue
