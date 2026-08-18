@@ -568,24 +568,31 @@ func _build_majestic_lake_transition() -> void:
 			rock.scale = Vector3(rock_scale, rock_scale, rock_scale)
 			rock.rotation.y = 0.42 + float(index) * 0.73
 			transition.add_child(rock)
-		var crate_mesh: BoxMesh = BoxMesh.new()
-		crate_mesh.size = Vector3(0.95, 0.62, 0.82)
-		var crate: MeshInstance3D = MeshInstance3D.new()
-		crate.name = "CaixaDeCampoMajestic_%02d" % index
-		crate.mesh = crate_mesh
-		crate.material_override = crate_material
-		crate.position = Vector3(x_value, ground_y + 0.31, z_value)
-		crate.rotation.y = 0.25 + float(index) * 0.58
-		transition.add_child(crate)
-		var lamp_mesh: SphereMesh = SphereMesh.new()
-		lamp_mesh.radius = 0.11
-		lamp_mesh.height = 0.22
+		# CP-CARTO-29 restaurado: rolos de campo apoiados na rocha substituem caixotes cúbicos de protótipo.
+		# A silhueta horizontal integra-se na margem, não recebe colisão e mantém o eixo das lajes inteiramente livre.
+		var roll_mesh: CylinderMesh = CylinderMesh.new()
+		roll_mesh.top_radius = 0.31
+		roll_mesh.bottom_radius = 0.38
+		roll_mesh.height = 1.34
+		roll_mesh.radial_segments = 10
+		var roll: MeshInstance3D = MeshInstance3D.new()
+		roll.name = "RoloDeCampoMajestic_%02d" % index
+		roll.mesh = roll_mesh
+		roll.material_override = crate_material
+		roll.position = Vector3(x_value, ground_y + 0.37, z_value)
+		roll.rotation = Vector3(PI * 0.5, 0.25 + float(index) * 0.58, 0.06 * float((index % 2) * 2 - 1))
+		transition.add_child(roll)
+		# Lanternas baixas em vez de esferas vermelhas isoladas: a luz preserva a orientação e ganha uma base física reconhecível.
+		var lamp_mesh: CylinderMesh = CylinderMesh.new()
+		lamp_mesh.top_radius = 0.095
+		lamp_mesh.bottom_radius = 0.145
+		lamp_mesh.height = 0.34
 		lamp_mesh.radial_segments = 10
 		var lamp: MeshInstance3D = MeshInstance3D.new()
-		lamp.name = "LanternaMajestic_%02d" % index
+		lamp.name = "LanternaDeCampoMajestic_%02d" % index
 		lamp.mesh = lamp_mesh
 		lamp.material_override = lamp_material
-		lamp.position = Vector3(x_value, ground_y + 0.94, z_value)
+		lamp.position = Vector3(x_value, ground_y + 0.82, z_value)
 		transition.add_child(lamp)
 		var fill: OmniLight3D = OmniLight3D.new()
 		fill.name = "LuzDeCampoMajestic_%02d" % index
@@ -654,10 +661,10 @@ func _build_lake_wayfinding() -> void:
 	stone.albedo_color = Color(0.14, 0.17, 0.16, 1.0)
 	stone.roughness = 0.91
 	var chronos: StandardMaterial3D = StandardMaterial3D.new()
-	chronos.albedo_color = Color(0.035, 0.20, 0.30, 1.0)
+	chronos.albedo_color = Color(0.040, 0.12, 0.16, 1.0)
 	chronos.emission_enabled = true
-	chronos.emission = Color(0.012, 0.16, 0.31, 1.0)
-	chronos.emission_energy_multiplier = 0.42
+	chronos.emission = Color(0.006, 0.045, 0.060, 1.0)
+	chronos.emission_energy_multiplier = 0.12
 	for index: int in range(4):
 		var t: float = float(index) / 3.0
 		var z_value: float = lerpf(154.0, 218.0, t)
@@ -675,20 +682,22 @@ func _build_lake_wayfinding() -> void:
 		pillar.position = Vector3(x_value, ground_y + 1.18, z_value)
 		pillar.rotation.y = 0.26 + float(index) * 0.57
 		markers.add_child(pillar)
-		var beacon_mesh: SphereMesh = SphereMesh.new()
-		beacon_mesh.radius = 0.105
-		beacon_mesh.height = 0.21
-		beacon_mesh.radial_segments = 12
+		# Uma pequena tampa rúnica integra a luz no marco de pedra; elimina a leitura de orbe flutuante de QA.
+		var beacon_mesh: CylinderMesh = CylinderMesh.new()
+		beacon_mesh.top_radius = 0.065
+		beacon_mesh.bottom_radius = 0.090
+		beacon_mesh.height = 0.10
+		beacon_mesh.radial_segments = 8
 		beacon_mesh.material = chronos
 		var beacon: MeshInstance3D = MeshInstance3D.new()
-		beacon.name = "LuzChronosMargem_%02d" % index
+		beacon.name = "TampaRunicaDaMargem_%02d" % index
 		beacon.mesh = beacon_mesh
-		beacon.position = Vector3(x_value, ground_y + 2.42, z_value)
+		beacon.position = Vector3(x_value, ground_y + 2.37, z_value)
 		markers.add_child(beacon)
 		var light: OmniLight3D = OmniLight3D.new()
-		light.light_color = Color(0.08, 0.26, 0.44, 1.0)
-		light.light_energy = 0.11
-		light.omni_range = 3.0
+		light.light_color = Color(0.08, 0.18, 0.22, 1.0)
+		light.light_energy = 0.06
+		light.omni_range = 2.2
 		light.shadow_enabled = false
 		light.position = beacon.position
 		markers.add_child(light)
