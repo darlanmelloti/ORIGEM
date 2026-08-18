@@ -199,3 +199,112 @@
 - [ ] Criar ZIP do projecto completo R7–R12 e calcular SHA-256.
 - [ ] Actualizar o relatório com estado único e próxima acção já iniciada.
 - [ ] Sincronizar o resultado na branch Dev2 publicamente verificável.
+
+
+## CP-D2-203 — continuidade após leitura GitHub
+
+- [ ] Corrigir no relatório público a referência ao HEAD intermédio e registar o HEAD efectivo.
+- [ ] Definir o próximo passe visual exclusivamente na Região 12, preservando o limite de 16 luzes.
+- [ ] Implementar o passe CP-D2-203 no checkout completo R7–R12.
+- [ ] Executar parser, gameplay de 30 segundos, print 1600x900 e scope guard.
+- [ ] Avaliar a captura e repetir se houver rejeição visual.
+- [ ] Empacotar ZIP e SHA-256 actualizados.
+- [ ] Publicar código, relatório e evidências na branch feature/dev2-mountain-canyon.
+
+
+## CP-D2-204 — contrato cartográfico e MAP_MIRROR_VALIDATION
+
+- [ ] Auditar `CartographicAnchors.gd`, `main.tscn` e o fluxo integrado actual.
+- [ ] Expandir a autoridade existente com posição mundial, altitude derivada, direcção de aproximação, handoff de entrada/saída, sujeito visual e estado de validação para Regiões 7–12.
+- [ ] Não criar coordenadas concorrentes nem tocar nos módulos proprietários das Regiões 1–6.
+- [ ] Implementar `MAP_MIRROR_VALIDATION` apenas em QA no mundo integrado, com marcadores, linhas e estados temporários.
+- [ ] Validar atravessabilidade dos handoffs e segmentos 7–12 com gameplay real de 30 segundos.
+- [ ] Capturar print 1600x900, gameplay, inventário de luzes/colisores/malhas, scope guard, log e SHA-256.
+- [ ] Publicar o checkpoint e iniciar a validação de continuidade 6→7 no mundo integrado.
+
+
+## CP-D2-205 — legibilidade do espelho cartográfico
+
+- [ ] Auditar a captura CP-D2-204 e os parâmetros de escala, cor e câmara do MAP_MIRROR_VALIDATION.
+- [ ] Aumentar a legibilidade dos seis marcadores e labels apenas no modo QA.
+- [ ] Preservar coordenadas de CartographicAnchors e geometria real das Regiões 7–12.
+- [ ] Repetir gameplay real de 30 segundos, print 1600x900, inventário e scope guard.
+- [ ] Avaliar visualmente e, se aceite, abrir a continuidade 6→7.
+- [ ] Empacotar ZIP, SHA-256, publicar código/relatório/evidências na branch Dev2.
+
+
+## Nova sessão — validação física R6→R7
+
+- [ ] Auditar os pontos físicos de entrada e saída da fronteira R6→R7 no mundo integrado.
+- [ ] Instrumentar QA para medir progresso do jogador, orientação e atravessabilidade sem alterar geometria Dev1.
+- [ ] Executar gameplay real de 30 segundos, print 1600x900, logs e scope guard.
+- [ ] Avaliar continuidade e registar STATUS_CODE com próxima acção concreta.
+- [ ] Criar ZIP e SHA-256, publicar alterações e fechar a sessão com estado, commit e evidências.
+
+
+## CP-D2-208 — continuidade física R7→R8
+
+- [ ] Auditar âncoras Vila Elevada, Observatório e handoff R7→R8.
+- [ ] Implementar spawn e instrumentação QA R7→R8 sem alterar Regiões 1–6.
+- [ ] Executar gameplay real de 30 segundos, print 1600x900, inventário, logs e scope guard.
+- [ ] Avaliar atravessabilidade e legibilidade do handoff.
+- [ ] Criar ZIP/SHA-256, publicar código e relatório e iniciar a sessão seguinte.
+
+
+## Protocolo contínuo — CP-D2-209 e transição automática
+
+- [ ] Consultar orientações e estado público da branch Dev2 antes de iniciar CP-D2-209.
+- [ ] Corrigir a leitura visual do Observatório R8 no mundo integrado, sem coordenadas concorrentes.
+- [ ] Executar gameplay 30s, print 1600x900, logs, inventário e scope guard.
+- [ ] Fechar CP-D2-209 com STATUS_CODE honesto, commits, ZIP e SHA-256.
+- [ ] Iniciar imediatamente CP-D2-210 no mesmo fluxo, sem aguardar resposta.
+- [ ] Repetir o procedimento para cada sessão seguinte, consultando GitHub em caso de dúvida.
+
+
+## CP-D2-210 — enquadramento QA de aproximação R7→R8
+
+- [ ] Criar câmara QA de aproximação que mostre o volume real do Observatório R8 e o corredor R7→R8 no mesmo quadro.
+- [ ] Não alterar a câmara normal nem criar coordenadas concorrentes.
+- [ ] Executar parser, gameplay 30s, print 1600x900, inventário e scope guard.
+- [ ] Fechar CP-D2-210 com estado, commits, ZIP e SHA-256.
+- [ ] Iniciar imediatamente CP-D2-211 após o fecho.
+
+
+## CP-D2-211 — builder real do Observatório R8
+
+- [ ] Auditar `HighlandRegion.gd` e a posição real `ObservatorioDaOrion`.
+- [ ] Reforçar a massa orgânica apoiada do Observatório sem alterar Regiões 1–6.
+- [ ] Preservar o orçamento de luzes e os colliders R7→R8.
+- [ ] Executar gameplay, print, logs, scope guard, ZIP e SHA-256.
+- [ ] Fechar CP-D2-211 e iniciar imediatamente CP-D2-212.
+
+
+## Protocolo Dev4 — fila contínua de tarefas longas
+
+- [ ] Definir um objectivo de longo curso com pelo menos três entregas encadeadas.
+- [ ] Registar para cada entrega o critério de entrada, o critério de saída e a próxima tarefa obrigatória.
+- [ ] Garantir que cada checkpoint contém estado, evidências, commit, pacote e a tarefa seguinte já iniciada.
+- [ ] Usar rejeição visual como gatilho automático de um novo passe, nunca como encerramento.
+- [ ] Evitar tarefas isoladas de uma só alteração; agrupar composição, integração física, QA e publicação numa fila única.
+- [ ] Criar um marcador de continuidade que permita retomar a fila sem depender de nova mensagem do utilizador.
+- [ ] Aplicar o protocolo ao ciclo actual R8 Observatório → R9 Trilha da Montanha → R10 Caverna do Orion.
+
+
+## Correcção de continuidade Dev4 — pós-Ato 3
+
+- [ ] Remover qualquer formulação equivalente a “aguardo a próxima instrução” dos relatórios activos.
+- [ ] Tratar Epílogo e Créditos como tarefas intermédias, não como encerramento de sessão.
+- [ ] Definir a fila pós-créditos: auditoria Ato 4, transição narrativa, integração jogável e captura de evidências.
+- [ ] Criar um marcador `NEXT_TASK_ACTIVE` com ficheiro-alvo, objectivo, critério de saída e próxima tarefa.
+- [ ] Executar pelo menos a primeira tarefa pós-créditos no mesmo fluxo após o commit `840634b`.
+- [ ] Fechar cada ciclo apenas com a próxima tarefa já iniciada e comprovada por diff ou commit seguinte.
+
+
+## Nova sessão — continuidade pós-créditos Dev4
+
+- [ ] Consultar o estado público e registar a ausência/presença do checkout Dev4.
+- [ ] Criar um marcador `NEXT_TASK_ACTIVE` com tarefa pós-créditos, ficheiro-alvo, objectivo e critério de saída.
+- [ ] Definir a fila encadeada de auditoria Ato 4, handoff jogável e take seguinte.
+- [ ] Validar que o relatório não termina com “aguardo instruções”.
+- [ ] Iniciar efectivamente a primeira tarefa da fila no mesmo fluxo.
+- [ ] Fechar o bloco apenas após registar estado, commit/evidência disponível e próxima tarefa activa.
