@@ -2,8 +2,9 @@
 ## Não substitui geometria nem é incluído como elemento visual na versão final.
 extends Node3D
 
-const MARKER_RADIUS: float = 0.85
-const LINE_HEIGHT: float = 0.35
+const MARKER_RADIUS: float = 1.45
+const LINE_HEIGHT: float = 0.50
+const LABEL_OFFSET: float = 3.0
 const STATE_COLORS: Dictionary = {
 	"UNBUILT": Color("#ef5350"),
 	"BLOCKOUT_VALIDATED": Color("#f6c453"),
@@ -43,8 +44,12 @@ func _build_mirror() -> void:
 		var label := Label3D.new()
 		label.name = "MapMirrorLabel_R%02d" % int(item["region_id"])
 		label.text = "R%02d  %s  [%s]" % [int(item["region_id"]), str(item["subject_visual"]), state]
-		label.position = marker.position + Vector3(0.0, 1.8, 0.0)
+		label.position = marker.position + Vector3(0.0, LABEL_OFFSET, 0.0)
 		label.modulate = material.albedo_color
+		label.font_size = 48
+		label.pixel_size = 0.012
+		label.outline_size = 12
+		label.outline_modulate = Color("#09121f")
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		label.no_depth_test = true
 		mirror_root.add_child(label)
@@ -71,8 +76,8 @@ func _add_segment(parent: Node3D, start: Vector3, finish: Vector3, index: int) -
 	var segment := MeshInstance3D.new()
 	segment.name = "MapMirrorHandoff_%02d" % index
 	var cylinder := CylinderMesh.new()
-	cylinder.top_radius = 0.16
-	cylinder.bottom_radius = 0.16
+	cylinder.top_radius = 0.28
+	cylinder.bottom_radius = 0.28
 	cylinder.height = start.distance_to(finish)
 	segment.mesh = cylinder
 	var material := StandardMaterial3D.new()
