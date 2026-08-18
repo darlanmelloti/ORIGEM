@@ -39,3 +39,21 @@ Evidência: `qa_evidence_voss_vista/cp_carto02_arch_buttress_qa_skip.png`.
 ### Próxima tarefa já iniciada
 
 **CP-CARTO-03 — Continuidade Casa Voss–Estrada:** substituir a leitura fragmentada de lajes isoladas por uma ligação de solo contínua, mantendo a estrada e o rio separados, sem criar nova luz e sem alterar a distância física até ao Arco.
+
+## CP-CARTO-03 — Continuidade Casa Voss–Estrada
+
+A revisão estrutural confirmou que a faixa já existe como malha contínua de 4,15 m, mas a elevação discreta acima do terreno e a redução de contraste das lajes **não alteraram a leitura** na captura de 30 segundos. O enquadramento continuou a ler a rota como pedras individuais sobre solo indistinto. A variante foi revertida integralmente: não há mudança de material, altura, colisores, hidrologia ou luzes publicada.
+
+| Verificação | Resultado |
+| --- | --- |
+| Godot 4.7.1, validação headless | Aprovada |
+| Novo Jogo + percurso contínuo de 30 segundos | Aprovados sem erro de runtime |
+| Faixa elevada e lajes com contraste reduzido | Rejeitada — ganho visual não perceptível |
+| Rio, colisores e distância até ao Arco | Preservados |
+| Luzes dinâmicas acrescentadas | 0 |
+
+Evidências: `qa_evidence_voss_vista/cp_carto03_roadbed_headless.log`, `qa_evidence_voss_vista/cp_carto03_roadbed_30s.log` e `qa_evidence_voss_vista/cp_carto03_roadbed_30s.png`.
+
+### Próxima tarefa já iniciada
+
+**CP-CARTO-04 — Profundidade Arco–Floresta Densa:** verificar, a partir da rota física depois do Arco, se a entrada na Região 4 é lida como corredor tridimensional contínuo. O passe limita-se a observação e, apenas se a cadeia estiver ilegível, a uma correcção estrutural apoiada no terreno; não deve repetir as calibrações de material, elevação de faixa, água ou escala das lajes rejeitadas.
