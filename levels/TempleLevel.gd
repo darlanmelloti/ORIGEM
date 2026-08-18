@@ -284,7 +284,7 @@ func _prepare_majestic_lake_route_qa() -> void:
 		head.rotation = Vector3.ZERO
 	var route_label: String = "Floresta–Majestic" if reverse_from_forest else "Majestic–lago"
 	print("[ORIGEM_QA_ROUTE] Spawn %s ativo em %s; primeira_perna=%s" % [route_label, player.global_position, connector_target])
-	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
+	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "" and OS.get_environment("ORIGEM_QA_CARTO_LINK_WALK") != "1":
 		call_deferred("_save_viewport_snapshot_qa")
 
 func _prepare_lake_approach_route_qa() -> void:

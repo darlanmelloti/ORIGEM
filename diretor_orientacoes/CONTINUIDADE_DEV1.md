@@ -180,3 +180,11 @@ O diagnóstico da rota `majestic_to_lake` revelou uma lacuna curta entre `Ligaca
 O harness QA passou a apontar o take Majestic para a primeira laje real de R6. Parser Godot 4.7.1, Menu→Novo Jogo, 36 segundos de gameplay e captura interna 1920×1080 passaram. A régua X/Z confirma `proximo=6:RUMO ÀS RUÍNAS` a partir do marco 5. A evidência encontra-se em `qa_evidence_carto84/CP_CARTO84_MAJESTIC_TO_RUINS_PHYSICAL_LINK.md`.
 
 **Próximo passo activo:** CP-CARTO-85 — validar a entrada em movimento da margem R6, preservando a nova continuidade e sem repetir estelas, cairns, lanternas, fetos, rochas, água ou árvores já rejeitados.
+
+## CP-CARTO-85 — Entrada física Majestic→Margem validada em movimento
+
+O harness `ORIGEM_QA_CARTO_LINK_WALK=1` percorreu a nova ligação R5→R6 com `move_and_slide()` e a física normal do jogador, sem depender do foco Xvfb. Ao frame físico 30, Elias avançou do spawn e permaneceu `no_chao=true`; a captura interna do viewport mostra as lajes no eixo correcto e a régua X/Z mantém `proximo=6:RUMO ÀS RUÍNAS`. A janela completa foi de 36 s. Sob llvmpipe, a cadência baixa não permite alegar chegada automática à margem inteira, mas valida a entrada e a primeira secção da continuidade sem queda ou bloqueio.
+
+A telemetria só activa no harness, não altera o jogo normal. Não foram mudadas luzes, água, árvores, fetos, rochas, estelas, cairns ou Regiões 7–12. Evidência: `qa_evidence_carto84/CP_CARTO85_MAJESTIC_RUINS_LINK_WALK.md`.
+
+**Próximo passo activo:** CP-CARTO-86 — auditar a chegada visual a R6 desde o eixo Majestic, usando a captura interna e promovendo apenas uma causa visual nova; o piloto Meshy continua pendente de GLB recuperável.

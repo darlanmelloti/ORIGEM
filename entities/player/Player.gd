@@ -16,6 +16,7 @@ var is_sprinting: bool = false
 var is_blocking: bool = false
 var player_velocity: Vector3 = Vector3.ZERO
 var bob_time: float = 0.0
+var qa_carto_link_frames: int = 0
 
 var current_health: int = 100
 const MAX_HEALTH: int = 100
@@ -282,6 +283,10 @@ func _handle_player(delta: float) -> void:
 		speed *= 0.65
 
 	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	# CP-CARTO-85: percorre a ligação R5→R6 sob a mesma física do jogador, sem injetar eventos Xvfb nem existir no jogo normal.
+	var qa_link_walk: bool = OS.get_environment("ORIGEM_QA_ROUTE") == "majestic_to_lake" and OS.get_environment("ORIGEM_QA_CARTO_LINK_WALK") == "1"
+	if qa_link_walk:
+		input_dir = Vector2(0.0, -1.0)
 	var direction: Vector3 = (transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)).normalized()
 
 	var horizontal_response: float = 1.0 if grounded else AIR_CONTROL
@@ -298,12 +303,25 @@ func _handle_player(delta: float) -> void:
 	velocity = player_velocity
 	move_and_slide()
 	player_velocity = velocity
+	if qa_link_walk:
+		qa_carto_link_frames += 1
+		if qa_carto_link_frames == 30:
+			print("[CP_CARTO85_LINK] frames=%d pos=(%.2f,%.2f,%.2f) no_chao=%s" % [qa_carto_link_frames, global_position.x, global_position.y, global_position.z, str(is_on_floor())])
+			var snapshot_path: String = OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT")
+			if snapshot_path != "":
+				call_deferred("_save_carto_link_snapshot_qa", snapshot_path)
 
 	if direction != Vector3.ZERO and is_on_floor():
 		bob_time += delta * speed
 		camera.position.y = sin(bob_time * 1.8) * 0.025
 	else:
 		camera.position.y = lerpf(camera.position.y, 0.0, delta * 6.0)
+
+func _save_carto_link_snapshot_qa(snapshot_path: String) -> void:
+	await get_tree().process_frame
+	var image: Image = get_viewport().get_texture().get_image()
+	var result: Error = image.save_png(snapshot_path)
+	print("[CP_CARTO85_LINK] snapshot=%s result=%s" % [snapshot_path, result])
 
 func _on_footstep() -> void:
 	pass
