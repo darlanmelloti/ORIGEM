@@ -28,6 +28,8 @@ A correcção CP-D2-202 foi executada no projecto Godot local completo das Regi�
 |---|---|
 | `gameplay-30s.mp4` | `9e8e8f15582d2181cd9ec15b56764aaf1df980e1b94e5132af712ec1c7c72bd9` |
 | `print-1600x900.jpg` | `5af2065498fb2fcc6dd188038f879b9bdce49c2a51c3995d2dda91c64c2cfadb` |
+| `CP-D2-202-R7-R12-complete.zip` | `da9f5ec13e004d09bc3bbc8da9da978f0fe8aa77ff727e51223d8b0bf2222d12` |
+| Branch pública Dev2 | `feature/dev2-mountain-canyon`, HEAD `6d7afde8b0bf94266b7563b9dee9ca2ee72e52ba` |
 
 ## NEXT_ACTION_IMMEDIATE
 
