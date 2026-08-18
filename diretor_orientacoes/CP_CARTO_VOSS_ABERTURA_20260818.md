@@ -289,3 +289,19 @@ Não foi encontrada uma interferência concreta que justificasse nova alteraçã
 | Profundidade macro | Mantida; sem deslocamento de marcos |
 
 **Próxima tarefa já iniciada — CP-CARTO-18:** validar a continuidade de interacção normal Casa Voss → porta [E] → exterior → Estrada do Rio depois dos passes cartográficos, com 30 segundos de gameplay e sem usar spawns técnicos. O objectivo é confirmar que a composição aperfeiçoada permanece acessível no fluxo de jogador real.
+
+### Conclusão operacional do CP-CARTO-18
+
+Foi validado o ramo normal de restauro pós-prólogo que coloca Elias dentro da Casa Voss e exige a interacção [E] junto à soleira. Durante a prova, a espera cinematográfica foi acelerada apenas no ambiente efémero de captura, sem teleporte exterior, sem modificação de colisores e sem alterar a lógica de porta. A evidência `cp_carto18_door_flow30.png` mostra Elias já no exterior, sobre o eixo da Estrada do Rio e orientado para o Arco, após a interacção [E] e deslocação contínua.
+
+A instrumentação de aceleração foi removida e a validação headless final confirmou que `VossHouse.gd` não mantém alterações transitórias. A porta normal, os seus colisores removidos no momento de abertura e o fluxo do jogador permanecem intactos.
+
+| Critério | Resultado |
+| --- | --- |
+| Prólogo → controlo de Elias | Executado pelo ramo normal pós-prólogo |
+| Interacção [E] | Aplicada junto à porta real |
+| Saída exterior | Concluída sem parede residual |
+| Continuidade para Estrada | Elias visível sobre as lajes, orientado para o Arco |
+| Limpeza | Instrumentação de prova removida antes de publicar |
+
+**Próxima tarefa já iniciada — CP-CARTO-19:** validar a legibilidade da Casa Voss como origem no olhar de retorno a partir da Estrada, preservando a porta, a montanha distante e a hierarquia Casa → Estrada → Arco. Não alterar a casa ou o prólogo sem uma regressão concreta demonstrada.
