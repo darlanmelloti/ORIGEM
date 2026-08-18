@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://entities/player/third_person/EliasThirdPersonPresentation.gd" id="1_elias"]
+
+[node name="EliasThirdPersonPresentation" type="Node3D"]
+script = ExtResource("1_elias")
+enabled_for_preview = true
