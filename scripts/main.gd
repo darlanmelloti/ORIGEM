@@ -9,8 +9,11 @@ extends Node3D
 # ═══════════════════════════════════════════════════════════════
 
 const CARTOGRAPHIC_MAP_UI_SCRIPT: Script = preload("res://ui/menus/CartographicMapUI.gd")
-# Orçamento GTX 1050 Ti: estas janelas secundárias são absorvidas pelos preenchimentos da Casa Voss.
+# Orçamento GTX 1050 Ti: o vale pode conter muitas luzes de narrativa, mas só as 16 mais próximas de Elias permanecem visíveis.
+const MAX_VISIBLE_DYNAMIC_OMNI_LIGHTS: int = 16
+const LIGHT_BUDGET_REFRESH_MSEC: int = 500
 var exterior_budget_culled_lights: PackedStringArray = PackedStringArray(["JanelaFrontalEste_Luz", "LuzDoSotao", "JanelaDaAla_Luz"])
+var next_light_budget_refresh_msec: int = 0
 
 # ─── UI ───────────────────────────────────────────────────────
 @onready var interact_label: Label = $UI/HUD/InteractLabel
@@ -85,10 +88,25 @@ func _ready():
 func _apply_exterior_light_budget() -> void:
 	var all_lights: Array[Node] = []
 	_collect_lights_recursive(get_tree().current_scene, all_lights)
+	var player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
+	var ranked_omni: Array[OmniLight3D] = []
 	for light_node: Node in all_lights:
 		var light: Light3D = light_node as Light3D
+		if light == null:
+			continue
 		if light.name in exterior_budget_culled_lights:
 			light.visible = false
+			continue
+		var omni: OmniLight3D = light as OmniLight3D
+		if omni != null:
+			ranked_omni.append(omni)
+	if player == null:
+		return
+	ranked_omni.sort_custom(func(a: OmniLight3D, b: OmniLight3D) -> bool:
+		return a.global_position.distance_squared_to(player.global_position) < b.global_position.distance_squared_to(player.global_position)
+	)
+	for index: int in range(ranked_omni.size()):
+		ranked_omni[index].visible = index < MAX_VISIBLE_DYNAMIC_OMNI_LIGHTS
 
 func _collect_lights_recursive(node: Node, result: Array[Node]) -> void:
 	if node is Light3D:
@@ -116,6 +134,11 @@ func _start_narrative():
 
 # ═══════════════════════════════════════════════════════════════
 func _process(delta: float):
+	# Os módulos procedurais nascem depois do _ready; actualiza o orçamento para incluir luzes regionais sem custo por frame.
+	var now_msec: int = Time.get_ticks_msec()
+	if now_msec >= next_light_budget_refresh_msec:
+		_apply_exterior_light_budget()
+		next_light_budget_refresh_msec = now_msec + LIGHT_BUDGET_REFRESH_MSEC
 	# O controlador corre em modo ALWAYS e lê Esc mesmo quando o menu já suspendeu a árvore.
 	if Input.is_action_just_pressed("ui_cancel"):
 		if is_instance_valid(pause_menu):

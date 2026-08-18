@@ -227,3 +227,20 @@ O harness passou a suportar os dois sentidos da ligação real entre o eixo da f
 | Evidência | Gameplay de aproximadamente 30 segundos e captura 960×540 |
 
 **Próxima tarefa já iniciada — CP-CARTO-14:** executar uma auditoria compacta do pacote das Regiões 1–6: confirmar que os modos QA não contaminam o jogo normal, contar o acréscimo de colisores CP-CARTO-11, confirmar o limite de luzes visíveis e preparar o próximo passe visual de activos sem criar nova geometria regional não validada.
+
+### Conclusão operacional do CP-CARTO-14
+
+A auditoria inicial encontrou 60 OmniLights declaradas na árvore procedural, uma contagem incompatível com o orçamento da GTX 1050 Ti se todas permanecessem activas. Foi substituído o corte nominal por um limitador adaptativo: a cada 500 ms, o controlador ordena as OmniLights pela distância a Elias e deixa visíveis apenas as 16 mais próximas; as três luzes secundárias da Casa Voss continuam excluídas. A medição no jogo real, com autoloads e mundo normal activos, devolveu `total_omni=18` e `visible_omni=15`, dentro do limite obrigatório.
+
+A instrumentação de medição e o harness isolado foram removidos antes da publicação. A validação final foi executada por editor headless e por aproximadamente 30 segundos de gameplay normal na Estrada do Rio. A captura `cp_carto14_normal_limited_lights30.png` preserva a rota densificada, o Arco, o rio lateral e a leitura diurna sem erro de runtime.
+
+| Métrica | Resultado |
+| --- | --- |
+| OmniLights declaradas no levantamento bruto | 60 |
+| OmniLights activas no jogo real medido | 15 |
+| Limite GTX 1050 Ti | ≤16 |
+| Colisores auditados antes do limitador | 251 `CollisionShape3D` |
+| Nós QA no jogo normal | 0 |
+| Validação final | Editor headless + gameplay normal de aproximadamente 30 segundos |
+
+**Próxima tarefa já iniciada — CP-CARTO-15:** aperfeiçoar a leitura macro da Casa Voss sem alterar a geometria canónica: identificar e corrigir somente activos próximos que ainda se leem como protótipo na tomada de abertura, começando pela silhueta da espada e por qualquer marco de pedra isolado, com comparação antes/depois e sem repetir ajustes de solo, água, FOV ou materiais rejeitados.
