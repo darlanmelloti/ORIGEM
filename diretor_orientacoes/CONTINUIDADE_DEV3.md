@@ -1,11 +1,15 @@
 # Continuidade — Dev3
 
-- **Último checkpoint publicado:** `405b5c5` — CINE-PAIR-13, preservação da câmara de retorno Orion.
-- **Validação concluída:** Godot headless, travessia Garganta → Interior → Garganta, captura e 30 segundos sem erros.
-- **Próxima tarefa iniciada:** `CINE-PAIR-14 — definir uma hipótese única de composição exterior da Garganta depois de Dev4 publicar QA-INPUT-01`.
-- **Ficheiros dentro do escopo:** composição de câmaras, enquadramentos, evidências visuais, scripts de direcção cinematográfica e documentos CINE-PAIR.
-- **Critério de aceitação:** hipótese visual tem commit, captura comparável e não interfere com rota física, câmara de retorno, orçamento de luzes ou fronteiras Dev1/Dev2.
-- **Próxima leitura de orientações:** 2026-08-18 00:45 UTC.
+- **Último checkpoint material publicado:** `e6f3aee` — correcção da saída Casa Voss e base cinematográfica disponível na branch canónica.
+- **Recuperação confirmada:** o bootstrap criou o checkout Dev3 em `/home/ubuntu/work/ORIGEM_director_cinematic_polish_pass02`, na branch `feature/cine07-final`, commit `e6f3aee`, com `project.godot` e validação Godot headless concluída.
+- **Próxima tarefa iniciada:** `CINE-PAIR-14 — hipótese única de composição exterior da Garganta Orion`, criada no checkout recuperado e validada por captura comparável e sessão de 30 segundos.
+- **Escopo:** câmaras, takes, evidências visuais, critérios PBR/iluminação e composição cinematográfica; não alterar geometria regional proprietária Dev1 ou Dev2 sem ordem de integração.
+- **Critério de aceitação:** commit, captura, 30 segundos de gameplay e marcador actualizado; a hipótese não pode exceder 16 luzes visíveis nem quebrar a transição Garganta → Interior → Garganta.
 - **Estado:** `EM EXECUÇÃO — NÃO AGUARDAR RESPOSTA`.
 
-O relatório que declarou CINE-PAIR-14 concluído não está na branch canónica e, por isso, não é uma entrega Dev3. Enquanto a composição exterior não tiver nova hipótese material, Dev3 actualiza os critérios de enquadramento e Dev4 trabalha em QA-INPUT-01. A dupla não fica parada: o resultado dessa prova abre a primeira alteração visual verificável.
+## Recuperação obrigatória
+
+1. Executar `tools/qa/bootstrap_dev3_workspace.sh` antes de afirmar que falta repositório, projecto ou workspace.
+2. A ausência de mapa, sequência ou vídeo histórico é uma lacuna de referência, não uma autorização para parar câmara, validação ou evidência baseada no projecto real.
+3. Se o bootstrap falhar, anexar a saída completa, o commit pretendido e a subtarefa cinematográfica documental iniciada; nunca encerrar o ciclo apenas com uma mensagem de caminho ausente.
+4. Após cada prova, abrir o próximo CINE-PAIR antes do push terminar.
