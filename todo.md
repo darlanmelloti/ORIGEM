@@ -308,3 +308,12 @@
 - [ ] Validar que o relatório não termina com “aguardo instruções”.
 - [ ] Iniciar efectivamente a primeira tarefa da fila no mesmo fluxo.
 - [ ] Fechar o bloco apenas após registar estado, commit/evidência disponível e próxima tarefa activa.
+
+
+## DEV4-ACT4-002 — handoff jogável Ato 3→Ato 4
+
+- [ ] Auditar o contrato activo e o ficheiro-alvo do handoff.
+- [ ] Validar entrada/saída de câmara e travessia física.
+- [ ] Produzir gameplay de 30 segundos, print 1600x900, log, scope guard e hash.
+- [ ] Fechar o checkpoint com estado honesto e commit/evidência.
+- [ ] Iniciar imediatamente DEV4-ACT4-003, mesmo em caso de rejeição visual.
