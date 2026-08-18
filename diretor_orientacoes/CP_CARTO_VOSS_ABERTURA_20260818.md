@@ -163,3 +163,20 @@ Os modos QA `forest_to_ruins` e `ruins_arrival` permitem inspecção reprodutív
 Foi publicada a matriz `MATRIZ_CONTINUIDADE_CARTOGRAFICA_R1_R6_20260818.md`, que consolida as seis âncoras canónicas, as distâncias directas e as últimas evidências de cada transição. A validação cruzada confirmou que todos os ficheiros de captura referidos existem e que o projecto abre em Godot 4.7.1 sem erro de parser ou carregamento de recurso.
 
 O **CP-CARTO-10** fica formalmente iniciado: provar a leitura macro Casa Voss → Estrada do Rio → Arco das Ruínas no mundo normal, sem comprimir a distância nem regressar aos ajustes de material rejeitados. O resultado deve manter o rio lateral, o vale legível e a silhueta do Arco como destino distante.
+
+### Conclusão operacional do CP-CARTO-10
+
+A captura normal de 30 segundos revelou que alguns activos `stone_largeA` da soleira e do enquadramento da Casa Voss ainda usavam o material importado claro, interrompendo a leitura Casa Voss → Estrada do Rio → Arco com pedras de aspecto técnico. Uma sonda temporária identificou as instâncias próximas; a sonda foi removida antes da publicação. As rochas de soleira, detritos de integração, rochas de estrada e afloramentos de primeiro plano passaram a receber o material PBR de pedra já usado pela Casa Voss.
+
+A comparação `cp_carto10_voss_rocks_pbr30.png` comprova a redução das massas claras para rocha escura integrada, mantendo o rio lateral, a estrada, a silhueta do Arco e a distância física. Duas abordagens sem ganho foram revertidas integralmente: omitir a variante diurna legada e retirar a faixa macro de leitura da Casa Voss. Nenhum módulo das Regiões 7–12 foi modificado.
+
+| Critério | Resultado |
+| --- | --- |
+| Abertura e porta da Casa Voss | Preservadas |
+| Rio e hidrologia | Inalterados |
+| Lajes, colisores e escala Casa–Arco | Preservados |
+| Activos claros não integrados | Corrigidos no PBR local da Casa |
+| Instrumentação temporária | Removida |
+| Gameplay técnico | 30 segundos, sem erro de runtime |
+
+**Próxima tarefa já iniciada — CP-CARTO-11:** densificar estruturalmente somente as lajes iniciais da Estrada do Rio entre `z=12` e `z=30`, preservando a faixa contínua, o rio lateral e a escala até ao Arco. A comparação deve medir se a rota deixa de se ler como pedras isoladas sem repetir calibrações de material já rejeitadas.

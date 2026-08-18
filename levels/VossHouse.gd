@@ -120,6 +120,7 @@ func _build_voss_panoramic_threshold(house: Node3D) -> void:
 		var scale_value: float = data["scale"] as float
 		stone.scale = Vector3(scale_value, scale_value * 0.62, scale_value)
 		stone.rotation.y = data["yaw"] as float
+		_tint_tree_silhouette(stone, stone_material)
 		threshold.add_child(stone)
 	# Fetos laterais confirmam a passagem para a Estrada sem estreitar os 3,9m do vão da porta.
 	for fern_index: int in range(2):
@@ -609,6 +610,7 @@ func _build_forest_ground_integration_92(house: Node3D) -> void:
 		var debris_scale: float = debris_data["scale"] as float
 		debris.scale = Vector3(debris_scale, debris_scale, debris_scale)
 		debris.rotation.y = debris_data["yaw"] as float
+		_tint_tree_silhouette(debris, stone_material)
 		house.add_child(debris)
 
 func _house_ground_y(house: Node3D, local_x: float, local_z: float) -> float:
@@ -790,6 +792,7 @@ func _build_opening_landscape(house: Node3D) -> void:
 		rock.position = Vector3(-6.0 + float(index) * 5.6, 0.12, -8.0 - float(index) * 2.0)
 		rock.scale = Vector3(0.34 + 0.05 * float(index), 0.34 + 0.05 * float(index), 0.34 + 0.05 * float(index))
 		rock.rotation.y = float(index) * 1.14
+		_tint_tree_silhouette(rock, stone_material)
 		house.add_child(rock)
 
 func _build_cinematic_exterior_depth(house: Node3D) -> void:
@@ -939,6 +942,7 @@ func _build_cinematic_exterior_depth(house: Node3D) -> void:
 		var rock_scale: float = 0.34 + fmod(float(index), 3.0) * 0.10
 		rock.scale = Vector3(rock_scale, rock_scale, rock_scale)
 		rock.rotation.y = float(index) * 0.61
+		_tint_tree_silhouette(rock, stone_material)
 		house.add_child(rock)
 	# Afloramentos de primeiro plano: molduram a margem direita do vale com geometria PBR real.
 	for index: int in range(3):
@@ -954,6 +958,7 @@ func _build_cinematic_exterior_depth(house: Node3D) -> void:
 		var foreground_scale: float = 0.78 + float(index) * 0.18
 		foreground_rock.scale = Vector3(foreground_scale, foreground_scale, foreground_scale)
 		foreground_rock.rotation.y = 0.45 + float(index) * 0.73
+		_tint_tree_silhouette(foreground_rock, stone_material)
 		house.add_child(foreground_rock)
 	if not DAYLIGHT_VARIANT_ENABLED:
 		_build_rain_and_puddles(house)
@@ -1277,9 +1282,9 @@ func _finish_opening_camera() -> void:
 			player_camera.make_current()
 			player_camera.current = true
 			get_tree().create_timer(0.10).timeout.connect(_verify_player_camera_handoff.bind(player_camera))
-	if opening_ui != null:
-		opening_ui.visible = true
-		opening_ui = null
+		if opening_ui != null:
+			opening_ui.visible = true
+			opening_ui = null
 	for hidden_node: Node3D in opening_hidden_nodes:
 		if is_instance_valid(hidden_node):
 			hidden_node.visible = true
