@@ -550,10 +550,11 @@ func _build_majestic_lake_transition() -> void:
 	crate_material.albedo_color = Color(0.115, 0.072, 0.035, 1.0)
 	crate_material.roughness = 0.88
 	var lamp_material: StandardMaterial3D = StandardMaterial3D.new()
-	lamp_material.albedo_color = Color(0.42, 0.09, 0.018, 1.0)
+	# Brasa âmbar de baixa intensidade: continua legível a curta distância, sem se destacar como marcador vermelho de protótipo.
+	lamp_material.albedo_color = Color(0.26, 0.105, 0.030, 1.0)
 	lamp_material.emission_enabled = true
-	lamp_material.emission = Color(0.95, 0.11, 0.012, 1.0)
-	lamp_material.emission_energy_multiplier = 0.72
+	lamp_material.emission = Color(0.48, 0.105, 0.018, 1.0)
+	lamp_material.emission_energy_multiplier = 0.38
 	for index: int in range(4):
 		var t: float = float(index) / 3.0
 		var z_value: float = lerpf(186.0, 220.0, t)
@@ -596,9 +597,9 @@ func _build_majestic_lake_transition() -> void:
 		transition.add_child(lamp)
 		var fill: OmniLight3D = OmniLight3D.new()
 		fill.name = "LuzDeCampoMajestic_%02d" % index
-		fill.light_color = Color(1.0, 0.27, 0.07, 1.0)
-		fill.light_energy = 0.18
-		fill.omni_range = 3.2
+		fill.light_color = Color(0.82, 0.24, 0.075, 1.0)
+		fill.light_energy = 0.12
+		fill.omni_range = 2.6
 		fill.shadow_enabled = false
 		fill.position = lamp.position
 		transition.add_child(fill)
