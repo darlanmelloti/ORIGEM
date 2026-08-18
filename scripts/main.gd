@@ -87,7 +87,13 @@ func _ready():
 
 func _apply_exterior_light_budget() -> void:
 	var all_lights: Array[Node] = []
-	_collect_lights_recursive(get_tree().current_scene, all_lights)
+	# Em arranque e harnesses QA a cena corrente pode ainda não estar definida; a raiz mantém a travessia segura sem alterar o orçamento.
+	var scene_root: Node = get_tree().current_scene
+	if scene_root == null:
+		scene_root = get_tree().root
+	if scene_root == null:
+		return
+	_collect_lights_recursive(scene_root, all_lights)
 	var player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 	var ranked_omni: Array[OmniLight3D] = []
 	for light_node: Node in all_lights:
@@ -109,6 +115,8 @@ func _apply_exterior_light_budget() -> void:
 		ranked_omni[index].visible = index < MAX_VISIBLE_DYNAMIC_OMNI_LIGHTS
 
 func _collect_lights_recursive(node: Node, result: Array[Node]) -> void:
+	if node == null or not is_instance_valid(node):
+		return
 	if node is Light3D:
 		result.append(node)
 	for child: Node in node.get_children():
