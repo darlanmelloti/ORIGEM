@@ -87,8 +87,8 @@ func _create_combat_nodes() -> void:
 
 	sword_pivot = Node3D.new()
 	sword_pivot.name = "SwordPivot"
-	sword_pivot.position = Vector3(0.48, -0.38, -0.78)
-	sword_pivot.rotation_degrees = Vector3(-18.0, 0.0, -18.0)
+	sword_pivot.position = Vector3(0.42, -0.50, -1.04)
+	sword_pivot.rotation_degrees = Vector3(-16.0, 2.0, -16.0)
 	camera.add_child(sword_pivot)
 
 	var blade_material: StandardMaterial3D = StandardMaterial3D.new()
@@ -96,13 +96,19 @@ func _create_combat_nodes() -> void:
 	blade_material.metallic = 0.9
 	blade_material.roughness = 0.28
 
-	var blade_mesh: BoxMesh = BoxMesh.new()
-	blade_mesh.size = Vector3(0.08, 0.08, 0.92)
+	# Lâmina de secção losangular: evita a leitura de barra rectangular no canto da câmara.
+	var blade_mesh: CylinderMesh = CylinderMesh.new()
+	blade_mesh.top_radius = 0.028
+	blade_mesh.bottom_radius = 0.068
+	blade_mesh.height = 0.88
+	blade_mesh.radial_segments = 4
 	blade_mesh.material = blade_material
 	var blade: MeshInstance3D = MeshInstance3D.new()
 	blade.name = "TemporalSword"
 	blade.mesh = blade_mesh
-	blade.position = Vector3(0.0, 0.0, -0.46)
+	blade.position = Vector3(0.0, 0.44, -0.04)
+	blade.rotation_degrees = Vector3(0.0, 0.0, 0.0)
+	blade.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	sword_pivot.add_child(blade)
 
 	var guard_material: StandardMaterial3D = StandardMaterial3D.new()
@@ -110,14 +116,49 @@ func _create_combat_nodes() -> void:
 	guard_material.metallic = 0.65
 	guard_material.roughness = 0.36
 
-	var guard_mesh: BoxMesh = BoxMesh.new()
-	guard_mesh.size = Vector3(0.34, 0.07, 0.10)
+	var guard_mesh: CylinderMesh = CylinderMesh.new()
+	guard_mesh.top_radius = 0.042
+	guard_mesh.bottom_radius = 0.055
+	guard_mesh.height = 0.36
+	guard_mesh.radial_segments = 6
 	guard_mesh.material = guard_material
 	var guard: MeshInstance3D = MeshInstance3D.new()
 	guard.name = "SwordGuard"
 	guard.mesh = guard_mesh
-	guard.position = Vector3(0.0, 0.0, 0.02)
+	guard.position = Vector3(0.0, 0.0, -0.01)
+	guard.rotation_degrees = Vector3(0.0, 0.0, 90.0)
+	guard.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	sword_pivot.add_child(guard)
+
+	var grip_material: StandardMaterial3D = StandardMaterial3D.new()
+	grip_material.albedo_color = Color(0.085, 0.045, 0.022, 1.0)
+	grip_material.roughness = 0.76
+	var grip_mesh: CylinderMesh = CylinderMesh.new()
+	grip_mesh.top_radius = 0.043
+	grip_mesh.bottom_radius = 0.050
+	grip_mesh.height = 0.28
+	grip_mesh.radial_segments = 8
+	grip_mesh.material = grip_material
+	var grip: MeshInstance3D = MeshInstance3D.new()
+	grip.name = "SwordGrip"
+	grip.mesh = grip_mesh
+	grip.position = Vector3(0.0, -0.16, 0.0)
+	grip.rotation_degrees = Vector3(0.0, 0.0, 0.0)
+	grip.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	sword_pivot.add_child(grip)
+
+	var pommel_mesh: SphereMesh = SphereMesh.new()
+	pommel_mesh.radius = 0.042
+	pommel_mesh.height = 0.084
+	pommel_mesh.radial_segments = 10
+	pommel_mesh.rings = 5
+	pommel_mesh.material = guard_material
+	var pommel: MeshInstance3D = MeshInstance3D.new()
+	pommel.name = "SwordPommel"
+	pommel.mesh = pommel_mesh
+	pommel.position = Vector3(0.0, -0.34, 0.0)
+	pommel.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	sword_pivot.add_child(pommel)
 
 func _update_combat(delta: float) -> void:
 	attack_cooldown = maxf(attack_cooldown - delta, 0.0)
@@ -129,9 +170,9 @@ func _update_combat(delta: float) -> void:
 	is_blocking = Input.is_action_pressed("defend") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and attack_recovery_timer <= 0.0 and current_stamina > 1.0
 	if is_blocking:
 		_consume_stamina(BLOCK_STAMINA_PER_SECOND * delta)
-		sword_pivot.rotation_degrees = Vector3(-35.0, 0.0, 30.0)
+		sword_pivot.rotation_degrees = Vector3(-35.0, 2.0, 30.0)
 	elif not is_attacking():
-		sword_pivot.rotation_degrees = Vector3(-18.0, 0.0, -18.0)
+		sword_pivot.rotation_degrees = Vector3(-16.0, 2.0, -16.0)
 
 	if Input.is_action_just_pressed("attack") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if attack_cooldown <= 0.0 and attack_recovery_timer <= 0.0 and not is_blocking and current_stamina >= ATTACK_STAMINA_COST:
@@ -171,7 +212,7 @@ func _update_stamina(delta: float) -> void:
 		EventBus.player_stamina_changed.emit(current_stamina, MAX_STAMINA)
 
 func _animate_sword_swing() -> void:
-	var start_rotation: Vector3 = Vector3(-18.0, 0.0, -18.0)
+	var start_rotation: Vector3 = Vector3(-16.0, 2.0, -16.0)
 	var strike_rotation: Vector3 = Vector3(35.0, -8.0, 64.0)
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(sword_pivot, "rotation_degrees", strike_rotation, 0.10)

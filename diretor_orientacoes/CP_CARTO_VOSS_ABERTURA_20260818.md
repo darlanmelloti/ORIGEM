@@ -244,3 +244,17 @@ A instrumentação de medição e o harness isolado foram removidos antes da pub
 | Validação final | Editor headless + gameplay normal de aproximadamente 30 segundos |
 
 **Próxima tarefa já iniciada — CP-CARTO-15:** aperfeiçoar a leitura macro da Casa Voss sem alterar a geometria canónica: identificar e corrigir somente activos próximos que ainda se leem como protótipo na tomada de abertura, começando pela silhueta da espada e por qualquer marco de pedra isolado, com comparação antes/depois e sem repetir ajustes de solo, água, FOV ou materiais rejeitados.
+
+### Conclusão operacional do CP-CARTO-15
+
+A silhueta de protótipo no canto inferior da tomada macro foi identificada como a espada de combate de Elias: uma lâmina e uma guarda feitas de duas caixas. A representação foi substituída por quatro volumes 3D leves — lâmina losangular afilada, guarda cilíndrica, cabo e pomo — sem luzes, colisores ou impacto no terreno. A primeira orientação, apontada em profundidade, foi corrigida para o plano da câmara; a captura final `cp_carto15_sword_orientation30.png` mostra uma espada legível, vertical e proporcional, sem ocultar a estrada nem o Arco.
+
+| Critério | Resultado |
+| --- | --- |
+| Espada rectangular de protótipo | Removida |
+| Silhueta nova | Lâmina, guarda, cabo e pomo tridimensionais |
+| Orçamento de luzes e colisores | Sem acréscimo |
+| Estrada, rio, Arco e FOV | Sem alteração |
+| Evidência | Editor headless + gameplay normal de aproximadamente 30 segundos |
+
+**Próxima tarefa já iniciada — CP-CARTO-16:** consolidar a leitura da ponte e do rio no plano médio Casa Voss → Arco, verificando se os elementos laterais comunicam profundidade sem se tornarem uma faixa ou barreira. A correcção, se necessária, será exclusivamente estrutural e fora da rota navegável.
