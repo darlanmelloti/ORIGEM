@@ -1365,6 +1365,8 @@ func _build_majestic_connector() -> void:
 			var rock_scale: float = 0.14 + float(cluster_index % 4) * 0.032
 			margin_rock.scale = Vector3(rock_scale, rock_scale * 0.82, rock_scale)
 			margin_rock.rotation.y = rng.randf_range(-PI, PI)
+			# CP-CARTO-60: a rocha lateral usa a mesma leitura húmida da margem, evitando o material claro do activo de origem.
+			_apply_material(margin_rock, ruin_material)
 			connector_margin.add_child(margin_rock)
 		var margin_fern: Node3D = FERN.instantiate() as Node3D
 		if margin_fern != null:
