@@ -19,6 +19,7 @@ var exterior_budget_culled_lights: PackedStringArray = PackedStringArray(["Janel
 @onready var hud_status: Label = $UI/HUD/StatusLabel
 @onready var stamina_label: Label = $UI/HUD/StaminaLabel
 @onready var crosshair: Label = $UI/HUD/Crosshair
+@onready var pause_menu: PauseMenu = $UI/PauseMenu
 
 # ─── NÓS DO JOGO ──────────────────────────────────────────────
 
@@ -56,6 +57,8 @@ var map_key_was_pressed: bool = false
 
 # ═══════════════════════════════════════════════════════════════
 func _ready():
+	# Esc precisa continuar a chegar ao controlador enquanto o PauseMenu suspende a árvore.
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	add_to_group("main_scene")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	RenderingServer.set_default_clear_color(Color(0.05, 0.05, 0.08))
@@ -113,6 +116,12 @@ func _start_narrative():
 
 # ═══════════════════════════════════════════════════════════════
 func _process(delta: float):
+	# O controlador corre em modo ALWAYS e lê Esc mesmo quando o menu já suspendeu a árvore.
+	if Input.is_action_just_pressed("ui_cancel"):
+		if is_instance_valid(pause_menu):
+			pause_menu.toggle()
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED)
 	_process_messages(delta)
 	_process_seraph(delta)
 	var map_key_pressed: bool = Input.is_key_pressed(KEY_M)
@@ -123,12 +132,6 @@ func _process(delta: float):
 		var player_node: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 		if player_node != null:
 			cartographic_map_ui.call("update_player_world_position", player_node.global_position, player_node.global_rotation.y)
-	if Input.is_action_just_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
 func _process_messages(_delta: float):
 	if msg_timer > 0:
 		# A expiração usa tempo de parede para que a UI não fique presa quando o renderizador de captura reduz o delta do jogo.
