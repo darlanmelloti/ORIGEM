@@ -128,3 +128,9 @@ A rota `forest_to_ruins` passou duas sessões de 36 segundos. Ao ocultar somente
 ### Extensão CP-CARTO-77 — Afluente cartográfico
 
 A segunda sonda causal ocultou `AfluenteCartograficoRioParaBacia` apenas no harness `forest_to_ruins`. A água lateral desapareceu, confirmando a sua fonte; o prop laranja/escuro permaneceu, pelo que não pertence ao afluente. O material e a geometria da água não foram alterados, pois as variantes de água já foram rejeitadas. A guarda QA foi removida e a matriz CP-CARTO-77 foi actualizada.
+
+### Extensão CP-CARTO-77 — Auditoria de nós e silhuetas de aproximação
+
+A auditoria QA de nós próximos no spawn Floresta→Ruínas identificou os candidatos no corredor, incluindo `SilhuetasDeAproximacaoDaBacia`. Ao ocultar somente essa raiz em uma sessão válida de 36 segundos, o prop laranja/escuro de primeiro plano permaneceu. As silhuetas de aproximação ficam excluídas como causa, sem alteração de pilares ou bases. Todas as sondas e a auditoria foram removidas de `ForestLakeRegion.gd` e `TempleLevel.gd`; o checkout de produção voltou a limpo. A matriz actualizada está em `qa_evidence_voss_vista/CP_CARTO77_FOREST_TO_RUINS_CAUSALITY.md`.
+
+**Próxima tarefa contínua:** não reabrir afluente, aterramento ou silhuetas de aproximação. O prop não identificado só pode ser tratado após associação inequívoca a um nó; CP-CARTO-56 mantém a prioridade de integração assim que Dev2 publicar R7.
