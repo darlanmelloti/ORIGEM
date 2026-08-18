@@ -274,3 +274,18 @@ A escala de profundidade foi preservada: por estar fora do eixo principal e dist
 | Evidência | Duas capturas de 30 segundos, incluindo tomada recenterada |
 
 **Próxima tarefa já iniciada — CP-CARTO-17:** inspeccionar a leitura de hierarquia dos marcos Casa Voss, Arco e Floresta a partir do percurso normal, com prioridade em remover apenas objectos próximos que se confundam com marcos cartográficos. Não repetir alterações de água, solo, FOV, densidade de lajes, câmara ou materiais já aceites/rejeitados.
+
+### Conclusão operacional do CP-CARTO-17
+
+A captura normal `cp_carto17_normal30.png` confirma uma hierarquia cartográfica estável a partir da rota inicial: a Estrada do Rio é o eixo imediato e contínuo; o Arco das Ruínas permanece o marco dominante de plano médio; e o agrupamento de árvores posterior estabelece a transição para a Floresta Densa sem converter o corredor numa parede. A espada de Elias aparece como objecto de primeiro plano, mas não intercepta o eixo da estrada ou a silhueta do Arco.
+
+Não foi encontrada uma interferência concreta que justificasse nova alteração. Preservaram-se, portanto, a posição dos marcos, a distância real do vale, o rio lateral, a densidade de lajes, as câmaras e os materiais. O checkpoint é uma aceitação por validação, não uma nova camada decorativa.
+
+| Plano | Leitura validada |
+| --- | --- |
+| Primeiro plano | Espada e lajes densificadas; caminho imediato claro |
+| Plano médio | Arco das Ruínas central e reconhecível |
+| Plano posterior | Árvores da Floresta Densa em estratos, sem fechar a rota |
+| Profundidade macro | Mantida; sem deslocamento de marcos |
+
+**Próxima tarefa já iniciada — CP-CARTO-18:** validar a continuidade de interacção normal Casa Voss → porta [E] → exterior → Estrada do Rio depois dos passes cartográficos, com 30 segundos de gameplay e sem usar spawns técnicos. O objectivo é confirmar que a composição aperfeiçoada permanece acessível no fluxo de jogador real.
