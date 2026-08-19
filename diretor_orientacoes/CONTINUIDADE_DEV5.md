@@ -84,22 +84,26 @@ O catálogo `CP_D5_013_CATALOGO_INSERCAO_R1_R6.md` mapeia os seis marcos a objec
 
 A cena `MeshBudgetAuditPreview.tscn` passou parser e sessão QA de 36 segundos, contando métricas reais dos GLB/GLTF. O relatório `CP_D5_014_AUDITORIA_MALHAS.md` confirma: ponte GLB 252 triângulos; rocha 80; árvore detalhada 402; pinheiro PBR 13.424; feto 6.232. Não foram encontrados colisores importados e o lote não criou luzes dinâmicas.
 
-## CP-D5-015 — ACTIVO: Ponte GLB leve no marco 2
+## CP-D5-015 — REJEITADO EM QA
 
-Criar uma cena QA que instancia `bridge_stone.glb` na âncora R2, com colisão própria de tabuleiro e uma comparação visual com o candidato procedural. O objectivo é avaliar se o activo real de 252 triângulos supera o candidato QA antes de qualquer revisão Dev1.
+A ponte GLB leve passou parser e sessão de 36 segundos com posição R2 calculada, colisão própria e custo de 252 triângulos. Foi rejeitada porque a captura revelou tabuleiro branco de escala reduzida e guarda-corpos rectilíneos, inferiores à leitura arqueológica exigida. Ver `CP_D5_015_PONTE_GLB_REJEITADA.md`. A rejeição não bloqueia a fila.
 
-### Aceitação CP-D5-015
+## CP-D5-016 — ACTIVO: Avaliação visual do portal remoto
+
+Executar parser, sessão de 36 segundos e captura interna de `DenseForestPortalPreview.tscn`. Comparar o candidato remoto aos critérios de profundidade lateral, passagem central e ausência de parede de árvores. Aceitar apenas se a leitura for superior ao portal Dev5 já rejeitado; caso contrário, reverter ou manter como candidato técnico sem integração.
+
+### Aceitação CP-D5-016
 
 | Critério | Obrigatório |
 |---|---|
-| Cartografia | Posição calculada pela ferramenta Dev5 a partir de R2 |
-| Física | Colisor contínuo no tabuleiro; entradas desimpedidas |
-| Orçamento | Registar 252 triângulos do GLB e colisão adicional explícita |
+| Cartografia | Marco 4 com âncora `(-9; 116)` declarada |
+| Geometria | Troncos e rochas tridimensionais; passagem central ≥2,4 m |
+| Visual | Sem outdoor, sem parede florestal e sem primitives de ensaio visíveis |
 | Validação | Parser Godot 4.7.1, 36 segundos e captura interna |
-| Continuidade | Ao publicar, abrir CP-D5-016 automaticamente |
+| Continuidade | Ao publicar, abrir CP-D5-017 automaticamente |
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-015` — comparar a ponte GLB leve de 252 triângulos com o candidato procedural QA do marco 2. Ao publicar CP-D5-015, abrir CP-D5-016 e continuar pela escada obrigatória do protocolo activo; não aguardar nova orientação.
+**Próxima tarefa activa após publicação:** `CP-D5-016` — capturar e avaliar visualmente o candidato remoto do portal Floresta Densa; ao publicar, abrir CP-D5-017 sem aguardar orientação.
