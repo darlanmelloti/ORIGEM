@@ -157,7 +157,10 @@ A varredura de editor encontrou 15 cenas QA em `levels/dev5/` e não encontrou `
 ## CP-D5-030 — CONCLUÍDO: Ficha consolidada de integração QA
 Foi criada `CP_D5_030_FICHA_INTEGRACAO_QA.md`, consolidando âncoras, X/Z, aterramento Y, colisores, luzes, isolamento e estados de promoção dos candidatos Dev5. A ficha confirma que nenhum candidato é integrado automaticamente; R4/R6 permanecem pendentes de viewport gráfico válido e todos os candidatos exigem revisão Dev1 antes de promoção.
 
-## CP-D5-031 — ACTIVO
+## CP-D5-031 — CONCLUÍDO: Handoff de revisão Dev1
+Foi criado `CP_D5_031_HANDOFF_REVISAO_DEV1.md`, organizando evidências técnicas, pendências visuais e critérios de decisão para Casa Voss, Ponte Marco 2, Portal Floresta, Vegetação média, Pavilhão Majestic e Ruínas Submersas. O handoff confirma que R4/R6 não podem ser promovidos sem viewport gráfico válido e que nenhum candidato é integrado automaticamente.
+
+## CP-D5-032 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -166,4 +169,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-031` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-032` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
