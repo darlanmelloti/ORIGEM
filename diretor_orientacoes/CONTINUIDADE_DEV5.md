@@ -321,7 +321,10 @@ O preview `VegetationDensityAuditPreview.tscn` passou 36 segundos com 1 pinheiro
 ## CP-D5-082 — CONCLUÍDO: Revalidação da orientação exterior Elias R1→R2
 O preview `EliasVossRoadHeadingPreview.tscn` passou 36 segundos com Casa Voss `(-22,8)`, estrada `(-21,4;12)`, ponte `(-21,4;28)`, destino `RUMO À ESTRADA DO RIO` id `2`, câmara externa e oito ciclos consistentes. Ver `CP_D5_082_REVALIDACAO_ORIENTACAO_EXTERIOR_R1.md` e `CP-D5-082_ELIAS_VOSS_EXTERNAL_RUNTIME.log`.
 
-## CP-D5-083 — ACTIVO
+## CP-D5-083 — CONCLUÍDO: Validação da sequência cartográfica R1–R6
+O preview `CartographicSequenceR1R6Preview.tscn` passou 36 segundos com oito pontos, `no_anchor_skip=true`, transição lateral Majestic `true`, chegada às Ruínas `true` e destino final âncora 7. Ver `CP_D5_083_VALIDACAO_SEQUENCIA_R1_R6.md` e `CP-D5-083_CARTOGRAPHIC_SEQUENCE_RUNTIME.log`.
+
+## CP-D5-084 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -331,4 +334,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-083` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-084` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
