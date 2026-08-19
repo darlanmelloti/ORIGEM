@@ -265,3 +265,10 @@ A auditoria CP-CARTO-098 confirmou que os afloramentos laterais já estão distr
 A rota `road_return_voss` ganhou captura interna de viewport e passou 36 segundos de gameplay. A limpeza cartográfica QA passou a correr antes da fotografia e removeu o `MarcoChronosAzulRemoto` remoto sem alterar produção, porta, rota ou colisores. Relatório: `CP_CARTO_100_RETORNO_CASA_VOSS_QA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-101:** validar a leitura de saída da Casa Voss no sentido inverso, Casa→Estrada, para comparar a origem doméstica com rio, lajes e Arco distante. O passe deve usar a rota QA existente ou uma tomada reversível equivalente, preservar FOV/câmara de produção e exigir parser Godot, 36 segundos e captura antes de qualquer alteração ambiental.
+
+
+## CP-CARTO-101 — Saída Casa Voss→Estrada validada
+
+A tomada QA `voss_to_road` foi inicialmente rejeitada por nascer dentro da casa. O spawn passou a usar a transformação real da soleira exterior e a recaptura de 36 segundos confirmou caminho livre para as lajes e o Arco, sem mexer em porta, câmara, FOV ou colisores. A qualidade global permanece abaixo do limiar artístico; relatório: `CP_CARTO_101_SAIDA_CASA_ESTRADA_QA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-102:** avaliar uma única camada atmosférica de profundidade usando os parâmetros existentes do `LevelEnvironment`, primeiro em modo QA e sem alterar luzes, água, FOV, geometria, árvores, Arco ou módulos R7–R12. A correcção só é promovível se a captura Casa Voss→Arco demonstrar separação adicional entre os planos do vale.
