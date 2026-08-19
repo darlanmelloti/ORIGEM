@@ -145,8 +145,11 @@ Foram executadas sessões independentes de 36 segundos para `DenseForestPortalPr
 ## CP-D5-026 — CONCLUÍDO: Ficha de prontidão para captura gráfica R4/R6
 Foi criada `CP_D5_026_PRONTIDAO_CAPTURA_GRAFICA.md`, com procedimento reproduzível, critérios de aceitação/rejeição visual, fallback headless e verificação de escopo para `DenseForestPortalPreview.tscn` e `SubmergedRuinsPierPreview.tscn`. Os candidatos continuam QA, sem promoção, enquanto não existir viewport gráfico válido para captura. Não foram repetidas geometrias rejeitadas nem tocados módulos de produção.
 
-## CP-D5-027 — ACTIVO
-Executar a próxima auditoria/ficha QA não concorrente autorizada pelo protocolo, preservando a pendência de captura visual dos candidatos R4/R6.
+## CP-D5-027 — CONCLUÍDO: Auditoria de escopo e dependências QA
+A auditoria confirmou que os previews R4/R6 não instanciam `ForestLakeRegion.gd`, `TempleLevel.gd` ou `Player.gd`, não criam luzes dinâmicas nos objectos e mantêm colisores apenas na camada QA. As referências a módulos de produção encontradas em documentação são fronteiras e contratos, não dependências de runtime. Não foram repetidas geometrias rejeitadas e não houve alterações fora de `levels/dev5/` e documentação Dev5. Ver `CP_D5_027_AUDITORIA_ESCOPO.md` e `CP-D5-027_AUDITORIA_ESCoPO.log`.
+
+## CP-D5-028 — ACTIVO
+Executar a próxima auditoria/ficha QA não concorrente, mantendo os candidatos R4/R6 pendentes de viewport gráfico válido e sem tocar módulos de produção.
 
 
 
@@ -154,4 +157,4 @@ Executar a próxima auditoria/ficha QA não concorrente autorizada pelo protocol
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-027` — executar a próxima auditoria/ficha QA não concorrente, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-028` — executar a próxima auditoria/ficha QA não concorrente, mantendo R4/R6 pendentes de captura visual válida.
