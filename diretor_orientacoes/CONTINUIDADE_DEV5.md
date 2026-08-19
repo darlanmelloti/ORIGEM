@@ -833,7 +833,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-250 — CONCLUÍDO: Regressão costa R6 viva
 `R6LivingShorePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 4 vegetações, 3 partes de ruína, 9 elementos aterrados, ruína colapsada, 0 lajes de cais, rota `clear=true`, `wall_of_trees=false` e produção preservada. Ver `CP_D5_250_REGRESSAO_SHORE_R6_VIVA.md` e `CP-D5-250_R6_LIVING_SHORE_RUNTIME.log`.
 
-## CP-D5-251 — ACTIVO
+## CP-D5-251 — CONCLUÍDO: Regressão leitura vegetal R6 Elias
+`R6EliasVegetationReadPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando monólito aterrado `(52,260)`, 3 vegetações aterradas, clearance 6,05 m, 2 ciclos `clear=true`, 0 lajes de cais, `wall_of_trees=false`, câmara de produção inactiva e produção preservada. Ver `CP_D5_251_REGRESSAO_LEITURA_VEGETAL_R6.md` e `CP-D5-251_R6_VEGETATION_READ_RUNTIME.log`.
+
+## CP-D5-252 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -843,7 +846,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-251` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-252` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
