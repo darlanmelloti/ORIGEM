@@ -237,8 +237,11 @@ O preview `MajesticEliasVegetationReadPreview.tscn` passou 36 segundos com cinco
 ## CP-D5-054 — CONCLUÍDO: Auditoria global de captura headless
 Foram identificados sete handlers ainda vulneráveis a textura/imagem nulas: Elias isolado, Placement, leitura R5, folga R6, Ponte R2, monólito R6 e Voss R1. Doze handlers já têm fallback seguro; o parser permanece limpo e nenhum módulo de produção foi alterado. Ver `CP_D5_054_AUDITORIA_CAPTURA_GLOBAL.md` e `CP-D5-054_UNSAFE_CAPTURE_HANDLERS.list`.
 
-## CP-D5-055 — ACTIVO
-Corrigir os sete handlers de captura headless, adicionar fallback para textura e imagem nulas e validar pelo menos uma sessão QA de 36 segundos.
+## CP-D5-055 — CONCLUÍDO: Correcção global dos fallbacks de captura
+Os sete handlers foram corrigidos para tratar textura e imagem nulas. A varredura final encontrou zero direct calls vulneráveis, o parser Compatibility passou limpo e o preview R6 manteve 36 segundos com grounding, folga `6,05 m`, dois ciclos `clear=true` e zero `SCRIPT ERROR`. Ver `CP_D5_055_CORRECAO_FALLBACKS_CAPTURA.md` e `CP-D5-055_R6_CAPTURE_RUNTIME_FINAL.log`.
+
+## CP-D5-056 — ACTIVO
+Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
 
@@ -247,4 +250,4 @@ Corrigir os sete handlers de captura headless, adicionar fallback para textura e
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-055` — corrigir os sete handlers de captura headless e validar uma sessão QA de 36 segundos, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-056` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.

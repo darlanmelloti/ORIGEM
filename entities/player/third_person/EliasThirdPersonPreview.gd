@@ -60,6 +60,13 @@ func _save_snapshot_qa(snapshot_path: String) -> void:
 		await get_tree().process_frame
 	var active_camera: Camera3D = get_viewport().get_camera_3d()
 	print("[DEV5_ELIAS_QA] capture_camera=%s" % (active_camera.get_path() if active_camera != null else NodePath("<none>")))
-	var image: Image = get_viewport().get_texture().get_image()
+	var viewport_texture := get_viewport().get_texture()
+	if viewport_texture == null:
+		print("[DEV5_ELIAS_QA] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+		return
+	var image: Image = viewport_texture.get_image()
+	if image == null:
+		print("[DEV5_ELIAS_QA] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+		return
 	var result := image.save_png(snapshot_path)
 	print("[DEV5_ELIAS_QA] snapshot=%s result=%s" % [snapshot_path, result])
