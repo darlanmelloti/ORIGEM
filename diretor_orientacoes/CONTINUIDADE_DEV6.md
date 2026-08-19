@@ -48,9 +48,13 @@ O orçamento R2 confirmou 0 luzes incrementais, dois materiais adicionais e LOD 
 
 A auditoria confirmou dois materiais próprios Dev6, reutilização do material PBR de ruína e o protocolo de recaptura de terceira pessoa. Registo: `DEV6_011_MATERIAIS_E_RECAPTURA_R2.md`.
 
-## Tarefa activa — DEV6-012
+## DEV6-012 — CONCLUÍDO
 
-Auditar a cobertura de evidência R2: confirmar que parser, logs de rota, screenshot e documentos de reversão estão presentes e coerentes. Depois publicar a baseline documental sem aguardar a recaptura externa.
+A cobertura documental foi confirmada na branch e a evidência binária de gameplay foi identificada no diretório QA externo, sem duplicação desnecessária em Git. Registo: `DEV6_012_COBERTURA_EVIDENCIA_R2.md`.
+
+## Tarefa activa — DEV6-013
+
+Verificar localmente a integridade e dimensões dos artefactos QA R2, gerar manifesto SHA-256 externo e actualizar o protocolo de recaptura. Não aguardar a câmara externa.
 
 ## Continuidade
 
