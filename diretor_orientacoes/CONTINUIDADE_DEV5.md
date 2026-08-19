@@ -362,17 +362,21 @@ O parser do projecto terminou com `PARSER_EXIT=0` e `EliasThirdPersonPreview.tsc
 
 `R3LivingArchCorridorPreview.tscn` passou parser e 36 segundos com dois cervos CC0, quatro elementos vegetais, duas ruínas laterais, oito aterramentos X/Z, corredor R3→R4 livre e uma luz dinâmica. Não cria arco estrutural, portal ou compressão cartográfica. Ver `CP_D5_094_ARCO_RUINAS_VIVO.md`.
 
-## CP-D5-095 — ACTIVO: Plano de integração mapa vivo R1–R6
+## CP-D5-095 — CONCLUÍDO: Plano de integração mapa vivo R1–R6
 
-Consolidar os candidatos QA vivos R1–R6 numa sequência segura de integração pelo Dev1. Para cada marco, registar origem, activos, limites LOD, colisores, rota a preservar, captura de prova e condição de reversão. Nenhuma promoção automática de QA para produção.
+O plano `CP_D5_095_INTEGRACAO_MAPA_VIVO_R1_R6.md` consolidou candidatos R1–R6, limites LOD, colisão, rota, reversão e evidências. Referências e parser foram verificados; R2 repetiu uma sessão QA de 36 segundos sem erro.
+
+## CP-D5-096 — ACTIVO: Pacote suporte integração R2
+
+Preparar ficha exacta para o Dev1 integrar a Estrada do Rio viva: âncoras, grupos, colisores, distâncias de fauna, limites LOD, ordem de nós e reversão. Sem modificar `RiverRoadJourney.gd`.
 
 | Critério | Obrigatório |
 |---|---|
-| Cobertura | R1 Casa Voss, R2 Estrada, R3 Arco, R4 Floresta, R5 Majestic, R6 Ruínas |
-| Segurança | preservar porta, água, rota e fronteira Dev2 |
-| Visual | fauna/vegetação/construção reais e sem painéis |
-| Validação | referências existentes e sessão QA de 36 segundos |
-| Continuidade | publicar e abrir CP-D5-096 no mesmo ciclo |
+| Âncora | Estrada/Rio e ponte modular preservam X/Z |
+| Segurança | fauna a >=5 m do tabuleiro e rota |
+| Produção | Dev5 não edita RiverRoadJourney.gd |
+| Validação | referências e 36 segundos QA |
+| Continuidade | publicar e abrir CP-D5-097 no mesmo ciclo |
 
 
 
@@ -381,4 +385,4 @@ Consolidar os candidatos QA vivos R1–R6 numa sequência segura de integração
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-095` — Plano de integração mapa vivo R1–R6. Depois da publicação, Dev5 abre CP-D5-096 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-096` — Pacote suporte integração R2. Depois da publicação, Dev5 abre CP-D5-097 no mesmo ciclo, sem consulta passiva ou espera temporal.
