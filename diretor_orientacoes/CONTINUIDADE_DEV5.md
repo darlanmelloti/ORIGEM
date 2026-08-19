@@ -779,7 +779,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-232 — CONCLUÍDO: Regressão clearance monólito R6
 `R6MonolithClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando monólito aterrado em `(52,260)`, colisor `CorredorMargemR6QA`, clearance 6,05 m sobre mínimo 4,00 m, 2 ciclos `clear=true` e produção preservada. Ver `CP_D5_232_REGRESSAO_CLEARANCE_MONOLITO_R6.md` e `CP-D5-232_R6_MONOLITH_CLEARANCE_RUNTIME.log`.
 
-## CP-D5-233 — ACTIVO
+## CP-D5-233 — CONCLUÍDO: Auditoria legibilidade R6
+`R6ReadabilityAnglesPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 3 ângulos com Elias, monólito e corredor visíveis, âncora `(52,260)`, rota `x=60`, 2 ciclos `clear=true`, monólito aterrado, câmara de produção inactiva e produção preservada. Ver `CP_D5_233_AUDITORIA_LEGIBILIDADE_R6.md` e `CP-D5-233_R6_READABILITY_RUNTIME.log`.
+
+## CP-D5-234 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -789,4 +792,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-233` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-234` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
