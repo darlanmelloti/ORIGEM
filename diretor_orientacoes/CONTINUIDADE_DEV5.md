@@ -297,7 +297,10 @@ O preview `MajesticEliasVegetationReadPreview.tscn` foi corrigido no fallback de
 ## CP-D5-074 — CONCLUÍDO: Auditoria de reversibilidade e fronteira Dev5
 A auditoria dos últimos 20 commits confirmou zero ficheiros fora da fronteira autorizada, zero alterações a `Player.gd`, zero alterações directas aos módulos R1–R12 e commits isolados reversíveis. Ver `CP_D5_074_AUDITORIA_REVERSIBILIDADE.md`.
 
-## CP-D5-075 — ACTIVO
+## CP-D5-075 — CONCLUÍDO: Composição vegetal intermediária R4/R5
+O preview `MediumVegetationCompositionPreview.tscn` passou 36 segundos com Floresta Densa R4 e Acampamento Majestic R5, cada composição com 1 PBR, 3 médios e 4 distantes. A telemetria confirmou `wall_of_trees=false` e `production_script=false`. Ver `CP_D5_075_VALIDACAO_COMPOSICAO_VEGETAL_R4_R5.md` e `CP-D5-075_MEDIUM_VEGETATION_RUNTIME.log`.
+
+## CP-D5-076 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -307,4 +310,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-075` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-076` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
