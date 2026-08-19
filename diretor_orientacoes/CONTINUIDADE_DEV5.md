@@ -122,23 +122,28 @@ A composição preservou as âncoras 1, 2 e 3, a rota central, zero luzes adicio
 
 Foram criados `CartographicGroundingSystem.gd`, `CartographicGroundingPreview.gd` e `CartographicGroundingPreview.tscn`. O sistema projecta raycast vertical, preserva X/Z e ajusta somente Y. A prova em terreno físico inclinado aterrou o anexo Casa Voss de `15,00 m` para `-2,78 m` e a ponte do marco 2 de `18,00 m` para `-2,71 m`, mantendo X/Z em ambos os casos. O parser Godot 4.7.1, a sessão QA de 36 segundos e a captura interna passaram sem erro de script. Ver `CP_D5_022_ATERRAMENTO_CARTOGRAFICO.md`.
 
-## CP-D5-023 — ACTIVO: Catálogo de alturas e contratos de aterramento R1–R6
+## CP-D5-023 — CONCLUÍDO: Catálogo de alturas e contratos de aterramento R1–R6
 
-Criar `CP_D5_023_CATALOGO_ALTURAS_ATERRAMENTO.md` e uma verificação QA leve que estabeleçam, para cada marco R1–R6, a âncora X/Z, o proprietário do terreno, o tipo de colisor esperado, a origem de altura válida e o candidato Dev5 elegível para `CartographicGroundingSystem.gd`. O catálogo deve separar explicitamente a prova QA da integração em produção e não pode alterar módulos regionais.
+Foram criados `CartographicHeightContracts.gd`, `CartographicHeightContractsPreview.gd` e respectiva cena. A telemetria QA confirmou a cobertura dos seis marcos, as suas coordenadas X/Z canónicas, três proprietários regionais, o contrato de solo aplicável e a exclusão explícita dos candidatos já rejeitados nos marcos 3 e 6. O parser Godot 4.7.1, a sessão de 36 segundos e a captura interna passaram sem erro. Ver `CP_D5_023_CATALOGO_ALTURAS_ATERRAMENTO.md`.
 
-### Aceitação CP-D5-023
+## CP-D5-024 — ACTIVO: Composição multi-marco aterrada Casa Voss→Estrada
+
+Criar uma única cena QA que coloque o anexo Casa Voss no marco 1 e a Ponte Marco 2 no marco 2 sobre um terreno físico irregular, aplicando `CartographicGroundingSystem.gd` a ambos. A composição deve provar escala e X/Z dos dois marcos, contacto sem objectos suspensos, zero luzes dinâmicas novas e passagem central visível. Não pode repetir a composição plana Casa→Estrada→Arco rejeitada em CP-D5-021, nem incluir o Arco estrutural rejeitado.
+
+### Aceitação CP-D5-024
 
 | Critério | Obrigatório |
 |---|---|
-| Cobertura | seis marcos R1–R6, uma entrada espacial por marco |
-| Contrato | proprietário, colisor esperado, origem de altura e regra X/Z explícitos |
-| Escopo | documentação e módulo QA apenas sob `levels/dev5/` |
-| Validação | parser Godot 4.7.1 e captura/telemetria QA de 36 segundos |
-| Continuidade | ao publicar, abrir CP-D5-024 automaticamente; não aguardar nem consultar passivamente |
+| Espacial | âncoras R1 e R2 preservadas em X/Z; apenas Y resolvido por raycast |
+| Física | dois contactos válidos em terreno irregular; nenhuma geometria suspensa |
+| Visual | câmara mostra ambos os marcos e uma ligação visual central; sem planos simples |
+| Escopo | novos módulos QA apenas em `levels/dev5/` |
+| Validação | parser Godot 4.7.1, 36 s, captura interna e telemetria de ambos os marcos |
+| Continuidade | ao publicar, abrir CP-D5-025 automaticamente; não aguardar nem consultar passivamente |
 
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-023` — catálogo de alturas e contratos de aterramento R1–R6. Depois da validação e publicação, Dev5 abre CP-D5-024 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-024` — composição multi-marco aterrada Casa Voss→Estrada. Depois da validação e publicação, Dev5 abre CP-D5-025 no mesmo ciclo, sem consulta passiva ou espera temporal.
