@@ -333,7 +333,10 @@ O preview `MeshBudgetAuditPreview.tscn` passou 36 segundos com 20.390 triângulo
 ## CP-D5-086 — CONCLUÍDO: Auditoria de LOD de vegetação
 O preview `VegetationLodAuditPreview.tscn` passou 36 segundos com limites de 1 árvore PBR focal, 3 árvores detalhadas médias e 8 elementos leves distantes; activos auditados sem colisores e zero luzes dinâmicas. Ver `CP_D5_086_AUDITORIA_VEGETATION_LOD.md` e `CP-D5-086_VEGETATION_LOD_RUNTIME.log`.
 
-## CP-D5-087 — ACTIVO
+## CP-D5-087 — CONCLUÍDO: Rumo Elias R5→R6
+O preview `EliasR5R6HeadingPreview.tscn` passou 36 segundos com início `(-80,190)`, destino `RUMO ÀS RUÍNAS` âncora 6, chegada R6 verdadeira e continuidade para âncora 7 `PASSAGEM: VILA ELEVADA`. Ver `CP_D5_087_VALIDACAO_RUMO_ELIAS_R5_R6.md` e `CP-D5-087_ELIAS_R5_R6_HEADING_RUNTIME.log`.
+
+## CP-D5-088 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -343,4 +346,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-087` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-088` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
