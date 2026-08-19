@@ -142,8 +142,11 @@ A cena `MultiLandmarkGroundedPreview.tscn` colocou o anexo Casa Voss no marco 1 
 ## CP-D5-025 — CONCLUÍDO EM QA TÉCNICO: Avaliação de captura dos candidatos R4/R6
 Foram executadas sessões independentes de 36 segundos para `DenseForestPortalPreview.tscn` e `SubmergedRuinsPierPreview.tscn`, confirmando os contratos de runtime sem `SCRIPT ERROR` ou `Parse Error`. O renderer headless não forneceu imagem de viewport válida: o fallback registou `snapshot_unavailable=headless_image`. Portanto, a avaliação visual permanece pendente e os candidatos não foram promovidos nem rejeitados por imagem. Ver `CP_D5_025_AVALIACAO_CAPTURA_QA.md` e `CP-D5-025_RUNTIME_HEADLESS.log`.
 
-## CP-D5-026 — ACTIVO
-Manter os candidatos R4/R6 em QA técnico e preparar a próxima auditoria ou ficha cartográfica permitida pelo protocolo, sem repetir geometrias rejeitadas e sem tocar módulos de produção.
+## CP-D5-026 — CONCLUÍDO: Ficha de prontidão para captura gráfica R4/R6
+Foi criada `CP_D5_026_PRONTIDAO_CAPTURA_GRAFICA.md`, com procedimento reproduzível, critérios de aceitação/rejeição visual, fallback headless e verificação de escopo para `DenseForestPortalPreview.tscn` e `SubmergedRuinsPierPreview.tscn`. Os candidatos continuam QA, sem promoção, enquanto não existir viewport gráfico válido para captura. Não foram repetidas geometrias rejeitadas nem tocados módulos de produção.
+
+## CP-D5-027 — ACTIVO
+Executar a próxima auditoria/ficha QA não concorrente autorizada pelo protocolo, preservando a pendência de captura visual dos candidatos R4/R6.
 
 
 
@@ -151,4 +154,4 @@ Manter os candidatos R4/R6 em QA técnico e preparar a próxima auditoria ou fic
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-026` — executar a próxima auditoria/ficha QA permitida pelo protocolo, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-027` — executar a próxima auditoria/ficha QA não concorrente, mantendo R4/R6 pendentes de captura visual válida.
