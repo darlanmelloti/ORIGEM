@@ -1,0 +1,30 @@
+--- SCENES ---
+CartographicGroundingPreview.tscn
+CartographicHeightContractsPreview.tscn
+CartographicPlacementPreview.tscn
+CartographicRegressionAuditPreview.tscn
+DenseForestPortalPreview.tscn
+EliasCameraContractPreview.tscn
+EliasMajesticClearancePreview.tscn
+EliasR6ClearancePreview.tscn
+GroundedVegetationR4R5Preview.tscn
+MajesticGroundedPavilionPreview.tscn
+MajesticPavilionPreview.tscn
+MediumVegetationCompositionPreview.tscn
+MeshBudgetAuditPreview.tscn
+MultiLandmarkGroundedPreview.tscn
+R6MonolithClearancePreview.tscn
+StoneBridgeGLBPreview.tscn
+StoneBridgeLandmarkPreview.tscn
+SubmergedRuinsPierPreview.tscn
+SubmergedShoreMonolithPreview.tscn
+VegetationDensityAuditPreview.tscn
+VegetationLodAuditPreview.tscn
+VossWaystationPreview.tscn
+scene_count=22
+--- MISSING RESOURCES ---
+--- LIGHT CONSTRUCTORS ---
+     22 DirectionalLight3D.new
+--- CAMERAS ---
+23
+--- PARSER ---
