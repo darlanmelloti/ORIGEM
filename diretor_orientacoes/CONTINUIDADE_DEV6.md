@@ -140,9 +140,13 @@ A auditoria confirmou parser, rota, grounding e luzes como PASS, enquanto tercei
 
 A verificação remota encontrou trabalho Dev5 de R3, mas nenhuma câmara ou recaptura válida para R2. A decisão visual mantém-se rejeitada e a regressão técnica continua. Registo: `DEV6_034_VERIFICACAO_REMOTA_R2.md`.
 
-## Tarefa activa — DEV6-035
+## DEV6-035 — CONCLUÍDO
 
-Executar regressão técnica R2: parser, `road_to_arch` por 36 segundos e manifesto de sessão. Não alterar câmara, jogador, rota ou geometria; aplicar a matriz DEV6-014 se uma recaptura válida surgir.
+A regressão técnica passou parser, rota de 36 segundos, R1–R6, 9/9 grounding, zero luzes e manifesto de sessão validado. Sem recaptura válida, a aceitação visual mantém-se rejeitada. Registo: `DEV6_035_REGRESSAO_MANIFESTO_R2.md`.
+
+## Tarefa activa — DEV6-036
+
+Auditar a rastreabilidade da sessão DEV6-035: confirmar que log, PNGs e manifesto correspondem à mesma execução e que a matriz DEV6-014 continua pendente apenas de terceira pessoa e composição. Não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
