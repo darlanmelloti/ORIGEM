@@ -304,7 +304,10 @@ func _build_river_road() -> void:
 		var x_value: float = _road_x(z_value)
 		var slab: MeshInstance3D = MeshInstance3D.new()
 		slab.name = "LajeEstradaRio_%02d" % index
-		slab.mesh = _make_slab(1.76 + rng.randf_range(-0.18, 0.20), 1.34 + rng.randf_range(-0.12, 0.18), rng)
+		# A aproximação ao Arco deixa de ler como degraus isolados: a malha prolonga-se, mas o volume físico e o eixo permanecem os mesmos.
+		var approach_coverage: float = smoothstep(76.0, 120.0, z_value)
+		var slab_depth: float = lerpf(1.34 + rng.randf_range(-0.12, 0.18), 2.42 + rng.randf_range(-0.10, 0.14), approach_coverage)
+		slab.mesh = _make_slab(1.76 + rng.randf_range(-0.18, 0.20), slab_depth, rng)
 		slab.material_override = path_material
 		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.042, z_value)
 		slab.rotation.y = atan2((_road_x(z_value + 1.0) - _road_x(z_value - 1.0)) * 0.5, 2.0) + rng.randf_range(-0.08, 0.08)

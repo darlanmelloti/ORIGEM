@@ -342,3 +342,10 @@ A componente visual residual foi localizada no ecrã, mas não houve nó 3D, col
 A elevação secundária Z=174 não produziu ganho de profundidade suficiente na tomada de 36 segundos e foi revertida. Não foram alterados rota, marcos, luzes, colisores ou limites das Regiões 1–6. Relatório: `CP_CARTO_113_CRISTA_SECUNDARIA_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-114:** auditar a transição visual das últimas lajes da Estrada do Rio para a clareira do Arco, identificando apenas o primeiro elemento que interrompe a leitura da rota. Não repetir materiais do Arco, cristas, água, atmosfera, largura do rio, árvores isoladas ou quaisquer hipóteses já rejeitadas.
+
+
+## CP-CARTO-114 — Transição lajes→Arco validada
+
+A profundidade visual das lajes cresce gradualmente no troço Z=76→120, deixando a aproximação ao Arco mais contínua sem modificar os colisores, o eixo, a água, as luzes ou as âncoras. O parser Godot e o gameplay de 36 segundos passaram. Relatório: `CP_CARTO_114_TRANSICAO_LAJES_ARCO_VALIDADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-115:** auditar a leitura da margem do rio na tomada lateral Casa Voss, agora sem a faixa escura auxiliar. Seleccionar apenas uma melhoria causal de margem ou de material de água que não repita largura do rio, afloramento isolado, atmosfera ou camadas hídricas já rejeitadas.
