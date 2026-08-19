@@ -148,8 +148,11 @@ Foi criada `CP_D5_026_PRONTIDAO_CAPTURA_GRAFICA.md`, com procedimento reproduzí
 ## CP-D5-027 — CONCLUÍDO: Auditoria de escopo e dependências QA
 A auditoria confirmou que os previews R4/R6 não instanciam `ForestLakeRegion.gd`, `TempleLevel.gd` ou `Player.gd`, não criam luzes dinâmicas nos objectos e mantêm colisores apenas na camada QA. As referências a módulos de produção encontradas em documentação são fronteiras e contratos, não dependências de runtime. Não foram repetidas geometrias rejeitadas e não houve alterações fora de `levels/dev5/` e documentação Dev5. Ver `CP_D5_027_AUDITORIA_ESCOPO.md` e `CP-D5-027_AUDITORIA_ESCoPO.log`.
 
-## CP-D5-028 — ACTIVO
-Executar a próxima auditoria/ficha QA não concorrente, mantendo os candidatos R4/R6 pendentes de viewport gráfico válido e sem tocar módulos de produção.
+## CP-D5-028 — CONCLUÍDO: Auditoria do backend de captura QA
+A ficha `CP_D5_028_AUDITORIA_BACKEND_CAPTURA.md` separou a limitação do renderer headless da qualidade dos candidatos R4/R6. Godot 4.7.1 completou as sessões de 36 segundos sem `SCRIPT ERROR`/`Parse Error`, mas o backend devolveu `Image` nula para as capturas. O fallback evita `save_png` inválido. Os candidatos continuam QA sem aceitação/rejeição visual e não houve alterações em produção.
+
+## CP-D5-029 — ACTIVO
+Preparar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de viewport gráfico válido.
 
 
 
@@ -157,4 +160,4 @@ Executar a próxima auditoria/ficha QA não concorrente, mantendo os candidatos 
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-028` — executar a próxima auditoria/ficha QA não concorrente, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-029` — preparar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
