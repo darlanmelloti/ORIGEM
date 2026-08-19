@@ -806,7 +806,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-241 — CONCLUÍDO: Regressão clearance Majestic R5
 `EliasMajesticClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando pavilhão aterrado em `(−88,178)`, colisor `CorredorMajesticEliasQA`, clearance 5,45 m sobre mínimo 4,00 m, 2 ciclos `clear=true`, Elias em terceira pessoa, câmara de produção inactiva e produção preservada. Ver `CP_D5_241_REGRESSAO_CLEARANCE_MAJESTIC_R5.md` e `CP-D5-241_R5_MAJESTIC_CLEARANCE_RUNTIME.log`.
 
-## CP-D5-242 — ACTIVO
+## CP-D5-242 — CONCLUÍDO: Regressão clearance floresta R4
+`EliasForestClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 6 elementos aterrados, âncora R4 `(−9,116)`, corredor de 5,20 m, clearance mínimo 2,75 m, 2 ciclos de rota aberta, `forest_portal=false`, `wall_of_trees=false`, câmara de produção inactiva e produção preservada. Ver `CP_D5_242_REGRESSAO_CLEARANCE_FLORESTA_R4.md` e `CP-D5-242_R4_FOREST_CLEARANCE_RUNTIME.log`.
+
+## CP-D5-243 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -816,4 +819,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-242` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-243` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
