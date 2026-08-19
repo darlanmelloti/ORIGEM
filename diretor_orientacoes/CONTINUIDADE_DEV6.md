@@ -224,9 +224,13 @@ O passe LOD aplicou visibilidade conservadora aos activos R1 e R6; R2, R3 e R4 j
 
 A auditoria GL unificou o material idêntico da fauna R2/R3 num recurso partilhado e preservou o aspecto, grounding e rotas de 36 s. Não foram encontradas outras unificações locais de baixo risco. Registo: `DEV6_054_MATERIAIS_GL_COMPATIBILITY.md`.
 
-## Tarefa activa — DEV6-055
+## DEV6-055 — CONCLUÍDO
 
-Auditar o estado remoto das recapturas de terceira pessoa pedidas a Dev1/Dev3 para R1, R2, R3, R4 e R6. Não alterar módulos de câmara, jogador ou cenário; se não existir evidência válida, produzir uma matriz de retorno concisa e avançar para a regressão técnica seguinte.
+A evidência remota publicada não mostra Elias em terceira pessoa nem os candidatos Dev6 R1–R6; todas as decisões continuam `REJECTED_VISUAL`. A matriz de retorno para Dev1/Dev3 está em `DEV6_055_RETORNO_RECAPTURA_REMOTA.md`.
+
+## Tarefa activa — DEV6-056
+
+Executar a regressão técnica de ponta a ponta R1→R6 depois das optimizações Dev6. Validar parser e sessões de 36 segundos para R1, R2, R3, R4 e R6; não alterar geometria, câmara, jogador, rotas ou materiais durante a regressão. Em seguida, consolidar o manifesto de evidência por sessão.
 
 ## Continuidade
 
