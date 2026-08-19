@@ -46,17 +46,20 @@ A ficha `CP_D5_007_FICHAS_INTEGRACAO_R1_R6.md` foi preparada para os candidatos 
 
 O pavilhão de Acampamento Majestic foi validado isoladamente em `MajesticPavilionPreview.tscn`: estrado, postes, cobertura inclinada, lona lateral, banco e colisores próprios. O parser passou e a cena manteve 36 segundos com captura interna. O objecto permanece fora de `ForestLakeRegion.gd`; ver `CP_D5_008_PAVILHAO_MAJESTIC_QA.md`.
 
-## CP-D5-009 — ACTIVO
+## CP-D5-009 — CONCLUÍDO
 
-Preparar a matriz consolidada de revisão Dev1 para os três candidatos QA: ponte do marco 2, anexo Casa Voss e pavilhão Majestic. A matriz deve priorizar somente uma integração causal de cada vez e proibir alteração dos três no mesmo ciclo.
+A matriz `CP_D5_009_MATRIZ_REVISAO_DEV1.md` ordena a revisão Dev1: ponte do marco 2, anexo Casa Voss e pavilhão Majestic. Ela proíbe integração simultânea, fixa os testes de aceitação e preserva todas as Regiões de produção até decisão do proprietário.
 
-## Fila após CP-D5-009
+## CP-D5-010 — BLOQUEADO POR ACTIVO EXTERNO
 
-1. CP-D5-005 — Integrar GLB humano rigado somente depois de activo recuperável/licenciado e orçamento aprovado.
-2. Rever feedback Dev1 sobre a matriz CP-D5-009 antes de integrar candidatos no mapa real.
+Auditar e integrar um humano GLTF/GLB somente quando existir ficheiro recuperável com licença documentada. O candidato actual de fornecedor externo exige CAPTCHA para download, pelo que nenhuma integração é autorizada nesta condição.
+
+## Estado de suporte Dev5
+
+Dev5 mantém os candidatos QA, evidências e matriz publicados. A próxima alteração de produção só pode iniciar depois de Dev1 seleccionar uma linha CP-D5-009; caso contrário, não criar nova geometria concorrente.
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-009` — preparar a matriz de revisão Dev1 sem modificar o mundo principal.
+**Próxima tarefa activa após publicação:** aguardar selecção Dev1 de uma única linha CP-D5-009 ou a disponibilização de um humano GLTF/GLB licenciado.
