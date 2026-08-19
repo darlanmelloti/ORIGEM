@@ -413,7 +413,10 @@ A sessão de captura interna de `R4LivingForestPreview.tscn` passou 36 segundos 
 ## CP-D5-110 — CONCLUÍDO: Handoff Elias R3→R4
 `EliasArchCorridorPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando âncora R3 `(-16.741,48)`, alvo físico `z=92`, 2 ciclos `route_open=true`, destino R4, câmara de Elias inactiva e `structural_arch=false`. Ver `CP_D5_110_VALIDACAO_HANDOFF_R3_R4.md` e `CP-D5-110_R3_R4_HANDOFF_RUNTIME.log`.
 
-## CP-D5-111 — ACTIVO
+## CP-D5-111 — CONCLUÍDO: Correcção colocação cartográfica
+`CartographicPlacementPreview.gd` teve corrigida a indentação dos fallbacks headless que causava `Parse Error: Unexpected "if" in class body`. A revalidação passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, emitindo as 6 âncoras X/Z canónicas de Casa Voss, Estrada, Arco, Floresta, Majestic e Ruínas. A alteração ficou limitada a `levels/dev5/`. Ver `CP_D5_111_CORRECCAO_PLACEMENT_QA.md`, `CP-D5-111_CARTOGRAPHIC_PLACEMENT_RUNTIME_FIXED.log` e o log inicial da regressão.
+
+## CP-D5-112 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -423,4 +426,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-111` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-112` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
