@@ -349,3 +349,10 @@ A elevação secundária Z=174 não produziu ganho de profundidade suficiente na
 A profundidade visual das lajes cresce gradualmente no troço Z=76→120, deixando a aproximação ao Arco mais contínua sem modificar os colisores, o eixo, a água, as luzes ou as âncoras. O parser Godot e o gameplay de 36 segundos passaram. Relatório: `CP_CARTO_114_TRANSICAO_LAJES_ARCO_VALIDADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-115:** auditar a leitura da margem do rio na tomada lateral Casa Voss, agora sem a faixa escura auxiliar. Seleccionar apenas uma melhoria causal de margem ou de material de água que não repita largura do rio, afloramento isolado, atmosfera ou camadas hídricas já rejeitadas.
+
+
+## CP-CARTO-115 — Composição ribeirinha compactada rejeitada
+
+A redução de micro-rochas e fetos para agrupamentos maiores passou tecnicamente, mas não produziu ganho visual suficiente na tomada lateral de 36 segundos. A margem original foi restaurada. Relatório: `CP_CARTO_115_MARGEM_RIBEIRINHA_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-116:** auditar a leitura de relevo entre o rio e o arco no enquadramento lateral, isolando a primeira camada de geometria que crie sensação de planura. Não repetir largura do rio, redução de densidade, afloramento isolado, materiais de água, atmosfera, cristas ou camadas auxiliares já rejeitados.
