@@ -680,7 +680,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-199 — CONCLUÍDO: Auditoria placement cartográfico R1→R6
 `CartographicPlacementPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA com execução explícita da cena, confirmando 6/6 âncoras, world X/Z e canvas canónicos, offsets `(0,0)`, produção inalterada e placement aprovado. Ver `CP_D5_199_AUDITORIA_PLACEMENT_CARTOGRAFICO.md` e `CP-D5-199_CARTOGRAPHIC_PLACEMENT_RUNTIME.log`.
 
-## CP-D5-200 — ACTIVO
+## CP-D5-200 — CONCLUÍDO: Regressão integrada final R1→R6
+`CartographicSequenceR1R6Preview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 8 checks, `no_anchor_skip=true`, desvio Majestic lateral, chegada R6, marcador `PASSAGEM: VILA ELEVADA` id 7, produção preservada e sequência completa R1→R6. Avisos FSR1 são incompatibilidade conhecida do Compatibility renderer. Ver `CP_D5_200_REGRESSAO_INTEGRADA_FINAL_R1_R6.md` e `CP-D5-200_INTEGRATED_SEQUENCE_RUNTIME.log`.
+
+## CP-D5-201 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -690,4 +693,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-200` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-201` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
