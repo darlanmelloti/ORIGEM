@@ -632,7 +632,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-183 — CONCLUÍDO: Regressão clearance final R6 Elias
 `EliasR6ClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando monólito aterrado em `(52,260)`, rota `x=60`, clearance de 6,05 m sobre mínimo 4,00 m, colisor `CorredorMargemR6EliasQA`, 2 ciclos `clear=true`, apresentação Elias third-person e câmara de produção inactiva. Ver `CP_D5_183_REGRESSAO_CLEARANCE_FINAL_R6.md` e `CP-D5-183_R6_CLEARANCE_RUNTIME.log`.
 
-## CP-D5-184 — ACTIVO
+## CP-D5-184 — CONCLUÍDO: Auditoria regressão cartográfica R1→R6
+`CartographicRegressionAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 6 candidatos, 0 scripts de produção, 0 luzes dinâmicas, offsets `(0,0)`, âncoras canónicas, Floresta isolada, Ruínas não emissivas e composição vegetal sem parede de árvores. Avisos FSR1 são incompatibilidade conhecida do Compatibility renderer. Ver `CP_D5_184_AUDITORIA_REGRESSAO_CARTOGRAFICA.md` e `CP-D5-184_CARTOGRAPHIC_AUDIT_RUNTIME.log`.
+
+## CP-D5-185 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -642,4 +645,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-184` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-185` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
