@@ -104,9 +104,13 @@ A matriz, baseline, regressão e telemetria actual não apresentam divergências
 
 O editor e a rota de 36 segundos carregaram os activos R2 sem erros de recurso, parser ou ficheiro. Registo: `DEV6_025_ESTABILIDADE_ACTIVOS_R2.md`.
 
-## Tarefa activa — DEV6-026
+## DEV6-026 — CONCLUÍDO
 
-Auditar referências e dependências dos activos R2 para confirmar que todos os caminhos continuam relativos ao projecto e reversíveis. Não alterar câmara, jogador, rota ou geometria; corrigir apenas referência quebrada caso exista.
+Os preloads R2 foram verificados: todos usam caminhos `res://` e os activos existem no clone Dev6, sem dependências externas ou referências quebradas. Registo: `DEV6_026_REFERENCIAS_ACTIVOS_R2.md`.
+
+## Tarefa activa — DEV6-027
+
+Auditar a limpeza de dependências R2: confirmar que não há `.uid` rastreado, caminhos absolutos ou binários QA indevidos na branch. Corrigir apenas artefactos de controlo de versão; não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
