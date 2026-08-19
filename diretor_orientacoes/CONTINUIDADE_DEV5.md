@@ -96,22 +96,23 @@ O candidato remoto do portal Floresta Densa passou parser e 36 segundos, mas a c
 
 O cais remoto passou parser e 36 segundos, mas a captura mostrou lajes cúbicas isoladas e colunas cilíndricas uniformes sobre um plano de ensaio. Não atingiu a leitura arqueológica das Ruínas Submersas e foi rejeitado; ver `CP_D5_017_CAIS_RUINAS_REJEITADO.md`. Não repetir o cais com a mesma linguagem de lajes e colunas primitivas.
 
-## CP-D5-018 — ACTIVO: Auditoria LOD vegetal
-
-Auditar os activos vegetais reais já locais, medindo triângulos, materiais, memória de cena e distância recomendada de uso. Produzir limites de densidade que permitam próximos candidatos dos marcos 4 e 5 sem paredes de árvores, sem relva tridimensional rejeitada e sem ultrapassar a GTX 1050 Ti.
-
+## CP-D5-018 — CONCLUÍDO: Auditoria LOD vegetal
+A auditoria `VegetationLodAuditPreview.tscn` mediu os quatro activos vegetais reais locais: pinheiro PBR (13.424 triângulos), árvore detalhada (402), feto (6.232) e alternativa leve (114). A tabela de densidade fixa uma árvore PBR focal, até três árvores detalhadas no plano médio e até oito elementos leves no plano distante. O feto permanece peça focal isolada, não folhagem distante em volume. Não foram encontrados colisores importados e o lote não criou luzes dinâmicas. Ver `CP_D5_018_AUDITORIA_LOD_VEGETAL.md` e `CP-D5-018_RUNTIME_HEADLESS.log`.
 ### Aceitação CP-D5-018
-
-| Critério | Obrigatório |
+| Critério | Resultado |
 |---|---|
-| Dados | Medição real de pinheiro PBR, árvore detalhada, feto e alternativa leve |
-| Resultado | Tabela de densidade por plano: focal, médio e distante |
-| Orçamento | Máximo de uma árvore PBR focal por composição QA até existir LOD comprovado |
-| Validação | Parser Godot 4.7.1 e 36 segundos de auditoria QA |
-| Continuidade | Ao publicar, abrir CP-D5-019 automaticamente |
+| Dados | Aprovado: quatro activos medidos com métricas reais. |
+| Resultado | Aprovado: limites focal, médio e distante documentados. |
+| Orçamento | Aprovado: máximo de uma árvore PBR focal por composição QA. |
+| Validação | Aprovado: parser e sessão headless de 36 segundos sem erros Dev5. |
+| Continuidade | CP-D5-019 aberto como próxima tarefa activa. |
+
+## CP-D5-019 — ACTIVO: Vegetação média dos marcos 4 e 5
+Criar um candidato QA de composição vegetal de média distância usando os limites do CP-D5-018, sem parede de árvores, sem relva tridimensional rejeitada, com uma árvore PBR focal no máximo e alternativas leves no plano distante. Não tocar `ForestLakeRegion.gd` nem qualquer módulo de produção.
+
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-018` — auditar LOD e densidade dos activos vegetais reais antes de abrir CP-D5-019 sem aguardar orientação.
+**Próxima tarefa activa após publicação:** `CP-D5-019` — criar composição QA de vegetação média para os marcos 4 e 5 usando os limites auditados.

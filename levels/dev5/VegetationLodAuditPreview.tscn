@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://levels/dev5/VegetationLodAuditPreview.gd" id="1_lod_audit"]
+
+[node name="VegetationLodAuditPreview" type="Node3D"]
+script = ExtResource("1_lod_audit")
