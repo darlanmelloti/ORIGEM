@@ -380,7 +380,10 @@ O plano `CP_D5_095_INTEGRACAO_MAPA_VIVO_R1_R6.md` consolidou candidatos R1–R6,
 ## CP-D5-099 — CONCLUÍDO: Ficha integração R6
 `CP_D5_099_FICHA_INTEGRACAO_R6.md` define a integração isolada da Margem Viva R6, preservando a âncora `(60,252)`, corredor Elias `x=60`, água separada da rota, ruína colapsada sem cais/cairn, 4 elementos vegetais, 2 cervos a >=5 m, no máximo 1 luz adicional e reversão exclusiva do commit R6. A validação passou parser (`PARSER_EXIT=0`) e 36 segundos de QA com 9 eventos de grounding, `route_cycle=1`, `clear=true`, distância fauna 20,08 m, `pier_slabs=0`, `collapsed_ruin=true` e sem módulos de produção alterados. Ver `CP_D5_099_VALIDACAO_R6_INTEGRACAO.md` e `CP-D5-099_R6_INTEGRATION_RUNTIME.log`.
 
-## CP-D5-100 — ACTIVO
+## CP-D5-100 — CONCLUÍDO: Regressão do mapa vivo R1–R6
+`CartographicSequenceR1R6Preview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA após as integrações R5/R6, confirmando 8 checks, `no_anchor_skip=true`, `majestic_lateral=true`, `ruins_arrival=true` e continuidade para a âncora 7. Ver `CP_D5_100_REGRESSAO_MAPA_VIVO_R1_R6.md` e `CP-D5-100_LIVING_MAP_REGRESSION_RUNTIME.log`.
+
+## CP-D5-101 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -390,4 +393,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-100` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-101` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
