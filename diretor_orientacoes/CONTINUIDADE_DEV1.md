@@ -363,3 +363,10 @@ A redução de micro-rochas e fetos para agrupamentos maiores passou tecnicament
 A comparação causal no pixel do sinal ciano identificou um carvalho `OAK_DARK`. A redução selectiva da componente azul em materiais verde-azulados foi promovida para todas as instâncias desse activo, sem alterar texturas, troncos, escala, rota, colisores ou luzes. Parser e gameplay regional de 36 segundos passaram. Relatório: `CP_CARTO_116_FOLHAGEM_FLORESTA_CALIBRADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-117:** validar a chegada ao Acampamento Majestic na mesma rota R4→R5 e auditar a primeira lacuna de leitura no destino. Não repetir alterações de folhagem OAK, marcadores P0, marcos ribeirinhos, composição de margem ou candidatos anteriormente rejeitados.
+
+
+## CP-CARTO-117 — Árvore Majestic aterrada
+
+A silhueta suspensa do talude esquerdo foi atribuída a `ArvoreDaFloresta_28`. A conífera incompatível foi substituída por `DARK_TREE` à escala 0,52, eliminando o objecto suspenso sem mover a rota, a clareira, os colisores, a cartografia ou as luzes. Parser e gameplay de 36 segundos passaram. Relatório: `CP_CARTO_117_ARVORE_MAJESTIC_ATERRADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-118:** validar a transição física Acampamento Majestic→Ruínas Submersas na rota cartográfica e localizar a primeira lacuna visual causal da margem de chegada. Não repetir a substituição de `ArvoreDaFloresta_28`, a calibração OAK, os candidatos hídricos, marcos cianos, cristas ou alterações ambientais já rejeitadas.

@@ -750,8 +750,13 @@ func _build_dense_forest() -> void:
 		var tree_source: PackedScene
 		var is_conifer: bool = false
 		var tone_down_cyan_foliage: bool = false
+		var use_grounded_majestic_tree: bool = false
+		# A instância 28 projectava uma conífera de base incompatível com o talude de chegada ao Majestic; teste reversível com árvore aterrada.
+		if index == 28:
+			tree_source = DARK_TREE
+			use_grounded_majestic_tree = true
 		# A maioria dos pontos focais usa malhas orgânicas reais; as coníferas EZ ficam como profundidade económica.
-		if index % 7 == 0:
+		elif index % 7 == 0:
 			# Instâncias próximas usam o pinheiro PBR local; evita a silhueta de folhagem plana do Island Tree no percurso jogável.
 			tree_source = PINE_TALL
 			is_conifer = true
@@ -774,7 +779,9 @@ func _build_dense_forest() -> void:
 			_tone_down_cyan_foliage(tree)
 		tree.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
 		var tree_scale: float = 0.20 + fmod(float(index), 4.0) * 0.045
-		if index % 7 == 0:
+		if use_grounded_majestic_tree:
+			tree_scale = 0.52
+		elif index % 7 == 0:
 			tree_scale = 0.68 + fmod(float(index), 3.0) * 0.10
 		elif index % 5 == 0:
 			tree_scale *= 1.48
