@@ -144,9 +144,13 @@ A verificação remota encontrou trabalho Dev5 de R3, mas nenhuma câmara ou rec
 
 A regressão técnica passou parser, rota de 36 segundos, R1–R6, 9/9 grounding, zero luzes e manifesto de sessão validado. Sem recaptura válida, a aceitação visual mantém-se rejeitada. Registo: `DEV6_035_REGRESSAO_MANIFESTO_R2.md`.
 
-## Tarefa activa — DEV6-036
+## DEV6-036 — CONCLUÍDO
 
-Auditar a rastreabilidade da sessão DEV6-035: confirmar que log, PNGs e manifesto correspondem à mesma execução e que a matriz DEV6-014 continua pendente apenas de terceira pessoa e composição. Não alterar câmara, jogador, rota ou geometria.
+Log, PNGs e manifesto DEV6-035 correspondem à mesma execução e passaram verificação de integridade. A matriz continua pendente apenas de terceira pessoa e composição. Registo: `DEV6_036_RASTREABILIDADE_SESSAO_R2.md`.
+
+## Tarefa activa — DEV6-037
+
+Verificar o Git remoto por uma recaptura R2 válida de terceira pessoa e aplicar DEV6-014/017 se existir. Sem entrada válida, manter apenas a regressão técnica e a documentação de prontidão; não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
