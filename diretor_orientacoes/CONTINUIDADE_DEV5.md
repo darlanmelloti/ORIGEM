@@ -151,8 +151,11 @@ A auditoria confirmou que os previews R4/R6 não instanciam `ForestLakeRegion.gd
 ## CP-D5-028 — CONCLUÍDO: Auditoria do backend de captura QA
 A ficha `CP_D5_028_AUDITORIA_BACKEND_CAPTURA.md` separou a limitação do renderer headless da qualidade dos candidatos R4/R6. Godot 4.7.1 completou as sessões de 36 segundos sem `SCRIPT ERROR`/`Parse Error`, mas o backend devolveu `Image` nula para as capturas. O fallback evita `save_png` inválido. Os candidatos continuam QA sem aceitação/rejeição visual e não houve alterações em produção.
 
-## CP-D5-029 — ACTIVO
-Preparar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de viewport gráfico válido.
+## CP-D5-029 — CONCLUÍDO: Inventário e varredura das cenas QA Dev5
+A varredura de editor encontrou 15 cenas QA em `levels/dev5/` e não encontrou `SCRIPT ERROR`, `Parse Error` ou `Failed to load script`. Os avisos FSR1 foram classificados como backend Compatibility/headless. Os `.uid` gerados pela varredura foram restaurados/limpos sem incluir alterações de ambiente no checkpoint. R4/R6 continuam pendentes de viewport gráfico válido. Ver `CP_D5_029_INVENTARIO_CENAS_QA.md` e `CP-D5-029_PARSER_SWEEP.log`.
+
+## CP-D5-030 — ACTIVO
+Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
 
@@ -160,4 +163,4 @@ Preparar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-029` — preparar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-030` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
