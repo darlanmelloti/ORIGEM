@@ -746,7 +746,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-221 — CONCLUÍDO: Regressão leitura vegetação R6
 `R6EliasVegetationReadPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando monólito `(52,260)` aterrado, 3 vegetações aterradas, clearance 6,05 m, 0 lajes, `wall_of_trees=false`, viewport `CameraQAR6Leitura`, 2 ciclos `clear=true`, actor Elias e produção preservada. Ver `CP_D5_221_REGRESSAO_LEITURA_VEGETACAO_R6.md` e `CP-D5-221_R6_VEGETATION_READ_RUNTIME.log`.
 
-## CP-D5-222 — ACTIVO
+## CP-D5-222 — CONCLUÍDO: Auditoria orçamento de malha GTX 1050 Ti
+`MeshBudgetAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 20.390 triângulos, 9 nós de malha, 12 slots de material, 0 colisores importados e `dynamic_lights=0`. Ver `CP_D5_222_AUDITORIA_ORCAMENTO_MALHA.md` e `CP-D5-222_MESH_BUDGET_RUNTIME.log`.
+
+## CP-D5-223 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -756,4 +759,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-222` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-223` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
