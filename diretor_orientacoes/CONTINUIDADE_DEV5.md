@@ -273,7 +273,10 @@ O preview `GroundedVegetationR4R5Preview.tscn` passou 36 segundos com 12 candida
 ## CP-D5-066 — CONCLUÍDO: Auditoria de orçamento de malha
 O `MeshBudgetAuditPreview` passou 36 segundos com 20.390 triângulos, 9 nós de malha, 12 slots de material, zero colisores e zero luzes dinâmicas. Os activos representativos de ponte, pedra, árvore e feto permanecem dentro do harness GTX 1050 Ti. Ver `CP_D5_066_AUDITORIA_MESH_BUDGET.md` e `CP-D5-066_MESH_BUDGET_RUNTIME.log`.
 
-## CP-D5-067 — ACTIVO
+## CP-D5-067 — CONCLUÍDO: Auditoria de LOD da vegetação
+O `VegetationLodAuditPreview` passou 36 segundos com limites de 1 árvore PBR focal, 3 árvores detalhadas médias e 8 elementos leves distantes. Os activos auditados somam as malhas e materiais esperados, sem colisões duplicadas e com zero luzes dinâmicas. Ver `CP_D5_067_AUDITORIA_VEGETATION_LOD.md` e `CP-D5-067_VEGETATION_LOD_RUNTIME.log`.
+
+## CP-D5-068 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -283,4 +286,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-067` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-068` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
