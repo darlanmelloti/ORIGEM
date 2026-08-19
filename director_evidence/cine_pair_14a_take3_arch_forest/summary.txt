@@ -1,0 +1,1 @@
+route=arch_to_forest duration_seconds=36 snapshot=/home/ubuntu/work/ORIGEM_director_cinematic_polish_pass02/director_evidence/cine_pair_14a_take3_arch_forest/arch_to_forest_36s.png
