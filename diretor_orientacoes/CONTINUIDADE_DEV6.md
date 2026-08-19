@@ -128,9 +128,13 @@ A preparação da recaptura foi confirmada: script, pasta QA, matriz, baseline, 
 
 O harness QA mantém entradas, capturas e telemetria determinísticas. A actualização Dev5 de composição aterrada não constitui recaptura de terceira pessoa; a aceitação visual permanece rejeitada. Registo: `DEV6_031_ESTABILIDADE_HARNESS_R2.md`.
 
-## Tarefa activa — DEV6-032
+## DEV6-032 — CONCLUÍDO
 
-Auditar a consistência do protocolo QA R2: script, manifestos, logs, matriz e baseline devem referir a mesma sessão e os mesmos critérios. Não alterar câmara, jogador, rota ou geometria.
+Script, telemetria, manifesto e matriz descrevem a mesma sessão R2 e não apresentam divergências. Registo: `DEV6_032_CONSISTENCIA_PROTOCOLO_QA_R2.md`.
+
+## Tarefa activa — DEV6-033
+
+Auditar a prontidão de promoção R2 sem recaptura: confirmar que os requisitos técnicos estão PASS e os requisitos visuais continuam pendentes de Dev1/Dev3. Não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
