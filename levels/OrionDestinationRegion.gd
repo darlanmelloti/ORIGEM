@@ -179,6 +179,21 @@ func _build_orion_cave() -> void:
 		mouth_stone.rotation = Vector3(0.08, float(mouth_index) * 0.63, -0.05)
 		_apply_material(mouth_stone, stone_material)
 		cave.add_child(mouth_stone)
+	# CP-D2-216: recess interior real atrás das ombreiras; volume escuro, apoiado e sem cartão plano.
+	var cave_recess := MeshInstance3D.new()
+	cave_recess.name = "RecorteEscuroInteriorBocaOrion"
+	var recess_mesh := SphereMesh.new()
+	recess_mesh.radius = 4.2
+	recess_mesh.height = 7.6
+	cave_recess.mesh = recess_mesh
+	cave_recess.position = Vector3(0.0, 4.1, -7.4)
+	cave_recess.scale = Vector3(1.0, 1.0, 0.34)
+	var recess_material := StandardMaterial3D.new()
+	recess_material.albedo_color = Color("#02070a")
+	recess_material.roughness = 1.0
+	recess_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	cave_recess.material_override = recess_material
+	cave.add_child(cave_recess)
 	var cave_eye: Node3D = ROCK_LARGE.instantiate() as Node3D
 	if cave_eye != null:
 		cave_eye.name = "OlhoRessonanteDaEntradaOrion"
@@ -377,6 +392,13 @@ func _build_cp_d2_007_physical_handoff() -> void:
 		body.name = "ColliderCPD2007_%s" % roles[index]
 		body.collision_layer = 1
 		body.collision_mask = 1
+		body.set_meta("physical_handoff", true)
+		if index == 0:
+			body.set_meta("handoff_R9_R10", true)
+		elif index < 4:
+			body.set_meta("handoff_R10_R11", true)
+		else:
+			body.set_meta("handoff_R11_R12", true)
 		var shape := CollisionShape3D.new()
 		var box := BoxShape3D.new()
 		box.size = Vector3(5.2 if index < 2 else 4.4, 0.9, 3.2)
@@ -465,10 +487,15 @@ func _build_cube_chamber_marker() -> void:
 	var cube: Node3D = ROCK_LARGE.instantiate() as Node3D
 	if cube != null:
 		cube.name = "CuboOrion"
-		cube.position = Vector3(0.0, 0.72, 0.0)
-		cube.scale = Vector3(0.72, 1.08, 0.72)
+		cube.position = Vector3(0.0, 1.55, 0.0)
+		cube.scale = Vector3(0.96, 2.10, 0.96)
 		cube.rotation = Vector3(0.12, 0.54, -0.08)
-		_apply_material(cube, stone_material)
+		var cube_silhouette_material := stone_material.duplicate() as StandardMaterial3D
+		cube_silhouette_material.albedo_color = Color("#23384b")
+		cube_silhouette_material.emission_enabled = true
+		cube_silhouette_material.emission = Color("#6c9dff")
+		cube_silhouette_material.emission_energy_multiplier = 0.72
+		_apply_material(cube, cube_silhouette_material)
 		cube.add_to_group("interactable")
 		chamber.add_child(cube)
 		var inner_core := MeshInstance3D.new()
@@ -479,7 +506,7 @@ func _build_cube_chamber_marker() -> void:
 		inner_mesh.radial_segments = 12
 		inner_mesh.material = cube_material
 		inner_core.mesh = inner_mesh
-		inner_core.position = Vector3(0.0, 0.72, 0.0)
+		inner_core.position = Vector3(0.0, 1.55, 0.0)
 		cube.add_child(inner_core)
 	var cube_light: OmniLight3D = OmniLight3D.new()
 	cube_light.name = "LuzNucleoOrion"
@@ -489,6 +516,38 @@ func _build_cube_chamber_marker() -> void:
 	cube_light.position = Vector3(0.0, 1.2, 0.0)
 	cube_light.shadow_enabled = false
 	chamber.add_child(cube_light)
+	# CP-D2-222: pórtico orgânico vertical para separar a silhueta R11 dos anéis.
+	for gate_side: int in [-1, 1]:
+		var gate_pillar: Node3D = PILLAR.instantiate() as Node3D
+		if gate_pillar == null:
+			continue
+		gate_pillar.name = "PorticoOrionCube_%s" % ("Esquerdo" if gate_side < 0 else "Direito")
+		gate_pillar.position = Vector3(float(gate_side) * 4.0, 4.8, 1.8)
+		gate_pillar.scale = Vector3(0.82, 2.25, 0.82)
+		gate_pillar.rotation = Vector3(0.04, 0.12 * float(gate_side), -0.03)
+		_apply_material(gate_pillar, stone_material)
+		chamber.add_child(gate_pillar)
+	var gate_lintel: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if gate_lintel != null:
+		gate_lintel.name = "LintelPorticoOrionCube"
+		gate_lintel.position = Vector3(0.0, 9.3, 1.8)
+		gate_lintel.scale = Vector3(1.35, 0.42, 0.78)
+		gate_lintel.rotation = Vector3(0.02, 0.08, -0.02)
+		_apply_material(gate_lintel, stone_material)
+		chamber.add_child(gate_lintel)
+	# CP-D2-223: contrafundo vertical emissivo, apoiado atrás do Cube, sem cartão plano.
+	var cube_backdrop: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if cube_backdrop != null:
+		cube_backdrop.name = "ContrafundoOrganicoOrionCube"
+		cube_backdrop.position = Vector3(0.0, 5.0, 3.0)
+		cube_backdrop.scale = Vector3(1.75, 3.2, 0.48)
+		var backdrop_material := stone_material.duplicate() as StandardMaterial3D
+		backdrop_material.albedo_color = Color("#101b32")
+		backdrop_material.emission_enabled = true
+		backdrop_material.emission = Color("#263e79")
+		backdrop_material.emission_energy_multiplier = 0.58
+		_apply_material(cube_backdrop, backdrop_material)
+		chamber.add_child(cube_backdrop)
 	for index: int in range(4):
 		var angle: float = float(index) * TAU / 4.0 + 0.22
 		var support: Node3D = PILLAR.instantiate() as Node3D
@@ -654,6 +713,23 @@ func _build_hub_to_final_dome_approach() -> void:
 			waypoint.position = stone.position + Vector3(0.0, 0.75, 0.0)
 			approach.add_child(waypoint)
 
+	var final_route_point := route[route.size() - 1]
+	var threshold_marker := PILLAR.instantiate() as Node3D
+	if threshold_marker != null:
+		threshold_marker.name = "WayfindingOrganicoSoleiraR12"
+		threshold_marker.position = Vector3(final_route_point.x, _height_at(final_route_point.x, final_route_point.y) + 1.05, final_route_point.y)
+		threshold_marker.scale = Vector3(0.34, 1.02, 0.30)
+		threshold_marker.rotation = Vector3(0.035, -0.26, -0.018)
+		threshold_marker.set_meta("map_region", 12)
+		threshold_marker.set_meta("physical_wayfinding", true)
+		var threshold_material := stone_material.duplicate() as StandardMaterial3D
+		threshold_material.albedo_color = Color("#2e3653")
+		threshold_material.emission_enabled = true
+		threshold_material.emission = Color("#7d70de")
+		threshold_material.emission_energy_multiplier = 0.34
+		_apply_material(threshold_marker, threshold_material)
+		approach.add_child(threshold_marker)
+
 func _build_final_dome() -> void:
 	var dome := Node3D.new()
 	dome.name = "CupulaFinal"
@@ -753,6 +829,42 @@ func _build_final_dome() -> void:
 		gateway_body.add_child(gateway_shape)
 		gateway_base.add_child(gateway_body)
 		dome.add_child(gateway_base)
+	# CP-D2-228/229: moldura vertical monumental da Cúpula Final, sem painel plano e sem novas luzes.
+	var cupula_contrast_material := stone_material.duplicate() as StandardMaterial3D
+	cupula_contrast_material.albedo_color = Color("#26334c")
+	cupula_contrast_material.emission_enabled = true
+	cupula_contrast_material.emission = Color("#7569d9")
+	cupula_contrast_material.emission_energy_multiplier = 0.42
+	cupula_contrast_material.roughness = 0.82
+	for silhouette_side: int in [-1, 1]:
+		var silhouette_pillar: Node3D = PILLAR.instantiate() as Node3D
+		if silhouette_pillar == null:
+			continue
+		silhouette_pillar.name = "PilarSilhuetaCupulaR12_%s" % ("Oeste" if silhouette_side < 0 else "Este")
+		silhouette_pillar.position = Vector3(float(silhouette_side) * 7.0, 5.4, 0.6)
+		silhouette_pillar.scale = Vector3(1.18, 4.10, 1.18)
+		silhouette_pillar.rotation = Vector3(0.03, 0.12 * float(silhouette_side), -0.04)
+		_apply_material(silhouette_pillar, cupula_contrast_material)
+		_limit_geometry_visibility(silhouette_pillar, 58.0)
+		dome.add_child(silhouette_pillar)
+	var silhouette_arch: Node3D = ROCK_LARGE.instantiate() as Node3D
+	if silhouette_arch != null:
+		silhouette_arch.name = "ArcoSilhuetaCupulaR12"
+		silhouette_arch.position = Vector3(0.0, 6.4, 0.6)
+		silhouette_arch.scale = Vector3(3.60, 1.05, 1.15)
+		silhouette_arch.rotation = Vector3(0.02, 0.04, 0.0)
+		_apply_material(silhouette_arch, cupula_contrast_material)
+		_limit_geometry_visibility(silhouette_arch, 58.0)
+		dome.add_child(silhouette_arch)
+	var sanctuary_pedestal := ROCK_LARGE.instantiate() as Node3D
+	if sanctuary_pedestal != null:
+		sanctuary_pedestal.name = "PedestalOrganicoContrasteCupulaR12"
+		sanctuary_pedestal.position = Vector3(0.0, 0.95, -0.35)
+		sanctuary_pedestal.scale = Vector3(6.8, 0.86, 4.6)
+		sanctuary_pedestal.rotation = Vector3(0.02, 0.16, -0.02)
+		_apply_material(sanctuary_pedestal, cupula_contrast_material)
+		_limit_geometry_visibility(sanctuary_pedestal, 58.0)
+		dome.add_child(sanctuary_pedestal)
 	var heart := MeshInstance3D.new()
 	heart.name = "NucleoCoroaFinal"
 	var heart_mesh := SphereMesh.new()
