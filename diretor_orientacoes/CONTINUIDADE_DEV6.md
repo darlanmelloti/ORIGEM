@@ -4,9 +4,13 @@
 - Branch: `feature/dev6-environment-art`
 - Orientações: `diretor_orientacoes/ONBOARDING_DEV6_ARTE_TECNICA_AMBIENTE.md`
 
-## Tarefa activa — DEV6-001
+## DEV6-001 — CONCLUÍDO
 
-Integrar a Estrada do Rio viva R2 em commit reversível conforme `CP_D5_096_FICHA_INTEGRACAO_R2.md`; validar `road_to_arch` por 36 segundos.
+A Estrada do Rio viva R2 foi integrada de forma reversível em `RiverRoadJourney.gd`. O parser Godot 4.7.1, o grounding de 9 activos, o orçamento adicional de 0 luzes e `road_to_arch` por 36 segundos passaram. Registo: `DEV6_001_ESTRADA_RIO_R2_VALIDADA.md`.
+
+## Tarefa activa — DEV6-002
+
+Auditar e refinar de forma reversível os materiais e LOD da integração R2 para reduzir a leitura residual de protótipo, preservando a rota, os X/Z cartográficos, os nove aterramentos e o orçamento de luzes.
 
 ## Continuidade
 

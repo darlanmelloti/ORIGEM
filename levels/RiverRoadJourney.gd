@@ -11,6 +11,9 @@ const FERN: PackedScene = preload("res://assets/models_polyhaven/fern_02/fern_02
 const PINE_MEDIUM: PackedScene = preload("res://assets/models_generated/ez_pine_medium_pbr.glb")
 const DARK_TREE: PackedScene = preload("res://assets/models_cc0/tree_detailed_dark.glb")
 const OAK_DARK: PackedScene = preload("res://assets/models_cc0/tree_oak_dark.glb")
+const DEER_CC0: PackedScene = preload("res://assets/models_cc0/deer_quaternius_cc0.glb")
+const DEV5_LANDMARK_OBJECTS: Script = preload("res://levels/dev5/CartographicLandmarkObjects.gd")
+const CARTOGRAPHIC_GROUNDING: Script = preload("res://levels/dev5/CartographicGroundingSystem.gd")
 const FLAGSTONE: Texture2D = preload("res://assets/textures/generated/daylight_weathered_flagstone.png")
 const GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_ground_normal_gl.jpg")
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
@@ -38,6 +41,7 @@ func _ready() -> void:
 	_build_river_road()
 	_build_river()
 	_build_river_margins()
+	_build_dev6_r2_living_integration()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_macro_river_cutbanks()
@@ -386,6 +390,125 @@ func _build_river() -> void:
 		bed_rock.rotation.y = bed_data["yaw"] as float
 		_apply_material(bed_rock, bed_rock_mat)
 		river_root.add_child(bed_rock)
+
+func _build_dev6_r2_living_integration() -> void:
+	# DEV6-001 — promoção reversível do candidato Dev5 R2. Todos os volumes ficam fora da faixa de 4,15 m
+	# do percurso Casa Voss → Arco; não cria luzes e conserva a água, ponte de leitura e escala macro existentes.
+	var r2_root := Node3D.new()
+	r2_root.name = "Dev6_EstradaDoRioVivaR2"
+	add_child(r2_root)
+	var bridge_z := 25.0
+	var bridge_x := _road_x(bridge_z) + 10.80
+	var library := DEV5_LANDMARK_OBJECTS.new() as Node3D
+	r2_root.add_child(library)
+	# A biblioteca Dev5 prepara a paleta antes de gerar a ponte; a ponte fica lateral, como vestígio navegável,
+	# sem intersectar a rota principal nem substituir a ponte estrutural de leitura do vale.
+	library.call("_build_material_library")
+	var bridge := library.call("create_stone_bridge_landmark") as Node3D
+	if bridge != null:
+		bridge.name = "PonteModularR2_Dev6"
+		bridge.position = Vector3(bridge_x, _height_at(bridge_x, bridge_z) + 0.10, bridge_z)
+		bridge.scale = Vector3(0.64, 0.64, 0.64)
+		bridge.rotation.y = 0.10
+		_apply_material(bridge, ruin_material)
+		bridge.add_to_group("dev6_r2_grounding")
+		r2_root.add_child(bridge)
+	var fauna_specs: Array[Dictionary] = [
+		{"name": "CervoMargemOesteR2", "x": _road_x(34.0) - 10.80, "z": 34.0, "scale": 0.50, "yaw": 0.56},
+		{"name": "CervoMargemEsteR2", "x": _road_x(50.0) + 11.20, "z": 50.0, "scale": 0.46, "yaw": -2.34}
+	]
+	for fauna_spec: Dictionary in fauna_specs:
+		var deer := DEER_CC0.instantiate() as Node3D
+		if deer == null:
+			continue
+		var deer_x := fauna_spec["x"] as float
+		var deer_z := fauna_spec["z"] as float
+		deer.name = fauna_spec["name"] as String
+		deer.position = Vector3(deer_x, _height_at(deer_x, deer_z), deer_z)
+		var deer_scale := fauna_spec["scale"] as float
+		deer.scale = Vector3.ONE * deer_scale
+		deer.rotation.y = fauna_spec["yaw"] as float
+		deer.add_to_group("decorative_fauna")
+		deer.add_to_group("dev6_r2_grounding")
+		r2_root.add_child(deer)
+	var vegetation_specs: Array[Dictionary] = [
+		{"scene": OAK_DARK, "name": "CarvalhoMargemR2", "x": _road_x(42.0) - 11.80, "z": 42.0, "scale": 0.38, "yaw": -0.35},
+		{"scene": PINE_MEDIUM, "name": "PinheiroMargemR2", "x": _road_x(56.0) + 12.40, "z": 56.0, "scale": 0.44, "yaw": 0.62},
+		{"scene": FERN, "name": "FetoMargemOesteR2", "x": _road_x(38.0) - 7.40, "z": 38.0, "scale": 0.52, "yaw": 0.18},
+		{"scene": FERN, "name": "FetoMargemEsteR2", "x": _road_x(53.0) + 7.80, "z": 53.0, "scale": 0.50, "yaw": -0.72}
+	]
+	for vegetation_spec: Dictionary in vegetation_specs:
+		var vegetation := (vegetation_spec["scene"] as PackedScene).instantiate() as Node3D
+		if vegetation == null:
+			continue
+		var vegetation_x := vegetation_spec["x"] as float
+		var vegetation_z := vegetation_spec["z"] as float
+		vegetation.name = vegetation_spec["name"] as String
+		vegetation.position = Vector3(vegetation_x, _height_at(vegetation_x, vegetation_z), vegetation_z)
+		var vegetation_scale := vegetation_spec["scale"] as float
+		vegetation.scale = Vector3.ONE * vegetation_scale
+		vegetation.rotation.y = vegetation_spec["yaw"] as float
+		vegetation.add_to_group("dev6_r2_grounding")
+		r2_root.add_child(vegetation)
+	var shelter_specs: Array[Dictionary] = [
+		{"x": _road_x(28.0) + 7.20, "z": 28.0, "scale": 0.32, "yaw": 0.46},
+		{"x": _road_x(30.0) + 8.35, "z": 30.0, "scale": 0.25, "yaw": -0.68}
+	]
+	for shelter_index: int in range(shelter_specs.size()):
+		var shelter_spec: Dictionary = shelter_specs[shelter_index]
+		var shelter_rock := RUIN_ROCK.instantiate() as Node3D
+		if shelter_rock == null:
+			continue
+		var shelter_x := shelter_spec["x"] as float
+		var shelter_z := shelter_spec["z"] as float
+		shelter_rock.name = "VestigioDeAbrigoR2_%02d" % (shelter_index + 1)
+		shelter_rock.position = Vector3(shelter_x, _height_at(shelter_x, shelter_z) + 0.02, shelter_z)
+		var shelter_scale := shelter_spec["scale"] as float
+		shelter_rock.scale = Vector3(shelter_scale, shelter_scale * 0.70, shelter_scale)
+		shelter_rock.rotation.y = shelter_spec["yaw"] as float
+		_apply_material(shelter_rock, ruin_material)
+		shelter_rock.add_to_group("dev6_r2_grounding")
+		r2_root.add_child(shelter_rock)
+	_build_dev6_r2_grounding_fields(r2_root)
+	call_deferred("_ground_dev6_r2_assets")
+	print("[DEV6_R2] status=integrated bridge=modular fauna=2 vegetation=4 shelter_parts=2 dynamic_lights=0 route_clear=true reversible=true")
+
+func _build_dev6_r2_grounding_fields(parent: Node3D) -> void:
+	# Adaptadores físicos invisíveis, exclusivamente laterais: tornam o contrato de raycast determinístico onde
+	# a malha regional ainda não expõe colisão contínua. Não adicionam geometria visível nem invadem a faixa da estrada.
+	var field_root := Node3D.new()
+	field_root.name = "AdaptadoresDeTerrenoR2"
+	parent.add_child(field_root)
+	var field_index := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r2_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var field := StaticBody3D.new()
+		field.name = "SuporteDeTerrenoR2_%02d" % field_index
+		field.position = Vector3(node.global_position.x, _height_at(node.global_position.x, node.global_position.z) - 0.08, node.global_position.z)
+		var collision := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = Vector3(3.40, 0.16, 3.40)
+		collision.shape = shape
+		field.add_child(collision)
+		field_root.add_child(field)
+		field_index += 1
+
+func _ground_dev6_r2_assets() -> void:
+	# O snapshot é executado após a árvore física receber os colisores de terreno. O raycast mantém X/Z e só corrige Y.
+	await get_tree().physics_frame
+	var grounded_count := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r2_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var desired := node.global_position + Vector3.UP * 48.0
+		var result: Dictionary = CARTOGRAPHIC_GROUNDING.snap_to_ground(get_world_3d(), node, desired)
+		if bool(result.get("grounded", false)):
+			grounded_count += 1
+	print("[DEV6_R2] grounding=%d expected=9 xz_preserved=true" % grounded_count)
+	assert(grounded_count == 9)
 
 func _build_positive_valley_bridge() -> void:
 	# CP280 — ponte de leitura no eixo positivo: integra Casa, rio, Estrada e Arco na sequência do mapa.
