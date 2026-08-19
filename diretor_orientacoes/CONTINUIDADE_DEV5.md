@@ -647,7 +647,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-188 — CONCLUÍDO: Regressão contrato câmara Elias
 `EliasCameraContractPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando câmara externa QA activa, `active_camera_count=1`, viewport `CameraQAExterna`, câmara Elias de produção inactiva, `Player.gd` e módulos regionais inalterados. Avisos de `viewport_set_scaling_3d_mode` são do renderer Compatibility. Ver `CP_D5_188_REGRESSAO_CAMERA_CONTRACT.md` e `CP-D5-188_CAMERA_CONTRACT_RUNTIME.log`.
 
-## CP-D5-189 — ACTIVO
+## CP-D5-189 — CONCLUÍDO: Regressão heading R1→R2
+`EliasVossRoadHeadingPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando Casa Voss `(−22,8)`, Estrada do Rio `(−21,4;12)`, ponte `(−21,4;28)`, destino `RUMO À ESTRADA DO RIO` id 2, 8 ciclos consistentes, câmara de produção inactiva e produção preservada. Avisos FSR1 são incompatibilidade conhecida do Compatibility renderer. Ver `CP_D5_189_REGRESSAO_HEADING_R1_R2.md` e `CP-D5-189_R1R2_HEADING_RUNTIME.log`.
+
+## CP-D5-190 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -657,4 +660,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-189` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-190` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
