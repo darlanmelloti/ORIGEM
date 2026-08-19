@@ -962,7 +962,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-293 — CONCLUÍDO: Auditoria integrada dos candidatos R1–R6
 `CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos, confirmando 6 candidatos, 0 scripts de produção, 0 luzes dinâmicas, aterramento/rotas, colisões próprias e composição vegetal R4/R5 com `wall_of_trees=false`. Ver `CP_D5_293_AUDITORIA_INTEGRADA_R1_R6.md` e `CP-D5-293_INTEGRATED_AUDIT_RUNTIME.log`.
 
-## CP-D5-294 — ACTIVO
+## CP-D5-294 — CONCLUÍDO: Regressão da apresentação terceira pessoa de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos, confirmando uma única câmara QA activa (`CameraQA`), sem erros de script, sem alteração de `Player.gd` e sem alteração de produção. Ver `CP_D5_294_ELIAS_TPS.md` e `CP-D5-294_ELIAS_TPS_RUNTIME.log`.
+
+## CP-D5-295 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -972,7 +975,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-294` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-295` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
