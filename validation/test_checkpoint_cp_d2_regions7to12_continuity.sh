@@ -10,6 +10,25 @@ VALIDATION_TAKE="${QA_VALIDATION_TAKE-8}"
 VALIDATION_REGION="${QA_VALIDATION_REGION-}"
 VALIDATION_ROUTE="${QA_VALIDATION_ROUTE-}"
 mkdir -p "$OUT"
+if [[ "${QA_PARITY_CONTRACT:-0}" == "1" ]]; then
+  PARITY_SCRIPT="$ROOT/validation/test_cp_d2_241_qa_parity.sh"
+  [[ -x "$PARITY_SCRIPT" ]] || { echo 'QA FAIL: CP-D2-241 parity contract missing or not executable' >&2; exit 1; }
+  printf '%s\n' 'QA_PARITY_CONTRACT=CP-D2-241_PRESENT'
+fi
+if [[ "${QA_FINAL_PACKAGE_CHECK:-0}" == "1" ]]; then
+  QA_SOURCE="$ROOT/levels/CartographicMirrorQA.gd"
+  QA_MAIN="$ROOT/scripts/main.gd"
+  QA_SCENE_FILE="$ROOT/scenes/main.tscn"
+  test -f "$QA_SOURCE" || { echo 'QA FAIL: QA source missing' >&2; exit 1; }
+  test -f "$QA_MAIN" || { echo 'QA FAIL: main script missing' >&2; exit 1; }
+  test -f "$QA_SCENE_FILE" || { echo 'QA FAIL: main scene missing' >&2; exit 1; }
+  grep -q 'MAP_MIRROR_VALIDATION' "$QA_SOURCE" || { echo 'QA FAIL: QA activation gate missing' >&2; exit 1; }
+  grep -q 'queue_free()' "$QA_SOURCE" || { echo 'QA FAIL: QA shutdown gate missing' >&2; exit 1; }
+  ! grep -q 'CartographicMirrorQA' "$QA_SCENE_FILE" || { echo 'QA FAIL: persistent QA overlay reference in main scene' >&2; exit 1; }
+  grep -q '_init_cartographic_mirror_qa' "$QA_MAIN" || { echo 'QA FAIL: runtime QA initializer missing' >&2; exit 1; }
+  grep -q 'load("res://levels/CartographicMirrorQA.gd")' "$QA_MAIN" || { echo 'QA FAIL: dynamic QA script load missing' >&2; exit 1; }
+  printf '%s\n' 'QA_FINAL_PACKAGE_CHECK=PASS runtime-gated-dynamic-overlay'
+fi
 rm -f "$OUT"/headless.log "$OUT"/gameplay-30s.mp4 "$OUT"/print-1600x900.jpg "$OUT"/ffmpeg.log
 
 if [[ ! -x "$GODOT" ]]; then
@@ -48,6 +67,9 @@ ffmpeg -y -ss "$PRINT_AT" -i "$OUT/gameplay-30s.mp4" -frames:v 1 -q:v 2 "$OUT/pr
 if grep -E 'SCRIPT ERROR|Parse Error|Invalid assignment' "$OUT/gameplay.log"; then
   echo 'QA FAIL: gameplay log reported script errors' >&2
   exit 1
+fi
+if [[ "${MAP_MIRROR_VALIDATION:-0}" == "1" ]]; then
+  grep -q 'MAP_MIRROR_ANCHOR_CONTRACT chain=R9->R10->R11->R12 count=3 state=RUNTIME_QA_ONLY' "$OUT/gameplay.log" || { echo 'QA FAIL: runtime cartographic anchor contract missing' >&2; exit 1; }
 fi
 
 printf '%s\n' '[QA] PASS: headless clean, gameplay 30s present, print 1600x900 present'
