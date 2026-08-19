@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://levels/dev5/MajesticGroundedPavilionPreview.gd" id="1_majestic"]
+
+[node name="MajesticGroundedPavilionPreview" type="Node3D"]
+script = ExtResource("1_majestic")
