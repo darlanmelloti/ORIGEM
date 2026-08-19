@@ -309,7 +309,10 @@ O preview `StoneBridgeLandmarkPreview.tscn` foi corrigido no fallback de captura
 ## CP-D5-078 — CONCLUÍDO: Corredor cartográfico Elias no arco R3
 O preview `EliasArchCorridorPreview.tscn` passou 36 segundos com R3 `(-16,741;48)`, arco físico em Z `92`, destino R4 id `4`, `structural_arch=false` e dois ciclos `route_open=true`. A transição R3→R4 foi confirmada sem criar produção. Ver `CP_D5_078_VALIDACAO_CORREDOR_ARCO_R3.md` e `CP-D5-078_ELIAS_ARCH_RUNTIME.log`.
 
-## CP-D5-079 — ACTIVO
+## CP-D5-079 — CONCLUÍDO: Folga Elias na margem R6
+O preview `EliasR6ClearancePreview.tscn` passou 36 segundos com monólito grounded em `(52,260)`, colisor `CorredorMargemR6EliasQA`, folga de `6,05 m` contra `4,00 m`, apresentação `EliasThirdPersonPresentation`, câmara externa e dois ciclos `clear=true`. Ver `CP_D5_079_VALIDACAO_ELIAS_R6_CLEARANCE.md` e `CP-D5-079_ELIAS_R6_CLEARANCE_RUNTIME.log`.
+
+## CP-D5-080 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -319,4 +322,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-079` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-080` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
