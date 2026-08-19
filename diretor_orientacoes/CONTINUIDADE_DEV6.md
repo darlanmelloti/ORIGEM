@@ -100,9 +100,13 @@ A regressão contínua voltou a passar parser, rota de 36 segundos, R1–R6, 9/9
 
 A matriz, baseline, regressão e telemetria actual não apresentam divergências: 36 s, R1–R6, 9/9 grounding, zero luzes e rejeição visual condicionada à recaptura permanecem coerentes. Registo: `DEV6_024_DIVERGENCIAS_CONTRATOS_R2.md`.
 
-## Tarefa activa — DEV6-025
+## DEV6-025 — CONCLUÍDO
 
-Auditar a estabilidade de carregamento dos activos R2 no editor Godot e a ausência de erros de recursos durante a rota. Não alterar câmara, jogador, rota ou geometria; se houver erro, corrigi-lo de forma reversível.
+O editor e a rota de 36 segundos carregaram os activos R2 sem erros de recurso, parser ou ficheiro. Registo: `DEV6_025_ESTABILIDADE_ACTIVOS_R2.md`.
+
+## Tarefa activa — DEV6-026
+
+Auditar referências e dependências dos activos R2 para confirmar que todos os caminhos continuam relativos ao projecto e reversíveis. Não alterar câmara, jogador, rota ou geometria; corrigir apenas referência quebrada caso exista.
 
 ## Continuidade
 
