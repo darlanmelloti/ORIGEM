@@ -315,7 +315,10 @@ O preview `EliasR6ClearancePreview.tscn` passou 36 segundos com monólito ground
 ## CP-D5-080 — CONCLUÍDO: Auditoria da lacuna cartográfica R1 → R2
 A auditoria do contrato Elias R1→R2 confirmou Casa Voss `(-22,8)`, estrada `(-21,4;12)`, ponte R2 `(-21,4;28)`, destino via `next_dev1_destination()` igual a `2`, parser limpo, zero referências de produção no preview e zero ficheiros fora da fronteira. Ver `CP_D5_080_AUDITORIA_LACUNA_R1_R2.md`.
 
-## CP-D5-081 — ACTIVO
+## CP-D5-081 — CONCLUÍDO: Auditoria de densidade vegetal
+O preview `VegetationDensityAuditPreview.tscn` passou 36 segundos com 1 pinheiro focal, 3 árvores escuras médias, 1 árvore leve e 2 fetos, total de 27.208 triângulos, zero luzes dinâmicas e `wall_density=false`. Ver `CP_D5_081_AUDITORIA_DENSIDADE_VEGETAL.md` e `CP-D5-081_VEGETATION_DENSITY_RUNTIME.log`.
+
+## CP-D5-082 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -325,4 +328,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-081` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-082` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
