@@ -446,7 +446,10 @@ A cena inicialmente procurada `LightBudgetAuditPreview.tscn` não existe; a vali
 ## CP-D5-121 — CONCLUÍDO: Regressão clareira Elias R4
 `EliasForestClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 6/6 elementos aterrados, corredor de 5,20 m, clearance mínimo de 2,75 m, 2 ciclos `corridor_open=true`, câmara de Elias inactiva, portal/parede vegetal ausentes e produção inalterada. Ver `CP_D5_121_REGRESSAO_ELIAS_FLORESTA.md` e `CP-D5-121_ELIAS_FOREST_RUNTIME.log`.
 
-## CP-D5-122 — ACTIVO
+## CP-D5-122 — CONCLUÍDO: Regressão ponte R2
+`EliasStoneBridgeTraversalPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando âncora R2 `(-21,40;28)`, grounding no `tabuleiro_continuo`, folga 0,21 m sobre mínimo 0,20 m, ponte modular, `glb_bridge=false`, 3 ciclos aprovados, câmara externa preservada e produção inalterada. Ver `CP_D5_122_REGRESSAO_PONTE_R2.md` e `CP-D5-122_R2_BRIDGE_RUNTIME.log`.
+
+## CP-D5-123 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -456,4 +459,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-122` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-123` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
