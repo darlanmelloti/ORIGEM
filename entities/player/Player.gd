@@ -88,10 +88,10 @@ func _create_combat_nodes() -> void:
 
 	sword_pivot = Node3D.new()
 	sword_pivot.name = "SwordPivot"
-	# Mantém o mesmo pivot de animação e raycast, mas reduz a ocupação periférica da arma no enquadramento do vale.
-	sword_pivot.position = Vector3(0.54, -0.64, -1.10)
-	sword_pivot.scale = Vector3(0.82, 0.82, 0.82)
-	sword_pivot.rotation_degrees = Vector3(-16.0, 2.0, -16.0)
+	# Preserva pivot, animação e raycast, mas desloca a arma para o canto inferior direito e liberta a leitura do mundo cartográfico.
+	sword_pivot.position = Vector3(0.84, -0.84, -1.50)
+	sword_pivot.scale = Vector3(0.52, 0.52, 0.52)
+	sword_pivot.rotation_degrees = Vector3(-12.0, 3.0, -20.0)
 	camera.add_child(sword_pivot)
 
 	var blade_material: StandardMaterial3D = StandardMaterial3D.new()

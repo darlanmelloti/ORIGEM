@@ -412,3 +412,10 @@ A falésia rectangular da chegada às Ruínas foi atribuída ao salto de fórmul
 A remoção das três balizas dos marcos emergentes R6 passou no parser e no take tardio de 36 segundos, mas não eliminou a luz azul residual nem melhorou a silhueta o suficiente. A alteração foi revertida. Relatório: `CP_CARTO_123_BALIZAS_R6_REJEITADAS.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-124:** atribuir a luz azul residual da chegada R6 por projecção de câmara e nó, sem repetir as balizas `BrilhoMarcoRuina`, HUD, mapa, arma, margens, árvores, sombras, água ou transição topográfica.
+
+
+## CP-CARTO-124 — Espada de Elias: enquadramento validado
+
+A apresentação da espada de primeira pessoa foi deslocada e reduzida sem alterar o `CombatRay` ou a lógica de ataque. Parser Godot e 36 segundos de gameplay R6 com captura tardia confirmaram que a arma continua legível no canto inferior direito e deixa o mapa real desobstruído. Relatório: `CP_CARTO_124_ESPADA_ELIAS_ENQUADRAMENTO_VALIDADO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-125:** auditar a silhueta arqueológica central da chegada R6 agora sem a obstrução da espada, priorizando a leitura de ruína real e excluindo repetição de materiais, balizas, água, margens, HUD, arma e topografia já testados.
