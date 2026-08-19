@@ -314,3 +314,10 @@ A auditoria causal identificou `EstradaDeLamaConformada` como a camada visual au
 A projecção de câmara, o raio no pixel e a ocultação QA da única árvore lateral coincidente não explicaram o pequeno sinal ciano. A sonda foi revertida sem tocar produção. Relatório: `CP_CARTO_109_SINAL_CIANO_NAO_ATRIBUIDO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-110:** auditoria de escala do corredor Casa Voss→Arco. Medir a relação entre largura das lajes, distância ao Arco e altura das silhuetas arbóreas nos dois enquadramentos QA limpos. Só propor alteração se a leitura demonstrar um problema causal de escala; não retomar a investigação do sinal ciano nem candidatos já rejeitados.
+
+
+## CP-CARTO-110 — Escala Casa Voss→Arco auditada
+
+A escala foi verificada contra as âncoras canónicas: Casa→Arco = 40,344 m e Arco→Floresta = 68,439 m. As capturas CP-CARTO-108 preservam essa continuidade. Não existe causa de escala que justifique mover marcos, mudar FOV ou comprimir o terreno. Relatório: `CP_CARTO_110_ESCALA_CORREDOR_CASA_ARCO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-111:** auditar a leitura material local do Arco das Ruínas e da junta final das lajes. Aplicar no máximo uma melhoria reversível de valor/normal, apenas se não alterar o arco estrutural, as distâncias, os colisores ou a rota.
