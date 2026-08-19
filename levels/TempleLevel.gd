@@ -70,6 +70,8 @@ func _queue_regional_qa_modes() -> void:
 		call_deferred("_prepare_road_return_voss_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "road_to_arch":
 		call_deferred("_prepare_road_to_arch_route_qa")
+	elif OS.get_environment("ORIGEM_QA_ROUTE") == "road_to_arch_recede":
+		call_deferred("_prepare_road_to_arch_recede_route_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "handoff_to_village":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_village_handoff_route_qa)
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest":
@@ -253,6 +255,26 @@ func _prepare_road_to_arch_route_qa() -> void:
 	if head != null:
 		head.rotation = Vector3.ZERO
 	print("[ORIGEM_QA_ROUTE] Spawn Estrada–Arco ativo em %s; foco=%s" % [player.global_position, focus])
+	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
+		call_deferred("_save_viewport_snapshot_qa")
+
+func _prepare_road_to_arch_recede_route_qa() -> void:
+	# Sonda de composição: recua apenas o spawn QA no mesmo eixo Casa→Estrada→Arco; FOV e câmara do jogo permanecem intocados.
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		get_tree().create_timer(0.25).timeout.connect(_prepare_road_to_arch_recede_route_qa)
+		return
+	var spawn_x: float = CartographicAnchors.ESTRADA_RIO_INICIO.x + 0.45
+	var spawn_z: float = CartographicAnchors.ESTRADA_RIO_INICIO.y + 2.0
+	var focus: Vector3 = Vector3(-13.8, 0.0, 92.0)
+	player.velocity = Vector3.ZERO
+	player.set("player_velocity", Vector3.ZERO)
+	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.30, spawn_z)
+	player.look_at(Vector3(focus.x, player.global_position.y, focus.z), Vector3.UP)
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_ROUTE] Spawn RecuadoEstrada–Arco ativo em %s; foco=%s" % [player.global_position, focus])
 	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
 		call_deferred("_save_viewport_snapshot_qa")
 

@@ -251,3 +251,10 @@ A terceira árvore detalhada CC0 temporária em `z=132` passou tecnicamente, mas
 As exclusões QA da luz e do contexto Majestic, dos sinais P0 e de materiais azul-ciano remotos não alteraram o ponto residual no quadro Casa Voss→Arco. As sondas foram removidas integralmente; não há alteração de produção. Relatório: `CP_CARTO_097_MARCADOR_RESIDUAL_NAO_ATRIBUIDO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-098:** auditar a silhueta geológica lateral da crista recém-promovida, identificando se um dos afloramentos CC0 existentes pode receber apenas material/escala de leitura sem alterar posição, rota, Arco, vegetação, água ou luzes. A hipótese exige uma diferença visual mensurável na captura Casa Voss→Arco, parser Godot 4.7.1 e 36 segundos de gameplay antes de promoção.
+
+
+## CP-CARTO-098 e CP-CARTO-099 — Auditoria geológica e tomada de recuo
+
+A auditoria CP-CARTO-098 confirmou que os afloramentos laterais já estão distribuídos em quatro famílias CC0 e não autoriza uma mudança cega de material, escala ou posição. A tomada QA `road_to_arch_recede` do CP-CARTO-099 passou por 36 segundos no mesmo eixo Casa Voss→Arco; revelou que a massa escura lateral é a malha física `SuperficieRioEstrada`. Não alterar água: hipóteses dessa família já foram rejeitadas. A ferramenta QA de recuo foi preservada e não afecta jogo normal.
+
+**Próxima tarefa já iniciada — CP-CARTO-100:** auditar a leitura espacial da Casa Voss no recuo através da rota `road_return_voss`, comparando a origem doméstica, a margem do rio e a direção do Arco sem alterar Casa, porta, iluminação, água, câmaras ou módulos R7–R12. Só uma lacuna visual nova e causal poderá abrir alteração de produção.
