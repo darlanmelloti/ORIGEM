@@ -97,10 +97,14 @@ func height_at(world_x: float, world_z: float) -> float:
 		height -= vista_opening * vista_opening * (1.25 + vista_progress * 2.15)
 
 	# Corredor ribeirinho de baixa inclinação: liga a Floresta Densa à margem ocidental do lago regional.
-	elif world_x > -38.0 and world_x < 25.0 and world_z >= 145.0 and world_z <= 252.0:
+	# A saída estende-se até z=270 para misturar a faixa baixa com o relevo regional; evita a parede criada pelo corte brusco em z=252.
+	elif world_x > -38.0 and world_x < 25.0 and world_z >= 145.0 and world_z <= 270.0:
+		var regional_height: float = height
 		var shore_noise: float = land_noise.get_noise_2d(world_x * 0.55, world_z * 0.55) * 0.22
 		var shore_detail: float = detail_noise.get_noise_2d(world_x, world_z) * 0.14
-		height = shore_noise + shore_detail
+		var shore_height: float = shore_noise + shore_detail
+		var r6_transition: float = smoothstep(238.0, 270.0, world_z)
+		height = lerpf(shore_height, regional_height, r6_transition)
 
 	# Crista recuada do vale: acrescenta um terceiro plano topográfico para lá do Arco, sem tocar na clareira ou no eixo de rota.
 	var arch_ridge_band: float = exp(-pow((world_z - 132.0) / 25.0, 2.0))

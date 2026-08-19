@@ -398,3 +398,10 @@ A emissão mínima e reforçada do material de terreno foi testada sem criar luz
 A captura tardia no segundo 30 excluiu HUD, camada cartográfica, `SwordPivot` de Elias e `MargensRochosasDoLago` como fonte da massa rectangular escura no quadrante direito da chegada R6. Todas as sondas foram revertidas; não houve alteração de produção. Relatório: `CP_CARTO_121_RECTANGULO_R6_ISOLAMENTOS_REJEITADOS.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-122:** auditar instâncias legadas de geometria de fundo pelas *bounding boxes* que intersectam o quadrante direito da câmara R6. Não repetir HUD, mapa, arma, margens, árvores 66/72/76, sombras, UI, água, Rocha 24 nem emissões globais.
+
+
+## CP-CARTO-122 — Transição topográfica R5→R6 validada
+
+A falésia rectangular da chegada às Ruínas foi atribuída ao salto de fórmula no limite `z=252`. A transição foi suavizada entre `z=238` e `z=270`, passou no parser e em 36 segundos de gameplay com captura Xvfb no segundo 30. O resultado foi promovido. Relatório: `CP_CARTO_122_TRANSICAO_TOPOGRAFICA_R6_VALIDADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-123:** melhorar a legibilidade da massa arqueológica das Ruínas Submersas na chegada R6, começando por uma auditoria de silhuetas que não repita HUD, mapa, arma, margens, árvores, sombras, água, emissões ou a transição topográfica agora validada.
