@@ -76,22 +76,25 @@ Foi criado `SubmergedRuinsPierPreview.tscn` com cinco lajes quebradas, quatro co
 
 A sessão headless completou 36 segundos e confirmou `landmark=6`, `submerged=true`, `emissive=false`, `dynamic_lights=0` e `production_script=false`; ver `CP_D5_012_RUINAS_SUBMERSAS_QA.md`. Também requer captura visual própria antes de se tornar candidato de integração.
 
-## CP-D5-013 — ACTIVO: Catálogo de inserção R1–R6
+## CP-D5-013 — CONCLUÍDO
 
-Criar um catálogo técnico de objectos tridimensionais prioritários por marco usando `CartographicPlacementSystem`. Para cada objecto, declarar activo real local disponível, deslocamento máximo a partir da âncora, orçamento estimado de triângulos, colisores necessários, evidência QA existente e proprietário de integração. Não criar ou integrar objectos de produção neste checkpoint.
+O catálogo `CP_D5_013_CATALOGO_INSERCAO_R1_R6.md` mapeia os seis marcos a objectos candidatos, activos locais, deslocamentos X/Z, colisores, proprietários e estados QA. O catálogo confirma que nenhuma proposta Dev5 atravessa R1–R6 ou recebe integração automática.
 
-### Aceitação CP-D5-013
+## CP-D5-014 — ACTIVO: Auditor de orçamento de malhas
+
+Criar uma cena QA que inventarie triângulos, materiais e nós de colisão dos GLB/GLTF locais seleccionados no catálogo. O auditor deve gerar registos verificáveis para a ponte, vegetação PBR, rochas e objectos QA, sem tocar objectos de produção.
+
+### Aceitação CP-D5-014
 
 | Critério | Obrigatório |
 |---|---|
-| Cartografia | Seis fichas R1–R6, todas com coordenadas X/Z e posição de canvas |
-| Activos | Preferência por GLB/GLTF local; proibir paredes, outdoors e primitivas não validadas |
-| Desempenho | Orçamento de triângulos e zero luzes dinâmicas por ficha |
-| Integração | Um único proprietário Dev1 por proposta; sem alteração directa de módulos regionais |
-| Continuidade | Ao publicar, abrir CP-D5-014 automaticamente |
+| Dados | Triângulos, materiais e nós de colisão reais extraídos das cenas importadas |
+| Orçamento | Relatório separado por activo e total da proposta; zero luzes dinâmicas |
+| Validação | Parser Godot 4.7.1 e 36 segundos de cena QA |
+| Continuidade | Ao publicar, abrir CP-D5-015 automaticamente |
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-013` — preparar o catálogo de inserção R1–R6 com a ferramenta cartográfica e, ao concluir, abrir automaticamente `CP-D5-014`.
+**Próxima tarefa activa após publicação:** `CP-D5-014` — auditar triângulos, materiais e colisores reais dos activos antes da próxima inserção QA.
