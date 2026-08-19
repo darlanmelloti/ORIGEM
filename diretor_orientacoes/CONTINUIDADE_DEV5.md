@@ -935,7 +935,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-284 — CONCLUÍDO: Auditoria contratos de altura contínua
 `CartographicHeightContractsPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando seis regiões, três proprietários de terreno, raycasts e rejeições de arco estrutural/cais preservadas, sem alterar produção. Ver `CP_D5_284_AUDITORIA_CONTRATOS_ALTURA_CONTINUA.md` e `CP-D5-284_HEIGHT_CONTRACTS_RUNTIME.log`.
 
-## CP-D5-285 — ACTIVO
+## CP-D5-285 — CONCLUÍDO: Regressão aterramento global contínua
+`CartographicGroundingPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando anexo Casa Voss e Ponte Marco 2 aterrados via `TerrenoColisorQA`, impactos Y -2,78/-2,71, X/Z preservados e produção intacta. Ver `CP_D5_285_REGRESSAO_ATERRAMENTO_GLOBAL_CONTINUA.md` e `CP-D5-285_GLOBAL_GROUNDING_RUNTIME.log`.
+
+## CP-D5-286 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -945,7 +948,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-285` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-286` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
