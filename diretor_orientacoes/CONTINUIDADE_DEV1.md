@@ -370,3 +370,10 @@ A comparação causal no pixel do sinal ciano identificou um carvalho `OAK_DARK`
 A silhueta suspensa do talude esquerdo foi atribuída a `ArvoreDaFloresta_28`. A conífera incompatível foi substituída por `DARK_TREE` à escala 0,52, eliminando o objecto suspenso sem mover a rota, a clareira, os colisores, a cartografia ou as luzes. Parser e gameplay de 36 segundos passaram. Relatório: `CP_CARTO_117_ARVORE_MAJESTIC_ATERRADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-118:** validar a transição física Acampamento Majestic→Ruínas Submersas na rota cartográfica e localizar a primeira lacuna visual causal da margem de chegada. Não repetir a substituição de `ArvoreDaFloresta_28`, a calibração OAK, os candidatos hídricos, marcos cianos, cristas ou alterações ambientais já rejeitadas.
+
+
+## CP-CARTO-118 — Auditoria da aproximação R6
+
+A rota `forest_to_ruins` foi validada por 36 segundos. A massa escura rectangular da chegada foi investigada por projecção, caixas envolventes, raio físico, isolamento de sombras e remoção QA de três árvores candidatas. Nenhuma hipótese alterou causalmente o elemento; todas as sondas foram revertidas e não houve alteração de produção. Relatório: `CP_CARTO_118_APROXIMACAO_RUINAS_AUDITORIA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-119:** validar a chegada física `ruins_arrival` e auditar a legibilidade da margem/ruína sem repetir os candidatos de painel, árvores 66/72/76, sombras ou água. A análise do painel residual fica documentada para uma frente de activos/renderização.
