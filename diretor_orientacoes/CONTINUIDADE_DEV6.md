@@ -112,9 +112,13 @@ Os preloads R2 foram verificados: todos usam caminhos `res://` e os activos exis
 
 A branch não rastreia `.uid` nem binários QA Dev6; os três caminhos absolutos documentam apenas evidência externa, sem dependência de runtime. Registo: `DEV6_027_LIMPEZA_DEPENDENCIAS_R2.md`.
 
-## Tarefa activa — DEV6-028
+## DEV6-028 — CONCLUÍDO
 
-Auditar os manifestos e hashes QA R2: confirmar coerência entre a integridade DEV6-013, a evidência externa actual e a baseline DEV6-023. Não alterar câmara, jogador, rota ou geometria.
+O manifesto DEV6-013 foi identificado como histórico após novas capturas de regressão. Foi gerado um manifesto QA externo actualizado, verificado para log e PNGs actuais. Registo: `DEV6_028_MANIFESTO_QA_R2.md`.
+
+## Tarefa activa — DEV6-029
+
+Actualizar o protocolo Dev6 para exigir manifesto SHA-256 próprio por sessão de QA R2 e auditar a preparação da próxima recaptura. Não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
