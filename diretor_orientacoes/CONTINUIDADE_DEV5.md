@@ -243,7 +243,10 @@ Os sete handlers foram corrigidos para tratar textura e imagem nulas. A varredur
 ## CP-D5-056 — CONCLUÍDO: Leitura R6 com Elias, baliza e vegetação
 A cena publicada `R6EliasVegetationReadPreview.tscn` passou 36 segundos. Confirmou baliza grounded em X/Z `(52,260)`, Elias com câmara QA externa e `elias_camera_current=false`, trajecto X=60, folga `6,05 m`, três elementos vegetais aterrados, zero lajes, `wall_of_trees=false`, dois ciclos `clear=true` e `production_modules_changed=false`. Ver `CP_D5_056_VALIDACAO_LEITURA_R6_ELIAS_VEGETACAO.md` e `CP-D5-056_R6_ELIAS_VEGETATION_RUNTIME.log`.
 
-## CP-D5-057 — ACTIVO
+## CP-D5-057 — CONCLUÍDO: Auditoria comparativa das leituras R5/R6
+A comparação confirmou os contratos de Elias em R5 e R6: folgas `5,45 m` e `6,05 m`, grounding verdadeiro, câmara de Elias inactiva, dois ciclos de trajecto, zero parede de árvores, zero lajes de cais e uma luz direccional por harness. O parser Compatibility passou e nenhum módulo regional foi alterado. Ver `CP_D5_057_AUDITORIA_COMPARATIVA_LEITURAS_R5_R6.md` e `CP-D5-057_R5_R6_READ_COMPARISON_AUDIT.log`.
+
+## CP-D5-058 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -253,4 +256,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-057` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-058` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.

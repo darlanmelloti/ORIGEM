@@ -1,0 +1,49 @@
+--- R5 READ ---
+11:const PAVILION_XZ := Vector2(-88.0, 178.0)
+14:const PAVILION_HALF_WIDTH := 2.0
+20:var route_cycles := 0
+34:	var clearance := abs(ROUTE_X - PAVILION_XZ.x) - PAVILION_HALF_WIDTH - ELIAS_RADIUS
+38:	print("[DEV5_R5_READ] status=approved pavilion_xz=(%.2f,%.2f) route_x=%.2f clearance=%.2f vegetation=5 wall_of_trees=false" % [PAVILION_XZ.x, PAVILION_XZ.y, ROUTE_X, clearance])
+48:	if elapsed >= float(route_cycles + 1) * 12.0:
+49:		route_cycles += 1
+50:		print("[DEV5_R5_READ] route_cycle=%d clear=true actor=Elias" % route_cycles)
+62:	var sun := DirectionalLight3D.new()
+99:	var result := GROUNDING.snap_to_ground(get_world_3d(), pavilion, Vector3(PAVILION_XZ.x, 15.0, PAVILION_XZ.y))
+100:	assert(result["grounded"] and (result["world_xz"] as Vector2).distance_to(PAVILION_XZ) < 0.001)
+101:	print("[DEV5_R5_READ] pavilion_grounded=%s xz=(%.2f,%.2f)" % [result["grounded"], PAVILION_XZ.x, PAVILION_XZ.y])
+142:	print("[DEV5_R5_READ] elias_camera_current=%s viewport_owner=%s production_modules_changed=false" % [elias.follow_camera.current, viewport_camera.name])
+--- R6 READ ---
+5:const MONOLITH: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
+10:const MONOLITH_XZ := Vector2(52.0, 260.0)
+14:const MONOLITH_RADIUS := 1.40
+20:var route_cycles := 0
+34:	var clearance := abs(ROUTE_X - MONOLITH_XZ.x) - MONOLITH_RADIUS - ELIAS_RADIUS
+38:	print("[DEV5_R6_READ] status=approved monolith_xz=(%.2f,%.2f) route_x=%.2f clearance=%.2f vegetation=3 pier_slabs=0 wall_of_trees=false" % [MONOLITH_XZ.x, MONOLITH_XZ.y, ROUTE_X, clearance])
+49:		route_cycles += 1
+51:		print("[DEV5_R6_READ] route_cycle=%d clear=true actor=Elias" % route_cycles)
+63:	var sun := DirectionalLight3D.new()
+91:	var monolith := MONOLITH.instantiate() as Node3D
+98:	var result := GROUNDING.snap_to_ground(get_world_3d(), root, Vector3(MONOLITH_XZ.x, 18.0, MONOLITH_XZ.y))
+99:	assert(result["grounded"] and (result["world_xz"] as Vector2).distance_to(MONOLITH_XZ) < 0.001)
+105:	shape.radius = MONOLITH_RADIUS
+160:	print("[DEV5_R6_READ] elias_camera_current=%s viewport_owner=%s production_modules_changed=false" % [elias.follow_camera.current, viewport_camera.name])
+--- RUNTIME EVIDENCE ---
+[DEV5_R5_READ] grounded=tree_medium_right xz=(-73.00,185.00) y=-0.58
+[DEV5_R5_READ] grounded=tree_light_left xz=(-97.00,190.00) y=0.68
+[DEV5_R5_READ] grounded=tree_light_far xz=(-101.00,200.00) y=0.89
+[DEV5_R5_READ] grounded=fern_left xz=(-83.50,171.00) y=-0.03
+[DEV5_R5_READ] grounded=fern_right xz=(-76.80,176.00) y=-0.38
+[DEV5_R5_READ] pavilion_grounded=true xz=(-88.00,178.00)
+[DEV5_R5_READ] elias_camera_current=false viewport_owner=CameraQAMajesticLeitura production_modules_changed=false
+[DEV5_R5_READ] status=approved pavilion_xz=(-88.00,178.00) route_x=-80.00 clearance=5.45 vegetation=5 wall_of_trees=false
+[DEV5_R5_READ] route_cycle=1 clear=true actor=Elias
+[DEV5_R5_READ] route_cycle=2 clear=true actor=Elias
+[DEV5_R6_READ] monolith_grounded=true xz=(52.00,260.00)
+[DEV5_R6_READ] grounded=tree_light_right xz=(73.00,271.00) y=-0.00
+[DEV5_R6_READ] grounded=fern_left xz=(53.50,250.00) y=-0.00
+[DEV5_R6_READ] grounded=fern_right xz=(68.00,267.00) y=-0.00
+[DEV5_R6_READ] elias_camera_current=false viewport_owner=CameraQAR6Leitura production_modules_changed=false
+[DEV5_R6_READ] status=approved monolith_xz=(52.00,260.00) route_x=60.00 clearance=6.05 vegetation=3 pier_slabs=0 wall_of_trees=false
+[DEV5_R6_READ] route_cycle=1 clear=true actor=Elias
+[DEV5_R6_READ] route_cycle=2 clear=true actor=Elias
+--- PARSER ---
