@@ -166,5 +166,9 @@ func _save_snapshot_qa(snapshot_path: String) -> void:
 	if viewport_texture == null:
 		print("[DEV5_ELIAS_R6] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
 		return
-	var result := viewport_texture.get_image().save_png(snapshot_path)
+	var image := viewport_texture.get_image()
+	if image == null:
+		print("[DEV5_ELIAS_R6] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+		return
+	var result := image.save_png(snapshot_path)
 	print("[DEV5_ELIAS_R6] snapshot=%s result=%s" % [snapshot_path, result])
