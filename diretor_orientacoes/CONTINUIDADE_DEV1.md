@@ -440,3 +440,10 @@ O pilar CC0 colapsado foi validado tecnicamente e em 36 segundos de gameplay, ma
 A troca da instância `NucleoDeArvoreEstrada_01` por árvore CC0 escura passou no parser e em 36 segundos de gameplay, mas não afectou materialmente a tomada real de saída. Foi revertida; não repetir alteração por inferência de posição. Relatório: `CP_CARTO_128_CONIFERA_FOCAL_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-129:** executar uma auditoria de projecção de malhas arbóreas na tomada Casa Voss→Estrada para listar exclusivamente as coníferas que ocupam os pixels dominantes, antes de qualquer novo ajuste de espécie, LOD ou composição.
+
+
+## CP-CARTO-129 — Árvore dominante: rejeitada
+
+A projecção confirmou `NucleoDeArvoreEstrada_00` como copa dominante no quadrante direito, mas a substituição por árvore CC0 escura não gerou ganho visual suficiente na captura de 36 segundos e foi revertida. Não repetir a troca desta instância. Relatório: `CP_CARTO_129_ARVORE_DOMINANTE_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-130:** auditar a continuidade geométrica do caminho no eixo Casa Voss→Arco, separando a leitura de lajes, sombras e lacunas de solo. A hipótese seguinte deve visar um elemento estrutural comprovadamente visível, sem repetir materiais, árvores, água, atmosfera, balizas ou topografia já rejeitados.
