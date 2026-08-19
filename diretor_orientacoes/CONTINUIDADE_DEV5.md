@@ -605,7 +605,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-174 — CONCLUÍDO: Regressão Majestic vivo R5
 `R5LivingMajesticPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 8 vegetações, 3 partes de abrigo, 14 elementos aterrados, pavilhão visível, clearance fauna de 27,41 m, ausência de marco de pedras e parede de árvores, 1 ciclo limpo e produção preservada. Ver `CP_D5_174_REGRESSAO_MAJESTIC_VIVO_R5.md` e `CP-D5-174_R5_LIVING_MAJESTIC_RUNTIME.log`.
 
-## CP-D5-175 — ACTIVO
+## CP-D5-175 — CONCLUÍDO: Regressão exterior vivo R1
+`R1LivingVossExteriorPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 5 elementos de jardim, 8 elementos aterrados, 4 ciclos `clear=true`, distância fauna de 9,07–9,87 m, Casa Voss e portas de produção intocadas e produção preservada. Ver `CP_D5_175_REGRESSAO_VOSS_EXTERIOR_R1.md` e `CP-D5-175_R1_VOSS_EXTERIOR_RUNTIME.log`.
+
+## CP-D5-176 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -615,4 +618,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-175` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-176` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
