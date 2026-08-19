@@ -228,9 +228,13 @@ A auditoria GL unificou o material idêntico da fauna R2/R3 num recurso partilha
 
 A evidência remota publicada não mostra Elias em terceira pessoa nem os candidatos Dev6 R1–R6; todas as decisões continuam `REJECTED_VISUAL`. A matriz de retorno para Dev1/Dev3 está em `DEV6_055_RETORNO_RECAPTURA_REMOTA.md`.
 
-## Tarefa activa — DEV6-056
+## DEV6-056 — CONCLUÍDO
 
-Executar a regressão técnica de ponta a ponta R1→R6 depois das optimizações Dev6. Validar parser e sessões de 36 segundos para R1, R2, R3, R4 e R6; não alterar geometria, câmara, jogador, rotas ou materiais durante a regressão. Em seguida, consolidar o manifesto de evidência por sessão.
+A regressão integrada R1, R2, R3, R4 e R6 passou parser e cinco sessões de 36 s. Os contratos de grounding, rota, X/Z e proibições estruturais mantiveram-se. Manifesto e decisão técnica: `DEV6_056_REGRESSAO_TECNICA_R1_R6.md`.
+
+## Tarefa activa — DEV6-057
+
+Auditar o custo acumulado de instâncias Dev6 por rota (R1, R2, R3, R4, R6), incluindo malhas, materiais e grupos de grounding. Não criar ou remover candidatos; documentar apenas os limites de instâncias para GTX 1050 Ti e iniciar regressão se detectar ultrapassagem.
 
 ## Continuidade
 
