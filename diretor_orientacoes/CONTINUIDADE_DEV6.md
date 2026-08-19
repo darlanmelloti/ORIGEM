@@ -92,9 +92,13 @@ A auditoria confirmou que nenhum passe técnico foi promovido indevidamente: a a
 
 A verificação remota encontrou apenas o contrato documental Dev5 `c15a4a0`; não houve código de câmara nem recaptura R2 válida. A matriz e baseline não foram indevidamente aplicadas. Registo: `DEV6_022_VERIFICACAO_REMOTA_RECAPTURA_R2.md`.
 
-## Tarefa activa — DEV6-023
+## DEV6-023 — CONCLUÍDO
 
-Executar a regressão técnica R2 actual — parser e rota de 36 segundos — como baseline contínua. Não alterar a câmara ou o jogador; se uma recaptura válida chegar entretanto, aplicar DEV6-014 e DEV6-017 imediatamente.
+A regressão contínua voltou a passar parser, rota de 36 segundos, R1–R6, 9/9 grounding e zero luzes incrementais. Sem recaptura válida, a decisão visual mantém-se rejeitada. Registo: `DEV6_023_REGRESSAO_CONTINUA_R2.md`.
+
+## Tarefa activa — DEV6-024
+
+Auditar divergências entre a configuração R2 publicada e os contratos DEV6-014/017/023. Corrigir apenas documentação se houver inconsistência; não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
