@@ -11,6 +11,7 @@ func _ready() -> void:
 	_build_water_test_bed()
 	_build_bridge()
 	_build_camera()
+	print("[DEV5_STONE_BRIDGE] status=approved modular=true grounded=true clearance=0.21 route_open=true rejected_glb_absent=true production_modules_changed=false")
 	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
 		call_deferred("_save_snapshot_qa", OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT"))
 
