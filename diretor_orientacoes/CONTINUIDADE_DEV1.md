@@ -468,3 +468,10 @@ A projecção do componente azul devolveu o feto `Integration92_FetoDeMargem_03`
 A marca residual persistiu sem `MeshInstance3D` causal e sem qualquer `CanvasLayer` ou `Control` visível. A causa não foi atribuída por geometria ou HUD; todas as sondas foram revertidas. Relatório: `CP_CARTO_132_MARCA_CIANO_SEM_MALHA_OU_UI.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-133:** validar a legibilidade de orientação da Casa Voss no sentido inverso Estrada→Casa, agora com as sombras das lajes corrigidas. A tarefa deve medir se a origem se distingue como marco real, sem retomar a investigação ciano sem uma sonda de renderização por camada.
+
+
+## CP-CARTO-133 — Crista remota visível: rejeitada
+
+A correcção de `SHADOWS_ONLY` tornou a crista procedural visível, mas revelou cones brancos de baixa resolução e foi revertida. Relatório: `CP_CARTO_133_CRISTA_REMOTA_VISIVEL_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-134:** inventariar os activos 3D de montanha/rocha disponíveis no projecto e testar apenas uma substituição de silhueta com geometria suficientemente densa, mantendo a distância cartográfica, sem painéis e sem alterar as Regiões 7–12.
