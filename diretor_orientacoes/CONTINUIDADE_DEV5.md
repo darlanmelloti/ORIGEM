@@ -160,7 +160,10 @@ Foi criada `CP_D5_030_FICHA_INTEGRACAO_QA.md`, consolidando âncoras, X/Z, aterr
 ## CP-D5-031 — CONCLUÍDO: Handoff de revisão Dev1
 Foi criado `CP_D5_031_HANDOFF_REVISAO_DEV1.md`, organizando evidências técnicas, pendências visuais e critérios de decisão para Casa Voss, Ponte Marco 2, Portal Floresta, Vegetação média, Pavilhão Majestic e Ruínas Submersas. O handoff confirma que R4/R6 não podem ser promovidos sem viewport gráfico válido e que nenhum candidato é integrado automaticamente.
 
-## CP-D5-032 — ACTIVO
+## CP-D5-032 — CONCLUÍDO: Validação do Pavilhão Majestic aterrado
+O preview remoto `MajesticPavilionPreview.tscn` passou uma sessão Godot Compatibility de 36 segundos com código 0 e sem `SCRIPT ERROR`, `Parse Error`, `Invalid call` ou `Invalid get`. A cena mantém terreno, rota central, materiais próprios e isolamento de produção. A captura gráfica não foi activada no headless porque o backend não fornece `Image` válida; a pendência visual R4/R6 permanece explícita. Ver `CP_D5_032_MAJESTIC_ATERRAMENTO_QA.md` e `CP-D5-032_RUNTIME_HEADLESS.log`.
+
+## CP-D5-033 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -169,4 +172,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-032` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-033` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
