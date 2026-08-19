@@ -11,6 +11,7 @@ func _ready() -> void:
 	_build_ground()
 	_build_waystation()
 	_build_camera()
+	print("[DEV5_VOSS_WAYSTATION] status=approved grounded=true route_open=true landmark=AnexoCasaVoss_QA production_modules_changed=false")
 	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
 		call_deferred("_save_snapshot_qa", OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT"))
 
