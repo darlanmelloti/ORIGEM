@@ -300,3 +300,10 @@ A tomada lateral da Casa Voss passou 36 segundos e confirmou que a discrepância
 A auditoria comprovou que o rio é geometria contínua de 32 segmentos, não um painel. As larguras experimentais de 10,8 m e 8,6 m passaram gameplay mas não reduziram materialmente a massa escura lateral; ambas foram revertidas e a largura canónica de 14,0 m foi restaurada. Não repetir largura, material, neblina ou rocha isolada. Relatório: `CP_CARTO_107_LARGURA_RIO_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-108:** instrumentar uma sonda QA de geometria no enquadramento lateral para identificar nós visíveis com albedo muito escuro e projecção no quadrante esquerdo do rio. Não ocultar nem alterar produção antes de a sonda produzir um candidato causal único.
+
+
+## CP-CARTO-108 — Faixa escura da Casa Voss removida
+
+A auditoria causal identificou `EstradaDeLamaConformada` como a camada visual auxiliar responsável pela faixa escura irregular na saída. A construção foi desactivada; lajes físicas, soleira, rota para o Arco e camada macro posterior foram preservadas. As tomadas lateral e Casa Voss→Arco passaram 36 segundos. Relatório: `CP_CARTO_108_ESTRADA_LAMA_REMOVIDA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-109:** auditar o pequeno objecto ciano residual junto à rota de saída agora que a faixa escura foi removida. A auditoria deve primeiro identificar nome, posição e material na tomada lateral. Não ocultar nem modificar a produção até existir atribuição causal única; não reabrir as hipóteses de rio, água, atmosfera, sombras ou estrada auxiliar já encerradas.

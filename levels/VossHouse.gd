@@ -79,7 +79,7 @@ func _ready() -> void:
 	_build_exterior_details(house)
 	_build_voss_panoramic_threshold(house)
 	# O antigo miradouro visual dominava a vista macro sem contribuir para a rota física; a bacia deve abrir directamente após a soleira.
-	_build_visible_opening_road()
+	# A Estrada de Lama auxiliar sobrepunha as lajes físicas e produzia uma faixa escura vista da soleira; a rota real mantém-se nas lajes cartográficas.
 	_build_macro_road_readability()
 	_build_voss_river_revelation_bridge()
 	_build_voss_distant_horizon_landmarks()
