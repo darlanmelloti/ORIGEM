@@ -199,8 +199,20 @@ O preview `EliasR6ClearancePreview.tscn` validou Elias com `EliasThirdPersonPres
 ## CP-D5-044 — CONCLUÍDO: Auditoria de escopo e terceira pessoa
 A auditoria confirmou zero referências operacionais a `Player.gd` ou módulos regionais de produção nos previews Dev5. `EliasThirdPersonPresentation` permanece isolada, com uma luz direccional por harness e parser Compatibility sem erros. As ocorrências de proprietários R1–R6 são apenas contratos, comentários e documentação. Ver `CP_D5_044_AUDITORIA_ESCOPO_TERCEIRA_PESSOA.md` e `CP-D5-044_SCOPE_THIRD_PERSON_AUDIT.log`.
 
-## CP-D5-045 — ACTIVO
-Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
+## CP-D5-045 — CONCLUÍDO: Contrato de câmara de Elias
+
+A cena `EliasCameraContractPreview.tscn` confirmou `follow_camera.current=false`, `CameraQAExterna.current=true` e `CameraQAExterna` como proprietária da viewport. O parser Godot 4.7.1, uma sessão de 36 segundos e a captura interna passaram; não houve alteração a `Player.gd` ou módulos regionais. Ver `CP_D5_045_CONTRATO_CAMARA_ELIAS.md`.
+
+## CP-D5-046 — ACTIVO: Auditoria de integridade de câmara dos harnesses Elias
+
+Criar uma varredura QA que localize cenas Dev5 com `EliasThirdPersonPresentation` e confirme uma única câmara activa por cena. A auditoria não altera produção; qualquer excepção precisa de ser documentada e rejeitada até revisão técnica.
+
+| Critério | Obrigatório |
+|---|---|
+| Cobertura | todos os harnesses Dev5 que instanciam Elias |
+| Aceitação | uma só câmara `current=true` por cena |
+| Isolamento | zero alteração a `Player.gd` e módulos regionais |
+| Continuidade | ao publicar, activar CP-D5-047 no mesmo ciclo |
 
 
 
@@ -208,4 +220,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-045` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-046` — auditoria de integridade de câmara dos harnesses Elias. Depois da validação e publicação, Dev5 abre CP-D5-047 no mesmo ciclo, sem consulta passiva ou espera temporal.

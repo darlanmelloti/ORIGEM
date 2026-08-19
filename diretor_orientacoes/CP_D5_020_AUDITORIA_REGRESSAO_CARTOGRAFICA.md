@@ -21,4 +21,4 @@ A sessão headless completou 36 segundos, confirmou os seis placement records e 
 
 ## Próxima tarefa
 
-Após publicação, consultar novamente o marcador Dev5 e executar o próximo item autorizado.
+Após publicação, iniciar imediatamente o próximo item permitido pela escada de continuidade Dev5; uma fila explícita vazia abre a primeira tarefa derivada autorizada, nunca uma espera ou nova consulta passiva.
