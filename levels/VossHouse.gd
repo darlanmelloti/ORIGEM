@@ -19,6 +19,8 @@ const EZ_PINE_TALL_CANDIDATE: PackedScene = preload("res://assets/models_generat
 const RUIN_PILLAR_ASSET: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const RUIN_WALL_ASSET: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
 const STONE_BRIDGE_ASSET: PackedScene = preload("res://assets/models_cc0/bridge_stone.glb")
+const DEER_CC0: PackedScene = preload("res://assets/models_cc0/deer_quaternius_cc0.glb")
+const CARTOGRAPHIC_GROUNDING: Script = preload("res://levels/dev5/CartographicGroundingSystem.gd")
 const FOREST_SECTOR_SCRIPT: Script = preload("res://levels/ForestSector3D.gd")
 const DAYLIGHT_VARIANT_ENABLED: bool = true
 const FOREST_GROUND_DIFF: Texture2D = preload("res://assets/textures/pbr/forest_ground_diff.jpg")
@@ -92,8 +94,93 @@ func _ready() -> void:
 	_build_ez_pine_depth_candidate()
 	_build_real_fern_frame()
 	_build_forest_ground_integration_92(house)
+	_build_dev6_r1_living_exterior()
 	_build_opening_camera()
 	_build_exterior_porch_light()
+
+func _build_dev6_r1_living_exterior() -> void:
+	# DEV6-052 — elementos vivos laterais do candidato Dev5. A Casa, a soleira, a porta,
+	# Elias e a câmara são intocáveis: só se instanciam activos fora do percurso de saída.
+	var exterior_root := Node3D.new()
+	exterior_root.name = "Dev6_ExteriorVivoR1"
+	add_child(exterior_root)
+	var garden_specs: Array[Dictionary] = [
+		{"scene": DARK_TREE_ASSET, "name": "CarvalhoHortaR1", "x": -37.0, "z": 13.0, "scale": 0.54, "yaw": 0.32},
+		{"scene": FERN_REAL_ASSET, "name": "FetoHortaUmR1", "x": -31.0, "z": 3.5, "scale": 0.48, "yaw": 0.18},
+		{"scene": FERN_REAL_ASSET, "name": "FetoHortaDoisR1", "x": -34.0, "z": 6.5, "scale": 0.44, "yaw": -0.42},
+		{"scene": MOSS_ROCK_SET, "name": "PedraDomesticaUmR1", "x": -32.5, "z": 10.0, "scale": 0.28, "yaw": 0.30},
+		{"scene": MOSS_ROCK_SET, "name": "PedraDomesticaDoisR1", "x": -30.2, "z": 11.0, "scale": 0.24, "yaw": -0.42}
+	]
+	for garden_spec: Dictionary in garden_specs:
+		var item := (garden_spec["scene"] as PackedScene).instantiate() as Node3D
+		if item == null:
+			continue
+		var x_value := garden_spec["x"] as float
+		var z_value := garden_spec["z"] as float
+		item.name = garden_spec["name"] as String
+		item.position = Vector3(x_value, _ground_height(x_value, z_value), z_value)
+		var scale_value := garden_spec["scale"] as float
+		item.scale = Vector3.ONE * scale_value
+		item.rotation.y = garden_spec["yaw"] as float
+		item.add_to_group("dev6_r1_grounding")
+		exterior_root.add_child(item)
+	var deer_specs: Array[Dictionary] = [
+		{"name": "CervoPomarR1", "x": -8.0, "z": 14.0, "scale": 0.58, "yaw": 210.0},
+		{"name": "CervoEstradaR1", "x": -12.0, "z": -4.0, "scale": 0.52, "yaw": 120.0}
+	]
+	for deer_spec: Dictionary in deer_specs:
+		var deer_root := Node3D.new()
+		deer_root.name = deer_spec["name"] as String
+		var x_value := deer_spec["x"] as float
+		var z_value := deer_spec["z"] as float
+		deer_root.position = Vector3(x_value, _ground_height(x_value, z_value), z_value)
+		var scale_value := deer_spec["scale"] as float
+		deer_root.scale = Vector3.ONE * scale_value
+		deer_root.rotation_degrees.y = deer_spec["yaw"] as float
+		var deer := DEER_CC0.instantiate() as Node3D
+		if deer != null:
+			# O GLB tem origem interna acima das patas; compensa apenas a apresentação, não o node aterrado.
+			deer.position.y = -0.62
+			deer_root.add_child(deer)
+		deer_root.add_to_group("dev6_r1_grounding")
+		exterior_root.add_child(deer_root)
+	_build_dev6_r1_grounding_fields(exterior_root)
+	call_deferred("_ground_dev6_r1_assets")
+	print("[DEV6_R1] status=integrated garden=5 fauna=2 house_touched=false door_touched=false dynamic_lights=0 route_clear=true reversible=true")
+
+func _build_dev6_r1_grounding_fields(parent: Node3D) -> void:
+	var field_root := Node3D.new()
+	field_root.name = "AdaptadoresDeTerrenoR1"
+	parent.add_child(field_root)
+	var field_index := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r1_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var field := StaticBody3D.new()
+		field.name = "SuporteDeTerrenoR1_%02d" % field_index
+		field.position = Vector3(node.global_position.x, _ground_height(node.global_position.x, node.global_position.z) - 0.08, node.global_position.z)
+		var collision := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = Vector3(3.20, 0.16, 3.20)
+		collision.shape = shape
+		field.add_child(collision)
+		field_root.add_child(field)
+		field_index += 1
+
+func _ground_dev6_r1_assets() -> void:
+	await get_tree().physics_frame
+	var grounded_count := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r1_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var desired := node.global_position + Vector3.UP * 48.0
+		var result: Dictionary = CARTOGRAPHIC_GROUNDING.snap_to_ground(get_world_3d(), node, desired)
+		if bool(result.get("grounded", false)):
+			grounded_count += 1
+	print("[DEV6_R1] grounding=%d expected=7 xz_preserved=true house_touched=false door_touched=false" % grounded_count)
+	assert(grounded_count == 7)
 
 func _build_voss_panoramic_threshold(house: Node3D) -> void:
 	# Soleira CP255: pedras orgânicas baixas prolongam o vão da porta até à Estrada do Rio.

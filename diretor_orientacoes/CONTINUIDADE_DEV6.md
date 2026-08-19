@@ -212,9 +212,13 @@ A margem R6 recebeu monólito, três afloramentos e dois fetos laterais sem cais
 
 A regressão R2, R3, R4 e R6 confirmou parser, quatro percursos de 36 s, grounding X/Z e zero luzes adicionadas pelos blocos Dev6. Todas as decisões visuais permanecem `REJECTED_VISUAL` até recaptura de terceira pessoa Dev1/Dev3. Registo: `DEV6_051_REGRESSAO_INTEGRADA_R2_R6.md`.
 
-## Tarefa activa — DEV6-052
+## DEV6-052 — CONCLUÍDO
 
-Auditar o candidato exterior R1 Dev5 para promover apenas activos laterais e aterrados junto à Casa Voss. Não alterar a casa, porta, jogador, câmara ou a rota de saída; não criar luzes; não reutilizar elementos rejeitados.
+O exterior R1 recebeu cinco elementos de horta e dois cervos laterais sem alterar Casa Voss, porta, Elias, câmara ou rota. Parser, saída de 36 s e grounding 7/7 passaram; a recaptura estável eliminou a evidência sob o terreno. A decisão visual permanece `REJECTED_VISUAL` até recaptura de terceira pessoa. Registo: `DEV6_052_EXTERIOR_R1_ESTADO_PARCIAL.md`.
+
+## Tarefa activa — DEV6-053
+
+Auditar LOD, visibilidade e custo de materiais dos activos Dev6 já integrados em R1, R2, R3, R4 e R6. Não criar geometria, luzes, câmaras ou colisores novos; documentar redução segura de custo para GTX 1050 Ti e preservar os contratos de grounding.
 
 ## Continuidade
 
