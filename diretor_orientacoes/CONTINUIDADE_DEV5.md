@@ -306,7 +306,10 @@ O preview `EliasStoneBridgeTraversalPreview.tscn` foi corrigido para aguardar f�
 ## CP-D5-077 — CONCLUÍDO: Validação StoneBridgeLandmark R2
 O preview `StoneBridgeLandmarkPreview.tscn` foi corrigido no fallback de captura e passou 36 segundos sem `SCRIPT ERROR` ou `Parse Error`. O escopo de produção e `Player.gd` permaneceram intocados. Ver `CP_D5_077_VALIDACAO_STONE_BRIDGE_LANDMARK.md` e `CP-D5-077_STONE_LANDMARK_RUNTIME_FIXED.log`.
 
-## CP-D5-078 — ACTIVO
+## CP-D5-078 — CONCLUÍDO: Corredor cartográfico Elias no arco R3
+O preview `EliasArchCorridorPreview.tscn` passou 36 segundos com R3 `(-16,741;48)`, arco físico em Z `92`, destino R4 id `4`, `structural_arch=false` e dois ciclos `route_open=true`. A transição R3→R4 foi confirmada sem criar produção. Ver `CP_D5_078_VALIDACAO_CORREDOR_ARCO_R3.md` e `CP-D5-078_ELIAS_ARCH_RUNTIME.log`.
+
+## CP-D5-079 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -316,4 +319,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-078` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-079` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
