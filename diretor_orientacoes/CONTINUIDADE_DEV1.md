@@ -384,3 +384,10 @@ A rota `forest_to_ruins` foi validada por 36 segundos. A massa escura rectangula
 O harness Dev1 agora gera a imagem da evidência no 30.º segundo real de execução Xvfb, mantendo um ciclo total de 36 segundos. A aproximação R6 foi revalidada por esse método. O raio correctamente alinhado encontrou `ColisorRochaDeMargem_24`, mas reduzir a rocha correspondente não mudou a falésia escura; a hipótese foi revertida. Relatório: `CP_CARTO_119_CAPTURA_TARDIA_E_FALÉSIA_R6.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-120:** auditar o material, a normal e o valor da malha `TerrenoEsculpido` na face da falésia R6. Não repetir árvores 66/72/76, sombras direccionais, UI, água nem Rocha de Margem 24.
+
+
+## CP-CARTO-120 — Preenchimento do TerrainPatch rejeitado
+
+A emissão mínima e reforçada do material de terreno foi testada sem criar luzes e com captura tardia ao segundo 30. A falésia R6 persistiu; a alteração foi revertida para não achatar o valor do vale. Relatório: `CP_CARTO_120_PREENCHIMENTO_TERRENO_R6_REJEITADO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-121:** auditar a topologia/normal da encosta R6 que ocupa o quadrante direito da chegada às Ruínas. Não repetir árvores 66/72/76, sombras, UI, água, Rocha 24 ou emissões globais do TerrainPatch.
