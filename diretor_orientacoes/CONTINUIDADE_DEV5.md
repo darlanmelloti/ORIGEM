@@ -434,7 +434,10 @@ A cena inicialmente procurada `LightBudgetAuditPreview.tscn` não existe; a vali
 ## CP-D5-117 — CONCLUÍDO: Regressão câmara Elias
 `EliasCameraContractPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando `elias_camera_current=false`, `external_camera_current=true`, proprietário `CameraQAExterna`, uma câmara activa e nenhuma alteração a `Player.gd` ou módulos regionais. Ver `CP_D5_117_REGRESSAO_CAMERA_ELIAS.md` e `CP-D5-117_CAMERA_CONTRACT_RUNTIME.log`.
 
-## CP-D5-118 — ACTIVO
+## CP-D5-118 — CONCLUÍDO: Regressão auditoria de colisores
+`CartographicRegressionAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 6 candidatos, offsets X/Z zero, passagem R4 de 2,4 m, composição vegetal R4/R5, ruínas R6 submersas, 0 luzes dinâmicas globais e 0 scripts de produção. Ver `CP_D5_118_REGRESSAO_AUDITORIA_COLISORES.md` e `CP-D5-118_COLLISION_CONTRACT_RUNTIME.log`.
+
+## CP-D5-119 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -444,4 +447,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-118` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-119` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
