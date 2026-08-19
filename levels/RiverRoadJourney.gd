@@ -477,9 +477,47 @@ func _build_dev6_r2_living_integration() -> void:
 		_apply_material(shelter_rock, ruin_material)
 		shelter_rock.add_to_group("dev6_r2_grounding")
 		r2_root.add_child(shelter_rock)
+	_build_dev6_r2_ground_treatment(r2_root)
 	_build_dev6_r2_grounding_fields(r2_root)
 	call_deferred("_ground_dev6_r2_assets")
 	print("[DEV6_R2] status=integrated bridge=modular fauna=2 vegetation=4 shelter_parts=2 dynamic_lights=0 route_clear=true reversible=true")
+
+func _build_dev6_r2_ground_treatment(parent: Node3D) -> void:
+	# Faixas de material, não terreno novo: sobreposição rasa nas margens laterais para quebrar a repetição escura.
+	# Não tem colisores, não ocupa a largura da estrada e continua integralmente reversível dentro do bloco Dev6.
+	var treatment_root := Node3D.new()
+	treatment_root.name = "TratamentoDeSoloR2"
+	parent.add_child(treatment_root)
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color(0.18, 0.235, 0.125, 0.23)
+	material.roughness = 0.98
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var z_samples: Array[float] = [28.0, 40.0, 52.0]
+	for z_center: float in z_samples:
+		for side: float in [-1.0, 1.0]:
+			var center_x := _road_x(z_center) + side * 4.25
+			var half_width := 1.45
+			var half_length := 4.80
+			var surface := SurfaceTool.new()
+			surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+			var p00 := Vector3(center_x - half_width, _height_at(center_x - half_width, z_center - half_length) + 0.026, z_center - half_length)
+			var p10 := Vector3(center_x + half_width, _height_at(center_x + half_width, z_center - half_length) + 0.026, z_center - half_length)
+			var p01 := Vector3(center_x - half_width, _height_at(center_x - half_width, z_center + half_length) + 0.026, z_center + half_length)
+			var p11 := Vector3(center_x + half_width, _height_at(center_x + half_width, z_center + half_length) + 0.026, z_center + half_length)
+			surface.add_vertex(p00)
+			surface.add_vertex(p01)
+			surface.add_vertex(p10)
+			surface.add_vertex(p10)
+			surface.add_vertex(p01)
+			surface.add_vertex(p11)
+			surface.generate_normals()
+			var patch := MeshInstance3D.new()
+			patch.name = "FaixaHumidaR2_%s_%d" % ["Oeste" if side < 0.0 else "Este", int(z_center)]
+			patch.mesh = surface.commit()
+			patch.material_override = material
+			patch.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			treatment_root.add_child(patch)
 
 func _configure_dev6_r2_lod(root: Node, visibility_end: float) -> void:
 	# Limites conservadores por categoria: árvores em plano médio, fetos e fauna em detalhe próximo.

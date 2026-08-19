@@ -12,9 +12,13 @@ A Estrada do Rio viva R2 foi integrada de forma reversível em `RiverRoadJourney
 
 O passe de materiais e LOD passou tecnicamente — parser, rota de 36 segundos, 9/9 aterramentos e zero luzes adicionais — mas a captura ainda revela limitações de solo e enquadramento que impedem aceitação visual. Registo: `DEV6_002_AUDITORIA_MATERIAIS_LOD_R2.md`.
 
-## Tarefa activa — DEV6-003
+## DEV6-003 — CONCLUÍDO COM REJEIÇÃO VISUAL DOCUMENTADA
 
-Aplicar um tratamento de material de solo R2 limitado e reversível, para reduzir contraste e repetição da margem no corredor de captura. Não alterar a geometria regional, a rota, os X/Z, os nove aterramentos, nem criar luzes.
+Foram aplicadas seis faixas laterais de material de solo sem colisores ou luzes. Parser, rota de 36 segundos, X/Z e 9/9 aterramentos passaram, mas a leitura visual global mantém-se abaixo do padrão. Registo: `DEV6_003_TRATAMENTO_SOLO_R2.md`.
+
+## Tarefa activa — DEV6-004
+
+Auditar a compatibilidade dos materiais do corredor R2 em `gl_compatibility`, identificando apenas melhorias de ambiente reversíveis. Preservar rota, jogador, X/Z, grounding e orçamento de luzes.
 
 ## Continuidade
 
