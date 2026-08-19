@@ -148,9 +148,13 @@ A regressão técnica passou parser, rota de 36 segundos, R1–R6, 9/9 grounding
 
 Log, PNGs e manifesto DEV6-035 correspondem à mesma execução e passaram verificação de integridade. A matriz continua pendente apenas de terceira pessoa e composição. Registo: `DEV6_036_RASTREABILIDADE_SESSAO_R2.md`.
 
-## Tarefa activa — DEV6-037
+## DEV6-037 — CONCLUÍDO
 
-Verificar o Git remoto por uma recaptura R2 válida de terceira pessoa e aplicar DEV6-014/017 se existir. Sem entrada válida, manter apenas a regressão técnica e a documentação de prontidão; não alterar câmara, jogador, rota ou geometria.
+A verificação remota não encontrou câmara ou recaptura válida de terceira pessoa para R2. A matriz DEV6-014 não foi aplicada prematuramente; a branch Dev6 mantém-se sincronizada. Registo: `DEV6_037_VERIFICACAO_REMOTA_R2.md`.
+
+## Tarefa activa — DEV6-038
+
+Executar regressão técnica R2 e manifesto de sessão. Não alterar câmara, jogador, rota ou geometria; aplicar DEV6-014/017 imediatamente se uma recaptura válida surgir.
 
 ## Continuidade
 
