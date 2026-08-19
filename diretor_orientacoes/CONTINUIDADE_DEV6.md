@@ -176,9 +176,13 @@ A regressão R2 passou parser, rota de 36 segundos, R1–R6, 9/9 grounding, zero
 
 A sessão DEV6-042 mantém integridade e telemetria válidas; a actualização Dev5 não contém terceira pessoa R2 nem evidência `road_to_arch` válida. Registo: `DEV6_043_RASTREABILIDADE_REMOTA_R2.md`.
 
-## Tarefa activa — DEV6-044
+## DEV6-044 — CONCLUÍDO
 
-Executar regressão técnica R2 com parser, rota de 36 segundos e manifesto de sessão. Não alterar câmara, jogador, rota ou geometria; aplicar DEV6-014/017 imediatamente se surgir recaptura válida.
+A regressão R2 passou parser, rota de 36 segundos, R1–R6, 9/9 grounding, zero luzes e manifesto de sessão. Sem recaptura válida, a aceitação visual mantém-se rejeitada. Registo: `DEV6_044_REGRESSAO_MANIFESTO_R2.md`.
+
+## Tarefa activa — DEV6-045
+
+Auditar a rastreabilidade da sessão DEV6-044 e verificar o Git remoto por qualquer entrada de terceira pessoa R2. Não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
