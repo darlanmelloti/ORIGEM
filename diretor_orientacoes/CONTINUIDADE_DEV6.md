@@ -96,9 +96,13 @@ A verificação remota encontrou apenas o contrato documental Dev5 `c15a4a0`; n�
 
 A regressão contínua voltou a passar parser, rota de 36 segundos, R1–R6, 9/9 grounding e zero luzes incrementais. Sem recaptura válida, a decisão visual mantém-se rejeitada. Registo: `DEV6_023_REGRESSAO_CONTINUA_R2.md`.
 
-## Tarefa activa — DEV6-024
+## DEV6-024 — CONCLUÍDO
 
-Auditar divergências entre a configuração R2 publicada e os contratos DEV6-014/017/023. Corrigir apenas documentação se houver inconsistência; não alterar câmara, jogador, rota ou geometria.
+A matriz, baseline, regressão e telemetria actual não apresentam divergências: 36 s, R1–R6, 9/9 grounding, zero luzes e rejeição visual condicionada à recaptura permanecem coerentes. Registo: `DEV6_024_DIVERGENCIAS_CONTRATOS_R2.md`.
+
+## Tarefa activa — DEV6-025
+
+Auditar a estabilidade de carregamento dos activos R2 no editor Godot e a ausência de erros de recursos durante a rota. Não alterar câmara, jogador, rota ou geometria; se houver erro, corrigi-lo de forma reversível.
 
 ## Continuidade
 
