@@ -1,0 +1,46 @@
+--- UNSAFE DIRECT CHAINS ---
+--- SAVE CALLS ---
+levels/dev5/MajesticPavilionPreview.gd-78-	var image := viewport_texture.get_image()
+levels/dev5/MajesticPavilionPreview.gd-79-	if image == null:
+levels/dev5/MajesticPavilionPreview.gd:82:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/StoneBridgeLandmarkPreview.gd:80:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/VossWaystationPreview.gd:75:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/DenseForestPortalPreview.gd-53-	var viewport_image := viewport_texture.get_image()
+levels/dev5/DenseForestPortalPreview.gd-54-	if viewport_image == null:
+levels/dev5/DenseForestPortalPreview.gd:57:	var result := viewport_image.save_png(snapshot_path)
+--
+levels/dev5/SubmergedRuinsPierPreview.gd-49-	var viewport_image := viewport_texture.get_image()
+levels/dev5/SubmergedRuinsPierPreview.gd-50-	if viewport_image == null:
+levels/dev5/SubmergedRuinsPierPreview.gd:53:	var result := viewport_image.save_png(snapshot_path)
+--
+levels/dev5/CartographicPlacementPreview.gd:73:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/MeshBudgetAuditPreview.gd-85-	var image := viewport_texture.get_image()
+levels/dev5/MeshBudgetAuditPreview.gd-86-	if image == null:
+levels/dev5/MeshBudgetAuditPreview.gd:89:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/StoneBridgeGLBPreview.gd-91-	var image := viewport_texture.get_image()
+levels/dev5/StoneBridgeGLBPreview.gd-92-	if image == null:
+levels/dev5/StoneBridgeGLBPreview.gd:95:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/VegetationDensityAuditPreview.gd-90-	var image := viewport_texture.get_image()
+levels/dev5/VegetationDensityAuditPreview.gd-91-	if image == null:
+levels/dev5/VegetationDensityAuditPreview.gd:94:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/CartographicGroundingPreview.gd-99-	var image := viewport_texture.get_image()
+levels/dev5/CartographicGroundingPreview.gd-100-	if image == null:
+levels/dev5/CartographicGroundingPreview.gd:103:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/CartographicHeightContractsPreview.gd-65-	var image := viewport_texture.get_image()
+levels/dev5/CartographicHeightContractsPreview.gd-66-	if image == null:
+levels/dev5/CartographicHeightContractsPreview.gd:69:	var result := image.save_png(snapshot_path)
+--
+levels/dev5/MajesticGroundedPavilionPreview.gd-117-	var image := viewport_texture.get_image()
+levels/dev5/MajesticGroundedPavilionPreview.gd-118-	if image == null:
+levels/dev5/MajesticGroundedPavilionPreview.gd:121:	var result := image.save_png(snapshot_path)
+--
+entities/player/third_person/EliasThirdPersonPreview.gd:64:	var result := image.save_png(snapshot_path)
+--- PARSER ---

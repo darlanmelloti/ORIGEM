@@ -169,7 +169,10 @@ O preview `MajesticPavilionPreview.gd` agora verifica textura e imagem de viewpo
 ## CP-D5-034 — CONCLUÍDO: Fallbacks de captura dos previews QA
 Foram endurecidos seis previews QA que ainda chamavam `save_png` sem verificar textura/imagem nula: `CartographicGroundingPreview`, `CartographicHeightContractsPreview`, `MajesticGroundedPavilionPreview`, `MeshBudgetAuditPreview`, `StoneBridgeGLBPreview` e `VegetationDensityAuditPreview`. A varredura editor Godot Compatibility e uma sessão de 36 segundos passaram sem `SCRIPT ERROR`/`Parse Error`; não restaram chamadas directas inseguras em `levels/dev5/`. R4/R6 continuam pendentes de viewport gráfico válido. Ver `CP_D5_034_FALLBACKS_CAPTURA_QA.md` e `CP-D5-034_PARSER_SWEEP.log`.
 
-## CP-D5-035 — ACTIVO
+## CP-D5-035 — CONCLUÍDO: Auditoria de segurança da captura QA
+A matriz confirmou zero cadeias directas inseguras de `save_png`, parser editor limpo e guards de textura/imagem nos previews QA. A captura headless pode continuar indisponível por imagem nula, mas já não gera chamadas inválidas. Elias permanece isolado e nenhum módulo de produção foi alterado. Ver `CP_D5_035_AUDITORIA_SEGURANCA_CAPTURA.md` e `CP-D5-035_CAPTURE_SAFETY_AUDIT.log`.
+
+## CP-D5-036 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -178,4 +181,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-035` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-036` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
