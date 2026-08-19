@@ -377,3 +377,10 @@ A silhueta suspensa do talude esquerdo foi atribuída a `ArvoreDaFloresta_28`. A
 A rota `forest_to_ruins` foi validada por 36 segundos. A massa escura rectangular da chegada foi investigada por projecção, caixas envolventes, raio físico, isolamento de sombras e remoção QA de três árvores candidatas. Nenhuma hipótese alterou causalmente o elemento; todas as sondas foram revertidas e não houve alteração de produção. Relatório: `CP_CARTO_118_APROXIMACAO_RUINAS_AUDITORIA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-119:** validar a chegada física `ruins_arrival` e auditar a legibilidade da margem/ruína sem repetir os candidatos de painel, árvores 66/72/76, sombras ou água. A análise do painel residual fica documentada para uma frente de activos/renderização.
+
+
+## CP-CARTO-119 — Captura tardia e falésia R6
+
+O harness Dev1 agora gera a imagem da evidência no 30.º segundo real de execução Xvfb, mantendo um ciclo total de 36 segundos. A aproximação R6 foi revalidada por esse método. O raio correctamente alinhado encontrou `ColisorRochaDeMargem_24`, mas reduzir a rocha correspondente não mudou a falésia escura; a hipótese foi revertida. Relatório: `CP_CARTO_119_CAPTURA_TARDIA_E_FALÉSIA_R6.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-120:** auditar o material, a normal e o valor da malha `TerrenoEsculpido` na face da falésia R6. Não repetir árvores 66/72/76, sombras direccionais, UI, água nem Rocha de Margem 24.
