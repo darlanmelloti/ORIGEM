@@ -80,9 +80,13 @@ A ficha de retorno para Dev1/Dev3 documenta os únicos critérios visuais penden
 
 A baseline, matriz e ficha de retorno foram comparadas e não apresentam divergências. A rejeição visual mantém-se limitada à perspectiva e composição da recaptura. Registo: `DEV6_019_COHERENCIA_DOCUMENTAL_R2.md`.
 
-## Tarefa activa — DEV6-020
+## DEV6-020 — CONCLUÍDO
 
-Auditar a rastreabilidade completa do candidato R2: correlacionar commits DEV6-001 a DEV6-019, evidência QA externa e critérios de recaptura. Não alterar código, jogador, câmara, rota ou geometria.
+A rastreabilidade do candidato R2 foi correlacionada entre commits, documentos e evidência QA externa. Registo: `DEV6_020_RASTREABILIDADE_CANDIDATO_R2.md`.
+
+## Tarefa activa — DEV6-021
+
+Auditar os critérios de promoção R2: confirmar que nenhum passe técnico foi indevidamente marcado como aceitação visual e que a única promoção pendente é a recaptura de terceira pessoa Dev1/Dev3. Não alterar código, jogador, câmara, rota ou geometria.
 
 ## Continuidade
 
