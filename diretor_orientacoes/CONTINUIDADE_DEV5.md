@@ -701,7 +701,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-206 — CONCLUÍDO: Regressão handoff final R6→R7
 `EliasR6R7HandoffPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando R6 `(60,252)`, marcador `PASSAGEM: VILA ELEVADA` id 7, R7 `(140,352)`, `reached_marker_r7=true`, `marker_only=true`, câmara de produção inactiva, geometria Dev2 ausente e produção preservada. Ver `CP_D5_206_REGRESSAO_HANDOFF_FINAL_R6_R7.md` e `CP-D5-206_R6_R7_HANDOFF_RUNTIME.log`.
 
-## CP-D5-207 — ACTIVO
+## CP-D5-207 — CONCLUÍDO: Regressão exterior vivo Casa Voss R1
+`R1LivingVossExteriorPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando waystation activa, 5 elementos de jardim, 2 faunas, 8 elementos aterrados, 4 ciclos `clear=true`, fauna a 9,07–9,87 m, `house_production_touched=false`, `door_touched=false` e produção preservada. Ver `CP_D5_207_REGRESSAO_VOSS_EXTERIOR_R1.md` e `CP-D5-207_R1_VOSS_EXTERIOR_RUNTIME.log`.
+
+## CP-D5-208 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -711,4 +714,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-207` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-208` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
