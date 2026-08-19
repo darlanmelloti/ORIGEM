@@ -293,3 +293,10 @@ A auditoria confirmou seis núcleos arbóreos espaçados no corredor e uma janel
 A tomada lateral da Casa Voss passou 36 segundos e confirmou que a discrepância principal não se resolve por árvore ou câmara isolada. O afloramento CC0 temporário em `z=17` na margem inicial não produziu ganho visual perceptível e foi removido. Não repetir essa rocha isolada. Relatório: `CP_CARTO_105_AFLORAMENTO_MARGEM_INICIAL_REJEITADO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-106:** auditar a estrutura contínua da `SuperficieRioEstrada` (largura, variação de altura e segmentos de triângulos) em contraste com a posição da câmara lateral, sem editar a água. O objectivo é decidir se a massa escura é uma limitação de material, composição ou topologia antes de autorizar qualquer nova solução.
+
+
+## CP-CARTO-106 e CP-CARTO-107 — Topologia e largura do rio
+
+A auditoria comprovou que o rio é geometria contínua de 32 segmentos, não um painel. As larguras experimentais de 10,8 m e 8,6 m passaram gameplay mas não reduziram materialmente a massa escura lateral; ambas foram revertidas e a largura canónica de 14,0 m foi restaurada. Não repetir largura, material, neblina ou rocha isolada. Relatório: `CP_CARTO_107_LARGURA_RIO_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-108:** instrumentar uma sonda QA de geometria no enquadramento lateral para identificar nós visíveis com albedo muito escuro e projecção no quadrante esquerdo do rio. Não ocultar nem alterar produção antes de a sonda produzir um candidato causal único.
