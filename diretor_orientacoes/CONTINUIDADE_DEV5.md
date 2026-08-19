@@ -749,7 +749,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-222 — CONCLUÍDO: Auditoria orçamento de malha GTX 1050 Ti
 `MeshBudgetAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 20.390 triângulos, 9 nós de malha, 12 slots de material, 0 colisores importados e `dynamic_lights=0`. Ver `CP_D5_222_AUDITORIA_ORCAMENTO_MALHA.md` e `CP-D5-222_MESH_BUDGET_RUNTIME.log`.
 
-## CP-D5-223 — ACTIVO
+## CP-D5-223 — CONCLUÍDO: Auditoria densidade vegetal GTX 1050 Ti
+`VegetationDensityAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando composição de 1 pinho focal, 3 árvores médias, 1 árvore leve e 2 fetos, 27.208 triângulos, `dynamic_lights=0`, `wall_density=false` e produção preservada. Ver `CP_D5_223_AUDITORIA_DENSIDADE_VEGETAL.md` e `CP-D5-223_VEGETATION_DENSITY_RUNTIME.log`.
+
+## CP-D5-224 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -759,4 +762,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-223` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-224` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
