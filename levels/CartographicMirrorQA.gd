@@ -207,6 +207,8 @@ func _report_integrated_inventory(marker_count: int) -> void:
 	var anchor_contract := scene_root.find_child("CartographicAnchors_Regioes10a12", true, false)
 	if anchor_contract != null:
 		print("MAP_MIRROR_ANCHOR_CONTRACT chain=", anchor_contract.get_meta("handoff_chain", "missing"), " count=", anchor_contract.get_meta("anchor_count", 0), " state=", anchor_contract.get_meta("validation_state", "missing"))
+	for contract_pair: Dictionary in [CartographicAnchors.continuity_7_to_8(), CartographicAnchors.continuity_8_to_9(), CartographicAnchors.continuity_9_to_10(), CartographicAnchors.continuity_10_to_11(), CartographicAnchors.continuity_11_to_12()]:
+		print("MAP_MIRROR_HANDOFF_CONTRACT id=", contract_pair.get("handoff_id", "missing"), " authority=", contract_pair.get("map_authority", "missing"), " state=", contract_pair.get("validation_state", "missing"))
 	print("MAP_MIRROR_INVENTORY meshes=", mesh_count, " omni_lights=", light_count, " static_bodies=", collider_count)
 	var physical_handoffs: Array[Node] = []
 	for candidate in scene_root.find_children("*", "StaticBody3D", true, false):

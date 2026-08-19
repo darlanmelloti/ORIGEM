@@ -97,6 +97,8 @@ static func continuity_7_to_8(terrain_y: float = 0.0) -> Dictionary:
 	return {
 		"from_region": 7,
 		"to_region": 8,
+		"handoff_id": "R07_R08",
+		"map_authority": "mapaorigem.webp",
 		"handoff_in": start,
 		"handoff_out": finish,
 		"direction": (finish - start).normalized(),
@@ -106,7 +108,72 @@ static func continuity_7_to_8(terrain_y: float = 0.0) -> Dictionary:
 	}
 
 
+static func continuity_8_to_9(terrain_y: float = 0.0) -> Dictionary:
+	var start := world_position(OBSERVATORIO, terrain_y)
+	var finish := world_position(TRILHA_MONTANHA_INICIO, terrain_y)
+	return {
+		"from_region": 8,
+		"to_region": 9,
+		"handoff_id": "R08_R09",
+		"map_authority": "mapaorigem.webp",
+		"handoff_in": start,
+		"handoff_out": finish,
+		"direction": (finish - start).normalized(),
+		"distance": start.distance_to(finish),
+		"subject_visual": "Transição Observatório → Trilha da Montanha",
+		"validation_state": "QA_BOUNDARY_PENDING"
+	}
+
+static func continuity_9_to_10(terrain_y: float = 0.0) -> Dictionary:
+	var start := world_position(TRILHA_MONTANHA_INICIO, terrain_y)
+	var finish := world_position(CAVERNA_ORION, terrain_y)
+	return {
+		"from_region": 9,
+		"to_region": 10,
+		"handoff_id": "R09_R10",
+		"map_authority": "mapaorigem.webp",
+		"handoff_in": start,
+		"handoff_out": finish,
+		"direction": (finish - start).normalized(),
+		"distance": start.distance_to(finish),
+		"subject_visual": "Transição Trilha da Montanha → Caverna do Orion",
+		"validation_state": "QA_BOUNDARY_PENDING"
+	}
+
+static func continuity_10_to_11(terrain_y: float = 0.0) -> Dictionary:
+	var start := world_position(CAVERNA_ORION, terrain_y)
+	var finish := world_position(CAMARA_ORION_CUBE, terrain_y)
+	return {
+		"from_region": 10,
+		"to_region": 11,
+		"handoff_id": "R10_R11",
+		"map_authority": "mapaorigem.webp",
+		"handoff_in": start,
+		"handoff_out": finish,
+		"direction": (finish - start).normalized(),
+		"distance": start.distance_to(finish),
+		"subject_visual": "Caverna do Orion → Câmara do Orion Cube",
+		"validation_state": "QA_BOUNDARY_PENDING"
+	}
+
+static func continuity_11_to_12(terrain_y: float = 0.0) -> Dictionary:
+	var start := world_position(CAMARA_ORION_CUBE, terrain_y)
+	var finish := world_position(HUB_TEMPORAL, terrain_y)
+	return {
+		"from_region": 11,
+		"to_region": 12,
+		"handoff_id": "R11_R12",
+		"map_authority": "mapaorigem.webp",
+		"handoff_in": start,
+		"handoff_out": finish,
+		"direction": (finish - start).normalized(),
+		"distance": start.distance_to(finish),
+		"subject_visual": "Transição Câmara do Orion Cube → Cúpula Final",
+		"validation_state": "QA_BOUNDARY_PENDING"
+	}
+
 static func world_position(anchor: Vector2, terrain_y: float, vertical_offset: float = 0.0) -> Vector3:
+
 	return Vector3(anchor.x, terrain_y + vertical_offset, anchor.y)
 
 static func map_texture_position(world: Vector2) -> Vector2:
