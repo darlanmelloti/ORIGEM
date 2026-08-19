@@ -539,7 +539,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-152 — CONCLUÍDO: Auditoria light/grounding R4/R5
 `GroundedVegetationR4R5Preview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 12 candidatos aterrados, X/Z preservado, 1 pinheiro focal, 3 árvores detalhadas, 6 elementos leves, 2 fetos, 0 luzes dinâmicas adicionadas, `wall_of_trees=false` e produção inalterada. Ver `CP_D5_152_AUDITORIA_LIGHT_GROUNDING_R4_R5.md` e `CP-D5-152_LIGHT_BUDGET_RUNTIME.log`.
 
-## CP-D5-153 — ACTIVO
+## CP-D5-153 — CONCLUÍDO: Regressão travessia Ponte R2
+`EliasStoneBridgeTraversalPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 3 ciclos, ponte modular aterrada, folga de tabuleiro de 0,21 m sobre mínimo 0,20 m, ponte GLB ausente, câmara externa e produção inalterada. Ver `CP_D5_153_REGRESSAO_ELias_STONE_BRIDGE.md` e `CP-D5-153_STONE_BRIDGE_RUNTIME.log`.
+
+## CP-D5-154 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -549,4 +552,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-153` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-154` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
