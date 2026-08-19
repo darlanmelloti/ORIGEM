@@ -52,16 +52,40 @@ O pavilhão de Acampamento Majestic foi validado isoladamente em `MajesticPavili
 
 A matriz `CP_D5_009_MATRIZ_REVISAO_DEV1.md` ordena a revisão Dev1: ponte do marco 2, anexo Casa Voss e pavilhão Majestic. Ela proíbe integração simultânea, fixa os testes de aceitação e preserva todas as Regiões de produção até decisão do proprietário.
 
-## CP-D5-010 — BLOQUEADO POR ACTIVO EXTERNO
+## Directiva de produção contínua Dev5
 
-Auditar e integrar um humano GLTF/GLB somente quando existir ficheiro recuperável com licença documentada. O candidato actual de fornecedor externo exige CAPTCHA para download, pelo que nenhuma integração é autorizada nesta condição.
+Dev5 é uma frente activa de **criação e refinamento do mapa real**, não uma frente de espera. A ausência de um humano rigado externo ou de uma selecção Dev1 só bloqueia a integração desse elemento específico; nunca bloqueia a criação de candidatos QA independentes, documentação espacial, ensaios de colisão ou a próxima prova de 36 segundos.
 
-## Estado de suporte Dev5
+Depois de cada checkpoint, Dev5 deve ler este marcador, abrir imediatamente o próximo item permitido, actualizar o estado para **ACTIVO** e continuar. A regra é: uma evidência concluída abre a tarefa seguinte; nunca encerra o ciclo.
 
-Dev5 mantém os candidatos QA, evidências e matriz publicados. A próxima alteração de produção só pode iniciar depois de Dev1 seleccionar uma linha CP-D5-009; caso contrário, não criar nova geometria concorrente.
+## CP-D5-010 — REJEITADO EM QA
+
+O arco de ruínas estrutural teve parser e sessão de 36 segundos, mas foi rejeitado porque a captura revelou blocos demasiado primitivos e sem ganho suficiente sobre o arco de produção. O código e cenas QA foram revertidos; ver `CP_D5_010_ARCO_RUINAS_REJEITADO.md`. A rejeição não bloqueia a fila.
+
+## CP-D5-011 — ACTIVO: Floresta Densa (marco 4)
+
+Criar um candidato QA de **portal florestal tridimensional** usando troncos reais inclinados, rochas laterais irregulares e camada de solo, mantendo uma passagem central de pelo menos 2,4 m. Não repetir pilares/lintéis do arco rejeitado, não criar parede de árvores, não usar placas e não tocar `ForestLakeRegion.gd`.
+
+### Aceitação CP-D5-011
+
+| Critério | Obrigatório |
+|---|---|
+| Mapa | Referência explícita ao marco 4 — `FLORESTA_DENSA=(-9; 116)` |
+| Geometria | Troncos, rochas e profundidade lateral real; passagem central aberta |
+| Física | Colisores só nos troncos e rochas laterais; percurso sem bloqueio |
+| Validação | Parser Godot 4.7.1, 36 segundos de cena QA e captura interna |
+| Continuidade | Ao publicar, abrir CP-D5-012 automaticamente |
+
+## CP-D5-012 — PRÉ-ATRIBUÍDO: Ruínas Submersas (marco 6)
+
+Criar um candidato QA de cais de ruínas submersas com lajes quebradas e colunas parciais; zero emissão, zero luzes dinâmicas, colisores apenas onde a travessia deve existir.
+
+## CP-D5-005 — CONDICIONAL, NÃO BLOQUEANTE
+
+Auditar e integrar um humano GLTF/GLB somente quando existir ficheiro recuperável com licença documentada. O CAPTCHA do fornecedor externo bloqueia apenas esta linha; Elias continua com proxy QA e o Dev5 continua nos CP-D5-010 a CP-D5-012.
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** aguardar selecção Dev1 de uma única linha CP-D5-009 ou a disponibilização de um humano GLTF/GLB licenciado.
+**Próxima tarefa activa após publicação:** `CP-D5-011` — construir o portal QA da Floresta Densa e, ao concluir, abrir automaticamente `CP-D5-012`.
