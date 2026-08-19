@@ -303,7 +303,10 @@ O preview `MediumVegetationCompositionPreview.tscn` passou 36 segundos com Flore
 ## CP-D5-076 — CONCLUÍDO: Travessia Elias na ponte modular R2
 O preview `EliasStoneBridgeTraversalPreview.tscn` foi corrigido para aguardar física antes da asserção de grounding e passou 36 segundos com R2 `(-21,4;28)`, colisor `tabuleiro_continuo`, grounding verdadeiro, folga `0,21 m` contra `0,20 m`, ponte modular, uma luz direccional e três ciclos sem erro. Ver `CP_D5_076_VALIDACAO_TRAVESSIA_ELIAS_PONTE_R2.md` e `CP-D5-076_ELIAS_BRIDGE_RUNTIME_FIXED.log`.
 
-## CP-D5-077 — ACTIVO
+## CP-D5-077 — CONCLUÍDO: Validação StoneBridgeLandmark R2
+O preview `StoneBridgeLandmarkPreview.tscn` foi corrigido no fallback de captura e passou 36 segundos sem `SCRIPT ERROR` ou `Parse Error`. O escopo de produção e `Player.gd` permaneceram intocados. Ver `CP_D5_077_VALIDACAO_STONE_BRIDGE_LANDMARK.md` e `CP-D5-077_STONE_LANDMARK_RUNTIME_FIXED.log`.
+
+## CP-D5-078 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -313,4 +316,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-077` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-078` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
