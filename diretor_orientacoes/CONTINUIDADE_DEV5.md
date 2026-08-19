@@ -374,16 +374,11 @@ O plano `CP_D5_095_INTEGRACAO_MAPA_VIVO_R1_R6.md` consolidou candidatos R1–R6,
 
 `CP_D5_097_FICHA_INTEGRACAO_R4.md` define corredor mínimo, LOD, fauna, abrigo lateral, exclusão do portal estrutural e reversão para o Dev1. Nenhum módulo de produção foi editado.
 
-## CP-D5-098 — ACTIVO: Ficha integração R5
+## CP-D5-098 — CONCLUÍDO: Ficha integração R5
+`CP_D5_098_FICHA_INTEGRACAO_R5.md` define a integração isolada do Acampamento Majestic vivo, preservando a âncora `(-88,178)`, o corredor Elias em `x=-79`, o pavilhão, abrigo lateral, LOD vegetal, 2 cervos a >=5 m, no máximo 1 luz adicional e reversão exclusiva do commit R5. A validação passou parser (`PARSER_EXIT=0`) e 36 segundos de QA com 13 eventos de grounding, `route_cycle=1`, `clear=true`, distância fauna 27,41 m, sem cairn/parede vegetal e sem módulos de produção alterados. Ver `CP_D5_098_VALIDACAO_R5_INTEGRACAO.md` e `CP-D5-098_R5_INTEGRATION_RUNTIME.log`.
 
-Preparar a ficha exacta de integração do Acampamento Majestic vivo: desvio lateral, pavilhão, fauna, clareira, ligação R5→R6, colisores e reversão. Dev5 não edita ForestLakeRegion.gd.
-
-| Critério | Obrigatório |
-|---|---|
-| Desvio | preservar a coordenada lateral Majestic |
-| Segurança | corredor R5→R6 e fauna a >=5 m |
-| Luzes | no máximo 1 luz adicional candidata |
-| Continuidade | publicar e abrir CP-D5-099 no mesmo ciclo |
+## CP-D5-099 — ACTIVO
+Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
 
@@ -392,4 +387,4 @@ Preparar a ficha exacta de integração do Acampamento Majestic vivo: desvio lat
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-098` — Ficha integração R5. Depois da publicação, Dev5 abre CP-D5-099 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-099` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
