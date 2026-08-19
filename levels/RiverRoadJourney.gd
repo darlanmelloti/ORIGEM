@@ -397,6 +397,11 @@ func _build_dev6_r2_living_integration() -> void:
 	var r2_root := Node3D.new()
 	r2_root.name = "Dev6_EstradaDoRioVivaR2"
 	add_child(r2_root)
+	# Material de fauna discreto e rugoso: elimina o brilho duro do GLB no modo Compatibility sem adicionar texturas.
+	var fauna_material := StandardMaterial3D.new()
+	fauna_material.albedo_color = Color(0.24, 0.16, 0.095, 1.0)
+	fauna_material.roughness = 0.96
+	fauna_material.metallic = 0.0
 	var bridge_z := 25.0
 	var bridge_x := _road_x(bridge_z) + 10.80
 	var library := DEV5_LANDMARK_OBJECTS.new() as Node3D
@@ -428,6 +433,8 @@ func _build_dev6_r2_living_integration() -> void:
 		var deer_scale := fauna_spec["scale"] as float
 		deer.scale = Vector3.ONE * deer_scale
 		deer.rotation.y = fauna_spec["yaw"] as float
+		_apply_material(deer, fauna_material)
+		_configure_dev6_r2_lod(deer, 42.0)
 		deer.add_to_group("decorative_fauna")
 		deer.add_to_group("dev6_r2_grounding")
 		r2_root.add_child(deer)
@@ -448,6 +455,7 @@ func _build_dev6_r2_living_integration() -> void:
 		var vegetation_scale := vegetation_spec["scale"] as float
 		vegetation.scale = Vector3.ONE * vegetation_scale
 		vegetation.rotation.y = vegetation_spec["yaw"] as float
+		_configure_dev6_r2_lod(vegetation, 58.0 if "Arvore" in vegetation.name or "Pinheiro" in vegetation.name else 34.0)
 		vegetation.add_to_group("dev6_r2_grounding")
 		r2_root.add_child(vegetation)
 	var shelter_specs: Array[Dictionary] = [
@@ -472,6 +480,16 @@ func _build_dev6_r2_living_integration() -> void:
 	_build_dev6_r2_grounding_fields(r2_root)
 	call_deferred("_ground_dev6_r2_assets")
 	print("[DEV6_R2] status=integrated bridge=modular fauna=2 vegetation=4 shelter_parts=2 dynamic_lights=0 route_clear=true reversible=true")
+
+func _configure_dev6_r2_lod(root: Node, visibility_end: float) -> void:
+	# Limites conservadores por categoria: árvores em plano médio, fetos e fauna em detalhe próximo.
+	for child: Node in root.get_children():
+		if child is GeometryInstance3D:
+			var geometry := child as GeometryInstance3D
+			geometry.visibility_range_begin = 0.0
+			geometry.visibility_range_end = visibility_end
+			geometry.visibility_range_end_margin = 7.0
+		_configure_dev6_r2_lod(child, visibility_end)
 
 func _build_dev6_r2_grounding_fields(parent: Node3D) -> void:
 	# Adaptadores físicos invisíveis, exclusivamente laterais: tornam o contrato de raycast determinístico onde
