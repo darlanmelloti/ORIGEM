@@ -455,7 +455,10 @@ A cena inicialmente procurada `LightBudgetAuditPreview.tscn` não existe; a vali
 ## CP-D5-124 — CONCLUÍDO: Regressão rumo Majestic→Ruínas
 `EliasR5R6HeadingPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando início `(-80,190)`, destino Ruínas id 6, `arrival_r6=true`, canvas R5 `(195,6;261,4)`, canvas R6 `(408,351)`, continuidade para a âncora 7 e câmara externa preservada. Ver `CP_D5_124_REGRESSAO_RUMO_MAJESTIC_R6.md` e `CP-D5-124_R5_R6_HEADING_RUNTIME.log`.
 
-## CP-D5-125 — ACTIVO
+## CP-D5-125 — CONCLUÍDO: Regressão integrada R4
+`R4LivingForestPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando estado aprovado, 3 ciclos `clear=true`, fauna mínima de 20,42 m, 12 grounding, 2 cervos, 8 vegetações, portal/parede vegetal ausentes e produção inalterada. Ver `CP_D5_125_REGRESSAO_R4_INTEGRADA.md` e `CP-D5-125_R4_INTEGRATED_RUNTIME.log`.
+
+## CP-D5-126 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -465,4 +468,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-125` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-126` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
