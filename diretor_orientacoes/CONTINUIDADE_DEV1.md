@@ -335,3 +335,10 @@ O material PBR exclusivo do Arco não gerou ganho visual suficiente na rota vali
 A componente visual residual foi localizada no ecrã, mas não houve nó 3D, colisor ou elemento UI causal. A instrumentação foi revertida e não se farão alterações especulativas. Relatório: `CP_CARTO_112_AUDITORIA_SINAL_CIANO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-113:** testar uma crista topográfica secundária, ampla e recuada entre o Arco e a entrada da Floresta Densa (R4), fora da rota e das clareiras. A finalidade é criar planos de profundidade reais, não um outdoor. Preservar as âncoras, o Arco, as lajes, as luzes e as Regiões 7–12; reverter se a tomada Casa Voss→Arco não demonstrar ganho visual claro.
+
+
+## CP-CARTO-113 — Crista secundária rejeitada
+
+A elevação secundária Z=174 não produziu ganho de profundidade suficiente na tomada de 36 segundos e foi revertida. Não foram alterados rota, marcos, luzes, colisores ou limites das Regiões 1–6. Relatório: `CP_CARTO_113_CRISTA_SECUNDARIA_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-114:** auditar a transição visual das últimas lajes da Estrada do Rio para a clareira do Arco, identificando apenas o primeiro elemento que interrompe a leitura da rota. Não repetir materiais do Arco, cristas, água, atmosfera, largura do rio, árvores isoladas ou quaisquer hipóteses já rejeitadas.
