@@ -533,7 +533,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-150 — CONCLUÍDO: Regressão composição vegetal R4/R5
 `MediumVegetationCompositionPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando R4/R5 com 1 PBR, 3 elementos médios, 4 distantes por composição, offsets `(0,0)`, `wall_of_trees=false`, `production_script=false` e produção inalterada. Ver `CP_D5_150_REGRESSAO_MEDIUM_VEGETATION.md` e `CP-D5-150_MEDIUM_VEGETATION_RUNTIME.log`.
 
-## CP-D5-151 — ACTIVO
+## CP-D5-151 — CONCLUÍDO: Regressão LOD vegetal final
+`VegetationLodAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando limites focal `1_pbr_tree`, médio `3_detailed_trees`, distante `8_light_foliage`, 0 colisores importados, 0 luzes dinâmicas e produção inalterada. Ver `CP_D5_151_REGRESSAO_VEGETATION_LOD_FINAL.md` e `CP-D5-151_VEGETATION_LOD_RUNTIME.log`.
+
+## CP-D5-152 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -543,4 +546,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-151` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-152` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
