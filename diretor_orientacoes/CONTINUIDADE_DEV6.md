@@ -216,9 +216,13 @@ A regressão R2, R3, R4 e R6 confirmou parser, quatro percursos de 36 s, groundi
 
 O exterior R1 recebeu cinco elementos de horta e dois cervos laterais sem alterar Casa Voss, porta, Elias, câmara ou rota. Parser, saída de 36 s e grounding 7/7 passaram; a recaptura estável eliminou a evidência sob o terreno. A decisão visual permanece `REJECTED_VISUAL` até recaptura de terceira pessoa. Registo: `DEV6_052_EXTERIOR_R1_ESTADO_PARCIAL.md`.
 
-## Tarefa activa — DEV6-053
+## DEV6-053 — CONCLUÍDO
 
-Auditar LOD, visibilidade e custo de materiais dos activos Dev6 já integrados em R1, R2, R3, R4 e R6. Não criar geometria, luzes, câmaras ou colisores novos; documentar redução segura de custo para GTX 1050 Ti e preservar os contratos de grounding.
+O passe LOD aplicou visibilidade conservadora aos activos R1 e R6; R2, R3 e R4 já tinham LOD por activo. Parser e sessões R1/R6 de 36 s mantiveram grounding e rota. Registo: `DEV6_053_AUDITORIA_LOD_ORCAMENTO.md`.
+
+## Tarefa activa — DEV6-054
+
+Auditar a compatibilidade e duplicação de materiais dos activos de vegetação Dev6 em GL Compatibility. Não alterar terreno, geometria, rota, câmera, luzes ou colisores; aplicar apenas unificação material segura se a auditoria identificar duplicação evitável.
 
 ## Continuidade
 

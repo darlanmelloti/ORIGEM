@@ -122,6 +122,7 @@ func _build_dev6_r1_living_exterior() -> void:
 		var scale_value := garden_spec["scale"] as float
 		item.scale = Vector3.ONE * scale_value
 		item.rotation.y = garden_spec["yaw"] as float
+		_configure_dev6_r1_lod(item, 56.0 if "Carvalho" in item.name else 30.0)
 		item.add_to_group("dev6_r1_grounding")
 		exterior_root.add_child(item)
 	var deer_specs: Array[Dictionary] = [
@@ -142,6 +143,7 @@ func _build_dev6_r1_living_exterior() -> void:
 			# O GLB tem origem interna acima das patas; compensa apenas a apresentação, não o node aterrado.
 			deer.position.y = -0.62
 			deer_root.add_child(deer)
+		_configure_dev6_r1_lod(deer_root, 42.0)
 		deer_root.add_to_group("dev6_r1_grounding")
 		exterior_root.add_child(deer_root)
 	_build_dev6_r1_grounding_fields(exterior_root)
@@ -181,6 +183,15 @@ func _ground_dev6_r1_assets() -> void:
 			grounded_count += 1
 	print("[DEV6_R1] grounding=%d expected=7 xz_preserved=true house_touched=false door_touched=false" % grounded_count)
 	assert(grounded_count == 7)
+
+func _configure_dev6_r1_lod(root: Node, visibility_end: float) -> void:
+	for child: Node in root.get_children():
+		if child is GeometryInstance3D:
+			var geometry := child as GeometryInstance3D
+			geometry.visibility_range_begin = 0.0
+			geometry.visibility_range_end = visibility_end
+			geometry.visibility_range_end_margin = 6.0
+		_configure_dev6_r1_lod(child, visibility_end)
 
 func _build_voss_panoramic_threshold(house: Node3D) -> void:
 	# Soleira CP255: pedras orgânicas baixas prolongam o vão da porta até à Estrada do Rio.

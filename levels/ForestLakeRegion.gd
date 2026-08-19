@@ -1855,6 +1855,7 @@ func _build_dev6_r6_organic_shore_integration() -> void:
 		monolith.scale = Vector3(0.62, 1.06, 0.62)
 		monolith.rotation_degrees = Vector3(0.0, 14.0, -4.0)
 		_apply_material(monolith, ruin_material)
+		_configure_dev6_r6_lod(monolith, 64.0)
 		monolith.add_to_group("dev6_r6_grounding")
 		r6_root.add_child(monolith)
 	var outcrop_specs: Array[Dictionary] = [
@@ -1874,6 +1875,7 @@ func _build_dev6_r6_organic_shore_integration() -> void:
 		outcrop.scale = Vector3(scale_value, scale_value * 0.78, scale_value)
 		outcrop.rotation.y = outcrop_spec["yaw"] as float
 		_apply_material(outcrop, outcrop_material)
+		_configure_dev6_r6_lod(outcrop, 46.0)
 		outcrop.add_to_group("dev6_r6_grounding")
 		r6_root.add_child(outcrop)
 	var fern_specs: Array[Dictionary] = [
@@ -1891,11 +1893,21 @@ func _build_dev6_r6_organic_shore_integration() -> void:
 		var scale_value := fern_spec["scale"] as float
 		fern.scale = Vector3.ONE * scale_value
 		fern.rotation.y = fern_spec["yaw"] as float
+		_configure_dev6_r6_lod(fern, 30.0)
 		fern.add_to_group("dev6_r6_grounding")
 		r6_root.add_child(fern)
 	_build_dev6_r6_grounding_fields(r6_root)
 	call_deferred("_ground_dev6_r6_assets")
 	print("[DEV6_R6] status=integrated monolith=1 outcrops=3 foliage=2 pier_slabs=0 dynamic_lights=0 route_clear=true reversible=true")
+
+func _configure_dev6_r6_lod(root: Node, visibility_end: float) -> void:
+	for child: Node in root.get_children():
+		if child is GeometryInstance3D:
+			var geometry := child as GeometryInstance3D
+			geometry.visibility_range_begin = 0.0
+			geometry.visibility_range_end = visibility_end
+			geometry.visibility_range_end_margin = 7.0
+		_configure_dev6_r6_lod(child, visibility_end)
 
 func _build_dev6_r6_grounding_fields(parent: Node3D) -> void:
 	var field_root := Node3D.new()
