@@ -872,7 +872,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-263 — CONCLUÍDO: Regressão multi-marco de aterramento
 `MultiLandmarkGroundedPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando anchors Casa Voss/Ponte 1–2 aterrados em terreno irregular, X/Z preservados, 0 scripts de produção e 0 luzes dinâmicas. Ver `CP_D5_263_REGRESSAO_MULTILANDMARK_GROUNDING.md` e `CP-D5-263_MULTILANDMARK_GROUNDING_RUNTIME.log`.
 
-## CP-D5-264 — ACTIVO
+## CP-D5-264 — CONCLUÍDO: Auditoria contratos de altura
+`CartographicHeightContractsPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando cobertura R1–R6, 3 proprietários de terreno, raycast obrigatório, produção preservada e rejeições do arco R3/cais R6 não reintroduzidas. Ver `CP_D5_264_AUDITORIA_CONTRATOS_ALTURA.md` e `CP-D5-264_HEIGHT_CONTRACTS_RUNTIME.log`.
+
+## CP-D5-265 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -882,7 +885,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-264` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-265` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
