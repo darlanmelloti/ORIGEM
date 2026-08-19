@@ -272,3 +272,10 @@ A rota `road_return_voss` ganhou captura interna de viewport e passou 36 segundo
 A tomada QA `voss_to_road` foi inicialmente rejeitada por nascer dentro da casa. O spawn passou a usar a transformação real da soleira exterior e a recaptura de 36 segundos confirmou caminho livre para as lajes e o Arco, sem mexer em porta, câmara, FOV ou colisores. A qualidade global permanece abaixo do limiar artístico; relatório: `CP_CARTO_101_SAIDA_CASA_ESTRADA_QA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-102:** avaliar uma única camada atmosférica de profundidade usando os parâmetros existentes do `LevelEnvironment`, primeiro em modo QA e sem alterar luzes, água, FOV, geometria, árvores, Arco ou módulos R7–R12. A correcção só é promovível se a captura Casa Voss→Arco demonstrar separação adicional entre os planos do vale.
+
+
+## CP-CARTO-102 — Profundidade atmosférica rejeitada
+
+O perfil QA de neblina moderadamente mais densa passou tecnicamente, mas reduziu o contraste intermédio e não atingiu ganho visual suficiente. Foi totalmente revertido; não repetir densidade, cor, saturação ou `fog_sky_affect` isoladamente. Relatório: `CP_CARTO_102_ATMOSFERA_PROFUNDIDADE_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-103:** auditar a leitura de escala da vegetação no enquadramento Casa Voss→Arco, contando os modelos por tipo e distância. A auditoria não pode criar, mover ou remover árvores: deve apenas determinar se a discrepância visual provém de LOD, escala, espécies ou enquadramento antes de abrir qualquer hipótese de produção.
