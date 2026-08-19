@@ -154,7 +154,10 @@ A ficha `CP_D5_028_AUDITORIA_BACKEND_CAPTURA.md` separou a limitação do render
 ## CP-D5-029 — CONCLUÍDO: Inventário e varredura das cenas QA Dev5
 A varredura de editor encontrou 15 cenas QA em `levels/dev5/` e não encontrou `SCRIPT ERROR`, `Parse Error` ou `Failed to load script`. Os avisos FSR1 foram classificados como backend Compatibility/headless. Os `.uid` gerados pela varredura foram restaurados/limpos sem incluir alterações de ambiente no checkpoint. R4/R6 continuam pendentes de viewport gráfico válido. Ver `CP_D5_029_INVENTARIO_CENAS_QA.md` e `CP-D5-029_PARSER_SWEEP.log`.
 
-## CP-D5-030 — ACTIVO
+## CP-D5-030 — CONCLUÍDO: Ficha consolidada de integração QA
+Foi criada `CP_D5_030_FICHA_INTEGRACAO_QA.md`, consolidando âncoras, X/Z, aterramento Y, colisores, luzes, isolamento e estados de promoção dos candidatos Dev5. A ficha confirma que nenhum candidato é integrado automaticamente; R4/R6 permanecem pendentes de viewport gráfico válido e todos os candidatos exigem revisão Dev1 antes de promoção.
+
+## CP-D5-031 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -163,4 +166,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-030` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-031` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
