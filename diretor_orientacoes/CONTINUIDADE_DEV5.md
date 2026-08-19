@@ -4,7 +4,7 @@
 
 **Base:** `3ba5638` de `feature/cine07-final`.
 
-**Regra permanente:** um checkpoint é evidência, não paragem. Depois de publicar, ler este ficheiro, iniciar o item seguinte permitido e manter o ciclo de parser Godot + 30 segundos de gameplay/captura + avaliação visual + commit/push.
+**Regra permanente:** um checkpoint é evidência, não paragem. Depois de publicar, ler este ficheiro, iniciar o item seguinte permitido e manter o ciclo de parser Godot + 30 segundos de gameplay/captura + avaliação visual + commit/push. Quando não existir item explícito, aplicar obrigatoriamente `PROTOCOLO_CONTINUIDADE_ACTIVA_DEV5.md`; a fila vazia abre uma tarefa de contingência, nunca uma espera.
 
 **Sincronização Git:** `gh auth status` é opcional e não determina se a branch pode publicar. Antes de declarar bloqueio, comparar obrigatoriamente `git rev-parse --short HEAD`, `origin/feature/dev5-cartographic-world-third-person` e `git rev-list --left-right --count origin/feature/dev5-cartographic-world-third-person...HEAD`. Quando houver commits locais, usar a credencial autorizada para o `git push`; quando a contagem for `0 0`, declarar a branch sincronizada e continuar a tarefa activa.
 
@@ -80,21 +80,26 @@ A sessão headless completou 36 segundos e confirmou `landmark=6`, `submerged=tr
 
 O catálogo `CP_D5_013_CATALOGO_INSERCAO_R1_R6.md` mapeia os seis marcos a objectos candidatos, activos locais, deslocamentos X/Z, colisores, proprietários e estados QA. O catálogo confirma que nenhuma proposta Dev5 atravessa R1–R6 ou recebe integração automática.
 
-## CP-D5-014 — ACTIVO: Auditor de orçamento de malhas
+## CP-D5-014 — CONCLUÍDO
 
-Criar uma cena QA que inventarie triângulos, materiais e nós de colisão dos GLB/GLTF locais seleccionados no catálogo. O auditor deve gerar registos verificáveis para a ponte, vegetação PBR, rochas e objectos QA, sem tocar objectos de produção.
+A cena `MeshBudgetAuditPreview.tscn` passou parser e sessão QA de 36 segundos, contando métricas reais dos GLB/GLTF. O relatório `CP_D5_014_AUDITORIA_MALHAS.md` confirma: ponte GLB 252 triângulos; rocha 80; árvore detalhada 402; pinheiro PBR 13.424; feto 6.232. Não foram encontrados colisores importados e o lote não criou luzes dinâmicas.
 
-### Aceitação CP-D5-014
+## CP-D5-015 — ACTIVO: Ponte GLB leve no marco 2
+
+Criar uma cena QA que instancia `bridge_stone.glb` na âncora R2, com colisão própria de tabuleiro e uma comparação visual com o candidato procedural. O objectivo é avaliar se o activo real de 252 triângulos supera o candidato QA antes de qualquer revisão Dev1.
+
+### Aceitação CP-D5-015
 
 | Critério | Obrigatório |
 |---|---|
-| Dados | Triângulos, materiais e nós de colisão reais extraídos das cenas importadas |
-| Orçamento | Relatório separado por activo e total da proposta; zero luzes dinâmicas |
-| Validação | Parser Godot 4.7.1 e 36 segundos de cena QA |
-| Continuidade | Ao publicar, abrir CP-D5-015 automaticamente |
+| Cartografia | Posição calculada pela ferramenta Dev5 a partir de R2 |
+| Física | Colisor contínuo no tabuleiro; entradas desimpedidas |
+| Orçamento | Registar 252 triângulos do GLB e colisão adicional explícita |
+| Validação | Parser Godot 4.7.1, 36 segundos e captura interna |
+| Continuidade | Ao publicar, abrir CP-D5-016 automaticamente |
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-014` — auditar triângulos, materiais e colisores reais dos activos antes da próxima inserção QA.
+**Próxima tarefa activa após publicação:** `CP-D5-015` — comparar a ponte GLB leve de 252 triângulos com o candidato procedural QA do marco 2. Ao publicar CP-D5-015, abrir CP-D5-016 e continuar pela escada obrigatória do protocolo activo; não aguardar nova orientação.
