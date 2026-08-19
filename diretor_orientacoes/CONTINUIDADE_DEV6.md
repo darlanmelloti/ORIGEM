@@ -220,9 +220,13 @@ O exterior R1 recebeu cinco elementos de horta e dois cervos laterais sem altera
 
 O passe LOD aplicou visibilidade conservadora aos activos R1 e R6; R2, R3 e R4 já tinham LOD por activo. Parser e sessões R1/R6 de 36 s mantiveram grounding e rota. Registo: `DEV6_053_AUDITORIA_LOD_ORCAMENTO.md`.
 
-## Tarefa activa — DEV6-054
+## DEV6-054 — CONCLUÍDO
 
-Auditar a compatibilidade e duplicação de materiais dos activos de vegetação Dev6 em GL Compatibility. Não alterar terreno, geometria, rota, câmera, luzes ou colisores; aplicar apenas unificação material segura se a auditoria identificar duplicação evitável.
+A auditoria GL unificou o material idêntico da fauna R2/R3 num recurso partilhado e preservou o aspecto, grounding e rotas de 36 s. Não foram encontradas outras unificações locais de baixo risco. Registo: `DEV6_054_MATERIAIS_GL_COMPATIBILITY.md`.
+
+## Tarefa activa — DEV6-055
+
+Auditar o estado remoto das recapturas de terceira pessoa pedidas a Dev1/Dev3 para R1, R2, R3, R4 e R6. Não alterar módulos de câmara, jogador ou cenário; se não existir evidência válida, produzir uma matriz de retorno concisa e avançar para a regressão técnica seguinte.
 
 ## Continuidade
 

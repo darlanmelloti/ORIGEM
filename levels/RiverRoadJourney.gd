@@ -30,12 +30,14 @@ const ARCH_WORLD_Z := 92.0
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
 var ruin_material: StandardMaterial3D
+var dev6_fauna_material: StandardMaterial3D
 
 func _ready() -> void:
 	_build_arch_wet_overlay()
 	terrain_patch = get_parent().get_node_or_null("TerrainPatch") as Node3D
 	path_material = _make_path_material()
 	ruin_material = _make_ruin_material()
+	dev6_fauna_material = _make_dev6_fauna_material()
 	_build_compacted_roadbed()
 	_build_road_entry_orientation()
 	_build_river_road()
@@ -58,6 +60,14 @@ func _ready() -> void:
 	_build_macro_ridge_layers()
 	_build_arch_backdrop_foothills()
 	_build_valley_rim_outcrops()
+
+func _make_dev6_fauna_material() -> StandardMaterial3D:
+	# Material único e pouco especular para os quatro cervos R2/R3; evita duplicação no GL Compatibility.
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color(0.24, 0.16, 0.095, 1.0)
+	material.roughness = 0.96
+	material.metallic = 0.0
+	return material
 
 func _build_macro_ridge_layers() -> void:
 	# Camadas laterais de relevo: criam profundidade real entre a Casa Voss e o Arco, sem aproximar o destino nem ocupar a faixa de 4,15 m da Estrada.
@@ -399,11 +409,8 @@ func _build_dev6_r2_living_integration() -> void:
 	var r2_root := Node3D.new()
 	r2_root.name = "Dev6_EstradaDoRioVivaR2"
 	add_child(r2_root)
-	# Material de fauna discreto e rugoso: elimina o brilho duro do GLB no modo Compatibility sem adicionar texturas.
-	var fauna_material := StandardMaterial3D.new()
-	fauna_material.albedo_color = Color(0.24, 0.16, 0.095, 1.0)
-	fauna_material.roughness = 0.96
-	fauna_material.metallic = 0.0
+	# Material partilhado R2/R3: elimina o brilho duro sem duplicar recursos no modo Compatibility.
+	var fauna_material := dev6_fauna_material
 	var bridge_z := 25.0
 	var bridge_x := _road_x(bridge_z) + 10.80
 	var library := DEV5_LANDMARK_OBJECTS.new() as Node3D
@@ -614,10 +621,7 @@ func _build_dev6_r3_living_integration() -> void:
 	var r3_root := Node3D.new()
 	r3_root.name = "Dev6_ArcoRuinasVivoR3"
 	add_child(r3_root)
-	var fauna_material := StandardMaterial3D.new()
-	fauna_material.albedo_color = Color(0.235, 0.155, 0.090, 1.0)
-	fauna_material.roughness = 0.96
-	fauna_material.metallic = 0.0
+	var fauna_material := dev6_fauna_material
 	var fauna_specs: Array[Dictionary] = [
 		{"name": "CervoRuinasOesteR3", "x": _road_x(82.0) - 12.20, "z": 82.0, "scale": 0.48, "yaw": 0.40},
 		{"name": "CervoRuinasEsteR3", "x": _road_x(94.0) + 12.60, "z": 94.0, "scale": 0.46, "yaw": -2.18}
