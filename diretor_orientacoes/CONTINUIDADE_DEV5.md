@@ -196,7 +196,10 @@ O corredor central da cena `R6MonolithClearancePreview.tscn` foi validado durant
 ## CP-D5-043 — CONCLUÍDO: Elias em terceira pessoa na margem R6
 O preview `EliasR6ClearancePreview.tscn` validou Elias com `EliasThirdPersonPresentation`, grounding R6 em X/Z `(52.00, 260.00)`, corredor X=60, folga de `6,05 m` e dois ciclos completos sem bloqueio durante 36 segundos. `Player.gd` não foi alterado. Foi corrigida no preview a atribuição de `global_position` antes da inserção do colisor na árvore, substituindo-a por `position`. A execução final não apresentou erros Dev5. Ver `CP_D5_043_ELIAS_TERCEIRA_PESSOA_R6_VALIDACAO.md` e `CP-D5-043_ELIAS_R6_RUNTIME_FIXED.log`. A aprovação visual final continua pendente de viewport gráfico válido.
 
-## CP-D5-044 — ACTIVO
+## CP-D5-044 — CONCLUÍDO: Auditoria de escopo e terceira pessoa
+A auditoria confirmou zero referências operacionais a `Player.gd` ou módulos regionais de produção nos previews Dev5. `EliasThirdPersonPresentation` permanece isolada, com uma luz direccional por harness e parser Compatibility sem erros. As ocorrências de proprietários R1–R6 são apenas contratos, comentários e documentação. Ver `CP_D5_044_AUDITORIA_ESCOPO_TERCEIRA_PESSOA.md` e `CP-D5-044_SCOPE_THIRD_PERSON_AUDIT.log`.
+
+## CP-D5-045 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -205,4 +208,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-044` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-045` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.

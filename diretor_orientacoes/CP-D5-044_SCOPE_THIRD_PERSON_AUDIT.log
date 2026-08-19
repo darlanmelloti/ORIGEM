@@ -1,0 +1,46 @@
+--- REFERENCES TO PRODUCTION/PLAYER IN DEV5 PREVIEWS ---
+levels/dev5/CartographicLandmarkObjects.gd:2:## Não é instanciada por TempleLevel até uma integração validada pelo proprietário R1–R6.
+levels/dev5/CartographicLandmarkObjects.gd:197:	# Candidato QA isolado: não toca ForestLakeRegion.gd e deixa passagem central >= 2.4 m.
+levels/dev5/DenseForestPortalPreview.gd:4:## CP-D5-011: cena QA autónoma do marco 4; não toca ForestLakeRegion.gd.
+levels/dev5/SubmergedRuinsPierPreview.gd:4:## CP-D5-012: preview autónomo do marco 6; não toca TempleLevel.gd.
+levels/dev5/VegetationDensityAuditPreview.gd:2:## Apenas QA; não carrega ForestLakeRegion.gd nem altera produção.
+levels/dev5/CartographicHeightContracts.gd:11:		"terrain_owner": "VossHouse.gd",
+levels/dev5/CartographicHeightContracts.gd:18:		"terrain_owner": "RiverRoadJourney.gd",
+levels/dev5/CartographicHeightContracts.gd:25:		"terrain_owner": "RiverRoadJourney.gd",
+levels/dev5/CartographicHeightContracts.gd:32:		"terrain_owner": "ForestLakeRegion.gd",
+levels/dev5/CartographicHeightContracts.gd:39:		"terrain_owner": "ForestLakeRegion.gd",
+levels/dev5/CartographicHeightContracts.gd:46:		"terrain_owner": "ForestLakeRegion.gd",
+entities/player/third_person/EliasThirdPersonPresentation.gd:2:## A referência de Elias define o vestuário e a silhueta; este módulo não substitui Player.gd no primeiro ciclo.
+--- THIRD-PERSON REFERENCES ---
+entities/player/third_person/EliasThirdPersonPresentation.gd:16:	name = "EliasThirdPersonPresentation"
+entities/player/third_person/EliasThirdPersonPresentation.gd:4:class_name EliasThirdPersonPresentation
+entities/player/third_person/EliasThirdPersonPresentation.tscn:3:[ext_resource type="Script" path="res://entities/player/third_person/EliasThirdPersonPresentation.gd" id="1_elias"]
+entities/player/third_person/EliasThirdPersonPresentation.tscn:5:[node name="EliasThirdPersonPresentation" type="Node3D"]
+entities/player/third_person/EliasThirdPersonPreview.gd:5:const ELIAS_PRESENTATION: Script = preload("res://entities/player/third_person/EliasThirdPersonPresentation.gd")
+entities/player/third_person/EliasThirdPersonPreview.tscn:3:[ext_resource type="Script" path="res://entities/player/third_person/EliasThirdPersonPreview.gd" id="1_preview"]
+entities/player/third_person/EliasThirdPersonPreview.tscn:5:[node name="EliasThirdPersonPreview" type="Node3D"]
+levels/dev5/EliasR6ClearancePreview.gd:118:	var presentation: EliasThirdPersonPresentation = ELIAS_PRESENTATION.new()
+levels/dev5/EliasR6ClearancePreview.gd:30:	print("[DEV5_ELIAS_R6] route_x=%.2f monolith_x=52.00 clearance=%.2f required=%.2f presentation=EliasThirdPersonPresentation" % [ROUTE_X, clearance, MIN_REQUIRED_CLEARANCE])
+levels/dev5/EliasR6ClearancePreview.gd:8:const ELIAS_PRESENTATION := preload("res://entities/player/third_person/EliasThirdPersonPresentation.gd")
+--- DYNAMIC LIGHT CONSTRUCTORS ---
+entities/player/third_person/EliasThirdPersonPreview.gd:17:	var sun := DirectionalLight3D.new()
+levels/dev5/CartographicGroundingPreview.gd:35:	var sun := DirectionalLight3D.new()
+levels/dev5/CartographicPlacementPreview.gd:25:	var sun := DirectionalLight3D.new()
+levels/dev5/CartographicRegressionAuditPreview.gd:55:	var light := DirectionalLight3D.new()
+levels/dev5/DenseForestPortalPreview.gd:31:	var sun := DirectionalLight3D.new()
+levels/dev5/EliasR6ClearancePreview.gd:56:	var sun := DirectionalLight3D.new()
+levels/dev5/GroundedVegetationR4R5Preview.gd:41:	var sun := DirectionalLight3D.new()
+levels/dev5/MajesticGroundedPavilionPreview.gd:35:	var sun := DirectionalLight3D.new()
+levels/dev5/MajesticPavilionPreview.gd:28:	var sun := DirectionalLight3D.new()
+levels/dev5/MediumVegetationCompositionPreview.gd:54:	var sun := DirectionalLight3D.new()
+levels/dev5/MeshBudgetAuditPreview.gd:73:	var light := DirectionalLight3D.new()
+levels/dev5/MultiLandmarkGroundedPreview.gd:78:	var sun := DirectionalLight3D.new()
+levels/dev5/R6MonolithClearancePreview.gd:57:	var sun := DirectionalLight3D.new()
+levels/dev5/StoneBridgeGLBPreview.gd:28:	var sun := DirectionalLight3D.new()
+levels/dev5/StoneBridgeLandmarkPreview.gd:28:	var sun := DirectionalLight3D.new()
+levels/dev5/SubmergedRuinsPierPreview.gd:28:	var sun := DirectionalLight3D.new()
+levels/dev5/SubmergedShoreMonolithPreview.gd:34:	var sun := DirectionalLight3D.new()
+levels/dev5/VegetationDensityAuditPreview.gd:32:	var sun := DirectionalLight3D.new()
+levels/dev5/VegetationLodAuditPreview.gd:61:	var light := DirectionalLight3D.new()
+levels/dev5/VossWaystationPreview.gd:28:	var sun := DirectionalLight3D.new()
+--- PARSER ---
