@@ -202,3 +202,24 @@ Parser Godot 4.7.1, Menu→Novo Jogo, 36 s de runtime, captura interna 1920×108
 A captura QA com o mapa aberto confirmou no mesmo quadro o marcador ELIAS na área do marco 6 e o destino `CHEGADA ÀS RUÍNAS`. A UI consome a mesma regra X/Z corrigida no CP-CARTO-86; não houve discrepância de posição, destino ou etiqueta, e nenhuma mudança de produção foi necessária. A imagem mantém os doze marcos do mapa oficial visíveis, mas a branch continua limitada às Regiões 1–6. Evidência: `qa_evidence_carto87/CP_CARTO87_R6_MAP_UI_COHERENCE.md`.
 
 **Próximo passo activo:** CP-CARTO-88 — verificar a continuidade macro do marcador ELIAS entre Majestic e Ruínas no mapa oficial, sem reabrir elementos ambientais já rejeitados.
+
+
+## CP-CARTO-088 a CP-CARTO-090 — Estado publicado
+
+O CP-CARTO-088 preservou a abertura R1→R3 após o passe de terreno; o CP-CARTO-089 rejeitou o activo focal Poly Haven por ausência de ganho visual e restaurou o pinheiro PBR aprovado. O CP-CARTO-090, publicado em `c9fbc75`, substituiu a textura base de solo excessivamente granular pelo conjunto PBR `forest_ground_06`, converteu manchas de margem em volumes baixos tridimensionais ancorados ao terreno e ensaiou afloramentos CC0 inclinados fora da rota. Parser e gameplay de 36 segundos Casa Voss→Arco passaram; o resultado artístico permanece **REJECTED_VISUAL** porque a composição macro não atinge 85% do padrão solicitado.
+
+**Próxima tarefa já iniciada — CP-CARTO-091:** atribuir por nome, classe, posição e material o marcador azul-ciano residual da captura `road_to_arch`, sem alterar vegetação, água, Arco, rotas ou luzes enquanto não houver uma fonte causal concreta. A evidência deve incluir parser Godot 4.7.1, 36 segundos de gameplay, captura 1600×900 ou superior e a comparação antes/depois. A branch continua limitada estritamente às Regiões 1–6.
+
+
+## CP-CARTO-091 — Hipótese `MarcoRibeirinho` rejeitada
+
+A sonda de nós visíveis identificou `MarcoRibeirinho_00` como candidato espacial próximo no horizonte. A sua tampa rúnica e luz foram ocultadas exclusivamente no harness `road_to_arch`; a captura de 36 segundos manteve o ponto azul-ciano sem alteração. A hipótese foi revertida integralmente, sem mudança no jogo de produção. Relatório: `CP_CARTO_091_MARCADOR_HORIZONTE_AUDITORIA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-092:** construir uma sonda QA de projecção câmara→mundo na rota `road_to_arch`, registando somente nós que projectem no quadrante visual direito onde o artefacto é observado. Não repetir ocultações por cor, `MarcoRibeirinho`, água, vegetação, Arco, luzes ou balizas sem associação de pixel demonstrável. Manter a fronteira R1–R6 e validar parser, 36 segundos de gameplay e captura antes de qualquer promoção.
+
+
+## CP-CARTO-092 — Projecção do carvalho rejeitada
+
+A sonda câmara→mundo filtrou o quadrante do artefacto e encontrou apenas a malha `tree_oak_dark` em `(-26.16133, 0.348372, 30.0)`. A ocultação exclusiva de QA foi validada durante 36 segundos e não modificou o ponto azul-ciano. A hipótese foi revertida; não repetir carvalho, Marco Ribeirinho, filtros amplos de cor ou alterações de vegetação baseadas nesse pixel. Relatório: `CP_CARTO_092_PROJECCAO_CARVALHO_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-093:** auditar a legibilidade material da rota de lajes Casa Voss→Arco usando somente os materiais existentes e sem mudar posição, escala, colisores, água, árvores, Arco ou luzes. O objectivo é distinguir a rota de pedra do solo PBR alternativo a médias distâncias; a hipótese só pode ser promovida se a captura de 36 segundos demonstrar ganho visual mensurável e preservação completa da trajectória física.
