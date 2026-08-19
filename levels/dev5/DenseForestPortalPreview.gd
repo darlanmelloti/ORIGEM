@@ -14,6 +14,8 @@ func _ready() -> void:
 	portal.name = "PortalFlorestalMarco4QA"
 	add_child(portal)
 	print("[DEV5_FOREST_QA] anchor=%s passage_width=%.1f isolated=true region_script=false" % [MAP_ANCHOR, CENTRAL_PASSAGE_WIDTH])
+	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
+		call_deferred("_save_snapshot_qa", OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT"))
 
 func _build_environment() -> void:
 	var world := WorldEnvironment.new()
@@ -40,3 +42,9 @@ func _build_environment() -> void:
 	camera.look_at_from_position(camera.position, Vector3(0.0, 1.0, 0.0))
 	camera.current = true
 	add_child(camera)
+
+func _save_snapshot_qa(snapshot_path: String) -> void:
+	for frame_index: int in range(30):
+		await get_tree().process_frame
+	var result := get_viewport().get_texture().get_image().save_png(snapshot_path)
+	print("[DEV5_FOREST_QA] snapshot=%s result=%s" % [snapshot_path, result])
