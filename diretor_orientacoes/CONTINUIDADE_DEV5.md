@@ -358,17 +358,21 @@ O parser do projecto terminou com `PARSER_EXIT=0` e `EliasThirdPersonPreview.tsc
 
 `R1LivingVossExteriorPreview.tscn` passou parser e 36 segundos com anexo aprovado, dois cervos CC0, horta tridimensional, oito aterramentos X/Z, rota exterior livre e uma luz dinâmica. Não altera VossHouse, a porta ou Player.gd. Ver `CP_D5_093_CASA_VOSS_VIVA.md`.
 
-## CP-D5-094 — ACTIVO: Arco das Ruínas vivo R3
+## CP-D5-094 — CONCLUÍDO: Arco das Ruínas vivo R3
 
-Criar composição QA do corredor R3 com flora de margem, fauna afastada e ruínas laterais em pedra. Preservar a rota R3→R4 e a silhueta canónica; nunca construir um arco estrutural, portal ou compressão da escala cartográfica.
+`R3LivingArchCorridorPreview.tscn` passou parser e 36 segundos com dois cervos CC0, quatro elementos vegetais, duas ruínas laterais, oito aterramentos X/Z, corredor R3→R4 livre e uma luz dinâmica. Não cria arco estrutural, portal ou compressão cartográfica. Ver `CP_D5_094_ARCO_RUINAS_VIVO.md`.
+
+## CP-D5-095 — ACTIVO: Plano de integração mapa vivo R1–R6
+
+Consolidar os candidatos QA vivos R1–R6 numa sequência segura de integração pelo Dev1. Para cada marco, registar origem, activos, limites LOD, colisores, rota a preservar, captura de prova e condição de reversão. Nenhuma promoção automática de QA para produção.
 
 | Critério | Obrigatório |
 |---|---|
-| Fauna | activo 3D real fora do corredor |
-| Flora | vegetação tridimensional de margem, sem parede |
-| Construção | ruínas laterais reais; zero arco estrutural |
-| Validação | parser, grounding e 36 segundos de QA |
-| Continuidade | publicar e abrir CP-D5-095 no mesmo ciclo |
+| Cobertura | R1 Casa Voss, R2 Estrada, R3 Arco, R4 Floresta, R5 Majestic, R6 Ruínas |
+| Segurança | preservar porta, água, rota e fronteira Dev2 |
+| Visual | fauna/vegetação/construção reais e sem painéis |
+| Validação | referências existentes e sessão QA de 36 segundos |
+| Continuidade | publicar e abrir CP-D5-096 no mesmo ciclo |
 
 
 
@@ -377,4 +381,4 @@ Criar composição QA do corredor R3 com flora de margem, fauna afastada e ruín
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-094` — Arco das Ruínas vivo R3. Depois da validação e publicação, Dev5 abre CP-D5-095 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-095` — Plano de integração mapa vivo R1–R6. Depois da publicação, Dev5 abre CP-D5-096 no mesmo ciclo, sem consulta passiva ou espera temporal.
