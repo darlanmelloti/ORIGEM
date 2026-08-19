@@ -136,9 +136,13 @@ Script, telemetria, manifesto e matriz descrevem a mesma sessão R2 e não apres
 
 A auditoria confirmou parser, rota, grounding e luzes como PASS, enquanto terceira pessoa e composição permanecem pendentes dos respectivos proprietários. A promoção visual continua correctamente bloqueada. Registo: `DEV6_033_PRONTIDAO_PROMOCAO_R2.md`.
 
-## Tarefa activa — DEV6-034
+## DEV6-034 — CONCLUÍDO
 
-Verificar o Git remoto por nova recaptura ou câmara de terceira pessoa e aplicar imediatamente a matriz DEV6-014 se existir. Se não existir, executar apenas a regressão técnica R2 sem alterar câmara, jogador, rota ou geometria.
+A verificação remota encontrou trabalho Dev5 de R3, mas nenhuma câmara ou recaptura válida para R2. A decisão visual mantém-se rejeitada e a regressão técnica continua. Registo: `DEV6_034_VERIFICACAO_REMOTA_R2.md`.
+
+## Tarefa activa — DEV6-035
+
+Executar regressão técnica R2: parser, `road_to_arch` por 36 segundos e manifesto de sessão. Não alterar câmara, jogador, rota ou geometria; aplicar a matriz DEV6-014 se uma recaptura válida surgir.
 
 ## Continuidade
 
