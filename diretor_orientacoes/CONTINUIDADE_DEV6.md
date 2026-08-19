@@ -108,9 +108,13 @@ O editor e a rota de 36 segundos carregaram os activos R2 sem erros de recurso, 
 
 Os preloads R2 foram verificados: todos usam caminhos `res://` e os activos existem no clone Dev6, sem dependências externas ou referências quebradas. Registo: `DEV6_026_REFERENCIAS_ACTIVOS_R2.md`.
 
-## Tarefa activa — DEV6-027
+## DEV6-027 — CONCLUÍDO
 
-Auditar a limpeza de dependências R2: confirmar que não há `.uid` rastreado, caminhos absolutos ou binários QA indevidos na branch. Corrigir apenas artefactos de controlo de versão; não alterar câmara, jogador, rota ou geometria.
+A branch não rastreia `.uid` nem binários QA Dev6; os três caminhos absolutos documentam apenas evidência externa, sem dependência de runtime. Registo: `DEV6_027_LIMPEZA_DEPENDENCIAS_R2.md`.
+
+## Tarefa activa — DEV6-028
+
+Auditar os manifestos e hashes QA R2: confirmar coerência entre a integridade DEV6-013, a evidência externa actual e a baseline DEV6-023. Não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
