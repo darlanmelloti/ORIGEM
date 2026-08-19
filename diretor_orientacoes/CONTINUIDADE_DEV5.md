@@ -279,7 +279,10 @@ O `VegetationLodAuditPreview` passou 36 segundos com limites de 1 árvore PBR fo
 ## CP-D5-068 — CONCLUÍDO: Handoff cartográfico R6 → R7
 O preview `EliasR6R7HandoffPreview.tscn` passou 36 segundos com partida R6 `(60,252)`, destino R7 `(140,352)`, `reached_marker_r7=true`, `elias_camera_current=false`, `marker_only=true`, `dev2_geometry_created=false` e `production_modules_changed=false`. A prova não criou Região 7 nem alterou produção. Ver `CP_D5_068_VALIDACAO_HANDOFF_R6_R7.md` e `CP-D5-068_R6_R7_HANDOFF_RUNTIME.log`.
 
-## CP-D5-069 — ACTIVO
+## CP-D5-069 — CONCLUÍDO: Rumo Elias R5 → R6
+O preview `EliasR5R6HeadingPreview.tscn` passou 36 segundos com partida `(-80,190)`, destino R6 id `6`, `arrival_r6=true`, próxima âncora `7`, indicação `PASSAGEM: VILA ELEVADA` e `elias_camera_current=false`. A continuidade R5→R6→R7 foi confirmada sem alterar produção. Ver `CP_D5_069_VALIDACAO_RUMO_ELIAS_R5_R6.md` e `CP-D5-069_R5_R6_HEADING_RUNTIME.log`.
+
+## CP-D5-070 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -289,4 +292,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-069` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-070` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
