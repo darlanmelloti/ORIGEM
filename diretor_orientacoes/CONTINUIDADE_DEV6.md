@@ -32,9 +32,17 @@ Quatro afloramentos e três vestígios laterais foram inseridos sem colisores, l
 
 A leitura de câmara foi auditada sem tocar no jogador nem na câmara de produção. A proposta de terceira pessoa cartográfica para Dev1/Dev3 está em `DEV6_007_PROPOSTA_CAMARA_CARTOGRAFICA_R2.md`.
 
-## Tarefa activa — DEV6-008
+## DEV6-008 — CONCLUÍDO
 
-Preparar uma ficha de transferência para Dev1/Dev3 com as condições de integração e recaptura R2. Em seguida, Dev6 inicia a auditoria técnica de regressão R2 depois de a frente proprietária publicar a câmara.
+A ficha de transferência e proposta de recaptura foram publicadas para Dev1/Dev3. Dev6 não aguarda a resposta externa: a integração futura será apenas uma entrada adicional de regressão.
+
+## DEV6-009 — CONCLUÍDO
+
+A baseline de regressão R2 confirmou ponte modular, 2 cervos, 4 elementos vegetais, 2 vestígios, 9/9 grounding, 0 luzes incrementais e `road_to_arch` por 36 segundos. Registo: `DEV6_009_BASELINE_REGRESSAO_R2.md`.
+
+## Tarefa activa — DEV6-010
+
+Auditar o orçamento de geometria e materiais do bloco R2: contabilizar instâncias Dev6, materiais adicionais e luzes, e confirmar que os ajustes continuam adequados à GTX 1050 Ti. Não interromper o ciclo enquanto a recaptura Dev1/Dev3 não chega.
 
 ## Continuidade
 
