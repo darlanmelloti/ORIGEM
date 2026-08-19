@@ -761,7 +761,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-226 — CONCLUÍDO: Regressão travessia ponte R2
 `EliasStoneBridgeTraversalPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando âncora `(−21,4;28)`, tabuleiro `tabuleiro_continuo` aterrado, clearance 0,21 m sobre mínimo 0,20 m, 3 ciclos, ponte modular, `glb_bridge=false`, câmara de produção inactiva e produção preservada. Ver `CP_D5_226_REGRESSAO_TRAVESSIA_PONTE_R2.md` e `CP-D5-226_R2_BRIDGE_TRAVERSAL_RUNTIME.log`.
 
-## CP-D5-227 — ACTIVO
+## CP-D5-227 — CONCLUÍDO: Regressão corredor R3
+`EliasArchCorridorPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando R3 `(−16,741;48)`, destino `RUMO À FLORESTA` id 4, 2 ciclos de rota aberta, `structural_arch=false`, câmara de produção inactiva e produção preservada. Ver `CP_D5_227_REGRESSAO_CORREDOR_R3.md` e `CP-D5-227_R3_ARCH_CORRIDOR_RUNTIME.log`.
+
+## CP-D5-228 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -771,4 +774,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-227` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-228` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
