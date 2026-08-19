@@ -321,3 +321,10 @@ A projecção de câmara, o raio no pixel e a ocultação QA da única árvore l
 A escala foi verificada contra as âncoras canónicas: Casa→Arco = 40,344 m e Arco→Floresta = 68,439 m. As capturas CP-CARTO-108 preservam essa continuidade. Não existe causa de escala que justifique mover marcos, mudar FOV ou comprimir o terreno. Relatório: `CP_CARTO_110_ESCALA_CORREDOR_CASA_ARCO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-111:** auditar a leitura material local do Arco das Ruínas e da junta final das lajes. Aplicar no máximo uma melhoria reversível de valor/normal, apenas se não alterar o arco estrutural, as distâncias, os colisores ou a rota.
+
+
+## CP-CARTO-111 — Material exclusivo do Arco rejeitado
+
+O material PBR exclusivo do Arco não gerou ganho visual suficiente na rota validada de 36 segundos. A alteração foi revertida, sem tocar em luzes, geometria, colisores ou âncoras. Relatório: `CP_CARTO_111_MATERIAL_ARCO_REJEITADO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-112:** auditoria de transição entre as últimas lajes da Estrada do Rio e a clareira do Arco. Medir os elementos que ainda interrompem a leitura do caminho; não repetir alterações de material do Arco, escala, atmosfera, água, árvores isoladas ou camadas auxiliares já rejeitadas.
