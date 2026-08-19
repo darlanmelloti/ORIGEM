@@ -208,19 +208,17 @@ A cena `EliasCameraContractPreview.tscn` confirmou `follow_camera.current=false`
 Foram identificados três harnesses com `EliasThirdPersonPresentation`. Os dois harnesses de percurso passaram a reter referência tipada à apresentação, eliminando uma asserção causada por normalização do nome do nó em `_ready()`. Parser Godot 4.7.1 e duas sessões de 36 segundos passaram com `elias_camera_current=false`, dois ciclos de percurso por cena e zero alterações a `Player.gd` ou módulos regionais. Ver `CP_D5_046_AUDITORIA_CAMERAS_ELIAS.md`.
 
 ## CP-D5-047 — CONCLUÍDO: Matriz de contratos de apresentação de Elias
-
-A matriz consolidou contratos de câmara, colisão QA, trajecto R5/R6, grounding, iluminação e isolamento de produção. A integridade documental e o contrato de câmara passaram no parser Godot 4.7.1 e numa sessão QA de 36 segundos com captura interna válida. Dev1 continua como proprietário da integração em `Player.gd`. Ver `CP_D5_047_MATRIZ_CONTRATOS_ELIAS.md`.
-
-## CP-D5-048 — ACTIVO: Checklist de integração Elias R5/R6
-
-Transformar a matriz em checklist operacional curto para revisão Dev1: testes obrigatórios, evidência, critérios de aceitação e reversão para câmara, colisor, trajecto e grounding. Esta tarefa não altera produção.
-
-| Critério | Obrigatório |
+Foi criada `CP_D5_047_MATRIZ_CONTRATOS_ELIAS.md`, consolidando câmara, referência tipada, colisão QA, trajecto, grounding, folga, performance e isolamento de produção. A ficha explicita aceitação, reversão e a propriedade de Dev1 sobre `Player.gd`; não promove Elias ao jogador principal.
+| Critério | Resultado |
 |---|---|
-| Cobertura | R5 e R6, câmara, colisão, percurso e grounding |
-| Aceitação | parser + 30 s de gameplay regional por Dev1 |
-| Reversão | bloqueio, queda, conflito de câmara ou desvio cartográfico |
-| Continuidade | ao publicar, activar CP-D5-049 no mesmo ciclo |
+| Cobertura | câmara, colisão QA, trajecto, grounding e isolamento documentados |
+| Segurança | aceitação e reversão explícitas |
+| Produção | Dev1 permanece proprietário de `Player.gd` |
+| Continuidade | CP-D5-048 activado no mesmo ciclo |
+
+## CP-D5-048 — ACTIVO
+Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
+
 
 
 
@@ -228,4 +226,4 @@ Transformar a matriz em checklist operacional curto para revisão Dev1: testes o
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-048` — checklist de integração Elias R5/R6. Depois da validação e publicação, Dev5 abre CP-D5-049 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-048` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.

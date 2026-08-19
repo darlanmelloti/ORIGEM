@@ -1,33 +1,28 @@
 # CP-D5-047 — Matriz de contratos da apresentação de Elias
 
-**Finalidade:** consolidar a fundação técnica já validada para Elias em terceira pessoa. Esta matriz permite revisão de integração sem alterar o controlador de produção, os módulos regionais ou a identidade do jogador.
+## Finalidade
 
-## Matriz de contratos
+Esta ficha consolida os contratos técnicos que qualquer harness Dev5 deve respeitar ao apresentar Elias em terceira pessoa. O documento é uma base de revisão para Dev1; não promove a apresentação ao jogador principal e não autoriza alterações em `Player.gd`.
 
-| Domínio | Contrato actual | Evidência QA | Proprietário | Critério de aceitação para produção | Reversão obrigatória |
-|---|---|---|---|---|---|
-| Identidade | O jogador chama-se **Elias**; a apresentação é `EliasThirdPersonPresentation`. | CP-D5-041, CP-D5-046 | Dev5 prepara; Dev1 integra | Nomenclatura e UI preservam Elias | Qualquer referência operacional a outro nome |
-| Câmara | Nos harnesses Dev5, `follow_camera.current=false` e a câmara QA externa domina a viewport. | CP-D5-045, CP-D5-046 | Dev5 | Uma câmara activa por cena de integração | Concorrência de câmaras, troca involuntária de viewport |
-| Colisão QA | Elias utiliza cápsula QA de raio `0,55 m`, separada da implementação de `Player.gd`. | CP-D5-041, CP-D5-043 | Dev5 | Revisão Dev1 do colisor do jogador principal | Queda, penetração ou bloqueio de rota |
-| Percurso R6 | Eixo `X=60`, baliza em `(52,260)`, folga de `6,05 m`. | CP-D5-042, CP-D5-043 | Dev1 para produção | 30 s Majestic→Ruínas sem bloqueio | Folga abaixo de `4,00 m` ou colisão com baliza |
-| Percurso R5 | Eixo `X=-80`, pavilhão em `(-88,178)`, folga de `5,45 m`. | CP-D5-043 | Dev1 para produção | 30 s Floresta→Majestic→Margem | Bloqueio, queda ou colisão com pavilhão |
-| Grounding | O sistema preserva X/Z cartográfico e ajusta apenas Y por raycast. | CP-D5-022, CP-D5-023 | Dev5 | Colisor de produção identificado por Dev1 | Objeto suspenso ou desvio de X/Z |
-| Iluminação | Os harnesses criam uma luz direccional; não acrescentam Omni/Spot lights. | CP-D5-040, CP-D5-046 | Dev5 | Orçamento integrado ≤16 luzes dinâmicas | Luzes novas sem orçamento ou regressão visual |
-| Produção | Dev5 não altera `Player.gd`, R1–R6 ou R7–R12. | Auditorias de escopo | Dev1/Dev2 | Alteração só por frente proprietária | Qualquer alteração directa fora do escopo |
+| Domínio | Contrato obrigatório | Evidência actual | Critério de aceitação |
+|---|---|---|---|
+| Câmara | A câmara de Elias permanece inactiva quando existe câmara QA externa | `EliasCameraContractPreview`, R6 e R5 | Uma única câmara de viewport activa; `follow_camera.current=false` |
+| Apresentação | Usar `EliasThirdPersonPresentation` através de referência tipada | Auditoria CP-D5-046 | A instância não depende de procura por nome mutável |
+| Colisão QA | Actor e marcos usam colisores próprios, sem alterar colisores de produção | Previews R5/R6 | Sem bloqueio indevido e sem referência a módulos regionais |
+| Trajecto | O actor percorre o corredor QA central e reinicia após o fim | R6 e R5 | Pelo menos dois ciclos completos com `clear=true` |
+| Grounding | A baliza conserva X/Z canónico e resolve apenas Y por raycast | R6 monólito e preview de folga | `grounded=true`, X/Z preservados e colisor QA identificado |
+| Folga | O trajecto respeita a distância mínima entre Elias e a baliza | R6 | `6,05 m` observados contra `4,00 m` mínimos |
+| Performance | Harness usa no máximo a luz direccional própria e não cria luzes do actor | Auditoria CP-D5-040 | Zero luzes dinâmicas adicionadas pela apresentação |
+| Isolamento | Não carregar ou modificar `Player.gd`, regiões R1–R6 ou câmaras de produção | Auditoria CP-D5-044 | Zero referências operacionais e zero alterações fora da fronteira Dev5 |
 
-## Fluxo de integração autorizado
+## Aceitação e reversão
 
-> Dev5 entrega **evidência e contrato**, mas não promove automaticamente candidatos ou a apresentação de Elias. Dev1 decide a integração real no controlador, no colisor e na câmara depois de validar o percurso regional com gameplay de pelo menos 30 segundos.
+O contrato é aceite quando o parser Compatibility passa, cada harness relevante mantém uma sessão de 36 segundos sem erros, a câmara QA permanece proprietária da viewport e os invariantes de grounding, colisão e trajecto são registados. Uma falha em qualquer critério mantém Elias como proxy QA e impede a integração.
 
-1. Dev1 escolhe uma única rota regional a integrar, R5 ou R6.
-2. Dev1 mantém a coordenada X/Z canónica e adopta apenas o ajuste Y confirmado pelo raycast.
-3. Dev1 valida a porta, o salto, a stamina, a colisão do jogador e 30 segundos de travessia física.
-4. Dev5 repete a auditoria de câmara e regressão apenas se a apresentação em terceira pessoa for efectivamente chamada pela produção.
+A reversão consiste em remover apenas o preview ou a alteração em `entities/player/third_person/` que falhou, restaurando o último commit Dev5 aprovado. É proibida a correcção directa em `Player.gd` ou em módulos regionais como forma de contornar um teste vermelho.
 
-## Validação da matriz
+> **Proprietário de produção:** Dev1 mantém a decisão sobre `Player.gd`, câmaras de produção e integração regional. Dev5 fornece apenas contratos e provas autónomas.
 
-A matriz foi reconciliada com as cenas `EliasCameraContractPreview`, `EliasR6ClearancePreview` e `EliasMajesticClearancePreview`, bem como com a telemetria e as capturas QA dos CP-D5-041 a CP-D5-046. Ela não introduz novo código em produção.
+## Próxima tarefa
 
-## Próxima tarefa automática
-
-**CP-D5-048 — Preparação de checklist de integração Elias R5/R6.** Transformar os contratos desta matriz num checklist operacional curto para o Dev1, com testes obrigatórios, fontes de evidência e condições de reversão. A tarefa mantém-se documental enquanto Dev1 não solicitar integração.
+Ao publicar esta matriz, activar CP-D5-048 no mesmo ciclo para a próxima validação QA permitida.
