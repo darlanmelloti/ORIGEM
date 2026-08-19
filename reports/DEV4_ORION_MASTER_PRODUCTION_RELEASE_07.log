@@ -1,0 +1,5 @@
+QA-PACKAGE-01 aprovado
+ZIP: /tmp/origem_package_qa.q1BKX2/ORIGEM_package_qa.zip
+SHA-256: cea4935d07e7b52ba119309c498cdd2d7294fb483a08c19c7a7a64f108a85d8f
+Captura: /tmp/origem_package_qa.q1BKX2/new_game_30s.png
+Logs: /tmp/origem_package_qa.q1BKX2/headless.log ; /tmp/origem_package_qa.q1BKX2/menu_new_game.log

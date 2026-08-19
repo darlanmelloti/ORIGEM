@@ -9,6 +9,8 @@ extends Node3D
 # ═══════════════════════════════════════════════════════════════
 
 const CARTOGRAPHIC_MAP_UI_SCRIPT: Script = preload("res://ui/menus/CartographicMapUI.gd")
+const QA_STATE_TRANSITION_SCRIPT: Script = preload("res://tools/qa/run_player_state_transition.gd")
+const QA_STATE_ROUNDTRIP_SCRIPT: Script = preload("res://tools/qa/run_player_state_roundtrip.gd")
 # Orçamento GTX 1050 Ti: o vale pode conter muitas luzes de narrativa, mas só as 16 mais próximas de Elias permanecem visíveis.
 const MAX_VISIBLE_DYNAMIC_OMNI_LIGHTS: int = 16
 const LIGHT_BUDGET_REFRESH_MSEC: int = 500
@@ -77,6 +79,12 @@ func _ready():
 	hud_status.text = "ELIAS  100 / 100"
 	stamina_label.text = "STAMINA  100 / 100"
 	_apply_exterior_light_budget()
+	if OS.has_environment("ORIGEM_QA_STATE_TRANSITION"):
+		var state_runner: Node = QA_STATE_TRANSITION_SCRIPT.new()
+		get_tree().root.call_deferred("add_child", state_runner)
+	elif OS.has_environment("ORIGEM_QA_STATE_ROUNDTRIP"):
+		var roundtrip_runner: Node = QA_STATE_ROUNDTRIP_SCRIPT.new()
+		get_tree().root.call_deferred("add_child", roundtrip_runner)
 	# CINE-PAIR-10: apenas um retorno real do interior deve substituir o spawn normal da Casa Voss.
 	var exterior_player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():

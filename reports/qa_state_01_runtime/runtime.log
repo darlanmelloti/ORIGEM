@@ -1,0 +1,26 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+WARNING: FSR1 3D scaling is only available when using the Forward+ renderer.
+     at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:1028)
+WARNING: res://scenes/main.tscn:4 - ext_resource, invalid UID: uid://pbower0o7k7e - using text path instead: res://entities/player/Player.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.
+     at: environment_set_ssr (servers/rendering/storage/environment_storage.cpp:653)
+     GDScript backtrace (most recent call first):
+         [0] _setup_environment (res://levels/LevelEnvironment.gd:65)
+         [1] _ready (res://levels/LevelEnvironment.gd:21)
+WARNING: SDFGI is only available when using the Forward+ renderer.
+     at: environment_set_sdfgi (servers/rendering/storage/environment_storage.cpp:822)
+     GDScript backtrace (most recent call first):
+         [0] _setup_environment (res://levels/LevelEnvironment.gd:72)
+         [1] _ready (res://levels/LevelEnvironment.gd:21)
+[QA-STATE-01] {"health":100,"label":"before_orion_entry","position":[-22.0,0.767649590969086,8.0],"rotation_y":0.0,"stamina":100.0}
+[QA-STATE-01] {"health":100,"label":"after_orion_entry","position":[0.0,0.849898099899292,0.449999988079071],"rotation_y":2.8322639465332,"stamina":100.0}
+[QA-STATE-01-RESULT] {"after":{"health":100,"label":"after_orion_entry","position":[0.0,0.849898099899292,0.449999988079071],"rotation_y":2.8322639465332,"stamina":100.0},"before":{"health":100,"label":"before_orion_entry","position":[-22.0,0.767649590969086,8.0],"rotation_y":0.0,"stamina":100.0},"duration_seconds":33,"entry_transition_completed":true,"probe":"QA-STATE-01","scope":"telemetria Dev4; sem alteração de Player.gd"}
+ERROR: Texture with GL ID of 65: leaked 349524 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Texture with GL ID of 66: leaked 349524 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)

@@ -1,0 +1,2 @@
+[QA-STATE-01-RESULT] {"after":{"health":100,"label":"after_orion_entry","position":[0.0,0.849898099899292,0.449999988079071],"rotation_y":2.8322639465332,"stamina":100.0},"before":{"health":100,"label":"before_orion_entry","position":[-22.0,0.767649590969086,8.0],"rotation_y":0.0,"stamina":100.0},"duration_seconds":33,"entry_transition_completed":true,"probe":"QA-STATE-01","scope":"telemetria Dev4; sem alteração de Player.gd"}
+[QA-STATE-01] captura=/home/ubuntu/ORIGEM_cine48_recovery_v2/reports/qa_state_01_runtime/orion_state_30s.png
