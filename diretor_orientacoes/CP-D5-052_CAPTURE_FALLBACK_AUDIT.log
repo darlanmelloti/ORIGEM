@@ -1,0 +1,96 @@
+--- SNAPSHOT HANDLERS ---
+entities/player/third_person/EliasThirdPersonPreview.gd
+levels/dev5/CartographicGroundingPreview.gd
+levels/dev5/CartographicHeightContractsPreview.gd
+levels/dev5/CartographicPlacementPreview.gd
+levels/dev5/DenseForestPortalPreview.gd
+levels/dev5/EliasCameraContractPreview.gd
+levels/dev5/EliasMajesticClearancePreview.gd
+levels/dev5/EliasR6ClearancePreview.gd
+levels/dev5/GroundedVegetationR4R5Preview.gd
+levels/dev5/MajesticGroundedPavilionPreview.gd
+levels/dev5/MajesticPavilionPreview.gd
+levels/dev5/MeshBudgetAuditPreview.gd
+levels/dev5/R6MonolithClearancePreview.gd
+levels/dev5/StoneBridgeGLBPreview.gd
+levels/dev5/StoneBridgeLandmarkPreview.gd
+levels/dev5/SubmergedRuinsPierPreview.gd
+levels/dev5/SubmergedShoreMonolithPreview.gd
+levels/dev5/VegetationDensityAuditPreview.gd
+levels/dev5/VossWaystationPreview.gd
+snapshot_handler_count=19
+--- SAFE TEXTURE FALLBACKS ---
+levels/dev5/MajesticPavilionPreview.gd:74:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/MajesticPavilionPreview.gd:75:	if viewport_texture == null:
+levels/dev5/MajesticPavilionPreview.gd:76:		print("[DEV5_MAJESTIC_QA] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/MajesticPavilionPreview.gd:78:	var image := viewport_texture.get_image()
+levels/dev5/MajesticPavilionPreview.gd:80:		print("[DEV5_MAJESTIC_QA] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/StoneBridgeLandmarkPreview.gd:79:	var image := get_viewport().get_texture().get_image()
+levels/dev5/VossWaystationPreview.gd:74:	var image := get_viewport().get_texture().get_image()
+levels/dev5/DenseForestPortalPreview.gd:49:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/DenseForestPortalPreview.gd:50:	if viewport_texture == null:
+levels/dev5/DenseForestPortalPreview.gd:51:		print("[DEV5_FOREST_QA] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/DenseForestPortalPreview.gd:53:	var viewport_image := viewport_texture.get_image()
+levels/dev5/DenseForestPortalPreview.gd:54:	if viewport_image == null:
+levels/dev5/DenseForestPortalPreview.gd:55:		print("[DEV5_FOREST_QA] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/DenseForestPortalPreview.gd:57:	var result := viewport_image.save_png(snapshot_path)
+levels/dev5/SubmergedRuinsPierPreview.gd:45:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/SubmergedRuinsPierPreview.gd:46:	if viewport_texture == null:
+levels/dev5/SubmergedRuinsPierPreview.gd:47:		print("[DEV5_RUINS_QA] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/SubmergedRuinsPierPreview.gd:49:	var viewport_image := viewport_texture.get_image()
+levels/dev5/SubmergedRuinsPierPreview.gd:50:	if viewport_image == null:
+levels/dev5/SubmergedRuinsPierPreview.gd:51:		print("[DEV5_RUINS_QA] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/SubmergedRuinsPierPreview.gd:53:	var result := viewport_image.save_png(snapshot_path)
+levels/dev5/CartographicPlacementPreview.gd:72:	var image := get_viewport().get_texture().get_image()
+levels/dev5/MeshBudgetAuditPreview.gd:81:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/MeshBudgetAuditPreview.gd:82:	if viewport_texture == null:
+levels/dev5/MeshBudgetAuditPreview.gd:83:		print("[DEV5_MESH_AUDIT] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/MeshBudgetAuditPreview.gd:85:	var image := viewport_texture.get_image()
+levels/dev5/MeshBudgetAuditPreview.gd:87:		print("[DEV5_MESH_AUDIT] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/StoneBridgeGLBPreview.gd:87:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/StoneBridgeGLBPreview.gd:88:	if viewport_texture == null:
+levels/dev5/StoneBridgeGLBPreview.gd:89:		print("[DEV5_BRIDGE_GLB] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/StoneBridgeGLBPreview.gd:91:	var image := viewport_texture.get_image()
+levels/dev5/StoneBridgeGLBPreview.gd:93:		print("[DEV5_BRIDGE_GLB] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/VegetationDensityAuditPreview.gd:86:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/VegetationDensityAuditPreview.gd:87:	if viewport_texture == null:
+levels/dev5/VegetationDensityAuditPreview.gd:88:		print("[DEV5_VEGETATION_DENSITY] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/VegetationDensityAuditPreview.gd:90:	var image := viewport_texture.get_image()
+levels/dev5/VegetationDensityAuditPreview.gd:92:		print("[DEV5_VEGETATION_DENSITY] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/CartographicGroundingPreview.gd:95:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/CartographicGroundingPreview.gd:96:	if viewport_texture == null:
+levels/dev5/CartographicGroundingPreview.gd:97:		print("[DEV5_GROUNDING] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/CartographicGroundingPreview.gd:99:	var image := viewport_texture.get_image()
+levels/dev5/CartographicGroundingPreview.gd:101:		print("[DEV5_GROUNDING] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/CartographicHeightContractsPreview.gd:61:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/CartographicHeightContractsPreview.gd:62:	if viewport_texture == null:
+levels/dev5/CartographicHeightContractsPreview.gd:63:		print("[DEV5_HEIGHT_CONTRACTS] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/CartographicHeightContractsPreview.gd:65:	var image := viewport_texture.get_image()
+levels/dev5/CartographicHeightContractsPreview.gd:67:		print("[DEV5_HEIGHT_CONTRACTS] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/MajesticGroundedPavilionPreview.gd:113:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/MajesticGroundedPavilionPreview.gd:114:	if viewport_texture == null:
+levels/dev5/MajesticGroundedPavilionPreview.gd:115:		print("[DEV5_MAJESTIC_GROUNDING] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/MajesticGroundedPavilionPreview.gd:117:	var image := viewport_texture.get_image()
+levels/dev5/MajesticGroundedPavilionPreview.gd:119:		print("[DEV5_MAJESTIC_GROUNDING] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/GroundedVegetationR4R5Preview.gd:144:	var viewport_texture := get_viewport().get_texture()
+levels/dev5/GroundedVegetationR4R5Preview.gd:145:	if viewport_texture == null:
+levels/dev5/GroundedVegetationR4R5Preview.gd:146:		print("[DEV5_VEGETATION_GROUNDING] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+levels/dev5/GroundedVegetationR4R5Preview.gd:148:	var image := viewport_texture.get_image()
+levels/dev5/GroundedVegetationR4R5Preview.gd:150:		print("[DEV5_VEGETATION_GROUNDING] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+levels/dev5/SubmergedShoreMonolithPreview.gd:127:	var result := get_viewport().get_texture().get_image().save_png(snapshot_path)
+levels/dev5/R6MonolithClearancePreview.gd:160:	var result := get_viewport().get_texture().get_image().save_png(snapshot_path)
+levels/dev5/EliasR6ClearancePreview.gd:139:	var viewport_camera := get_viewport().get_camera_3d()
+levels/dev5/EliasR6ClearancePreview.gd:140:	assert(viewport_camera != null and viewport_camera != elias_presentation.follow_camera)
+levels/dev5/EliasR6ClearancePreview.gd:141:	print("[DEV5_ELIAS_CAMERA_AUDIT] harness=EliasR6ClearancePreview elias_camera_current=%s viewport_owner=%s" % [elias_presentation.follow_camera.current, viewport_camera.name])
+levels/dev5/EliasR6ClearancePreview.gd:165:	var result := get_viewport().get_texture().get_image().save_png(snapshot_path)
+levels/dev5/EliasMajesticClearancePreview.gd:123:	var viewport_camera := get_viewport().get_camera_3d()
+levels/dev5/EliasMajesticClearancePreview.gd:124:	assert(viewport_camera != null and viewport_camera != elias_presentation.follow_camera)
+levels/dev5/EliasMajesticClearancePreview.gd:125:	print("[DEV5_ELIAS_CAMERA_AUDIT] harness=EliasMajesticClearancePreview elias_camera_current=%s viewport_owner=%s" % [elias_presentation.follow_camera.current, viewport_camera.name])
+levels/dev5/EliasMajesticClearancePreview.gd:149:	var result := get_viewport().get_texture().get_image().save_png(snapshot_path)
+levels/dev5/EliasCameraContractPreview.gd:19:	assert(get_viewport().get_camera_3d() == external_camera)
+levels/dev5/EliasCameraContractPreview.gd:20:	print("[DEV5_ELIAS_CAMERA] elias_camera_current=%s external_camera_current=%s viewport_owner=%s" % [elias.follow_camera.current, external_camera.current, get_viewport().get_camera_3d().name])
+levels/dev5/EliasCameraContractPreview.gd:82:	var result := get_viewport().get_texture().get_image().save_png(snapshot_path)
+entities/player/third_person/EliasThirdPersonPreview.gd:55:	var active_camera: Camera3D = get_viewport().get_camera_3d()
+entities/player/third_person/EliasThirdPersonPreview.gd:61:	var active_camera: Camera3D = get_viewport().get_camera_3d()
+entities/player/third_person/EliasThirdPersonPreview.gd:63:	var image: Image = get_viewport().get_texture().get_image()
+--- PARSER ---

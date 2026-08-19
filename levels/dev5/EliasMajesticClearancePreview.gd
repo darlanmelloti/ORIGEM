@@ -146,5 +146,9 @@ func _build_overlay() -> void:
 func _save_snapshot_qa(snapshot_path: String) -> void:
 	for frame_index: int in range(40):
 		await get_tree().process_frame
-	var result := get_viewport().get_texture().get_image().save_png(snapshot_path)
+	var viewport_texture := get_viewport().get_texture()
+	if viewport_texture == null:
+		print("[DEV5_ELIAS_MAJESTIC] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+		return
+	var result := viewport_texture.get_image().save_png(snapshot_path)
 	print("[DEV5_ELIAS_MAJESTIC] snapshot=%s result=%s" % [snapshot_path, result])
