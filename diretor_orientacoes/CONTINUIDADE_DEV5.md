@@ -126,24 +126,26 @@ Foram criados `CartographicGroundingSystem.gd`, `CartographicGroundingPreview.gd
 
 Foram criados `CartographicHeightContracts.gd`, `CartographicHeightContractsPreview.gd` e respectiva cena. A telemetria QA confirmou a cobertura dos seis marcos, as suas coordenadas X/Z canónicas, três proprietários regionais, o contrato de solo aplicável e a exclusão explícita dos candidatos já rejeitados nos marcos 3 e 6. O parser Godot 4.7.1, a sessão de 36 segundos e a captura interna passaram sem erro. Ver `CP_D5_023_CATALOGO_ALTURAS_ATERRAMENTO.md`.
 
-## CP-D5-024 — ACTIVO: Composição multi-marco aterrada Casa Voss→Estrada
-
-Criar uma única cena QA que coloque o anexo Casa Voss no marco 1 e a Ponte Marco 2 no marco 2 sobre um terreno físico irregular, aplicando `CartographicGroundingSystem.gd` a ambos. A composição deve provar escala e X/Z dos dois marcos, contacto sem objectos suspensos, zero luzes dinâmicas novas e passagem central visível. Não pode repetir a composição plana Casa→Estrada→Arco rejeitada em CP-D5-021, nem incluir o Arco estrutural rejeitado.
+## CP-D5-024 — CONCLUÍDO EM QA: Composição multi-marco aterrada Casa Voss→Estrada
+A cena `MultiLandmarkGroundedPreview.tscn` colocou o anexo Casa Voss no marco 1 e a Ponte Marco 2 no marco 2 sobre terreno físico irregular, usando `CartographicGroundingSystem.gd`. Os raycasts confirmaram `grounded=true` para ambos, ajustaram Y de 15,00/18,00 m para -2,52 m e preservaram X/Z `(-22,8)` e `(-21,4;12)`. A cena manteve a passagem visual central, não incluiu o Arco rejeitado e não tocou produção. Ver `CP_D5_024_COMPOSICAO_ATERRADA_QA.md` e `CP-D5-024_RUNTIME_HEADLESS.log`.
 
 ### Aceitação CP-D5-024
-
-| Critério | Obrigatório |
+| Critério | Resultado |
 |---|---|
-| Espacial | âncoras R1 e R2 preservadas em X/Z; apenas Y resolvido por raycast |
-| Física | dois contactos válidos em terreno irregular; nenhuma geometria suspensa |
-| Visual | câmara mostra ambos os marcos e uma ligação visual central; sem planos simples |
-| Escopo | novos módulos QA apenas em `levels/dev5/` |
-| Validação | parser Godot 4.7.1, 36 s, captura interna e telemetria de ambos os marcos |
-| Continuidade | ao publicar, abrir CP-D5-025 automaticamente; não aguardar nem consultar passivamente |
+| Espacial | Aprovado: âncoras R1/R2 e X/Z preservados; somente Y resolvido por raycast. |
+| Física | Aprovado: dois contactos válidos em terreno irregular, sem suspensão. |
+| Visual | Aprovado em QA: ambos os marcos e ligação central no enquadramento. |
+| Escopo | Aprovado: módulos novos somente em `levels/dev5/`. |
+| Validação | Aprovado localmente: parser e 36 s sem erros Dev5; captura oficial pendente. |
+| Continuidade | CP-D5-025 aberto automaticamente. |
+
+## CP-D5-025 — ACTIVO
+Criar o próximo candidato QA autorizado conforme a orientação publicada, sem aguardar consulta passiva após este checkpoint.
+
 
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-024` — composição multi-marco aterrada Casa Voss→Estrada. Depois da validação e publicação, Dev5 abre CP-D5-025 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-025` — executar o próximo candidato QA autorizado conforme a fila publicada.
