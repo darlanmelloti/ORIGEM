@@ -307,3 +307,10 @@ A auditoria comprovou que o rio é geometria contínua de 32 segmentos, não um 
 A auditoria causal identificou `EstradaDeLamaConformada` como a camada visual auxiliar responsável pela faixa escura irregular na saída. A construção foi desactivada; lajes físicas, soleira, rota para o Arco e camada macro posterior foram preservadas. As tomadas lateral e Casa Voss→Arco passaram 36 segundos. Relatório: `CP_CARTO_108_ESTRADA_LAMA_REMOVIDA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-109:** auditar o pequeno objecto ciano residual junto à rota de saída agora que a faixa escura foi removida. A auditoria deve primeiro identificar nome, posição e material na tomada lateral. Não ocultar nem modificar a produção até existir atribuição causal única; não reabrir as hipóteses de rio, água, atmosfera, sombras ou estrada auxiliar já encerradas.
+
+
+## CP-CARTO-109 — Sinal ciano residual não atribuído
+
+A projecção de câmara, o raio no pixel e a ocultação QA da única árvore lateral coincidente não explicaram o pequeno sinal ciano. A sonda foi revertida sem tocar produção. Relatório: `CP_CARTO_109_SINAL_CIANO_NAO_ATRIBUIDO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-110:** auditoria de escala do corredor Casa Voss→Arco. Medir a relação entre largura das lajes, distância ao Arco e altura das silhuetas arbóreas nos dois enquadramentos QA limpos. Só propor alteração se a leitura demonstrar um problema causal de escala; não retomar a investigação do sinal ciano nem candidatos já rejeitados.
