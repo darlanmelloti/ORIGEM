@@ -38,17 +38,21 @@ O candidato humano rigado está identificado, mas a aquisição automática do G
 
 O anexo tridimensional Casa Voss foi validado isoladamente em `VossWaystationPreview.tscn`: paredes volumétricas, abertura frontal, cobertura física de duas águas e colisores próprios. O objecto ainda não pode ser colocado em `VossHouse.gd`; ver `CP_D5_006_CASA_VOSS_ANEXO_QA.md`.
 
-## CP-D5-007 — ACTIVO
+## CP-D5-007 — CONCLUÍDO
 
-Preparar uma ficha de proposta para os candidatos Dev5 já validados — ponte do marco 2 e anexo da Casa Voss — com âncora X/Z, distância, orçamento de materiais/triângulos, colisores, dependências e proprietário da integração. Não alterar módulos R1–R6 nesta tarefa.
+A ficha `CP_D5_007_FICHAS_INTEGRACAO_R1_R6.md` foi preparada para os candidatos Dev5: ponte do marco 2 e anexo Casa Voss. Ela fixa âncoras, orçamento, colisores, proprietário R1–R6 e testes de aceitação, sem alterar módulos de produção.
 
-## Fila após CP-D5-007
+## CP-D5-008 — ACTIVO
+
+Criar somente um novo candidato cartográfico em cena QA isolada, depois de verificar que não sobrepõe a ponte ou o anexo já propostos. O candidato deve ter uma referência explícita no mapa, geometria tridimensional real, colisores próprios, zero luzes dinâmicas e 36 segundos de validação. Não alterar módulos R1–R6 ou R7–R12.
+
+## Fila após CP-D5-008
 
 1. CP-D5-005 — Integrar GLB humano rigado somente depois de activo recuperável/licenciado e orçamento aprovado.
-2. CP-D5-008 — Criar o próximo objecto cartográfico apenas em cena QA, depois da decisão Dev1 sobre os candidatos actuais.
+2. Rever feedback Dev1 sobre as fichas CP-D5-007 antes de integrar candidatos no mapa real.
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-007` — preparar fichas de integração dos objectos Dev5 já aprovados em QA, sem modificar o mundo principal.
+**Próxima tarefa activa após publicação:** `CP-D5-008` — criar o próximo candidato cartográfico apenas em cena QA, sem modificar o mundo principal.
