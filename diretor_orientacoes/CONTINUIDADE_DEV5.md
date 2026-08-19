@@ -578,7 +578,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-165 — CONCLUÍDO: Regressão heading R1→R2
 `EliasVossRoadHeadingPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando Casa Voss `(−22,8)`, Estrada `(−21,4;12)`, ponte candidata `(−21,4;28)`, destino R2 id 2, 8 ciclos de rota, câmara Elias de produção inactiva e produção preservada. Ver `CP_D5_165_REGRESSAO_HEADING_R1_R2.md` e `CP-D5-165_VOSS_ROAD_HEADING_RUNTIME.log`.
 
-## CP-D5-166 — ACTIVO
+## CP-D5-166 — CONCLUÍDO: Regressão corredor vivo R3
+`R3LivingArchCorridorPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 4 vegetações, 2 partes de ruína, 8 elementos aterrados, clearance fauna de 11,49–12,26 m em 4 ciclos, ausência do arco estrutural, escala não comprimida e produção preservada. Ver `CP_D5_166_REGRESSAO_R3_CORREDOR_VIVO.md` e `CP-D5-166_R3_LIVING_ARCH_RUNTIME.log`.
+
+## CP-D5-167 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -588,4 +591,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-166` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-167` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
