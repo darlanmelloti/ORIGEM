@@ -426,3 +426,10 @@ A apresentação da espada de primeira pessoa foi deslocada e reduzida sem alter
 As duas variantes de redução de dominante ciano foram validadas tecnicamente e em 36 segundos de gameplay, mas a variante reforçada tornou a conífera distante artificialmente verde sem corrigir de modo consistente a árvore focal. Ambas foram revertidas; não repetir multiplicações de albedo nas coníferas PBR. Relatório: `CP_CARTO_126_CONIFERAS_R6_REJEITADAS.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-127:** auditar a composição de escala entre as Ruínas Submersas e a faixa de árvores posterior, privilegiando uma melhoria de legibilidade por posicionamento ou LOD e não por cor, água, baliza, arma, HUD, margem ou topografia já testados.
+
+
+## CP-CARTO-127 — Pilar colapsado R6: rejeitado
+
+O pilar CC0 colapsado foi validado tecnicamente e em 36 segundos de gameplay, mas permaneceu fora do enquadramento efectivo da chegada e não entregou ganho visual suficiente. Foi revertido; não repetir a mesma inserção isolada nessa posição. Relatório: `CP_CARTO_127_PILAR_COLAPSADO_R6_REJEITADO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-128:** retomar a saída cartográfica da Casa Voss com captura tardia, medindo quais marcos R1→R3 são de facto legíveis da soleira exterior antes de mexer em escala, composição ou activos.
