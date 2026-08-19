@@ -346,17 +346,21 @@ O parser do projecto terminou com `PARSER_EXIT=0` e `EliasThirdPersonPreview.tsc
 
 `R5LivingMajesticPreview.tscn` passou parser e 36 segundos com pavilhão real, dois cervos CC0, sete elementos vegetais, três peças de abrigo colapsado, 13 aterramentos X/Z, corredor Elias livre e uma luz dinâmica. A cena não altera produção. Ver `CP_D5_090_ACAMPAMENTO_MAJESTIC_VIVO.md`.
 
-## CP-D5-091 — ACTIVO: Estrada do Rio viva R2
+## CP-D5-091 — CONCLUÍDO: Estrada do Rio viva R2
 
-Construir composição QA da Estrada do Rio com ponte modular existente, vegetação ribeirinha, fauna 3D afastada do tabuleiro e vestígios de abrigo. Não reutilizar ponte GLB rejeitada, não bloquear Elias e não alterar produção sem revisão Dev1.
+`R2LivingRiverRoadPreview.tscn` passou parser e 36 segundos com ponte modular, dois cervos CC0, quatro elementos vegetais, dois vestígios de abrigo, nove aterramentos X/Z, travessia livre e uma luz dinâmica. Não reutiliza ponte GLB e não altera produção. Ver `CP_D5_091_ESTRADA_RIO_VIVA.md`.
+
+## CP-D5-092 — ACTIVO: Clareira viva Floresta Densa R4
+
+Criar composição QA da Floresta Densa com fauna discreta, árvores em profundidade, vegetação aterrada e vestígio de abrigo lateral. Preservar corredor aberto de Elias, limites LOD e exclusão total do portal florestal estrutural rejeitado.
 
 | Critério | Obrigatório |
 |---|---|
-| Fauna | activo 3D real fora do tabuleiro da ponte |
-| Flora | margem orgânica; nenhum painel ou parede vegetal |
-| Construção | ponte modular aprovada e abrigo/vestígio real |
+| Fauna | activo 3D real fora do corredor |
+| Flora | floresta tridimensional, sem parede vegetal |
+| Construção | abrigo/ruína lateral; nunca portal estrutural |
 | Validação | parser, grounding e 36 segundos de QA |
-| Continuidade | publicar e abrir CP-D5-092 no mesmo ciclo |
+| Continuidade | publicar e abrir CP-D5-093 no mesmo ciclo |
 
 
 
@@ -365,4 +369,4 @@ Construir composição QA da Estrada do Rio com ponte modular existente, vegeta�
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-091` — Estrada do Rio viva R2. Depois da validação e publicação, Dev5 abre CP-D5-092 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-092` — Clareira viva Floresta Densa R4. Depois da validação e publicação, Dev5 abre CP-D5-093 no mesmo ciclo, sem consulta passiva ou espera temporal.
