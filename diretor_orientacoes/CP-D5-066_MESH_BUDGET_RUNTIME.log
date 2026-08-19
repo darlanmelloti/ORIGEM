@@ -1,0 +1,14 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3421)
+
+ERROR: FSR1 is only available when using the Forward+ renderer.
+   at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:979)
+[DEV5_MESH_AUDIT] asset=bridge_stone.glb triangles=252 mesh_nodes=1 materials=2 collisions=0
+[DEV5_MESH_AUDIT] asset=stone_largeA.glb triangles=80 mesh_nodes=1 materials=1 collisions=0
+[DEV5_MESH_AUDIT] asset=tree_detailed_dark.glb triangles=402 mesh_nodes=1 materials=3 collisions=0
+[DEV5_MESH_AUDIT] asset=ez_pine_tall_pbr.glb triangles=13424 mesh_nodes=2 materials=2 collisions=0
+[DEV5_MESH_AUDIT] asset=fern_02_1k.gltf triangles=6232 mesh_nodes=4 materials=4 collisions=0
+[DEV5_MESH_AUDIT] total_triangles=20390 mesh_nodes=9 material_slots=12 collision_nodes=0 dynamic_lights=0
+PROCESS_EXIT=124
