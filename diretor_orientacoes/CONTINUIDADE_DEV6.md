@@ -68,9 +68,13 @@ A prontidão de integração foi confirmada: branch sincronizada, árvore limpa 
 
 A auditoria confirmou que a integração R2 e os grupos de grounding permanecem isolados, sem referências às Regiões 7–12 e com reversão limitada ao bloco Dev6. Registo: `DEV6_016_REVERSAO_ESCOPO_R2.md`.
 
-## Tarefa activa — DEV6-017
+## DEV6-017 — CONCLUÍDO
 
-Preparar uma verificação de parser e rota R2 para executar imediatamente após qualquer integração externa de câmara. Enquanto não houver integração externa, executar a validação actual como baseline sem alterar a câmara nem o jogador.
+A baseline de parser e rota foi executada: Godot 4.7.1, `road_to_arch` por 36 segundos, R1–R6, 9/9 grounding e zero luzes incrementais passaram. Registo: `DEV6_017_BASELINE_PARSER_ROTA_R2.md`.
+
+## Tarefa activa — DEV6-018
+
+Auditar o registo de integração R2 e preparar uma ficha de retorno para Dev1/Dev3. A ficha deve indicar os únicos critérios que ainda impedem aceitação visual: perspectiva de terceira pessoa e composição cartográfica. Não aguardar a resposta externa.
 
 ## Continuidade
 
