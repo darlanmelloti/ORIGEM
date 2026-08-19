@@ -70,6 +70,8 @@ func _queue_regional_qa_modes() -> void:
 		call_deferred("_prepare_road_return_voss_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "voss_to_road":
 		call_deferred("_prepare_voss_to_road_route_qa")
+	elif OS.get_environment("ORIGEM_QA_ROUTE") == "voss_lateral":
+		call_deferred("_prepare_voss_lateral_route_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "road_to_arch":
 		call_deferred("_prepare_road_to_arch_route_qa")
 	elif OS.get_environment("ORIGEM_QA_ROUTE") == "road_to_arch_recede":
@@ -229,6 +231,28 @@ func _prepare_lake_stela_interaction_qa() -> void:
 	if head != null:
 		head.rotation = Vector3.ZERO
 	print("[ORIGEM_QA_INTERACT] Elias posicionado diante da Estela do Lago em %s; estela=%s" % [player.global_position, stela.global_position])
+
+func _prepare_voss_lateral_route_qa() -> void:
+	# Tomada lateral QA: desloca apenas o spawn de avaliação e mantém a orientação espacial Casa→Estrada→Arco.
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	if player == null:
+		get_tree().create_timer(0.25).timeout.connect(_prepare_voss_lateral_route_qa)
+		return
+	var voss_exterior: Node3D = get_tree().get_first_node_in_group("voss_house") as Node3D
+	var spawn_world: Vector3 = voss_exterior.to_global(Vector3(5.6, 1.25, -6.4)) if voss_exterior != null else Vector3(CartographicAnchors.CASA_VOSS.x - 4.5, 1.25, CartographicAnchors.CASA_VOSS.y + 5.0)
+	var focus_world: Vector3 = voss_exterior.to_global(Vector3(0.0, 1.25, -15.0)) if voss_exterior != null else Vector3(-18.8, 1.25, 53.0)
+	player.velocity = Vector3.ZERO
+	player.set("player_velocity", Vector3.ZERO)
+	player.global_position = Vector3(spawn_world.x, _terrain_height_for_qa(spawn_world.x, spawn_world.z) + 1.30, spawn_world.z)
+	player.look_at(Vector3(focus_world.x, player.global_position.y, focus_world.z), Vector3.UP)
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation = Vector3.ZERO
+	print("[ORIGEM_QA_ROUTE] Spawn LateralCasaVoss ativo em %s; foco=%s" % [player.global_position, focus_world])
+	if OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1":
+		_audit_blue_meshes_qa()
+	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
+		call_deferred("_save_viewport_snapshot_qa")
 
 func _prepare_voss_to_road_route_qa() -> void:
 	# Tomada de saída: nasce fora da soleira da Casa Voss e alinha as lajes com a Estrada do Rio e o Arco distante.

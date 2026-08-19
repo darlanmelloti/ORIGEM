@@ -279,3 +279,17 @@ A tomada QA `voss_to_road` foi inicialmente rejeitada por nascer dentro da casa.
 O perfil QA de neblina moderadamente mais densa passou tecnicamente, mas reduziu o contraste intermédio e não atingiu ganho visual suficiente. Foi totalmente revertido; não repetir densidade, cor, saturação ou `fog_sky_affect` isoladamente. Relatório: `CP_CARTO_102_ATMOSFERA_PROFUNDIDADE_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-103:** auditar a leitura de escala da vegetação no enquadramento Casa Voss→Arco, contando os modelos por tipo e distância. A auditoria não pode criar, mover ou remover árvores: deve apenas determinar se a discrepância visual provém de LOD, escala, espécies ou enquadramento antes de abrir qualquer hipótese de produção.
+
+
+## CP-CARTO-103 — Auditoria de escala vegetal
+
+A auditoria confirmou seis núcleos arbóreos espaçados no corredor e uma janela preservada diante do Arco. A Casa Voss concentra os assets de maior escala e requer avaliação por enquadramento antes de qualquer troca de espécie, posição ou LOD. Relatório: `CP_CARTO_103_AUDITORIA_ESCALA_VEGETAL.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-104:** criar uma única tomada QA lateral da soleira da Casa Voss, sem mover geometria, vegetação, rio ou Arco, para distinguir erro de composição de erro de activo. Exigir parser Godot, 36 segundos, captura e decisão antes de alterar produção.
+
+
+## CP-CARTO-104 e CP-CARTO-105 — Tomada lateral e margem inicial
+
+A tomada lateral da Casa Voss passou 36 segundos e confirmou que a discrepância principal não se resolve por árvore ou câmara isolada. O afloramento CC0 temporário em `z=17` na margem inicial não produziu ganho visual perceptível e foi removido. Não repetir essa rocha isolada. Relatório: `CP_CARTO_105_AFLORAMENTO_MARGEM_INICIAL_REJEITADO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-106:** auditar a estrutura contínua da `SuperficieRioEstrada` (largura, variação de altura e segmentos de triângulos) em contraste com a posição da câmara lateral, sem editar a água. O objectivo é decidir se a massa escura é uma limitação de material, composição ou topologia antes de autorizar qualquer nova solução.
