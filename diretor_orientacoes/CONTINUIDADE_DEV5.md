@@ -974,7 +974,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-297 — CONCLUÍDO: Auditoria dos contratos de altura R1–R6
 `CartographicHeightContractsPreview.tscn` passou parser e QA headless de 36 segundos, confirmando cobertura dos seis marcos, três proprietários regionais, raycast obrigatório e exclusões dos elementos rejeitados. Ver `CP_D5_297_CONTRATOS_ALTURA.md` e `CP-D5-297_HEIGHT_CONTRACTS_RUNTIME.log`.
 
-## CP-D5-298 — ACTIVO
+## CP-D5-298 — CONCLUÍDO: Composição multi-marco aterrada
+`MultiLandmarkGroundedPreview.tscn` passou parser e QA headless de 36 segundos, confirmando Casa Voss e Ponte Marco 2 aterradas no mesmo terreno irregular, X/Z preservados, `production_script=false` e `dynamic_lights=0`. Ver `CP_D5_298_COMPOSICAO_ATERRADA.md` e `CP-D5-298_MULTILANDMARK_RUNTIME.log`.
+
+## CP-D5-299 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -984,7 +987,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-298` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-299` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
