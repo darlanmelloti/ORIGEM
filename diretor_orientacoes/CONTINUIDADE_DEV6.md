@@ -52,9 +52,13 @@ A auditoria confirmou dois materiais próprios Dev6, reutilização do material 
 
 A cobertura documental foi confirmada na branch e a evidência binária de gameplay foi identificada no diretório QA externo, sem duplicação desnecessária em Git. Registo: `DEV6_012_COBERTURA_EVIDENCIA_R2.md`.
 
-## Tarefa activa — DEV6-013
+## DEV6-013 — CONCLUÍDO
 
-Verificar localmente a integridade e dimensões dos artefactos QA R2, gerar manifesto SHA-256 externo e actualizar o protocolo de recaptura. Não aguardar a câmara externa.
+A integridade, dimensões e hashes da evidência QA R2 foram verificados localmente e documentados. Registo: `DEV6_013_INTEGRIDADE_EVIDENCIA_R2.md`.
+
+## Tarefa activa — DEV6-014
+
+Preparar uma matriz de aceitação para a recaptura de terceira pessoa R2 e auditar a prontidão dos contratos Dev6. Não aguardar a câmara externa; publicar a matriz e continuar por auditorias reversíveis.
 
 ## Continuidade
 
