@@ -97,6 +97,14 @@ func _audit_blue_meshes_qa() -> void:
 	var scene_root: Node = get_tree().current_scene
 	if scene_root == null:
 		return
+	# A limpeza canónica da Casa Voss cobre marcadores tardios, luzes, partículas e materiais que não partilham a mesma raiz.
+	if voss_house != null and voss_house.has_method("_hide_late_opening_technical_markers"):
+		voss_house.call("_hide_late_opening_technical_markers")
+	# O farol do futuro Orion é narrativa de longo alcance, não um marcador para contaminar a evidência QA R1–R3.
+	var chronos_beacon: Node3D = scene_root.find_child("MarcoChronosAzulRemoto", true, false) as Node3D
+	if chronos_beacon != null:
+		chronos_beacon.visible = false
+		print("[QA_CHRONOS_BEACON_HIDDEN] pos=%s" % chronos_beacon.global_position)
 	for node: Node in scene_root.find_children("*", "MeshInstance3D", true, false):
 		var mesh_node: MeshInstance3D = node as MeshInstance3D
 		if mesh_node == null or not mesh_node.visible or mesh_node.global_position.distance_to(reference_position) > 125.0:
@@ -236,6 +244,10 @@ func _prepare_road_return_voss_qa() -> void:
 	if head != null:
 		head.rotation = Vector3.ZERO
 	print("[ORIGEM_QA_ROUTE] Spawn RetornoCasaVoss ativo em %s; foco=%s" % [player.global_position, focus])
+	if OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1":
+		_audit_blue_meshes_qa()
+	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
+		call_deferred("_save_viewport_snapshot_qa")
 
 func _prepare_road_to_arch_route_qa() -> void:
 	# Harness de evidência macro R1–R3: Elias nasce no mesmo primeiro segmento livre da Estrada e aponta para o Arco físico recuado.

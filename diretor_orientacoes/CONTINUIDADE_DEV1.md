@@ -258,3 +258,10 @@ As exclusões QA da luz e do contexto Majestic, dos sinais P0 e de materiais azu
 A auditoria CP-CARTO-098 confirmou que os afloramentos laterais já estão distribuídos em quatro famílias CC0 e não autoriza uma mudança cega de material, escala ou posição. A tomada QA `road_to_arch_recede` do CP-CARTO-099 passou por 36 segundos no mesmo eixo Casa Voss→Arco; revelou que a massa escura lateral é a malha física `SuperficieRioEstrada`. Não alterar água: hipóteses dessa família já foram rejeitadas. A ferramenta QA de recuo foi preservada e não afecta jogo normal.
 
 **Próxima tarefa já iniciada — CP-CARTO-100:** auditar a leitura espacial da Casa Voss no recuo através da rota `road_return_voss`, comparando a origem doméstica, a margem do rio e a direção do Arco sem alterar Casa, porta, iluminação, água, câmaras ou módulos R7–R12. Só uma lacuna visual nova e causal poderá abrir alteração de produção.
+
+
+## CP-CARTO-100 — Retorno à Casa Voss validado
+
+A rota `road_return_voss` ganhou captura interna de viewport e passou 36 segundos de gameplay. A limpeza cartográfica QA passou a correr antes da fotografia e removeu o `MarcoChronosAzulRemoto` remoto sem alterar produção, porta, rota ou colisores. Relatório: `CP_CARTO_100_RETORNO_CASA_VOSS_QA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-101:** validar a leitura de saída da Casa Voss no sentido inverso, Casa→Estrada, para comparar a origem doméstica com rio, lajes e Arco distante. O passe deve usar a rota QA existente ou uma tomada reversível equivalente, preservar FOV/câmara de produção e exigir parser Godot, 36 segundos e captura antes de qualquer alteração ambiental.
