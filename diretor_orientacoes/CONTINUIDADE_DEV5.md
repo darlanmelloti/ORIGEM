@@ -419,7 +419,10 @@ A sessão de captura interna de `R4LivingForestPreview.tscn` passou 36 segundos 
 ## CP-D5-112 — CONCLUÍDO: Regressão grounding cartográfico
 `CartographicGroundingPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, aterrando o anexo Casa Voss de 15,00 m para -2,78 m e a ponte R2 de 18,00 m para -2,71 m, com X/Z preservados nos dois casos. Ver `CP_D5_112_REGRESSAO_GROUNDING.md` e `CP-D5-112_GROUNDING_RUNTIME.log`.
 
-## CP-D5-113 — ACTIVO
+## CP-D5-113 — CONCLUÍDO: Regressão contratos de altura R1–R6
+`CartographicHeightContractsPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando cobertura 6/6, três proprietários, grounding por raycast, `status=approved`, produção inalterada e exclusão das geometrias rejeitadas do arco R3 e cais R6. Ver `CP_D5_113_REGRESSAO_CONTRATOS_ALTURA.md` e `CP-D5-113_HEIGHT_CONTRACTS_RUNTIME.log`.
+
+## CP-D5-114 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -429,4 +432,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-113` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-114` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
