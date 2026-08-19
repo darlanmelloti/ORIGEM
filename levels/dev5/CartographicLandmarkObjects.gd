@@ -14,6 +14,7 @@ var moss_material: StandardMaterial3D
 var plaster_material: StandardMaterial3D
 var timber_material: StandardMaterial3D
 var roof_material: StandardMaterial3D
+var canvas_material: StandardMaterial3D
 
 func _ready() -> void:
 	name = "Dev5CartographicObjects"
@@ -27,6 +28,7 @@ func _build_material_library() -> void:
 	plaster_material = _material(Color(0.50, 0.42, 0.31), 0.96)
 	timber_material = _material(Color(0.18, 0.09, 0.045), 0.90)
 	roof_material = _material(Color(0.095, 0.075, 0.055), 0.97)
+	canvas_material = _material(Color(0.42, 0.31, 0.17), 0.99)
 
 func create_stone_bridge_landmark() -> Node3D:
 	# CP-D5-002: ponte modular do marco 2. O chamador decide a âncora e a orientação;
@@ -119,6 +121,41 @@ func create_voss_waystation_landmark() -> Node3D:
 	chimney.position = Vector3(-0.78, 2.30, -0.34)
 	house.add_child(chimney)
 	return house
+
+func create_majestic_pavilion_landmark() -> Node3D:
+	# CP-D5-008: pavilhão do Acampamento Majestic, em volume real e sem luzes.
+	var pavilion := Node3D.new()
+	pavilion.name = "PavilhaoAcampamentoMajesticMarco5"
+	pavilion.add_to_group("dev5_landmark_majestic")
+	var deck := _box("EstradoDeMadeira", Vector3(4.60, 0.18, 3.30), timber_material)
+	deck.position = Vector3(0.0, 0.09, 0.0)
+	pavilion.add_child(deck)
+	_add_static_collider(deck, Vector3(4.60, 0.18, 3.30))
+	# Quatro postes ancoram uma tenda real, em vez de um painel ou silhueta plana.
+	for post_x: float in [-1.92, 1.92]:
+		for post_z: float in [-1.30, 1.30]:
+			var post := _cylinder("Poste_%+.0f_%+.0f" % [post_x, post_z], 0.105, 2.55, timber_material)
+			post.position = Vector3(post_x, 1.36, post_z)
+			pavilion.add_child(post)
+	# Cobertura dupla inclinada e beirais: forma reconhecível no marco 5 do mapa.
+	for side: float in [-1.0, 1.0]:
+		var canopy := _box("Lona%+.0f" % side, Vector3(2.44, 0.10, 3.72), canvas_material)
+		canopy.position = Vector3(side * 0.98, 2.48, 0.0)
+		canopy.rotation_degrees.z = side * -27.5
+		pavilion.add_child(canopy)
+	var ridge := _box("Cumeeira", Vector3(0.16, 0.16, 3.48), timber_material)
+	ridge.position = Vector3(0.0, 2.63, 0.0)
+	pavilion.add_child(ridge)
+	# Painéis de lona curtos mantêm a entrada aberta e dão profundidade lateral.
+	for side: float in [-1.0, 1.0]:
+		var curtain := _box("LonaLateral%+.0f" % side, Vector3(0.08, 1.12, 2.85), canvas_material)
+		curtain.position = Vector3(side * 2.02, 1.22, 0.0)
+		pavilion.add_child(curtain)
+	var bench := _box("BancoDeCampanha", Vector3(2.05, 0.32, 0.48), timber_material)
+	bench.position = Vector3(0.0, 0.44, -0.86)
+	pavilion.add_child(bench)
+	_add_static_collider(bench, Vector3(2.05, 0.32, 0.48))
+	return pavilion
 
 func _box(node_name: String, size: Vector3, material: Material) -> MeshInstance3D:
 	var mesh := BoxMesh.new()
