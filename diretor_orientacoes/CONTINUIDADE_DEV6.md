@@ -16,9 +16,13 @@ O passe de materiais e LOD passou tecnicamente — parser, rota de 36 segundos, 
 
 Foram aplicadas seis faixas laterais de material de solo sem colisores ou luzes. Parser, rota de 36 segundos, X/Z e 9/9 aterramentos passaram, mas a leitura visual global mantém-se abaixo do padrão. Registo: `DEV6_003_TRATAMENTO_SOLO_R2.md`.
 
-## Tarefa activa — DEV6-004
+## DEV6-004 — CONCLUÍDO COM REJEIÇÃO VISUAL DOCUMENTADA
 
-Auditar a compatibilidade dos materiais do corredor R2 em `gl_compatibility`, identificando apenas melhorias de ambiente reversíveis. Preservar rota, jogador, X/Z, grounding e orçamento de luzes.
+A compatibilidade `gl_compatibility` foi auditada e o shader recebeu uma máscara lateral R2 reversível. Parser, rota de 36 segundos, grounding 9/9 e zero luzes adicionais passaram. A melhoria de granulação foi moderada e não autoriza aceitação visual final. Registo: `DEV6_004_COMPATIBILIDADE_GL_R2.md`.
+
+## Tarefa activa — DEV6-005
+
+Auditar a leitura ambiental do corredor R2 e introduzir, apenas se necessário, sinais de ambiente reversíveis que reforcem profundidade sem alterar jogador, rota, X/Z, grounding, luzes ou módulos fora de R1–R6.
 
 ## Continuidade
 

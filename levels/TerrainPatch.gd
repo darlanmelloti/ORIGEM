@@ -198,11 +198,23 @@ void fragment() {
 					forest_floor = mix(forest_floor, pbr_ground * vec3(1.04, 1.02, 0.88), 0.86);
 					forest_floor = mix(forest_floor, vec3(0.128, 0.170, 0.066), leaf * 0.12);
 
+					// Margens R2: usa as UVs de espaço-mundo para baixar a frequência visual exclusivamente ao redor da Estrada do Rio.
+					// Não muda relevo, colisão, rota ou materiais das Regiões 7–12.
+					vec2 terrain_world = UV / 0.095;
+					float r2_progress = clamp((terrain_world.y - 12.0) / 108.0, 0.0, 1.0);
+					float r2_center = mix(-21.4, -10.0, r2_progress) + sin(r2_progress * 3.14159265 * 2.5) * 1.8;
+					float r2_distance = abs(terrain_world.x - r2_center);
+					float r2_span = smoothstep(10.0, 18.0, terrain_world.y) * (1.0 - smoothstep(82.0, 96.0, terrain_world.y));
+					float r2_margin = r2_span * smoothstep(2.35, 3.25, r2_distance) * (1.0 - smoothstep(12.5, 15.5, r2_distance));
+					vec3 r2_soil = mix(vec3(0.085, 0.125, 0.060), pbr_ground * vec3(0.78, 0.88, 0.66), 0.46);
+					forest_floor = mix(forest_floor, r2_soil, r2_margin * 0.56);
+
 					// Solo continua pouco especular, mas recupera leitura terrosa e micro-relevo no GL Compatibility.
 					ALBEDO = forest_floor * mix(1.00, 1.14, soil);
 			ROUGHNESS = mix(mix(0.74, 0.96, broad + pebbles * 0.18), pbr_rough, 0.38);
+			ROUGHNESS = mix(ROUGHNESS, 0.93, r2_margin * 0.62);
 			NORMAL_MAP = texture(ground_normal, UV * 1.65).rgb;
-			NORMAL_MAP_DEPTH = 0.32;
+			NORMAL_MAP_DEPTH = mix(0.32, 0.18, r2_margin);
 
 		METALLIC = 0.0;
 		SPECULAR = 0.22;
