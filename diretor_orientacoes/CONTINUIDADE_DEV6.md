@@ -88,9 +88,13 @@ A rastreabilidade do candidato R2 foi correlacionada entre commits, documentos e
 
 A auditoria confirmou que nenhum passe técnico foi promovido indevidamente: a aceitação visual continua bloqueada apenas pelos critérios de terceira pessoa e composição cartográfica. Registo: `DEV6_021_CRITERIOS_PROMOCAO_R2.md`.
 
-## Tarefa activa — DEV6-022
+## DEV6-022 — CONCLUÍDO
 
-Verificar o Git remoto para qualquer recaptura ou alteração de câmara publicada por Dev1/Dev3. Se houver, executar imediatamente a matriz DEV6-014 e a baseline DEV6-017; se não houver, continuar a auditoria técnica de regressão R2 sem alterar a câmara ou o jogador.
+A verificação remota encontrou apenas o contrato documental Dev5 `c15a4a0`; não houve código de câmara nem recaptura R2 válida. A matriz e baseline não foram indevidamente aplicadas. Registo: `DEV6_022_VERIFICACAO_REMOTA_RECAPTURA_R2.md`.
+
+## Tarefa activa — DEV6-023
+
+Executar a regressão técnica R2 actual — parser e rota de 36 segundos — como baseline contínua. Não alterar a câmara ou o jogador; se uma recaptura válida chegar entretanto, aplicar DEV6-014 e DEV6-017 imediatamente.
 
 ## Continuidade
 
