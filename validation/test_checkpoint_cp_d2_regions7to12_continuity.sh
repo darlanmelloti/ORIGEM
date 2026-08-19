@@ -70,6 +70,9 @@ if grep -E 'SCRIPT ERROR|Parse Error|Invalid assignment' "$OUT/gameplay.log"; th
 fi
 if [[ "${MAP_MIRROR_VALIDATION:-0}" == "1" ]]; then
   grep -q 'MAP_MIRROR_ANCHOR_CONTRACT chain=R9->R10->R11->R12 count=3 state=RUNTIME_QA_ONLY' "$OUT/gameplay.log" || { echo 'QA FAIL: runtime cartographic anchor contract missing' >&2; exit 1; }
+  for handoff_id in R07_R08 R08_R09 R09_R10 R10_R11 R11_R12; do
+    grep -q "MAP_MIRROR_HANDOFF_CONTRACT id=${handoff_id} authority=mapaorigem.webp" "$OUT/gameplay.log" || { echo "QA FAIL: handoff contract missing: ${handoff_id}" >&2; exit 1; }
+  done
 fi
 
 printf '%s\n' '[QA] PASS: headless clean, gameplay 30s present, print 1600x900 present'
