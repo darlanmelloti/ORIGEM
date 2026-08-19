@@ -157,6 +157,41 @@ func create_majestic_pavilion_landmark() -> Node3D:
 	_add_static_collider(bench, Vector3(2.05, 0.32, 0.48))
 	return pavilion
 
+func create_submerged_ruins_pier_landmark() -> Node3D:
+	# CP-D5-012: cais das Ruínas Submersas, marco 6. Candidato QA isolado.
+	var pier := Node3D.new()
+	pier.name = "CaisRuinasSubmersasMarco6"
+	pier.add_to_group("dev5_landmark_submerged_ruins")
+	# Água como volume visual; nenhum emissive e nenhuma luz criada pelo objecto.
+	var waterline := _box("LinhaAguaRuinas", Vector3(8.0, 0.12, 8.0), moss_material)
+	waterline.position = Vector3(0.0, -0.52, 0.0)
+	pier.add_child(waterline)
+	# Lajes quebradas formam um percurso incompleto, mas atravessável.
+	var slab_specs: Array[Vector3] = [
+		Vector3(-1.55, 0.02, -2.55), Vector3(0.0, 0.10, -1.25),
+		Vector3(1.35, -0.02, 0.05), Vector3(-0.35, 0.08, 1.42), Vector3(1.55, 0.0, 2.65)
+	]
+	for index: int in range(slab_specs.size()):
+		var spec := slab_specs[index]
+		var slab := _box("LajeQuebrada%02d" % index, Vector3(1.45 if index % 2 == 0 else 1.10, 0.22, 0.82), weathered_stone_material)
+		slab.position = spec
+		slab.rotation_degrees = Vector3(0.0, -12.0 + index * 9.0, 4.0 if index % 2 == 0 else -5.0)
+		pier.add_child(slab)
+		_add_static_collider(slab, Vector3(1.45 if index % 2 == 0 else 1.10, 0.22, 0.82))
+	# Colunas parciais laterais: ruína reconhecível, sem muralha nem bloqueio central.
+	var column_specs: Array[Vector3] = [
+		Vector3(-2.45, 0.15, -2.20), Vector3(2.38, -0.05, -0.90),
+		Vector3(-2.30, 0.10, 1.35), Vector3(2.50, 0.02, 2.35)
+	]
+	for index: int in range(column_specs.size()):
+		var spec := column_specs[index]
+		var column := _cylinder("ColunaParcial%02d" % index, 0.28, 1.15 + (index % 2) * 0.35, stone_material)
+		column.position = spec
+		column.rotation_degrees = Vector3(0.0, 0.0, -7.0 if index % 2 == 0 else 6.0)
+		pier.add_child(column)
+		_add_static_cylinder_collider(column, 0.28, 1.15 + (index % 2) * 0.35)
+	return pier
+
 func create_dense_forest_portal_landmark() -> Node3D:
 	# CP-D5-011: portal florestal do marco 4, âncora FLORESTA_DENSA=(-9; 116).
 	# Candidato QA isolado: não toca ForestLakeRegion.gd e deixa passagem central >= 2.4 m.

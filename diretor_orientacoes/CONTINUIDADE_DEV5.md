@@ -78,9 +78,11 @@ A sessão headless local completou 36 segundos e confirmou `isolated=true region
 | Validação | Aprovada localmente: 36 segundos sem erro Dev5; captura visual pendente. |
 | Escopo | Aprovado: nenhum módulo regional de produção foi tocado. |
 
-## CP-D5-012 — ACTIVO: Ruínas Submersas (marco 6)
+## CP-D5-012 — CONCLUÍDO EM QA: Ruínas Submersas (marco 6)
 
-Criar um candidato QA de cais de ruínas submersas com lajes quebradas e colunas parciais; zero emissão, zero luzes dinâmicas, colisores apenas onde a travessia deve existir. Não tocar `TempleLevel.gd` ou qualquer módulo regional de produção.
+Foi criado o candidato QA `SubmergedRuinsPierPreview.tscn` com cinco lajes quebradas, quatro colunas parciais laterais e volume de água não emissivo. Os colisores foram limitados às lajes de travessia e às colunas laterais; o objecto não cria luzes dinâmicas nem toca `TempleLevel.gd` ou módulos regionais de produção.
+
+A sessão headless local completou 36 segundos e confirmou `landmark=6 submerged=true emissive=false dynamic_lights=0 production_script=false`, sem erros de parser/runtime Dev5. A evidência está em `CP_D5_012_RUINAS_SUBMERSAS_QA.md` e o log em `CP-D5-012_RUNTIME_HEADLESS.log`. A captura visual 1600×900 permanece pendente no ambiente oficial.
 
 ## CP-D5-005 — CONDICIONAL, NÃO BLOQUEANTE
 
@@ -90,4 +92,4 @@ Auditar e integrar um humano GLTF/GLB somente quando existir ficheiro recuperáv
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-012` — construir o cais QA das Ruínas Submersas do marco 6.
+**Próxima tarefa activa após publicação:** consultar novamente o marcador Dev5 após 10 segundos e executar a próxima tarefa autorizada, se publicada.
