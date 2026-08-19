@@ -823,3 +823,10 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
 **Tarefa activa actual:** `CP-D5-244` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+
+
+### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
+
+A ferramenta isolada `levels/dev5/R1R3ThirdPersonCartographicPreview.*` passou no parser Godot 4.7.1 e numa sessão de 36 segundos, confirmando Elias em terceira pessoa e o Arco canónico no eixo a `z=92`, sem alterar `Player.gd`, produção ou Regiões 7–12. A captura foi **REJECTED_VISUAL** por terreno granular, marcadores técnicos, ruínas de baixa complexidade e silhueta provisória. A ferramenta permanece QA; ver `CP_D5_130_RECAPTURA_R1_R3_TERCEIRA_PESSOA.md`.
+
+Este registo não substitui a tarefa remota activa `CP-D5-244`. A pré-visualização deve ser usada apenas como evidência para uma futura integração Dev1/Dev3 quando a fila canónica a autorizar.
