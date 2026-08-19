@@ -800,7 +800,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-239 — CONCLUÍDO: Regressão contrato câmara Elias
 `EliasCameraContractPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando câmara externa `CameraQAExterna`, `active_camera_count=1`, câmara de produção inactiva, `Player.gd` inalterado e módulos regionais preservados. Avisos de scaling são específicos do renderer Compatibility. Ver `CP_D5_239_REGRESSAO_CONTRATO_CAMERA.md` e `CP-D5-239_CAMERA_CONTRACT_RUNTIME.log`.
 
-## CP-D5-240 — ACTIVO
+## CP-D5-240 — CONCLUÍDO: Regressão heading R5→R6
+`EliasR5R6HeadingPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando início `(−80,190)`, destino `RUMO ÀS RUÍNAS` id 6, chegada R6, próxima âncora 7 `PASSAGEM: VILA ELEVADA`, câmara de produção inactiva e produção preservada. Ver `CP_D5_240_REGRESSAO_HEADING_R5_R6.md` e `CP-D5-240_R5_R6_HEADING_RUNTIME.log`.
+
+## CP-D5-241 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -810,4 +813,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-240` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-241` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
