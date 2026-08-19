@@ -882,11 +882,12 @@ func _add_water_triangle(surface: SurfaceTool, first: Vector3, second: Vector3, 
 func _make_path_material() -> StandardMaterial3D:
 	var material: StandardMaterial3D = StandardMaterial3D.new()
 	# Matiz de pedra húmida: integra a Estrada do Rio à paleta florestal sem reduzir a leitura da rota física.
-	material.albedo_color = Color(0.43, 0.46, 0.38, 1.0)
+	# Tom mineral ligeiramente mais quente: mantém pedra húmida, mas separa a rota do solo florestal em média distância.
+	material.albedo_color = Color(0.56, 0.54, 0.44, 1.0)
 	material.albedo_texture = FLAGSTONE
 	material.normal_enabled = true
 	material.normal_texture = GROUND_NORMAL
-	material.normal_scale = 0.28
+	material.normal_scale = 0.24
 	material.roughness_texture = GROUND_ROUGHNESS
 	material.roughness = 0.90
 	material.uv1_scale = Vector3(0.34, 0.34, 0.34)

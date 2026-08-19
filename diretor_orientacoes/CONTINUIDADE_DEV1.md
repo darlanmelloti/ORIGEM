@@ -223,3 +223,10 @@ A sonda de nós visíveis identificou `MarcoRibeirinho_00` como candidato espaci
 A sonda câmara→mundo filtrou o quadrante do artefacto e encontrou apenas a malha `tree_oak_dark` em `(-26.16133, 0.348372, 30.0)`. A ocultação exclusiva de QA foi validada durante 36 segundos e não modificou o ponto azul-ciano. A hipótese foi revertida; não repetir carvalho, Marco Ribeirinho, filtros amplos de cor ou alterações de vegetação baseadas nesse pixel. Relatório: `CP_CARTO_092_PROJECCAO_CARVALHO_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-093:** auditar a legibilidade material da rota de lajes Casa Voss→Arco usando somente os materiais existentes e sem mudar posição, escala, colisores, água, árvores, Arco ou luzes. O objectivo é distinguir a rota de pedra do solo PBR alternativo a médias distâncias; a hipótese só pode ser promovida se a captura de 36 segundos demonstrar ganho visual mensurável e preservação completa da trajectória física.
+
+
+## CP-CARTO-093 — Lajes com leitura material reforçada
+
+A Estrada do Rio conservou malha, rota, colisores e âncoras, mas recebeu uma calibração material mineral mais quente e normal reduzida. A captura de 36 segundos Casa Voss→Arco mostra a sequência de lajes melhor separada do solo PBR. O ganho é local e não encerra o refinamento visual do vale. Relatório: `CP_CARTO_093_MATERIAL_LAJES_ESTRADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-094:** auditar a composição vegetal do horizonte R1→R3 em três planos (primeiro, médio, fundo), usando exclusivamente os activos reais já carregados. A primeira acção é identificar por raiz os conjuntos que contribuem para a leitura repetitiva, sem mover, escalar ou eliminar instâncias antes de uma associação causal. Não repetir a clareira pré-Arco, os pilotos de árvore, as alterações de água, a relva procedural ou qualquer candidato rejeitado.
