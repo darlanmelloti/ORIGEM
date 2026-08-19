@@ -185,24 +185,25 @@ void fragment() {
 	float broad = value_noise(p * 0.22);
 	float soil = value_noise(p * 1.7);
 	float leaf = smoothstep(0.57, 0.83, value_noise(p * 3.3));
-											vec3 wet_mud = mix(vec3(0.105, 0.145, 0.060), vec3(0.220, 0.235, 0.105), broad);
-					vec3 forest_floor = mix(wet_mud, vec3(0.105, 0.215, 0.075), leaf * 0.42);
+		vec3 wet_mud = mix(vec3(0.135, 0.175, 0.075), vec3(0.270, 0.290, 0.135), broad);
+		vec3 forest_floor = mix(wet_mud, vec3(0.115, 0.235, 0.082), leaf * 0.34);
 
-			float pebbles = smoothstep(0.76, 0.91, value_noise(p * 6.5));
-			float leaf_litter = smoothstep(0.62, 0.84, value_noise(p * 4.6 + vec2(4.2, 1.7)));
-			forest_floor = mix(forest_floor, vec3(0.042, 0.036, 0.026), pebbles * 0.34);
-			forest_floor = mix(forest_floor, vec3(0.155, 0.098, 0.042), leaf_litter * 0.16);
+					float pebbles = smoothstep(0.78, 0.93, value_noise(p * 6.5));
+		float leaf_litter = smoothstep(0.64, 0.86, value_noise(p * 4.6 + vec2(4.2, 1.7)));
+		forest_floor = mix(forest_floor, vec3(0.060, 0.052, 0.035), pebbles * 0.22);
+		forest_floor = mix(forest_floor, vec3(0.165, 0.108, 0.050), leaf_litter * 0.12);
+
 			vec3 pbr_ground = texture(ground_albedo, UV * 1.65).rgb;
 			float pbr_rough = texture(ground_roughness, UV * 1.65).r;
-					// CP-CARTO-38: prioriza a textura PBR de terra húmida e reduz a leitura negra/uniforme no corredor R4–R6.
-					forest_floor = mix(forest_floor, pbr_ground * vec3(1.04, 1.02, 0.88), 0.86);
-					forest_floor = mix(forest_floor, vec3(0.128, 0.170, 0.066), leaf * 0.12);
+		// Mantém a textura PBR como prova de matéria, sem permitir que ela esmague o valor médio do vale no GL Compatibility.
+		forest_floor = mix(forest_floor, pbr_ground * vec3(1.10, 1.08, 0.93), 0.60);
+		forest_floor = mix(forest_floor, vec3(0.140, 0.185, 0.076), leaf * 0.10);
 
-					// Solo continua pouco especular, mas recupera leitura terrosa e micro-relevo no GL Compatibility.
-					ALBEDO = forest_floor * mix(1.00, 1.14, soil);
-			ROUGHNESS = mix(mix(0.74, 0.96, broad + pebbles * 0.18), pbr_rough, 0.38);
-			NORMAL_MAP = texture(ground_normal, UV * 1.65).rgb;
-			NORMAL_MAP_DEPTH = 0.32;
+		// Solo pouco especular, mas com valor médio suficiente para os planos do vale se separarem.
+		ALBEDO = forest_floor * mix(1.04, 1.12, soil);
+		ROUGHNESS = mix(mix(0.76, 0.94, broad + pebbles * 0.14), pbr_rough, 0.30);
+		NORMAL_MAP = texture(ground_normal, UV * 1.65).rgb;
+		NORMAL_MAP_DEPTH = 0.22;
 
 		METALLIC = 0.0;
 		SPECULAR = 0.22;

@@ -225,6 +225,8 @@ func _prepare_road_to_arch_route_qa() -> void:
 	if head != null:
 		head.rotation = Vector3.ZERO
 	print("[ORIGEM_QA_ROUTE] Spawn Estrada–Arco ativo em %s; foco=%s" % [player.global_position, focus])
+	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "":
+		call_deferred("_save_viewport_snapshot_qa")
 
 func _prepare_positive_bridge_route_qa() -> void:
 	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D

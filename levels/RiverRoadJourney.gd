@@ -788,23 +788,31 @@ func _build_roadside_vegetation() -> void:
 	var vegetation: Node3D = Node3D.new()
 	vegetation.name = "VegetacaoEstradaDoRio"
 	add_child(vegetation)
-	for index: int in range(10):
-		var z_value: float = 26.0 + float(index) * 9.0
-		var side: float = -1.0 if index % 2 == 0 else 1.0
-		var x_value: float = _road_x(z_value) + side * (7.0 + float(index % 3) * 1.1)
-		# As coníferas geradas serviam ao protótipo, mas liam como cones planos na revelação macro.
-		# Árvores CC0 de tronco e copa orgânicos mantêm a margem aberta e sem parede vegetal.
-		var tree_source: PackedScene = DARK_TREE
-		if index % 3 == 0:
-			tree_source = OAK_DARK
+	# Núcleos espaçados: a sequência quebra a leitura de parede vegetal, conserva a floresta explorável e abre janelas para o Arco distante.
+	var tree_specs: Array[Dictionary] = [
+		{"z": 30.0, "side": -1.0, "offset": 8.4, "scale": 0.22, "oak": true, "yaw": 0.18},
+		{"z": 42.0, "side": 1.0, "offset": 10.8, "scale": 0.25, "oak": false, "yaw": -0.46},
+		{"z": 57.0, "side": -1.0, "offset": 12.6, "scale": 0.23, "oak": false, "yaw": 0.84},
+		{"z": 74.0, "side": 1.0, "offset": 14.2, "scale": 0.29, "oak": true, "yaw": -0.30},
+		# Sem árvores no eixo entre z=80 e z=94: a silhueta do Arco permanece legível na viagem real.
+		{"z": 101.0, "side": -1.0, "offset": 13.8, "scale": 0.24, "oak": false, "yaw": 0.62},
+		{"z": 112.0, "side": 1.0, "offset": 15.6, "scale": 0.30, "oak": true, "yaw": -0.74}
+	]
+	for index: int in range(tree_specs.size()):
+		var spec: Dictionary = tree_specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var x_value: float = _road_x(z_value) + side * (spec["offset"] as float)
+		var tree_source: PackedScene = OAK_DARK if bool(spec["oak"]) else DARK_TREE
 		var tree: Node3D = tree_source.instantiate() as Node3D
 		if tree != null:
-			tree.name = "ArvoreEstrada_%02d" % index
+			tree.name = "NucleoDeArvoreEstrada_%02d" % index
 			tree.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
-			var tree_scale: float = 0.24 + float(index % 3) * 0.04
+			var tree_scale: float = spec["scale"] as float
 			tree.scale = Vector3(tree_scale, tree_scale, tree_scale)
-			tree.rotation.y = float(index) * 0.72
+			tree.rotation.y = spec["yaw"] as float
 			vegetation.add_child(tree)
+
 	for index: int in range(16):
 		var z_value: float = 18.0 + float(index) * 6.0
 		var side: float = -1.0 if index % 2 == 0 else 1.0
