@@ -729,6 +729,9 @@ func _build_hub_to_final_dome_approach() -> void:
 		threshold_marker.rotation = Vector3(0.035, -0.26, -0.018)
 		threshold_marker.set_meta("map_region", 12)
 		threshold_marker.set_meta("physical_wayfinding", true)
+		threshold_marker.set_meta("handoff_out", "ColisaoHandoffSoleiraR12")
+		threshold_marker.set_meta("approach_vector", Vector3(0.0, 0.0, -1.0))
+		threshold_marker.set_meta("validation_state", "RUNTIME_QA_ONLY")
 		var threshold_material := stone_material.duplicate() as StandardMaterial3D
 		threshold_material.albedo_color = Color("#2e3653")
 		threshold_material.emission_enabled = true
