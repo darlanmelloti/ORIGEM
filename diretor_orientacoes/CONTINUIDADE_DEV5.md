@@ -791,7 +791,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-236 — CONCLUÍDO: Auditoria densidade vegetal
 `VegetationDensityAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando pinheiro focal 1, árvore média 3, árvore leve 1, fetos 2, total de 27.208 triângulos, 0 luzes dinâmicas e `wall_density=false`. Ver `CP_D5_236_AUDITORIA_DENSIDADE_VEGETAL.md` e `CP-D5-236_VEGETATION_DENSITY_RUNTIME.log`.
 
-## CP-D5-237 — ACTIVO
+## CP-D5-237 — CONCLUÍDO: Auditoria LOD vegetal
+`VegetationLodAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando pinheiro PBR 13.424 triângulos, árvore média 402, feto 6.232, árvore leve 114, limites 1/3/8 e 0 luzes dinâmicas. Ver `CP_D5_237_AUDITORIA_LOD.md` e `CP-D5-237_LOD_RUNTIME.log`.
+
+## CP-D5-238 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -801,4 +804,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-237` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-238` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
