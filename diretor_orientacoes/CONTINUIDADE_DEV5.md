@@ -590,7 +590,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-169 — CONCLUÍDO: Auditoria placement R1→R6
 `CartographicPlacementPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando as seis âncoras R1→R6 com coordenadas X/Z canónicas e canvas do mapa: R1 `(−22,8)`, R2 `(−21,4;12)`, R3 `(−16,741;48)`, R4 `(−9;116)`, R5 `(−88;178)` e R6 `(60;252)`. Avisos FSR1 são incompatibilidade conhecida do Compatibility renderer; produção preservada. Ver `CP_D5_169_AUDITORIA_PLACEMENT_R1_R6.md` e `CP-D5-169_PLACEMENT_AUDIT_RUNTIME.log`.
 
-## CP-D5-170 — ACTIVO
+## CP-D5-170 — CONCLUÍDO: Regressão Elias third-person
+`EliasThirdPersonPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando `CameraQA` activa, apresentação `EliasThirdPersonPresentation`, `Player.gd` inalterado, câmara de produção não assumida e produção preservada. Ver `CP_D5_170_REGRESSAO_ELIAS_THIRD_PERSON.md` e `CP-D5-170_ELIAS_PRESENTATION_RUNTIME.log`.
+
+## CP-D5-171 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -600,4 +603,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-170` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-171` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
