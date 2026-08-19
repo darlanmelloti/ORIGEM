@@ -56,9 +56,13 @@ A cobertura documental foi confirmada na branch e a evidência binária de gamep
 
 A integridade, dimensões e hashes da evidência QA R2 foram verificados localmente e documentados. Registo: `DEV6_013_INTEGRIDADE_EVIDENCIA_R2.md`.
 
-## Tarefa activa — DEV6-014
+## DEV6-014 — CONCLUÍDO
 
-Preparar uma matriz de aceitação para a recaptura de terceira pessoa R2 e auditar a prontidão dos contratos Dev6. Não aguardar a câmara externa; publicar a matriz e continuar por auditorias reversíveis.
+A matriz de aceitação para a recaptura de terceira pessoa foi publicada. Registo: `DEV6_014_MATRIZ_ACEITACAO_RECAPTURA_R2.md`.
+
+## Tarefa activa — DEV6-015
+
+Auditar a prontidão de integração R2 após a matriz: confirmar documentos, baseline, manifestos e ausência de divergência Git. Não aguardar a câmara externa; iniciar a auditoria agora.
 
 ## Continuidade
 
