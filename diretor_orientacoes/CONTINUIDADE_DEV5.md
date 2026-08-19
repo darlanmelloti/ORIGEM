@@ -839,7 +839,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-252 — CONCLUÍDO: Regressão sequência integrada R1–R6
 `CartographicSequenceR1R6Preview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 8 checkpoints, `no_anchor_skip=true`, handoff lateral Majestic válido, chegada às Ruínas válida e abertura do marcador R7 `PASSAGEM: VILA ELEVADA`. Avisos FSR1 são do renderer Compatibility; produção preservada. Ver `CP_D5_252_REGRESSAO_SEQUENCIA_INTEGRADA_R1_R6.md` e `CP-D5-252_SEQUENCE_R1_R6_RUNTIME.log`.
 
-## CP-D5-253 — ACTIVO
+## CP-D5-253 — CONCLUÍDO: Regressão handoff R6→R7
+`EliasR6R7HandoffPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando R6 `(60,252)`, marcador `PASSAGEM: VILA ELEVADA` id 7, chegada R7, `marker_only=true`, geometria Dev2 não criada, câmara de produção inactiva e produção preservada. Ver `CP_D5_253_REGRESSAO_HANDOFF_R6_R7.md` e `CP-D5-253_R6_R7_HANDOFF_RUNTIME.log`.
+
+## CP-D5-254 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -849,7 +852,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-253` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-254` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
