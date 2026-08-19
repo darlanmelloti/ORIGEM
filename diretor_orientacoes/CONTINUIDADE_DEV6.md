@@ -244,9 +244,13 @@ Amostragem runtime confirmou grounding R1 7/7, R2 9/9, R3 8/8, R4 6/6 e R6 6/6 n
 
 A verificação remota posterior não encontrou recapturas de terceira pessoa para R1, R2, R3, R4 ou R6. Os bloqueios visuais permanecem explícitos; registo: `DEV6_059_DISPONIBILIDADE_RECAPTURA_R1_R6.md`.
 
-## Tarefa activa — DEV6-060
+## DEV6-060 — CONCLUÍDO
 
-Executar a regressão GL Compatibility das integrações Dev6 sem alterar cena: parser, contagem de referências `Light3D` dentro dos blocos Dev6, e uma sessão R2 de 36 segundos. Se passar, documentar a baseline; se falhar, abrir correcção mínima e reversível.
+A baseline GL passou parser, auditoria de 0 referências de luz nos blocos Dev6 e rota R2 de 36 s com grounding 9/9. Registo: `DEV6_060_BASELINE_GL_R2.md`.
+
+## Tarefa activa — DEV6-061
+
+Auditar a regressão dos materiais de solo e margens Dev6 em GL Compatibility. Não alterar geometria, luzes, câmara, jogadores ou rotas; comparar apenas parâmetros materiais introduzidos por Dev6 e executar sessão R6 de 36 s se a auditoria não encontrar divergência.
 
 ## Continuidade
 
