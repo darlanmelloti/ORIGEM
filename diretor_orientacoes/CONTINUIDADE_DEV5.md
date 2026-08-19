@@ -193,7 +193,10 @@ O preview `SubmergedShoreMonolithPreview.tscn` executou durante 36 segundos em C
 ## CP-D5-042 — CONCLUÍDO: Validação de folga da baliza R6
 O corredor central da cena `R6MonolithClearancePreview.tscn` foi validado durante 36 segundos. A baliza aterrada em X/Z `(52.00, 260.00)` mantém folga calculada de `6,05 m` contra o mínimo de `4,00 m`; o proxy realizou dois ciclos completos sem bloqueio. A execução final não apresentou erros Dev5. Foi corrigida no preview a atribuição de `global_position` antes da inserção do colisor na árvore, substituindo-a por `position`. Ver `CP_D5_042_VALIDACAO_FOLGA_BALIZA_R6.md` e `CP-D5-042_R6_CLEARANCE_RUNTIME_FIXED.log`.
 
-## CP-D5-043 — ACTIVO
+## CP-D5-043 — CONCLUÍDO: Elias em terceira pessoa na margem R6
+O preview `EliasR6ClearancePreview.tscn` validou Elias com `EliasThirdPersonPresentation`, grounding R6 em X/Z `(52.00, 260.00)`, corredor X=60, folga de `6,05 m` e dois ciclos completos sem bloqueio durante 36 segundos. `Player.gd` não foi alterado. Foi corrigida no preview a atribuição de `global_position` antes da inserção do colisor na árvore, substituindo-a por `position`. A execução final não apresentou erros Dev5. Ver `CP_D5_043_ELIAS_TERCEIRA_PESSOA_R6_VALIDACAO.md` e `CP-D5-043_ELIAS_R6_RUNTIME_FIXED.log`. A aprovação visual final continua pendente de viewport gráfico válido.
+
+## CP-D5-044 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -202,4 +205,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-043` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-044` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
