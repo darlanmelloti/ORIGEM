@@ -309,6 +309,8 @@ func _build_river_road() -> void:
 		var slab_depth: float = lerpf(1.34 + rng.randf_range(-0.12, 0.18), 2.42 + rng.randf_range(-0.10, 0.14), approach_coverage)
 		slab.mesh = _make_slab(1.76 + rng.randf_range(-0.18, 0.20), slab_depth, rng)
 		slab.material_override = path_material
+		# Lajes funcionam como guia cartográfico; sem sombra própria evitam faixas negras repetitivas no GL Compatibility.
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.042, z_value)
 		slab.rotation.y = atan2((_road_x(z_value + 1.0) - _road_x(z_value - 1.0)) * 0.5, 2.0) + rng.randf_range(-0.08, 0.08)
 		road.add_child(slab)
@@ -334,6 +336,7 @@ func _build_river_road() -> void:
 		infill.name = "LajeContinuidadeEstradaRio_%02d" % infill_index
 		infill.mesh = _make_slab(1.56 + infill_rng.randf_range(-0.10, 0.12), 1.70 + infill_rng.randf_range(-0.08, 0.10), infill_rng)
 		infill.material_override = path_material
+		infill.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		infill.position = Vector3(infill_x, _height_at(infill_x, infill_z) + 0.039, infill_z)
 		infill.rotation.y = atan2((_road_x(infill_z + 1.0) - _road_x(infill_z - 1.0)) * 0.5, 2.0) + infill_rng.randf_range(-0.055, 0.055)
 		road.add_child(infill)

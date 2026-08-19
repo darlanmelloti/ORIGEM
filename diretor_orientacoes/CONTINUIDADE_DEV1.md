@@ -447,3 +447,10 @@ A troca da instância `NucleoDeArvoreEstrada_01` por árvore CC0 escura passou n
 A projecção confirmou `NucleoDeArvoreEstrada_00` como copa dominante no quadrante direito, mas a substituição por árvore CC0 escura não gerou ganho visual suficiente na captura de 36 segundos e foi revertida. Não repetir a troca desta instância. Relatório: `CP_CARTO_129_ARVORE_DOMINANTE_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-130:** auditar a continuidade geométrica do caminho no eixo Casa Voss→Arco, separando a leitura de lajes, sombras e lacunas de solo. A hipótese seguinte deve visar um elemento estrutural comprovadamente visível, sem repetir materiais, árvores, água, atmosfera, balizas ou topografia já rejeitados.
+
+
+## CP-CARTO-130 — Sombras das lajes: validado
+
+A desactivação selectiva de sombras nas lajes visuais da Estrada do Rio passou no parser Godot e em 36 segundos de gameplay. A captura tardia comprovou uma rota contínua, sem faixas negras repetitivas, sem novos emissores e sem alteração dos colisores. Relatório: `CP_CARTO_130_SOMBRAS_LAJES_VALIDADO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-131:** auditar as pequenas marcas azul-ciano restantes no eixo Casa Voss→Arco, agora que a rota está legível; atribuir primeiro por projecção/camada antes de alterar qualquer conteúdo de produção.
