@@ -1,0 +1,38 @@
+--- CAMERAS ---
+levels/dev5/CartographicGroundingPreview.gd:85:	var camera := Camera3D.new()
+levels/dev5/CartographicPlacementPreview.gd:62:	var camera := Camera3D.new()
+levels/dev5/CartographicRegressionAuditPreview.gd:50:	var camera := Camera3D.new()
+levels/dev5/DenseForestPortalPreview.gd:38:	var camera := Camera3D.new()
+levels/dev5/GroundedVegetationR4R5Preview.gd:123:	var camera := Camera3D.new()
+levels/dev5/MajesticGroundedPavilionPreview.gd:92:	var camera := Camera3D.new()
+levels/dev5/MajesticPavilionPreview.gd:63:	var camera := Camera3D.new()
+levels/dev5/MediumVegetationCompositionPreview.gd:60:	var camera := Camera3D.new()
+levels/dev5/MeshBudgetAuditPreview.gd:62:	var camera := Camera3D.new()
+levels/dev5/MultiLandmarkGroundedPreview.gd:73:	var camera := Camera3D.new()
+levels/dev5/StoneBridgeGLBPreview.gd:77:	var camera := Camera3D.new()
+levels/dev5/StoneBridgeLandmarkPreview.gd:68:	var camera := Camera3D.new()
+levels/dev5/SubmergedRuinsPierPreview.gd:34:	var camera := Camera3D.new()
+levels/dev5/VegetationDensityAuditPreview.gd:76:	var camera := Camera3D.new()
+levels/dev5/VegetationLodAuditPreview.gd:50:	var camera := Camera3D.new()
+levels/dev5/VossWaystationPreview.gd:63:	var camera := Camera3D.new()
+--- LIGHTS ---
+levels/dev5/CartographicGroundingPreview.gd:35:	var sun := DirectionalLight3D.new()
+levels/dev5/CartographicPlacementPreview.gd:25:	var sun := DirectionalLight3D.new()
+levels/dev5/CartographicRegressionAuditPreview.gd:55:	var light := DirectionalLight3D.new()
+levels/dev5/DenseForestPortalPreview.gd:31:	var sun := DirectionalLight3D.new()
+levels/dev5/GroundedVegetationR4R5Preview.gd:41:	var sun := DirectionalLight3D.new()
+levels/dev5/MajesticGroundedPavilionPreview.gd:35:	var sun := DirectionalLight3D.new()
+levels/dev5/MajesticPavilionPreview.gd:28:	var sun := DirectionalLight3D.new()
+levels/dev5/MediumVegetationCompositionPreview.gd:54:	var sun := DirectionalLight3D.new()
+levels/dev5/MeshBudgetAuditPreview.gd:73:	var light := DirectionalLight3D.new()
+levels/dev5/MultiLandmarkGroundedPreview.gd:78:	var sun := DirectionalLight3D.new()
+levels/dev5/StoneBridgeGLBPreview.gd:28:	var sun := DirectionalLight3D.new()
+levels/dev5/StoneBridgeLandmarkPreview.gd:28:	var sun := DirectionalLight3D.new()
+levels/dev5/SubmergedRuinsPierPreview.gd:28:	var sun := DirectionalLight3D.new()
+levels/dev5/VegetationDensityAuditPreview.gd:32:	var sun := DirectionalLight3D.new()
+levels/dev5/VegetationLodAuditPreview.gd:61:	var light := DirectionalLight3D.new()
+levels/dev5/VossWaystationPreview.gd:28:	var sun := DirectionalLight3D.new()
+--- COUNTS ---
+camera_declarations=16
+light_declarations=16
+--- PARSER ---

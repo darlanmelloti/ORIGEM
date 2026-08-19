@@ -184,7 +184,10 @@ Foram carregadas 17 cenas QA Dev5 em processos headless Compatibility isolados, 
 ## CP-D5-039 — CONCLUÍDO: Linha de base de performance QA
 As 17 cenas QA foram executadas em processos headless Compatibility durante cinco segundos, todas com código 0 e sem erros Dev5. O arranque observado ficou entre 230 e 236 ms; o máximo de 236 ms em `VossWaystationPreview` não constitui outlier operacional. A medição é linha de base de processo, não FPS do mundo completo. Ver `CP_D5_039_BASELINE_PERFORMANCE_QA.md` e `CP-D5-039_PERFORMANCE_BASELINE.log`.
 
-## CP-D5-040 — ACTIVO
+## CP-D5-040 — CONCLUÍDO: Auditoria de câmaras e luzes QA
+A auditoria encontrou 16 declarações de `Camera3D` e 16 de luz em 17 cenas/scripts QA. Não há OmniLight3D/SpotLight3D nem múltiplas luzes dinâmicas por harness; os objectos cartográficos não criam luz própria. O parser Compatibility terminou sem erros Dev5 e o limite global de 16 luzes não é ameaçado por cenas isoladas. Ver `CP_D5_040_AUDITORIA_LUZES_CAMERAS_QA.md` e `CP-D5-040_LIGHT_CAMERA_AUDIT.log`.
+
+## CP-D5-041 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -193,4 +196,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-040` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-041` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
