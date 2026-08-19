@@ -1,0 +1,19 @@
+=== EliasMajesticClearancePreview ===
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3421)
+
+ERROR: FSR1 is only available when using the Forward+ renderer.
+   at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:979)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Transform3D()
+   at: get_global_transform (scene/3d/node_3d.cpp:621)
+   GDScript backtrace (most recent call first):
+       [0] _build_pavilion_collision (res://levels/dev5/EliasMajesticClearancePreview.gd:94)
+       [1] _ready (res://levels/dev5/EliasMajesticClearancePreview.gd:25)
+[DEV5_ELIAS_MAJESTIC] pavilion_grounded=true xz=(-88.00,178.00) collider=CorredorMajesticEliasQA
+[DEV5_ELIAS_CAMERA_AUDIT] harness=EliasMajesticClearancePreview elias_camera_current=false viewport_owner=@Camera3D@11
+[DEV5_ELIAS_MAJESTIC] route_x=-80.00 pavilion_x=-88.00 clearance=5.45 required=4.00 presentation=EliasThirdPersonPresentation
+[DEV5_ELIAS_MAJESTIC] route_cycle=1 clear=true actor=Elias
+[DEV5_ELIAS_MAJESTIC] route_cycle=2 clear=true actor=Elias
+PROCESS_EXIT=124

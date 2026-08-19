@@ -219,7 +219,10 @@ Foi criada `CP_D5_047_MATRIZ_CONTRATOS_ELIAS.md`, consolidando câmara, referên
 ## CP-D5-048 — CONCLUÍDO: Checklist de integração Elias R5/R6
 Foi criada `CP_D5_048_CHECKLIST_INTEGRACAO_ELIAS_R5_R6.md`, convertendo a matriz em passos operacionais para Dev1. A checklist cobre câmara, identidade, colisão, percursos R5/R6, grounding, orçamento de luzes, propriedade de produção, critérios de aceitação e reversão. A tarefa permanece documental e não altera `Player.gd` nem módulos regionais.
 
-## CP-D5-049 — ACTIVO
+## CP-D5-049 — CONCLUÍDO: Validação dos percursos Elias R5/R6
+Os harnesses `EliasMajesticClearancePreview` e `EliasR6ClearancePreview` passaram sessões QA finais de 36 segundos. R5 confirmou âncora `(-88,178)`, trajecto X=-80, folga `5,45 m`, grounding e dois ciclos; R6 confirmou `(52,260)`, trajecto X=60, folga `6,05 m`, grounding e dois ciclos. Em ambos, `elias_camera_current=false`. Foi corrigido no preview R5 o colisor definido por `global_position` antes da entrada na árvore, usando `position`; a execução final terminou sem erros Dev5. Ver `CP_D5_049_VALIDACAO_PERCURSOS_ELIAS_R5_R6.md` e os logs `CP-D5-049_*RUNTIME*FIXED.log`.
+
+## CP-D5-050 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -229,4 +232,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-049` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-050` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.

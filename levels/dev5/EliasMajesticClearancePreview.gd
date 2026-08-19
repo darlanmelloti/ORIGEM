@@ -91,7 +91,7 @@ func _build_pavilion_collision() -> void:
 	assert(result["grounded"])
 	var blocker := StaticBody3D.new()
 	blocker.name = "ColisorPavilhaoMajesticEliasQA"
-	blocker.global_position = pavilion.global_position + Vector3(0.0, 1.4, 0.0)
+	blocker.position = pavilion.global_position + Vector3(0.0, 1.4, 0.0)
 	var collision := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
 	shape.size = Vector3(PAVILION_HALF_WIDTH * 2.0, 2.8, PAVILION_HALF_WIDTH * 2.0)
