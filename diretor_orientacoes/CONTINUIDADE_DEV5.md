@@ -662,7 +662,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-193 — CONCLUÍDO: Regressão corredor vivo R3
 `R3LivingArchCorridorPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 4 vegetações, 2 partes de ruína, 8 elementos aterrados, 4 ciclos `clear=true`, fauna a 11,49–12,26 m, `structural_arch=false`, `scale_compressed=false` e produção preservada. Ver `CP_D5_193_REGRESSAO_CORREDOR_VIVO_R3.md` e `CP-D5-193_R3_LIVING_CORRIDOR_RUNTIME.log`.
 
-## CP-D5-194 — ACTIVO
+## CP-D5-194 — CONCLUÍDO: Regressão pavilhão Majestic aterrado R5
+`MajesticGroundedPavilionPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando âncora 5, pavilhão `(−88,178)` aterrado por raycast, Y `17,00→−0,00`, X/Z preservados, fundação aterrada, colisor `TerrenoMajesticColisorQA`, 0 luzes dinâmicas e produção preservada. Ver `CP_D5_194_REGRESSAO_PAVILHAO_ATERRADO_R5.md` e `CP-D5-194_MAJESTIC_GROUNDED_RUNTIME.log`.
+
+## CP-D5-195 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -672,4 +675,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-194` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-195` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
