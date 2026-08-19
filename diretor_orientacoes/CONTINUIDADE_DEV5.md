@@ -354,17 +354,21 @@ O parser do projecto terminou com `PARSER_EXIT=0` e `EliasThirdPersonPreview.tsc
 
 `R4LivingForestPreview.tscn` passou parser e 36 segundos com dois cervos CC0, oito elementos vegetais LOD, abrigo lateral em pedra, 12 aterramentos X/Z, corredor Elias livre e uma luz dinâmica. Não cria portal estrutural ou parede vegetal. Ver `CP_D5_092_FLORESTA_DENSA_VIVA.md`.
 
-## CP-D5-093 — ACTIVO: Casa Voss viva R1
+## CP-D5-093 — CONCLUÍDO: Casa Voss viva R1
 
-Criar composição QA exterior da Casa Voss com anexo, horta/vegetação, fauna discreta e vestígio doméstico tridimensional. Preservar a rota Casa Voss→Estrada, evitar qualquer edição na casa jogável/porta e não alterar produção sem revisão Dev1.
+`R1LivingVossExteriorPreview.tscn` passou parser e 36 segundos com anexo aprovado, dois cervos CC0, horta tridimensional, oito aterramentos X/Z, rota exterior livre e uma luz dinâmica. Não altera VossHouse, a porta ou Player.gd. Ver `CP_D5_093_CASA_VOSS_VIVA.md`.
+
+## CP-D5-094 — ACTIVO: Arco das Ruínas vivo R3
+
+Criar composição QA do corredor R3 com flora de margem, fauna afastada e ruínas laterais em pedra. Preservar a rota R3→R4 e a silhueta canónica; nunca construir um arco estrutural, portal ou compressão da escala cartográfica.
 
 | Critério | Obrigatório |
 |---|---|
-| Fauna | activo 3D real afastado da soleira e rota |
-| Flora | horta e vegetação tridimensionais, sem painéis |
-| Construção | anexo aprovado e vestígio doméstico real |
+| Fauna | activo 3D real fora do corredor |
+| Flora | vegetação tridimensional de margem, sem parede |
+| Construção | ruínas laterais reais; zero arco estrutural |
 | Validação | parser, grounding e 36 segundos de QA |
-| Continuidade | publicar e abrir CP-D5-094 no mesmo ciclo |
+| Continuidade | publicar e abrir CP-D5-095 no mesmo ciclo |
 
 
 
@@ -373,4 +377,4 @@ Criar composição QA exterior da Casa Voss com anexo, horta/vegetação, fauna 
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-093` — Casa Voss viva R1. Depois da validação e publicação, Dev5 abre CP-D5-094 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-094` — Arco das Ruínas vivo R3. Depois da validação e publicação, Dev5 abre CP-D5-095 no mesmo ciclo, sem consulta passiva ou espera temporal.
