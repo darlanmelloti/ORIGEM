@@ -366,17 +366,21 @@ O parser do projecto terminou com `PARSER_EXIT=0` e `EliasThirdPersonPreview.tsc
 
 O plano `CP_D5_095_INTEGRACAO_MAPA_VIVO_R1_R6.md` consolidou candidatos R1–R6, limites LOD, colisão, rota, reversão e evidências. Referências e parser foram verificados; R2 repetiu uma sessão QA de 36 segundos sem erro.
 
-## CP-D5-096 — ACTIVO: Pacote suporte integração R2
+## CP-D5-096 — CONCLUÍDO: Ficha integração R2
 
-Preparar ficha exacta para o Dev1 integrar a Estrada do Rio viva: âncoras, grupos, colisores, distâncias de fauna, limites LOD, ordem de nós e reversão. Sem modificar `RiverRoadJourney.gd`.
+`CP_D5_096_FICHA_INTEGRACAO_R2.md` especifica âncora, ponte modular, fauna, flora, colisores, sequência de reversão e referências QA para o Dev1. Nenhum módulo de produção foi editado.
+
+## CP-D5-097 — ACTIVO: Ficha integração R4
+
+Preparar a ficha exacta de integração da Floresta Densa viva: corredor mínimo, limites LOD, fauna, abrigo lateral, colisores e reversão. Nunca incluir portal estrutural ou parede vegetal.
 
 | Critério | Obrigatório |
 |---|---|
-| Âncora | Estrada/Rio e ponte modular preservam X/Z |
-| Segurança | fauna a >=5 m do tabuleiro e rota |
-| Produção | Dev5 não edita RiverRoadJourney.gd |
-| Validação | referências e 36 segundos QA |
-| Continuidade | publicar e abrir CP-D5-097 no mesmo ciclo |
+| Corredor | mínimo 5 m, livre para Elias |
+| Flora | LOD CP-D5-018 e um feto por lado |
+| Segurança | fauna a >=5 m e zero portal estrutural |
+| Produção | Dev5 não edita ForestLakeRegion.gd |
+| Continuidade | publicar e abrir CP-D5-098 no mesmo ciclo |
 
 
 
@@ -385,4 +389,4 @@ Preparar ficha exacta para o Dev1 integrar a Estrada do Rio viva: âncoras, grup
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-096` — Pacote suporte integração R2. Depois da publicação, Dev5 abre CP-D5-097 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-097` — Ficha integração R4. Depois da publicação, Dev5 abre CP-D5-098 no mesmo ciclo, sem consulta passiva ou espera temporal.
