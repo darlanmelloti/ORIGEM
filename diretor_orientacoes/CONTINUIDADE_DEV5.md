@@ -240,7 +240,10 @@ Foram identificados sete handlers ainda vulneráveis a textura/imagem nulas: Eli
 ## CP-D5-055 — CONCLUÍDO: Correcção global dos fallbacks de captura
 Os sete handlers foram corrigidos para tratar textura e imagem nulas. A varredura final encontrou zero direct calls vulneráveis, o parser Compatibility passou limpo e o preview R6 manteve 36 segundos com grounding, folga `6,05 m`, dois ciclos `clear=true` e zero `SCRIPT ERROR`. Ver `CP_D5_055_CORRECAO_FALLBACKS_CAPTURA.md` e `CP-D5-055_R6_CAPTURE_RUNTIME_FINAL.log`.
 
-## CP-D5-056 — ACTIVO
+## CP-D5-056 — CONCLUÍDO: Leitura R6 com Elias, baliza e vegetação
+A cena publicada `R6EliasVegetationReadPreview.tscn` passou 36 segundos. Confirmou baliza grounded em X/Z `(52,260)`, Elias com câmara QA externa e `elias_camera_current=false`, trajecto X=60, folga `6,05 m`, três elementos vegetais aterrados, zero lajes, `wall_of_trees=false`, dois ciclos `clear=true` e `production_modules_changed=false`. Ver `CP_D5_056_VALIDACAO_LEITURA_R6_ELIAS_VEGETACAO.md` e `CP-D5-056_R6_ELIAS_VEGETATION_RUNTIME.log`.
+
+## CP-D5-057 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -250,4 +253,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-056` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-057` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
