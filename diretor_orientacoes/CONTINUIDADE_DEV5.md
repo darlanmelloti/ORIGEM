@@ -572,7 +572,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-163 — CONCLUÍDO: Regressão clearance Elias R4
 `EliasForestClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 6/6 elementos aterrados, clearance mínimo de 2,75 m, 2 ciclos de rota limpos, corredor aberto, portal estrutural ausente, parede de árvores ausente e produção inalterada. Ver `CP_D5_163_REGRESSAO_CLEARANCE_R4.md` e `CP-D5-163_FOREST_CLEARANCE_RUNTIME.log`.
 
-## CP-D5-164 — ACTIVO
+## CP-D5-164 — CONCLUÍDO: Regressão clearance Majestic R5
+`EliasMajesticClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando pavilhão aterrado em `(−88,178)`, rota lateral em `x=−80`, clearance de 5,45 m sobre mínimo 4,00 m, 2 ciclos `clear=true`, actor Elias, câmara de produção inactiva e produção preservada. Ver `CP_D5_164_REGRESSAO_CLEARANCE_MAJESTIC.md` e `CP-D5-164_MAJESTIC_CLEARANCE_RUNTIME.log`.
+
+## CP-D5-165 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -582,4 +585,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-164` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-165` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
