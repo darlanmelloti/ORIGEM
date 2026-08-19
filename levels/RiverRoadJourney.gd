@@ -478,9 +478,49 @@ func _build_dev6_r2_living_integration() -> void:
 		shelter_rock.add_to_group("dev6_r2_grounding")
 		r2_root.add_child(shelter_rock)
 	_build_dev6_r2_ground_treatment(r2_root)
+	_build_dev6_r2_environmental_scale(r2_root)
 	_build_dev6_r2_grounding_fields(r2_root)
 	call_deferred("_ground_dev6_r2_assets")
 	print("[DEV6_R2] status=integrated bridge=modular fauna=2 vegetation=4 shelter_parts=2 dynamic_lights=0 route_clear=true reversible=true")
+
+func _build_dev6_r2_environmental_scale(parent: Node3D) -> void:
+	# DEV6-006: silhuetas laterais escassas criam planos de escala no vale sem transformar a estrada numa parede vegetal.
+	# Não há colisores, luzes, emissões ou qualquer volume dentro de 8,5 m do eixo cartográfico da rota.
+	var scale_root := Node3D.new()
+	scale_root.name = "EscalaAmbientalR2"
+	parent.add_child(scale_root)
+	var specs: Array[Dictionary] = [
+		{"z": 36.0, "side": -1.0, "offset": 10.6, "rock": 0.56, "pillar": 0.30, "yaw": 0.36},
+		{"z": 48.0, "side": 1.0, "offset": 11.4, "rock": 0.70, "pillar": 0.00, "yaw": -0.52},
+		{"z": 61.0, "side": -1.0, "offset": 12.8, "rock": 0.82, "pillar": 0.34, "yaw": 0.74},
+		{"z": 74.0, "side": 1.0, "offset": 13.6, "rock": 0.92, "pillar": 0.28, "yaw": -0.26}
+	]
+	for index: int in range(specs.size()):
+		var spec: Dictionary = specs[index]
+		var z_value := spec["z"] as float
+		var side := spec["side"] as float
+		var x_value := _road_x(z_value) + side * (spec["offset"] as float)
+		var rock := RUIN_ROCK.instantiate() as Node3D
+		if rock != null:
+			rock.name = "AfloramentoEscalaR2_%02d" % (index + 1)
+			rock.position = Vector3(x_value, _height_at(x_value, z_value) - 0.10, z_value)
+			var rock_scale := spec["rock"] as float
+			rock.scale = Vector3(rock_scale, rock_scale * 0.76, rock_scale)
+			rock.rotation.y = spec["yaw"] as float
+			_apply_material(rock, ruin_material)
+			scale_root.add_child(rock)
+		var pillar_scale := spec["pillar"] as float
+		if pillar_scale <= 0.0:
+			continue
+		var pillar := RUIN_PILLAR.instantiate() as Node3D
+		if pillar != null:
+			pillar.name = "VestigioEscalaR2_%02d" % (index + 1)
+			var pillar_x := x_value - side * 1.55
+			pillar.position = Vector3(pillar_x, _height_at(pillar_x, z_value + 0.70), z_value + 0.70)
+			pillar.scale = Vector3(pillar_scale, pillar_scale * 1.50, pillar_scale)
+			pillar.rotation.y = (spec["yaw"] as float) + 0.24
+			_apply_material(pillar, ruin_material)
+			scale_root.add_child(pillar)
 
 func _build_dev6_r2_ground_treatment(parent: Node3D) -> void:
 	# Faixas de material, não terreno novo: sobreposição rasa nas margens laterais para quebrar a repetição escura.

@@ -24,9 +24,13 @@ A compatibilidade `gl_compatibility` foi auditada e o shader recebeu uma máscar
 
 O passe atmosférico preservou parser, rota de 36 segundos, 9/9 aterramentos, X/Z e zero luzes novas, mas a melhoria visual foi marginal. Não repetir ajustes de neblina. Registo: `DEV6_005_LEITURA_AMBIENTAL_R2.md`.
 
-## Tarefa activa — DEV6-006
+## DEV6-006 — CONCLUÍDO COM REJEIÇÃO VISUAL DOCUMENTADA
 
-Construir uma camada reversível de escala ambiental fora da rota R2 — apenas rochas de talude, vegetação de plano médio ou vestígios arqueológicos baixos — para reforçar profundidade. Proibido alterar jogador, rota, X/Z, grounding, luzes ou módulos fora de R1–R6.
+Quatro afloramentos e três vestígios laterais foram inseridos sem colisores, luzes, emissões ou invasão da rota. A validação técnica passou, mas o ganho visual foi discreto. Registo: `DEV6_006_ESCALA_AMBIENTAL_R2.md`.
+
+## Tarefa activa — DEV6-007
+
+Auditar a leitura da câmara QA de `road_to_arch` e preparar recomendações de enquadramento cartográfico para o proprietário de gameplay/cinemática. Dev6 não altera jogador nem câmara de produção; só pode criar evidência e uma proposta reversível.
 
 ## Continuidade
 
