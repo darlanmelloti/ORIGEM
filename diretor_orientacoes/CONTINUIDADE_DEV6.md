@@ -232,9 +232,13 @@ A evidência remota publicada não mostra Elias em terceira pessoa nem os candid
 
 A regressão integrada R1, R2, R3, R4 e R6 passou parser e cinco sessões de 36 s. Os contratos de grounding, rota, X/Z e proibições estruturais mantiveram-se. Manifesto e decisão técnica: `DEV6_056_REGRESSAO_TECNICA_R1_R6.md`.
 
-## Tarefa activa — DEV6-057
+## DEV6-057 — CONCLUÍDO
 
-Auditar o custo acumulado de instâncias Dev6 por rota (R1, R2, R3, R4, R6), incluindo malhas, materiais e grupos de grounding. Não criar ou remover candidatos; documentar apenas os limites de instâncias para GTX 1050 Ti e iniciar regressão se detectar ultrapassagem.
+A auditoria contabilizou 36 activos Dev6, 36 adaptadores de grounding e 0 luzes dinâmicas nas cinco regiões; LOD está activo em todos os candidatos. Não há excedente local comprovado que justifique remover activos. Registo: `DEV6_057_ORCAMENTO_INSTANCIAS_R1_R6.md`.
+
+## Tarefa activa — DEV6-058
+
+Verificar a integridade dos adaptadores de grounding Dev6 nas cinco regiões após as optimizações. Não criar, remover ou reposicionar activos; executar parser e amostragem de cada grupo de grounding, documentando qualquer divergência antes de abrir nova alteração.
 
 ## Continuidade
 
