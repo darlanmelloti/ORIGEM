@@ -44,9 +44,13 @@ A baseline de regressão R2 confirmou ponte modular, 2 cervos, 4 elementos veget
 
 O orçamento R2 confirmou 0 luzes incrementais, dois materiais adicionais e LOD limitado para fauna/vegetação. Registo: `DEV6_010_ORCAMENTO_R2.md`.
 
-## Tarefa activa — DEV6-011
+## DEV6-011 — CONCLUÍDO
 
-Executar a auditoria de materiais distintos e preparar um protocolo de recaptura de terceira pessoa para aplicar imediatamente quando Dev1/Dev3 publicar a câmara. Não aguardar: se a recaptura não estiver disponível, continuar com auditorias R2 reversíveis.
+A auditoria confirmou dois materiais próprios Dev6, reutilização do material PBR de ruína e o protocolo de recaptura de terceira pessoa. Registo: `DEV6_011_MATERIAIS_E_RECAPTURA_R2.md`.
+
+## Tarefa activa — DEV6-012
+
+Auditar a cobertura de evidência R2: confirmar que parser, logs de rota, screenshot e documentos de reversão estão presentes e coerentes. Depois publicar a baseline documental sem aguardar a recaptura externa.
 
 ## Continuidade
 
