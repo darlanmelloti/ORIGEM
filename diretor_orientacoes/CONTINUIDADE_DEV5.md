@@ -178,7 +178,10 @@ O harness `GroundedVegetationR4R5Preview.tscn` passou 36 segundos com 12 instân
 ## CP-D5-037 — CONCLUÍDO: Auditoria de recursos dos previews QA
 Foram verificados 18 caminhos `res://` usados pelos previews Dev5 e pela apresentação isolada de Elias; todos existem, sem `MISSING`. A varredura de parser Godot Compatibility terminou com código 0 e sem `SCRIPT ERROR`, `Parse Error` ou falha de carregamento. R4/R6 continuam pendentes de viewport gráfico válido e nenhum módulo de produção foi alterado. Ver `CP_D5_037_AUDITORIA_RECURSOS_QA.md` e `CP-D5-037_RESOURCE_AUDIT.log`.
 
-## CP-D5-038 — ACTIVO
+## CP-D5-038 — CONCLUÍDO: Smoke test runtime das cenas QA
+Foram carregadas 17 cenas QA Dev5 em processos headless Compatibility isolados, todas com código 0 e sem `SCRIPT ERROR`, `Parse Error`, `Invalid call`, `Invalid get` ou falha de carregamento. O smoke test confirma integridade de instanciação, mas não substitui captura gráfica nem promove R4/R6. Ver `CP_D5_038_SMOKE_RUNTIME_QA.md` e `CP-D5-038_RUNTIME_SMOKE.log`.
+
+## CP-D5-039 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -187,4 +190,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-038` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-039` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
