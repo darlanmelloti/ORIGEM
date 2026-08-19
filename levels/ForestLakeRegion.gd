@@ -749,6 +749,7 @@ func _build_dense_forest() -> void:
 			continue
 		var tree_source: PackedScene
 		var is_conifer: bool = false
+		var tone_down_cyan_foliage: bool = false
 		# A maioria dos pontos focais usa malhas orgânicas reais; as coníferas EZ ficam como profundidade económica.
 		if index % 7 == 0:
 			# Instâncias próximas usam o pinheiro PBR local; evita a silhueta de folhagem plana do Island Tree no percurso jogável.
@@ -756,6 +757,7 @@ func _build_dense_forest() -> void:
 			is_conifer = true
 		elif index % 5 == 0:
 			tree_source = OAK_DARK
+			tone_down_cyan_foliage = true
 		elif index % 3 == 0:
 			tree_source = DARK_TREE
 		elif index % 2 == 0:
@@ -768,6 +770,8 @@ func _build_dense_forest() -> void:
 		if tree == null:
 			continue
 		tree.name = "ArvoreDaFloresta_%02d" % index
+		if tone_down_cyan_foliage:
+			_tone_down_cyan_foliage(tree)
 		tree.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
 		var tree_scale: float = 0.20 + fmod(float(index), 4.0) * 0.045
 		if index % 7 == 0:
@@ -2051,6 +2055,23 @@ func _build_south_shore_fill() -> void:
 	south_fill.omni_range = 14.0  # CP 200: reduzido para GTX 1050
 	south_fill.shadow_enabled = false
 	south_shore.add_child(south_fill)
+
+func _tone_down_cyan_foliage(root: Node) -> void:
+	# CP-CARTO-116: mantém textura e silhueta do carvalho, reduzindo apenas a dominante ciano incompatível com a floresta real.
+	for child: Node in root.get_children():
+		if child is MeshInstance3D:
+			var mesh_node: MeshInstance3D = child as MeshInstance3D
+			if mesh_node.mesh != null:
+				for surface_index: int in range(mesh_node.mesh.get_surface_count()):
+					var original: StandardMaterial3D = mesh_node.get_active_material(surface_index) as StandardMaterial3D
+					if original == null:
+						continue
+					var base: Color = original.albedo_color
+					if base.g > base.r * 1.06 and base.b > base.r * 1.04:
+						var tinted: StandardMaterial3D = original.duplicate() as StandardMaterial3D
+						tinted.albedo_color = Color(base.r * 0.82, base.g * 0.94, base.b * 0.56, base.a)
+						mesh_node.set_surface_override_material(surface_index, tinted)
+		_tone_down_cyan_foliage(child)
 
 func _apply_material(root: Node, material: Material) -> void:
 	for child: Node in root.get_children():

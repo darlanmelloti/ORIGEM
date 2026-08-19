@@ -356,3 +356,10 @@ A profundidade visual das lajes cresce gradualmente no troço Z=76→120, deixan
 A redução de micro-rochas e fetos para agrupamentos maiores passou tecnicamente, mas não produziu ganho visual suficiente na tomada lateral de 36 segundos. A margem original foi restaurada. Relatório: `CP_CARTO_115_MARGEM_RIBEIRINHA_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-116:** auditar a leitura de relevo entre o rio e o arco no enquadramento lateral, isolando a primeira camada de geometria que crie sensação de planura. Não repetir largura do rio, redução de densidade, afloramento isolado, materiais de água, atmosfera, cristas ou camadas auxiliares já rejeitados.
+
+
+## CP-CARTO-116 — Folhagem da Floresta Densa calibrada
+
+A comparação causal no pixel do sinal ciano identificou um carvalho `OAK_DARK`. A redução selectiva da componente azul em materiais verde-azulados foi promovida para todas as instâncias desse activo, sem alterar texturas, troncos, escala, rota, colisores ou luzes. Parser e gameplay regional de 36 segundos passaram. Relatório: `CP_CARTO_116_FOLHAGEM_FLORESTA_CALIBRADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-117:** validar a chegada ao Acampamento Majestic na mesma rota R4→R5 e auditar a primeira lacuna de leitura no destino. Não repetir alterações de folhagem OAK, marcadores P0, marcos ribeirinhos, composição de margem ou candidatos anteriormente rejeitados.
