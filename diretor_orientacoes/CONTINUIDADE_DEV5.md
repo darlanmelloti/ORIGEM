@@ -467,7 +467,10 @@ A cena inicialmente procurada `LightBudgetAuditPreview.tscn` não existe; a vali
 ## CP-D5-128 — CONCLUÍDO: Regressão folga Elias R6
 `EliasR6ClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando monólito aterrado `(52,260)`, colisor `CorredorMargemR6EliasQA`, rota Elias `x=60`, clearance 6,05 m sobre mínimo 4,00 m, 2 ciclos `clear=true`, viewport externo e produção inalterada. Ver `CP_D5_128_REGRESSAO_ELIAS_R6_CLEARANCE.md` e `CP-D5-128_R6_CLEARANCE_RUNTIME.log`.
 
-## CP-D5-129 — ACTIVO
+## CP-D5-129 — CONCLUÍDO: Passe substituto técnico Majestic
+`MajesticEliasVegetationReadPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando pavilhão aterrado `(-88,178)`, câmara `CameraQAMajesticLeitura`, rota Elias `x=-80`, clearance 5,45 m, 5 vegetações em profundidade, 2 ciclos `clear=true`, parede vegetal ausente e produção inalterada. O passe não promove visualmente o Majestic: o pavilhão procedural permanece `REJECTED_VISUAL` e o Fantasy House do Dev7 ainda não foi integrado. Ver `CP_D5_129_PASSE_SUBSTITUTO_MAJESTIC.md` e `CP-D5-129_MAJESTIC_SUBSTITUTE_RUNTIME.log`.
+
+## CP-D5-130 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -477,4 +480,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-129` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-130` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
