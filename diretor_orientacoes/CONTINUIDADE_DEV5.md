@@ -890,7 +890,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-269 — CONCLUÍDO: Regressão Casa Voss Waystation
 `VossWaystationPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando `AnexoCasaVoss_QA`, aterramento, `route_open=true`, instrumentação Dev5 confinada e produção preservada. Ver `CP_D5_269_REGRESSAO_VOSS_WAYSTATION.md` e `CP-D5-269_VOSS_WAYSTATION_RUNTIME.log`.
 
-## CP-D5-270 — ACTIVO
+## CP-D5-270 — CONCLUÍDO: Regressão pavilhão Majestic R5
+`MajesticGroundedPavilionPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando pavilhão `(−88,178)` aterrado via `TerrenoMajesticColisorQA`, fundação aterrada, X/Z preservados, 0 luzes dinâmicas e produção preservada. Ver `CP_D5_270_REGRESSAO_PAVILHAO_MAJESTIC.md` e `CP-D5-270_MAJESTIC_PAVILION_RUNTIME.log`.
+
+## CP-D5-271 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -900,7 +903,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-270` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-271` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
