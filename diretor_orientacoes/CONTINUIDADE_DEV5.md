@@ -599,7 +599,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-172 — CONCLUÍDO: Regressão travessia ponte R2
 `EliasStoneBridgeTraversalPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando ponte R2 em `(−21,4;28)` aterrada, colisor `tabuleiro_continuo`, clearance de 0,21 m sobre mínimo 0,20 m, tipo modular, ponte GLB ausente, 3 ciclos limpos e produção preservada. Ver `CP_D5_172_REGRESSAO_TRAVESSIA_PONTE_R2.md` e `CP-D5-172_BRIDGE_TRAVERSAL_RUNTIME.log`.
 
-## CP-D5-173 — ACTIVO
+## CP-D5-173 — CONCLUÍDO: Regressão floresta viva R4
+`R4LivingForestPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 8 vegetações, 2 partes de abrigo, 12 elementos aterrados, distância fauna de 20,42–20,77 m em 3 ciclos, ausência de portal estrutural e parede de árvores e produção preservada. Ver `CP_D5_173_REGRESSAO_FLORESTA_VIVA_R4.md` e `CP-D5-173_R4_LIVING_FOREST_RUNTIME.log`.
+
+## CP-D5-174 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -609,4 +612,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-173` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-174` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
