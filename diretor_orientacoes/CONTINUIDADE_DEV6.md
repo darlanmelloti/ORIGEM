@@ -236,9 +236,13 @@ A regressão integrada R1, R2, R3, R4 e R6 passou parser e cinco sessões de 36 
 
 A auditoria contabilizou 36 activos Dev6, 36 adaptadores de grounding e 0 luzes dinâmicas nas cinco regiões; LOD está activo em todos os candidatos. Não há excedente local comprovado que justifique remover activos. Registo: `DEV6_057_ORCAMENTO_INSTANCIAS_R1_R6.md`.
 
-## Tarefa activa — DEV6-058
+## DEV6-058 — CONCLUÍDO
 
-Verificar a integridade dos adaptadores de grounding Dev6 nas cinco regiões após as optimizações. Não criar, remover ou reposicionar activos; executar parser e amostragem de cada grupo de grounding, documentando qualquer divergência antes de abrir nova alteração.
+Amostragem runtime confirmou grounding R1 7/7, R2 9/9, R3 8/8, R4 6/6 e R6 6/6 nas sessões de 36 s, sem erro de parser ou assert. Registo: `DEV6_058_INTEGRIDADE_GROUNDING_R1_R6.md`.
+
+## Tarefa activa — DEV6-059
+
+Consolidar a disponibilidade das recapturas de terceira pessoa R1–R6 após os retornos Dev6. Não alterar módulos de gameplay/câmara ou candidatos; verificar apenas o remoto, comparar qualquer nova evidência com a matriz DEV6-055 e, se ausente, iniciar a próxima regressão de compatibilidade GL.
 
 ## Continuidade
 
