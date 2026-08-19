@@ -102,6 +102,11 @@ func height_at(world_x: float, world_z: float) -> float:
 		var shore_detail: float = detail_noise.get_noise_2d(world_x, world_z) * 0.14
 		height = shore_noise + shore_detail
 
+	# Crista recuada do vale: acrescenta um terceiro plano topográfico para lá do Arco, sem tocar na clareira ou no eixo de rota.
+	var arch_ridge_band: float = exp(-pow((world_z - 132.0) / 25.0, 2.0))
+	var arch_ridge_route_hollow: float = exp(-pow((world_x + 8.0) / 11.0, 2.0))
+	height += arch_ridge_band * (1.0 - arch_ridge_route_hollow) * 7.2
+
 	# Bacias histórica e regional: a segunda recebe as Ruínas Submersas do mapa de doze marcos.
 	for lake_center: Vector2 in [Vector2(25.0, -62.0), Vector2(60.0, 252.0)]:
 		var lake_distance: float = Vector2(world_x, world_z).distance_to(lake_center)

@@ -230,3 +230,10 @@ A sonda câmara→mundo filtrou o quadrante do artefacto e encontrou apenas a ma
 A Estrada do Rio conservou malha, rota, colisores e âncoras, mas recebeu uma calibração material mineral mais quente e normal reduzida. A captura de 36 segundos Casa Voss→Arco mostra a sequência de lajes melhor separada do solo PBR. O ganho é local e não encerra o refinamento visual do vale. Relatório: `CP_CARTO_093_MATERIAL_LAJES_ESTRADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-094:** auditar a composição vegetal do horizonte R1→R3 em três planos (primeiro, médio, fundo), usando exclusivamente os activos reais já carregados. A primeira acção é identificar por raiz os conjuntos que contribuem para a leitura repetitiva, sem mover, escalar ou eliminar instâncias antes de uma associação causal. Não repetir a clareira pré-Arco, os pilotos de árvore, as alterações de água, a relva procedural ou qualquer candidato rejeitado.
+
+
+## CP-CARTO-095 — Crista recuada R1→R3 validada
+
+A crista lateral recuada em `z≈132` passou parser e 36 segundos de gameplay Casa Voss→Arco. O eixo navegável foi preservado por uma depressão central; a leitura obtém um terceiro plano topográfico posterior ao Arco sem alterar âncoras, colisores, água, luzes ou módulos R7–R12. Relatório: `CP_CARTO_095_CRISTA_RECUADA_ARCO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-096:** compor uma única faixa vegetal intermédia sobre a nova crista, usando apenas uma das árvores CC0 reais já aprovadas e posicionando-a fora do eixo da rota e da clareira do Arco. A hipótese deve introduzir variação de silhueta, não densidade linear; requer parser, gameplay de 36 segundos, captura e avaliação antes de promoção.
