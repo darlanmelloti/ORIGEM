@@ -398,7 +398,10 @@ A ficha `CP_D5_096_FICHA_INTEGRACAO_R2.md` foi revalidada com parser (`PARSER_EX
 ## CP-D5-105 — CONCLUÍDO: Regressão Margem Viva R6
 `R6LivingShorePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA após a suavização orgânica, confirmando 9 eventos de grounding, 1 ciclo `clear=true`, distância fauna 20,08 m, `collapsed_ruin=true`, `pier_slabs=0`, `wall_of_trees=false` e produção inalterada. A captura gráfica oficial de R6 continua pendente por limitação headless. Ver `CP_D5_105_REGRESSAO_R6_VIVA.md` e `CP-D5-105_R6_REGRESSION_RUNTIME.log`.
 
-## CP-D5-106 — ACTIVO
+## CP-D5-106 — CONCLUÍDO: Regressão sequência viva R1–R6
+`CartographicSequenceR1R6Preview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA após os novos handoffs, confirmando 8 checks, `no_anchor_skip=true`, R1→R2→R3→R4, `majestic_lateral=true`, R5→R6, `ruins_arrival=true` e continuidade para a âncora 7. Ver `CP_D5_106_REGRESSAO_SEQUENCIA_VIVA_R1_R6.md` e `CP-D5-106_R1_R4_SEQUENCE_RUNTIME.log`.
+
+## CP-D5-107 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -408,4 +411,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-106` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-107` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
