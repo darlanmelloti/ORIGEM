@@ -461,3 +461,10 @@ A desactivação selectiva de sombras nas lajes visuais da Estrada do Rio passou
 A projecção do componente azul devolveu o feto `Integration92_FetoDeMargem_03`, mas a comparação QA sem a instância preservou integralmente a marca. O candidato vegetal e a sonda temporária foram revertidos. Relatório: `CP_CARTO_131_MARCA_CIANO_FETO_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-132:** executar uma auditoria de profundidade/camada de renderização no pixel residual, distinguindo céu, interface e objectos sem colisor antes de testar qualquer nova ocultação.
+
+
+## CP-CARTO-132 — Marca azul: malha e interface excluídas
+
+A marca residual persistiu sem `MeshInstance3D` causal e sem qualquer `CanvasLayer` ou `Control` visível. A causa não foi atribuída por geometria ou HUD; todas as sondas foram revertidas. Relatório: `CP_CARTO_132_MARCA_CIANO_SEM_MALHA_OU_UI.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-133:** validar a legibilidade de orientação da Casa Voss no sentido inverso Estrada→Casa, agora com as sombras das lajes corrigidas. A tarefa deve medir se a origem se distingue como marco real, sem retomar a investigação ciano sem uma sonda de renderização por camada.
