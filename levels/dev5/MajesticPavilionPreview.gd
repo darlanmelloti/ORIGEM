@@ -71,6 +71,13 @@ func _build_camera() -> void:
 func _save_snapshot_qa(snapshot_path: String) -> void:
 	for frame_index: int in range(30):
 		await get_tree().process_frame
-	var image := get_viewport().get_texture().get_image()
+	var viewport_texture := get_viewport().get_texture()
+	if viewport_texture == null:
+		print("[DEV5_MAJESTIC_QA] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+		return
+	var image := viewport_texture.get_image()
+	if image == null:
+		print("[DEV5_MAJESTIC_QA] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+		return
 	var result := image.save_png(snapshot_path)
 	print("[DEV5_MAJESTIC_QA] snapshot=%s result=%s" % [snapshot_path, result])

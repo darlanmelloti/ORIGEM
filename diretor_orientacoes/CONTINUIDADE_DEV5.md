@@ -163,7 +163,10 @@ Foi criado `CP_D5_031_HANDOFF_REVISAO_DEV1.md`, organizando evidências técnica
 ## CP-D5-032 — CONCLUÍDO: Validação do Pavilhão Majestic aterrado
 O preview remoto `MajesticPavilionPreview.tscn` passou uma sessão Godot Compatibility de 36 segundos com código 0 e sem `SCRIPT ERROR`, `Parse Error`, `Invalid call` ou `Invalid get`. A cena mantém terreno, rota central, materiais próprios e isolamento de produção. A captura gráfica não foi activada no headless porque o backend não fornece `Image` válida; a pendência visual R4/R6 permanece explícita. Ver `CP_D5_032_MAJESTIC_ATERRAMENTO_QA.md` e `CP-D5-032_RUNTIME_HEADLESS.log`.
 
-## CP-D5-033 — ACTIVO
+## CP-D5-033 — CONCLUÍDO: Fallback seguro de captura Majestic
+O preview `MajesticPavilionPreview.gd` agora verifica textura e imagem de viewport antes de chamar `save_png`. A sessão Compatibility completou 36 segundos com código 0 e registou `snapshot_unavailable=headless_image` sem erro de script. A captura gráfica continua pendente de viewport válido e R4/R6 não foram promovidos. Ver `CP_D5_033_FALLBACK_CAPTURA_MAJESTIC.md` e `CP-D5-033_RUNTIME_HEADLESS.log`.
+
+## CP-D5-034 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -172,4 +175,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-033` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-034` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
