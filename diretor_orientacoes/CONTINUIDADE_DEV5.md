@@ -110,12 +110,14 @@ A auditoria `VegetationLodAuditPreview.tscn` mediu os quatro activos vegetais re
 ## CP-D5-019 — CONCLUÍDO EM QA: Vegetação média dos marcos 4 e 5
 Foi criada `MediumVegetationCompositionPreview.tscn` para os marcos 4 e 5, usando `CartographicPlacementSystem.gd` e offsets canónicos `(0,0)`. Cada composição contém uma árvore PBR focal, três árvores detalhadas médias e quatro alternativas leves distantes, com posições irregulares e sem parede de árvores. A sessão headless completou 36 segundos e confirmou `wall_of_trees=false production_script=false`; ver `CP_D5_019_VEGETACAO_MEDIA_QA.md` e `CP-D5-019_RUNTIME_HEADLESS.log`.
 
-## CP-D5-020 — ACTIVO: Auditoria de regressão cartográfica
-Executar auditoria QA dos candidatos Dev5 publicados, confirmando âncoras, offsets, colisores, luzes e isolamento de módulos de produção. Não repetir geometrias rejeitadas nem tocar `ForestLakeRegion.gd`.
+## CP-D5-020 — CONCLUÍDO: Auditoria de regressão cartográfica
+A cena `CartographicRegressionAuditPreview.tscn` auditou Casa Voss, Ponte do marco 2, Floresta Densa, Majestic, Ruínas Submersas e Vegetação média. Todos os candidatos declararam âncoras canónicas e `local_offset=(0,0)` através de `CartographicPlacementSystem.gd`; os world X/Z e canvas do mapa foram confirmados. Os colisores foram contabilizados por candidato e nenhuma luz dinâmica adicional foi criada pelos objectos. O harness usou apenas luzes direccionais QA das cenas isoladas. Ver `CP_D5_020_AUDITORIA_REGRESSAO_CARTOGRAFICA.md` e `CP-D5-020_RUNTIME_HEADLESS.log`.
+
+A sessão headless completou 36 segundos sem erros Dev5, sem production scripts e sem repetir geometrias rejeitadas.
 
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-020` — executar auditoria de regressão cartográfica dos candidatos Dev5 publicados.
+**Próxima tarefa activa após publicação:** consultar o marcador Dev5 após 10 segundos e executar o próximo item autorizado.
