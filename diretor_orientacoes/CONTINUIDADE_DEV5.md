@@ -965,7 +965,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-294 — CONCLUÍDO: Regressão da apresentação terceira pessoa de Elias
 `EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos, confirmando uma única câmara QA activa (`CameraQA`), sem erros de script, sem alteração de `Player.gd` e sem alteração de produção. Ver `CP_D5_294_ELIAS_TPS.md` e `CP-D5-294_ELIAS_TPS_RUNTIME.log`.
 
-## CP-D5-295 — ACTIVO
+## CP-D5-295 — CONCLUÍDO: Regressão do aterramento cartográfico
+`CartographicGroundingPreview.tscn` passou parser e QA headless de 36 segundos, confirmando `grounded=true` para Casa Voss e Ponte Marco 2, X/Z preservados e Y resolvido por raycast em terreno irregular. Ver `CP_D5_295_ATERRAMENTO_REGRESSAO.md` e `CP-D5-295_GROUNDING_RUNTIME.log`.
+
+## CP-D5-296 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -975,7 +978,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-295` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-296` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
