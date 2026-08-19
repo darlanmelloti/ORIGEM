@@ -328,3 +328,10 @@ A escala foi verificada contra as âncoras canónicas: Casa→Arco = 40,344 m e 
 O material PBR exclusivo do Arco não gerou ganho visual suficiente na rota validada de 36 segundos. A alteração foi revertida, sem tocar em luzes, geometria, colisores ou âncoras. Relatório: `CP_CARTO_111_MATERIAL_ARCO_REJEITADO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-112:** auditoria de transição entre as últimas lajes da Estrada do Rio e a clareira do Arco. Medir os elementos que ainda interrompem a leitura do caminho; não repetir alterações de material do Arco, escala, atmosfera, água, árvores isoladas ou camadas auxiliares já rejeitadas.
+
+
+## CP-CARTO-112 — Sinal ciano auditado sem atribuição única
+
+A componente visual residual foi localizada no ecrã, mas não houve nó 3D, colisor ou elemento UI causal. A instrumentação foi revertida e não se farão alterações especulativas. Relatório: `CP_CARTO_112_AUDITORIA_SINAL_CIANO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-113:** testar uma crista topográfica secundária, ampla e recuada entre o Arco e a entrada da Floresta Densa (R4), fora da rota e das clareiras. A finalidade é criar planos de profundidade reais, não um outdoor. Preservar as âncoras, o Arco, as lajes, as luzes e as Regiões 7–12; reverter se a tomada Casa Voss→Arco não demonstrar ganho visual claro.
