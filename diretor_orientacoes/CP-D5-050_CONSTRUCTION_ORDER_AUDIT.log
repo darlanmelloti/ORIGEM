@@ -1,0 +1,15 @@
+--
+levels/dev5/CartographicGroundingSystem.gd-10-	var ray_end := desired_world_position + Vector3.DOWN * 140.0
+levels/dev5/CartographicGroundingSystem.gd-11-	var query := PhysicsRayQueryParameters3D.create(ray_start, ray_end, collision_mask)
+levels/dev5/CartographicGroundingSystem.gd-20-			"world_xz": Vector2(desired_world_position.x, desired_world_position.z),
+levels/dev5/CartographicGroundingSystem.gd-21-		}
+levels/dev5/CartographicGroundingSystem.gd-22-	var impact := hit["position"] as Vector3
+levels/dev5/CartographicGroundingSystem.gd-24-	return {
+levels/dev5/CartographicGroundingSystem.gd-25-		"grounded": true,
+levels/dev5/CartographicGroundingSystem.gd-26-		"desired_y": desired_world_position.y,
+levels/dev5/CartographicGroundingSystem.gd-5-extends RefCounted
+levels/dev5/CartographicGroundingSystem.gd-6-
+levels/dev5/CartographicGroundingSystem.gd-7-static func snap_to_ground(world: World3D, candidate: Node3D, desired_world_position: Vector3, collision_mask: int = 1) -> Dictionary:
+levels/dev5/CartographicGroundingSystem.gd-9-	var ray_start := desired_world_position + Vector3.UP * 60.0
+levels/dev5/CartographicGroundingSystem.gd:23:	candidate.global_position = Vector3(desired_world_position.x, impact.y, desired_world_position.z)
+levels/dev5/CartographicGroundingSystem.gd:8:	candidate.global_position = desired_world_position
