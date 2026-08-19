@@ -827,7 +827,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-248 — CONCLUÍDO: Regressão floresta R4 viva
 `R4LivingForestPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 8 vegetações, 2 partes de abrigo, 12 elementos aterrados, 3 ciclos `clear=true`, `structural_portal=false`, `wall_of_trees=false` e produção preservada. Ver `CP_D5_248_REGRESSAO_FLORESTA_R4_VIVA.md` e `CP-D5-248_R4_LIVING_FOREST_RUNTIME.log`.
 
-## CP-D5-249 — ACTIVO
+## CP-D5-249 — CONCLUÍDO: Regressão Majestic R5 vivo
+`R5LivingMajesticPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 8 vegetações, 3 partes de abrigo, pavilhão visível, 14 elementos aterrados, rota `clear=true`, `cairn=false`, `wall_of_trees=false` e produção preservada. Ver `CP_D5_249_REGRESSAO_MAJESTIC_R5_VIVO.md` e `CP-D5-249_R5_LIVING_MAJESTIC_RUNTIME.log`.
+
+## CP-D5-250 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -837,7 +840,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-249` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-250` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
