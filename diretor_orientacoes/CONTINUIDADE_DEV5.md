@@ -512,7 +512,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-143 — CONCLUÍDO: Regressão margem orgânica R6
 `R6OrganicShorePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando terreno orgânico, 10 grounding, 4 folhagens, 5 afloramentos, monólito aterrado `(52,260)`, 2 ciclos `clear=true`, 0 cubos de margem, 0 lajes de cais, parede vegetal ausente e produção inalterada. Ver `CP_D5_143_REGRESSAO_R6_ORGANIC.md` e `CP-D5-143_R6_ORGANIC_RUNTIME.log`.
 
-## CP-D5-144 — ACTIVO
+## CP-D5-144 — CONCLUÍDO: Regressão integrada Floresta R4
+`R4LivingForestPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando estado aprovado, 3 ciclos `clear=true`, fauna mínima de 20,42 m, 12 grounding, 8 vegetações, `structural_portal=false`, `wall_of_trees=false` e produção inalterada. Ver `CP_D5_144_REGRESSAO_R4_FOREST.md` e `CP-D5-144_R4_FOREST_RUNTIME.log`.
+
+## CP-D5-145 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -522,4 +525,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-144` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-145` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
