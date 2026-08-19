@@ -64,9 +64,13 @@ A matriz de aceitação para a recaptura de terceira pessoa foi publicada. Regis
 
 A prontidão de integração foi confirmada: branch sincronizada, árvore limpa e documentação DEV6-001/009/011/013/014 presente. Registo: `DEV6_015_PRONTIDAO_INTEGRACAO_R2.md`.
 
-## Tarefa activa — DEV6-016
+## DEV6-016 — CONCLUÍDO
 
-Auditar os contratos de reversão e escopo R2: confirmar que os blocos Dev6 permanecem isolados, que não há alteração das Regiões 7–12 e que a remoção do bloco R2 não afecta a rota. Não aguardar recaptura externa.
+A auditoria confirmou que a integração R2 e os grupos de grounding permanecem isolados, sem referências às Regiões 7–12 e com reversão limitada ao bloco Dev6. Registo: `DEV6_016_REVERSAO_ESCOPO_R2.md`.
+
+## Tarefa activa — DEV6-017
+
+Preparar uma verificação de parser e rota R2 para executar imediatamente após qualquer integração externa de câmara. Enquanto não houver integração externa, executar a validação actual como baseline sem alterar a câmara nem o jogador.
 
 ## Continuidade
 
