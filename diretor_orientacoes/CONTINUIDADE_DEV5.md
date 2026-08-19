@@ -731,7 +731,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-216 — CONCLUÍDO: Regressão legibilidade angular R6
 `R6ReadabilityAnglesPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 3 ângulos, Elias/monólito/corredor visíveis em todos, monólito `(52,260)` aterrado, rota `x=60`, 2 ciclos `clear=true`, câmara de produção inactiva e produção preservada. Ver `CP_D5_216_REGRESSAO_LEGIBILIDADE_ANGULAR_R6.md` e `CP-D5-216_R6_READABILITY_RUNTIME.log`.
 
-## CP-D5-217 — ACTIVO
+## CP-D5-217 — CONCLUÍDO: Regressão vegetação aterrada R4→R5
+`GroundedVegetationR4R5Preview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 12 candidatos aterrados, 1 pinho focal, 3 árvores detalhadas/médias, 6 folhagens leves, 2 fetos, X/Z preservados, 0 luzes adicionais, `wall_of_trees=false` e produção preservada. Ver `CP_D5_217_REGRESSAO_VEGETACAO_ATERRADA_R4_R5.md` e `CP-D5-217_GROUNDED_VEGETATION_RUNTIME.log`.
+
+## CP-D5-218 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -741,4 +744,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-217` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-218` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
