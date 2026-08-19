@@ -231,7 +231,10 @@ O inventário confirmou 22 cenas QA, zero recursos `res://` ausentes, 22 luzes d
 ## CP-D5-052 — CONCLUÍDO: Auditoria de fallback de captura Elias
 Os três harnesses Elias passaram a tratar textura de viewport e imagem nulas em headless, registando `snapshot_unavailable` em vez de provocar crash. O contrato de câmara foi revalidado durante 36 segundos com `elias_camera_current=false`, câmara externa activa e zero `SCRIPT ERROR`. Ver `CP_D5_052_AUDITORIA_FALLBACK_CAPTURA_ELIAS.md`, `CP-D5-052_CAPTURE_FALLBACK_AUDIT.log` e `CP-D5-052_EliasCameraContract_RUNTIME_FIXED.log`.
 
-## CP-D5-053 — ACTIVO
+## CP-D5-053 — CONCLUÍDO: Leitura R5 com Elias, Pavilhão e vegetação
+O preview `MajesticEliasVegetationReadPreview.tscn` passou 36 segundos com cinco elementos vegetais aterrados, Pavilhão em X/Z `(-88,178)`, Elias no trajecto X=-80, folga `5,45 m`, dois ciclos `clear=true`, `elias_camera_current=false`, `wall_of_trees=false` e `production_modules_changed=false`. Ver `CP_D5_053_VALIDACAO_LEITURA_R5_ELIAS_VEGETACAO.md` e `CP-D5-053_R5_ELIAS_VEGETATION_RUNTIME.log`.
+
+## CP-D5-054 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -241,4 +244,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-053` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-054` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
