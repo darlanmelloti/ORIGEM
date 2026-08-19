@@ -391,3 +391,10 @@ O harness Dev1 agora gera a imagem da evidência no 30.º segundo real de execu�
 A emissão mínima e reforçada do material de terreno foi testada sem criar luzes e com captura tardia ao segundo 30. A falésia R6 persistiu; a alteração foi revertida para não achatar o valor do vale. Relatório: `CP_CARTO_120_PREENCHIMENTO_TERRENO_R6_REJEITADO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-121:** auditar a topologia/normal da encosta R6 que ocupa o quadrante direito da chegada às Ruínas. Não repetir árvores 66/72/76, sombras, UI, água, Rocha 24 ou emissões globais do TerrainPatch.
+
+
+## CP-CARTO-121 — Rectângulo R6: isolamentos rejeitados
+
+A captura tardia no segundo 30 excluiu HUD, camada cartográfica, `SwordPivot` de Elias e `MargensRochosasDoLago` como fonte da massa rectangular escura no quadrante direito da chegada R6. Todas as sondas foram revertidas; não houve alteração de produção. Relatório: `CP_CARTO_121_RECTANGULO_R6_ISOLAMENTOS_REJEITADOS.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-122:** auditar instâncias legadas de geometria de fundo pelas *bounding boxes* que intersectam o quadrante direito da câmara R6. Não repetir HUD, mapa, arma, margens, árvores 66/72/76, sombras, UI, água, Rocha 24 nem emissões globais.
