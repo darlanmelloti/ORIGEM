@@ -1043,7 +1043,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-320 — CONCLUÍDO: Auditoria cartográfica integrada contínua
 `CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos, confirmando 6 candidatos, grounding, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_320_AUDITORIA_CONTINUA.md` e `CP-D5-320_RUNTIME.log`.
 
-## CP-D5-321 — ACTIVO
+## CP-D5-321 — CONCLUÍDO: Regressão da câmara de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos, confirmando uma única câmara QA activa (`CameraQA`), sem erros de parser/script, sem alteração de `Player.gd` ou produção. Ver `CP_D5_321_ELIAS_CAMERA.md` e `CP-D5-321_RUNTIME.log`.
+
+## CP-D5-322 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -1053,7 +1056,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-321` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-322` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
