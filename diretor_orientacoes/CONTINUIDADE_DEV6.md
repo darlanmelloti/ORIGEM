@@ -132,9 +132,13 @@ O harness QA mantém entradas, capturas e telemetria determinísticas. A actuali
 
 Script, telemetria, manifesto e matriz descrevem a mesma sessão R2 e não apresentam divergências. Registo: `DEV6_032_CONSISTENCIA_PROTOCOLO_QA_R2.md`.
 
-## Tarefa activa — DEV6-033
+## DEV6-033 — CONCLUÍDO
 
-Auditar a prontidão de promoção R2 sem recaptura: confirmar que os requisitos técnicos estão PASS e os requisitos visuais continuam pendentes de Dev1/Dev3. Não alterar câmara, jogador, rota ou geometria.
+A auditoria confirmou parser, rota, grounding e luzes como PASS, enquanto terceira pessoa e composição permanecem pendentes dos respectivos proprietários. A promoção visual continua correctamente bloqueada. Registo: `DEV6_033_PRONTIDAO_PROMOCAO_R2.md`.
+
+## Tarefa activa — DEV6-034
+
+Verificar o Git remoto por nova recaptura ou câmara de terceira pessoa e aplicar imediatamente a matriz DEV6-014 se existir. Se não existir, executar apenas a regressão técnica R2 sem alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
