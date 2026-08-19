@@ -992,7 +992,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-303 — CONCLUÍDO: Auditoria final de orçamento LOD e vegetação
 `VegetationLodAuditPreview.tscn` passou parser e QA headless de 36 segundos, confirmando 13.424/402/6.232/114 triângulos nos activos auditados, 1 PBR focal, 3 médios, 8 distantes e 0 luzes dinâmicas para GTX 1050 Ti. Ver `CP_D5_303_AUDITORIA_FINAL_ORCAMENTO.md` e `CP-D5-303_FINAL_BUDGET_RUNTIME.log`.
 
-## CP-D5-304 — ACTIVO
+## CP-D5-304 — CONCLUÍDO: Handoff final R6 para Vila Elevada
+`CartographicSequenceR1R6Preview.tscn` passou parser e QA headless de 36 segundos, confirmando `r6_arrival` em `(60.000,252.000)`, destino 7 `PASSAGEM: VILA ELEVADA`, 8 checks e zero alteração em R7. Ver `CP_D5_304_HANDOFF_R6_R7.md` e `CP-D5-304_R6_R7_HANDOFF_RUNTIME.log`.
+
+## CP-D5-305 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -1002,7 +1005,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-304` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-305` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
