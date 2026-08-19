@@ -454,3 +454,10 @@ A projecção confirmou `NucleoDeArvoreEstrada_00` como copa dominante no quadra
 A desactivação selectiva de sombras nas lajes visuais da Estrada do Rio passou no parser Godot e em 36 segundos de gameplay. A captura tardia comprovou uma rota contínua, sem faixas negras repetitivas, sem novos emissores e sem alteração dos colisores. Relatório: `CP_CARTO_130_SOMBRAS_LAJES_VALIDADO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-131:** auditar as pequenas marcas azul-ciano restantes no eixo Casa Voss→Arco, agora que a rota está legível; atribuir primeiro por projecção/camada antes de alterar qualquer conteúdo de produção.
+
+
+## CP-CARTO-131 — Marca azul: feto rejeitado
+
+A projecção do componente azul devolveu o feto `Integration92_FetoDeMargem_03`, mas a comparação QA sem a instância preservou integralmente a marca. O candidato vegetal e a sonda temporária foram revertidos. Relatório: `CP_CARTO_131_MARCA_CIANO_FETO_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-132:** executar uma auditoria de profundidade/camada de renderização no pixel residual, distinguindo céu, interface e objectos sem colisor antes de testar qualquer nova ocultação.
