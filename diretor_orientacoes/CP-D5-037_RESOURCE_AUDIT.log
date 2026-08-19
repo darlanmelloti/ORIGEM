@@ -1,0 +1,20 @@
+OK	levels/dev5/CartographicGroundingPreview.gd	res://levels/dev5/CartographicPlacementSystem.gd
+OK	levels/dev5/CartographicGroundingPreview.gd	res://levels/dev5/CartographicGroundingSystem.gd
+OK	levels/dev5/CartographicGroundingPreview.gd	res://levels/dev5/CartographicLandmarkObjects.gd
+OK	levels/dev5/CartographicHeightContractsPreview.gd	res://levels/dev5/CartographicHeightContracts.gd
+OK	levels/dev5/CartographicPlacementSystem.gd	res://levels/CartographicAnchors.gd
+OK	levels/dev5/CartographicRegressionAuditPreview.gd	res://levels/dev5/VossWaystationPreview.tscn
+OK	levels/dev5/CartographicRegressionAuditPreview.gd	res://levels/dev5/StoneBridgeLandmarkPreview.tscn
+OK	levels/dev5/CartographicRegressionAuditPreview.gd	res://levels/dev5/DenseForestPortalPreview.tscn
+OK	levels/dev5/CartographicRegressionAuditPreview.gd	res://levels/dev5/MajesticPavilionPreview.tscn
+OK	levels/dev5/CartographicRegressionAuditPreview.gd	res://levels/dev5/SubmergedRuinsPierPreview.tscn
+OK	levels/dev5/CartographicRegressionAuditPreview.gd	res://levels/dev5/MediumVegetationCompositionPreview.tscn
+OK	levels/dev5/GroundedVegetationR4R5Preview.gd	res://assets/models_generated/ez_pine_tall_pbr.glb
+OK	levels/dev5/GroundedVegetationR4R5Preview.gd	res://assets/models_cc0/tree_detailed_dark.glb
+OK	levels/dev5/GroundedVegetationR4R5Preview.gd	res://assets/models_cc0/tree_default_dark.glb
+OK	levels/dev5/GroundedVegetationR4R5Preview.gd	res://assets/models_polyhaven/fern_02/fern_02_1k.gltf
+OK	levels/dev5/MeshBudgetAuditPreview.gd	res://assets/models_cc0/bridge_stone.glb
+OK	levels/dev5/MeshBudgetAuditPreview.gd	res://assets/models_cc0/stone_largeA.glb
+OK	entities/player/third_person/EliasThirdPersonPreview.gd	res://entities/player/third_person/EliasThirdPersonPresentation.gd
+parser_exit=0
+parser_errors=0
