@@ -171,13 +171,13 @@ func _build_overlay() -> void:
 func _save_snapshot(path: String) -> void:
 	for frame: int in range(40):
 		await get_tree().process_frame
-	var viewport_texture := get_viewport().get_texture()
-if viewport_texture == null:
-	print("[DEV5_R5_READ] snapshot_unavailable=headless_renderer path=%s" % path)
-	return
-var image := viewport_texture.get_image()
-if image == null:
-	print("[DEV5_R5_READ] snapshot_unavailable=headless_image path=%s" % path)
-	return
+	var viewport_texture: Texture2D = get_viewport().get_texture()
+	if viewport_texture == null:
+		print("[DEV5_R5_READ] snapshot_unavailable=headless_renderer path=%s" % path)
+		return
+	var image: Image = viewport_texture.get_image()
+	if image == null:
+		print("[DEV5_R5_READ] snapshot_unavailable=headless_image path=%s" % path)
+		return
 	var result := image.save_png(path)
 	print("[DEV5_R5_READ] snapshot=%s result=%s" % [path, result])

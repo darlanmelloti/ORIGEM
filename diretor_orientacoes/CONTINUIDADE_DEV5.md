@@ -291,7 +291,10 @@ O preview `MultiLandmarkGroundedPreview.tscn` passou 36 segundos com CasaVoss â
 ## CP-D5-072 — CONCLUÍDO: Leitura R6 de Elias com vegetação
 O preview `R6EliasVegetationReadPreview.tscn` passou 36 segundos com monólito grounded em `(52,260)`, vegetação de 3 elementos, folga de `6,05 m`, zero lajes, `wall_of_trees=false`, produção inalterada e dois ciclos `clear=true` com Elias. Ver `CP_D5_072_VALIDACAO_LEITURA_R6_ELIAS.md` e `CP-D5-072_R6_VEGETATION_READ_RUNTIME.log`.
 
-## CP-D5-073 — ACTIVO
+## CP-D5-073 — CONCLUÍDO: Leitura de Elias no Pavilhão Majestic R5
+O preview `MajesticEliasVegetationReadPreview.tscn` foi corrigido no fallback de captura e passou 36 segundos com pavilhão grounded em `(-88,178)`, folga de `5,45 m`, cinco elementos vegetais, `wall_of_trees=false`, produção inalterada e dois ciclos `clear=true` com Elias. Ver `CP_D5_073_VALIDACAO_LEITURA_MAJESTIC_R5.md` e `CP-D5-073_MAJESTIC_RUNTIME_FIXED.log`.
+
+## CP-D5-074 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -301,4 +304,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-073` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-074` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
