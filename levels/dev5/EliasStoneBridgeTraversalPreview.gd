@@ -24,6 +24,7 @@ func _ready() -> void:
 	_build_elias()
 	_build_camera()
 	await get_tree().process_frame
+	await get_tree().physics_frame
 	_verify_contract()
 	_build_overlay()
 	assert(bridge_grounded)
