@@ -695,7 +695,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-204 — CONCLUÍDO: Regressão contratos de altura R1→R6
 `CartographicHeightContractsPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 6 regiões, 3 proprietários de terreno, X/Z canónicos, raycast obrigatório, candidatos rejeitados preservados e produção inalterada. Ver `CP_D5_204_REGRESSAO_CONTRATOS_ALTURA_R1_R6.md` e `CP-D5-204_HEIGHT_CONTRACTS_RUNTIME.log`.
 
-## CP-D5-205 — ACTIVO
+## CP-D5-205 — CONCLUÍDO: Regressão estrada viva R2
+`R2LivingRiverRoadPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 4 vegetações, 2 partes de abrigo, 9 elementos aterrados, ponte modular, 5 travessias `bridge_crossed=true`, 5 ciclos `clear=true`, fauna a 12,08–12,93 m, `bridge_glb=false`, `wall_of_trees=false` e produção preservada. Ver `CP_D5_205_REGRESSAO_ESTRADA_VIVA_R2.md` e `CP-D5-205_R2_LIVING_ROAD_RUNTIME.log`.
+
+## CP-D5-206 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -705,4 +708,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-205` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-206` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.

@@ -1,0 +1,22 @@
+# CP-D5-205 — Regressão da estrada viva R2
+
+## Resultado
+
+A cena `R2LivingRiverRoadPreview.tscn` passou parser (`PARSER_EXIT=0`) e sessão QA de 36 segundos (`QA_EXIT=124`, timeout controlado). A estrada viva manteve a travessia central com ponte modular, fauna afastada e composição orgânica sem reintroduzir o GLB rejeitado.
+
+| Verificação | Resultado |
+|---|---|
+| Estado | `approved` |
+| Fauna | 2 elementos |
+| Vegetação | 4 elementos |
+| Partes de abrigo | 2 |
+| Elementos aterrados | 9 |
+| Ponte modular | `true` |
+| Ponte GLB | `false` |
+| Travessias bem-sucedidas | 5 |
+| Ciclos limpos | 5 |
+| Distância fauna | 12,08–12,93 m |
+| Parede de árvores | `false` |
+| Módulos de produção alterados | `false` |
+
+A regressão aprova a estrada viva R2 e preserva a travessia modular, sem geometria GLB rejeitada ou alterações à produção. O log está em `CP-D5-205_R2_LIVING_ROAD_RUNTIME.log`.
