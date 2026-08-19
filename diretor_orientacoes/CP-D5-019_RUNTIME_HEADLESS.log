@@ -1,0 +1,10 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3421)
+
+ERROR: FSR1 is only available when using the Forward+ renderer.
+   at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:979)
+[DEV5_VEGETATION_COMPOSITION] label=FlorestaDensa anchor=4 map_xz=(-9.0, 116.0) local_offset=(0,0) pbr=1 medium=3 distant=4
+[DEV5_VEGETATION_COMPOSITION] label=AcampamentoMajestic anchor=5 map_xz=(-88.0, 178.0) local_offset=(0,0) pbr=1 medium=3 distant=4
+[DEV5_VEGETATION_COMPOSITION] anchors=4,5 pbr_per_composition=1 medium_per_composition=3 distant_per_composition=4 wall_of_trees=false production_script=false

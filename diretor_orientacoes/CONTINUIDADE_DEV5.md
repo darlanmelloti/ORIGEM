@@ -107,12 +107,15 @@ A auditoria `VegetationLodAuditPreview.tscn` mediu os quatro activos vegetais re
 | Validação | Aprovado: parser e sessão headless de 36 segundos sem erros Dev5. |
 | Continuidade | CP-D5-019 aberto como próxima tarefa activa. |
 
-## CP-D5-019 — ACTIVO: Vegetação média dos marcos 4 e 5
-Criar um candidato QA de composição vegetal de média distância usando os limites do CP-D5-018, sem parede de árvores, sem relva tridimensional rejeitada, com uma árvore PBR focal no máximo e alternativas leves no plano distante. Não tocar `ForestLakeRegion.gd` nem qualquer módulo de produção.
+## CP-D5-019 — CONCLUÍDO EM QA: Vegetação média dos marcos 4 e 5
+Foi criada `MediumVegetationCompositionPreview.tscn` para os marcos 4 e 5, usando `CartographicPlacementSystem.gd` e offsets canónicos `(0,0)`. Cada composição contém uma árvore PBR focal, três árvores detalhadas médias e quatro alternativas leves distantes, com posições irregulares e sem parede de árvores. A sessão headless completou 36 segundos e confirmou `wall_of_trees=false production_script=false`; ver `CP_D5_019_VEGETACAO_MEDIA_QA.md` e `CP-D5-019_RUNTIME_HEADLESS.log`.
+
+## CP-D5-020 — ACTIVO: Auditoria de regressão cartográfica
+Executar auditoria QA dos candidatos Dev5 publicados, confirmando âncoras, offsets, colisores, luzes e isolamento de módulos de produção. Não repetir geometrias rejeitadas nem tocar `ForestLakeRegion.gd`.
 
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-019` — criar composição QA de vegetação média para os marcos 4 e 5 usando os limites auditados.
+**Próxima tarefa activa após publicação:** `CP-D5-020` — executar auditoria de regressão cartográfica dos candidatos Dev5 publicados.
