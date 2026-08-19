@@ -20,9 +20,13 @@ Foram aplicadas seis faixas laterais de material de solo sem colisores ou luzes.
 
 A compatibilidade `gl_compatibility` foi auditada e o shader recebeu uma máscara lateral R2 reversível. Parser, rota de 36 segundos, grounding 9/9 e zero luzes adicionais passaram. A melhoria de granulação foi moderada e não autoriza aceitação visual final. Registo: `DEV6_004_COMPATIBILIDADE_GL_R2.md`.
 
-## Tarefa activa — DEV6-005
+## DEV6-005 — CONCLUÍDO COM REJEIÇÃO VISUAL DOCUMENTADA
 
-Auditar a leitura ambiental do corredor R2 e introduzir, apenas se necessário, sinais de ambiente reversíveis que reforcem profundidade sem alterar jogador, rota, X/Z, grounding, luzes ou módulos fora de R1–R6.
+O passe atmosférico preservou parser, rota de 36 segundos, 9/9 aterramentos, X/Z e zero luzes novas, mas a melhoria visual foi marginal. Não repetir ajustes de neblina. Registo: `DEV6_005_LEITURA_AMBIENTAL_R2.md`.
+
+## Tarefa activa — DEV6-006
+
+Construir uma camada reversível de escala ambiental fora da rota R2 — apenas rochas de talude, vegetação de plano médio ou vestígios arqueológicos baixos — para reforçar profundidade. Proibido alterar jogador, rota, X/Z, grounding, luzes ou módulos fora de R1–R6.
 
 ## Continuidade
 

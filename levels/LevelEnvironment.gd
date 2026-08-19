@@ -84,15 +84,15 @@ func _setup_environment() -> void:
 	environment.fog_enabled = true
 	# CP 211 — neblina litúrgica azulada, menos densa e mais integrada com o céu.
 	# A profundidade adicional mantém a montanha legível como destino distante.
-	environment.fog_light_color = Color(0.62, 0.76, 0.92)
-	environment.fog_light_energy = 0.34
-	environment.fog_density = 0.0015
-	environment.fog_sky_affect = 0.72
+	environment.fog_light_color = Color(0.53, 0.66, 0.72)
+	environment.fog_light_energy = 0.42
+	environment.fog_density = 0.0024
+	environment.fog_sky_affect = 0.64
 	environment.volumetric_fog_enabled = false
 	environment.adjustment_enabled = true
-	environment.adjustment_brightness = 1.04
-	environment.adjustment_contrast = 1.04
-	environment.adjustment_saturation = 1.10
+	environment.adjustment_brightness = 1.00
+	environment.adjustment_contrast = 1.07
+	environment.adjustment_saturation = 1.03
 
 func _sync_chronos_profile() -> void:
 	if opening_storm_active:
