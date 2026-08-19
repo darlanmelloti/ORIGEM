@@ -32,9 +32,9 @@ A evidência técnica está em `CP_D5_002_PONTE_MARCO2_QA.md`.
 
 A apresentação isolada de Elias recebeu melhorias de silhueta: colete aberto, cinto e fivela, cabelo assimétrico, bolsa lateral e espada com punho. O parser Godot 4.7.1 passou e a cena QA manteve 36 segundos com captura interna. É uma **proxy técnica**, não uma substituição de `Player.gd` nem o modelo artístico final; não toca primeira pessoa, porta E, salto, stamina ou Casa Voss.
 
-## CP-D5-005 — BLOQUEADO POR ACTIVO EXTERNO
+## CP-D5-005 — CONDICIONAL, NÃO BLOQUEANTE
 
-O candidato humano rigado está identificado, mas a aquisição automática do GLTF/FBX gratuito foi bloqueada pelo CAPTCHA do fornecedor. Integrar somente quando existir um ficheiro recuperável e uma licença/atribuição documentada.
+O candidato humano rigado está identificado, mas a aquisição automática do GLTF/FBX gratuito foi bloqueada pelo CAPTCHA do fornecedor. Integrar somente quando existir um ficheiro recuperável e uma licença/atribuição documentada. Esta condição não bloqueia nenhuma outra tarefa Dev5.
 
 ## CP-D5-006 — CONCLUÍDO EM QA
 
@@ -62,34 +62,36 @@ Depois de cada checkpoint, Dev5 deve ler este marcador, abrir imediatamente o pr
 
 O arco de ruínas estrutural teve parser e sessão de 36 segundos, mas foi rejeitado porque a captura revelou blocos demasiado primitivos e sem ganho suficiente sobre o arco de produção. O código e cenas QA foram revertidos; ver `CP_D5_010_ARCO_RUINAS_REJEITADO.md`. A rejeição não bloqueia a fila.
 
-## CP-D5-011 — CONCLUÍDO EM QA: Floresta Densa (marco 4)
+## CP-D5-011 — CANDIDATO TÉCNICO; AVALIAÇÃO VISUAL PENDENTE
 
-Foi criado o candidato QA `DenseForestPortalPreview.tscn` com troncos cilíndricos inclinados, galhos curtos, rochas laterais irregulares e camada de solo volumétrica. A âncora está explícita como `FLORESTA_DENSA=(-9; 116)`. A passagem central nominal é de 2,4 m e não possui lintel, placas ou parede de árvores. Os colisores existem apenas nos seis troncos e nas quatro rochas laterais; `ForestLakeRegion.gd` não foi alterado.
+O colaborador remoto publicou `DenseForestPortalPreview.tscn`, com troncos, galhos, rochas e camada de solo no marco 4. O parser e a sessão headless de 36 segundos passaram, sem tocar `ForestLakeRegion.gd`; ver `CP_D5_011_FLORESTA_DENSA_QA.md`.
 
-A sessão headless local completou 36 segundos e confirmou `isolated=true region_script=false`, sem erros de parser/runtime Dev5. A evidência está em `CP_D5_011_FLORESTA_DENSA_QA.md` e o log em `CP-D5-011_RUNTIME_HEADLESS.log`. A captura visual 1600×900 continua pendente no ambiente oficial.
+Em paralelo, uma variante alternativa de portal criada localmente foi rejeitada visualmente por ler como estrutura provisória ou parede de árvores; ela foi revertida e documentada em `CP_D5_011_PORTAL_REJEITADO_E_PLACEMENT.md`. Esta rejeição **não invalida** o candidato remoto: o candidato remoto exige uma captura visual própria antes de qualquer aprovação ou integração.
 
-### Aceitação CP-D5-011
+A ferramenta `CartographicPlacementSystem.gd` é agora obrigatória: cada candidato Dev5 deve declarar marco, X/Z canónico, posição no canvas do mapa e deslocamento local antes da cena QA.
 
-| Critério | Resultado |
+## CP-D5-012 — CANDIDATO TÉCNICO: Ruínas Submersas
+
+Foi criado `SubmergedRuinsPierPreview.tscn` com cinco lajes quebradas, quatro colunas parciais laterais e água não emissiva. Os colisores foram limitados às lajes de travessia e às colunas laterais; o objecto não cria luzes dinâmicas nem toca `TempleLevel.gd` ou módulos regionais de produção.
+
+A sessão headless completou 36 segundos e confirmou `landmark=6`, `submerged=true`, `emissive=false`, `dynamic_lights=0` e `production_script=false`; ver `CP_D5_012_RUINAS_SUBMERSAS_QA.md`. Também requer captura visual própria antes de se tornar candidato de integração.
+
+## CP-D5-013 — ACTIVO: Catálogo de inserção R1–R6
+
+Criar um catálogo técnico de objectos tridimensionais prioritários por marco usando `CartographicPlacementSystem`. Para cada objecto, declarar activo real local disponível, deslocamento máximo a partir da âncora, orçamento estimado de triângulos, colisores necessários, evidência QA existente e proprietário de integração. Não criar ou integrar objectos de produção neste checkpoint.
+
+### Aceitação CP-D5-013
+
+| Critério | Obrigatório |
 |---|---|
-| Mapa | Aprovado: `FLORESTA_DENSA=(-9; 116)`. |
-| Geometria | Aprovada em QA: troncos, rochas, solo e profundidade lateral real. |
-| Física | Aprovada: colisores apenas nos troncos/rochas laterais e passagem central aberta. |
-| Validação | Aprovada localmente: 36 segundos sem erro Dev5; captura visual pendente. |
-| Escopo | Aprovado: nenhum módulo regional de produção foi tocado. |
-
-## CP-D5-012 — CONCLUÍDO EM QA: Ruínas Submersas (marco 6)
-
-Foi criado o candidato QA `SubmergedRuinsPierPreview.tscn` com cinco lajes quebradas, quatro colunas parciais laterais e volume de água não emissivo. Os colisores foram limitados às lajes de travessia e às colunas laterais; o objecto não cria luzes dinâmicas nem toca `TempleLevel.gd` ou módulos regionais de produção.
-
-A sessão headless local completou 36 segundos e confirmou `landmark=6 submerged=true emissive=false dynamic_lights=0 production_script=false`, sem erros de parser/runtime Dev5. A evidência está em `CP_D5_012_RUINAS_SUBMERSAS_QA.md` e o log em `CP-D5-012_RUNTIME_HEADLESS.log`. A captura visual 1600×900 permanece pendente no ambiente oficial.
-
-## CP-D5-005 — CONDICIONAL, NÃO BLOQUEANTE
-
-Auditar e integrar um humano GLTF/GLB somente quando existir ficheiro recuperável com licença documentada. O CAPTCHA do fornecedor externo bloqueia apenas esta linha; Elias continua com proxy QA e o Dev5 continua nos CP-D5-010 a CP-D5-012.
+| Cartografia | Seis fichas R1–R6, todas com coordenadas X/Z e posição de canvas |
+| Activos | Preferência por GLB/GLTF local; proibir paredes, outdoors e primitivas não validadas |
+| Desempenho | Orçamento de triângulos e zero luzes dinâmicas por ficha |
+| Integração | Um único proprietário Dev1 por proposta; sem alteração directa de módulos regionais |
+| Continuidade | Ao publicar, abrir CP-D5-014 automaticamente |
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** consultar novamente o marcador Dev5 após 10 segundos e executar a próxima tarefa autorizada, se publicada.
+**Próxima tarefa activa após publicação:** `CP-D5-013` — preparar o catálogo de inserção R1–R6 com a ferramenta cartográfica e, ao concluir, abrir automaticamente `CP-D5-014`.
