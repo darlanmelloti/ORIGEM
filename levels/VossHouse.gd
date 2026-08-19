@@ -94,6 +94,9 @@ func _ready() -> void:
 	_build_forest_ground_integration_92(house)
 	_build_opening_camera()
 	_build_exterior_porch_light()
+	# O harness cartográfico pode pedir a mesma limpeza de auxiliares técnicos usada na abertura, sem alterar a visibilidade no jogo normal.
+	if OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1":
+		get_tree().create_timer(0.90).timeout.connect(_hide_late_opening_technical_markers)
 
 func _build_voss_panoramic_threshold(house: Node3D) -> void:
 	# Soleira CP255: pedras orgânicas baixas prolongam o vão da porta até à Estrada do Rio.
@@ -1164,7 +1167,9 @@ func _audit_opening_residuals() -> void:
 	report.close()
 
 func _hide_late_opening_technical_markers() -> void:
-	if not opening_active:
+	# Em gameplay normal a função só actua no prólogo. O modo QA explícito reutiliza-a para que a evidência não confunda auxiliares técnicos com geometria do mundo.
+	var clean_cartographic_qa: bool = OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1"
+	if not opening_active and not clean_cartographic_qa:
 		return
 	# O estágio QA Orion é uma auditoria interior explícita; no prólogo normal, a limpeza permanece integral.
 	if OS.get_environment("ORIGEM_QA_ORION_REVEAL") == "1":

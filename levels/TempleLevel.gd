@@ -85,6 +85,34 @@ func _queue_regional_qa_modes() -> void:
 	elif OS.get_environment("ORIGEM_QA_INTERACT") == "majestic_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_majestic_stela_interaction_qa)
 	# CP-CARTO-83 QA: a captura é chamada pelo spawn específico após a câmara receber a posição final.
+	if OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1":
+		get_tree().create_timer(2.50).timeout.connect(_audit_blue_meshes_qa)
+
+func _audit_blue_meshes_qa() -> void:
+	# Diagnóstico exclusivo do harness: identifica materiais azul-ciano visíveis antes de qualquer ocultação selectiva.
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	var reference_position: Vector3 = player.global_position if player != null else Vector3.ZERO
+	var scene_root: Node = get_tree().current_scene
+	if scene_root == null:
+		return
+	for node: Node in scene_root.find_children("*", "MeshInstance3D", true, false):
+		var mesh_node: MeshInstance3D = node as MeshInstance3D
+		if mesh_node == null or not mesh_node.visible or mesh_node.global_position.distance_to(reference_position) > 125.0:
+			continue
+		var active_material: Material = mesh_node.get_active_material(0)
+		var standard_material: StandardMaterial3D = active_material as StandardMaterial3D
+		if standard_material == null:
+			var material_class: String = active_material.get_class() if active_material != null else "sem_material"
+			print("[QA_VISUAL_NODE] name=%s pos=%s material=%s" % [mesh_node.name, mesh_node.global_position, material_class])
+			continue
+		var albedo: Color = standard_material.albedo_color
+		var emission: Color = standard_material.emission
+		var blue_albedo: bool = albedo.b > 0.42 and albedo.b > albedo.r * 1.28 and albedo.b > albedo.g * 1.10
+		var blue_emission: bool = standard_material.emission_enabled and emission.b > 0.09 and emission.b > emission.r * 1.28 and emission.b > emission.g * 1.10
+		if blue_albedo or blue_emission:
+			# No modo QA, sinais azuis são instrumentação de mapa e não geometria narrativa: ocultá-los impede que sejam confundidos com conteúdo final.
+			mesh_node.visible = false
+			print("[QA_BLUE_MESH_HIDDEN] name=%s pos=%s albedo=%s emission=%s" % [mesh_node.name, mesh_node.global_position, albedo, emission])
 
 func _save_viewport_snapshot_qa() -> void:
 	var snapshot_path: String = OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT")

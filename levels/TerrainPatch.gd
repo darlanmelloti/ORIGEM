@@ -10,10 +10,10 @@ const CELLS_Z: int = 220
 const SIZE_X: float = 640.0
 const SIZE_Z: float = 880.0
 const TERRAIN_Z_MAX: float = 620.0
-const FOREST_GROUND_DIFF: Texture2D = preload("res://assets/textures/pbr/forest_ground_diff.jpg")
-const REGIONAL_WET_GROUND_DIFF: Texture2D = preload("res://assets/textures/generated/regional_wet_forest_floor.png")
-const FOREST_GROUND_ROUGH: Texture2D = preload("res://assets/textures/pbr/forest_ground_roughness.jpg")
-const FOREST_GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_ground_normal_gl.jpg")
+# Conjunto PBR com valor médio terroso: evita a leitura granulada da textura húmida anterior no GL Compatibility.
+const FOREST_GROUND_DIFF: Texture2D = preload("res://assets/textures/pbr/forest_ground_06_diff_1k.jpg")
+const FOREST_GROUND_ROUGH: Texture2D = preload("res://assets/textures/pbr/forest_ground_06_rough_1k.jpg")
+const FOREST_GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_ground_06_nor_gl_1k.jpg")
 
 var terrain_material: Material
 var land_noise: FastNoiseLite
@@ -181,29 +181,33 @@ float value_noise(vec2 p) {
 }
 
 void fragment() {
-	vec2 p = UV * 7.5;
-	float broad = value_noise(p * 0.22);
-	float soil = value_noise(p * 1.7);
-	float leaf = smoothstep(0.57, 0.83, value_noise(p * 3.3));
-		vec3 wet_mud = mix(vec3(0.135, 0.175, 0.075), vec3(0.270, 0.290, 0.135), broad);
-		vec3 forest_floor = mix(wet_mud, vec3(0.115, 0.235, 0.082), leaf * 0.34);
+	// A escala anterior expunha demasiado micro-ruído; a nova relação produz manchas de humidade legíveis ao atravessar o vale.
+	vec2 p = UV * 4.4;
+	float broad = value_noise(p * 0.09);
+	float soil = value_noise(p * 0.85);
+	float leaf = smoothstep(0.57, 0.83, value_noise(p * 2.1));
+		// Valor médio húmido para que a textura PBR descreva matéria sem transformar o vale num ruído escuro uniforme.
+		vec3 wet_mud = mix(vec3(0.185, 0.235, 0.108), vec3(0.315, 0.335, 0.155), broad);
+		vec3 forest_floor = mix(wet_mud, vec3(0.145, 0.285, 0.105), leaf * 0.26);
 
-					float pebbles = smoothstep(0.78, 0.93, value_noise(p * 6.5));
-		float leaf_litter = smoothstep(0.64, 0.86, value_noise(p * 4.6 + vec2(4.2, 1.7)));
+		float pebbles = smoothstep(0.80, 0.95, value_noise(p * 4.0));
+		float leaf_litter = smoothstep(0.64, 0.86, value_noise(p * 3.1 + vec2(4.2, 1.7)));
 		forest_floor = mix(forest_floor, vec3(0.060, 0.052, 0.035), pebbles * 0.22);
 		forest_floor = mix(forest_floor, vec3(0.165, 0.108, 0.050), leaf_litter * 0.12);
 
-			vec3 pbr_ground = texture(ground_albedo, UV * 1.65).rgb;
-			float pbr_rough = texture(ground_roughness, UV * 1.65).r;
+		// O mipmap amacia o microdetalhe à distância e deixa que a variação macro descreva o vale, em vez de uma malha de pontos.
+		vec2 pbr_uv = UV * 1.90;
+		vec3 pbr_ground = textureLod(ground_albedo, pbr_uv, 1.85).rgb;
+		float pbr_rough = textureLod(ground_roughness, pbr_uv, 1.85).r;
 		// Mantém a textura PBR como prova de matéria, sem permitir que ela esmague o valor médio do vale no GL Compatibility.
-		forest_floor = mix(forest_floor, pbr_ground * vec3(1.10, 1.08, 0.93), 0.60);
-		forest_floor = mix(forest_floor, vec3(0.140, 0.185, 0.076), leaf * 0.10);
+		forest_floor = mix(forest_floor, pbr_ground * vec3(1.02, 1.00, 0.88), 0.36);
+		forest_floor = mix(forest_floor, vec3(0.170, 0.220, 0.090), leaf * 0.08);
 
 		// Solo pouco especular, mas com valor médio suficiente para os planos do vale se separarem.
-		ALBEDO = forest_floor * mix(1.04, 1.12, soil);
+		ALBEDO = forest_floor * mix(0.98, 1.07, soil);
 		ROUGHNESS = mix(mix(0.76, 0.94, broad + pebbles * 0.14), pbr_rough, 0.30);
-		NORMAL_MAP = texture(ground_normal, UV * 1.65).rgb;
-		NORMAL_MAP_DEPTH = 0.22;
+		NORMAL_MAP = textureLod(ground_normal, pbr_uv, 1.35).rgb;
+		NORMAL_MAP_DEPTH = 0.28;
 
 		METALLIC = 0.0;
 		SPECULAR = 0.22;
@@ -212,7 +216,7 @@ void fragment() {
 	"""
 	var material: ShaderMaterial = ShaderMaterial.new()
 	material.shader = shader
-	material.set_shader_parameter("ground_albedo", REGIONAL_WET_GROUND_DIFF)
+	material.set_shader_parameter("ground_albedo", FOREST_GROUND_DIFF)
 	material.set_shader_parameter("ground_roughness", FOREST_GROUND_ROUGH)
 	material.set_shader_parameter("ground_normal", FOREST_GROUND_NORMAL)
 	return material
@@ -224,8 +228,8 @@ func _add_terrain_triangle(surface: SurfaceTool, first: Vector3, second: Vector3
 
 func _add_terrain_vertex(surface: SurfaceTool, point: Vector3) -> void:
 	surface.set_color(_terrain_color(point))
-	# UVs em espaço do mundo: solo florestal húmido repete sobre a malha explorável, sem painel plano.
-	surface.set_uv(Vector2(point.x * 0.095, point.z * 0.095))
+	# UVs alargadas reduzem repetição granular sem alterar a malha, colisão ou trajectos cartográficos.
+	surface.set_uv(Vector2(point.x * 0.035, point.z * 0.035))
 	surface.add_vertex(point)
 
 func _terrain_color(point: Vector3) -> Color:

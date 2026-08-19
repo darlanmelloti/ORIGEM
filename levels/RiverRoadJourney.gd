@@ -6,6 +6,7 @@ extends Node3D
 
 const RUIN_PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const RUIN_ROCK: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
+const SLOPE_ROCK: PackedScene = preload("res://assets/models_cc0/cliff_blockSlope_rock.glb")
 const STONE_BRIDGE: PackedScene = preload("res://assets/models_cc0/bridge_stone.glb")
 const FERN: PackedScene = preload("res://assets/models_polyhaven/fern_02/fern_02_1k.gltf")
 const PINE_MEDIUM: PackedScene = preload("res://assets/models_generated/ez_pine_medium_pbr.glb")
@@ -52,6 +53,7 @@ func _ready() -> void:
 	_build_macro_ridge_layers()
 	_build_arch_backdrop_foothills()
 	_build_valley_rim_outcrops()
+	_build_slope_outcrop_chain()
 
 func _build_macro_ridge_layers() -> void:
 	# Camadas laterais de relevo: criam profundidade real entre a Casa Voss e o Arco, sem aproximar o destino nem ocupar a faixa de 4,15 m da Estrada.
@@ -165,6 +167,33 @@ func _build_valley_rim_outcrops() -> void:
 				vestige.rotation = Vector3(0.08 * side, (spec["yaw"] as float) + 0.35, 0.05)
 				_apply_material(vestige, ruin_material)
 				rims.add_child(vestige)
+
+func _build_slope_outcrop_chain() -> void:
+	# Volumes CC0 inclinados em planos alternados: quebram os taludes lisos sem criar uma parede nem avançar sobre a rota Casa→Arco.
+	var outcrops: Node3D = Node3D.new()
+	outcrops.name = "AfloramentosInclinadosDoVale"
+	add_child(outcrops)
+	var specs: Array[Dictionary] = [
+		{"z": 38.0, "side": 1.0, "offset": 18.0, "scale": 0.66, "yaw": -0.48},
+		{"z": 57.0, "side": -1.0, "offset": 19.5, "scale": 0.88, "yaw": 0.82},
+		{"z": 77.0, "side": 1.0, "offset": 21.0, "scale": 1.06, "yaw": -0.26},
+		{"z": 96.0, "side": -1.0, "offset": 22.5, "scale": 1.18, "yaw": 0.56}
+	]
+	for index: int in range(specs.size()):
+		var spec: Dictionary = specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var x_value: float = _road_x(z_value) + side * (spec["offset"] as float)
+		var outcrop: Node3D = SLOPE_ROCK.instantiate() as Node3D
+		if outcrop == null:
+			continue
+		outcrop.name = "AfloramentoInclinado_%02d" % (index + 1)
+		outcrop.position = Vector3(x_value, _height_at(x_value, z_value) - 0.12, z_value)
+		var scale_value: float = spec["scale"] as float
+		outcrop.scale = Vector3(scale_value * 1.25, scale_value, scale_value * 1.12)
+		outcrop.rotation.y = spec["yaw"] as float
+		_apply_material(outcrop, ruin_material)
+		outcrops.add_child(outcrop)
 
 func _height_at(world_x: float, world_z: float) -> float:
 	if terrain_patch != null and terrain_patch.has_method("height_at"):
@@ -791,7 +820,7 @@ func _build_roadside_vegetation() -> void:
 	# Núcleos espaçados: a sequência quebra a leitura de parede vegetal, conserva a floresta explorável e abre janelas para o Arco distante.
 	var tree_specs: Array[Dictionary] = [
 		{"z": 30.0, "side": -1.0, "offset": 8.4, "scale": 0.22, "oak": true, "yaw": 0.18},
-		{"z": 42.0, "side": 1.0, "offset": 10.8, "scale": 0.25, "oak": false, "yaw": -0.46},
+		{"z": 42.0, "side": 1.0, "offset": 10.8, "scale": 0.25, "oak": false, "pine_pbr": true, "yaw": -0.46},
 		{"z": 57.0, "side": -1.0, "offset": 12.6, "scale": 0.23, "oak": false, "yaw": 0.84},
 		{"z": 74.0, "side": 1.0, "offset": 14.2, "scale": 0.29, "oak": true, "yaw": -0.30},
 		# Sem árvores no eixo entre z=80 e z=94: a silhueta do Arco permanece legível na viagem real.
@@ -803,7 +832,8 @@ func _build_roadside_vegetation() -> void:
 		var z_value: float = spec["z"] as float
 		var side: float = spec["side"] as float
 		var x_value: float = _road_x(z_value) + side * (spec["offset"] as float)
-		var tree_source: PackedScene = OAK_DARK if bool(spec["oak"]) else DARK_TREE
+		# Um único pinheiro PBR focal introduz leitura vegetal real sem exceder o limite de LOD nem fechar a janela para o Arco.
+		var tree_source: PackedScene = PINE_MEDIUM if bool(spec.get("pine_pbr", false)) else (OAK_DARK if bool(spec["oak"]) else DARK_TREE)
 		var tree: Node3D = tree_source.instantiate() as Node3D
 		if tree != null:
 			tree.name = "NucleoDeArvoreEstrada_%02d" % index
@@ -1032,15 +1062,21 @@ func _build_riparian_color_variation() -> void:
 	]
 	for patch: Dictionary in color_patches:
 		var p: MeshInstance3D = MeshInstance3D.new()
-		p.name = "ColorPatch"
-		var pmesh: PlaneMesh = PlaneMesh.new()
-		pmesh.size = Vector2(rng.randf_range(1.8, 3.2), rng.randf_range(1.4, 2.6))
+		p.name = "AgrupamentoDeFolhagemBaixa"
+		# Sem planos no mundo: cada agrupamento é um volume baixo real, moldado pela altura local do terreno.
+		var pmesh: SphereMesh = SphereMesh.new()
+		pmesh.radius = 0.5
+		pmesh.height = 1.0
+		pmesh.radial_segments = 12
+		pmesh.rings = 6
 		p.mesh = pmesh
 		var pmat: StandardMaterial3D = StandardMaterial3D.new()
 		pmat.albedo_color = patch["col"]
 		pmat.roughness = 0.95
 		p.material_override = pmat
-		p.position = patch["pos"]
+		var authored_pos: Vector3 = patch["pos"] as Vector3
+		p.position = Vector3(authored_pos.x, _height_at(authored_pos.x, authored_pos.z) + 0.030, authored_pos.z)
+		p.scale = Vector3(rng.randf_range(1.8, 3.2), rng.randf_range(0.025, 0.055), rng.randf_range(1.4, 2.6))
 		p.rotation.y = rng.randf_range(0.0, TAU)
 		var_root.add_child(p)
 
