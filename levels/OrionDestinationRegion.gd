@@ -108,6 +108,9 @@ func _build_cartographic_anchors() -> void:
 	anchors.name = "CartographicAnchors_Regioes10a12"
 	anchors.set_meta("map_authority", "mapaorigem.webp")
 	anchors.set_meta("scope", "REGIONS_7_12_ONLY")
+	anchors.set_meta("handoff_chain", "R9->R10->R11->R12")
+	anchors.set_meta("anchor_count", 3)
+	anchors.set_meta("validation_state", "RUNTIME_QA_ONLY")
 	var anchor_data: Array[Dictionary] = [
 		{"name": "Marco10_CavernaDoOrion", "position": Vector3(-116.0, 0.0, 548.0), "role": "abertura tectonica escura na serra", "approach": "R9->R10", "handoff_in": "ColisaoHandoffR9R10", "handoff_out": "ColisaoHandoffCubeR11", "subject": "boca da caverna e braseiros azuis"},
 		{"name": "Marco11_CamaraOrionCube", "position": Vector3(-116.0, 0.0, 562.0), "role": "pico tridimensional e ponto luminescente", "approach": "R10->R11", "handoff_in": "ColisaoHandoffCubeR11", "handoff_out": "ColisaoHandoffHubR12", "subject": "Cubo de Orion e pórtico organico"},
