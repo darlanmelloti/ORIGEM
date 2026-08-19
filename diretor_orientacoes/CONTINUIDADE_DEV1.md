@@ -237,3 +237,17 @@ A Estrada do Rio conservou malha, rota, colisores e âncoras, mas recebeu uma ca
 A crista lateral recuada em `z≈132` passou parser e 36 segundos de gameplay Casa Voss→Arco. O eixo navegável foi preservado por uma depressão central; a leitura obtém um terceiro plano topográfico posterior ao Arco sem alterar âncoras, colisores, água, luzes ou módulos R7–R12. Relatório: `CP_CARTO_095_CRISTA_RECUADA_ARCO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-096:** compor uma única faixa vegetal intermédia sobre a nova crista, usando apenas uma das árvores CC0 reais já aprovadas e posicionando-a fora do eixo da rota e da clareira do Arco. A hipótese deve introduzir variação de silhueta, não densidade linear; requer parser, gameplay de 36 segundos, captura e avaliação antes de promoção.
+
+
+## CP-CARTO-096 — Silhueta isolada na crista rejeitada
+
+A terceira árvore detalhada CC0 temporária em `z=132` passou tecnicamente, mas não alterou a leitura do horizonte na captura de 36 segundos. Foi removida por completo; não repetir a mesma posição, escala ou orientação. Relatório: `CP_CARTO_096_SILHUETA_CRISTA_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-097:** repetir a atribuição do marcador azul-ciano usando a janela de projecção normalizada correcta, centrada aproximadamente em `x=0.66, y=0.44` da captura 1920×1080. A auditoria deve incluir `Light3D` além de malhas visuais, pois a primeira sonda filtrou apenas malhas no quadrante incorrecto. Não repetir Marco Ribeirinho ou `tree_oak_dark`.
+
+
+## CP-CARTO-097 — Marcador residual não atribuído
+
+As exclusões QA da luz e do contexto Majestic, dos sinais P0 e de materiais azul-ciano remotos não alteraram o ponto residual no quadro Casa Voss→Arco. As sondas foram removidas integralmente; não há alteração de produção. Relatório: `CP_CARTO_097_MARCADOR_RESIDUAL_NAO_ATRIBUIDO.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-098:** auditar a silhueta geológica lateral da crista recém-promovida, identificando se um dos afloramentos CC0 existentes pode receber apenas material/escala de leitura sem alterar posição, rota, Arco, vegetação, água ou luzes. A hipótese exige uma diferença visual mensurável na captura Casa Voss→Arco, parser Godot 4.7.1 e 36 segundos de gameplay antes de promoção.
