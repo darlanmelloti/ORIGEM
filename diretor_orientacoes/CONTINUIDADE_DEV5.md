@@ -449,7 +449,10 @@ A cena inicialmente procurada `LightBudgetAuditPreview.tscn` não existe; a vali
 ## CP-D5-122 — CONCLUÍDO: Regressão ponte R2
 `EliasStoneBridgeTraversalPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando âncora R2 `(-21,40;28)`, grounding no `tabuleiro_continuo`, folga 0,21 m sobre mínimo 0,20 m, ponte modular, `glb_bridge=false`, 3 ciclos aprovados, câmara externa preservada e produção inalterada. Ver `CP_D5_122_REGRESSAO_PONTE_R2.md` e `CP-D5-122_R2_BRIDGE_RUNTIME.log`.
 
-## CP-D5-123 — ACTIVO
+## CP-D5-123 — CONCLUÍDO: Regressão rumo Voss→Estrada
+`EliasVossRoadHeadingPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando Casa Voss `(-22,8)`, Estrada `(-21,4;12)`, Ponte R2 `(-21,4;28)`, 8 ciclos para `RUMO À ESTRADA DO RIO`, câmara externa preservada e produção inalterada. Ver `CP_D5_123_REGRESSAO_RUMO_VOSS_R2.md` e `CP-D5-123_VOSS_HEADING_RUNTIME.log`.
+
+## CP-D5-124 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -459,4 +462,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-123` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-124` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
