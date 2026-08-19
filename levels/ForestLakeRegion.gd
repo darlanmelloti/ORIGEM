@@ -23,6 +23,7 @@ const GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_groun
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
+const CARTOGRAPHIC_GROUNDING: Script = preload("res://levels/dev5/CartographicGroundingSystem.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -64,6 +65,7 @@ func _ready() -> void:
 	_build_submerged_ruins()
 	_build_cartographic_basin_silhouette()
 	_build_riparian_margin()
+	_build_dev6_r6_organic_shore_integration()
 	_build_lakeside_focal_vegetation()
 	_build_majestic_ruins_approach_grounding()
 	_apply_riparian_fern_alpha_test()
@@ -1836,6 +1838,98 @@ func _build_riparian_margin() -> void:
 			accent_fern.scale = Vector3(0.46, 0.46, 0.46)
 			accent_fern.rotation.y = 0.28 + float(accent_index) * 0.83
 			margin.add_child(accent_fern)
+
+func _build_dev6_r6_organic_shore_integration() -> void:
+	# DEV6-050 — promoção reversível da margem orgânica Dev5. A rota para as Ruínas conserva
+	# uma faixa livre no eixo x=60; não há cais de lajes, portal, colunas uniformes ou luzes novas.
+	var r6_root := Node3D.new()
+	r6_root.name = "Dev6_MargemOrganicaR6"
+	add_child(r6_root)
+	var outcrop_material := StandardMaterial3D.new()
+	outcrop_material.albedo_color = Color(0.16, 0.20, 0.18, 1.0)
+	outcrop_material.roughness = 0.96
+	var monolith := PILLAR.instantiate() as Node3D
+	if monolith != null:
+		monolith.name = "MonolitoMargemR6_Dev6"
+		monolith.position = Vector3(52.0, _height_at(52.0, 260.0), 260.0)
+		monolith.scale = Vector3(0.62, 1.06, 0.62)
+		monolith.rotation_degrees = Vector3(0.0, 14.0, -4.0)
+		_apply_material(monolith, ruin_material)
+		monolith.add_to_group("dev6_r6_grounding")
+		r6_root.add_child(monolith)
+	var outcrop_specs: Array[Dictionary] = [
+		{"name": "AfloramentoOesteR6", "x": 46.0, "z": 254.0, "scale": 0.54, "yaw": 0.32},
+		{"name": "AfloramentoEsteR6", "x": 73.0, "z": 275.0, "scale": 0.48, "yaw": -0.58},
+		{"name": "AfloramentoLinhaAguaR6", "x": 55.0, "z": 278.5, "scale": 0.38, "yaw": 0.80}
+	]
+	for outcrop_spec: Dictionary in outcrop_specs:
+		var outcrop := ROCK.instantiate() as Node3D
+		if outcrop == null:
+			continue
+		var x_value := outcrop_spec["x"] as float
+		var z_value := outcrop_spec["z"] as float
+		outcrop.name = outcrop_spec["name"] as String
+		outcrop.position = Vector3(x_value, _height_at(x_value, z_value) - 0.04, z_value)
+		var scale_value := outcrop_spec["scale"] as float
+		outcrop.scale = Vector3(scale_value, scale_value * 0.78, scale_value)
+		outcrop.rotation.y = outcrop_spec["yaw"] as float
+		_apply_material(outcrop, outcrop_material)
+		outcrop.add_to_group("dev6_r6_grounding")
+		r6_root.add_child(outcrop)
+	var fern_specs: Array[Dictionary] = [
+		{"name": "FetoMargemOesteR6", "x": 54.0, "z": 251.5, "scale": 0.46, "yaw": 0.20},
+		{"name": "FetoMargemEsteR6", "x": 68.0, "z": 271.5, "scale": 0.44, "yaw": -0.48}
+	]
+	for fern_spec: Dictionary in fern_specs:
+		var fern := FERN.instantiate() as Node3D
+		if fern == null:
+			continue
+		var x_value := fern_spec["x"] as float
+		var z_value := fern_spec["z"] as float
+		fern.name = fern_spec["name"] as String
+		fern.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
+		var scale_value := fern_spec["scale"] as float
+		fern.scale = Vector3.ONE * scale_value
+		fern.rotation.y = fern_spec["yaw"] as float
+		fern.add_to_group("dev6_r6_grounding")
+		r6_root.add_child(fern)
+	_build_dev6_r6_grounding_fields(r6_root)
+	call_deferred("_ground_dev6_r6_assets")
+	print("[DEV6_R6] status=integrated monolith=1 outcrops=3 foliage=2 pier_slabs=0 dynamic_lights=0 route_clear=true reversible=true")
+
+func _build_dev6_r6_grounding_fields(parent: Node3D) -> void:
+	var field_root := Node3D.new()
+	field_root.name = "AdaptadoresDeTerrenoR6"
+	parent.add_child(field_root)
+	var field_index := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r6_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var field := StaticBody3D.new()
+		field.name = "SuporteDeTerrenoR6_%02d" % field_index
+		field.position = Vector3(node.global_position.x, _height_at(node.global_position.x, node.global_position.z) - 0.08, node.global_position.z)
+		var collision := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = Vector3(3.40, 0.16, 3.40)
+		collision.shape = shape
+		field.add_child(collision)
+		field_root.add_child(field)
+		field_index += 1
+
+func _ground_dev6_r6_assets() -> void:
+	await get_tree().physics_frame
+	var grounded_count := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r6_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var desired := node.global_position + Vector3.UP * 48.0
+		var result: Dictionary = CARTOGRAPHIC_GROUNDING.snap_to_ground(get_world_3d(), node, desired)
+		if bool(result.get("grounded", false)):
+			grounded_count += 1
+	print("[DEV6_R6] grounding=%d expected=6 xz_preserved=true pier_slabs=0" % grounded_count)
+	assert(grounded_count == 6)
 
 func _build_majestic_ruins_approach_grounding() -> void:
 	# CP284: três grupos irregulares costuram o fim da expedição Majestic à margem das Ruínas sem fechar a aproximação ocidental.

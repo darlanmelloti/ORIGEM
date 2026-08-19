@@ -42,6 +42,8 @@ func _ready() -> void:
 	_build_river()
 	_build_river_margins()
 	_build_dev6_r2_living_integration()
+	_build_dev6_r3_living_integration()
+	_build_dev6_r4_living_integration()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_macro_river_cutbanks()
@@ -605,6 +607,196 @@ func _ground_dev6_r2_assets() -> void:
 			grounded_count += 1
 	print("[DEV6_R2] grounding=%d expected=9 xz_preserved=true" % grounded_count)
 	assert(grounded_count == 9)
+
+func _build_dev6_r3_living_integration() -> void:
+	# DEV6-047 — promoção reversível do corredor vivo Dev5 R3. Replica apenas fauna,
+	# vegetação e vestígios laterais aprovados; não cria arco estrutural, luzes ou colisores na rota.
+	var r3_root := Node3D.new()
+	r3_root.name = "Dev6_ArcoRuinasVivoR3"
+	add_child(r3_root)
+	var fauna_material := StandardMaterial3D.new()
+	fauna_material.albedo_color = Color(0.235, 0.155, 0.090, 1.0)
+	fauna_material.roughness = 0.96
+	fauna_material.metallic = 0.0
+	var fauna_specs: Array[Dictionary] = [
+		{"name": "CervoRuinasOesteR3", "x": _road_x(82.0) - 12.20, "z": 82.0, "scale": 0.48, "yaw": 0.40},
+		{"name": "CervoRuinasEsteR3", "x": _road_x(94.0) + 12.60, "z": 94.0, "scale": 0.46, "yaw": -2.18}
+	]
+	for fauna_spec: Dictionary in fauna_specs:
+		var deer := DEER_CC0.instantiate() as Node3D
+		if deer == null:
+			continue
+		var deer_x := fauna_spec["x"] as float
+		var deer_z := fauna_spec["z"] as float
+		deer.name = fauna_spec["name"] as String
+		deer.position = Vector3(deer_x, _height_at(deer_x, deer_z), deer_z)
+		var deer_scale := fauna_spec["scale"] as float
+		deer.scale = Vector3.ONE * deer_scale
+		deer.rotation.y = fauna_spec["yaw"] as float
+		_apply_material(deer, fauna_material)
+		_configure_dev6_r3_lod(deer, 40.0)
+		deer.add_to_group("decorative_fauna")
+		deer.add_to_group("dev6_r3_grounding")
+		r3_root.add_child(deer)
+	var vegetation_specs: Array[Dictionary] = [
+		{"scene": OAK_DARK, "name": "CarvalhoRuinasOesteR3", "x": _road_x(78.0) - 13.80, "z": 78.0, "scale": 0.40, "yaw": -0.24},
+		{"scene": PINE_MEDIUM, "name": "PinheiroRuinasEsteR3", "x": _road_x(91.0) + 14.20, "z": 91.0, "scale": 0.44, "yaw": 0.58},
+		{"scene": FERN, "name": "FetoRuinasOesteR3", "x": _road_x(87.0) - 7.30, "z": 87.0, "scale": 0.52, "yaw": 0.22},
+		{"scene": FERN, "name": "FetoRuinasEsteR3", "x": _road_x(98.0) + 7.60, "z": 98.0, "scale": 0.50, "yaw": -0.62}
+	]
+	for vegetation_spec: Dictionary in vegetation_specs:
+		var vegetation := (vegetation_spec["scene"] as PackedScene).instantiate() as Node3D
+		if vegetation == null:
+			continue
+		var vegetation_x := vegetation_spec["x"] as float
+		var vegetation_z := vegetation_spec["z"] as float
+		vegetation.name = vegetation_spec["name"] as String
+		vegetation.position = Vector3(vegetation_x, _height_at(vegetation_x, vegetation_z), vegetation_z)
+		var vegetation_scale := vegetation_spec["scale"] as float
+		vegetation.scale = Vector3.ONE * vegetation_scale
+		vegetation.rotation.y = vegetation_spec["yaw"] as float
+		_configure_dev6_r3_lod(vegetation, 56.0 if "Carvalho" in vegetation.name or "Pinheiro" in vegetation.name else 32.0)
+		vegetation.add_to_group("dev6_r3_grounding")
+		r3_root.add_child(vegetation)
+	var ruin_specs: Array[Dictionary] = [
+		{"scene": RUIN_ROCK, "name": "VestigioRuinasOesteR3", "x": _road_x(86.0) - 10.40, "z": 86.0, "scale": 0.50, "yaw": 0.42},
+		{"scene": RUIN_PILLAR, "name": "VestigioRuinasEsteR3", "x": _road_x(97.0) + 10.80, "z": 97.0, "scale": 0.28, "yaw": -0.36}
+	]
+	for ruin_spec: Dictionary in ruin_specs:
+		var ruin := (ruin_spec["scene"] as PackedScene).instantiate() as Node3D
+		if ruin == null:
+			continue
+		var ruin_x := ruin_spec["x"] as float
+		var ruin_z := ruin_spec["z"] as float
+		ruin.name = ruin_spec["name"] as String
+		ruin.position = Vector3(ruin_x, _height_at(ruin_x, ruin_z) - 0.03, ruin_z)
+		var ruin_scale := ruin_spec["scale"] as float
+		ruin.scale = Vector3(ruin_scale, ruin_scale * 0.82, ruin_scale)
+		ruin.rotation.y = ruin_spec["yaw"] as float
+		_apply_material(ruin, ruin_material)
+		ruin.add_to_group("dev6_r3_grounding")
+		r3_root.add_child(ruin)
+	_build_dev6_r3_grounding_fields(r3_root)
+	call_deferred("_ground_dev6_r3_assets")
+	print("[DEV6_R3] status=integrated fauna=2 vegetation=4 ruin_parts=2 structural_arch=false dynamic_lights=0 route_clear=true reversible=true")
+
+func _configure_dev6_r3_lod(root: Node, visibility_end: float) -> void:
+	for child: Node in root.get_children():
+		if child is GeometryInstance3D:
+			var geometry := child as GeometryInstance3D
+			geometry.visibility_range_begin = 0.0
+			geometry.visibility_range_end = visibility_end
+			geometry.visibility_range_end_margin = 7.0
+		_configure_dev6_r3_lod(child, visibility_end)
+
+func _build_dev6_r3_grounding_fields(parent: Node3D) -> void:
+	var field_root := Node3D.new()
+	field_root.name = "AdaptadoresDeTerrenoR3"
+	parent.add_child(field_root)
+	var field_index := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r3_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var field := StaticBody3D.new()
+		field.name = "SuporteDeTerrenoR3_%02d" % field_index
+		field.position = Vector3(node.global_position.x, _height_at(node.global_position.x, node.global_position.z) - 0.08, node.global_position.z)
+		var collision := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = Vector3(3.40, 0.16, 3.40)
+		collision.shape = shape
+		field.add_child(collision)
+		field_root.add_child(field)
+		field_index += 1
+
+func _ground_dev6_r3_assets() -> void:
+	await get_tree().physics_frame
+	var grounded_count := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r3_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var desired := node.global_position + Vector3.UP * 48.0
+		var result: Dictionary = CARTOGRAPHIC_GROUNDING.snap_to_ground(get_world_3d(), node, desired)
+		if bool(result.get("grounded", false)):
+			grounded_count += 1
+	print("[DEV6_R3] grounding=%d expected=8 xz_preserved=true structural_arch=false" % grounded_count)
+	assert(grounded_count == 8)
+
+func _build_dev6_r4_living_integration() -> void:
+	# DEV6-049 — vegetação lateral R4 derivada do candidato Dev5 aterrada. O portal florestal,
+	# fauna e abrigo não fazem parte desta promoção: a rota mantém corredor aberto para Majestic.
+	var r4_root := Node3D.new()
+	r4_root.name = "Dev6_FlorestaDensaVivaR4"
+	add_child(r4_root)
+	var vegetation_specs: Array[Dictionary] = [
+		{"scene": PINE_MEDIUM, "name": "PinheiroFocalR4", "x": _road_x(109.0) - 15.80, "z": 109.0, "scale": 0.74, "yaw": 0.30, "lod": 62.0},
+		{"scene": DARK_TREE, "name": "ArvoreDetalheOesteR4", "x": _road_x(104.0) - 13.20, "z": 104.0, "scale": 0.66, "yaw": -0.36, "lod": 58.0},
+		{"scene": DARK_TREE, "name": "ArvoreDetalheLesteR4", "x": _road_x(116.0) + 14.40, "z": 116.0, "scale": 0.62, "yaw": 0.46, "lod": 58.0},
+		{"scene": OAK_DARK, "name": "CarvalhoDistanteR4", "x": _road_x(121.0) + 19.00, "z": 121.0, "scale": 0.52, "yaw": -0.20, "lod": 64.0},
+		{"scene": FERN, "name": "FetoMargemOesteR4", "x": _road_x(111.0) - 6.80, "z": 111.0, "scale": 0.48, "yaw": 0.18, "lod": 30.0},
+		{"scene": FERN, "name": "FetoMargemEsteR4", "x": _road_x(119.0) + 6.90, "z": 119.0, "scale": 0.46, "yaw": -0.52, "lod": 30.0}
+	]
+	for vegetation_spec: Dictionary in vegetation_specs:
+		var vegetation := (vegetation_spec["scene"] as PackedScene).instantiate() as Node3D
+		if vegetation == null:
+			continue
+		var x_value := vegetation_spec["x"] as float
+		var z_value := vegetation_spec["z"] as float
+		vegetation.name = vegetation_spec["name"] as String
+		vegetation.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
+		var scale_value := vegetation_spec["scale"] as float
+		vegetation.scale = Vector3.ONE * scale_value
+		vegetation.rotation.y = vegetation_spec["yaw"] as float
+		_configure_dev6_r4_lod(vegetation, vegetation_spec["lod"] as float)
+		vegetation.add_to_group("dev6_r4_grounding")
+		r4_root.add_child(vegetation)
+	_build_dev6_r4_grounding_fields(r4_root)
+	call_deferred("_ground_dev6_r4_assets")
+	print("[DEV6_R4] status=integrated focal_pine=1 detailed_trees=3 ferns=2 structural_portal=false dynamic_lights=0 route_clear=true reversible=true")
+
+func _configure_dev6_r4_lod(root: Node, visibility_end: float) -> void:
+	for child: Node in root.get_children():
+		if child is GeometryInstance3D:
+			var geometry := child as GeometryInstance3D
+			geometry.visibility_range_begin = 0.0
+			geometry.visibility_range_end = visibility_end
+			geometry.visibility_range_end_margin = 7.0
+		_configure_dev6_r4_lod(child, visibility_end)
+
+func _build_dev6_r4_grounding_fields(parent: Node3D) -> void:
+	var field_root := Node3D.new()
+	field_root.name = "AdaptadoresDeTerrenoR4"
+	parent.add_child(field_root)
+	var field_index := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r4_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var field := StaticBody3D.new()
+		field.name = "SuporteDeTerrenoR4_%02d" % field_index
+		field.position = Vector3(node.global_position.x, _height_at(node.global_position.x, node.global_position.z) - 0.08, node.global_position.z)
+		var collision := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = Vector3(3.40, 0.16, 3.40)
+		collision.shape = shape
+		field.add_child(collision)
+		field_root.add_child(field)
+		field_index += 1
+
+func _ground_dev6_r4_assets() -> void:
+	await get_tree().physics_frame
+	var grounded_count := 0
+	for candidate: Node in get_tree().get_nodes_in_group("dev6_r4_grounding"):
+		if not (candidate is Node3D):
+			continue
+		var node := candidate as Node3D
+		var desired := node.global_position + Vector3.UP * 48.0
+		var result: Dictionary = CARTOGRAPHIC_GROUNDING.snap_to_ground(get_world_3d(), node, desired)
+		if bool(result.get("grounded", false)):
+			grounded_count += 1
+	print("[DEV6_R4] grounding=%d expected=6 xz_preserved=true structural_portal=false" % grounded_count)
+	assert(grounded_count == 6)
 
 func _build_positive_valley_bridge() -> void:
 	# CP280 — ponte de leitura no eixo positivo: integra Casa, rio, Estrada e Arco na sequência do mapa.

@@ -209,12 +209,26 @@ void fragment() {
 					vec3 r2_soil = mix(vec3(0.085, 0.125, 0.060), pbr_ground * vec3(0.78, 0.88, 0.66), 0.46);
 					forest_floor = mix(forest_floor, r2_soil, r2_margin * 0.56);
 
-					// Solo continua pouco especular, mas recupera leitura terrosa e micro-relevo no GL Compatibility.
-					ALBEDO = forest_floor * mix(1.00, 1.14, soil);
+					// DEV6-R3: o vale do Arco usa um tratamento de baixa frequência no GL Compatibility.
+					// Clareia a leitura material entre z=78–112 sem alterar relevo, colisores ou a faixa jogável.
+					float r3_zone = smoothstep(76.0, 86.0, terrain_world.y) * (1.0 - smoothstep(108.0, 120.0, terrain_world.y));
+					float r3_progress = clamp((terrain_world.y - 82.0) / 28.0, 0.0, 1.0);
+					float r3_center = mix(-13.8, -9.0, r3_progress) + sin(r3_progress * 3.14159265 * 1.4) * 0.72;
+					float r3_distance = abs(terrain_world.x - r3_center);
+					float r3_margin = r3_zone * smoothstep(2.30, 3.25, r3_distance) * (1.0 - smoothstep(13.0, 17.0, r3_distance));
+					vec3 r3_base = mix(forest_floor, pbr_ground * vec3(1.34, 1.26, 0.94), 0.72);
+					// A base aplica-se a toda a zona do Arco; a margem só acrescenta micro-variação e evita uma faixa clara unilateral.
+					forest_floor = mix(forest_floor, r3_base + vec3(0.062, 0.078, 0.026), r3_zone * 0.92);
+					forest_floor = mix(forest_floor, r3_base + vec3(0.070, 0.086, 0.030), r3_margin * 0.34);
+
+					// Emissão muito baixa preserva uma leitura de solo húmido nas sombras do GL sem criar luzes dinâmicas.
+					ALBEDO = forest_floor * mix(1.00, 1.08, soil);
+					EMISSION = vec3(0.036, 0.056, 0.014) * (r3_zone * 0.82 + r3_margin * 0.18);
 			ROUGHNESS = mix(mix(0.74, 0.96, broad + pebbles * 0.18), pbr_rough, 0.38);
 			ROUGHNESS = mix(ROUGHNESS, 0.93, r2_margin * 0.62);
+			ROUGHNESS = mix(ROUGHNESS, 0.84, r3_zone * 0.66 + r3_margin * 0.34);
 			NORMAL_MAP = texture(ground_normal, UV * 1.65).rgb;
-			NORMAL_MAP_DEPTH = mix(0.32, 0.18, r2_margin);
+			NORMAL_MAP_DEPTH = mix(0.32, 0.18, max(r2_margin, r3_margin));
 
 		METALLIC = 0.0;
 		SPECULAR = 0.22;

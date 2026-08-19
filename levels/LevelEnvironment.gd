@@ -190,23 +190,20 @@ func apply_voss_daylight() -> void:
 	environment.sky = _create_daylight_sky()
 	environment.background_energy_multiplier = 1.00
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	environment.ambient_light_color = Color(0.50, 0.58, 0.52, 1.0)
-	environment.ambient_light_energy = 0.94
+	environment.ambient_light_color = Color(0.58, 0.67, 0.60, 1.0)
+	environment.ambient_light_energy = 1.08
 	environment.fog_enabled = true
 	environment.fog_light_color = Color(0.66, 0.74, 0.78, 1.0)
 	environment.fog_light_energy = 0.26
 	environment.fog_density = 0.0011
-
 	environment.fog_sky_affect = 0.60
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	environment.tonemap_exposure = 1.15
-
 	environment.glow_enabled = false
 	environment.adjustment_enabled = true
 	environment.adjustment_brightness = 1.00
-	environment.adjustment_contrast = 1.11
+	environment.adjustment_contrast = 1.04
 	environment.adjustment_saturation = 0.96
-
 	if sun != null:
 		sun.rotation_degrees = Vector3(-32.0, -38.0, 0.0)
 		sun.light_color = Color(1.0, 0.80, 0.60, 1.0)

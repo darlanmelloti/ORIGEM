@@ -196,9 +196,25 @@ A sessão DEV6-046 mantém integridade e telemetria válidas; a ponta Dev5 não 
 
 A regressão R2 passou parser, rota de 36 segundos, R1–R6, 9/9 grounding, zero luzes e manifesto de sessão. Sem recaptura válida, a aceitação visual mantém-se rejeitada. Registo: `DEV6_048_REGRESSAO_MANIFESTO_R2.md`.
 
-## Tarefa activa — DEV6-049
+## DEV6-047 a DEV6-048 — CONCLUÍDOS
 
-Auditar a rastreabilidade da sessão DEV6-048 e verificar o Git remoto por qualquer entrada de terceira pessoa R2. Não alterar câmara, jogador, rota ou geometria.
+O corredor vivo R3 foi integrado com 2 faunas, 4 vegetações e 2 vestígios laterais, sem arco estrutural nem luzes adicionais. Parser, rota Arco–Floresta por 36 s e grounding 8/8 passaram. Os passes materiais GL melhoraram as sombras, mas a leitura final mantém `REJECTED_VISUAL` por câmara de primeira pessoa, taludes técnicos e activos ainda provisórios. Registos: `DEV6_047_INTEGRACAO_R3_ESTADO_PARCIAL.md` e `DEV6_048_MATERIAIS_R3_E_DECISAO.md`.
+
+## DEV6-049 — CONCLUÍDO
+
+A vegetação lateral R4 foi integrada sem portal, fauna ou luzes. Parser, rota Floresta–Majestic de 36 s, clearing e grounding 6/6 passaram. A leitura visual mantém `REJECTED_VISUAL` por câmara de primeira pessoa, taludes provisórios e vegetação ainda técnica. Registo: `DEV6_049_VEGETACAO_R4_ESTADO_PARCIAL.md`.
+
+## DEV6-050 — CONCLUÍDO
+
+A margem R6 recebeu monólito, três afloramentos e dois fetos laterais sem cais de lajes nem luzes. Parser, rota Majestic–Ruínas de 36 s e grounding 6/6 passaram. A leitura visual mantém `REJECTED_VISUAL` por arma em primeira pessoa, taludes provisórios e vegetação técnica. Registo: `DEV6_050_MARGEM_R6_ESTADO_PARCIAL.md`.
+
+## DEV6-051 — CONCLUÍDO
+
+A regressão R2, R3, R4 e R6 confirmou parser, quatro percursos de 36 s, grounding X/Z e zero luzes adicionadas pelos blocos Dev6. Todas as decisões visuais permanecem `REJECTED_VISUAL` até recaptura de terceira pessoa Dev1/Dev3. Registo: `DEV6_051_REGRESSAO_INTEGRADA_R2_R6.md`.
+
+## Tarefa activa — DEV6-052
+
+Auditar o candidato exterior R1 Dev5 para promover apenas activos laterais e aterrados junto à Casa Voss. Não alterar a casa, porta, jogador, câmara ou a rota de saída; não criar luzes; não reutilizar elementos rejeitados.
 
 ## Continuidade
 
