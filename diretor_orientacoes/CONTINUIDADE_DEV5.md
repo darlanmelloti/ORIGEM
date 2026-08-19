@@ -285,7 +285,10 @@ O preview `EliasR5R6HeadingPreview.tscn` passou 36 segundos com partida `(-80,19
 ## CP-D5-070 — CONCLUÍDO: Passagem Elias na Floresta R4
 O preview `EliasForestClearancePreview.tscn` passou 36 segundos com âncora `(-9,116)`, corredor de `5,20 m`, folga mínima de `2,75 m`, seis elementos grounded, `forest_portal=false`, `wall_of_trees=false` e dois ciclos de rota abertos. Ver `CP_D5_070_VALIDACAO_ELIAS_FLORESTA_R4.md` e `CP-D5-070_ELIAS_FOREST_RUNTIME.log`.
 
-## CP-D5-071 — ACTIVO
+## CP-D5-071 — CONCLUÍDO: Composição grounded R1/R2
+O preview `MultiLandmarkGroundedPreview.tscn` passou 36 segundos com CasaVoss âncora `1` em `(-22,8)` e PonteMarco2 âncora `2` em `(-21,4;12)`, ambos grounded sobre terreno irregular, X/Z preservado, `production_script=false` e zero luzes dinâmicas. Ver `CP_D5_071_VALIDACAO_COMPOSICAO_GROUNDED_R1_R2.md` e `CP-D5-071_MULTILANDMARK_RUNTIME.log`.
+
+## CP-D5-072 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -295,4 +298,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-071` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-072` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
