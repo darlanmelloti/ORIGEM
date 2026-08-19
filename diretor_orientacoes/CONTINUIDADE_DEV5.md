@@ -815,7 +815,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-244 — CONCLUÍDO TECNICAMENTE: Recaptura R1→R3 terceira pessoa
 `R1R3ThirdPersonCartographicPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando Elias em terceira pessoa, Arco visível em `z=92`, aterramento, escala 70 m, 1 luz e 2 ciclos `clear=true`. A captura permanece `REJECTED_VISUAL` por terreno granular, marcadores técnicos, ruínas simples e silhueta provisória; produção e `Player.gd` preservados. Ver `CP_D5_244_RECAPTURA_R1_R3_RUNTIME.md` e `CP-D5-244_R1_R3_RECAPTURE_RUNTIME.log`.
 
-## CP-D5-245 — ACTIVO
+## CP-D5-245 — CONCLUÍDO: Regressão Casa Voss R1 viva
+`R1LivingVossExteriorPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 5 elementos de jardim, posto de passagem, 8 elementos aterrados, 4 ciclos `clear=true`, produção e porta preservadas e módulos de produção inalterados. Ver `CP_D5_245_REGRESSAO_VOSS_R1.md` e `CP-D5-245_R1_VOSS_EXTERIOR_RUNTIME.log`.
+
+## CP-D5-246 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -825,7 +828,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-245` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-246` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
