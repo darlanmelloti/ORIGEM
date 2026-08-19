@@ -641,7 +641,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-186 — CONCLUÍDO: Regressão handoff final R6→R7
 `EliasR6R7HandoffPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando origem R6 `(60,252)`, destino R7 `(140,352)`, marcador `PASSAGEM: VILA ELEVADA` id 7 alcançado, `marker_only=true`, geometria Dev2 não criada, câmara Elias de produção inactiva e produção preservada. Ver `CP_D5_186_REGRESSAO_HANDOFF_FINAL_R6_R7.md` e `CP-D5-186_R6R7_HANDOFF_RUNTIME.log`.
 
-## CP-D5-187 — ACTIVO
+## CP-D5-187 — CONCLUÍDO: Regressão vegetação aterrada R4→R5
+`GroundedVegetationR4R5Preview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 12 candidatos aterrados, 1 pinheiro PBR focal, 3 árvores médias, 6 folhagens leves, 2 fetos, X/Z preservados, 0 luzes adicionais, `wall_of_trees=false` e produção preservada. Ver `CP_D5_187_REGRESSAO_VEGETACAO_ATERRADA_R4_R5.md` e `CP-D5-187_R4R5_VEGETATION_RUNTIME.log`.
+
+## CP-D5-188 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -651,4 +654,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-187` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-188` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
