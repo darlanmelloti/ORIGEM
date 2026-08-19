@@ -386,7 +386,10 @@ O plano `CP_D5_095_INTEGRACAO_MAPA_VIVO_R1_R6.md` consolidou candidatos R1–R6,
 ## CP-D5-101 — CONCLUÍDO: Ficha integração R3
 `CP_D5_101_FICHA_INTEGRACAO_R3.md` define a integração isolada do Arco das Ruínas Vivo, preservando a âncora `(-16.741,48)`, o corredor Elias, o alvo físico `z=92`, duas ruínas laterais, 2 cervos a >=5 m, 4 elementos vegetais, ausência de arco estrutural e no máximo 1 luz candidata. A validação passou parser (`PARSER_EXIT=0`) e 36 segundos de QA com 8 eventos de grounding, 4 ciclos `clear=true`, distância mínima de 11,49 m, `structural_arch=false`, `scale_compressed=false` e sem produção alterada. Ver `CP_D5_101_VALIDACAO_R3_INTEGRACAO.md` e `CP-D5-101_R3_INTEGRATION_RUNTIME.log`.
 
-## CP-D5-102 — ACTIVO
+## CP-D5-102 — CONCLUÍDO: Ficha integração R1
+`CP_D5_102_FICHA_INTEGRACAO_R1.md` define a integração isolada da Casa Voss Viva, preservando a âncora `(-22,8)`, o corredor Elias `x=-21.4`, a saída R1→R2, a horta lateral, 2 cervos a >=5 m, a porta e o interior de produção intactos e no máximo 1 luz candidata. A validação passou parser (`PARSER_EXIT=0`) e 36 segundos de QA com 8 eventos de grounding, 4 ciclos `clear=true`, distância mínima de 9,07 m, `house_production_touched=false`, `door_touched=false` e sem módulos de produção alterados. Ver `CP_D5_102_VALIDACAO_R1_INTEGRACAO.md` e `CP-D5-102_R1_INTEGRATION_RUNTIME.log`.
+
+## CP-D5-103 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -396,4 +399,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-102` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-103` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
