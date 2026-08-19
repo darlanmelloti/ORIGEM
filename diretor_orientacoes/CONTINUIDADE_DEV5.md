@@ -203,16 +203,20 @@ A auditoria confirmou zero referências operacionais a `Player.gd` ou módulos r
 
 A cena `EliasCameraContractPreview.tscn` confirmou `follow_camera.current=false`, `CameraQAExterna.current=true` e `CameraQAExterna` como proprietária da viewport. O parser Godot 4.7.1, uma sessão de 36 segundos e a captura interna passaram; não houve alteração a `Player.gd` ou módulos regionais. Ver `CP_D5_045_CONTRATO_CAMARA_ELIAS.md`.
 
-## CP-D5-046 — ACTIVO: Auditoria de integridade de câmara dos harnesses Elias
+## CP-D5-046 — CONCLUÍDO: Auditoria de integridade de câmara dos harnesses Elias
 
-Criar uma varredura QA que localize cenas Dev5 com `EliasThirdPersonPresentation` e confirme uma única câmara activa por cena. A auditoria não altera produção; qualquer excepção precisa de ser documentada e rejeitada até revisão técnica.
+Foram identificados três harnesses com `EliasThirdPersonPresentation`. Os dois harnesses de percurso passaram a reter referência tipada à apresentação, eliminando uma asserção causada por normalização do nome do nó em `_ready()`. Parser Godot 4.7.1 e duas sessões de 36 segundos passaram com `elias_camera_current=false`, dois ciclos de percurso por cena e zero alterações a `Player.gd` ou módulos regionais. Ver `CP_D5_046_AUDITORIA_CAMERAS_ELIAS.md`.
+
+## CP-D5-047 — ACTIVO: Matriz de contratos de apresentação de Elias
+
+Consolidar numa ficha única os contratos de câmara, colisão QA, trajecto e isolamento de produção da apresentação de Elias. A tarefa é documental e não promove a apresentação ao jogador principal.
 
 | Critério | Obrigatório |
 |---|---|
-| Cobertura | todos os harnesses Dev5 que instanciam Elias |
-| Aceitação | uma só câmara `current=true` por cena |
-| Isolamento | zero alteração a `Player.gd` e módulos regionais |
-| Continuidade | ao publicar, activar CP-D5-047 no mesmo ciclo |
+| Cobertura | câmara, colisão QA, trajecto, grounding e isolamento |
+| Segurança | critérios de aceitação e reversão explícitos |
+| Produção | Dev1 permanece proprietário de `Player.gd` |
+| Continuidade | ao publicar, activar CP-D5-048 no mesmo ciclo |
 
 
 
@@ -220,4 +224,4 @@ Criar uma varredura QA que localize cenas Dev5 com `EliasThirdPersonPresentation
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-046` — auditoria de integridade de câmara dos harnesses Elias. Depois da validação e publicação, Dev5 abre CP-D5-047 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-047` — matriz de contratos de apresentação de Elias. Depois da validação e publicação, Dev5 abre CP-D5-048 no mesmo ciclo, sem consulta passiva ou espera temporal.

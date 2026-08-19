@@ -15,6 +15,7 @@ const ELIAS_RADIUS := 0.55
 const MIN_REQUIRED_CLEARANCE := 4.0
 
 var elias_actor: CharacterBody3D
+var elias_presentation: EliasThirdPersonPresentation
 var route_cycles := 0
 
 func _ready() -> void:
@@ -24,6 +25,8 @@ func _ready() -> void:
 	_build_monolith_collision()
 	_build_elias_actor()
 	_build_camera()
+	await get_tree().process_frame
+	_verify_camera_contract()
 	_build_overlay()
 	var clearance := abs(ROUTE_X - 52.0) - MONOLITH_RADIUS - ELIAS_RADIUS
 	assert(clearance >= MIN_REQUIRED_CLEARANCE)
@@ -115,11 +118,11 @@ func _build_elias_actor() -> void:
 	collision.shape = shape
 	collision.position.y = 0.95
 	elias_actor.add_child(collision)
-	var presentation: EliasThirdPersonPresentation = ELIAS_PRESENTATION.new()
-	presentation.name = "EliasThirdPersonR6QA"
-	presentation.camera_distance = 3.8
-	presentation.enabled_for_preview = true
-	elias_actor.add_child(presentation)
+	elias_presentation = ELIAS_PRESENTATION.new()
+	elias_presentation.name = "EliasThirdPersonR6QA"
+	elias_presentation.camera_distance = 3.8
+	elias_presentation.enabled_for_preview = true
+	elias_actor.add_child(elias_presentation)
 
 func _apply_ruin_material(node: Node) -> void:
 	var material := StandardMaterial3D.new()
@@ -129,6 +132,13 @@ func _apply_ruin_material(node: Node) -> void:
 		if child is MeshInstance3D:
 			child.material_override = material
 		_apply_ruin_material(child)
+
+func _verify_camera_contract() -> void:
+	assert(elias_presentation != null and elias_presentation.follow_camera != null)
+	elias_presentation.follow_camera.current = false
+	var viewport_camera := get_viewport().get_camera_3d()
+	assert(viewport_camera != null and viewport_camera != elias_presentation.follow_camera)
+	print("[DEV5_ELIAS_CAMERA_AUDIT] harness=EliasR6ClearancePreview elias_camera_current=%s viewport_owner=%s" % [elias_presentation.follow_camera.current, viewport_camera.name])
 
 func _build_camera() -> void:
 	var camera := Camera3D.new()
