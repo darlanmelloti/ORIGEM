@@ -342,8 +342,21 @@ O preview `CartographicSequenceR1R6Preview.tscn` passou 36 segundos após as pub
 ## CP-D5-089 — CONCLUÍDO: Regressão Elias third-person
 O parser do projecto terminou com `PARSER_EXIT=0` e `EliasThirdPersonPreview.tscn` manteve uma sessão QA de 36 segundos com `CameraQA` externa activa, sem `SCRIPT ERROR` ou `Parse Error`. Ver `CP_D5_089_REGRESSAO_ELIAS_THIRD_PERSON.md` e `CP-D5-089_PARSER_RUNTIME.log`.
 
-## CP-D5-090 — ACTIVO
-Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
+## CP-D5-090 — CONCLUÍDO: Acampamento Majestic vivo R5
+
+`R5LivingMajesticPreview.tscn` passou parser e 36 segundos com pavilhão real, dois cervos CC0, sete elementos vegetais, três peças de abrigo colapsado, 13 aterramentos X/Z, corredor Elias livre e uma luz dinâmica. A cena não altera produção. Ver `CP_D5_090_ACAMPAMENTO_MAJESTIC_VIVO.md`.
+
+## CP-D5-091 — ACTIVO: Estrada do Rio viva R2
+
+Construir composição QA da Estrada do Rio com ponte modular existente, vegetação ribeirinha, fauna 3D afastada do tabuleiro e vestígios de abrigo. Não reutilizar ponte GLB rejeitada, não bloquear Elias e não alterar produção sem revisão Dev1.
+
+| Critério | Obrigatório |
+|---|---|
+| Fauna | activo 3D real fora do tabuleiro da ponte |
+| Flora | margem orgânica; nenhum painel ou parede vegetal |
+| Construção | ponte modular aprovada e abrigo/vestígio real |
+| Validação | parser, grounding e 36 segundos de QA |
+| Continuidade | publicar e abrir CP-D5-092 no mesmo ciclo |
 
 
 
@@ -352,4 +365,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-090` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-091` — Estrada do Rio viva R2. Depois da validação e publicação, Dev5 abre CP-D5-092 no mesmo ciclo, sem consulta passiva ou espera temporal.
