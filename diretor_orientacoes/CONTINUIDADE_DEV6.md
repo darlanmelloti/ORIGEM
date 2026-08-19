@@ -124,9 +124,13 @@ O protocolo de manifesto por sessão foi documentado e passa a substituir a reut
 
 A preparação da recaptura foi confirmada: script, pasta QA, matriz, baseline, protocolo e sincronização Git estão disponíveis. Registo: `DEV6_030_PRONTIDAO_RECAPTURA_R2.md`.
 
-## Tarefa activa — DEV6-031
+## DEV6-031 — CONCLUÍDO
 
-Auditar a estabilidade do script QA R2 e a reprodutibilidade da telemetria, sem criar nova alteração visual. Se a câmara externa surgir, interromper esta auditoria apenas para aplicar imediatamente DEV6-014 e DEV6-017.
+O harness QA mantém entradas, capturas e telemetria determinísticas. A actualização Dev5 de composição aterrada não constitui recaptura de terceira pessoa; a aceitação visual permanece rejeitada. Registo: `DEV6_031_ESTABILIDADE_HARNESS_R2.md`.
+
+## Tarefa activa — DEV6-032
+
+Auditar a consistência do protocolo QA R2: script, manifestos, logs, matriz e baseline devem referir a mesma sessão e os mesmos critérios. Não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
