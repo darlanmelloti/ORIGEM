@@ -473,7 +473,10 @@ A cena inicialmente procurada `LightBudgetAuditPreview.tscn` não existe; a vali
 ## CP-D5-130 — CONCLUÍDO: Validação folga técnica Majestic
 `EliasMajesticClearancePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando pavilhão aterrado `(-88,178)`, colisor `CorredorMajesticEliasQA`, rota Elias `x=-80`, clearance 5,45 m sobre mínimo 4,00 m, 2 ciclos `clear=true`, câmara externa e produção inalterada. A validação é apenas técnica; `REJECTED_VISUAL` permanece até activo autorizado do Dev7. Ver `CP_D5_130_VALIDACAO_MAJESTIC_CLEARANCE.md` e `CP-D5-130_MAJESTIC_CLEARANCE_RUNTIME.log`.
 
-## CP-D5-131 — ACTIVO
+## CP-D5-131 — CONCLUÍDO: Regressão sequência R1→R6
+A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; após diagnóstico, `CartographicSequenceR1R6Preview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA. Foram confirmados 8 checks, `no_anchor_skip=true`, `majestic_lateral=true`, `ruins_arrival=true`, estado aprovado e continuidade para a âncora 7. Ver `CP_D5_131_REGRESSAO_SEQUENCIA_R1_R6.md`, `CP-D5-131_FULL_SEQUENCE_RUNTIME.log` e `CP-D5-131_FULL_SEQUENCE_FIXED_RUNTIME.log`.
+
+## CP-D5-132 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -483,4 +486,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-131` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-132` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
