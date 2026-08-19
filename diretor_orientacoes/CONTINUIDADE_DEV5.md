@@ -234,8 +234,11 @@ Os três harnesses Elias passaram a tratar textura de viewport e imagem nulas em
 ## CP-D5-053 — CONCLUÍDO: Leitura R5 com Elias, Pavilhão e vegetação
 O preview `MajesticEliasVegetationReadPreview.tscn` passou 36 segundos com cinco elementos vegetais aterrados, Pavilhão em X/Z `(-88,178)`, Elias no trajecto X=-80, folga `5,45 m`, dois ciclos `clear=true`, `elias_camera_current=false`, `wall_of_trees=false` e `production_modules_changed=false`. Ver `CP_D5_053_VALIDACAO_LEITURA_R5_ELIAS_VEGETACAO.md` e `CP-D5-053_R5_ELIAS_VEGETATION_RUNTIME.log`.
 
-## CP-D5-054 — ACTIVO
-Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
+## CP-D5-054 — CONCLUÍDO: Auditoria global de captura headless
+Foram identificados sete handlers ainda vulneráveis a textura/imagem nulas: Elias isolado, Placement, leitura R5, folga R6, Ponte R2, monólito R6 e Voss R1. Doze handlers já têm fallback seguro; o parser permanece limpo e nenhum módulo de produção foi alterado. Ver `CP_D5_054_AUDITORIA_CAPTURA_GLOBAL.md` e `CP-D5-054_UNSAFE_CAPTURE_HANDLERS.list`.
+
+## CP-D5-055 — ACTIVO
+Corrigir os sete handlers de captura headless, adicionar fallback para textura e imagem nulas e validar pelo menos uma sessão QA de 36 segundos.
 
 
 
@@ -244,4 +247,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-054` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-055` — corrigir os sete handlers de captura headless e validar uma sessão QA de 36 segundos, mantendo R4/R6 pendentes de captura visual válida.
