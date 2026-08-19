@@ -433,3 +433,10 @@ As duas variantes de redução de dominante ciano foram validadas tecnicamente e
 O pilar CC0 colapsado foi validado tecnicamente e em 36 segundos de gameplay, mas permaneceu fora do enquadramento efectivo da chegada e não entregou ganho visual suficiente. Foi revertido; não repetir a mesma inserção isolada nessa posição. Relatório: `CP_CARTO_127_PILAR_COLAPSADO_R6_REJEITADO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-128:** retomar a saída cartográfica da Casa Voss com captura tardia, medindo quais marcos R1→R3 são de facto legíveis da soleira exterior antes de mexer em escala, composição ou activos.
+
+
+## CP-CARTO-128 — Conífera focal: rejeitada
+
+A troca da instância `NucleoDeArvoreEstrada_01` por árvore CC0 escura passou no parser e em 36 segundos de gameplay, mas não afectou materialmente a tomada real de saída. Foi revertida; não repetir alteração por inferência de posição. Relatório: `CP_CARTO_128_CONIFERA_FOCAL_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-129:** executar uma auditoria de projecção de malhas arbóreas na tomada Casa Voss→Estrada para listar exclusivamente as coníferas que ocupam os pixels dominantes, antes de qualquer novo ajuste de espécie, LOD ou composição.
