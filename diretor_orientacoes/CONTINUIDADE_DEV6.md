@@ -76,9 +76,13 @@ A baseline de parser e rota foi executada: Godot 4.7.1, `road_to_arch` por 36 se
 
 A ficha de retorno para Dev1/Dev3 documenta os únicos critérios visuais pendentes — terceira pessoa e composição cartográfica — mantendo todos os contratos Dev6 como PASS. Registo: `DEV6_018_RETORNO_VISUAL_R2_DEV1_DEV3.md`.
 
-## Tarefa activa — DEV6-019
+## DEV6-019 — CONCLUÍDO
 
-Auditar a coerência cruzada entre a baseline DEV6-017, a matriz DEV6-014 e a ficha de retorno DEV6-018. Corrigir apenas divergências documentais; não alterar jogador, câmara, rota ou geometria.
+A baseline, matriz e ficha de retorno foram comparadas e não apresentam divergências. A rejeição visual mantém-se limitada à perspectiva e composição da recaptura. Registo: `DEV6_019_COHERENCIA_DOCUMENTAL_R2.md`.
+
+## Tarefa activa — DEV6-020
+
+Auditar a rastreabilidade completa do candidato R2: correlacionar commits DEV6-001 a DEV6-019, evidência QA externa e critérios de recaptura. Não alterar código, jogador, câmara, rota ou geometria.
 
 ## Continuidade
 
