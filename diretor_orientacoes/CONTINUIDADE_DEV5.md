@@ -584,7 +584,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-167 — CONCLUÍDO: Regressão margem orgânica R6
 `R6OrganicShorePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando monólito aterrado em `(52,260)`, 10 elementos orgânicos aterrados, 4 folhagens, 5 afloramentos, zero lajes de cais, ausência de cubos de margem e parede de árvores, 2 ciclos `clear=true` e produção preservada. Ver `CP_D5_167_REGRESSAO_MARGEM_ORGANICA_R6.md` e `CP-D5-167_R6_ORGANIC_SHORE_RUNTIME.log`.
 
-## CP-D5-168 — ACTIVO
+## CP-D5-168 — CONCLUÍDO: Regressão leitura vegetação R6
+`R6EliasVegetationReadPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando monólito em `(52,260)`, 3 vegetações aterradas, clearance de 6,05 m, zero lajes de cais, `wall_of_trees=false`, viewport `CameraQAR6Leitura`, 2 ciclos limpos, Elias activo e produção preservada. Ver `CP_D5_168_REGRESSAO_LEITURA_VEGETACAO_R6.md` e `CP-D5-168_R6_ELIAS_VEGETATION_RUNTIME.log`.
+
+## CP-D5-169 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -594,4 +597,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-168` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-169` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
