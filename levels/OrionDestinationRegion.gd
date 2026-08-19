@@ -109,15 +109,22 @@ func _build_cartographic_anchors() -> void:
 	anchors.set_meta("map_authority", "mapaorigem.webp")
 	anchors.set_meta("scope", "REGIONS_7_12_ONLY")
 	var anchor_data: Array[Dictionary] = [
-		{"name": "Marco10_CavernaDoOrion", "position": Vector3(-116.0, 0.0, 548.0), "role": "abertura tectonica escura na serra"},
-		{"name": "Marco11_CamaraOrionCube", "position": Vector3(-116.0, 0.0, 562.0), "role": "pico tridimensional e ponto luminescente"},
-		{"name": "Marco12_HubTemporal", "position": Vector3(164.0, 0.0, 210.0), "role": "anel de monolitos e nucleo temporal em perspectiva"}
+		{"name": "Marco10_CavernaDoOrion", "position": Vector3(-116.0, 0.0, 548.0), "role": "abertura tectonica escura na serra", "approach": "R9->R10", "handoff_in": "ColisaoHandoffR9R10", "handoff_out": "ColisaoHandoffCubeR11", "subject": "boca da caverna e braseiros azuis"},
+		{"name": "Marco11_CamaraOrionCube", "position": Vector3(-116.0, 0.0, 562.0), "role": "pico tridimensional e ponto luminescente", "approach": "R10->R11", "handoff_in": "ColisaoHandoffCubeR11", "handoff_out": "ColisaoHandoffHubR12", "subject": "Cubo de Orion e pórtico organico"},
+		{"name": "Marco12_HubTemporal", "position": Vector3(164.0, 0.0, 210.0), "role": "anel de monolitos e nucleo temporal em perspectiva", "approach": "R11->R12", "handoff_in": "ColisaoHandoffHubR12", "handoff_out": "ColisaoHandoffSoleiraR12", "subject": "Cupula Final e soleira temporal"}
+		
 	]
 	for data: Dictionary in anchor_data:
 		var marker := Marker3D.new()
 		marker.name = str(data["name"])
+			
 		marker.position = data["position"] as Vector3
 		marker.set_meta("map_role", str(data["role"]))
+		marker.set_meta("map_approach", str(data["approach"]))
+		marker.set_meta("handoff_in", str(data["handoff_in"]))
+		marker.set_meta("handoff_out", str(data["handoff_out"]))
+		marker.set_meta("visual_subject", str(data["subject"]))
+		marker.set_meta("validation_state", "RUNTIME_QA_ONLY")
 		marker.set_meta("visibility_rule", "silhueta ou continuidade; sem painel")
 		anchors.add_child(marker)
 	add_child(anchors)
