@@ -246,7 +246,10 @@ A cena publicada `R6EliasVegetationReadPreview.tscn` passou 36 segundos. Confirm
 ## CP-D5-057 — CONCLUÍDO: Auditoria comparativa das leituras R5/R6
 A comparação confirmou os contratos de Elias em R5 e R6: folgas `5,45 m` e `6,05 m`, grounding verdadeiro, câmara de Elias inactiva, dois ciclos de trajecto, zero parede de árvores, zero lajes de cais e uma luz direccional por harness. O parser Compatibility passou e nenhum módulo regional foi alterado. Ver `CP_D5_057_AUDITORIA_COMPARATIVA_LEITURAS_R5_R6.md` e `CP-D5-057_R5_R6_READ_COMPARISON_AUDIT.log`.
 
-## CP-D5-058 — ACTIVO
+## CP-D5-058 — CONCLUÍDO: Validação StoneBridgeGLB R2
+O preview `StoneBridgeGLBPreview.tscn` passou 36 segundos com âncora `2`, world X/Z `(-21,4;28,0)`, offset `(0;16)`, 252 triângulos e colisão `tabuleiro_continuo`. Não houve `SCRIPT ERROR` ou `Parse Error`; módulos regionais e `Player.gd` permaneceram intocados. Ver `CP_D5_058_VALIDACAO_STONE_BRIDGE_GLB.md` e `CP-D5-058_STONE_BRIDGE_RUNTIME.log`.
+
+## CP-D5-059 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -256,4 +259,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-058` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-059` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
