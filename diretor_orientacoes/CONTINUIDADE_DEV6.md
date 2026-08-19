@@ -84,9 +84,13 @@ A baseline, matriz e ficha de retorno foram comparadas e não apresentam diverg�
 
 A rastreabilidade do candidato R2 foi correlacionada entre commits, documentos e evidência QA externa. Registo: `DEV6_020_RASTREABILIDADE_CANDIDATO_R2.md`.
 
-## Tarefa activa — DEV6-021
+## DEV6-021 — CONCLUÍDO
 
-Auditar os critérios de promoção R2: confirmar que nenhum passe técnico foi indevidamente marcado como aceitação visual e que a única promoção pendente é a recaptura de terceira pessoa Dev1/Dev3. Não alterar código, jogador, câmara, rota ou geometria.
+A auditoria confirmou que nenhum passe técnico foi promovido indevidamente: a aceitação visual continua bloqueada apenas pelos critérios de terceira pessoa e composição cartográfica. Registo: `DEV6_021_CRITERIOS_PROMOCAO_R2.md`.
+
+## Tarefa activa — DEV6-022
+
+Verificar o Git remoto para qualquer recaptura ou alteração de câmara publicada por Dev1/Dev3. Se houver, executar imediatamente a matriz DEV6-014 e a baseline DEV6-017; se não houver, continuar a auditoria técnica de regressão R2 sem alterar a câmara ou o jogador.
 
 ## Continuidade
 
