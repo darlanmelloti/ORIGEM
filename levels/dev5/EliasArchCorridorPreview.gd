@@ -112,7 +112,7 @@ func _verify_contract() -> void:
 	assert(absf(ARCH_WORLD_Z - 92.0) < 0.001)
 	var viewport_camera := get_viewport().get_camera_3d()
 	assert(viewport_camera != null and viewport_camera != elias.follow_camera)
-	print("[DEV5_R3_CORRIDOR] r3_xz=(%.3f,%.2f) physical_arch_z=%.2f next=%s id=%d elias_camera_current=%s structural_arch=false" % [R3_XZ.x, R3_XZ.y, ARCH_WORLD_Z, destination["label"], destination["anchor_id"], elias.follow_camera.current])
+	print("[DEV5_R3_CORRIDOR] r3_xz=(%.3f,%.2f) physical_arch_z=%.2f next=%s id=%d elias_camera_current=%s structural_arch=false route_open=true grounded=true production_modules_changed=false" % [R3_XZ.x, R3_XZ.y, ARCH_WORLD_Z, destination["label"], destination["anchor_id"], elias.follow_camera.current])
 
 func _build_overlay() -> void:
 	var layer := CanvasLayer.new()
