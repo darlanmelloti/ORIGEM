@@ -240,9 +240,13 @@ A auditoria contabilizou 36 activos Dev6, 36 adaptadores de grounding e 0 luzes 
 
 Amostragem runtime confirmou grounding R1 7/7, R2 9/9, R3 8/8, R4 6/6 e R6 6/6 nas sessões de 36 s, sem erro de parser ou assert. Registo: `DEV6_058_INTEGRIDADE_GROUNDING_R1_R6.md`.
 
-## Tarefa activa — DEV6-059
+## DEV6-059 — CONCLUÍDO
 
-Consolidar a disponibilidade das recapturas de terceira pessoa R1–R6 após os retornos Dev6. Não alterar módulos de gameplay/câmara ou candidatos; verificar apenas o remoto, comparar qualquer nova evidência com a matriz DEV6-055 e, se ausente, iniciar a próxima regressão de compatibilidade GL.
+A verificação remota posterior não encontrou recapturas de terceira pessoa para R1, R2, R3, R4 ou R6. Os bloqueios visuais permanecem explícitos; registo: `DEV6_059_DISPONIBILIDADE_RECAPTURA_R1_R6.md`.
+
+## Tarefa activa — DEV6-060
+
+Executar a regressão GL Compatibility das integrações Dev6 sem alterar cena: parser, contagem de referências `Light3D` dentro dos blocos Dev6, e uma sessão R2 de 36 segundos. Se passar, documentar a baseline; se falhar, abrir correcção mínima e reversível.
 
 ## Continuidade
 
