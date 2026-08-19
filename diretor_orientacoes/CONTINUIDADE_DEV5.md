@@ -350,17 +350,21 @@ O parser do projecto terminou com `PARSER_EXIT=0` e `EliasThirdPersonPreview.tsc
 
 `R2LivingRiverRoadPreview.tscn` passou parser e 36 segundos com ponte modular, dois cervos CC0, quatro elementos vegetais, dois vestígios de abrigo, nove aterramentos X/Z, travessia livre e uma luz dinâmica. Não reutiliza ponte GLB e não altera produção. Ver `CP_D5_091_ESTRADA_RIO_VIVA.md`.
 
-## CP-D5-092 — ACTIVO: Clareira viva Floresta Densa R4
+## CP-D5-092 — CONCLUÍDO: Floresta Densa viva R4
 
-Criar composição QA da Floresta Densa com fauna discreta, árvores em profundidade, vegetação aterrada e vestígio de abrigo lateral. Preservar corredor aberto de Elias, limites LOD e exclusão total do portal florestal estrutural rejeitado.
+`R4LivingForestPreview.tscn` passou parser e 36 segundos com dois cervos CC0, oito elementos vegetais LOD, abrigo lateral em pedra, 12 aterramentos X/Z, corredor Elias livre e uma luz dinâmica. Não cria portal estrutural ou parede vegetal. Ver `CP_D5_092_FLORESTA_DENSA_VIVA.md`.
+
+## CP-D5-093 — ACTIVO: Casa Voss viva R1
+
+Criar composição QA exterior da Casa Voss com anexo, horta/vegetação, fauna discreta e vestígio doméstico tridimensional. Preservar a rota Casa Voss→Estrada, evitar qualquer edição na casa jogável/porta e não alterar produção sem revisão Dev1.
 
 | Critério | Obrigatório |
 |---|---|
-| Fauna | activo 3D real fora do corredor |
-| Flora | floresta tridimensional, sem parede vegetal |
-| Construção | abrigo/ruína lateral; nunca portal estrutural |
+| Fauna | activo 3D real afastado da soleira e rota |
+| Flora | horta e vegetação tridimensionais, sem painéis |
+| Construção | anexo aprovado e vestígio doméstico real |
 | Validação | parser, grounding e 36 segundos de QA |
-| Continuidade | publicar e abrir CP-D5-093 no mesmo ciclo |
+| Continuidade | publicar e abrir CP-D5-094 no mesmo ciclo |
 
 
 
@@ -369,4 +373,4 @@ Criar composição QA da Floresta Densa com fauna discreta, árvores em profundi
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-092` — Clareira viva Floresta Densa R4. Depois da validação e publicação, Dev5 abre CP-D5-093 no mesmo ciclo, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-093` — Casa Voss viva R1. Depois da validação e publicação, Dev5 abre CP-D5-094 no mesmo ciclo, sem consulta passiva ou espera temporal.
