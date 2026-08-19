@@ -72,9 +72,13 @@ A auditoria confirmou que a integração R2 e os grupos de grounding permanecem 
 
 A baseline de parser e rota foi executada: Godot 4.7.1, `road_to_arch` por 36 segundos, R1–R6, 9/9 grounding e zero luzes incrementais passaram. Registo: `DEV6_017_BASELINE_PARSER_ROTA_R2.md`.
 
-## Tarefa activa — DEV6-018
+## DEV6-018 — CONCLUÍDO
 
-Auditar o registo de integração R2 e preparar uma ficha de retorno para Dev1/Dev3. A ficha deve indicar os únicos critérios que ainda impedem aceitação visual: perspectiva de terceira pessoa e composição cartográfica. Não aguardar a resposta externa.
+A ficha de retorno para Dev1/Dev3 documenta os únicos critérios visuais pendentes — terceira pessoa e composição cartográfica — mantendo todos os contratos Dev6 como PASS. Registo: `DEV6_018_RETORNO_VISUAL_R2_DEV1_DEV3.md`.
+
+## Tarefa activa — DEV6-019
+
+Auditar a coerência cruzada entre a baseline DEV6-017, a matriz DEV6-014 e a ficha de retorno DEV6-018. Corrigir apenas divergências documentais; não alterar jogador, câmara, rota ou geometria.
 
 ## Continuidade
 
