@@ -46,5 +46,13 @@ func _build_environment() -> void:
 func _save_snapshot_qa(snapshot_path: String) -> void:
 	for frame_index: int in range(30):
 		await get_tree().process_frame
-	var result := get_viewport().get_texture().get_image().save_png(snapshot_path)
+	var viewport_texture := get_viewport().get_texture()
+	if viewport_texture == null:
+		print("[DEV5_FOREST_QA] snapshot_unavailable=headless_renderer path=%s" % snapshot_path)
+		return
+	var viewport_image := viewport_texture.get_image()
+	if viewport_image == null:
+		print("[DEV5_FOREST_QA] snapshot_unavailable=headless_image path=%s" % snapshot_path)
+		return
+	var result := viewport_image.save_png(snapshot_path)
 	print("[DEV5_FOREST_QA] snapshot=%s result=%s" % [snapshot_path, result])
