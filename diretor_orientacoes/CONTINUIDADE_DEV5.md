@@ -264,7 +264,10 @@ O `SubmergedShoreMonolithPreview` foi corrigido após indentação inválida no 
 ## CP-D5-063 — CONCLUÍDO: Rumo Elias Casa de Voss → Estrada do Rio
 O preview `EliasVossRoadHeadingPreview.tscn` passou 36 segundos com Casa de Voss `(-22,8)`, estrada `(-21,4;12)`, ponte R2 `(-21,4;28)`, destino id `2`, `elias_camera_current=false` e oito ciclos de rumo. A continuidade espacial R1→R2 foi confirmada sem alterar produção. Ver `CP_D5_063_VALIDACAO_RUMO_ELIAS_VOSS_ESTRADA.md` e `CP-D5-063_VOSS_HEADING_RUNTIME.log`.
 
-## CP-D5-064 — ACTIVO
+## CP-D5-064 — CONCLUÍDO: Auditoria de sequência cartográfica R1–R6
+O preview `CartographicSequenceR1R6Preview.tscn` passou 36 segundos com oito marcos, `no_anchor_skip=true`, `majestic_lateral=true` e `ruins_arrival=true`. A sequência percorre R1 Voss, R2 estrada, R3 arco, R4 floresta, R5 aproximação/Majestic e R6 ruínas sem saltos de âncora. Ver `CP_D5_064_AUDITORIA_SEQUENCIA_CARTOGRAFICA_R1_R6.md` e `CP-D5-064_CARTOGRAPHIC_SEQUENCE_RUNTIME.log`.
+
+## CP-D5-065 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -274,4 +277,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-064` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-065` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
