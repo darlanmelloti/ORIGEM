@@ -620,7 +620,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-179 — CONCLUÍDO: Regressão aterramento cartográfico
 `CartographicGroundingPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2/2 contactos válidos por raycast, Casa Voss Y `15,00→−2,78`, ponte Y `18,00→−2,71`, X/Z preservados, colisor `TerrenoColisorQA` e produção inalterada. Ver `CP_D5_179_REGRESSAO_ATERRAMENTO_CARTOGRAFICO.md` e `CP-D5-179_GROUNDING_RUNTIME.log`.
 
-## CP-D5-180 — ACTIVO
+## CP-D5-180 — CONCLUÍDO: Regressão composição aterrada R1→R2
+`MultiLandmarkGroundedPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando Casa Voss e ponte marco 2 aterradas em terreno irregular, Y `15,00/18,00→−2,52`, X/Z preservados, âncoras 1/2, script de produção ausente, 0 luzes dinâmicas e Arco R3 rejeitado ausente. Avisos FSR1 são incompatibilidade conhecida do Compatibility renderer. Ver `CP_D5_180_REGRESSAO_COMPOSICAO_ATERRADA_R1_R2.md` e `CP-D5-180_MULTI_GROUNDED_RUNTIME.log`.
+
+## CP-D5-181 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -630,4 +633,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-180` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-181` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
