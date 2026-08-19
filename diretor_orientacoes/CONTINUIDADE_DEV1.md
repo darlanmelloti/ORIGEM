@@ -405,3 +405,10 @@ A captura tardia no segundo 30 excluiu HUD, camada cartográfica, `SwordPivot` d
 A falésia rectangular da chegada às Ruínas foi atribuída ao salto de fórmula no limite `z=252`. A transição foi suavizada entre `z=238` e `z=270`, passou no parser e em 36 segundos de gameplay com captura Xvfb no segundo 30. O resultado foi promovido. Relatório: `CP_CARTO_122_TRANSICAO_TOPOGRAFICA_R6_VALIDADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-123:** melhorar a legibilidade da massa arqueológica das Ruínas Submersas na chegada R6, começando por uma auditoria de silhuetas que não repita HUD, mapa, arma, margens, árvores, sombras, água, emissões ou a transição topográfica agora validada.
+
+
+## CP-CARTO-123 — Balizas R6 rejeitadas
+
+A remoção das três balizas dos marcos emergentes R6 passou no parser e no take tardio de 36 segundos, mas não eliminou a luz azul residual nem melhorou a silhueta o suficiente. A alteração foi revertida. Relatório: `CP_CARTO_123_BALIZAS_R6_REJEITADAS.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-124:** atribuir a luz azul residual da chegada R6 por projecção de câmara e nó, sem repetir as balizas `BrilhoMarcoRuina`, HUD, mapa, arma, margens, árvores, sombras, água ou transição topográfica.
