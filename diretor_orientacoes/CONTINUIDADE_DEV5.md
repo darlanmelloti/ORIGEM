@@ -312,7 +312,10 @@ O preview `EliasArchCorridorPreview.tscn` passou 36 segundos com R3 `(-16,741;48
 ## CP-D5-079 — CONCLUÍDO: Folga Elias na margem R6
 O preview `EliasR6ClearancePreview.tscn` passou 36 segundos com monólito grounded em `(52,260)`, colisor `CorredorMargemR6EliasQA`, folga de `6,05 m` contra `4,00 m`, apresentação `EliasThirdPersonPresentation`, câmara externa e dois ciclos `clear=true`. Ver `CP_D5_079_VALIDACAO_ELIAS_R6_CLEARANCE.md` e `CP-D5-079_ELIAS_R6_CLEARANCE_RUNTIME.log`.
 
-## CP-D5-080 — ACTIVO
+## CP-D5-080 — CONCLUÍDO: Auditoria da lacuna cartográfica R1 → R2
+A auditoria do contrato Elias R1→R2 confirmou Casa Voss `(-22,8)`, estrada `(-21,4;12)`, ponte R2 `(-21,4;28)`, destino via `next_dev1_destination()` igual a `2`, parser limpo, zero referências de produção no preview e zero ficheiros fora da fronteira. Ver `CP_D5_080_AUDITORIA_LACUNA_R1_R2.md`.
+
+## CP-D5-081 — ACTIVO
 Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura gráfica.
 
 
@@ -322,4 +325,4 @@ Executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundaçã
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-080` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
+**Tarefa activa actual:** `CP-D5-081` — executar a próxima auditoria/ficha QA não concorrente ou melhoria de fundação permitida, mantendo R4/R6 pendentes de captura visual válida.
