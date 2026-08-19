@@ -560,7 +560,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-159 — CONCLUÍDO: Regressão handoff R6→R7
 `EliasR6R7HandoffPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando origem R6 `(60,252)`, marcador R7 `PASSAGEM: VILA ELEVADA` id 7 alcançado, `marker_only=true`, geometria Dev2 não criada, câmara Elias de produção inactiva e módulos de produção inalterados. Ver `CP_D5_159_REGRESSAO_R6_R7_HANDOFF.md` e `CP-D5-159_R6R7_HANDOFF_RUNTIME.log`.
 
-## CP-D5-160 — ACTIVO
+## CP-D5-160 — CONCLUÍDO: Auditoria densidade vegetal GTX 1050 Ti
+`VegetationDensityAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 1 pinheiro focal, 3 árvores médias, 1 elemento leve, 2 fetos, 27.208 triângulos, 0 luzes dinâmicas e `wall_density=false`. Ver `CP_D5_160_AUDITORIA_DENSIDADE_VEGETAL.md` e `CP-D5-160_VEGETATION_DENSITY_RUNTIME.log`.
+
+## CP-D5-161 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -570,4 +573,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-160` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-161` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
