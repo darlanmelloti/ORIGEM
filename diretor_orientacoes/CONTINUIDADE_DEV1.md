@@ -419,3 +419,10 @@ A remoção das três balizas dos marcos emergentes R6 passou no parser e no tak
 A apresentação da espada de primeira pessoa foi deslocada e reduzida sem alterar o `CombatRay` ou a lógica de ataque. Parser Godot e 36 segundos de gameplay R6 com captura tardia confirmaram que a arma continua legível no canto inferior direito e deixa o mapa real desobstruído. Relatório: `CP_CARTO_124_ESPADA_ELIAS_ENQUADRAMENTO_VALIDADO.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-125:** auditar a silhueta arqueológica central da chegada R6 agora sem a obstrução da espada, priorizando a leitura de ruína real e excluindo repetição de materiais, balizas, água, margens, HUD, arma e topografia já testados.
+
+
+## CP-CARTO-126 — Coníferas R6: calibração rejeitada
+
+As duas variantes de redução de dominante ciano foram validadas tecnicamente e em 36 segundos de gameplay, mas a variante reforçada tornou a conífera distante artificialmente verde sem corrigir de modo consistente a árvore focal. Ambas foram revertidas; não repetir multiplicações de albedo nas coníferas PBR. Relatório: `CP_CARTO_126_CONIFERAS_R6_REJEITADAS.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-127:** auditar a composição de escala entre as Ruínas Submersas e a faixa de árvores posterior, privilegiando uma melhoria de legibilidade por posicionamento ou LOD e não por cor, água, baliza, arma, HUD, margem ou topografia já testados.
