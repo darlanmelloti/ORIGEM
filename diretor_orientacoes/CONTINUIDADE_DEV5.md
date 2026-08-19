@@ -62,23 +62,25 @@ Depois de cada checkpoint, Dev5 deve ler este marcador, abrir imediatamente o pr
 
 O arco de ruínas estrutural teve parser e sessão de 36 segundos, mas foi rejeitado porque a captura revelou blocos demasiado primitivos e sem ganho suficiente sobre o arco de produção. O código e cenas QA foram revertidos; ver `CP_D5_010_ARCO_RUINAS_REJEITADO.md`. A rejeição não bloqueia a fila.
 
-## CP-D5-011 — ACTIVO: Floresta Densa (marco 4)
+## CP-D5-011 — CONCLUÍDO EM QA: Floresta Densa (marco 4)
 
-Criar um candidato QA de **portal florestal tridimensional** usando troncos reais inclinados, rochas laterais irregulares e camada de solo, mantendo uma passagem central de pelo menos 2,4 m. Não repetir pilares/lintéis do arco rejeitado, não criar parede de árvores, não usar placas e não tocar `ForestLakeRegion.gd`.
+Foi criado o candidato QA `DenseForestPortalPreview.tscn` com troncos cilíndricos inclinados, galhos curtos, rochas laterais irregulares e camada de solo volumétrica. A âncora está explícita como `FLORESTA_DENSA=(-9; 116)`. A passagem central nominal é de 2,4 m e não possui lintel, placas ou parede de árvores. Os colisores existem apenas nos seis troncos e nas quatro rochas laterais; `ForestLakeRegion.gd` não foi alterado.
+
+A sessão headless local completou 36 segundos e confirmou `isolated=true region_script=false`, sem erros de parser/runtime Dev5. A evidência está em `CP_D5_011_FLORESTA_DENSA_QA.md` e o log em `CP-D5-011_RUNTIME_HEADLESS.log`. A captura visual 1600×900 continua pendente no ambiente oficial.
 
 ### Aceitação CP-D5-011
 
-| Critério | Obrigatório |
+| Critério | Resultado |
 |---|---|
-| Mapa | Referência explícita ao marco 4 — `FLORESTA_DENSA=(-9; 116)` |
-| Geometria | Troncos, rochas e profundidade lateral real; passagem central aberta |
-| Física | Colisores só nos troncos e rochas laterais; percurso sem bloqueio |
-| Validação | Parser Godot 4.7.1, 36 segundos de cena QA e captura interna |
-| Continuidade | Ao publicar, abrir CP-D5-012 automaticamente |
+| Mapa | Aprovado: `FLORESTA_DENSA=(-9; 116)`. |
+| Geometria | Aprovada em QA: troncos, rochas, solo e profundidade lateral real. |
+| Física | Aprovada: colisores apenas nos troncos/rochas laterais e passagem central aberta. |
+| Validação | Aprovada localmente: 36 segundos sem erro Dev5; captura visual pendente. |
+| Escopo | Aprovado: nenhum módulo regional de produção foi tocado. |
 
-## CP-D5-012 — PRÉ-ATRIBUÍDO: Ruínas Submersas (marco 6)
+## CP-D5-012 — ACTIVO: Ruínas Submersas (marco 6)
 
-Criar um candidato QA de cais de ruínas submersas com lajes quebradas e colunas parciais; zero emissão, zero luzes dinâmicas, colisores apenas onde a travessia deve existir.
+Criar um candidato QA de cais de ruínas submersas com lajes quebradas e colunas parciais; zero emissão, zero luzes dinâmicas, colisores apenas onde a travessia deve existir. Não tocar `TempleLevel.gd` ou qualquer módulo regional de produção.
 
 ## CP-D5-005 — CONDICIONAL, NÃO BLOQUEANTE
 
@@ -88,4 +90,4 @@ Auditar e integrar um humano GLTF/GLB somente quando existir ficheiro recuperáv
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-011` — construir o portal QA da Floresta Densa e, ao concluir, abrir automaticamente `CP-D5-012`.
+**Próxima tarefa activa após publicação:** `CP-D5-012` — construir o cais QA das Ruínas Submersas do marco 6.

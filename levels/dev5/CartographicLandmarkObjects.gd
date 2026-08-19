@@ -157,6 +157,57 @@ func create_majestic_pavilion_landmark() -> Node3D:
 	_add_static_collider(bench, Vector3(2.05, 0.32, 0.48))
 	return pavilion
 
+func create_dense_forest_portal_landmark() -> Node3D:
+	# CP-D5-011: portal florestal do marco 4, âncora FLORESTA_DENSA=(-9; 116).
+	# Candidato QA isolado: não toca ForestLakeRegion.gd e deixa passagem central >= 2.4 m.
+	var portal := Node3D.new()
+	portal.name = "PortalFlorestalMarco4"
+	portal.add_to_group("dev5_landmark_forest_portal")
+	var soil := _box("CamadaSoloFloresta", Vector3(9.0, 0.24, 7.0), moss_material)
+	soil.position = Vector3(0.0, -0.12, 0.0)
+	portal.add_child(soil)
+	# Troncos inclinados em profundidade lateral; o corredor central permanece aberto.
+	var trunk_specs: Array[Vector3] = [
+		Vector3(-2.05, 1.35, -2.35), Vector3(-1.78, 1.45, 0.0), Vector3(-2.08, 1.30, 2.35),
+		Vector3(2.05, 1.42, -2.25), Vector3(1.78, 1.34, 0.15), Vector3(2.08, 1.48, 2.45)
+	]
+	for index: int in range(trunk_specs.size()):
+		var spec := trunk_specs[index]
+		var trunk := _cylinder("TroncoPortal%02d" % index, 0.24, spec.y * 2.0, timber_material)
+		trunk.position = Vector3(spec.x, spec.y, spec.z)
+		trunk.rotation_degrees = Vector3(0.0, 0.0, -11.0 if spec.x < 0.0 else 11.0)
+		portal.add_child(trunk)
+		_add_static_cylinder_collider(trunk, 0.24, spec.y * 2.0)
+		# Galhos curtos dão profundidade ao portal sem formar lintel ou parede.
+		var branch := _box("GalhoPortal%02d" % index, Vector3(0.14, 0.14, 1.15), timber_material)
+		branch.position = Vector3(spec.x * 0.82, spec.y * 1.45, spec.z + (0.45 if index % 2 == 0 else -0.45))
+		branch.rotation_degrees.y = 28.0 if index % 2 == 0 else -28.0
+		portal.add_child(branch)
+	# Rochas irregulares laterais, fora da faixa de travessia central de 2.4 m.
+	var rock_specs: Array[Vector3] = [
+		Vector3(-2.85, 0.42, -2.7), Vector3(-2.72, 0.34, 2.55),
+		Vector3(2.85, 0.38, -2.55), Vector3(2.76, 0.46, 2.7)
+	]
+	for index: int in range(rock_specs.size()):
+		var spec := rock_specs[index]
+		var rock := _box("RochaLateral%02d" % index, Vector3(0.78, spec.y * 2.0, 1.08), stone_material)
+		rock.position = Vector3(spec.x, spec.y, spec.z)
+		rock.rotation_degrees = Vector3(0.0, 17.0 * (index + 1), 8.0 if index % 2 == 0 else -8.0)
+		portal.add_child(rock)
+		_add_static_collider(rock, Vector3(0.78, spec.y * 2.0, 1.08))
+	return portal
+
+func _add_static_cylinder_collider(mesh_node: MeshInstance3D, radius: float, height: float) -> void:
+	var body := StaticBody3D.new()
+	body.name = "Colisor_" + mesh_node.name
+	var shape := CylinderShape3D.new()
+	shape.radius = radius
+	shape.height = height
+	var collision := CollisionShape3D.new()
+	collision.shape = shape
+	body.add_child(collision)
+	mesh_node.add_child(body)
+
 func _box(node_name: String, size: Vector3, material: Material) -> MeshInstance3D:
 	var mesh := BoxMesh.new()
 	mesh.size = size
