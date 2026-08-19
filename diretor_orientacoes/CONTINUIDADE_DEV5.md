@@ -635,7 +635,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-184 — CONCLUÍDO: Auditoria regressão cartográfica R1→R6
 `CartographicRegressionAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 6 candidatos, 0 scripts de produção, 0 luzes dinâmicas, offsets `(0,0)`, âncoras canónicas, Floresta isolada, Ruínas não emissivas e composição vegetal sem parede de árvores. Avisos FSR1 são incompatibilidade conhecida do Compatibility renderer. Ver `CP_D5_184_AUDITORIA_REGRESSAO_CARTOGRAFICA.md` e `CP-D5-184_CARTOGRAPHIC_AUDIT_RUNTIME.log`.
 
-## CP-D5-185 — ACTIVO
+## CP-D5-185 — CONCLUÍDO: Regressão leitura Majestic R5 Elias
+`MajesticEliasVegetationReadPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando pavilhão aterrado em `(−88,178)`, 5 vegetações aterradas, rota `x=−80`, clearance de 5,45 m, 2 ciclos `clear=true`, viewport `CameraQAMajesticLeitura`, `wall_of_trees=false`, Elias activo e produção preservada. Ver `CP_D5_185_REGRESSAO_LEITURA_MAJESTIC_R5.md` e `CP-D5-185_MAJESTIC_VEGETATION_READ_RUNTIME.log`.
+
+## CP-D5-186 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -645,4 +648,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-185` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-186` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
