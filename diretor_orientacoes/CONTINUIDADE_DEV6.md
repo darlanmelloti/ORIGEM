@@ -28,9 +28,13 @@ O passe atmosférico preservou parser, rota de 36 segundos, 9/9 aterramentos, X/
 
 Quatro afloramentos e três vestígios laterais foram inseridos sem colisores, luzes, emissões ou invasão da rota. A validação técnica passou, mas o ganho visual foi discreto. Registo: `DEV6_006_ESCALA_AMBIENTAL_R2.md`.
 
-## Tarefa activa — DEV6-007
+## DEV6-007 — CONCLUÍDO
 
-Auditar a leitura da câmara QA de `road_to_arch` e preparar recomendações de enquadramento cartográfico para o proprietário de gameplay/cinemática. Dev6 não altera jogador nem câmara de produção; só pode criar evidência e uma proposta reversível.
+A leitura de câmara foi auditada sem tocar no jogador nem na câmara de produção. A proposta de terceira pessoa cartográfica para Dev1/Dev3 está em `DEV6_007_PROPOSTA_CAMARA_CARTOGRAFICA_R2.md`.
+
+## Tarefa activa — DEV6-008
+
+Preparar uma ficha de transferência para Dev1/Dev3 com as condições de integração e recaptura R2. Em seguida, Dev6 inicia a auditoria técnica de regressão R2 depois de a frente proprietária publicar a câmara.
 
 ## Continuidade
 
