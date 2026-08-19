@@ -133,6 +133,8 @@ func _build_vegetation() -> void:
 	_spawn_grounded("tree_medium_east", Vector3(-69.0, 18.0, 192.0), TREE_DETAILED, Vector3.ONE * 1.04)
 	_spawn_grounded("tree_light_north", Vector3(-72.0, 18.0, 168.0), TREE_LIGHT, Vector3.ONE * 1.16)
 	_spawn_grounded("tree_light_south", Vector3(-107.0, 18.0, 198.0), TREE_LIGHT, Vector3.ONE * 1.08)
+	# Sexta árvore leve no plano distante: acrescenta profundidade, sem formar parede no corredor.
+	_spawn_grounded("tree_light_far_east", Vector3(-62.0, 18.0, 205.0), TREE_LIGHT, Vector3.ONE * 0.92)
 	_spawn_grounded("fern_left", Vector3(-84.0, 18.0, 165.0), FERN, Vector3.ONE * 0.72)
 	_spawn_grounded("fern_right", Vector3(-75.0, 18.0, 195.0), FERN, Vector3.ONE * 0.64)
 
@@ -205,14 +207,14 @@ func _nearest_wildlife_distance() -> float:
 	return nearest
 
 func _verify_contract() -> void:
-	assert(grounding_events == 13)
+	assert(grounding_events == 14)
 	assert(wildlife.size() == 2)
 	assert(elias != null and elias.follow_camera != null)
 	elias.follow_camera.current = false
 	assert(get_viewport().get_camera_3d() != elias.follow_camera)
 	assert(_nearest_wildlife_distance() >= 5.0)
 	assert(_dynamic_lights() == 1)
-	print("[DEV5_R5_LIVING] status=approved fauna=2 vegetation=7 shelter_parts=3 pavilion=true grounded=%d cairn=false wall_of_trees=false production_modules_changed=false" % grounding_events)
+	print("[DEV5_R5_LIVING] status=approved fauna=2 vegetation=8 shelter_parts=3 pavilion=true grounded=%d cairn=false wall_of_trees=false production_modules_changed=false" % grounding_events)
 
 func _dynamic_lights() -> int:
 	var count := 0
