@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://levels/dev5/VossWaystationPreview.gd" id="1_voss_preview"]
+
+[node name="VossWaystationPreview" type="Node3D"]
+script = ExtResource("1_voss_preview")

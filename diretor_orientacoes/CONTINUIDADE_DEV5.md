@@ -26,26 +26,29 @@ A Ponte de Pedra do marco 2 foi construída e validada na cena isolada `StoneBri
 
 A evidência técnica está em `CP_D5_002_PONTE_MARCO2_QA.md`.
 
-## CP-D5-003/004 — ACTIVO
+## CP-D5-003/004 — CONCLUÍDO COMO PROXY QA
 
-Refinar a apresentação isolada de Elias em terceira pessoa e manter a cena QA correspondente. A tarefa não pode substituir `Player.gd`, primeira pessoa, porta E, salto, stamina ou a Casa Voss. A primeira evolução válida deve melhorar a leitura de silhueta, vestuário e espada sem converter a imagem de referência numa textura plana.
+A apresentação isolada de Elias recebeu melhorias de silhueta: colete aberto, cinto e fivela, cabelo assimétrico, bolsa lateral e espada com punho. O parser Godot 4.7.1 passou e a cena QA manteve 36 segundos com captura interna. É uma **proxy técnica**, não uma substituição de `Player.gd` nem o modelo artístico final; não toca primeira pessoa, porta E, salto, stamina ou Casa Voss.
 
-### Aceitação
+## CP-D5-005 — BLOQUEADO POR ACTIVO EXTERNO
 
-| Critério | Exigência |
-|---|---|
-| Escopo | Apenas `entities/player/third_person/`, cena QA e evidência Dev5. |
-| Referência | Elias é referência artística, não textura ou modelo rigado. |
-| Validação | Parser Godot 4.7.1 e 30 segundos de gameplay/captura. |
-| Próxima tarefa | CP-D5-005, somente com GLB humano rigado e licenciado. |
+O candidato humano rigado está identificado, mas a aquisição automática do GLTF/FBX gratuito foi bloqueada pelo CAPTCHA do fornecedor. Integrar somente quando existir um ficheiro recuperável e uma licença/atribuição documentada.
 
-## Fila após CP-D5-003/004
+## CP-D5-006 — CONCLUÍDO EM QA
 
-1. CP-D5-005 — Integrar um GLB humano rigado somente depois de activo recuperável/licenciado e orçamento aprovado.
-2. CP-D5-006 — Propor o próximo objecto cartográfico isolado após revisão da ponte pelo proprietário R1–R6.
+O anexo tridimensional Casa Voss foi validado isoladamente em `VossWaystationPreview.tscn`: paredes volumétricas, abertura frontal, cobertura física de duas águas e colisores próprios. O objecto ainda não pode ser colocado em `VossHouse.gd`; ver `CP_D5_006_CASA_VOSS_ANEXO_QA.md`.
+
+## CP-D5-007 — ACTIVO
+
+Preparar uma ficha de proposta para os candidatos Dev5 já validados — ponte do marco 2 e anexo da Casa Voss — com âncora X/Z, distância, orçamento de materiais/triângulos, colisores, dependências e proprietário da integração. Não alterar módulos R1–R6 nesta tarefa.
+
+## Fila após CP-D5-007
+
+1. CP-D5-005 — Integrar GLB humano rigado somente depois de activo recuperável/licenciado e orçamento aprovado.
+2. CP-D5-008 — Criar o próximo objecto cartográfico apenas em cena QA, depois da decisão Dev1 sobre os candidatos actuais.
 
 ## Correcção CEO — Identidade do jogador
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Próxima tarefa activa após publicação:** `CP-D5-003/004` — melhorar Elias em terceira pessoa apenas em cena QA, sem modificar o jogador principal.
+**Próxima tarefa activa após publicação:** `CP-D5-007` — preparar fichas de integração dos objectos Dev5 já aprovados em QA, sem modificar o mundo principal.
