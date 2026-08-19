@@ -497,7 +497,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-138 — CONCLUÍDO: Regressão integrada Estrada do Rio R2
 `R2LivingRiverRoadPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando estado aprovado, 5 travessias da ponte modular, 5 ciclos `clear=true`, fauna mínima de 12,08 m, 9 grounding, ponte GLB ausente, parede vegetal ausente e produção inalterada. Ver `CP_D5_138_REGRESSAO_R2_RIVER.md` e `CP-D5-138_R2_RIVER_RUNTIME.log`.
 
-## CP-D5-139 — ACTIVO
+## CP-D5-139 — CONCLUÍDO: Regressão integrada Corredor R3
+`R3LivingArchCorridorPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando estado aprovado, 4 ciclos `clear=true`, fauna mínima de 11,49 m, 8 grounding, `structural_arch=false`, `scale_compressed=false` e produção inalterada. Ver `CP_D5_139_REGRESSAO_R3_ARCH.md` e `CP-D5-139_R3_ARCH_RUNTIME.log`.
+
+## CP-D5-140 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -507,4 +510,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-139` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-140` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
