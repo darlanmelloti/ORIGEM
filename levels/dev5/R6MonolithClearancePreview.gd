@@ -94,7 +94,7 @@ func _build_monolith_with_collision() -> void:
 	assert(result["grounded"])
 	var blocker := StaticBody3D.new()
 	blocker.name = "ColisorBalizaQA"
-	blocker.global_position = root.global_position + Vector3(0.0, 1.65, 0.0)
+	blocker.position = root.global_position + Vector3(0.0, 1.65, 0.0)
 	var collision := CollisionShape3D.new()
 	var shape := CylinderShape3D.new()
 	shape.radius = MONOLITH_RADIUS
