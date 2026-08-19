@@ -116,9 +116,13 @@ A branch não rastreia `.uid` nem binários QA Dev6; os três caminhos absolutos
 
 O manifesto DEV6-013 foi identificado como histórico após novas capturas de regressão. Foi gerado um manifesto QA externo actualizado, verificado para log e PNGs actuais. Registo: `DEV6_028_MANIFESTO_QA_R2.md`.
 
-## Tarefa activa — DEV6-029
+## DEV6-029 — CONCLUÍDO
 
-Actualizar o protocolo Dev6 para exigir manifesto SHA-256 próprio por sessão de QA R2 e auditar a preparação da próxima recaptura. Não alterar câmara, jogador, rota ou geometria.
+O protocolo de manifesto por sessão foi documentado e passa a substituir a reutilização de hashes históricos depois de novas capturas. Registo: `DEV6_029_PROTOCOLO_MANIFESTO_SESSAO_R2.md`.
+
+## Tarefa activa — DEV6-030
+
+Auditar a preparação da próxima recaptura R2: confirmar script QA, pasta externa, matriz DEV6-014, baseline DEV6-017 e protocolo DEV6-029. Não alterar câmara, jogador, rota ou geometria.
 
 ## Continuidade
 
