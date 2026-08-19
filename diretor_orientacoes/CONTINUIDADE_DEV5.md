@@ -482,7 +482,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-133 — CONCLUÍDO: Auditoria mesh budget GTX 1050 Ti
 `MeshBudgetAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 20.390 triângulos, 9 nós de malha, 12 slots de material, 0 colisores importados, 0 luzes dinâmicas e produção inalterada. Ver `CP_D5_133_AUDITORIA_MESH_BUDGET.md` e `CP-D5-133_MESH_BUDGET_RUNTIME.log`.
 
-## CP-D5-134 — ACTIVO
+## CP-D5-134 — CONCLUÍDO: Regressão densidade vegetal
+`VegetationDensityAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 1 pinheiro focal, 3 árvores médias, 1 árvore leve, 2 fetos, 27.208 triângulos, 0 luzes dinâmicas, `wall_density=false` e produção inalterada. Ver `CP_D5_134_REGRESSAO_VEGETATION_DENSITY.md` e `CP-D5-134_VEGETATION_DENSITY_RUNTIME.log`.
+
+## CP-D5-135 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -492,4 +495,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-134` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-135` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
