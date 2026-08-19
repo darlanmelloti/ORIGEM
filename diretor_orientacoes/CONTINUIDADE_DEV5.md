@@ -527,7 +527,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-148 — CONCLUÍDO: Passe leitura vegetação R6
 `R6EliasVegetationReadPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando monólito aterrado, 3 elementos vegetais aterrados, clearance Elias de 6,05 m, 2 ciclos `clear=true`, `CameraQAR6Leitura`, 0 lajes de cais, parede vegetal ausente e produção inalterada. Ver `CP_D5_148_PASSE_LEITURA_VEGETACAO_R6.md` e `CP-D5-148_R6_VEGETATION_READ_RUNTIME.log`.
 
-## CP-D5-149 — ACTIVO
+## CP-D5-149 — CONCLUÍDO: Auditoria integrada final
+`CartographicRegressionAuditPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 6 candidatos R1–R6, offsets zero, 0 scripts de produção, 0 luzes dinâmicas, colisores auditados, vegetação PBR/média/distante controlada, passagem R4 de 2,4 m e R6 submersa sem emissivo. Ver `CP_D5_149_AUDITORIA_INTEGRADA_FINAL.md` e `CP-D5-149_INTEGRATED_AUDIT_RUNTIME.log`.
+
+## CP-D5-150 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -537,4 +540,4 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-149` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-150` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
