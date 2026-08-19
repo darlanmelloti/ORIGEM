@@ -929,7 +929,10 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-282 — CONCLUÍDO: Regressão costa R6 viva contínua
 `R6LivingShorePreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando 2 faunas, 4 vegetações, 3 partes de ruína, 9 elementos aterrados, 0 lajes de cais, `wall_of_trees=false`, rota `clear=true` e produção preservada. Ver `CP_D5_282_REGRESSAO_COSTA_R6_VIVA_CONTINUA.md` e `CP-D5-282_R6_LIVING_SHORE_RUNTIME.log`.
 
-## CP-D5-283 — ACTIVO
+## CP-D5-283 — CONCLUÍDO: Regressão multi-marco de aterramento contínua
+`MultiLandmarkGroundedPreview.tscn` passou parser (`PARSER_EXIT=0`) e 36 segundos de QA, confirmando anchors Casa Voss e Ponte Marco 2, aterramento em terreno irregular, coordenadas preservadas, 0 scripts de produção e 0 luzes dinâmicas. Ver `CP_D5_283_REGRESSAO_MULTILANDMARK_GROUNDING_CONTINUA.md` e `CP-D5-283_MULTILANDMARK_GROUNDING_RUNTIME.log`.
+
+## CP-D5-284 — ACTIVO
 Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
 
 
@@ -939,7 +942,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-283` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-284` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
