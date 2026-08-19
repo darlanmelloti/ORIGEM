@@ -475,3 +475,10 @@ A marca residual persistiu sem `MeshInstance3D` causal e sem qualquer `CanvasLay
 A correcção de `SHADOWS_ONLY` tornou a crista procedural visível, mas revelou cones brancos de baixa resolução e foi revertida. Relatório: `CP_CARTO_133_CRISTA_REMOTA_VISIVEL_REJEITADA.md`.
 
 **Próxima tarefa já iniciada — CP-CARTO-134:** inventariar os activos 3D de montanha/rocha disponíveis no projecto e testar apenas uma substituição de silhueta com geometria suficientemente densa, mantendo a distância cartográfica, sem painéis e sem alterar as Regiões 7–12.
+
+
+## CP-CARTO-134 — Falésia CC0 de fundo: rejeitada
+
+A instância QA de `cliff_cave_rock.glb` foi técnica e visualmente válida, mas não entrou no enquadramento Estrada→Casa Voss. Foi removida por ausência de ganho verificável. Relatório: `CP_CARTO_134_FALESIA_CC0_INVISIVEL_REJEITADA.md`.
+
+**Próxima tarefa já iniciada — CP-CARTO-135:** auditar o vector, FOV e franja de visibilidade da câmara de retorno antes de testar qualquer outro activo montanhoso. O resultado deve indicar se o fundo montanhoso está fora de enquadramento, oculto pela casa ou reduzido por escala aparente.
