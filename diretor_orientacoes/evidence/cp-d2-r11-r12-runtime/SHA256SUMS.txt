@@ -1,0 +1,4 @@
+a1d5b4eb11abf39488f0f087fb6472bbb754f28901ccde4c0e3c518bc54eef22  diretor_orientacoes/evidence/cp-d2-r11-r12-runtime/gameplay-30s.mp4
+eb558ef6a7995301b313e20f325547d13ecff66a768cf05fc7a1f9a9e2e96ef4  diretor_orientacoes/evidence/cp-d2-r11-r12-runtime/print-1600x900.png
+6b15b862dc5dc13c5bf413cc38d84400caad449b16549144c51a396508af8e61  diretor_orientacoes/evidence/cp-d2-r11-r12-runtime/qa.log
+c9a2b0cbf8bcbea4bb02d40b2a874ccbd9254e6759ade29ec4f145818ce36534  diretor_orientacoes/evidence/cp-d2-r11-r12-runtime/duration.txt

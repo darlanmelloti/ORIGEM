@@ -9,6 +9,7 @@ const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeB.gl
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
+const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 
 var terrain_patch: Node3D
 var stone_material: StandardMaterial3D
@@ -23,6 +24,7 @@ func _ready() -> void:
 	_build_orion_cave()
 	_build_region9_to_10_approach()
 	_build_cp_d2_007_physical_handoff()
+	_build_cartographic_r11_r12_physical_corridor()
 	if OS.get_environment("QA_VALIDATION_ROUTE") == "R9_R10_INTEGRATED_HANDOFF":
 		_apply_r9_r10_visual_culling()
 	var validation_region := OS.get_environment("ORIGEM_VALIDATION_REGION")
@@ -426,6 +428,46 @@ func _build_cp_d2_007_physical_handoff() -> void:
 			light.shadow_enabled = false
 			handoff.add_child(light)
 	print("CPD2007_HANDOFF_READY points=", handoff_points.size())
+
+func _build_cartographic_r11_r12_physical_corridor() -> void:
+	# CP-D2-R11R12-002: corredor físico exacto entre os anchors R11 e R12.
+	# A geometria é Dev2-only; as coordenadas vêm exclusivamente de CartographicAnchors.
+	var contract: Dictionary = CARTOGRAPHIC_ANCHORS.continuity_11_to_12(0.15)
+	var start: Vector3 = contract["handoff_in"]
+	var finish: Vector3 = contract["handoff_out"]
+	var corridor := Node3D.new()
+	corridor.name = "CartographicHandoffR11R12"
+	corridor.set_meta("scope", "REGIONS_7_12_ONLY")
+	corridor.set_meta("map_authority", "mapaorigem.webp")
+	corridor.set_meta("handoff_id", "R11_R12")
+	corridor.set_meta("collider_contract", "ColisaoHandoffHubR12")
+	corridor.set_meta("anchor_start", start)
+	corridor.set_meta("anchor_finish", finish)
+	add_child(corridor)
+	const segment_count: int = 8
+	for index: int in range(segment_count):
+		var t0: float = float(index) / float(segment_count)
+		var t1: float = float(index + 1) / float(segment_count)
+		var p0: Vector3 = start.lerp(finish, t0)
+		var p1: Vector3 = start.lerp(finish, t1)
+		var midpoint: Vector3 = p0.lerp(p1, 0.5)
+		var delta: Vector3 = p1 - p0
+		var body := StaticBody3D.new()
+		body.name = "ColliderHandoffHubR12_%02d" % index
+		body.collision_layer = 1
+		body.collision_mask = 1
+		body.set_meta("physical_handoff", true)
+		body.set_meta("handoff_R11_R12", true)
+		body.set_meta("segment_index", index)
+		var shape := CollisionShape3D.new()
+		var box := BoxShape3D.new()
+		box.size = Vector3(5.4, 2.2, maxf(delta.length() + 0.8, 1.0))
+		shape.shape = box
+		body.position = midpoint + Vector3(0.0, 0.95, 0.0)
+		body.rotation.y = atan2(delta.x, delta.z)
+		body.add_child(shape)
+		corridor.add_child(body)
+	print("CARTOGRAPHIC_R11_R12_CORRIDOR_READY segments=%d distance=%0.3f contract=ColisaoHandoffHubR12" % [segment_count, start.distance_to(finish)])
 
 func _apply_r9_r10_visual_culling() -> void:
 	# CP-D2-091: remover apenas adornos de QA que flutuam no handoff; a física permanece intacta.
