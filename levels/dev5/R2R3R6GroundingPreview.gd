@@ -8,6 +8,7 @@ const REGIONS := [
 ]
 
 var checks_passed := 0
+var consistency_passed := 0
 var telemetry: Array[Dictionary] = []
 
 func _ready() -> void:
@@ -17,7 +18,8 @@ func _ready() -> void:
 	_build_overlay()
 	await get_tree().physics_frame
 	await _run_grounding_checks()
-	print("[DEV5_WORLD_GROUNDING] status=approved regions=%d checks=%d Elias=third_person production_modules_changed=false player_gd_changed=false dynamic_lights=0" % [REGIONS.size(), checks_passed])
+	print("[DEV5_WORLD_GROUNDING] status=approved regions=%d checks=%d consistency=%d Elias=third_person production_modules_changed=false player_gd_changed=false dynamic_lights=0" % [REGIONS.size(), checks_passed, consistency_passed])
+	assert(consistency_passed == REGIONS.size())
 	assert(checks_passed == REGIONS.size())
 
 func _build_environment() -> void:
@@ -111,9 +113,13 @@ func _run_grounding_checks() -> void:
 		var hit_position := ray.get_collision_point() if hit else Vector3.ZERO
 		var grounded := hit and collider_name == str(region["collider"]) and absf(hit_position.y - ground_y) <= 0.05
 		var elias_position := Vector3(anchor.x, hit_position.y + 0.02, anchor.y) if grounded else Vector3.ZERO
-		var result := {"region": region["id"], "grounded": grounded, "collider": collider_name, "hit_y": hit_position.y, "expected_y": ground_y, "elias_position": elias_position}
+		var clearance_consistent := grounded and absf((elias_position.y - hit_position.y) - 0.02) <= 0.001
+		var xz_consistent := grounded and is_equal_approx(elias_position.x, anchor.x) and is_equal_approx(elias_position.z, anchor.y)
+		var result := {"region": region["id"], "grounded": grounded, "collider": collider_name, "hit_y": hit_position.y, "expected_y": ground_y, "elias_position": elias_position, "clearance_consistent": clearance_consistent, "xz_consistent": xz_consistent}
 		telemetry.append(result)
-		print("[DEV5_WORLD_GROUNDING] region=%s anchor_xz=(%.3f,%.3f) grounded=%s collider=%s hit_y=%.3f expected_y=%.3f error=%.3f elias_pos=(%.3f,%.3f,%.3f)" % [region["id"], anchor.x, anchor.y, grounded, collider_name, hit_position.y, ground_y, absf(hit_position.y - ground_y), elias_position.x, elias_position.y, elias_position.z])
+		print("[DEV5_WORLD_GROUNDING] region=%s anchor_xz=(%.3f,%.3f) grounded=%s collider=%s hit_y=%.3f expected_y=%.3f error=%.3f elias_pos=(%.3f,%.3f,%.3f) clearance_ok=%s xz_ok=%s" % [region["id"], anchor.x, anchor.y, grounded, collider_name, hit_position.y, ground_y, absf(hit_position.y - ground_y), elias_position.x, elias_position.y, elias_position.z, clearance_consistent, xz_consistent])
+		if clearance_consistent and xz_consistent:
+			consistency_passed += 1
 		if grounded:
 			checks_passed += 1
 			var elias_marker := MeshInstance3D.new()
