@@ -1,0 +1,7 @@
+CP-D2-R1R6-013=HEADLESS_PASS
+BOUNDARY=R6->R7
+SAMPLES=41
+DISTANCE=128.062
+GROUNDING=y=0.15
+OWNER_GUARD=R6_dev1_boundary_readonly; R7_dev2_owner
+STATUS=REJECTED_VISUAL dedicated boundary capture remains next action
