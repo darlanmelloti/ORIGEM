@@ -183,6 +183,8 @@ func _build_r6_r7_handoff_colliders() -> void:
 		shape_node.shape = shape
 		segment.add_child(shape_node)
 		corridor.add_child(segment)
+	if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
+		print("R6R7_RUNTIME_COLLIDERS count=%d start=%s finish=%s distance=%0.3f grounding_y=%0.3f scope=R6_BOUNDARY_READONLY_R7_OWNER" % [segment_count, str(start), str(finish), float(contract["distance"]), start.y])
 
 func _build_elevated_village() -> void:
 	var village: Node3D = Node3D.new()

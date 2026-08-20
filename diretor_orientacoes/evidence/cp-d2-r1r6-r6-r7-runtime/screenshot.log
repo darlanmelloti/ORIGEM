@@ -9,9 +9,9 @@ ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
   libswscale      7.  5.100 /  7.  5.100
   libswresample   4. 12.100 /  4. 12.100
   libpostproc    57.  3.100 / 57.  3.100
-[x11grab @ 0x555896d8ce40] Stream #0: not enough frames to estimate rate; consider increasing probesize
+[x11grab @ 0x563adc077e40] Stream #0: not enough frames to estimate rate; consider increasing probesize
 Input #0, x11grab, from ':98.0':
-  Duration: N/A, start: 1787203333.566697, bitrate: 1381018 kb/s
+  Duration: N/A, start: 1787203579.900431, bitrate: 1381018 kb/s
   Stream #0:0: Video: rawvideo (BGR[0] / 0x524742), bgr0, 1600x900, 1381018 kb/s, 29.97 fps, 1000k tbr, 1000k tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (rawvideo (native) -> png (native))
@@ -22,7 +22,7 @@ Output #0, image2, to '/home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_C
   Stream #0:0: Video: png, rgb24(pc, gbr/unknown/unknown, progressive), 1600x900, q=2-31, 200 kb/s, 29.97 fps, 29.97 tbn
     Metadata:
       encoder         : Lavc60.31.102 png
-frame=    0 fps=0.0 q=-0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=N/A    [image2 @ 0x555896d94f00] The specified filename '/home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/print-1600x900.png' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0x555896d94f00] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 0x555896d94340] video:1811kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+frame=    0 fps=0.0 q=-0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=N/A    [image2 @ 0x563adc07ff00] The specified filename '/home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/print-1600x900.png' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x563adc07ff00] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 0x563adc07f340] video:1859kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
 frame=    1 fps=0.0 q=-0.0 Lsize=N/A time=00:00:00.00 bitrate=N/A speed=   0x    

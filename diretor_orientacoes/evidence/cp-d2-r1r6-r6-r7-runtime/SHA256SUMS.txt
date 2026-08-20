@@ -1,4 +1,4 @@
-b654e0b4ac131d278fa9336959342f7daa3e1c4b689b8b9b7bbe67226cecd59f  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/print-1600x900.png
-efdc73f4723aaa5f24b4e1a1d2e72a5da9f4bab56d5405c70f730cb56349670f  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/gameplay-30s.mp4
-39af8596092d0c2ffcb9bdc28be16571aaba1c96d22c994f1c7cb84e264d0664  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/runtime.log
+aa854f73f80d132724fb703acb14ed13ec7029401b0e58726df85c7ebbaf13e3  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/print-1600x900.png
+71916b01de492775c1b747dda14904e75bc267192b5c4320375ed1fe03c71306  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/gameplay-30s.mp4
+be31396d36cb7512af1d84bf187895661cba2bb11d125cff8337163575bcfbd9  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/runtime.log
 c9a2b0cbf8bcbea4bb02d40b2a874ccbd9254e6759ade29ec4f145818ce36534  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/duration.txt
