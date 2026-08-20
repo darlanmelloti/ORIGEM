@@ -1,0 +1,2 @@
+dbc5b784d104a183435a7e57a703b8faa3b196ff1856df4f38049eff9a6fff8c  diretor_orientacoes/CP_D5_518_AUDITORIA_INTEGRADA.md
+f89bb562d185dfe2c2e0b1e0f808045000f26946e7fe834da1e8cbe736b166c9  diretor_orientacoes/CP-D5-518_RUNTIME.log
