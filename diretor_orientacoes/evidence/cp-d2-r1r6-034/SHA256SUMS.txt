@@ -1,0 +1,6 @@
+0d5542a9bf040af23c4a9f0ba926cdb1c4758a9b0a5b05a8a6f53ff939eb84aa  diretor_orientacoes/evidence/cp-d2-r1r6-034/print-1600x900.png
+06c5fd47f5875338a9249030317ae7b518be17b24647c48f744d331b9d8a58a3  diretor_orientacoes/evidence/cp-d2-r1r6-034/gameplay-30s.mp4
+fcdee9205de1585636025bfe6e7ec5f8bbd3abc41d5048d693d705c2bd7de348  diretor_orientacoes/evidence/cp-d2-r1r6-034/capture.log
+3c55726462925c0377a487b9a131bc1f75f2f0f6e4c93c7223d7026d2a7062b0  diretor_orientacoes/evidence/cp-d2-r1r6-034/headless-ownership.log
+3ae8dfdf58902cd168ddf6f098f4b2b6daabc2f4f3e69d6ac2fcfa177896afcb  diretor_orientacoes/evidence/cp-d2-r1r6-034/headless-capture.log
+2add8cf9727ec4a495851327026096ba11a27b50383d6b3d60c0d1c60448c495  diretor_orientacoes/evidence/cp-d2-r1r6-034/QA_SUMMARY.txt
