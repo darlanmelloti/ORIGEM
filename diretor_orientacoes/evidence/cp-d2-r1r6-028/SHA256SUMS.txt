@@ -1,0 +1,3 @@
+7043495a0b584a2aadb6c8356cd74a86960cbdcf04ca8c4b93e5deeee022660c  diretor_orientacoes/evidence/cp-d2-r1r6-028/integrated-audit.log
+c268a2c4bff392ceb79a2d020761bad9c27d8e396ac59a9e770514225deb0d23  diretor_orientacoes/evidence/cp-d2-r1r6-028/near-anchor-audit.log
+6140a6dbb1f7aaf075e9a409e146f8828d086f9355a627506a93dfbb8494d73b  diretor_orientacoes/evidence/cp-d2-r1r6-028/QA_SUMMARY.txt

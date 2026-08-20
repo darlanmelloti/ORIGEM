@@ -1,0 +1,34 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+INTEGRATED_REGION id=01 name=Casa Voss world=(-22.000,8.000) map=(80.0,452.0)
+INTEGRATED_REGION id=02 name=Estrada do Rio world=(-21.400,12.000) map=(234.0,462.0)
+INTEGRATED_REGION id=03 name=Arco das Ruínas world=(-16.741,48.000) map=(362.0,463.0)
+INTEGRATED_REGION id=04 name=Floresta Densa world=(-9.000,116.000) map=(334.0,244.0)
+INTEGRATED_REGION id=05 name=Acampamento Majestic world=(-88.000,178.000) map=(187.0,258.0)
+INTEGRATED_REGION id=06 name=Ruínas Submersas world=(60.000,252.000) map=(408.0,351.0)
+INTEGRATED_REGION id=07 name=Vila Elevada world=(140.000,352.000) map=(542.0,235.0)
+INTEGRATED_REGION id=08 name=Observatório world=(194.000,404.000) map=(560.0,165.0)
+INTEGRATED_REGION id=09 name=Trilha da Montanha world=(174.000,414.000) map=(440.0,137.0)
+INTEGRATED_REGION id=10 name=Caverna do Orion world=(-116.000,548.000) map=(466.0,78.0)
+INTEGRATED_REGION id=11 name=Câmara do Orion Cube world=(-116.000,562.000) map=(514.0,33.0)
+INTEGRATED_REGION id=12 name=Hub Temporal world=(164.000,210.000) map=(564.0,497.0)
+INTEGRATED_HANDOFF R1->R2 distance=4.045 grounded_y=0.15 owner=Dev1
+INTEGRATED_HANDOFF R2->R3 distance=36.300 grounded_y=0.15 owner=Dev1
+INTEGRATED_HANDOFF R3->R4 distance=68.439 grounded_y=0.15 owner=Dev1
+INTEGRATED_HANDOFF R4->R5 distance=100.424 grounded_y=0.15 owner=Dev1
+INTEGRATED_HANDOFF R5->R6 distance=165.469 grounded_y=0.15 owner=Dev1
+INTEGRATED_HANDOFF R6->R7 distance=128.062 grounded_y=0.15 owner=Dev1
+INTEGRATED_HANDOFF R7->R8 distance=74.967 grounded_y=0.15 owner=Dev2
+INTEGRATED_HANDOFF R8->R9 distance=22.361 grounded_y=0.15 owner=Dev2
+INTEGRATED_HANDOFF R9->R10 distance=319.462 grounded_y=0.15 owner=Dev2
+INTEGRATED_HANDOFF R10->R11 distance=14.000 grounded_y=0.15 owner=Dev2
+INTEGRATED_HANDOFF R11->R12 distance=449.782 grounded_y=0.15 owner=Dev2
+INTEGRATED_BOUNDARY R6->R7 state=QA_BOUNDARY_PENDING distance=128.062
+INTEGRATED_ROUTE_DISTANCE=1383.311
+INTEGRATED_MAP_MIRROR regions=12 entries=12 state=RUNTIME_QA_ONLY
+INTEGRATED_LIGHT_BUDGET_CONTRACT=PASS max_dynamic_lights=16
+INTEGRATED_SCOPE_GUARD=PASS R1-R6_dev1_readonly_standby R7-R12_dev2_owner QA_consumers_only
+CP-D2-R1R6-025_INTEGRATED_R1_R12_AUDIT=PASS

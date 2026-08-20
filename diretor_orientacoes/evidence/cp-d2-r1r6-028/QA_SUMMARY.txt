@@ -1,0 +1,10 @@
+CP-D2-R1R6-028=PASS
+CONTINUITY=INTEGRATED_R1->R12_PLUS_NEAR_ANCHORS
+TECHNICAL=12 map entries; 11 positive handoffs; route_distance=1383.311; runtime errors=0
+VISUAL=integrated panorama plus close-up panels; near pairs readable
+PRINT=1600x900 evidence retained in CP-D2-R1R6-026 and CP-D2-R1R6-027
+GAMEPLAY=30s evidence retained in CP-D2-R1R6-026 and CP-D2-R1R6-027
+DYNAMIC_LIGHTS=1 QA panorama / 1 near-anchor composition
+LIGHT_LIMIT=16
+SCOPE_GUARD=PASS R1-R6_dev1_readonly_standby R7-R12_dev2_owner QA_consumers_only
+NEXT=CP-D2-R1R6-029 R1-R6 grounding and wayfinding QA
