@@ -1,0 +1,66 @@
+{
+  "contract_id": "DEV5_VERTICAL_SLICE_R2_R3_R6_GROUNDING",
+  "version": 1,
+  "owner": "Dev5",
+  "integration_role": "world_grounding_integrator",
+  "authority": {
+    "spatial": "cartographic_map",
+    "visual": "Dev3_cinematic_direction",
+    "gameplay_wayfinding": "Dev1",
+    "technical_validation": "Dev4"
+  },
+  "regions": {
+    "R2": {
+      "label": "Estrada_Rio",
+      "anchor_xz": [-21.4, 25.0],
+      "grounding_mode": "downward_raycast",
+      "ray_origin_y": 30.0,
+      "ray_length": 60.0,
+      "max_abs_error_m": 0.05,
+      "expected_collider": "R2_RoadGround",
+      "owner": "Dev5"
+    },
+    "R3": {
+      "label": "Arco_Ruinas",
+      "anchor_xz": [-16.741, 70.0],
+      "grounding_mode": "downward_raycast",
+      "ray_origin_y": 35.0,
+      "ray_length": 70.0,
+      "max_abs_error_m": 0.05,
+      "expected_collider": "R3_ArchGround",
+      "owner": "Dev5"
+    },
+    "R6": {
+      "label": "Ruinas_Submersas",
+      "anchor_xz": [60.0, 252.0],
+      "grounding_mode": "downward_raycast",
+      "ray_origin_y": 40.0,
+      "ray_length": 90.0,
+      "max_abs_error_m": 0.05,
+      "expected_collider": "R6_ShoreGround",
+      "owner": "Dev5"
+    }
+  },
+  "player": {
+    "identity": "Elias",
+    "presentation": "third_person",
+    "camera_contract": "CameraQA",
+    "ground_clearance_m": 0.02
+  },
+  "hardware": {
+    "renderer": "gl_compatibility",
+    "gpu_target": "GTX_1050_Ti",
+    "max_dynamic_lights": 16,
+    "dynamic_lights_in_preview": 0
+  },
+  "scope": {
+    "allowed": ["levels/dev5/", "diretor_orientacoes/"],
+    "production_modules_changed": false,
+    "player_gd_changed": false
+  },
+  "validation": {
+    "godot_parser": "4.7.1",
+    "qa_duration_seconds": 36,
+    "required_evidence": ["parser_log", "qa_runtime", "sha256sums"]
+  }
+}
