@@ -1,0 +1,38 @@
+{
+  "contract": "DEV5_R6_R7_MODULAR_HANDOFF",
+  "version": 1,
+  "status": "ready",
+  "region_interface": {
+    "from": {"id": 6, "name": "R6", "anchor_xz": [60.0, 252.0]},
+    "to": {"id": 7, "name": "Vila Elevada", "anchor_xz": [140.0, 352.0], "geometry_owner": "Dev2"},
+    "marker": "PASSAGEM_VILA_ELEVADA",
+    "marker_id": 7
+  },
+  "preview_bounds": {
+    "min": [10.0, -1.0, 212.0],
+    "max": [190.0, 5.0, 392.0]
+  },
+  "modular_geometry": {
+    "lanes": 2,
+    "meshes": 18,
+    "colliders": 18,
+    "grounded": true,
+    "clearance_m": 2.4,
+    "marker_only": true,
+    "region7_geometry": false
+  },
+  "runtime_constraints": {
+    "dynamic_lights": 0,
+    "max_dynamic_lights": 16,
+    "renderer": "gl_compatibility",
+    "third_person_identity": "Elias",
+    "camera": "CameraQA",
+    "production_modules_changed": false,
+    "player_gd_changed": false
+  },
+  "handoff_acceptance": {
+    "contract_ready": true,
+    "reached_marker_r7": true,
+    "dev2_geometry_created": false
+  }
+}
