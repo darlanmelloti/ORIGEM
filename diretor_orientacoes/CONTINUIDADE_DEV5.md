@@ -2386,8 +2386,250 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-## CP-D5-512 — ACTIVO
-Iniciar imediatamente a auditoria integrada R1–R6, sem aguardar confirmação verbal.
+## CP-D5-512 — CONCLUÍDO: Auditoria integrada contínua R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_512_AUDITORIA_INTEGRADA.md`, `CP-D5-512_RUNTIME.log` e `CP-D5-512_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; auditoria cartográfica aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-513
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-513 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_513_ELIAS_REGRESSAO.md`, `CP-D5-513_RUNTIME.log` e `CP-D5-513_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: auditoria integrada R1–R6 no harness cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `CartographicRegressionAuditPreview.tscn` no CP-D5-514
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-514 — CONCLUÍDO: Auditoria integrada contínua R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_514_AUDITORIA_INTEGRADA.md`, `CP-D5-514_RUNTIME.log` e `CP-D5-514_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; auditoria cartográfica aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-515
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-515 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_515_ELIAS_REGRESSAO.md`, `CP-D5-515_RUNTIME.log` e `CP-D5-515_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: auditoria integrada R1–R6 no harness cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `CartographicRegressionAuditPreview.tscn` no CP-D5-516
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-516 — CONCLUÍDO: Auditoria integrada contínua R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_516_AUDITORIA_INTEGRADA.md`, `CP-D5-516_RUNTIME.log` e `CP-D5-516_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; auditoria cartográfica aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-517
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-517 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_517_ELIAS_REGRESSAO.md`, `CP-D5-517_RUNTIME.log` e `CP-D5-517_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: auditoria integrada R1–R6 no harness cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `CartographicRegressionAuditPreview.tscn` no CP-D5-518
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-518 — CONCLUÍDO: Auditoria integrada contínua R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_518_AUDITORIA_INTEGRADA.md`, `CP-D5-518_RUNTIME.log` e `CP-D5-518_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-519
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-519 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_519_ELIAS_REGRESSAO.md`, `CP-D5-519_RUNTIME.log` e `CP-D5-519_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: auditoria integrada R1–R6 no harness cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `CartographicRegressionAuditPreview.tscn` no CP-D5-520
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-520 — CONCLUÍDO: Auditoria integrada contínua R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_520_AUDITORIA_INTEGRADA.md`, `CP-D5-520_RUNTIME.log` e `CP-D5-520_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; auditoria cartográfica aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-521
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-521 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_521_ELIAS_REGRESSAO.md`, `CP-D5-521_RUNTIME.log` e `CP-D5-521_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: auditoria integrada R1–R6 no harness cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `CartographicRegressionAuditPreview.tscn` no CP-D5-522
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-522 — CONCLUÍDO: Auditoria integrada contínua R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_522_AUDITORIA_INTEGRADA.md`, `CP-D5-522_RUNTIME.log` e `CP-D5-522_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; auditoria cartográfica aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-523
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-523 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_523_ELIAS_REGRESSAO.md`, `CP-D5-523_RUNTIME.log` e `CP-D5-523_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: auditoria integrada R1–R6 no harness cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `CartographicRegressionAuditPreview.tscn` no CP-D5-524
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-524 — CONCLUÍDO: Auditoria integrada contínua R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_524_AUDITORIA_INTEGRADA.md`, `CP-D5-524_RUNTIME.log` e `CP-D5-524_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; auditoria cartográfica aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-525
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-525 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_525_ELIAS_REGRESSAO.md`, `CP-D5-525_RUNTIME.log` e `CP-D5-525_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: auditoria integrada R1–R6 no harness cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `CartographicRegressionAuditPreview.tscn` no CP-D5-526
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-526 — CONCLUÍDO: Auditoria integrada contínua R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_526_AUDITORIA_INTEGRADA.md`, `CP-D5-526_RUNTIME.log` e `CP-D5-526_SHA256SUMS.txt`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; auditoria cartográfica aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-527
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-527 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_527_ELIAS_REGRESSAO.md`, `CP-D5-527_RUNTIME.log` e `CP-D5-527_SHA256SUMS.txt`.
+
+## CP-D5-528 — ACTIVO: Integração modular e espelhamento R6→R7
+A nova tarefa Dev5 foi realocada oficialmente para apoiar malhas 3D modulares e expandir o espelhamento cartográfico na transição R6→R7. O contrato está em `CP_D5_528_HANDOFF_R6_R7_MODULAR.md`. Âncoras: R6 `Vector3(60,y,252)` e entrada R7 `Vector3(140,y,352)`, com grounding apenas em Y, terceira pessoa de Elias isolada e limite global de `≤16` luzes.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: transição R6→R7 / entrada Vila Elevada
+- **RESPONSAVEL**: Dev5 — Integração modular & espelhamento cartográfico
+- **STATUS_CODE**: ACTIVE
+- **TAREFA_EM_EXECUCAO_AGORA**: construir preview isolado do contrato R6→R7
+- **DEPENDENCIAS_RECEBIDAS**: handoff R6→R7; plano Região 7; padrões Elias/grounding validados
+- **EVIDENCIA**: `CP_D5_528_HANDOFF_R6_R7_MODULAR.md`
+- **NEXT_ACTION_IMMEDIATE**: implementar `R6R7ModularMirrorPreview.tscn` sem alterar produção
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+Iniciar imediatamente a implementação isolada do CP-D5-528, sem aguardar confirmação verbal.
 
 
 
@@ -2396,7 +2638,7 @@ Iniciar imediatamente a auditoria integrada R1–R6, sem aguardar confirmação 
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-512` — iniciar auditoria integrada R1–R6 imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-528` — implementar preview modular isolado R6→R7 imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa

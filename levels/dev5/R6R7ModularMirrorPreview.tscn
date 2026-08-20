@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://levels/dev5/R6R7ModularMirrorPreview.gd" id="1_r6r7"]
+
+[node name="R6R7ModularMirrorPreview" type="Node3D"]
+script = ExtResource("1_r6r7")
+
+[node name="TechnicalContract" type="Node" parent="."]
+metadata/r6_anchor_xz = Vector2(60, 252)
+metadata/r7_anchor_xz = Vector2(140, 352)
+metadata/marker_only = true
+metadata/region7_geometry = false
+metadata/production_modules_changed = false
+metadata/max_dynamic_lights = 16
+metadata/third_person_identity = "Elias"
