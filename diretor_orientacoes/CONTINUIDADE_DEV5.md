@@ -1441,8 +1441,23 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-## CP-D5-449 — ACTIVO
-Iniciar imediatamente a regressão de Elias, sem aguardar confirmação verbal.
+## CP-D5-449 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` como única câmara activa, sem erros de script e sem alteração de `Player.gd` ou produção. Ver `CP_D5_449_ELIAS_REGRESSAO.md` e `CP-D5-449_RUNTIME.log`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: auditoria integrada R1–R6 no harness cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; handoff Dev5→Dev6; regressão Elias aprovada
+- **EVIDENCIA**: parser, QA 36 s em 1600×900, runtime e `CameraQA`
+- **NEXT_ACTION_IMMEDIATE**: validar `CartographicRegressionAuditPreview.tscn` no CP-D5-450
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-450 — ACTIVO
+Iniciar imediatamente a auditoria integrada R1–R6, sem aguardar confirmação verbal.
 
 
 
@@ -1451,7 +1466,7 @@ Iniciar imediatamente a regressão de Elias, sem aguardar confirmação verbal.
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-449` — iniciar regressão técnica de Elias imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-450` — iniciar auditoria integrada R1–R6 imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
