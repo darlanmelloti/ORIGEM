@@ -103,9 +103,9 @@ func _add_title(text: String, position: Vector3) -> void:
 	var label := Label3D.new()
 	label.text = text
 	label.position = position
-	label.font_size = 56
-	label.pixel_size = 0.04
-	label.outline_size = 12
+	label.font_size = 34
+	label.pixel_size = 0.022
+	label.outline_size = 8
 	label.modulate = Color("#f4f1e7")
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	qa_root.add_child(label)

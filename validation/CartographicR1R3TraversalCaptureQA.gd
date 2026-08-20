@@ -16,6 +16,7 @@ func _initialize() -> void:
 	var start := Anchors.world_position(Anchors.CASA_VOSS, 0.0, 9.0)
 	var finish := Anchors.world_position(Anchors.ARCO_RUINAS, 0.0, 9.0)
 	var direction := (finish - start).normalized()
+	var stable_target := start.lerp(finish, 0.5)
 	var duration := 30.0
 	var override_seconds := OS.get_environment("QA_CAPTURE_SECONDS")
 	if not override_seconds.is_empty():
@@ -24,7 +25,7 @@ func _initialize() -> void:
 	for frame: int in range(frame_count):
 		var progress := float(frame) / float(frame_count - 1)
 		var target := start.lerp(finish, progress)
-		camera.look_at_from_position(target + Vector3(-13.0, 13.0, -17.0), target + direction * 4.0, Vector3.UP)
+		camera.look_at_from_position(target + Vector3(-26.0, 22.0, -38.0), stable_target + Vector3(0.0, 1.5, 0.0), Vector3.UP)
 		if frame % 30 == 0:
 			print("DYNAMIC_TRAVERSAL progress=%0.2f region_hint=%s" % [progress, _region_hint(progress)])
 		await create_timer(duration / float(frame_count)).timeout
