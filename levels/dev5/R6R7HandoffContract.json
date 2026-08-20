@@ -34,5 +34,18 @@
     "contract_ready": true,
     "reached_marker_r7": true,
     "dev2_geometry_created": false
+  },
+  "validation_profile": {
+    "parser": "Godot 4.7.1",
+    "qa_duration_seconds": 36,
+    "resolution": [1600, 900],
+    "renderer": "gl_compatibility",
+    "required_runtime_flags": [
+      "grounded=true",
+      "marker_only=true",
+      "production_modules_changed=false",
+      "region7_geometry=false"
+    ],
+    "expected_dynamic_lights_max": 16
   }
 }

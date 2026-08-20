@@ -2659,21 +2659,24 @@ O contrato machine-readable, o preview modular e o handoff de Elias passaram val
 ## CP-D5-542 — CONCLUÍDO: Regressão conjunta do contrato e handoff R6→R7
 A regressão conjunta passou parser e duas sessões QA headless de 36 segundos, confirmando contrato JSON, duas faixas, grounding, zero luzes, Elias em terceira pessoa, marcador R7 alcançado e produção intacta. Ver `CP_D5_542_REGRESSAO_CONJUNTA_CONTRATO.md`, `CP-D5-542_RUNTIME.log` e `CP-D5-542_SHA256SUMS.txt`.
 
-## CP-D5-543 — ACTIVO: Próxima tarefa contínua de integração modular
+## CP-D5-543 — CONCLUÍDO: Auditoria estática do contrato R6→R7
+A auditoria estática verificou âncoras, faixas, malhas, colisores, orçamento de luzes, flags de produção, Player.gd e estado de handoff. O contrato passou, assim como parser e QA headless de 36 segundos. Ver `CP_D5_543_AUDITORIA_ESTATICA_R6_R7.md`, `CP-D5-543_RUNTIME.log` e `CP-D5-543_SHA256SUMS.txt`.
+
+## CP-D5-544 — ACTIVO: Próxima tarefa contínua de integração modular
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
 - **REGIAO_ACTUAL**: transição R6→R7 / corredor modular de duas faixas
 - **RESPONSAVEL**: Dev5 — Integração modular & espelhamento cartográfico
 - **STATUS_CODE**: ACTIVE
-- **TAREFA_EM_EXECUCAO_AGORA**: consultar orientações remotas e iniciar a próxima melhoria isolada
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-542 aprovado; contrato JSON, telemetria e QA validados
-- **EVIDENCIA**: regressão conjunta, parser, QA 36 s e SHA-256
+- **TAREFA_EM_EXECUCAO_AGORA**: consultar orientações remotas e executar a próxima melhoria isolada
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-543 aprovado; auditoria estática, contrato JSON, telemetria e QA validados
+- **EVIDENCIA**: auditoria estática, parser, QA 36 s e SHA-256
 - **NEXT_ACTION_IMMEDIATE**: consultar GitHub e executar a próxima tarefa Dev5
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a próxima tarefa do CP-D5-543, sem aguardar confirmação verbal.
+Iniciar imediatamente a próxima tarefa do CP-D5-544, sem aguardar confirmação verbal.
 
 
 
@@ -2682,7 +2685,7 @@ Iniciar imediatamente a próxima tarefa do CP-D5-543, sem aguardar confirmação
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-543` — consultar e executar imediatamente a próxima tarefa Dev5, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-544` — consultar e executar imediatamente a próxima tarefa Dev5, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
