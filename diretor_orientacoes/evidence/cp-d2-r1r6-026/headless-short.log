@@ -1,0 +1,10 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+R1R12_PANORAMA progress=0.00
+PANORAMA_LIGHT_INVENTORY dynamic_lights=1 max=16
+PANORAMA_LIGHT_BUDGET_CONTRACT=PASS
+PANORAMA_SCOPE_GUARD=PASS R1-R6_readonly R7-R12_owner_dev2
+CP-D2-R1R6-026_R1_R12_PANORAMA_CAPTURE=PASS
