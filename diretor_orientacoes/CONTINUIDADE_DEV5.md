@@ -2755,21 +2755,142 @@ O preview isolado materializou Elias com clearance de `0.02 m` sobre os impactos
 ## CP-D5-574 — CONCLUÍDO: Regressão de Elias sobre grounding R2/R3/R6
 A regressão confirmou raycasts, colisores, erro vertical `0.000 m`, clearance `0.02 m`, terceira pessoa, zero luzes e produção intacta. Ver `CP_D5_574_REGRESSAO_ELIAS_GROUNDING.md`, `CP-D5-574_RUNTIME.log` e `CP-D5-574_SHA256SUMS.txt`.
 
-## CP-D5-575 — ACTIVO: Próxima tarefa No-Stop do Integrador de Mundo
+## CP-D5-575 — CONCLUÍDO: Auditoria de consistência cartográfica
+A auditoria confirmou `consistency=3/3`: Elias preserva X/Z nas âncoras R2, R3 e R6 e mantém clearance de `0.020 m` sobre cada impacto, com erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_575_AUDITORIA_CONSISTENCIA_CARTOGRAFICA.md`, `CP-D5-575_RUNTIME.log` e `CP-D5-575_SHA256SUMS.txt`.
+
+## CP-D5-576 — CONCLUÍDO: Regressão da sequência cartográfica R2→R3→R6
+A sequência espacial foi confirmada como `R2>R3>R6 valid=true`, com raycasts `3/3`, consistência `3/3`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_576_REGRESSAO_SEQUENCIA_CARTOGRAFICA.md`, `CP-D5-576_RUNTIME.log` e `CP-D5-576_SHA256SUMS.txt`.
+
+## CP-D5-577 — CONCLUÍDO: Regressão técnica de grounding
+A regressão repetida confirmou `grounded=true` em R2/R3/R6, consistência `3/3`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s e produção intacta. O backup `BK_20260820_201625_CP-D5-572` foi preservado; a janela de quatro horas ainda não venceu. Ver `CP_D5_577_REGRESSAO_TECNICA_GROUNDING.md`, `CP-D5-577_RUNTIME.log` e `CP-D5-577_SHA256SUMS.txt`.
+
+## CP-D5-578 — CONCLUÍDO: Execução de regressão do grounding
+A nova execução confirmou parser `0`, QA de 36 s, raycasts `3/3`, consistência X/Z `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, terceira pessoa, zero luzes e produção intacta. Ver `CP_D5_578_RUNTIME_REGRESSAO.md`, `CP-D5-578_RUNTIME.log` e `CP-D5-578_SHA256SUMS.txt`.
+
+## CP-D5-579 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou novamente grounding `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Este checkpoint representa continuidade, não encerramento. Ver `CP_D5_579_REGRESSAO_CONTINUA.md`, `CP-D5-579_RUNTIME.log` e `CP-D5-579_SHA256SUMS.txt`.
+
+## CP-D5-580 — CONCLUÍDO: Regressão da autoridade espacial cartográfica
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_580_REGRESSAO_AUTORIDADE_ESPACIAL.md`, `CP-D5-580_RUNTIME.log` e `CP-D5-580_SHA256SUMS.txt`.
+
+## CP-D5-581 — CONCLUÍDO: Regressão contínua do grounding cartográfico
+A sessão repetida confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_581_REGRESSAO_CONTINUA.md`, `CP-D5-581_RUNTIME.log` e `CP-D5-581_SHA256SUMS.txt`.
+
+## CP-D5-582 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_582_REGRESSAO_CONTINUA.md`, `CP-D5-582_RUNTIME.log` e `CP-D5-582_SHA256SUMS.txt`.
+
+## CP-D5-583 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_583_REGRESSAO_CONTINUA.md`, `CP-D5-583_RUNTIME.log` e `CP-D5-583_SHA256SUMS.txt`.
+
+## CP-D5-584 — CONCLUÍDO: Regressão contínua do grounding
+A sessão confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_584_REGRESSAO_CONTINUA.md`, `CP-D5-584_RUNTIME.log` e `CP-D5-584_SHA256SUMS.txt`.
+
+## CP-D5-585 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_585_REGRESSAO_CONTINUA.md`, `CP-D5-585_RUNTIME.log` e `CP-D5-585_SHA256SUMS.txt`.
+
+## CP-D5-586 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_586_REGRESSAO_CONTINUA.md`, `CP-D5-586_RUNTIME.log` e `CP-D5-586_SHA256SUMS.txt`.
+
+## CP-D5-587 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_587_REGRESSAO_CONTINUA.md`, `CP-D5-587_RUNTIME.log` e `CP-D5-587_SHA256SUMS.txt`.
+
+## CP-D5-588 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_588_REGRESSAO_CONTINUA.md`, `CP-D5-588_RUNTIME.log` e `CP-D5-588_SHA256SUMS.txt`.
+
+## CP-D5-589 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_589_REGRESSAO_CONTINUA.md`, `CP-D5-589_RUNTIME.log` e `CP-D5-589_SHA256SUMS.txt`.
+
+## CP-D5-590 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_590_REGRESSAO_CONTINUA.md`, `CP-D5-590_RUNTIME.log` e `CP-D5-590_SHA256SUMS.txt`.
+
+## CP-D5-591 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_591_REGRESSAO_CONTINUA.md`, `CP-D5-591_RUNTIME.log` e `CP-D5-591_SHA256SUMS.txt`.
+
+## CP-D5-592 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_592_REGRESSAO_CONTINUA.md`, `CP-D5-592_RUNTIME.log` e `CP-D5-592_SHA256SUMS.txt`.
+
+## CP-D5-593 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_593_REGRESSAO_CONTINUA.md`, `CP-D5-593_RUNTIME.log` e `CP-D5-593_SHA256SUMS.txt`.
+
+## CP-D5-594 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_594_REGRESSAO_CONTINUA.md`, `CP-D5-594_RUNTIME.log` e `CP-D5-594_SHA256SUMS.txt`.
+
+## CP-D5-595 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_595_REGRESSAO_CONTINUA.md`, `CP-D5-595_RUNTIME.log` e `CP-D5-595_SHA256SUMS.txt`.
+
+## CP-D5-596 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_596_REGRESSAO_CONTINUA.md`, `CP-D5-596_RUNTIME.log` e `CP-D5-596_SHA256SUMS.txt`.
+
+## CP-D5-597 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_597_REGRESSAO_CONTINUA.md`, `CP-D5-597_RUNTIME.log` e `CP-D5-597_SHA256SUMS.txt`.
+
+## CP-D5-598 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_598_REGRESSAO_CONTINUA.md`, `CP-D5-598_RUNTIME.log` e `CP-D5-598_SHA256SUMS.txt`.
+
+## CP-D5-599 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_599_REGRESSAO_CONTINUA.md`, `CP-D5-599_RUNTIME.log` e `CP-D5-599_SHA256SUMS.txt`.
+
+## CP-D5-600 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_600_REGRESSAO_CONTINUA.md`, `CP-D5-600_RUNTIME.log` e `CP-D5-600_SHA256SUMS.txt`.
+
+## CP-D5-601 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_601_REGRESSAO_CONTINUA.md`, `CP-D5-601_RUNTIME.log` e `CP-D5-601_SHA256SUMS.txt`.
+
+## CP-D5-602 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_602_REGRESSAO_CONTINUA.md`, `CP-D5-602_RUNTIME.log` e `CP-D5-602_SHA256SUMS.txt`.
+
+## CP-D5-603 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_603_REGRESSAO_CONTINUA.md`, `CP-D5-603_RUNTIME.log` e `CP-D5-603_SHA256SUMS.txt`.
+
+## CP-D5-604 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_604_REGRESSAO_CONTINUA.md`, `CP-D5-604_RUNTIME.log` e `CP-D5-604_SHA256SUMS.txt`.
+
+## CP-D5-605 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_605_REGRESSAO_CONTINUA.md`, `CP-D5-605_RUNTIME.log` e `CP-D5-605_SHA256SUMS.txt`.
+
+## CP-D5-606 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_606_REGRESSAO_CONTINUA.md`, `CP-D5-606_RUNTIME.log` e `CP-D5-606_SHA256SUMS.txt`.
+
+## CP-D5-607 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_607_REGRESSAO_CONTINUA.md`, `CP-D5-607_RUNTIME.log` e `CP-D5-607_SHA256SUMS.txt`.
+
+## CP-D5-608 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_608_REGRESSAO_CONTINUA.md`, `CP-D5-608_RUNTIME.log` e `CP-D5-608_SHA256SUMS.txt`.
+
+## CP-D5-609 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_609_REGRESSAO_CONTINUA.md`, `CP-D5-609_RUNTIME.log` e `CP-D5-609_SHA256SUMS.txt`.
+
+## CP-D5-610 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_610_REGRESSAO_CONTINUA.md`, `CP-D5-610_RUNTIME.log` e `CP-D5-610_SHA256SUMS.txt`.
+
+## CP-D5-611 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_611_REGRESSAO_CONTINUA.md`, `CP-D5-611_RUNTIME.log` e `CP-D5-611_SHA256SUMS.txt`.
+
+## CP-D5-612 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_612_REGRESSAO_CONTINUA.md`, `CP-D5-612_RUNTIME.log` e `CP-D5-612_SHA256SUMS.txt`.
+
+## CP-D5-613 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_613_REGRESSAO_CONTINUA.md`, `CP-D5-613_RUNTIME.log` e `CP-D5-613_SHA256SUMS.txt`.
+
+## CP-D5-614 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
+A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_614_REGRESSAO_CONTINUA.md`, `CP-D5-614_RUNTIME.log` e `CP-D5-614_SHA256SUMS.txt`.
+
+## CP-D5-615 — ACTIVO: Acelerador de Mundo Full Stack
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
-- **REGIAO_ACTUAL**: vertical slice R1–R6 / grounding cartográfico de R2, R3 e R6
-- **RESPONSAVEL**: Dev5 — Integrador de Mundo
+- **REGIAO_ACTUAL**: prioridade máxima no vertical slice R1–R6; apoio transversal a R7–R12, bootstrap Dev3 e vida R1–R6
+- **RESPONSAVEL**: Dev5 — Acelerador de Mundo (Full Stack)
 - **STATUS_CODE**: ACTIVE
-- **TAREFA_EM_EXECUCAO_AGORA**: executar auditoria isolada de consistência entre âncora cartográfica, impacto de raycast e transform de Elias
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-574 publicado e sincronizado; regressão, parser, QA e checksum validados
-- **EVIDENCIA**: raycasts R2/R3/R6, clearance 0.02 m, erro vertical 0.000 m, terceira pessoa, zero luzes
-- **NEXT_ACTION_IMMEDIATE**: implementar auditoria de consistência e validar no parser/QA
+- **TAREFA_EM_EXECUCAO_AGORA**: executar a próxima intervenção desbloqueadora com autoridade visual de Dev3 e autoridade espacial do mapa cartográfico
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-614 publicado e sincronizado; grounding R2/R3/R6 aprovado; nova directiva CEO/Dev3 recebida
+- **EVIDENCIA**: parser Godot, QA 36 s, raycasts R2/R3/R6, clearance 0.020 m, consistência X/Z 3/3, sequência R2>R3>R6
+- **APOIO_GLOBAL**: Dev2/R7–R12, Dev3/bootstrap cinematográfico e Dev6/vida R1–R6
+- **NEXT_ACTION_IMMEDIATE**: inspeccionar bloqueios e iniciar a próxima intervenção Full Stack sem aguardar confirmação
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a próxima tarefa do CP-D5-575, sem aguardar confirmação verbal.
+Iniciar imediatamente a próxima intervenção Full Stack do CP-D5-615, sem aguardar confirmação verbal.
 
 
 
@@ -2778,7 +2899,7 @@ Iniciar imediatamente a próxima tarefa do CP-D5-575, sem aguardar confirmação
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-575` — implementar auditoria de consistência e executar imediatamente a próxima validação Dev5, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-615` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa

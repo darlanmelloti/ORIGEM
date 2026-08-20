@@ -1,0 +1,65 @@
+{
+  "contract_id": "DEV5_WORLD_ACCELERATOR_R1_R6_FULL_STACK",
+  "version": 1,
+  "owner": "Dev5",
+  "role": "world_accelerator_full_stack",
+  "priority": "vertical_slice_R1_R6",
+  "authorities": {
+    "spatial": "cartographic_map",
+    "visual": "Dev3_cinematic_direction",
+    "technical": "Dev4_QA_master",
+    "regional_geometry_R7_R12": "Dev2"
+  },
+  "coordination_lanes": {
+    "Dev2": {
+      "scope": "R7_R12_optimization_and_R6_R7_handoff",
+      "handoff": "contract_only_no_geometry_duplication",
+      "next_marker": "PASSAGEM_VILA_ELEVADA"
+    },
+    "Dev3": {
+      "scope": "cinematic_bootstrap_and_visual_readability",
+      "required_inputs": ["cartographic_anchor", "grounded_pivot", "camera_axis", "Elias_third_person"],
+      "output": "reversible_camera_validation_scene"
+    },
+    "Dev6": {
+      "scope": "R1_R6_environment_life",
+      "required_inputs": ["grounded_anchor", "bounding_box", "material_hint", "render_cost"],
+      "lighting_rule": "no_new_dynamic_lights_without_Dev4_inventory"
+    }
+  },
+  "confirmed_anchors": {
+    "R2": {"label": "Estrada_Rio", "anchor_xz": [-21.4, 25.0], "source": "R2R3R6GroundingContract.json"},
+    "R3": {"label": "Arco_Ruinas", "anchor_xz": [-16.741, 70.0], "source": "R2R3R6GroundingContract.json"},
+    "R5": {"label": "Majestic_Pavilion", "anchor_xz": [-88.0, 178.0], "source": "CP_D5_049_VALIDACAO_PERCURSOS_ELIAS_R5_R6.md"},
+    "R6": {"label": "Ruinas_Submersas", "anchor_xz": [60.0, 252.0], "source": "R2R3R6GroundingContract.json"}
+  },
+  "pending_authority_inputs": {
+    "R1": "canonical_anchor_required_before_geometry_or_camera_promotion",
+    "R4": "canonical_anchor_required_before_geometry_or_camera_promotion"
+  },
+  "player": {
+    "identity": "Elias",
+    "presentation": "third_person",
+    "ground_clearance_m": 0.02,
+    "xz_preservation": true
+  },
+  "hardware": {
+    "renderer": "gl_compatibility",
+    "gpu_target": "GTX_1050_Ti",
+    "max_dynamic_lights": 16,
+    "preview_dynamic_lights": 0
+  },
+  "scope": {
+    "allowed": ["levels/dev5/", "diretor_orientacoes/"],
+    "production_modules_changed": false,
+    "player_gd_changed": false,
+    "geometry_owner_R7_R12_unchanged": true
+  },
+  "acceptance": {
+    "parser": "Godot_4.7.1",
+    "qa_duration_seconds": 36,
+    "grounding_max_abs_error_m": 0.05,
+    "required_handoffs": ["Dev5_to_Dev6", "Dev5_to_Dev3", "Dev5_to_Dev2"],
+    "required_evidence": ["contract", "runtime_log", "report", "sha256sums"]
+  }
+}
