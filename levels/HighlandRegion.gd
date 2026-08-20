@@ -28,6 +28,7 @@ func _ready() -> void:
 	_build_region7_handoff_chain()
 	_build_lake_to_village_path()
 	_build_r6_r7_handoff_colliders()
+	_build_r7_r8_handoff_colliders()
 	_build_elevated_village()
 	_build_observatory()
 	_build_mountain_trail()
@@ -185,6 +186,37 @@ func _build_r6_r7_handoff_colliders() -> void:
 		corridor.add_child(segment)
 	if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
 		print("R6R7_RUNTIME_COLLIDERS count=%d start=%s finish=%s distance=%0.3f grounding_y=%0.3f scope=R6_BOUNDARY_READONLY_R7_OWNER" % [segment_count, str(start), str(finish), float(contract["distance"]), start.y])
+
+func _build_r7_r8_handoff_colliders() -> void:
+	# Handoff físico owner-safe da Vila Elevada ao Observatório, derivado do contrato cartográfico.
+	var contract: Dictionary = Anchors.continuity_7_to_8(_height_at(140.0, 352.0))
+	var start: Vector3 = contract["handoff_in"]
+	var finish: Vector3 = contract["handoff_out"]
+	var corridor: Node3D = Node3D.new()
+	corridor.name = "R7R8_HandoffColliders_Dev2"
+	corridor.set_meta("handoff_id", "R07_R08")
+	corridor.set_meta("collider_contract", "ColliderCPD2007_R07_R08")
+	corridor.set_meta("map_authority", "mapaorigem.webp")
+	corridor.set_meta("scope", "R7_R8_DEV2_OWNER")
+	add_child(corridor)
+	var segment_count: int = 6
+	for index: int in range(segment_count):
+		var a: Vector3 = start.lerp(finish, float(index) / float(segment_count))
+		var b: Vector3 = start.lerp(finish, float(index + 1) / float(segment_count))
+		var segment: StaticBody3D = StaticBody3D.new()
+		segment.name = "ColliderCPD2007_R07_R08_%02d" % (index + 1)
+		segment.collision_layer = 1
+		segment.collision_mask = 1
+		segment.position = (a + b) * 0.5
+		segment.look_at_from_position(segment.position, b, Vector3.UP)
+		var shape_node: CollisionShape3D = CollisionShape3D.new()
+		var shape: BoxShape3D = BoxShape3D.new()
+		shape.size = Vector3(3.0, 0.45, a.distance_to(b) + 0.25)
+		shape_node.shape = shape
+		segment.add_child(shape_node)
+		corridor.add_child(segment)
+	if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY":
+		print("R7R8_RUNTIME_COLLIDERS count=%d start=%s finish=%s distance=%0.3f grounding_y=%0.3f contract=ColliderCPD2007_R07_R08 scope=R7_R8_DEV2_OWNER" % [segment_count, str(start), str(finish), float(contract["distance"]), start.y])
 
 func _build_elevated_village() -> void:
 	var village: Node3D = Node3D.new()
