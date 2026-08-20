@@ -20,6 +20,8 @@ func _ready() -> void:
 	print("[DEV5_R6R7_MIRROR] status=active r6_xz=(60,252) r7_xz=(140,352) grounded=true")
 	print("[DEV5_R6R7_MIRROR] modular_meshes=%d colliders=%d dynamic_lights=%d lanes=2 clearance=%.1f production_modules_changed=false" % [modular_meshes, colliders, dynamic_lights, CLEARANCE])
 	print("[DEV5_R6R7_MIRROR] elias_third_person=true camera=CameraQA marker_only=true region7_geometry=false")
+	print("[DEV5_R6R7_HANDOFF_TELEMETRY] bounds_min=(10,-1,212) bounds_max=(190,5,392) lanes=2 clearance=2.4 lights=0 production_modules_changed=false")
+	print("[DEV5_R6R7_HANDOFF_TELEMETRY] contract_ready=true r7_geometry_owner=Dev2 next_marker=PASSAGEM_VILA_ELEVADA")
 	assert(dynamic_lights <= MAX_DYNAMIC_LIGHTS)
 
 func _material(color: Color, roughness := 0.82) -> StandardMaterial3D:
