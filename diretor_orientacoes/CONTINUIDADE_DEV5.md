@@ -2884,7 +2884,10 @@ O contrato Full Stack foi validado com grounding R2/R3/R6 aprovado, parser `0`, 
 ## CP-D5-617 — CONCLUÍDO: Passe Full Stack do Acelerador de Mundo
 O passe confirmou contrato Full Stack, prioridade R1–R6, apoio limitado a Dev2/R7–R12, bootstrap Dev3 e ambiente Dev6, parser `0`, QA de 36 s, produção intacta e `DYNAMIC_LIGHTS=0`. Ver `CP_D5_617_ACELERADOR_FULL_STACK.md`, `CP-D5-617_RUNTIME.log` e `CP-D5-617_SHA256SUMS.txt`.
 
-## CP-D5-618 — ACTIVO: Próximo passe Full Stack
+## CP-D5-618 — CONCLUÍDO: Passe Full Stack do Acelerador de Mundo
+O passe confirmou contrato Full Stack, prioridade R1–R6, apoios Dev2/Dev3/Dev6, parser `0`, QA de 36 s, produção intacta e `DYNAMIC_LIGHTS=0`. Ver `CP_D5_618_ACELERADOR_FULL_STACK.md`, `CP-D5-618_RUNTIME.log` e `CP-D5-618_SHA256SUMS.txt`.
+
+## CP-D5-619 — ACTIVO: Próximo passe Full Stack
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
@@ -2892,14 +2895,14 @@ O passe confirmou contrato Full Stack, prioridade R1–R6, apoio limitado a Dev2
 - **RESPONSAVEL**: Dev5 — Acelerador de Mundo (Full Stack)
 - **STATUS_CODE**: ACTIVE
 - **TAREFA_EM_EXECUCAO_AGORA**: executar a próxima intervenção desbloqueadora sem substituir a propriedade geométrica do Dev2 nem a autoridade visual do Dev3
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-617 publicado e sincronizado; passe Full Stack aprovado
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-618 publicado e sincronizado; passe Full Stack aprovado
 - **EVIDENCIA**: parser Godot, QA 36 s, raycasts R2/R3/R6, contrato R1–R6, handoffs Dev2/Dev3/Dev6
 - **APOIO_GLOBAL**: Dev2/R7–R12, Dev3/bootstrap cinematográfico e Dev6/vida R1–R6
 - **NEXT_ACTION_IMMEDIATE**: executar o próximo passe Full Stack e validar novamente antes de sincronizar
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente o próximo passe Full Stack do CP-D5-618, sem aguardar confirmação verbal.
+Iniciar imediatamente o próximo passe Full Stack do CP-D5-619, sem aguardar confirmação verbal.
 
 
 
@@ -2908,7 +2911,7 @@ Iniciar imediatamente o próximo passe Full Stack do CP-D5-618, sem aguardar con
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-618` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-619` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
