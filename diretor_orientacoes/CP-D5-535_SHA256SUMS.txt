@@ -1,0 +1,2 @@
+2fefcd1cd8a4571d8d7ac94c1c273bd714784bd447c6fc7a37b941f1dd25f198  diretor_orientacoes/CP_D5_535_REGRESSAO_CONJUNTA_R6_R7.md
+0762363e4bddbbc3803c5fbc46c524fd0e5dbed2b8d3cd96898dd8d8a20fcca8  diretor_orientacoes/CP-D5-535_RUNTIME.log
