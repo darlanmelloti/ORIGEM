@@ -2878,22 +2878,25 @@ A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`,
 ## CP-D5-615 — CONCLUÍDO: Acelerador de Mundo Full Stack
 Foi criado e validado `levels/dev5/WorldAcceleratorR1R6Contract.json`, com handoffs para Dev2, Dev3 e Dev6, âncoras confirmadas de R2/R3/R5/R6 e R1/R4 explicitamente pendentes de fonte canónica. Parser Godot `0`, QA controlada de 36 s, produção intacta e iluminação dinâmica `0`. Ver `CP_D5_615_ACELERADOR_FULL_STACK.md`, `CP-D5-615_RUNTIME.log` e `CP-D5-615_SHA256SUMS.txt`.
 
-## CP-D5-616 — ACTIVO: Próximo passe Full Stack
+## CP-D5-616 — CONCLUÍDO: Regressão do Acelerador de Mundo Full Stack
+O contrato Full Stack foi validado com grounding R2/R3/R6 aprovado, parser `0`, QA controlada de 36 s, produção intacta, `DYNAMIC_LIGHTS=0` e handoffs Dev2/Dev3/Dev6 preservados. Ver `CP_D5_616_ACELERADOR_REGRESSAO.md`, `CP-D5-616_RUNTIME.log` e `CP-D5-616_SHA256SUMS.txt`.
+
+## CP-D5-617 — ACTIVO: Próximo passe Full Stack
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
 - **REGIAO_ACTUAL**: prioridade máxima no vertical slice R1–R6; apoio transversal a R7–R12, bootstrap Dev3 e vida R1–R6
 - **RESPONSAVEL**: Dev5 — Acelerador de Mundo (Full Stack)
 - **STATUS_CODE**: ACTIVE
-- **TAREFA_EM_EXECUCAO_AGORA**: iniciar a próxima intervenção desbloqueadora sem substituir a propriedade geométrica do Dev2 nem a autoridade visual do Dev3
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-615 publicado e sincronizado; contrato Full Stack aprovado
+- **TAREFA_EM_EXECUCAO_AGORA**: executar a próxima intervenção desbloqueadora sem substituir a propriedade geométrica do Dev2 nem a autoridade visual do Dev3
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-616 publicado e sincronizado; regressão Full Stack aprovada
 - **EVIDENCIA**: parser Godot, QA 36 s, raycasts R2/R3/R6, contrato R1–R6, handoffs Dev2/Dev3/Dev6
 - **APOIO_GLOBAL**: Dev2/R7–R12, Dev3/bootstrap cinematográfico e Dev6/vida R1–R6
 - **NEXT_ACTION_IMMEDIATE**: executar o próximo passe Full Stack e validar novamente antes de sincronizar
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente o próximo passe Full Stack do CP-D5-616, sem aguardar confirmação verbal.
+Iniciar imediatamente o próximo passe Full Stack do CP-D5-617, sem aguardar confirmação verbal.
 
 
 
@@ -2902,7 +2905,7 @@ Iniciar imediatamente o próximo passe Full Stack do CP-D5-616, sem aguardar con
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-616` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-617` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
