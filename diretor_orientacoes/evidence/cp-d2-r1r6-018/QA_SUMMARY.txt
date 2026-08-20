@@ -1,0 +1,8 @@
+CP-D2-R1R6-018=PASS
+CONTINUITY=R8->R9
+FRAME=R8 and R9 readable and separated
+PRINT=1600x900
+GAMEPLAY=30s
+RUNTIME_ERRORS=0
+OWNER_GUARD=R1-R6 production untouched; R8-R9 Dev2 owner
+NEXT=CP-D2-R1R6-019 R9->R10 continuity
