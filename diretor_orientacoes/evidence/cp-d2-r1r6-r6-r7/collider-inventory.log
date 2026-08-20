@@ -1,0 +1,12 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+R6R7_COLLIDER_INVENTORY scene=res://scenes/main.tscn
+R6R7_COLLIDER_INVENTORY static_or_character_bodies=10 collision_shapes=10
+R6R7_NAVIGATION regions=1 baked_meshes=0
+R6R7_EXPECTED_HANDOFF r6=(60.0, 0.15, 252.0) r7=(140.0, 0.15, 352.0) distance=128.062 grounding_y=0.150
+R6R7_SCOPE_GUARD=PASS R6_dev1_readonly R7_dev2_owner
+R6R7_PHYSICAL_INTEGRATION_PENDING: main scene NavigationRegion3D has no baked navigation mesh
+CP-D2-R6R7-003_PHYSICAL_COLLIDER_INVENTORY=PASS_WITH_INTEGRATION_PENDING

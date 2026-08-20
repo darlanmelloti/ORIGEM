@@ -1,0 +1,3 @@
+7f821a59eed686fb292f605dc574112a932f1e5056e8a5c065d51fe3116a8a77  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/collider-inventory.log
+1aa147136b027f2b1fad1b70f9cdac2e453f8e26dfb2079e04a082d6bada9be3  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/QA_SUMMARY.txt
+8fa221599b3fba36847f7e37a39343e91bb1a3366ec615d5b3c0e627ccd2dcc5  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/PLAYABLE_ROUTE_SUMMARY.txt
