@@ -1,0 +1,2 @@
+e125bf8091f004e01c41bc4309c3cc74c257089ea4eaa7caee6c32c3fb25976e  diretor_orientacoes/CP_D5_515_ELIAS_REGRESSAO.md
+0f24121d6e523897e7dec6719f4a4dd336b8f4911d504ea6492dfdf63429bade  diretor_orientacoes/CP-D5-515_RUNTIME.log
