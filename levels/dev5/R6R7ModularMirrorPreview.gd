@@ -18,7 +18,7 @@ func _ready() -> void:
 	_build_anchor("R7_VILA_ELEVADA_MARKER", R7_XZ, Color("#c49555"))
 	_build_elias_camera()
 	print("[DEV5_R6R7_MIRROR] status=active r6_xz=(60,252) r7_xz=(140,352) grounded=true")
-	print("[DEV5_R6R7_MIRROR] modular_meshes=%d colliders=%d dynamic_lights=%d clearance=%.1f production_modules_changed=false" % [modular_meshes, colliders, dynamic_lights, CLEARANCE])
+	print("[DEV5_R6R7_MIRROR] modular_meshes=%d colliders=%d dynamic_lights=%d lanes=2 clearance=%.1f production_modules_changed=false" % [modular_meshes, colliders, dynamic_lights, CLEARANCE])
 	print("[DEV5_R6R7_MIRROR] elias_third_person=true camera=CameraQA marker_only=true region7_geometry=false")
 	assert(dynamic_lights <= MAX_DYNAMIC_LIGHTS)
 
@@ -71,6 +71,8 @@ func _build_transition_gate() -> void:
 	_box(gate, "Header", Vector3(0.0, 4.0, 0.0), Vector3(7.0, 1.0, 1.2), Color("#8a704b"))
 	for index in range(5):
 		_box(gate, "ModularSlab_%02d" % index, Vector3(0.0, 0.12, -20.0 + index * 10.0), Vector3(4.0, 0.24, 3.6), Color("#6e766e"))
+	for index in range(5):
+		_box(gate, "ParallelSlab_%02d" % index, Vector3(8.0, 0.12, -20.0 + index * 10.0), Vector3(3.2, 0.24, 3.6), Color("#5f6d68"))
 
 func _build_elias_camera() -> void:
 	var camera := Camera3D.new()
