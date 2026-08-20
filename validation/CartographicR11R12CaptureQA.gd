@@ -51,8 +51,8 @@ func _initialize() -> void:
 	qa_root.add_child(corridor)
 	var temporal_core := MeshInstance3D.new()
 	var core_mesh := SphereMesh.new()
-	core_mesh.radius = 5.5
-	core_mesh.height = 11.0
+	core_mesh.radius = 8.5
+	core_mesh.height = 17.0
 	var core_material := StandardMaterial3D.new()
 	core_material.albedo_color = Color("#b57cff")
 	core_material.emission_enabled = true
@@ -60,8 +60,9 @@ func _initialize() -> void:
 	core_material.emission_energy_multiplier = 2.3
 	core_mesh.material = core_material
 	temporal_core.mesh = core_mesh
-	temporal_core.position = finish + Vector3(0.0, 5.5, 0.0)
+	temporal_core.position = finish + Vector3(0.0, 8.5, 0.0)
 	qa_root.add_child(temporal_core)
+	_add_vertical_portal(finish)
 	for index: int in range(5):
 		var resonance := OmniLight3D.new()
 		resonance.name = "R12_Temporal_Resonance_%02d" % (index + 1)
@@ -88,16 +89,47 @@ func _initialize() -> void:
 	if not override_seconds.is_empty():
 		duration = maxf(float(override_seconds), 1.0)
 	var frame_count := maxi(30, ceili(duration * 10.0))
-	var stable_target := start.lerp(finish, 0.5)
+	var stable_target := start.lerp(finish, 0.62)
 	for frame: int in range(frame_count):
 		var progress := float(frame) / float(frame_count - 1)
 		var target := start.lerp(finish, progress)
-		camera.look_at_from_position(target + Vector3(-175.0, 105.0, -228.0), stable_target + Vector3(0.0, 10.0, 0.0), Vector3.UP)
+		camera.look_at_from_position(target + Vector3(-112.0, 70.0, -148.0), stable_target + Vector3(0.0, 12.0, 0.0), Vector3.UP)
 		if frame % 30 == 0:
 			print("R11R12_DYNAMIC progress=%0.2f" % progress)
 		await create_timer(duration / float(frame_count)).timeout
 	print("CP-D2-R1R6-024_R11_R12_DYNAMIC_CAPTURE=PASS")
 	quit(0)
+
+func _add_vertical_portal(center: Vector3) -> void:
+	# QA-only architectural silhouette: a grounded portal frame makes R12 readable without altering production geometry.
+	for side: float in [-1.0, 1.0]:
+		var pillar := MeshInstance3D.new()
+		var pillar_mesh := CylinderMesh.new()
+		pillar_mesh.top_radius = 1.15
+		pillar_mesh.bottom_radius = 1.55
+		pillar_mesh.height = 14.0
+		pillar_mesh.radial_segments = 12
+		var pillar_material := StandardMaterial3D.new()
+		pillar_material.albedo_color = Color("#47396c")
+		pillar_material.emission_enabled = true
+		pillar_material.emission = Color("#8d58db")
+		pillar_material.emission_energy_multiplier = 0.8
+		pillar_mesh.material = pillar_material
+		pillar.mesh = pillar_mesh
+		pillar.position = center + Vector3(side * 7.0, 7.0, 0.0)
+		qa_root.add_child(pillar)
+	var lintel := MeshInstance3D.new()
+	var lintel_mesh := BoxMesh.new()
+	lintel_mesh.size = Vector3(16.0, 2.2, 2.4)
+	var lintel_material := StandardMaterial3D.new()
+	lintel_material.albedo_color = Color("#6a4a98")
+	lintel_material.emission_enabled = true
+	lintel_material.emission = Color("#a76ff0")
+	lintel_material.emission_energy_multiplier = 1.1
+	lintel_mesh.material = lintel_material
+	lintel.mesh = lintel_mesh
+	lintel.position = center + Vector3(0.0, 14.0, 0.0)
+	qa_root.add_child(lintel)
 
 func _register_dynamic_light(light: Light3D) -> void:
 	dynamic_light_count += 1
