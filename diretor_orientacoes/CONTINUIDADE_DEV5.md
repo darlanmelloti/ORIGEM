@@ -2671,7 +2671,10 @@ O contrato, preview modular e handoff de Elias passaram JSON, parser e duas sess
 ## CP-D5-546 — CONCLUÍDO: Validação do perfil de contrato R6→R7
 O perfil do contrato, o preview modular e os invariantes de runtime passaram JSON, parser e QA headless de 36 segundos, mantendo grounding, Elias em terceira pessoa, zero luzes e produção intacta. Ver `CP_D5_546_VALIDACAO_PERFIL_R6_R7.md`, `CP-D5-546_RUNTIME.log` e `CP-D5-546_SHA256SUMS.txt`.
 
-## CP-D5-547 — ACTIVO: Próxima tarefa contínua de integração modular
+## CP-D5-547 — CONCLUÍDO: Regressão do preview modular R6→R7
+O preview passou contrato JSON, parser e QA headless de 36 segundos, confirmando duas faixas, 18 malhas, 18 colisores, grounding, Elias em terceira pessoa, zero luzes, handoff pronto e produção intacta. Ver `CP_D5_547_REGRESSAO_PREVIEW_R6_R7.md`, `CP-D5-547_RUNTIME.log` e `CP-D5-547_SHA256SUMS.txt`.
+
+## CP-D5-548 — ACTIVO: Próxima tarefa contínua de integração modular
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
@@ -2679,13 +2682,13 @@ O perfil do contrato, o preview modular e os invariantes de runtime passaram JSO
 - **RESPONSAVEL**: Dev5 — Integração modular & espelhamento cartográfico
 - **STATUS_CODE**: ACTIVE
 - **TAREFA_EM_EXECUCAO_AGORA**: consultar orientações remotas e iniciar a próxima melhoria isolada
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-546 aprovado e publicado; perfil, contrato JSON e telemetria validados
-- **EVIDENCIA**: validação de perfil, parser, QA 36 s e SHA-256
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-547 aprovado e publicado; contrato, perfil e telemetria validados
+- **EVIDENCIA**: regressão de preview, parser, QA 36 s e SHA-256
 - **NEXT_ACTION_IMMEDIATE**: consultar GitHub e executar a próxima tarefa Dev5
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a próxima tarefa do CP-D5-547, sem aguardar confirmação verbal.
+Iniciar imediatamente a próxima tarefa do CP-D5-548, sem aguardar confirmação verbal.
 
 
 
@@ -2694,7 +2697,7 @@ Iniciar imediatamente a próxima tarefa do CP-D5-547, sem aguardar confirmação
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-547` — consultar e executar imediatamente a próxima tarefa Dev5, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-548` — consultar e executar imediatamente a próxima tarefa Dev5, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
