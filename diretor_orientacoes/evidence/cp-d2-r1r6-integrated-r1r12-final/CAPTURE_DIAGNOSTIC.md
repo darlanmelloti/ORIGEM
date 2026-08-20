@@ -1,0 +1,3 @@
+# Diagnóstico da captura integrada final
+
+O auditor integrado R1→R12 passou com o marcador `CP-D2-R1R6-025_INTEGRATED_R1_R12_AUDIT=PASS`. A tentativa de captura gráfica iniciou o Godot e registou progresso do panorama até 39%, sem parser/runtime error no trecho observado. O screenshot foi criado em 1600×900. O vídeo não foi concluído porque o processo ffmpeg x11grab foi interrompido pelo job control; não há evidência de falha do jogo. A próxima tentativa deve usar processos desacoplados do terminal (`setsid`/`-nostdin`), limpar o Xvfb residual e confirmar a duração antes de aceitar o checkpoint.

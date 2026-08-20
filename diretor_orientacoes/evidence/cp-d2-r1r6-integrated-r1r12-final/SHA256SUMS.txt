@@ -1,0 +1,5 @@
+3d19de5378c33c7d6f0c6c8896b5cb8d7820b5ece75e0cf795186ad6bef6200d  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12-final/gameplay-30s.mp4
+d2800474b64f481e3fdc5da2f64e0230e457c53f0117c4f698f38f4b6a60e1cd  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12-final/print-1600x900.png
+1e0899c33fb44dd715e344e645a215ce53fd9974eb1c244f43526ce9f9f54994  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12-final/qa.log
+a3ff4720dba736ef9d45c957655041a71c52b5ec335359c56578fc494a0b1f16  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12-final/panorama-headless-qa.log
+c9a2b0cbf8bcbea4bb02d40b2a874ccbd9254e6759ade29ec4f145818ce36534  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12-final/duration.txt

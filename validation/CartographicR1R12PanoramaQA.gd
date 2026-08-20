@@ -50,7 +50,7 @@ func _initialize() -> void:
 	camera.name = "R1R12PanoramaCamera"
 	camera.current = true
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera.size = 680.0
+	camera.size = 900.0
 	qa_root.add_child(camera)
 	await process_frame
 	var duration := 31.0
@@ -128,8 +128,8 @@ func _add_marker(point: Vector3, region_id: int, title: String, color: Color) ->
 	else:
 		label_offset = Vector3(-14.0, 9.0, 0.0)
 	label.position = point + label_offset
-	label.font_size = 108
-	label.pixel_size = 0.070
+	label.font_size = 92
+	label.pixel_size = 0.058
 	label.outline_size = 9
 	label.modulate = Color("#f4f1e7")
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
