@@ -1,0 +1,11 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+NEAR_ANCHOR_PANEL R1 CASA VOSS -> R2 ESTRADA DO RIO source_distance=4.045
+NEAR_ANCHOR_PANEL R10 CAVERNA DO ORION -> R11 CÂMARA DO ORION CUBE source_distance=14.000
+NEAR_ANCHOR_SOURCE R1=(-22.0, 8.0) R2=(-21.4, 12.0) R10=(-116.0, 548.0) R11=(-116.0, 562.0)
+NEAR_ANCHOR_LIGHT_BUDGET=PASS dynamic_lights=1 max=16
+NEAR_ANCHOR_DYNAMIC progress=0.00
+CP-D2-R1R6-027_NEAR_ANCHOR_CAPTURE=PASS
