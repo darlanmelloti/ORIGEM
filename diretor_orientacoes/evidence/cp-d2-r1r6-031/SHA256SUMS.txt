@@ -1,0 +1,5 @@
+7f65750c2f86092ddcba415ed0c8bdd2fc1643d7100b93ecf71d4b6bc7b33c44  diretor_orientacoes/evidence/cp-d2-r1r6-031/print-1600x900.png
+88a2171f5687b35356355021b8d9c9f0b5c5aac0510fecb9e5c2990f4d103ec7  diretor_orientacoes/evidence/cp-d2-r1r6-031/gameplay-30s.mp4
+e0af4df439bc49a0e42c4434904d2312e3896738d9fa352636766c119c412fdd  diretor_orientacoes/evidence/cp-d2-r1r6-031/capture.log
+f3edf0e5cdb684768977761dade443adc94ffd9dc5976c4d9ad435e84466a596  diretor_orientacoes/evidence/cp-d2-r1r6-031/headless-short.log
+82cd66ad95fa2c2e7e28182e82fe6c2eabb060eee395bd26e76886303443ed72  diretor_orientacoes/evidence/cp-d2-r1r6-031/QA_SUMMARY.txt
