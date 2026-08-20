@@ -1,0 +1,2 @@
+8408f95cdde773369d74799cfe1e2a9cb4453452ead3a5ba052433563b66757c  diretor_orientacoes/evidence/cp-d2-r1r6-011/headless.log
+b056395fa9ceefc01e57e18cefb02999bb53cb581851415f76096accfba403db  diretor_orientacoes/evidence/cp-d2-r1r6-011/QA_SUMMARY.txt

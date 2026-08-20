@@ -1,0 +1,8 @@
+CP-D2-R1R6-011=HEADLESS_PASS
+CONTINUITY=R5->R6
+SAMPLES=61
+DISTANCE=165.469
+GROUNDING=y=0.15
+LATERAL_LIMIT=6.000
+OWNER_GUARD=R1-R6 production modules untouched; Dev1 standby
+STATUS=REJECTED_VISUAL dedicated R5-R6 capture remains next action
