@@ -1,0 +1,12 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+CPD2007_HANDOFF_READY points=5
+REGION12_LIGHT_BUDGET kept=11 max=16 removed=24
+R6R7_TRAVERSAL_RUNTIME corridor_present=true segments=8 arrival_trigger=true
+R6R7_TRAVERSAL_RUNTIME expected_segments=8 expected_arrival_trigger=true
+CP-D2-R6R7-006_TRAVERSAL_RUNTIME=PASS
