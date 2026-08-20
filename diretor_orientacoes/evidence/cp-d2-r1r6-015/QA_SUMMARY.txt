@@ -1,0 +1,7 @@
+CP-D2-R1R6-015=HEADLESS_PASS
+CONTINUITY=R7->R8
+SAMPLES=41
+DISTANCE=74.967
+GROUNDING=y=0.15
+OWNER_GUARD=R1-R6 production untouched; R7-R8 Dev2 owner
+STATUS=REJECTED_VISUAL dedicated R7-R8 capture remains next action
