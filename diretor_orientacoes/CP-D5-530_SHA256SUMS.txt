@@ -1,0 +1,2 @@
+23bea0603a32800ede5d7935af55aa744332bb6ac7793c41732f15866c5ef478  diretor_orientacoes/CP_D5_530_AUDITORIA_MODULAR_R6_R7.md
+62ebb137fae35dc929c2a23de97b86b407bf7aec52695b69fb86590abaeb0c35  diretor_orientacoes/CP-D5-530_RUNTIME.log
