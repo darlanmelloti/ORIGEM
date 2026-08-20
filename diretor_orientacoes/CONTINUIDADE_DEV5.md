@@ -2653,21 +2653,24 @@ A validação do preview e de Elias passou parser e duas sessões QA headless de
 ## CP-D5-540 — CONCLUÍDO: Contrato machine-readable de handoff R6→R7
 O contrato `R6R7HandoffContract.json` foi criado e validado sintaticamente, com âncoras, bounding boxes, duas faixas, grounding, orçamento de luzes, Elias e propriedade Dev2 da geometria R7. Parser e QA headless de 36 segundos passaram. Ver `R6R7HandoffContract.json`, `CP_D5_540_CONTRATO_MACHINE_READABLE.md`, `CP-D5-540_RUNTIME.log` e `CP-D5-540_SHA256SUMS.txt`.
 
-## CP-D5-541 — ACTIVO: Próxima tarefa contínua de integração modular
+## CP-D5-541 — CONCLUÍDO: Validação do contrato JSON e handoff de Elias
+O contrato machine-readable, o preview modular e o handoff de Elias passaram validação JSON, parser Godot e duas sessões QA headless de 36 segundos, confirmando âncoras, bounding box, duas faixas, grounding, zero luzes, `contract_ready=true` e produção intacta. Ver `CP_D5_541_VALIDACAO_CONTRATO_HANDOFF.md`, `CP-D5-541_RUNTIME.log` e `CP-D5-541_SHA256SUMS.txt`.
+
+## CP-D5-542 — ACTIVO: Próxima tarefa contínua de integração modular
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
 - **REGIAO_ACTUAL**: transição R6→R7 / corredor modular de duas faixas
 - **RESPONSAVEL**: Dev5 — Integração modular & espelhamento cartográfico
 - **STATUS_CODE**: ACTIVE
-- **TAREFA_EM_EXECUCAO_AGORA**: validar o contrato machine-readable junto com o handoff de Elias
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-540 aprovado; contrato JSON, telemetria e restrições validados
-- **EVIDENCIA**: contrato machine-readable, parser, QA 36 s e SHA-256
-- **NEXT_ACTION_IMMEDIATE**: executar regressão conjunta do JSON, preview modular e Elias
+- **TAREFA_EM_EXECUCAO_AGORA**: continuar a validação isolada do contrato e preservar o handoff de Elias
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-541 aprovado; contrato JSON, telemetria e QA validados
+- **EVIDENCIA**: validação JSON, parser, QA 36 s e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: executar a próxima regressão conjunta e consultar novas orientações remotas
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a regressão do CP-D5-541, sem aguardar confirmação verbal.
+Iniciar imediatamente a próxima tarefa do CP-D5-542, sem aguardar confirmação verbal.
 
 
 
@@ -2676,7 +2679,7 @@ Iniciar imediatamente a regressão do CP-D5-541, sem aguardar confirmação verb
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-541` — validar imediatamente o contrato JSON, preview modular e Elias, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-542` — executar imediatamente a próxima regressão conjunta, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
