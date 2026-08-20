@@ -2638,21 +2638,24 @@ O pacote de handoff com âncoras, bounding boxes, duas faixas, grounding, zero l
 ## CP-D5-535 — CONCLUÍDO: Regressão conjunta modular e Elias R6→R7
 A regressão conjunta passou parser e duas sessões QA headless de 36 segundos, confirmando duas faixas, `modular_meshes=18`, `colliders=18`, `grounded=true`, `dynamic_lights=0`, `elias_third_person=true`, `reached_marker_r7=true`, `marker_only=true`, `region7_geometry=false` e `production_modules_changed=false`. Ver `CP_D5_535_REGRESSAO_CONJUNTA_R6_R7.md`, `CP-D5-535_RUNTIME.log` e `CP-D5-535_SHA256SUMS.txt`.
 
-## CP-D5-536 — ACTIVO: Próxima tarefa de integração modular Dev5 R6→R7
+## CP-D5-536 — CONCLUÍDO: Metadados do contrato modular R6→R7
+A cena recebeu metadados explícitos de bounding box global, duas faixas, `18` malhas, `18` colisores, `0` luzes dinâmicas e clearance `2.4`. Parser e QA headless de 36 segundos passaram sem erros, preservando `region7_geometry=false` e `production_modules_changed=false`. Ver `CP_D5_536_METADATA_CONTRATO_MODULAR.md`, `CP-D5-536_RUNTIME.log` e `CP-D5-536_SHA256SUMS.txt`.
+
+## CP-D5-537 — ACTIVO: Próxima melhoria de integração modular Dev5 R6→R7
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
 - **REGIAO_ACTUAL**: transição R6→R7 / corredor modular de duas faixas
 - **RESPONSAVEL**: Dev5 — Integração modular & espelhamento cartográfico
 - **STATUS_CODE**: ACTIVE
-- **TAREFA_EM_EXECUCAO_AGORA**: consultar orientações remotas e executar a próxima melhoria isolada autorizada
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-535 aprovado; contrato R6→R7; handoff bounding boxes validado
-- **EVIDENCIA**: regressão conjunta, parser, QA 36 s e SHA-256
-- **NEXT_ACTION_IMMEDIATE**: consultar GitHub e iniciar a próxima melhoria em escopo Dev5
+- **TAREFA_EM_EXECUCAO_AGORA**: continuar a melhoria isolada do contrato modular e do handoff de Elias
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-536 aprovado; bounding boxes, grounding e orçamento validados
+- **EVIDENCIA**: metadados de contrato, parser, QA 36 s e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: executar a próxima regressão conjunta modular e Elias
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a próxima tarefa do CP-D5-536, sem aguardar confirmação verbal.
+Iniciar imediatamente a próxima regressão do CP-D5-537, sem aguardar confirmação verbal.
 
 
 
@@ -2661,7 +2664,7 @@ Iniciar imediatamente a próxima tarefa do CP-D5-536, sem aguardar confirmação
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-536` — executar a próxima melhoria modular Dev5 imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-537` — executar a próxima regressão conjunta modular e Elias imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa

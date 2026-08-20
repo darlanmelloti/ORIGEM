@@ -1,0 +1,2 @@
+600de928ffa5ab9d8850e6b3802005b330df0994d1b5084c3a1a3c2ecc97c60d  diretor_orientacoes/CP_D5_537_REGRESSAO_CONJUNTA_METADATA.md
+0762363e4bddbbc3803c5fbc46c524fd0e5dbed2b8d3cd96898dd8d8a20fcca8  diretor_orientacoes/CP-D5-537_RUNTIME.log
