@@ -1,0 +1,2 @@
+57ab6a44d0485dcbd609c4b8833752ccd593e1d135a791a6641f1103052009d2  diretor_orientacoes/CP_D5_533_AUDITORIA_FINAL_R6_R7.md
+0762363e4bddbbc3803c5fbc46c524fd0e5dbed2b8d3cd96898dd8d8a20fcca8  diretor_orientacoes/CP-D5-533_RUNTIME.log
