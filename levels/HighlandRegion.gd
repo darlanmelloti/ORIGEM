@@ -29,6 +29,7 @@ func _ready() -> void:
 	_build_lake_to_village_path()
 	_build_r6_r7_handoff_colliders()
 	_build_r7_r8_handoff_colliders()
+	_build_r8_r9_handoff_colliders()
 	_build_elevated_village()
 	_build_observatory()
 	_build_mountain_trail()
@@ -45,8 +46,8 @@ func _build_cartographic_anchors() -> void:
 	anchors.set_meta("scope", "REGIONS_7_12_ONLY")
 	var anchor_data: Array[Dictionary] = [
 		{"name": "Marco07_VilaElevada", "position": Vector3(140.0, 0.0, 352.0), "role": "massa urbana em socalcos à direita"},
-		{"name": "Marco08_Observatorio", "position": Vector3(188.0, 0.0, 404.0), "role": "cupula no topo da vila"},
-		{"name": "Marco09_TrilhaDaMontanha", "position": Vector3(20.0, 0.0, 470.0), "role": "linha serpenteante até Orion"}
+{"name": "Marco08_Observatorio", "position": Vector3(194.0, 0.0, 404.0), "role": "cupula no topo da vila"},
+			{"name": "Marco09_TrilhaDaMontanha", "position": Vector3(174.0, 0.0, 414.0), "role": "linha serpenteante até Orion"}
 	]
 	for data: Dictionary in anchor_data:
 		var marker := Marker3D.new()
@@ -217,6 +218,37 @@ func _build_r7_r8_handoff_colliders() -> void:
 		corridor.add_child(segment)
 	if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY":
 		print("R7R8_RUNTIME_COLLIDERS count=%d start=%s finish=%s distance=%0.3f grounding_y=%0.3f contract=ColliderCPD2007_R07_R08 scope=R7_R8_DEV2_OWNER" % [segment_count, str(start), str(finish), float(contract["distance"]), start.y])
+
+func _build_r8_r9_handoff_colliders() -> void:
+	# Handoff físico owner-safe do Observatório à Trilha da Montanha.
+	var contract: Dictionary = Anchors.continuity_8_to_9(_height_at(194.0, 404.0))
+	var start: Vector3 = contract["handoff_in"]
+	var finish: Vector3 = contract["handoff_out"]
+	var corridor: Node3D = Node3D.new()
+	corridor.name = "R8R9_HandoffColliders_Dev2"
+	corridor.set_meta("handoff_id", "R08_R09")
+	corridor.set_meta("collider_contract", "ColliderCPD2007_R08_R09")
+	corridor.set_meta("map_authority", "mapaorigem.webp")
+	corridor.set_meta("scope", "R8_R9_DEV2_OWNER")
+	add_child(corridor)
+	var segment_count: int = 4
+	for index: int in range(segment_count):
+		var a: Vector3 = start.lerp(finish, float(index) / float(segment_count))
+		var b: Vector3 = start.lerp(finish, float(index + 1) / float(segment_count))
+		var segment: StaticBody3D = StaticBody3D.new()
+		segment.name = "ColliderCPD2007_R08_R09_%02d" % (index + 1)
+		segment.collision_layer = 1
+		segment.collision_mask = 1
+		segment.position = (a + b) * 0.5
+		segment.look_at_from_position(segment.position, b, Vector3.UP)
+		var shape_node: CollisionShape3D = CollisionShape3D.new()
+		var shape: BoxShape3D = BoxShape3D.new()
+		shape.size = Vector3(2.8, 0.45, a.distance_to(b) + 0.25)
+		shape_node.shape = shape
+		segment.add_child(shape_node)
+		corridor.add_child(segment)
+	if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R8_R9_BOUNDARY":
+		print("R8R9_RUNTIME_COLLIDERS count=%d start=%s finish=%s distance=%0.3f grounding_y=%0.3f contract=ColliderCPD2007_R08_R09 scope=R8_R9_DEV2_OWNER" % [segment_count, str(start), str(finish), float(contract["distance"]), start.y])
 
 func _build_elevated_village() -> void:
 	var village: Node3D = Node3D.new()
@@ -608,7 +640,8 @@ func _build_organic_route(route_name: String, route: Array[Vector2], width: floa
 			if stone == null:
 				continue
 			stone.name = "DegrauOrganico_%03d" % stone_index
-			stone.position = Vector3(point.x, _height_at(point.x, point.y) + 0.82, point.y)
+			var entry_step_lift: float = 0.28 if route_name == "TrilhaDaMontanhaOrion" and stone_index < 4 else 0.82
+			stone.position = Vector3(point.x, _height_at(point.x, point.y) + entry_step_lift, point.y)
 			if OS.get_environment("ORIGEM_DEBUG_ROUTE") == "1" and (stone_index == 0 or stone_index == 5 or stone_index == 10):
 				print("[REGIAO8_9_ROUTE] index=%d world=%s" % [stone_index, str(stone.position)])
 			stone.scale = Vector3(width * 0.18, 0.10 + fmod(float(stone_index), 3.0) * 0.025, 0.28)
@@ -620,7 +653,8 @@ func _build_organic_route(route_name: String, route: Array[Vector2], width: floa
 			stone_body.collision_mask = 1
 			var stone_shape := CollisionShape3D.new()
 			var stone_box := BoxShape3D.new()
-			stone_box.size = Vector3(width * 0.62, 0.34, 0.72)
+			var entry_step_height: float = 0.12 if route_name == "TrilhaDaMontanhaOrion" and stone_index < 4 else 0.34
+			stone_box.size = Vector3(width * 0.62, entry_step_height, 0.72)
 			stone_shape.shape = stone_box
 			stone_shape.position = Vector3(0.0, 0.10, 0.0)
 			stone_body.add_child(stone_shape)

@@ -1,0 +1,6 @@
+9460b8462f1fb6ef73782aeecb4be604da7eb4710be6cd9b395b2fba61c32546  diretor_orientacoes/evidence/cp-d2-r7-r8-runtime/print-1600x900.png
+89cfb24aa80c3f95b2958b9b9369785b96433271f3028ea07568b4c3673766e5  diretor_orientacoes/evidence/cp-d2-r7-r8-runtime/gameplay-30s.mp4
+0e8eb8d91febf8921e41ce999f456f3a8ea90a26d0c64f698d8aae2c11dd130d  diretor_orientacoes/evidence/cp-d2-r7-r8-runtime/qa.log
+1ba6ef15c1c53f9a236c9d4103597087f0713313564286e1df6340bd8d48fb1a  diretor_orientacoes/evidence/cp-d2-r7-r8-runtime/CP-D2-R8R9-001-continuity.log
+4dfd3f17bd0e691d43a069cbdbf8aab6ea39a34329cc1d91c63eb74f856ec920  diretor_orientacoes/evidence/cp-d2-r7-r8-runtime/CP-D2-R8R9-002-collider.log
+90e7c9092220a6277bbfeea3fe76ed6fd4df9d4a76ddf6a93fd82f75108b6c5b  diretor_orientacoes/evidence/cp-d2-r7-r8-runtime/CP-D2R8R9-003-player.log

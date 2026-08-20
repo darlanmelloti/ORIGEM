@@ -1,0 +1,55 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+MAP_MIRROR_BOUNDARY from=6 to=7 state=QA_BOUNDARY_PENDING distance=128.062484741211
+MAP_MIRROR_BOUNDARY from=7 to=8 state=QA_BOUNDARY_PENDING distance=74.9666595458984
+MAP_MIRROR_BOUNDARY from=8 to=9 state=QA_BOUNDARY_PENDING distance=22.3606796264648
+MAP_MIRROR_BOUNDARY from=9 to=10 state=QA_BOUNDARY_PENDING distance=319.462036132812
+MAP_MIRROR_BOUNDARY from=10 to=11 state=QA_BOUNDARY_PENDING distance=14.0
+MAP_MIRROR_BOUNDARY from=11 to=12 state=QA_BOUNDARY_PENDING distance=449.782165527344
+MAP_MIRROR_VALIDATION=RUNTIME_INSTANCE_CREATED
+R8R9_RUNTIME_COLLIDERS count=4 start=(194.0, 31.29847, 404.0) finish=(174.0, 31.29847, 414.0) distance=22.361 grounding_y=31.298 contract=ColliderCPD2007_R08_R09 scope=R8_R9_DEV2_OWNER
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+CPD2007_HANDOFF_READY points=5
+REGION12_LIGHT_BUDGET kept=11 max=16 removed=24
+MAP_MIRROR_VALIDATION=ACTIVE regions=7-12 markers=6 source=CartographicAnchors.gd
+MAP_MIRROR_ANCHOR_CONTRACT chain=R9->R10->R11->R12 count=3 state=RUNTIME_QA_ONLY
+MAP_MIRROR_HANDOFF_CONTRACT id=R07_R08 collider=ColliderCPD2007_R07_R08 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_HANDOFF_CONTRACT id=R08_R09 collider=ColliderCPD2007_R08_R09 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_HANDOFF_CONTRACT id=R09_R10 collider=ColisaoHandoffR9R10 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_HANDOFF_CONTRACT id=R10_R11 collider=ColisaoHandoffCubeR11 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_HANDOFF_CONTRACT id=R11_R12 collider=ColisaoHandoffHubR12 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_INVENTORY meshes=1727 omni_lights=138 static_bodies=158
+MAP_MIRROR_HANDOFF name=R9_R10 present=true
+MAP_MIRROR_HANDOFF name=R10_R11 present=true
+MAP_MIRROR_HANDOFF name=R11_R12 present=true
+MAP_MIRROR_HANDOFF_COLLIDERS count=15
+MAP_MIRROR_QA_START player_position=(0.0, 0.994527, -28.0)
+MAP_MIRROR_BOUNDARY from=6 to=7 state=QA_BOUNDARY_PENDING distance=128.062484741211
+MAP_MIRROR_BOUNDARY from=7 to=8 state=QA_BOUNDARY_PENDING distance=74.9666595458984
+MAP_MIRROR_BOUNDARY from=8 to=9 state=QA_BOUNDARY_PENDING distance=22.3606796264648
+MAP_MIRROR_BOUNDARY from=9 to=10 state=QA_BOUNDARY_PENDING distance=319.462036132812
+MAP_MIRROR_BOUNDARY from=10 to=11 state=QA_BOUNDARY_PENDING distance=14.0
+MAP_MIRROR_BOUNDARY from=11 to=12 state=QA_BOUNDARY_PENDING distance=449.782165527344
+MAP_MIRROR_VALIDATION=RUNTIME_INSTANCE_CREATED
+R8R9_RUNTIME_COLLIDERS count=4 start=(194.0, 31.29847, 404.0) finish=(174.0, 31.29847, 414.0) distance=22.361 grounding_y=31.298 contract=ColliderCPD2007_R08_R09 scope=R8_R9_DEV2_OWNER
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+CPD2007_HANDOFF_READY points=5
+REGION12_LIGHT_BUDGET kept=11 max=16 removed=24
+MAP_MIRROR_VALIDATION=ACTIVE regions=7-12 markers=6 source=CartographicAnchors.gd
+MAP_MIRROR_ANCHOR_CONTRACT chain=R9->R10->R11->R12 count=3 state=RUNTIME_QA_ONLY
+MAP_MIRROR_HANDOFF_CONTRACT id=R07_R08 collider=ColliderCPD2007_R07_R08 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_HANDOFF_CONTRACT id=R08_R09 collider=ColliderCPD2007_R08_R09 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_HANDOFF_CONTRACT id=R09_R10 collider=ColisaoHandoffR9R10 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_HANDOFF_CONTRACT id=R10_R11 collider=ColisaoHandoffCubeR11 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_HANDOFF_CONTRACT id=R11_R12 collider=ColisaoHandoffHubR12 authority=mapaorigem.webp physical=true state=QA_BOUNDARY_PENDING
+MAP_MIRROR_INVENTORY meshes=1727 omni_lights=138 static_bodies=158
+MAP_MIRROR_HANDOFF name=R9_R10 present=true
+MAP_MIRROR_HANDOFF name=R10_R11 present=true
+MAP_MIRROR_HANDOFF name=R11_R12 present=true
+MAP_MIRROR_HANDOFF_COLLIDERS count=15
+MAP_MIRROR_QA_START player_position=(0.0, 0.994527, -28.0)
