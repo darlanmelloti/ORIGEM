@@ -1,0 +1,18 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+ORIGEM_REGION8_OBSERVATORY_READY (194.0, 31.29847, 404.0)
+CPD2007_HANDOFF_READY points=5
+CARTOGRAPHIC_R11_R12_CORRIDOR_READY segments=8 distance=449.782 contract=ColisaoHandoffHubR12
+REGION12_LIGHT_BUDGET kept=11 max=16 removed=25
+R12_DOME_PLAYER_SEGMENT index=1 blocked=false substeps=8
+R12_DOME_PLAYER_SEGMENT index=2 blocked=false substeps=8
+R12_DOME_PLAYER_SEGMENT index=3 blocked=false substeps=8
+R12_DOME_PLAYER_SEGMENT index=4 blocked=false substeps=8
+R12_DOME_PLAYER_SEGMENT index=5 blocked=false substeps=8
+R12_DOME_PLAYER_SEGMENT index=6 blocked=false substeps=8
+R12_DOME_PLAYER_SEGMENT index=7 blocked=false substeps=8
+CP-D2-R12-002_FINAL_DOME_TRAVERSAL=PASS segments_clear=7 endpoint=(164,181.5)

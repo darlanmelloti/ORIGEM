@@ -1,0 +1,6 @@
+709cf90ca218121329902b376bcf44783a4d29318de52ca0ab121d8ff6228159  diretor_orientacoes/evidence/cp-d2-r12-final-dome-runtime/gameplay-30s.mp4
+206769e1f13a5c247c772e01009a7e151e64fa1d4f28b4b93de51f29cfde8d7e  diretor_orientacoes/evidence/cp-d2-r12-final-dome-runtime/print-1600x900.png
+f33acc75795aebdc9626708483cf04d578e35786c5e041ec1f9949f0a0344890  diretor_orientacoes/evidence/cp-d2-r12-final-dome-runtime/qa.log
+90c74c808288e7489c3aebdf1aaf4fc70db1d7f3eeffcd3fd40744150c20e903  diretor_orientacoes/evidence/cp-d2-r12-final-dome-runtime/r12-inventory.log
+baa172108b2c15cd824805a138e69d54d343ddd7e6acd1fb24c5d0d7a9d5433d  diretor_orientacoes/evidence/cp-d2-r12-final-dome-runtime/r12-traversal.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  diretor_orientacoes/evidence/cp-d2-r12-final-dome-runtime/duration.txt

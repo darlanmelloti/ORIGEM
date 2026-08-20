@@ -1,0 +1,127 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+Vulkan 1.4.318 - Forward+ - Using Device #0: Unknown - llvmpipe (LLVM 20.1.2, 256 bits)
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+ERROR: Condition "status < 0" is true. Returning: ERR_CANT_OPEN
+   at: init_output_device (drivers/alsa/audio_driver_alsa.cpp:97)
+WARNING: All audio drivers failed, falling back to the dummy driver.
+     at: initialize (servers/audio/audio_server.cpp:258)
+
+CPD2007_HANDOFF_READY points=5
+CARTOGRAPHIC_R11_R12_CORRIDOR_READY segments=8 distance=449.782 contract=ColisaoHandoffHubR12
+REGION12_LIGHT_BUDGET kept=11 max=16 removed=25
+R12_DOME_CAPTURE_INVENTORY visible_meshes=23 dynamic_lights=12
+R12_DOME_CAPTURE progress=0.00
+R12_DOME_CAPTURE progress=0.10
+R12_DOME_CAPTURE progress=0.19
+X connection to :104 broken (explicit kill or server shutdown).
+ERROR: BUG: Unreferenced static string to 0: servers
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: luminance_buffers
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: color_upscaled
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: quarter_texture
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: sky_buffers
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: half_texture
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: mip_level
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: rb_ssr
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: ssr
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: rb_ssil
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: reflection
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: rb_ssao
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: final
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: back_color
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: back_depth
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: normal_roughness
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: VRS
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: Fog
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: sdfgi
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: Physics3DConstraintSolveIslands
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: Physics3DConstraintSetup
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: ShaderCompilation
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: .
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _enter_world
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: Variant
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore_restore
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore_start
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: @export_range
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: @export_multiline
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: @export
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: @icon
+   at: unref (core/string/string_name.cpp:117)
+WARNING: A Thread object is being destroyed without its completion having been realized.
+Please call wait_to_finish() on it to ensure correct cleanup.
+     at: ~Thread (core/os/thread.cpp:102)
+ERROR: 7 RID allocations of type '23NavMeshGeometryParser2D' were leaked at exit.
+ERROR: 6 RID allocations of type '23NavMeshGeometryParser3D' were leaked at exit.
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools11BucketLargeE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools12BucketMediumE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools11BucketSmallE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+ERROR: BUG: Unreferenced static string to 0: _create_mesh_array
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _unhandled_key_input
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _unhandled_input
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _shortcut_input
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _input
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _exit_tree
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _enter_tree
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _physics_process
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _exists
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _recognize_path
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _set_path_cache
+   at: unref (core/string/string_name.cpp:117)
+ERROR: BUG: Unreferenced static string to 0: _reset_state
+   at: unref (core/string/string_name.cpp:117)
+ERROR: Pages in use exist at exit in PagedAllocator: N10StringName5_DataE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
