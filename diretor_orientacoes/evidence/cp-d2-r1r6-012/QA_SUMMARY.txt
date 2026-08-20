@@ -1,0 +1,8 @@
+CP-D2-R1R6-012=PASS
+CONTINUITY=R5->R6
+FRAME=R5 and R6 readable together
+PRINT=1600x900
+GAMEPLAY=30s
+RUNTIME_ERRORS=0
+OWNER_GUARD=R1-R6 production modules untouched; Dev1 standby
+NEXT=CP-D2-R1R6-013 R6->R7 boundary handoff QA
