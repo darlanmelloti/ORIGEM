@@ -67,7 +67,8 @@ func _initialize() -> void:
 	var camera := Camera3D.new()
 	camera.name = "R9R10DynamicCamera"
 	camera.current = true
-	camera.fov = 72.0
+	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+	camera.size = 360.0
 	qa_root.add_child(camera)
 	await process_frame
 	var duration := 31.0
@@ -79,7 +80,7 @@ func _initialize() -> void:
 	for frame: int in range(frame_count):
 		var progress := float(frame) / float(frame_count - 1)
 		var target := start.lerp(finish, progress)
-		camera.look_at_from_position(target + Vector3(-90.0, 52.0, -118.0), stable_target + Vector3(0.0, 4.0, 0.0), Vector3.UP)
+		camera.look_at_from_position(stable_target + Vector3(0.0, 205.0, -115.0), stable_target + Vector3(0.0, 0.0, 0.0), Vector3.UP)
 		if frame % 30 == 0:
 			print("R9R10_DYNAMIC progress=%0.2f" % progress)
 		await create_timer(duration / float(frame_count)).timeout
@@ -92,8 +93,8 @@ func _register_dynamic_light(light: Light3D) -> void:
 func _add_marker(position: Vector3, title: String, color: Color, larger: bool) -> void:
 	var marker := MeshInstance3D.new()
 	var sphere := SphereMesh.new()
-	sphere.radius = 1.25 if larger else 1.0
-	sphere.height = 2.5 if larger else 2.0
+	sphere.radius = 4.0 if larger else 1.0
+	sphere.height = 8.0 if larger else 2.0
 	var material := StandardMaterial3D.new()
 	material.albedo_color = color
 	material.emission_enabled = true
@@ -106,8 +107,8 @@ func _add_marker(position: Vector3, title: String, color: Color, larger: bool) -
 	label.text = title
 	var is_r10 := title.begins_with("R10")
 	label.position = position + (Vector3(18.0, 10.0, 0.0) if is_r10 else Vector3(-26.0, 10.0, 0.0))
-	label.font_size = 78 if larger else 64
-	label.pixel_size = 0.050 if larger else 0.041
+	label.font_size = 120 if larger else 64
+	label.pixel_size = 0.075 if larger else 0.041
 	label.outline_size = 9
 	label.modulate = Color("#f4f1e7")
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
