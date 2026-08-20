@@ -89,11 +89,11 @@ func _initialize() -> void:
 	if not override_seconds.is_empty():
 		duration = maxf(float(override_seconds), 1.0)
 	var frame_count := maxi(30, ceili(duration * 10.0))
-	var stable_target := start.lerp(finish, 0.62)
+	var stable_target := start.lerp(finish, 0.50)
 	for frame: int in range(frame_count):
 		var progress := float(frame) / float(frame_count - 1)
 		var target := start.lerp(finish, progress)
-		camera.look_at_from_position(target + Vector3(-112.0, 70.0, -148.0), stable_target + Vector3(0.0, 12.0, 0.0), Vector3.UP)
+		camera.look_at_from_position(target + Vector3(-150.0, 86.0, -196.0), stable_target + Vector3(0.0, 11.0, 0.0), Vector3.UP)
 		if frame % 30 == 0:
 			print("R11R12_DYNAMIC progress=%0.2f" % progress)
 		await create_timer(duration / float(frame_count)).timeout
@@ -113,7 +113,7 @@ func _add_vertical_portal(center: Vector3) -> void:
 		pillar_material.albedo_color = Color("#47396c")
 		pillar_material.emission_enabled = true
 		pillar_material.emission = Color("#8d58db")
-		pillar_material.emission_energy_multiplier = 0.8
+		pillar_material.emission_energy_multiplier = 2.0
 		pillar_mesh.material = pillar_material
 		pillar.mesh = pillar_mesh
 		pillar.position = center + Vector3(side * 7.0, 7.0, 0.0)
@@ -125,7 +125,7 @@ func _add_vertical_portal(center: Vector3) -> void:
 	lintel_material.albedo_color = Color("#6a4a98")
 	lintel_material.emission_enabled = true
 	lintel_material.emission = Color("#a76ff0")
-	lintel_material.emission_energy_multiplier = 1.1
+	lintel_material.emission_energy_multiplier = 2.4
 	lintel_mesh.material = lintel_material
 	lintel.mesh = lintel_mesh
 	lintel.position = center + Vector3(0.0, 14.0, 0.0)
