@@ -32,8 +32,8 @@ func _initialize() -> void:
 	ground.mesh = plane
 	ground.position = Vector3(100.0, -0.06, 300.0)
 	qa_root.add_child(ground)
-	var start := Anchors.world_position(Anchors.RUINAS_SUBMERSAS, 0.0, 0.2)
-	var finish := Anchors.world_position(Anchors.VILA_ELEVADA, 0.0, 0.2)
+	var start := Anchors.world_position(Anchors.RUINAS_SUBMERSAS, 0.0, 0.15)
+	var finish := Anchors.world_position(Anchors.VILA_ELEVADA, 0.0, 0.15)
 	_add_marker(start, "R6 RUÍNAS SUBMERSAS", Color("#63d6da"), true)
 	_add_marker(finish, "R7 VILA ELEVADA", Color("#d89cff"), true)
 	var corridor := MeshInstance3D.new()

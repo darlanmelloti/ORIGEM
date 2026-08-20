@@ -1,0 +1,8 @@
+9158c263f59ad4cb8b259f7f727532df774d3eb8fde7125b73eabd97c9ff9509  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/print-1600x900.png
+4f18ca972db6f0268dc5d722758c1963d81f026ebb03db96da8744005606f2c1  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/gameplay-30s.mp4
+fcdee9205de1585636025bfe6e7ec5f8bbd3abc41d5048d693d705c2bd7de348  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/capture.log
+3ae8dfdf58902cd168ddf6f098f4b2b6daabc2f4f3e69d6ac2fcfa177896afcb  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/headless-short.log
+9ce81846b378f5aef8e23c1b76b1a2c0d6ff951ac67b4ee98f70802fbcdc6d26  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/boundary-qa.log
+3c55726462925c0377a487b9a131bc1f75f2f0f6e4c93c7223d7026d2a7062b0  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/ownership-qa.log
+c9a2b0cbf8bcbea4bb02d40b2a874ccbd9254e6759ade29ec4f145818ce36534  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/duration.txt
+1aa147136b027f2b1fad1b70f9cdac2e453f8e26dfb2079e04a082d6bada9be3  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7/QA_SUMMARY.txt

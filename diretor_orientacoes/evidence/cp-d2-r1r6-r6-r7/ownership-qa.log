@@ -1,0 +1,11 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+BOUNDARY_R6 position=(60.000,0.220,252.000) owner=Dev1 map=(408.0,351.0)
+BOUNDARY_R7 position=(140.000,0.220,352.000) owner=Dev2 map=(542.0,235.0)
+BOUNDARY_R6_R7 distance=128.062 state=QA_BOUNDARY_PENDING
+BOUNDARY_OWNERSHIP_SCOPE_GUARD=PASS R1-R6_dev1_readonly R7-R12_dev2_owner
+BOUNDARY_LIGHT_BUDGET=PASS max_dynamic_lights=16
+CP-D2-R1R6-034_R6_R7_BOUNDARY_OWNERSHIP_QA=PASS
