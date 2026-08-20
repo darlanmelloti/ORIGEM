@@ -2749,7 +2749,10 @@ O corredor modular foi revalidado antes da convergência do vertical slice, mant
 ## CP-D5-572 — CONCLUÍDO: Integração de Mundo e grounding R2/R3/R6
 O Dev5 foi realocado para Integrador de Mundo. O contrato `levels/dev5/R2R3R6GroundingContract.json` e o preview isolado validaram raycasts descendentes em R2, R3 e R6, com erro vertical de `0.000 m` nas três regiões, `Elias=third_person`, `dynamic_lights=0`, parser Godot `4.7.1` aprovado, QA controlado de `36 s` e `production_modules_changed=false`. Ver `CP_D5_572_CONTRATO_GROUNDING_R2_R3_R6.md`, `CP_D5_572_INTEGRACAO_MUNDO_GROUNDING.md`, `CP-D5-572_RUNTIME.log`, `CP-D5-572_SHA256SUMS.txt` e o backup em `/home/ubuntu/BACKUPS_ORIGEM/BK_20260820_201625_CP-D5-572/`.
 
-## CP-D5-573 — ACTIVO: Próxima tarefa No-Stop do Integrador de Mundo
+## CP-D5-573 — CONCLUÍDO: Transformação espacial de Elias sobre grounding R2/R3/R6
+O preview isolado materializou Elias com clearance de `0.02 m` sobre os impactos cartográficos de R2, R3 e R6, mantendo erro vertical `0.000 m`, terceira pessoa, zero luzes e produção intacta. Ver `CP_D5_573_TRANSFORMACAO_ELIAS_GROUNDING.md`, `CP-D5-573_RUNTIME.log` e `CP-D5-573_SHA256SUMS.txt`.
+
+## CP-D5-574 — ACTIVO: Próxima tarefa No-Stop do Integrador de Mundo
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
@@ -2757,13 +2760,13 @@ O Dev5 foi realocado para Integrador de Mundo. O contrato `levels/dev5/R2R3R6Gro
 - **RESPONSAVEL**: Dev5 — Integrador de Mundo
 - **STATUS_CODE**: ACTIVE
 - **TAREFA_EM_EXECUCAO_AGORA**: consultar as novas orientações remotas e iniciar a próxima melhoria isolada de grounding
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-572 aprovado localmente; contrato, preview, parser, QA, checksum e backup validados
-- **EVIDENCIA**: raycasts R2/R3/R6, erro vertical 0.000 m, terceira pessoa, zero luzes
-- **NEXT_ACTION_IMMEDIATE**: publicar CP-D5-572, aguardar 10 segundos, sincronizar e executar CP-D5-573
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-573 aprovado localmente; transformação de Elias, parser, QA e checksum validados
+- **EVIDENCIA**: raycasts R2/R3/R6, clearance 0.02 m, erro vertical 0.000 m, terceira pessoa, zero luzes
+- **NEXT_ACTION_IMMEDIATE**: publicar CP-D5-573, aguardar 10 segundos, sincronizar e executar CP-D5-574
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a próxima tarefa do CP-D5-573, sem aguardar confirmação verbal.
+Iniciar imediatamente a próxima tarefa do CP-D5-574, sem aguardar confirmação verbal.
 
 
 
@@ -2772,7 +2775,7 @@ Iniciar imediatamente a próxima tarefa do CP-D5-573, sem aguardar confirmação
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-573` — publicar, sincronizar e executar imediatamente a próxima tarefa Dev5, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-574` — publicar, sincronizar e executar imediatamente a próxima tarefa Dev5, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
