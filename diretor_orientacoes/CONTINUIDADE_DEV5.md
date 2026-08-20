@@ -2875,22 +2875,25 @@ A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`,
 ## CP-D5-614 — CONCLUÍDO: Regressão contínua do Integrador de Mundo
 A execução confirmou raycasts `3/3`, consistência `3/3`, clearance `0.020 m`, sequência `R2>R3>R6`, erro vertical `0.000 m`, parser aprovado, QA de 36 s, zero luzes e produção intacta. Ver `CP_D5_614_REGRESSAO_CONTINUA.md`, `CP-D5-614_RUNTIME.log` e `CP-D5-614_SHA256SUMS.txt`.
 
-## CP-D5-615 — ACTIVO: Acelerador de Mundo Full Stack
+## CP-D5-615 — CONCLUÍDO: Acelerador de Mundo Full Stack
+Foi criado e validado `levels/dev5/WorldAcceleratorR1R6Contract.json`, com handoffs para Dev2, Dev3 e Dev6, âncoras confirmadas de R2/R3/R5/R6 e R1/R4 explicitamente pendentes de fonte canónica. Parser Godot `0`, QA controlada de 36 s, produção intacta e iluminação dinâmica `0`. Ver `CP_D5_615_ACELERADOR_FULL_STACK.md`, `CP-D5-615_RUNTIME.log` e `CP-D5-615_SHA256SUMS.txt`.
+
+## CP-D5-616 — ACTIVO: Próximo passe Full Stack
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
 - **REGIAO_ACTUAL**: prioridade máxima no vertical slice R1–R6; apoio transversal a R7–R12, bootstrap Dev3 e vida R1–R6
 - **RESPONSAVEL**: Dev5 — Acelerador de Mundo (Full Stack)
 - **STATUS_CODE**: ACTIVE
-- **TAREFA_EM_EXECUCAO_AGORA**: executar a próxima intervenção desbloqueadora com autoridade visual de Dev3 e autoridade espacial do mapa cartográfico
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-614 publicado e sincronizado; grounding R2/R3/R6 aprovado; nova directiva CEO/Dev3 recebida
-- **EVIDENCIA**: parser Godot, QA 36 s, raycasts R2/R3/R6, clearance 0.020 m, consistência X/Z 3/3, sequência R2>R3>R6
+- **TAREFA_EM_EXECUCAO_AGORA**: iniciar a próxima intervenção desbloqueadora sem substituir a propriedade geométrica do Dev2 nem a autoridade visual do Dev3
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-615 publicado e sincronizado; contrato Full Stack aprovado
+- **EVIDENCIA**: parser Godot, QA 36 s, raycasts R2/R3/R6, contrato R1–R6, handoffs Dev2/Dev3/Dev6
 - **APOIO_GLOBAL**: Dev2/R7–R12, Dev3/bootstrap cinematográfico e Dev6/vida R1–R6
-- **NEXT_ACTION_IMMEDIATE**: inspeccionar bloqueios e iniciar a próxima intervenção Full Stack sem aguardar confirmação
+- **NEXT_ACTION_IMMEDIATE**: executar o próximo passe Full Stack e validar novamente antes de sincronizar
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a próxima intervenção Full Stack do CP-D5-615, sem aguardar confirmação verbal.
+Iniciar imediatamente o próximo passe Full Stack do CP-D5-616, sem aguardar confirmação verbal.
 
 
 
@@ -2899,7 +2902,7 @@ Iniciar imediatamente a próxima intervenção Full Stack do CP-D5-615, sem agua
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-615` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-616` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
