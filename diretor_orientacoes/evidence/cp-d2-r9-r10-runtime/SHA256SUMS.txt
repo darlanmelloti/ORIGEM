@@ -1,0 +1,3 @@
+b06c0f3f680bfc17d0e95f3e543b3e8dd953a6b1116417ad2eb0857011c7f704  diretor_orientacoes/evidence/cp-d2-r9-r10-runtime/CP-D2-R9R10-001-continuity.log
+af37d8f40ed0c1c548312bffa54075396343cf22bb139070ffcd4d2cdde40ab3  diretor_orientacoes/evidence/cp-d2-r9-r10-runtime/CP-D2-R9R10-002-physical.log
+e27befdf93d4163ba8e7b4fa80424f3c444d466e3005593d91196162aff9e33d  diretor_orientacoes/evidence/cp-d2-r9-r10-runtime/CP-D2-R9R10-003-player.log
