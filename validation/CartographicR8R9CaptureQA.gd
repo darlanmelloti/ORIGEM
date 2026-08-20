@@ -83,8 +83,9 @@ func _add_marker(position: Vector3, title: String, color: Color, larger: bool) -
 	qa_root.add_child(marker)
 	var label := Label3D.new()
 	label.text = title
-	label.position = position + (Vector3(8.0, 8.0, 0.0) if larger else Vector3(-18.0, 8.0, 0.0))
-	label.font_size = 74 if larger else 58
+	var offset := Vector3(22.0, 14.0, 0.0) if larger else Vector3(-36.0, 13.0, 0.0)
+	label.position = position + offset
+	label.font_size = 66 if larger else 52
 	label.pixel_size = 0.045 if larger else 0.036
 	label.outline_size = 8
 	label.modulate = Color("#f4f1e7")
