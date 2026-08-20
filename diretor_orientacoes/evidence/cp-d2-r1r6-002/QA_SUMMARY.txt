@@ -1,0 +1,7 @@
+CP-D2-R1R6-002=HEADLESS_PASS
+GROUNDING_CHAIN=R1->R2->R3
+GROUNDING_POLICY=floating_markers=FORBIDDEN
+CORRIDOR_R1_R3=40.344
+OWNER_GUARD=R1-R6 production modules untouched; Dev1 standby
+ENGINE=Godot 4.7.1
+STATUS=REJECTED_VISUAL visual scene capture remains next action
