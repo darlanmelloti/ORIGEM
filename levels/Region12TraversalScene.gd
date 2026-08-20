@@ -39,10 +39,18 @@ func _ready() -> void:
 		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
 			base_stone.visible = false
 		traversal_base.add_child(base_stone)
+		var contact_mass := ROCK_LARGE.instantiate() as Node3D
+		if contact_mass != null:
+			contact_mass.name = "ApoioContactoBaseR12_%02d" % index
+			contact_mass.position = base_positions[index] + Vector3(0.0, -0.46, 0.18)
+			contact_mass.scale = Vector3(1.08 + float(index % 2) * 0.18, 0.22, 0.86 + float(index % 3) * 0.10)
+			contact_mass.rotation = Vector3(0.03, float(index) * 0.31, -0.015)
+			traversal_base.add_child(contact_mass)
 	var foundation_positions: Array[Vector3] = [
 		Vector3(-4.8, -0.18, -1.8), Vector3(0.0, -0.28, -2.3), Vector3(4.8, -0.18, -1.8),
 		Vector3(-7.0, -0.08, 1.0), Vector3(7.0, -0.08, 1.0)
 	]
+
 	for foundation_index: int in range(foundation_positions.size()):
 		var foundation_stone := ROCK_LARGE.instantiate() as Node3D
 		if foundation_stone == null:
@@ -75,7 +83,8 @@ func _ready() -> void:
 		support.rotation = Vector3(0.04, -0.15 + float(support_index) * 0.23, 0.02)
 		if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
 			support.visible = false
-			traversal_base.add_child(support)
+		traversal_base.add_child(support)
+
 	if OS.get_environment("QA_VALIDATION_ROUTE") == "R11_R12_HUB_DEDICATED":
 		traversal_base.visible = false
 	destination = DESTINATION_SCRIPT.new() as Node3D
@@ -678,8 +687,8 @@ func _build_final_dome_traversal_proxy() -> void:
 			continue
 		crown_stone.name = "CoroaValidadaCupula_%02d" % crown_index
 		# A coroa assenta no conjunto vertical; o passe reduz a leitura de pedras flutuantes.
-		crown_stone.position = Vector3(-2.45 + float(crown_index) * 2.45, 2.72 if crown_index != 1 else 3.32, -4.48)
-		crown_stone.scale = Vector3(2.75 if crown_index != 1 else 3.40, 1.45 if crown_index != 1 else 1.80, 1.75 if crown_index != 1 else 1.95)
+		crown_stone.position = Vector3(-2.45 + float(crown_index) * 2.45, 2.18 if crown_index != 1 else 2.76, -4.48)
+		crown_stone.scale = Vector3(2.55 if crown_index != 1 else 3.15, 1.18 if crown_index != 1 else 1.48, 1.62 if crown_index != 1 else 1.78)
 		crown_stone.rotation = Vector3(0.08 * sign(float(crown_index - 1)), 0.08 * float(crown_index - 1), -0.06 * sign(float(crown_index - 1)))
 		var crown_material := StandardMaterial3D.new()
 		crown_material.albedo_color = Color("#5b718b") if crown_index != 1 else Color("#708aa5")
@@ -689,11 +698,13 @@ func _build_final_dome_traversal_proxy() -> void:
 		crown_material.emission_energy_multiplier = 0.12
 		for crown_mesh in crown_stone.find_children("*", "MeshInstance3D", true, false):
 			crown_mesh.set_surface_override_material(0, crown_material)
+		# QA-only composition: keep the central crown as the vertical focal point; side stones read as floating in the traversal frame.
+		if crown_index != 1 and OS.get_environment("QA_VALIDATION_ROUTE") != "R11_R12_HUB_DEDICATED":
+			crown_stone.visible = false
 		proxy.add_child(crown_stone)
 		print("[REGION12_CROWN_DEBUG] index=", crown_index, " global=", crown_stone.global_position, " scale=", crown_stone.scale)
 	var shoulder_positions: Array[Vector3] = [
-		Vector3(-4.25, 1.92, -4.18), Vector3(4.25, 1.92, -4.18),
-		Vector3(-3.15, 2.12, -4.76), Vector3(3.15, 2.12, -4.76)
+		Vector3(-4.25, 1.35, -4.18), Vector3(4.25, 1.35, -4.18), Vector3(-3.15, 1.48, -4.76), Vector3(3.15, 1.48, -4.76)
 	]
 	for shoulder_index: int in range(shoulder_positions.size()):
 		var shoulder := ROCK_LARGE.instantiate() as Node3D
@@ -701,13 +712,15 @@ func _build_final_dome_traversal_proxy() -> void:
 			continue
 		shoulder.name = "OmbroOrganicoCupulaR12_%02d" % shoulder_index
 		shoulder.position = shoulder_positions[shoulder_index]
-		shoulder.scale = Vector3(1.45 if shoulder_index < 2 else 1.18, 0.68 if shoulder_index < 2 else 0.54, 1.12)
+		shoulder.scale = Vector3(1.28 if shoulder_index < 2 else 1.06, 0.54 if shoulder_index < 2 else 0.44, 0.98)
 		shoulder.rotation = Vector3(0.05, -0.18 + float(shoulder_index) * 0.26, 0.03)
 		var shoulder_material := StandardMaterial3D.new()
 		shoulder_material.albedo_color = Color("#4e667d")
 		shoulder_material.roughness = 0.88
 		for shoulder_mesh in shoulder.find_children("*", "MeshInstance3D", true, false):
 			shoulder_mesh.set_surface_override_material(0, shoulder_material)
+		if OS.get_environment("QA_VALIDATION_ROUTE") != "R11_R12_HUB_DEDICATED":
+			shoulder.visible = false
 		proxy.add_child(shoulder)
 	var lateral_links: Array[Vector3] = [
 		Vector3(-3.72, 1.12, -4.42), Vector3(3.72, 1.12, -4.42),
@@ -726,6 +739,8 @@ func _build_final_dome_traversal_proxy() -> void:
 		link_material.roughness = 0.90
 		for link_mesh in link_stone.find_children("*", "MeshInstance3D", true, false):
 			link_mesh.set_surface_override_material(0, link_material)
+		if OS.get_environment("QA_VALIDATION_ROUTE") != "R11_R12_HUB_DEDICATED":
+			link_stone.visible = false
 		proxy.add_child(link_stone)
 	var link_support_positions: Array[Vector3] = [
 		Vector3(-3.72, 0.58, -4.42), Vector3(3.72, 0.58, -4.42),
@@ -889,7 +904,7 @@ func _build_environment() -> void:
 	environment.background_color = Color("#090d24")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#56618a")
-	environment.ambient_light_energy = 0.68
+	environment.ambient_light_energy = 0.54
 	environment.fog_enabled = true
 	environment.fog_light_color = Color("#53648b")
 	environment.fog_light_energy = 0.38
@@ -905,7 +920,7 @@ func _build_environment() -> void:
 	add_child(world)
 	var moon := DirectionalLight3D.new()
 	moon.light_color = Color("#b7c5ee")
-	moon.light_energy = 0.70
+	moon.light_energy = 0.48
 	moon.rotation_degrees = Vector3(-48.0, 22.0, 0.0)
 	add_child(moon)
 
@@ -946,11 +961,12 @@ func _process(delta: float) -> void:
 func _set_camera(progress: float) -> void:
 	if camera == null:
 		return
-	var start := Vector3(163.82, 2.34, 180.78)
-	var finish := Vector3(164.32, 1.98, 176.02)
+	# CP-D2-R12-004: enquadramento elevado para revelar portal, núcleo e base da Cúpula.
+	var start := Vector3(163.82, 5.20, 187.40)
+	var finish := Vector3(164.32, 4.45, 181.80)
 	var position := start.lerp(finish, progress)
 	position.x += sin(progress * TAU * 0.8) * 0.10
 	position.y += sin(progress * PI) * 0.10
 	camera.position = position
-	var target := Vector3(164.00 + sin(progress * PI) * 0.02, -0.10 + progress * 0.03, 175.42)
+	var target := Vector3(164.00 + sin(progress * PI) * 0.02, 2.55 + progress * 0.25, 177.10)
 	camera.look_at(target, Vector3.UP)
