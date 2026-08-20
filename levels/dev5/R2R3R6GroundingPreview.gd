@@ -9,6 +9,7 @@ const REGIONS := [
 
 var checks_passed := 0
 var consistency_passed := 0
+var cartographic_sequence_passed := false
 var telemetry: Array[Dictionary] = []
 
 func _ready() -> void:
@@ -18,8 +19,9 @@ func _ready() -> void:
 	_build_overlay()
 	await get_tree().physics_frame
 	await _run_grounding_checks()
-	print("[DEV5_WORLD_GROUNDING] status=approved regions=%d checks=%d consistency=%d Elias=third_person production_modules_changed=false player_gd_changed=false dynamic_lights=0" % [REGIONS.size(), checks_passed, consistency_passed])
+	print("[DEV5_WORLD_GROUNDING] status=approved regions=%d checks=%d consistency=%d sequence=%s Elias=third_person production_modules_changed=false player_gd_changed=false dynamic_lights=0" % [REGIONS.size(), checks_passed, consistency_passed, cartographic_sequence_passed])
 	assert(consistency_passed == REGIONS.size())
+	assert(cartographic_sequence_passed)
 	assert(checks_passed == REGIONS.size())
 
 func _build_environment() -> void:
@@ -135,3 +137,5 @@ func _run_grounding_checks() -> void:
 			elias_marker.position = elias_position + Vector3(0.0, 0.9, 0.0)
 			add_child(elias_marker)
 		ray.queue_free()
+	cartographic_sequence_passed = telemetry.size() == 3 and telemetry[0]["region"] == "R2" and telemetry[1]["region"] == "R3" and telemetry[2]["region"] == "R6" and float(telemetry[0]["elias_position"].z) < float(telemetry[1]["elias_position"].z) and float(telemetry[1]["elias_position"].z) < float(telemetry[2]["elias_position"].z)
+	print("[DEV5_WORLD_GROUNDING] cartographic_sequence=R2>R3>R6 valid=%s" % cartographic_sequence_passed)
