@@ -2614,22 +2614,45 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-527 — CONCLUÍDO: Regressão contínua da apresentação de Elias
 `EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando `CameraQA` activa, sem erros de script e sem alterações em produção. Ver `CP_D5_527_ELIAS_REGRESSAO.md`, `CP-D5-527_RUNTIME.log` e `CP-D5-527_SHA256SUMS.txt`.
 
-## CP-D5-528 — ACTIVO: Integração modular e espelhamento R6→R7
-A nova tarefa Dev5 foi realocada oficialmente para apoiar malhas 3D modulares e expandir o espelhamento cartográfico na transição R6→R7. O contrato está em `CP_D5_528_HANDOFF_R6_R7_MODULAR.md`. Âncoras: R6 `Vector3(60,y,252)` e entrada R7 `Vector3(140,y,352)`, com grounding apenas em Y, terceira pessoa de Elias isolada e limite global de `≤16` luzes.
+## CP-D5-528 — CONCLUÍDO: Integração modular e espelhamento cartográfico R6→R7
+`R6R7ModularMirrorPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900 após correcção estrutural do parent da cena. A telemetria confirmou âncoras R6 `(60,252)` e R7 `(140,352)`, `grounded=true`, `modular_meshes=13`, `colliders=13`, `dynamic_lights=0`, `elias_third_person=true`, `marker_only=true`, `region7_geometry=false` e `production_modules_changed=false`. Ver `CP_D5_528_HANDOFF_R6_R7_MODULAR.md`, `CP_D5_528_INTEGRACAO_MODULAR_R6_R7.md`, `CP-D5-528_RUNTIME.log` e `CP-D5-528_SHA256SUMS.txt`.
+
+## CP-D5-529 — CONCLUÍDO: Regressão Elias no handoff modular R6→R7
+`EliasR6R7HandoffPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando R6 `(60,252)`, marcador `PASSAGEM: VILA ELEVADA` ID 7, R7 `(140,352)`, `reached_marker_r7=true`, `marker_only=true`, `dev2_geometry_created=false` e `production_modules_changed=false`. Ver `CP_D5_529_ELIAS_R6_R7_REGRESSAO.md`, `CP-D5-529_RUNTIME.log` e `CP-D5-529_SHA256SUMS.txt`.
+
+## CP-D5-530 — CONCLUÍDO: Auditoria modular de transição R6→R7
+`R6R7ModularMirrorPreview.tscn` passou parser e QA headless de 36 segundos, confirmando âncoras R6/R7, `grounded=true`, `modular_meshes=13`, `colliders=13`, `dynamic_lights=0`, clearance `2.4`, `elias_third_person=true`, `marker_only=true`, `region7_geometry=false` e `production_modules_changed=false`. Ver `CP_D5_530_AUDITORIA_MODULAR_R6_R7.md`, `CP-D5-530_RUNTIME.log` e `CP-D5-530_SHA256SUMS.txt`.
+
+## CP-D5-531 — CONCLUÍDO: Expansão modular do corredor R6→R7
+O preview foi expandido com uma segunda faixa modular paralela. A validação confirmou `modular_meshes=18`, `colliders=18`, `lanes=2`, `grounded=true`, `dynamic_lights=0`, clearance `2.4`, Elias em terceira pessoa, `region7_geometry=false` e `production_modules_changed=false`. Ver `CP_D5_531_EXPANSAO_MODULAR_R6_R7.md`, `CP-D5-531_RUNTIME.log` e `CP-D5-531_SHA256SUMS.txt`.
+
+## CP-D5-532 — CONCLUÍDO: Regressão Elias no corredor modular expandido
+`EliasR6R7HandoffPreview.tscn` passou parser e QA headless de 36 segundos, confirmando R6/R7, `reached_marker_r7=true`, `marker_only=true`, `dev2_geometry_created=false` e `production_modules_changed=false` no corredor de duas faixas. Ver `CP_D5_532_ELIAS_CORREDOR_MODULAR.md`, `CP-D5-532_RUNTIME.log` e `CP-D5-532_SHA256SUMS.txt`.
+
+## CP-D5-533 — CONCLUÍDO: Auditoria final conjunta do handoff modular R6→R7
+A auditoria conjunta passou parser e duas sessões QA headless de 36 segundos, confirmando R6→R7 `(60,252)`→`(140,352)`, duas faixas, `modular_meshes=18`, `colliders=18`, `grounded=true`, `dynamic_lights=0`, `elias_third_person=true`, `reached_marker_r7=true`, `marker_only=true`, `region7_geometry=false` e `production_modules_changed=false`. Ver `CP_D5_533_AUDITORIA_FINAL_R6_R7.md`, `CP-D5-533_RUNTIME.log` e `CP-D5-533_SHA256SUMS.txt`.
+
+## CP-D5-534 — CONCLUÍDO: Handoff de bounding boxes R6→R7 validado
+O pacote de handoff com âncoras, bounding boxes, duas faixas, grounding, zero luzes dinâmicas e restrições de produção foi validado por parser e QA headless de 36 segundos. Ver `CP_D5_534_HANDOFF_BOUNDING_BOXES.md`, `CP_D5_534_HANDOFF_VALIDADO.md`, `CP-D5-534_RUNTIME.log` e `CP-D5-534_SHA256SUMS.txt`.
+
+## CP-D5-535 — CONCLUÍDO: Regressão conjunta modular e Elias R6→R7
+A regressão conjunta passou parser e duas sessões QA headless de 36 segundos, confirmando duas faixas, `modular_meshes=18`, `colliders=18`, `grounded=true`, `dynamic_lights=0`, `elias_third_person=true`, `reached_marker_r7=true`, `marker_only=true`, `region7_geometry=false` e `production_modules_changed=false`. Ver `CP_D5_535_REGRESSAO_CONJUNTA_R6_R7.md`, `CP-D5-535_RUNTIME.log` e `CP-D5-535_SHA256SUMS.txt`.
+
+## CP-D5-536 — ACTIVO: Próxima tarefa de integração modular Dev5 R6→R7
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
-- **REGIAO_ACTUAL**: transição R6→R7 / entrada Vila Elevada
+- **REGIAO_ACTUAL**: transição R6→R7 / corredor modular de duas faixas
 - **RESPONSAVEL**: Dev5 — Integração modular & espelhamento cartográfico
 - **STATUS_CODE**: ACTIVE
-- **TAREFA_EM_EXECUCAO_AGORA**: construir preview isolado do contrato R6→R7
-- **DEPENDENCIAS_RECEBIDAS**: handoff R6→R7; plano Região 7; padrões Elias/grounding validados
-- **EVIDENCIA**: `CP_D5_528_HANDOFF_R6_R7_MODULAR.md`
-- **NEXT_ACTION_IMMEDIATE**: implementar `R6R7ModularMirrorPreview.tscn` sem alterar produção
+- **TAREFA_EM_EXECUCAO_AGORA**: consultar orientações remotas e executar a próxima melhoria isolada autorizada
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-535 aprovado; contrato R6→R7; handoff bounding boxes validado
+- **EVIDENCIA**: regressão conjunta, parser, QA 36 s e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: consultar GitHub e iniciar a próxima melhoria em escopo Dev5
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a implementação isolada do CP-D5-528, sem aguardar confirmação verbal.
+Iniciar imediatamente a próxima tarefa do CP-D5-536, sem aguardar confirmação verbal.
 
 
 
@@ -2638,7 +2661,7 @@ Iniciar imediatamente a implementação isolada do CP-D5-528, sem aguardar confi
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-528` — implementar preview modular isolado R6→R7 imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-536` — executar a próxima melhoria modular Dev5 imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
