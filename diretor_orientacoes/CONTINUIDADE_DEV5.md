@@ -1421,8 +1421,28 @@ A primeira invocação apontou para cena inexistente e terminou `QA_EXIT=1`; ap�
 ## CP-D5-446 — CONCLUÍDO: Auditoria integrada contínua R1–R6
 `CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Ver `CP_D5_446_AUDITORIA_INTEGRADA.md` e `CP-D5-446_RUNTIME.log`.
 
-## CP-D5-447 — ACTIVO
-Abrir a próxima ficha de integração ou regressão autorizada imediatamente após esta publicação, sem consulta passiva ou espera temporal.
+## CP-D5-447 — CONCLUÍDO: Regressão contínua da apresentação de Elias
+`EliasThirdPersonPreview.tscn` passou parser e QA headless de 36 segundos, confirmando uma única câmara QA activa (`CameraQA`), sem alteração de `Player.gd` ou produção. Ver `CP_D5_447_ELIAS_REGRESSAO.md` e `CP-D5-447_RUNTIME.log`.
+
+## CP-D5-448 — CONCLUÍDO: Passe de Fidelidade Cartográfica R1–R6
+`CartographicRegressionAuditPreview.tscn` passou parser e QA headless de 36 segundos em 1600×900, confirmando 6 candidatos, grounding/rotas aprovados, clearance `0.21`, passagem `2.4 m`, `production_scripts=0`, `dynamic_lights=0` e vegetação `1/3/4` sem parede de árvores. Handoff Dev5→Dev6 entregue em `HANDOFF_DEV5_DEV6_CP_D5_448.md`.
+
+**Evidência SHA-256:** `CP-D5-448_RUNTIME.log` = `f89bb562d185dfe2c2e0b1e0f808045000f26946e7fe834da1e8cbe736b166c9`; relatório = `a06da3edc5f8a63c41ecc864ea9d78b45c1ec986fdfe7ca3eb402e79b4eef41e`; handoff = `d689528fbe4bea61c4694a0a062050613ea7a29af4053079fed5aadbb5f26bd0`; directiva = `3d9cfbc496ebc5f47560b78d6d737e83b38adf09613ea9ef037072cc3e7d2bd9`.
+
+### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
+
+- **REGIAO_ACTUAL**: R1–R6 / interface R6→R7
+- **RESPONSAVEL**: Dev5 — Mundo Cartesiano & 3D
+- **STATUS_CODE**: PASSED
+- **TAREFA_EM_EXECUCAO_AGORA**: regressão técnica da apresentação de Elias no harness isolado
+- **DEPENDENCIAS_RECEBIDAS**: Directiva Dev2–Dev6; autoridade `mapaorigem.webp`; handoff Dev5→Dev6 concluído
+- **EVIDENCIA**: parser, QA 36 s, print 1600×900, runtime e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar `EliasThirdPersonPreview.tscn` no CP-D5-449
+- **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
+- **WAIT_ALLOWED**: false
+
+## CP-D5-449 — ACTIVO
+Iniciar imediatamente a regressão de Elias, sem aguardar confirmação verbal.
 
 
 
@@ -1431,7 +1451,7 @@ Abrir a próxima ficha de integração ou regressão autorizada imediatamente ap
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-447` — abrir a próxima ficha de integração ou regressão autorizada imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-449` — iniciar regressão técnica de Elias imediatamente, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
