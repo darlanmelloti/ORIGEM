@@ -2701,7 +2701,10 @@ O contrato e o corredor modular passaram JSON, parser e QA headless de 36 segund
 ## CP-D5-556 — CONCLUÍDO: Validação sincronizada do corredor modular R6→R7
 O contrato e o corredor modular passaram JSON, parser e QA headless de 36 segundos após a sincronização, confirmando duas faixas, grounding, Elias em terceira pessoa, zero luzes, handoff pronto e produção intacta. Ver `CP_D5_556_VALIDACAO_CORREDOR_R6_R7.md`, `CP-D5-556_RUNTIME.log` e `CP-D5-556_SHA256SUMS.txt`.
 
-## CP-D5-557 — ACTIVO: Próxima tarefa contínua de integração modular
+## CP-D5-557 — CONCLUÍDO: Validação sincronizada do corredor modular R6→R7
+O contrato e o corredor modular passaram JSON, parser e QA headless de 36 segundos após a sincronização, confirmando duas faixas, grounding, Elias em terceira pessoa, zero luzes, handoff pronto e produção intacta. Ver `CP_D5_557_VALIDACAO_CORREDOR_R6_R7.md`, `CP-D5-557_RUNTIME.log` e `CP-D5-557_SHA256SUMS.txt`.
+
+## CP-D5-558 — ACTIVO: Próxima tarefa contínua de integração modular
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
@@ -2709,13 +2712,13 @@ O contrato e o corredor modular passaram JSON, parser e QA headless de 36 segund
 - **RESPONSAVEL**: Dev5 — Integração modular & espelhamento cartográfico
 - **STATUS_CODE**: ACTIVE
 - **TAREFA_EM_EXECUCAO_AGORA**: consultar orientações remotas e iniciar a próxima melhoria isolada
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-556 aprovado localmente; contrato, perfil e telemetria validados
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-557 aprovado localmente; contrato, perfil e telemetria validados
 - **EVIDENCIA**: validação sincronizada, parser, QA 36 s e SHA-256
-- **NEXT_ACTION_IMMEDIATE**: publicar o CP-D5-556, aguardar 10 segundos, sincronizar e executar a próxima tarefa Dev5
+- **NEXT_ACTION_IMMEDIATE**: publicar o CP-D5-557, aguardar 10 segundos, sincronizar e executar a próxima tarefa Dev5
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a próxima tarefa do CP-D5-557, sem aguardar confirmação verbal.
+Iniciar imediatamente a próxima tarefa do CP-D5-558, sem aguardar confirmação verbal.
 
 
 
@@ -2724,7 +2727,7 @@ Iniciar imediatamente a próxima tarefa do CP-D5-557, sem aguardar confirmação
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-557` — publicar, sincronizar e executar imediatamente a próxima tarefa Dev5, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-558` — publicar, sincronizar e executar imediatamente a próxima tarefa Dev5, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
