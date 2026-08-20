@@ -38,6 +38,10 @@ var tablet2_taken: bool = false
 var tablet3_taken: bool = false
 var spring_fragment_taken: bool = false
 var mission_phase: int = 0  # 0=início, 1=tábuas, 2=cubo, 3=fuga, 4=fim
+var qa_composition_camera: Camera3D
+
+# QA cartográfico é runtime-only: nunca fica serializado na cena de produção.
+var cartographic_mirror_qa: Node3D
 
 # ─── MENSAGEM ─────────────────────────────────────────────────
 var msg_timer: float = 0.0
@@ -50,6 +54,7 @@ var seraph_active: bool = true
 # ═══════════════════════════════════════════════════════════════
 func _ready():
 	add_to_group("main_scene")
+	_init_cartographic_mirror_qa()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	RenderingServer.set_default_clear_color(Color(0.05, 0.05, 0.08))
 	interact_label.visible = false
@@ -61,6 +66,19 @@ func _ready():
 	hud_status.text = "ELIAS  100 / 100"
 	stamina_label.text = "STAMINA  100 / 100"
 	_start_narrative()
+
+func _init_cartographic_mirror_qa() -> void:
+	if OS.get_environment("MAP_MIRROR_VALIDATION") != "1":
+		return
+	var qa_script := load("res://levels/CartographicMirrorQA.gd") as Script
+	if qa_script == null:
+		push_error("MAP_MIRROR_VALIDATION requested but CartographicMirrorQA.gd could not be loaded")
+		return
+	cartographic_mirror_qa = Node3D.new()
+	cartographic_mirror_qa.name = "CartographicMirrorQA_Runtime"
+	cartographic_mirror_qa.set_script(qa_script)
+	add_child(cartographic_mirror_qa)
+	print("MAP_MIRROR_VALIDATION=RUNTIME_INSTANCE_CREATED")
 
 func _start_narrative():
 	if _take57_validation_mode():
@@ -74,11 +92,23 @@ func _start_narrative():
 		var validation_region: String = OS.get_environment("ORIGEM_VALIDATION_REGION")
 		if validation_player != null:
 			if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
-				validation_player.global_position = Vector3(60.0, 8.0, 252.0)
+				validation_player.global_position = Vector3(60.0, 3.55, 252.0)
 				validation_player.rotation.y = -0.72
 			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY":
 				validation_player.global_position = Vector3(170.0, 15.0, 382.0)
 				validation_player.rotation.y = -2.38
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R9_CHAIN":
+				validation_player.global_position = Vector3(174.0, 20.0, 382.0)
+				validation_player.rotation.y = -2.12
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R9_R10_CHAIN":
+				validation_player.global_position = Vector3(214.0, 43.0, 456.0)
+				validation_player.rotation.y = -2.38
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R10_R11_CHAIN":
+				validation_player.global_position = Vector3(-116.0, 45.0, 548.0)
+				validation_player.rotation.y = 0.0
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R11_R12_CHAIN":
+				validation_player.global_position = Vector3(-116.0, 48.0, 562.0)
+				validation_player.rotation.y = 0.72
 			elif validation_take == "6":
 				validation_player.global_position = Vector3(0.0, 1.8, -73.0)
 			elif validation_take == "7":
@@ -93,18 +123,41 @@ func _start_narrative():
 				validation_player.global_position = Vector3(-116.0, 43.0, 532.0)
 			else:
 				validation_player.global_position = Vector3(0.0, 1.4, -28.0)
-			if validation_take != "8" and OS.get_environment("QA_VALIDATION_ROUTE") not in ["MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY", "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY"]:
+			if validation_take != "8" and OS.get_environment("QA_VALIDATION_ROUTE") not in ["MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY", "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY", "MAP_MIRROR_VALIDATION_R7_R9_CHAIN", "MAP_MIRROR_VALIDATION_R9_R10_CHAIN", "MAP_MIRROR_VALIDATION_R10_R11_CHAIN"]:
 				validation_player.rotation.y = PI
-		mission_phase = 1
-		if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY" and validation_player != null:
-			var validation_camera := validation_player.get_node_or_null("Head/Camera3D") as Camera3D
-			if validation_camera != null:
-				validation_camera.look_at(Vector3(194.0, 20.0, 404.0), Vector3.UP)
-				validation_camera.fov = 48.0
-		if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
-			_show_msg("HANDOFF R6 → R7 — Ruínas Submersas para Vila Elevada.", 4.0)
-		elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY":
-			_show_msg("HANDOFF R7 → R8 — Vila Elevada para Observatório.", 4.0)
+			mission_phase = 1
+			if OS.get_environment("QA_VALIDATION_ROUTE") in ["MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY", "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY", "MAP_MIRROR_VALIDATION_R7_R9_CHAIN", "MAP_MIRROR_VALIDATION_R9_R10_CHAIN", "MAP_MIRROR_VALIDATION_R10_R11_CHAIN", "MAP_MIRROR_VALIDATION_R11_R12_CHAIN"] and validation_player != null:
+				var validation_camera := validation_player.get_node_or_null("Head/Camera3D") as Camera3D
+				if validation_camera != null:
+					var look_target := Vector3(194.0, 20.0, 404.0)
+					if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
+						look_target = Vector3(140.0, 14.0, 352.0)
+					elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R9_CHAIN":
+						look_target = Vector3(174.0, 24.0, 414.0)
+					elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R9_R10_CHAIN":
+						look_target = Vector3(-116.0, 43.0, 532.0)
+					elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R10_R11_CHAIN":
+						look_target = Vector3(-116.0, 46.0, 562.0)
+					elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R11_R12_CHAIN":
+						look_target = Vector3(-48.0, 34.0, 474.0)
+					validation_camera.look_at(look_target, Vector3.UP)
+					validation_camera.current = true
+					validation_camera.fov = 50.0 if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R10_R11_CHAIN" else (42.0 if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R11_R12_CHAIN" else (52.0 if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R9_R10_CHAIN" else 48.0))
+			if OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY":
+				_show_msg("HANDOFF R6 → R7 — Ruínas Submersas para Vila Elevada.", 4.0)
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY":
+				_show_msg("HANDOFF R7 → R8 — Vila Elevada para Observatório.", 4.0)
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R7_R9_CHAIN":
+				_show_msg("MAP MIRROR R7 → R8 → R9 — Vila, Observatório e Trilha da Montanha.", 4.0)
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R9_R10_CHAIN":
+				_show_msg("MAP MIRROR R9 → R10 — Trilha da Montanha, boca da Caverna e beacon Orion.", 4.0)
+				call_deferred("_activate_r9_r10_composition_camera")
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R10_R11_CHAIN":
+				_show_msg("MAP MIRROR R10 → R11 — Caverna do Orion para Câmara do Orion Cube.", 4.0)
+				call_deferred("_activate_r10_r11_composition_camera")
+			elif OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R11_R12_CHAIN":
+				_show_msg("MAP MIRROR R11 → R12 — Câmara do Orion Cube para Cúpula Final.", 4.0)
+				call_deferred("_activate_r11_r12_composition_camera")
 		elif validation_region == "8":
 			_show_msg("REGIÃO 8 — Observatório da Orion e leitura do céu alpino.", 4.0)
 		elif validation_region == "7":
@@ -129,14 +182,60 @@ func _start_narrative():
 
 # ═══════════════════════════════════════════════════════════════
 func _take57_validation_mode() -> bool:
-	if OS.get_environment("ORIGEM_TAKE57") == "1" or OS.get_environment("ORIGEM_VALIDATION_TAKE") in ["6", "7", "8"] or OS.get_environment("ORIGEM_VALIDATION_REGION") in ["7", "8"] or OS.get_environment("ORIGEM_VALIDATION_REGION") == "10" or OS.get_environment("QA_VALIDATION_ROUTE") in ["MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY", "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY"]:
+	if OS.get_environment("ORIGEM_TAKE57") == "1" or OS.get_environment("MAP_MIRROR_VALIDATION") == "1" or OS.get_environment("ORIGEM_VALIDATION_TAKE") in ["6", "7", "8"] or OS.get_environment("ORIGEM_VALIDATION_REGION") in ["7", "8"] or OS.get_environment("ORIGEM_VALIDATION_REGION") == "10" or OS.get_environment("QA_VALIDATION_ROUTE") in ["MAP_MIRROR_VALIDATION_R6_R7_BOUNDARY", "MAP_MIRROR_VALIDATION_R7_R8_BOUNDARY", "MAP_MIRROR_VALIDATION_R7_R9_CHAIN", "MAP_MIRROR_VALIDATION_R9_R10_CHAIN", "MAP_MIRROR_VALIDATION_R10_R11_CHAIN", "MAP_MIRROR_VALIDATION_R11_R12_CHAIN"]:
 		return true
 	for argument: String in OS.get_cmdline_args():
 		if argument == "--take57":
 			return true
 	return false
 
+func _activate_r9_r10_composition_camera() -> void:
+	var composition_camera := Camera3D.new()
+	composition_camera.name = "CameraQA_R09_R10_CaveMouth"
+	composition_camera.fov = 54.0
+	add_child(composition_camera)
+	composition_camera.global_position = Vector3(-116.0, 54.0, 578.0)
+	composition_camera.look_at(Vector3(-116.0, 43.0, 540.0), Vector3.UP)
+	composition_camera.current = true
+	print("[CP_D2_215_CAMERA] dedicated R09_R10 cave-mouth position=%s target=%s" % [str(composition_camera.global_position), str(Vector3(-116.0, 43.0, 540.0))])
+
+func _activate_r10_r11_composition_camera() -> void:
+	var composition_camera := Camera3D.new()
+	composition_camera.name = "CameraQA_R10_R11_OrionCube"
+	composition_camera.fov = 38.0
+	add_child(composition_camera)
+	composition_camera.global_position = Vector3(-126.0, 51.0, 544.0)
+	composition_camera.look_at(Vector3(-116.0, 49.0, 562.0), Vector3.UP)
+	composition_camera.current = true
+	print("[CP_D2_224_CAMERA] close R10_R11 cube position=%s target=%s" % [str(composition_camera.global_position), str(Vector3(-116.0, 49.0, 562.0))])
+
+func _activate_r11_r12_composition_camera() -> void:
+	var composition_camera := Camera3D.new()
+	composition_camera.name = "CameraQA_R11_R12_FinalDome"
+	composition_camera.fov = 44.0
+	add_child(composition_camera)
+	composition_camera.global_position = Vector3(164.0, 22.0, 195.0)
+	composition_camera.look_at(Vector3(164.0, 17.0, 178.0), Vector3.UP)
+	composition_camera.current = true
+	qa_composition_camera = composition_camera
+	print("[CP_D2_228_CAMERA] corrected R11_R12 final dome position=%s target=%s" % [str(composition_camera.global_position), str(Vector3(164.0, 18.0, 178.0))])
+
+func _force_qa_composition_camera() -> void:
+	if qa_composition_camera == null or not is_instance_valid(qa_composition_camera):
+		return
+	var all_cameras := get_tree().current_scene.find_children("*", "Camera3D", true, false)
+	for candidate_camera in all_cameras:
+		var camera := candidate_camera as Camera3D
+		if camera != qa_composition_camera:
+			camera.current = false
+	qa_composition_camera.make_current()
+	var active_view_camera := get_viewport().get_camera_3d()
+	if active_view_camera != null and active_view_camera != qa_composition_camera:
+		print("[CP_D2_228_CAMERA_CONFLICT] active=%s expected=%s active_position=%s" % [str(active_view_camera.name), str(qa_composition_camera.name), str(active_view_camera.global_position)])
+
 func _process(delta: float):
+	if qa_composition_camera != null and is_instance_valid(qa_composition_camera) and OS.get_environment("QA_VALIDATION_ROUTE") == "MAP_MIRROR_VALIDATION_R11_R12_CHAIN":
+		call_deferred("_force_qa_composition_camera")
 	_process_messages(delta)
 	_process_seraph(delta)
 	if Input.is_action_just_pressed("ui_cancel"):

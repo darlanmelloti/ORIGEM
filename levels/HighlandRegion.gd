@@ -4,6 +4,7 @@
 
 extends Node3D
 
+const Anchors = preload("res://levels/CartographicAnchors.gd")
 const PINE_TALL: PackedScene = preload("res://assets/models_generated/ez_pine_tall_pbr.glb")
 const TREE_CC0: PackedScene = preload("res://assets/models_cc0/tree_detailed_dark.glb")
 const FERN_CC0: PackedScene = preload("res://assets/models_polyhaven/fern_02/fern_02_1k.gltf")
@@ -26,6 +27,7 @@ func _ready() -> void:
 	path_material = _make_path_material()
 	_build_region7_handoff_chain()
 	_build_lake_to_village_path()
+	_build_r6_r7_handoff_colliders()
 	_build_elevated_village()
 	_build_observatory()
 	_build_mountain_trail()
@@ -151,6 +153,36 @@ func _build_region7_handoff_chain() -> void:
 func _build_lake_to_village_path() -> void:
 	var route: Array[Vector2] = [Vector2(16.0, 288.0), Vector2(48.0, 302.0), Vector2(83.0, 318.0), Vector2(116.0, 336.0), Vector2(138.0, 354.0)]
 	_build_flagstone_route("EstradaParaVilaElevada", route, 3.3)
+
+func _build_r6_r7_handoff_colliders() -> void:
+	# Corredor físico invisível derivado exclusivamente da autoridade cartográfica.
+	# É integração de fronteira, não geometria regional: R6 permanece read-only.
+	var contract: Dictionary = Anchors.continuity_6_to_7(_height_at(60.0, 252.0))
+	var start: Vector3 = contract["handoff_in"]
+	var finish: Vector3 = contract["handoff_out"]
+	var corridor: Node3D = Node3D.new()
+	corridor.name = "R6R7_HandoffColliders_Dev2"
+	corridor.set_meta("map_authority", "mapaorigem.webp")
+	corridor.set_meta("scope", "R6_BOUNDARY_READONLY_R7_OWNER")
+	add_child(corridor)
+	var segment_count: int = 8
+	for index: int in range(segment_count):
+		var t0: float = float(index) / float(segment_count)
+		var t1: float = float(index + 1) / float(segment_count)
+		var a: Vector3 = start.lerp(finish, t0)
+		var b: Vector3 = start.lerp(finish, t1)
+		var segment: StaticBody3D = StaticBody3D.new()
+		segment.name = "R6R7_HandoffCollider_%02d" % (index + 1)
+		segment.collision_layer = 1
+		segment.collision_mask = 1
+		segment.position = (a + b) * 0.5
+		segment.look_at_from_position(segment.position, b, Vector3.UP)
+		var shape_node: CollisionShape3D = CollisionShape3D.new()
+		var shape: BoxShape3D = BoxShape3D.new()
+		shape.size = Vector3(3.3, 0.45, a.distance_to(b) + 0.25)
+		shape_node.shape = shape
+		segment.add_child(shape_node)
+		corridor.add_child(segment)
 
 func _build_elevated_village() -> void:
 	var village: Node3D = Node3D.new()

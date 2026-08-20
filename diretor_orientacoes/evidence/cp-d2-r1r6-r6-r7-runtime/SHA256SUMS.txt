@@ -1,0 +1,4 @@
+b654e0b4ac131d278fa9336959342f7daa3e1c4b689b8b9b7bbe67226cecd59f  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/print-1600x900.png
+efdc73f4723aaa5f24b4e1a1d2e72a5da9f4bab56d5405c70f730cb56349670f  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/gameplay-30s.mp4
+39af8596092d0c2ffcb9bdc28be16571aaba1c96d22c994f1c7cb84e264d0664  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/runtime.log
+c9a2b0cbf8bcbea4bb02d40b2a874ccbd9254e6759ade29ec4f145818ce36534  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/duration.txt

@@ -12,6 +12,9 @@ func _ready() -> void:
 	btn_settings.pressed.connect(func(): print("Definições - em breve"))
 	btn_quit.pressed.connect(func(): get_tree().quit())
 	btn_new_game.grab_focus()
+	# QA-only: nunca activa no jogo normal; permite capturas headless determinísticas.
+	if OS.get_environment("ORIGEM_AUTO_START") == "1":
+		call_deferred("_on_new_game_pressed")
 
 func _on_new_game_pressed() -> void:
 	var path := "res://scenes/main.tscn"
