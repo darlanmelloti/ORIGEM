@@ -2641,21 +2641,27 @@ A regressão conjunta passou parser e duas sessões QA headless de 36 segundos, 
 ## CP-D5-536 — CONCLUÍDO: Metadados do contrato modular R6→R7
 A cena recebeu metadados explícitos de bounding box global, duas faixas, `18` malhas, `18` colisores, `0` luzes dinâmicas e clearance `2.4`. Parser e QA headless de 36 segundos passaram sem erros, preservando `region7_geometry=false` e `production_modules_changed=false`. Ver `CP_D5_536_METADATA_CONTRATO_MODULAR.md`, `CP-D5-536_RUNTIME.log` e `CP-D5-536_SHA256SUMS.txt`.
 
-## CP-D5-537 — ACTIVO: Próxima melhoria de integração modular Dev5 R6→R7
+## CP-D5-537 — CONCLUÍDO: Regressão conjunta dos metadados R6→R7
+A regressão conjunta do preview modular e do handoff de Elias passou parser e duas sessões QA headless de 36 segundos, confirmando `18` malhas, `18` colisores, duas faixas, grounding, zero luzes, Elias em terceira pessoa, marcador R7 alcançado e produção intacta. Ver `CP_D5_537_REGRESSAO_CONJUNTA_METADATA.md`, `CP-D5-537_RUNTIME.log` e `CP-D5-537_SHA256SUMS.txt`.
+
+## CP-D5-538 — CONCLUÍDO: Telemetria explícita de handoff R6→R7
+O preview passou a emitir bounding box, faixas, clearance, luzes, estado de contrato e proprietário da geometria R7. Parser e QA headless de 36 segundos passaram, com `contract_ready=true`, `r7_geometry_owner=Dev2` e `production_modules_changed=false`. Ver `CP_D5_538_TELEMETRIA_HANDOFF_R6_R7.md`, `CP-D5-538_RUNTIME.log` e `CP-D5-538_SHA256SUMS.txt`.
+
+## CP-D5-539 — ACTIVO: Próxima melhoria modular Dev5 R6→R7
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
 - **REGIAO_ACTUAL**: transição R6→R7 / corredor modular de duas faixas
 - **RESPONSAVEL**: Dev5 — Integração modular & espelhamento cartográfico
 - **STATUS_CODE**: ACTIVE
-- **TAREFA_EM_EXECUCAO_AGORA**: continuar a melhoria isolada do contrato modular e do handoff de Elias
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-536 aprovado; bounding boxes, grounding e orçamento validados
-- **EVIDENCIA**: metadados de contrato, parser, QA 36 s e SHA-256
-- **NEXT_ACTION_IMMEDIATE**: executar a próxima regressão conjunta modular e Elias
+- **TAREFA_EM_EXECUCAO_AGORA**: executar a próxima regressão do contrato telemétrico e do handoff de Elias
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-538 aprovado; telemetria, bounding boxes, grounding e orçamento validados
+- **EVIDENCIA**: telemetria explícita, parser, QA 36 s e SHA-256
+- **NEXT_ACTION_IMMEDIATE**: validar novamente o preview e Elias com a telemetria de handoff
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente a próxima regressão do CP-D5-537, sem aguardar confirmação verbal.
+Iniciar imediatamente a regressão do CP-D5-539, sem aguardar confirmação verbal.
 
 
 
@@ -2664,7 +2670,7 @@ Iniciar imediatamente a próxima regressão do CP-D5-537, sem aguardar confirma�
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-537` — executar a próxima regressão conjunta modular e Elias imediatamente, sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-539` — validar imediatamente o contrato telemétrico e o handoff de Elias, sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
