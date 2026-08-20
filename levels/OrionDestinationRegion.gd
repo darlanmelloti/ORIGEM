@@ -638,7 +638,7 @@ func _build_region11_to_12_approach() -> void:
 	var approach := Node3D.new()
 	approach.name = "TransicaoRegiao11Para12"
 	add_child(approach)
-	var route: Array[Vector2] = [Vector2(-116.0, 562.0), Vector2(-82.0, 518.0), Vector2(-48.0, 474.0), Vector2(-14.0, 430.0), Vector2(20.0, 386.0), Vector2(54.0, 342.0), Vector2(88.0, 298.0), Vector2(126.0, 254.0), Vector2(164.0, 216.0)]
+	var route: Array[Vector2] = [Vector2(-116.0, 562.0), Vector2(-82.0, 518.0), Vector2(-48.0, 474.0), Vector2(-14.0, 430.0), Vector2(20.0, 386.0), Vector2(54.0, 342.0), Vector2(88.0, 298.0), Vector2(126.0, 254.0), Vector2(164.0, 216.0), Vector2(164.0, 210.0)]
 	for index: int in range(route.size()):
 		var point := route[index]
 		var stone := ROCK_LARGE.instantiate() as Node3D

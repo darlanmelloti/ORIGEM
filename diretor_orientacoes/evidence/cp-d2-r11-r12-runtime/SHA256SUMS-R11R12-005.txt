@@ -1,0 +1,4 @@
+7cf24e02d913639fb079edba252916faef5f7264fe909cb685be6d7726d504ee  diretor_orientacoes/evidence/cp-d2-r11-r12-runtime/CP-D2-R11R12-005-final-approach.log
+a1d5b4eb11abf39488f0f087fb6472bbb754f28901ccde4c0e3c518bc54eef22  diretor_orientacoes/evidence/cp-d2-r11-r12-runtime/gameplay-30s.mp4
+eb558ef6a7995301b313e20f325547d13ecff66a768cf05fc7a1f9a9e2e96ef4  diretor_orientacoes/evidence/cp-d2-r11-r12-runtime/print-1600x900.png
+6b15b862dc5dc13c5bf413cc38d84400caad449b16549144c51a396508af8e61  diretor_orientacoes/evidence/cp-d2-r11-r12-runtime/qa.log
