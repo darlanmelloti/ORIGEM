@@ -1,0 +1,12 @@
+CP-D2-R1R6-035=PASS
+CONTINUITY=R7 Vila Elevada -> R8 Observatório
+SOURCE=CartographicAnchors.gd
+FRAME=R7 and R8 readable; handoff visible
+PRINT=1600x900
+GAMEPLAY=30s
+RUNTIME_ERRORS=0
+DYNAMIC_LIGHTS=1
+LIGHT_LIMIT=16
+R7R8_DYNAMIC_CAPTURE=PASS
+SCOPE_GUARD=PASS R1-R6_dev1_readonly R7-R12_dev2_owner
+NEXT=CP-D2-R1R6-036 R8->R9 camera corridor continuity
