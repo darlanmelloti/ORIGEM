@@ -108,9 +108,9 @@ func _add_marker(point: Vector3, region_id: int, title: String, color: Color) ->
 	label.text = "R%02d  %s" % [region_id, title]
 	var label_offset := Vector3(0.0, 9.0, 0.0)
 	if region_id == 1:
-		label_offset = Vector3(-18.0, 9.0, -12.0)
+		label_offset = Vector3(-34.0, 18.0, -24.0)
 	elif region_id == 2:
-		label_offset = Vector3(16.0, 9.0, -12.0)
+		label_offset = Vector3(30.0, 18.0, -24.0)
 	elif region_id == 3:
 		label_offset = Vector3(-18.0, 9.0, 10.0)
 	elif region_id == 4:
@@ -120,9 +120,9 @@ func _add_marker(point: Vector3, region_id: int, title: String, color: Color) ->
 	elif region_id == 9:
 		label_offset = Vector3(-28.0, 9.0, 10.0)
 	elif region_id == 10:
-		label_offset = Vector3(-32.0, 9.0, 12.0)
+		label_offset = Vector3(-42.0, 20.0, 22.0)
 	elif region_id == 11:
-		label_offset = Vector3(28.0, 9.0, -12.0)
+		label_offset = Vector3(36.0, 20.0, -22.0)
 	elif region_id % 2 == 0:
 		label_offset = Vector3(14.0, 9.0, 0.0)
 	else:

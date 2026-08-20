@@ -1,0 +1,10 @@
+INTEGRATED_R1_R12=PASSED_WITH_BOUNDARY_PENDING
+AUDIT=CP-D2-R1R6-025 integrated map mirror PASS
+REGIONS=12 anchors loaded from levels/CartographicAnchors.gd
+HANDOFFS=R1-R12 registered; R6->R7 QA_BOUNDARY_PENDING
+ROUTE_DISTANCE=1383.311
+PRINT=1600x900
+GAMEPLAY=30s
+DYNAMIC_LIGHTS=1 panorama QA; contract max=16
+SCOPE_GUARD=PASS R1-R6_dev1_readonly_standby R7-R12_dev2_owner
+NEXT=physical R6->R7 handoff integration

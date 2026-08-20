@@ -1,0 +1,5 @@
+da2e33d6b2a79532eae5b21ce222f3a4b64263863fb411750648b51db5187fc6  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12/print-1600x900.png
+b926bcdd0fdda259d371e2b89df1ab7c62f69b220adcb4fe985c5f023bdfb7f0  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12/gameplay-30s.mp4
+5de5a69d730ff62b549fbc81aa6a0535b1d08063ecc99a85f8e4ed7bc100807a  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12/capture.log
+c9a2b0cbf8bcbea4bb02d40b2a874ccbd9254e6759ade29ec4f145818ce36534  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12/duration.txt
+d6ad962d65646125cdd9a4815404fe1ce6d0df728e2326dd2a1c4086d7356fb6  diretor_orientacoes/evidence/cp-d2-r1r6-integrated-r1r12/QA_SUMMARY.txt
