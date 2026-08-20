@@ -2,3 +2,4 @@ aa854f73f80d132724fb703acb14ed13ec7029401b0e58726df85c7ebbaf13e3  diretor_orient
 71916b01de492775c1b747dda14904e75bc267192b5c4320375ed1fe03c71306  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/gameplay-30s.mp4
 be31396d36cb7512af1d84bf187895661cba2bb11d125cff8337163575bcfbd9  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/runtime.log
 8fda06f25ad0faa04c65115f81fc062b60a74a0fb0ee4907f9b77899f0688483  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/CP-D2-R6R7-006-traversal.log
+ef3e0309f730364925467ba77f823d43e0d529d7145898f9ca92b53ba50d43e5  diretor_orientacoes/evidence/cp-d2-r1r6-r6-r7-runtime/CP-D2-R6R7-007-player.log
