@@ -1,0 +1,4 @@
+9366940643a41075905defe85d58e9331445e29b114d446509cf98c5762e300a  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r1r6-001/gameplay-30s.mp4
+27e46298684a3ec2f5596e532f35a21a1fc52162f806c7317e6f166a8f7762f0  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r1r6-001/print-1600x900.png
+58e357491ddcea2f1d49f85d69c63296c9009317e1f690c86b228b8bb1b010cf  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r1r6-001/headless.log
+a0ffc7bc97e34cb9a64d4b2967f3582612859e94f9f99eb0a58f96870b0d0148  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r1r6-001/QA_SUMMARY.txt
