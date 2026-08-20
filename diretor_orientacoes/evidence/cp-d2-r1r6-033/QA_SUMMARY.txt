@@ -1,0 +1,12 @@
+CP-D2-R1R6-033=PASS
+CONTINUITY=R4->R5->R6 camera and corridor
+SOURCE=CartographicAnchors.gd
+FRAME=R4 Floresta Densa; R5 Acampamento Majestic; R6 Ruínas Submersas readable
+PRINT=1600x900
+GAMEPLAY=30s
+RUNTIME_ERRORS=0
+DYNAMIC_LIGHTS=1
+LIGHT_LIMIT=16
+R4R6_CAMERA_LIGHT_BUDGET=PASS
+R4R6_CAMERA_SCOPE_GUARD=PASS R1-R6_dev1_readonly_standby
+NEXT=CP-D2-R1R6-034 R6->R7 boundary ownership and visual handoff
