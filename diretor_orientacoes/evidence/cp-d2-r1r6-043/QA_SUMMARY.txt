@@ -1,0 +1,11 @@
+CP-D2-R1R6-043=PASSED
+CONTINUITY=R11 Câmara do Orion Cube -> R12 Hub Temporal
+CHANGE=dominant vertical violet temporal silhouette; balanced lateral framing; R11/R12 labels readable
+TECHNICAL=Godot 4.7.1 headless PASS; parser/runtime errors=0
+PRINT=1600x900
+GAMEPLAY=30s
+DYNAMIC_LIGHTS=6
+LIGHT_LIMIT=16
+LIGHT_INVENTORY=PASS
+SCOPE_GUARD=PASS R1-R6_dev1_readonly R7-R12_dev2_owner
+NEXT=integrated R1-R12 panorama and Cartographic Fidelity Report

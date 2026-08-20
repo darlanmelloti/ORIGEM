@@ -63,6 +63,7 @@ func _initialize() -> void:
 	temporal_core.position = finish + Vector3(0.0, 8.5, 0.0)
 	qa_root.add_child(temporal_core)
 	_add_vertical_portal(finish)
+	_add_temporal_silhouette(finish)
 	for index: int in range(5):
 		var resonance := OmniLight3D.new()
 		resonance.name = "R12_Temporal_Resonance_%02d" % (index + 1)
@@ -99,6 +100,22 @@ func _initialize() -> void:
 		await create_timer(duration / float(frame_count)).timeout
 	print("CP-D2-R1R6-024_R11_R12_DYNAMIC_CAPTURE=PASS")
 	quit(0)
+
+func _add_temporal_silhouette(center: Vector3) -> void:
+	# QA-only dominant silhouette for cartographic R12 readability.
+	var silhouette := MeshInstance3D.new()
+	var capsule := CapsuleMesh.new()
+	capsule.radius = 10.0
+	capsule.height = 30.0
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color("#8d58db")
+	material.emission_enabled = true
+	material.emission = Color("#6c3fbf")
+	material.emission_energy_multiplier = 1.8
+	capsule.material = material
+	silhouette.mesh = capsule
+	silhouette.position = center + Vector3(0.0, 15.0, 0.0)
+	qa_root.add_child(silhouette)
 
 func _add_vertical_portal(center: Vector3) -> void:
 	# QA-only architectural silhouette: a grounded portal frame makes R12 readable without altering production geometry.
@@ -149,7 +166,7 @@ func _add_marker(position: Vector3, title: String, color: Color, larger: bool) -
 	qa_root.add_child(marker)
 	var label := Label3D.new()
 	label.text = title
-	label.position = position + Vector3(-12.0, 14.0, 0.0)
+	label.position = position + (Vector3(-38.0, 34.0, 0.0) if title.begins_with("R12") else Vector3(-12.0, 14.0, 0.0))
 	label.font_size = 148 if larger else 118
 	label.pixel_size = 0.086 if larger else 0.070
 	label.outline_size = 10
