@@ -1,0 +1,12 @@
+CP-D2-R1R6-039=PASS
+CONTINUITY=R10 Caverna do Orion -> R11 Câmara do Orion Cube
+SOURCE=CartographicAnchors.gd
+FRAME=R10/R11 readable; dark cave; blue-violet braziers visible
+PRINT=1600x900
+GAMEPLAY=30s
+RUNTIME_ERRORS=0
+DYNAMIC_LIGHTS=4
+LIGHT_LIMIT=16
+LIGHT_INVENTORY=PASS
+SCOPE_GUARD=PASS R1-R6_dev1_readonly R7-R12_dev2_owner
+NEXT=CP-D2-R1R6-040 R11->R12 temporal hub continuity
