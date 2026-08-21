@@ -3831,3 +3831,15 @@ Dev5 abre a próxima tarefa para manter a revisão formal Gamma rastreável e o 
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar a continuidade formal, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-710 — CONCLUÍDO: Continuidade da revisão formal Gamma
+
+A branch foi confirmada sincronizada em `997e726` (`0 0`), sem novas orientações, com handoff R4/R5/R6 presente, suporte Dev6 disponível, worktree limpo, parser `0`, aprovação pendente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-711 — ACTIVO: Apoio Gamma / preservação de evidência final
+
+Dev5 abre a próxima tarefa para preservar a evidência final Gamma, manter a rastreabilidade dos previews e deixar o pacote pronto para decisão formal dos owners. Não haverá promoção automática.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar evidência final, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
