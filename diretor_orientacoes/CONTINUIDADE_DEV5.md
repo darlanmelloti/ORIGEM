@@ -3963,3 +3963,15 @@ Dev5 abre a próxima tarefa para manter o gate de aprovação Gamma documentado 
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar o gate de aprovação, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-721 — CONCLUÍDO: Manutenção do gate de aprovação Gamma
+
+A branch foi confirmada sincronizada em `7ebca0a` (`0 0`), sem novas orientações nem aprovação formal. O gate permanece preservado, os artefactos rastreados estão presentes, 97 artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-722 — ACTIVO: Apoio Gamma / auditoria de retenção do pacote
+
+Dev5 abre a próxima tarefa para auditar a retenção do pacote Gamma, garantindo que os relatórios, checksums e previews permanecem recuperáveis e que os artefactos gerados não atravessam a fronteira de entrega.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar retenção, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
