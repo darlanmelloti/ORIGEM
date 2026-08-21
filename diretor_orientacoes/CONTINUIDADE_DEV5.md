@@ -3411,3 +3411,15 @@ Dev5 abre a próxima tarefa para preparar a matriz de integração condicionada 
 **NEXT_ACTION_IMMEDIATE:** criar a matriz de integração condicionada, executar parser e sessão QA de 36 segundos do conjunto Gamma, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-675 — CONCLUÍDO: Matriz de integração condicionada Gamma
+
+A matriz e a validação integrada confirmaram os três previews Gamma, parser `0`, três sessões de 36 segundos (`124` cada), grounding R5/R6, rota R4→R5→R6, atmosfera R4, luz abissal R6, produção intacta e máximo de `2/16` luzes. Publicação sincronizada em `1273bee` (`0 0`).
+
+## CP-D5-676 — ACTIVO: Apoio Gamma / pacote de revisão final
+
+Dev5 abre a próxima tarefa derivada para consolidar o pacote final de revisão do espelhamento real, com foco na rastreabilidade entre mapa, storyboard, previews, grounding e evidências de runtime. Nenhuma integração automática será efectuada sem aprovação dos proprietários regionais e revisão de Dev3/Dev4/Dev6.
+
+**NEXT_ACTION_IMMEDIATE:** executar a verificação final de rastreabilidade, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
