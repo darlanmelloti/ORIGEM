@@ -4419,3 +4419,15 @@ Dev5 abre imediatamente a próxima tarefa para consultar orientações, preserva
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar o gate AAA, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-17 — CONCLUÍDO: Continuidade operacional do gate AAA
+
+O CP-AAA-17 foi executado após consulta remota, sem novas orientações, aprovação ou pedido de alteração. A produção permaneceu intacta, o perfil isolado continua separado e a promoção está bloqueada.
+
+## CP-AAA-18 — ACTIVO: Continuidade do gate AAA
+
+Dev5 abre imediatamente a próxima tarefa para consultar orientações, preservar rollback e manter o gate AAA activo.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar o gate AAA, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
