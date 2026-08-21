@@ -3975,3 +3975,15 @@ Dev5 abre a próxima tarefa para auditar a retenção do pacote Gamma, garantind
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar retenção, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-722 — CONCLUÍDO: Auditoria de retenção do pacote Gamma
+
+A branch foi confirmada sincronizada em `c638e56` (`0 0`), sem novas orientações, com relatórios, checksums e previews recuperáveis, 97 artefactos locais gerados fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-723 — ACTIVO: Apoio Gamma / revisão de entrega condicionada
+
+Dev5 abre a próxima tarefa para revisar a entrega condicionada Gamma, confirmando a separação entre evidência rastreada e artefactos locais gerados antes da decisão formal dos owners.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, revisar a entrega condicionada, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
