@@ -4239,3 +4239,15 @@ Dev5 abre a próxima tarefa para obter runtime mínimo de 36 segundos, telemetri
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, recolher evidência AAA condicionada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-02 — CONCLUÍDO: Evidência AAA condicionada
+
+A sessão de jogo headless completou 36 segundos com `QA_EXIT=124`, parser sem erros de sintaxe e produção preservada. A cena isolada de grounding completou 36 segundos e registou `anexo_casa_voss` e `ponte_marco_2` grounded por raycast, com X/Z preservados. A aprovação AAA formal permanece pendente devido à ausência de telemetria de frame time/luzes, avisos FSR1 em Compatibility e ausência dos identificadores de ângulo/snap esperados no `Player.gd` auditado.
+
+## CP-AAA-03 — ACTIVO: Telemetria e configuração de renderer
+
+Dev5 abre a próxima tarefa para recolher telemetria de frame time/luzes, resolver ou documentar o aviso FSR1 no renderer Compatibility e preservar a integração condicionada.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, recolher telemetria e verificar renderer, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
