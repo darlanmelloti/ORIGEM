@@ -3519,3 +3519,15 @@ Dev5 abre a próxima tarefa para manter o estado de revisão dos candidatos Gamm
 **NEXT_ACTION_IMMEDIATE:** auditar estado limpo, checksums e rollback, validar parser e runtime mínimo, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-684 — CONCLUÍDO: Manutenção de estado de revisão Gamma
+
+O worktree passou `git diff --check`, todos os checksums anteriores e os três previews estão presentes, o parser terminou com `0`, a QA principal cumpriu 36 segundos (`124`), o rollback está disponível por commit e a revisão continua pendente. Publicação sincronizada em `d34cc88` (`0 0`).
+
+## CP-D5-685 — ACTIVO: Apoio Gamma / continuidade No-Stop
+
+Dev5 abre a próxima tarefa para manter a continuidade operacional do pacote Gamma e procurar novas orientações remotas sem interromper o trabalho de QA. O foco permanece no espelhamento R4–R6, apoio R5→R6, rastreabilidade e segurança de integração.
+
+**NEXT_ACTION_IMMEDIATE:** consultar novas orientações remotas, executar a validação de continuidade Gamma, gerar checksums, publicar, aguardar 10 segundos, consultar novamente o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
