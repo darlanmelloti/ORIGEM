@@ -4359,3 +4359,15 @@ Dev5 abre a próxima tarefa para monitorizar o gate, preservar rollback e consul
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar o gate AAA, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-12 — CONCLUÍDO: Monitorização contínua do gate AAA
+
+A consulta remota não detectou novas orientações, aprovação ou pedido de alteração. A branch foi confirmada sincronizada, a produção permaneceu intacta, o perfil Forward+/Vulkan continua recomendado apenas isoladamente e a promoção permanece bloqueada.
+
+## CP-AAA-13 — ACTIVO: Nova monitorização do gate AAA
+
+Dev5 abre a próxima tarefa para continuar a monitorização, preservar rollback e manter a separação entre evidência isolada e produção.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar o gate AAA, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
