@@ -3927,3 +3927,15 @@ Dev5 abre a próxima tarefa para manter a decisão formal Gamma rastreável e o 
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar continuidade da decisão formal, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-718 — CONCLUÍDO: Continuidade de decisão formal Gamma
+
+A branch foi confirmada sincronizada em `ba54d27` (`0 0`), sem novas orientações nem decisão dos owners. Os artefactos e evidências permanecem presentes, 97 artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-719 — ACTIVO: Apoio Gamma / monitorização de aprovação
+
+Dev5 abre a próxima tarefa para monitorizar a aprovação formal Gamma e manter o pacote R4/R5/R6 pronto, isolado e reversível enquanto não houver decisão explícita.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar aprovação, validar parser e evidências, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
