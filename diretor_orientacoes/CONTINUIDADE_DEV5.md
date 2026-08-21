@@ -4071,3 +4071,15 @@ Dev5 abre a próxima tarefa para verificar a disponibilidade condicionada para p
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar disponibilidade condicionada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-730 — CONCLUÍDO: Disponibilidade condicionada para promoção Gamma
+
+A branch foi confirmada sincronizada em `b633304` (`0 0`), sem novas orientações nem aprovação formal. O pacote está pronto para promoção condicionada, mas sem autorização automática; os artefactos locais gerados continuam fora da entrega, parser `0`, rollback disponível e produção intacta.
+
+## CP-D5-731 — ACTIVO: Apoio Gamma / retenção do gate de promoção
+
+Dev5 abre a próxima tarefa para revalidar a retenção do gate de promoção, mantendo a disponibilidade condicionada, os handoffs interequipas e a reversibilidade do pacote R4/R5/R6.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, revalidar o gate, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
