@@ -3447,3 +3447,15 @@ Dev5 abre a próxima tarefa para verificar que nenhum candidato Gamma atravessa 
 **NEXT_ACTION_IMMEDIATE:** executar auditoria de dependências e fronteiras, validar parser e runtime dos previews, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-678 — CONCLUÍDO: Auditoria de fronteiras Gamma
+
+Os três scripts Gamma foram auditados sem referências a `ForestLakeRegion.gd`, `TempleLevel.gd` ou `Player.gd`. O parser terminou com `0`, cada preview cumpriu 36 segundos (`124`), a integração automática permaneceu desactivada e a revisão Dev3/Dev4/Dev6 continua obrigatória. Publicação sincronizada em `a85769e` (`0 0`).
+
+## CP-D5-679 — ACTIVO: Apoio Gamma / checklist de integração segura
+
+Dev5 abre a próxima tarefa para transformar a auditoria de fronteiras num checklist operacional de integração segura, preservando candidatos isolados, proprietários regionais, grounding, orçamento e rollback documentado.
+
+**NEXT_ACTION_IMMEDIATE:** criar o checklist de integração segura, validá-lo contra os previews Gamma e as evidências, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
