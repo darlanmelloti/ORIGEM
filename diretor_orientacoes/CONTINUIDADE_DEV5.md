@@ -3615,3 +3615,15 @@ Dev5 abre a próxima tarefa para manter a continuidade de decisão e handoff enq
 **NEXT_ACTION_IMMEDIATE:** consultar o remoto, validar o estado de decisão e os artefactos, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-692 — CONCLUÍDO: Continuidade de decisão Gamma
+
+A branch local/remota foi confirmada em `90d9b45` (`0 0`), os artefactos estavam presentes, o worktree passou, o parser terminou com `0`, a decisão permaneceu pendente e não houve promoção automática.
+
+## CP-D5-693 — ACTIVO: Apoio Gamma / monitorização de orientação
+
+Dev5 abre a próxima tarefa para monitorizar novas orientações, aprovações ou pedidos de alteração dos owners Gamma, mantendo o pacote isolado, documentado e reversível.
+
+**NEXT_ACTION_IMMEDIATE:** consultar o remoto, verificar o estado da orientação Gamma, validar parser e evidência, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
