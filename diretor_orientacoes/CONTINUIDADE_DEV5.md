@@ -3939,3 +3939,15 @@ Dev5 abre a próxima tarefa para monitorizar a aprovação formal Gamma e manter
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar aprovação, validar parser e evidências, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-719 — CONCLUÍDO: Monitorização de aprovação Gamma
+
+A branch foi confirmada sincronizada em `148a9ce` (`0 0`), sem novas orientações nem aprovação formal. O pacote e as evidências permanecem presentes, 97 artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-720 — ACTIVO: Apoio Gamma / preservação de prontidão para aprovação
+
+Dev5 abre a próxima tarefa para preservar a prontidão do pacote Gamma e manter o handoff R4/R5/R6 disponível para aprovação explícita, sem promover alterações automaticamente.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar preservação de prontidão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
