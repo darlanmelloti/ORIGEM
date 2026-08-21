@@ -1,0 +1,2 @@
+5e0dfabcdd75ca0031f79ffd2dd79cb7b3a56aa0da52746ed250445dceedb7ae  diretor_orientacoes/CP-AAA-66_RELATORIO_CONTINUIDADE_GATE.md
+c9d626a2803769916b69bd5596f12dad66f80d275fce1119dd0e395883786dad  diretor_orientacoes/CP-AAA-66_GATE_CONTINUITY.log
