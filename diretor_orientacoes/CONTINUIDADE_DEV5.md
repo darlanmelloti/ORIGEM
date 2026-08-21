@@ -3759,3 +3759,15 @@ Dev5 abre a próxima tarefa para manter a revisão final Gamma continuamente ras
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar continuidade da revisão final, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-704 — CONCLUÍDO: Continuidade da revisão final Gamma
+
+A branch foi confirmada sincronizada em `69a11cb` (`0 0`), sem novas orientações, com artefactos presentes, worktree limpo, parser `0`, aprovação formal pendente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-705 — ACTIVO: Apoio Gamma / monitorização de decisão formal
+
+Dev5 abre a próxima tarefa para acompanhar a decisão formal dos owners Gamma e preservar o pacote isolado. Qualquer promoção continua condicionada a aprovação explícita, commit separado, regressão e rollback.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar decisão formal e integridade do pacote, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
