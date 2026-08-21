@@ -4083,3 +4083,15 @@ Dev5 abre a próxima tarefa para revalidar a retenção do gate de promoção, m
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, revalidar o gate, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-731 — CONCLUÍDO: Retenção do gate de promoção Gamma
+
+A branch foi confirmada sincronizada em `d467524` (`0 0`), sem novas orientações nem aprovação formal. O gate permanece retido, os artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-732 — ACTIVO: Apoio Gamma / monitorização de promoção condicionada
+
+Dev5 abre a próxima tarefa para monitorizar a promoção condicionada do pacote Gamma, preservando os handoffs interequipas e sem alterar o mundo principal antes de aprovação explícita.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar promoção condicionada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
