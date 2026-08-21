@@ -3663,3 +3663,15 @@ Dev5 abre a próxima tarefa para monitorizar a decisão final dos owners Gamma, 
 **NEXT_ACTION_IMMEDIATE:** consultar novas orientações remotas, validar o estado dos owners e a evidência final, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-696 — CONCLUÍDO: Monitorização final dos owners Gamma
+
+A decisão dos owners não foi detectada; a branch foi confirmada sincronizada em `03a9539` (`0 0`), os artefactos estavam presentes, o worktree passou, o parser terminou com `0`, a promoção automática permaneceu desactivada e o rollback ficou disponível.
+
+## CP-D5-697 — ACTIVO: Apoio Gamma / prontidão de promoção condicionada
+
+Dev5 abre a próxima tarefa para manter a prontidão de promoção condicionada do pacote Gamma. Qualquer integração continua dependente de aprovação explícita dos owners e deve ocorrer em commit separado, com regressão e rollback.
+
+**NEXT_ACTION_IMMEDIATE:** verificar o gate de promoção condicionada, consultar orientações remotas, validar parser e evidência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
