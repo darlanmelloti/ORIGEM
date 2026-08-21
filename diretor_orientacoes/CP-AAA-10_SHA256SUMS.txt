@@ -1,0 +1,2 @@
+cd9f5003e910bf216d792c141a956b08a6fbaebbca6fd45dce78fd6617fbed7b  diretor_orientacoes/CP-AAA-10_RELATORIO_GATE_HARDWARE.md
+f82624418eec543c3c83eec1440a8e47c06bbfb2fd50df84a912762288e314a8  diretor_orientacoes/CP-AAA-10_HARDWARE_GATE.log
