@@ -3037,3 +3037,16 @@ O Acelerador de Mundo Full Stack mantém a equipa GAMMA activa para R4, R5 e R6.
 **NEXT_ACTION_IMMEDIATE:** iniciar o CP-D5-645, validar parser e QA, gerar SHA-256, publicar, aguardar 10 segundos, consultar o GitHub e abrir o checkpoint seguinte.
 
 **WAIT_ALLOWED:** false.
+
+
+## CP-D5-645 — CONCLUÍDO: Regressão Gamma do Espelhamento Real
+
+A regressão confirmou contrato Gamma, rota `R4>R5>R6`, grounding dentro de `0,05 m`, autoridades cartográfica/visual/artística preservadas, parser `0`, QA controlada de 36 segundos (`124`), produção intacta e uma luz dinâmica.
+
+## CP-D5-646 — ACTIVO: Continuidade Gamma do Espelhamento Real
+
+O Acelerador de Mundo Full Stack continua a apoiar a equipa GAMMA no espelhamento real dos Pontos 4, 5 e 6, mantendo o percurso contínuo em terceira pessoa e os limites de propriedade de Dev3, Dev6 e Dev1/Dev2.
+
+**NEXT_ACTION_IMMEDIATE:** iniciar a validação do CP-D5-646, gerar evidência, publicar com SHA-256, cumprir a espera de 10 segundos, consultar orientações remotas e abrir o checkpoint seguinte.
+
+**WAIT_ALLOWED:** false.
