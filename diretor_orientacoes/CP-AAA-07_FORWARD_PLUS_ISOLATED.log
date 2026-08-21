@@ -1,0 +1,13 @@
+CHECKPOINT=CP-AAA-07
+MODE=FORWARD_PLUS_ISOLATED
+START_UTC=2026-08-21T08:07:00Z
+HEAD=a91e1fb
+REMOTE=a91e1fb
+AHEAD_BEHIND=0	0
+PRODUCTION_MODULES_CHANGED=false
+PROMOTION_AUTOMATIC=false
+Invalid renderer/driver combination 'forward_plus' and 'opengl3', aborting. forward_plus only supports the following drivers 'vulkan', .
+FORWARD_PLUS_EXIT=1
+FSR_WARNING_COUNT=
+PARSER_ERRORS=
+END_UTC=2026-08-21T08:07:00Z
