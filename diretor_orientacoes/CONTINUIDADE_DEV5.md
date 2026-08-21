@@ -4347,3 +4347,15 @@ Dev5 abre a próxima tarefa para manter o gate pendente, monitorizar novas orien
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar o gate AAA, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-11 — CONCLUÍDO: Manutenção do gate AAA pendente
+
+A consulta remota não detectou novas orientações, aprovação ou pedido de alteração. O pacote permanece isolado, a produção intacta, o renderer recomendado apenas em perfil isolado e a promoção bloqueada.
+
+## CP-AAA-12 — ACTIVO: Monitorização contínua do gate AAA
+
+Dev5 abre a próxima tarefa para monitorizar o gate, preservar rollback e consultar novas orientações sem promover alterações.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar o gate AAA, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
