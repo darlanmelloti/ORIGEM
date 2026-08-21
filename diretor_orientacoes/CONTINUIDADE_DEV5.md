@@ -4119,3 +4119,15 @@ Dev5 abre a próxima tarefa para auditar a integridade pré-decisão do pacote G
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar integridade pré-decisão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-734 — CONCLUÍDO: Integridade pré-decisão Gamma
+
+A branch foi confirmada sincronizada em `8989d2a` (`0 0`), sem novas orientações nem aprovação formal. A cadeia de checksums e a fronteira pré-decisão permanecem íntegras, os artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-735 — ACTIVO: Apoio Gamma / preservação de readiness para owners
+
+Dev5 abre a próxima tarefa para preservar a prontidão do pacote Gamma para revisão dos owners, mantendo os handoffs Dev3, Dev4 e Dev6 preparados, a promoção condicionada e o rollback disponível.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar readiness para owners, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
