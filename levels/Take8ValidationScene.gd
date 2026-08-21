@@ -17,7 +17,7 @@ var elapsed: float = 0.0
 var region9_gate_light: OmniLight3D
 var route_start := Vector3(169.0, 31.2, 398.0)
 var route_end := Vector3(148.0, 32.4, 438.0)
-var r9_camera_position := Vector3(-184.0, 0.0, 548.0)
+var r9_camera_position := Vector3(205.0, 42.0, 372.0)
 
 func _ready() -> void:
 	_build_environment()
@@ -121,22 +121,23 @@ func _process(delta: float) -> void:
 		var trail_target := Vector3(169.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.65, 414.0).lerp(Vector3(148.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.55, 438.0), trail_progress)
 		validation_camera.look_at(trail_target, Vector3.UP)
 	else:
-		validation_camera.fov = 38.0
+		validation_camera.fov = 55.0
 		validation_camera.position = r9_camera_position
-		validation_camera.look_at(Vector3(-164.0, 53.5, 564.0), Vector3.UP)
+		validation_camera.look_at(Vector3(145.0, 23.0, 360.0), Vector3.UP)
 		var r9_terrain := get_node_or_null("TerrainPatch") as Node3D
 		if r9_terrain != null:
 			r9_terrain.visible = true
+		# CP073: manter os sujeitos reais R7–R9 visíveis no segundo acto; a câmara elevada revela a cadeia em vez de ocultar a trilha.
 		var r9_route := get_node_or_null("Take8HighlandRegion/TrilhaDaMontanhaOrion") as Node3D
 		if r9_route != null:
-			r9_route.visible = false
+			r9_route.visible = true
 		var r9_outcrops := get_node_or_null("Take8HighlandRegion/AfloramentosDaTrilha") as Node3D
 		if r9_outcrops != null:
-			r9_outcrops.visible = false
+			r9_outcrops.visible = true
 		for r9_decor_name in ["MarcoOrganicoEntradaTrilhaTake8", "ArcoOrganicoEntradaTake8_0", "ArcoOrganicoEntradaTake8_1", "ArcoOrganicoEntradaTake8_2", "Take8AncoraVerticalOrganica"]:
 			var r9_decor := get_node_or_null("Take8HighlandRegion/" + r9_decor_name) as Node3D
 			if r9_decor != null:
-				r9_decor.visible = false
+				r9_decor.visible = true
 	if region9_gate_light != null:
 		region9_gate_light.light_energy = 0.56 + sin(elapsed * 1.7) * 0.10
 
