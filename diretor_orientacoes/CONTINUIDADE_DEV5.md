@@ -3699,3 +3699,15 @@ Dev5 abre a próxima tarefa para verificar o estado pós-gate e manter o pacote 
 **NEXT_ACTION_IMMEDIATE:** consultar o GitHub, validar o estado pós-gate, parser e evidências, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-699 — CONCLUÍDO: Verificação pós-gate Gamma
+
+A branch foi confirmada sincronizada em `34be0c4` (`0 0`), os artefactos estavam presentes, o worktree passou, o parser terminou com `0`, a aprovação dos owners permaneceu ausente, `PROMOTION_ALLOWED=false`, e o rollback continuou disponível.
+
+## CP-D5-700 — ACTIVO: Apoio Gamma / checkpoint de continuidade
+
+Dev5 abre o próximo checkpoint para manter a continuidade operacional após o CP-D5-699, consultar novas orientações e preservar o pacote Gamma sem promoção automática.
+
+**NEXT_ACTION_IMMEDIATE:** consultar o GitHub, validar o estado do pacote e do gate, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
