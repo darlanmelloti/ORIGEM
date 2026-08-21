@@ -4035,3 +4035,15 @@ Dev5 abre a próxima tarefa para verificar a consistência final entre os relat�
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar consistência, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-727 — CONCLUÍDO: Verificação de consistência do handoff Gamma
+
+A branch foi confirmada sincronizada em `b9aa5ef` (`0 0`), sem novas orientações nem aprovação formal. A cadeia de checksums, relatórios e previews permanece consistente, 97 artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-728 — ACTIVO: Apoio Gamma / validação final de fronteira de promoção
+
+Dev5 abre a próxima tarefa para verificar a fronteira de promoção do pacote Gamma, assegurando que nenhum artefacto não rastreado ou alteração condicional entra no mundo principal sem aprovação explícita.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar a fronteira de promoção, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
