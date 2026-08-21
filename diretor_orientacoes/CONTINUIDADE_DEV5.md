@@ -3711,3 +3711,15 @@ Dev5 abre o próximo checkpoint para manter a continuidade operacional após o C
 **NEXT_ACTION_IMMEDIATE:** consultar o GitHub, validar o estado do pacote e do gate, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-700 — CONCLUÍDO: Checkpoint de continuidade Gamma
+
+A branch foi confirmada sincronizada em `faa4a59` (`0 0`), sem novas orientações, com artefactos presentes, worktree limpo, parser Godot `0`, aprovação dos owners ausente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-701 — ACTIVO: Apoio Gamma / verificação contínua do handoff
+
+Dev5 abre a próxima tarefa para manter o handoff Gamma em verificação contínua, pronto para novas orientações ou aprovação explícita. O pacote permanece isolado e não será promovido automaticamente.
+
+**NEXT_ACTION_IMMEDIATE:** consultar novas orientações, verificar handoff e evidência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
