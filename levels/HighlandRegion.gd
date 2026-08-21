@@ -289,8 +289,9 @@ func _build_elevated_village() -> void:
 	var fortress_facade: Node3D = CLIFF_ROCK.instantiate() as Node3D
 	if fortress_facade != null:
 		fortress_facade.name = "CP102FachadaContinuaVilaR7"
-		fortress_facade.position = Vector3(0.0, 2.35, 8.5)
-		fortress_facade.scale = Vector3(5.2, 1.65, 1.15)
+		# CP106: massa central ampliada e apoiada na soleira, com proporção legível em baixa perspectiva.
+		fortress_facade.position = Vector3(0.0, 2.8, 8.0)
+		fortress_facade.scale = Vector3(6.3, 2.05, 1.28)
 		fortress_facade.rotation = Vector3(0.02, 0.0, 0.0)
 		var facade_material: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
 		facade_material.albedo_color = Color("#87968a")
@@ -315,11 +316,23 @@ func _build_elevated_village() -> void:
 		var entry_lintel: Node3D = SLOPE_ROCK.instantiate() as Node3D
 		if entry_lintel != null:
 			entry_lintel.name = "CP103LintelEntradaVilaR7"
-			entry_lintel.position = Vector3(0.0, 3.25, 6.2)
-			entry_lintel.scale = Vector3(1.65, 0.42, 0.72)
+			entry_lintel.position = Vector3(0.0, 3.9, 5.8)
+			entry_lintel.scale = Vector3(1.95, 0.5, 0.82)
 			_apply_material(entry_lintel, facade_material)
 			village.add_child(entry_lintel)
-	# CP083: terraço e muros de ligação transformam as casas isoladas numa vila fortificada contínua.
+		# CP106: dois vãos laterais apoiados no terraço reforçam a entrada sem duplicar a rota física.
+		var entry_jamb_positions: Array[Vector3] = [Vector3(-2.25, 1.85, 6.0), Vector3(2.25, 1.85, 6.0)]
+		for jamb_index: int in range(entry_jamb_positions.size()):
+			var entry_jamb: Node3D = CLIFF_ROCK.instantiate() as Node3D
+			if entry_jamb == null:
+				continue
+			entry_jamb.name = "CP106OmbreiraEntradaR7_%02d" % jamb_index
+			entry_jamb.position = entry_jamb_positions[jamb_index]
+			entry_jamb.scale = Vector3(0.48, 1.42, 0.62)
+			entry_jamb.rotation.y = 0.08 if jamb_index == 0 else -0.08
+			_apply_material(entry_jamb, facade_material)
+			village.add_child(entry_jamb)
+		# CP083: terraço e muros de ligação transformam as casas isoladas numa vila fortificada contínua.
 	var elevated_base_positions: Array[Vector3] = [Vector3(-9.0, 0.78, 4.0), Vector3(0.0, 1.42, 9.5), Vector3(9.0, 1.95, 15.0)]
 	for base_index: int in range(elevated_base_positions.size()):
 		var elevated_base: Node3D = SLOPE_ROCK.instantiate() as Node3D
