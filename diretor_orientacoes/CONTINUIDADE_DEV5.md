@@ -3987,3 +3987,15 @@ Dev5 abre a próxima tarefa para revisar a entrega condicionada Gamma, confirman
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, revisar a entrega condicionada, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-723 — CONCLUÍDO: Revisão de entrega condicionada Gamma
+
+A branch foi confirmada sincronizada em `537a808` (`0 0`), sem novas orientações nem aprovação formal. A fronteira de entrega rastreada foi preservada, 97 artefactos locais gerados continuam fora do pacote, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-724 — ACTIVO: Apoio Gamma / validação do pacote final de revisão
+
+Dev5 abre a próxima tarefa para validar o pacote final de revisão Gamma antes de nova consulta aos owners, mantendo R4/R5/R6 isolado, rastreável e reversível.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar o pacote final de revisão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
