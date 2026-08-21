@@ -11,6 +11,7 @@ const ROUTE_ANCHOR: PackedScene = preload("res://assets/models_cc0/stone_largeB.
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const HOUSE_ROOF: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
 const ROUTE_STONE: PackedScene = preload("res://assets/models_cc0/stone_smallF.glb")
+const BRIDGE_ARCH: PackedScene = preload("res://assets/models_cc0/bridge_stone.glb")
 
 var validation_camera: Camera3D
 var elapsed: float = 0.0
@@ -29,6 +30,7 @@ func _ready() -> void:
 	add_child(highlands)
 	_prepare_real_trail_reveal(highlands, terrain)
 	_build_cinematic_village_reveal()
+	_build_cp079_organic_facade()
 	var start_ground: float = float(terrain.call("height_at", route_start.x, route_start.z))
 	var end_ground: float = float(terrain.call("height_at", route_end.x, route_end.z))
 	route_start.y = start_ground + 2.1
@@ -99,6 +101,48 @@ func _build_cinematic_village_reveal() -> void:
 			route_stone.position = Vector3(140.0, 14.8, 357.0) + route_positions[route_index]
 			route_stone.scale = Vector3.ONE * 0.58
 			reveal.add_child(route_stone)
+
+func _build_cp079_organic_facade() -> void:
+	# CP079: fachada QA-only com massa contínua; apenas assets CC0, sem blocos primitivos.
+	var facade := Node3D.new()
+	facade.name = "CP079FachadaOrganicaR7"
+	facade.position = Vector3(140.0, 14.25, 357.0)
+	add_child(facade)
+	var wall_left := PILLAR.instantiate() as Node3D
+	if wall_left != null:
+		wall_left.name = "CP079ParedeNorte"
+		wall_left.position = Vector3(-4.6, 3.4, 0.2)
+		wall_left.scale = Vector3(1.65, 3.3, 1.2)
+		facade.add_child(wall_left)
+		_apply_cp090_material(wall_left)
+	var wall_right := PILLAR.instantiate() as Node3D
+	if wall_right != null:
+		wall_right.name = "CP079ParedeSul"
+		wall_right.position = Vector3(4.6, 3.4, 0.2)
+		wall_right.scale = Vector3(1.65, 3.3, 1.2)
+		facade.add_child(wall_right)
+		_apply_cp090_material(wall_right)
+	var lintel := ROCK_LARGE.instantiate() as Node3D
+	if lintel != null:
+		lintel.name = "CP079Frontao"
+		lintel.position = Vector3(0.0, 6.6, 0.0)
+		lintel.scale = Vector3(4.9, 1.15, 1.55)
+		facade.add_child(lintel)
+		_apply_cp090_material(lintel)
+	var bridge := BRIDGE_ARCH.instantiate() as Node3D
+	if bridge != null:
+		bridge.name = "CP080ArcoEntradaVilaR7"
+		bridge.position = Vector3(0.0, 2.8, -1.2)
+		bridge.scale = Vector3(2.3, 2.3, 2.3)
+		facade.add_child(bridge)
+		_apply_cp090_material(bridge)
+	var threshold := ROUTE_STONE.instantiate() as Node3D
+	if threshold != null:
+		threshold.name = "CP079SoleiraAterrada"
+		threshold.position = Vector3(0.0, 0.28, 2.15)
+		threshold.scale = Vector3(2.8, 0.45, 1.8)
+		facade.add_child(threshold)
+		_apply_cp090_material(threshold)
 
 func _apply_cp090_material(node: Node3D) -> void:
 	var material := StandardMaterial3D.new()
@@ -217,11 +261,11 @@ func _build_environment() -> void:
 	environment.background_color = Color("#839caf")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#8baab4")
-	environment.ambient_light_energy = 0.98
+	environment.ambient_light_energy = 1.32
 	environment.fog_enabled = true
 	environment.fog_light_color = Color("#91aeb8")
-	environment.fog_light_energy = 0.72
-	environment.fog_density = 0.00045
+	environment.fog_light_energy = 0.48
+	environment.fog_density = 0.00024
 	environment.fog_height = 18.0
 	environment.fog_height_density = 0.012
 	environment.volumetric_fog_enabled = false
@@ -230,7 +274,7 @@ func _build_environment() -> void:
 	var sun := DirectionalLight3D.new()
 	sun.name = "Take8AlpineKey"
 	sun.light_color = Color("#d7e5e2")
-	sun.light_energy = 1.15
+	sun.light_energy = 1.42
 	sun.shadow_enabled = false
 	sun.rotation_degrees = Vector3(-50.0, -28.0, 0.0)
 	add_child(sun)

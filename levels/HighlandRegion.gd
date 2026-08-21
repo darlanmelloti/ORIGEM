@@ -402,7 +402,7 @@ func _make_village_house(index: int) -> Node3D:
 	var base: Node3D = ROCK_LARGE.instantiate() as Node3D
 	if base != null:
 		base.name = "AfloramentoBaseDaCasa"
-		base.scale = Vector3(1.08, 0.24, 0.86)
+		base.scale = Vector3(1.42, 0.42, 1.10)
 		base.position = Vector3(0.0, 0.52, 0.0)
 		_apply_material(base, house_stone_material)
 		house.add_child(base)
@@ -410,40 +410,40 @@ func _make_village_house(index: int) -> Node3D:
 		var house_pillar: Node3D = PILLAR.instantiate() as Node3D
 		if house_pillar != null:
 			house_pillar.name = "PilarOrganicoCasa_%02d_%02d" % [index, pillar_index]
-			house_pillar.position = Vector3(-1.6 + float(pillar_index) * 1.6, 2.35 + float(pillar_index % 2) * 0.28, 0.0)
-			house_pillar.scale = Vector3(0.30, 0.92, 0.30)
+			house_pillar.position = Vector3(-1.75 + float(pillar_index) * 1.75, 2.55 + float(pillar_index % 2) * 0.30, 0.0)
+			house_pillar.scale = Vector3(0.42, 1.34, 0.42)
 			_apply_material(house_pillar, house_stone_material)
 			house.add_child(house_pillar)
 	var roof: Node3D = ROCK_LARGE.instantiate() as Node3D
 	if roof != null:
 		roof.name = "CoberturaRochosaDaCasa"
-		roof.scale = Vector3(1.05, 0.14, 0.80)
+		roof.scale = Vector3(1.38, 0.28, 1.04)
 		roof.rotation = Vector3(0.14, 0.35, -0.08)
-		roof.position = Vector3(0.0, 3.05, 0.0)
+		roof.position = Vector3(0.0, 3.42, 0.0)
 		_apply_material(roof, house_roof_material)
 		house.add_child(roof)
 	var left_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
 	if left_wall != null:
 		left_wall.name = "ParedeOrganicaEsquerdaCasa_%02d" % index
-		left_wall.scale = Vector3(0.62, 1.10, 0.64)
+		left_wall.scale = Vector3(0.86, 1.62, 0.84)
 		left_wall.rotation = Vector3(0.04, 0.20, -0.08)
-		left_wall.position = Vector3(-2.05, 1.85, 0.04)
+		left_wall.position = Vector3(-2.35, 2.05, 0.04)
 		_apply_material(left_wall, house_stone_material)
 		house.add_child(left_wall)
 	var right_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
 	if right_wall != null:
 		right_wall.name = "ParedeOrganicaDireitaCasa_%02d" % index
-		right_wall.scale = Vector3(0.62, 1.10, 0.64)
+		right_wall.scale = Vector3(0.86, 1.62, 0.84)
 		right_wall.rotation = Vector3(-0.03, -0.18, 0.08)
-		right_wall.position = Vector3(2.05, 1.85, 0.04)
+		right_wall.position = Vector3(2.35, 2.05, 0.04)
 		_apply_material(right_wall, house_stone_material)
 		house.add_child(right_wall)
 	var sloped_roof: Node3D = SLOPE_ROCK.instantiate() as Node3D
 	if sloped_roof != null:
 		sloped_roof.name = "CoberturaInclinadaOrganicaCasa_%02d" % index
-		sloped_roof.scale = Vector3(1.16, 0.62, 0.88)
+		sloped_roof.scale = Vector3(1.52, 0.86, 1.10)
 		sloped_roof.rotation = Vector3(0.12, 0.30, -0.14)
-		sloped_roof.position = Vector3(0.0, 3.62, 0.06)
+		sloped_roof.position = Vector3(0.0, 4.18, 0.06)
 		_apply_material(sloped_roof, house_roof_material)
 		house.add_child(sloped_roof)
 	var hearth_light := OmniLight3D.new()
