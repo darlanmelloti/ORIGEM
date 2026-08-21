@@ -289,29 +289,35 @@ func _build_elevated_village() -> void:
 	var fortress_facade: Node3D = CLIFF_ROCK.instantiate() as Node3D
 	if fortress_facade != null:
 		fortress_facade.name = "CP102FachadaContinuaVilaR7"
-		fortress_facade.position = Vector3(0.0, 3.4, 9.0)
-		fortress_facade.scale = Vector3(5.8, 2.6, 1.35)
+		fortress_facade.position = Vector3(0.0, 2.35, 8.5)
+		fortress_facade.scale = Vector3(5.2, 1.65, 1.15)
 		fortress_facade.rotation = Vector3(0.02, 0.0, 0.0)
-		_apply_material(fortress_facade, stone_material)
+		var facade_material: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
+		facade_material.albedo_color = Color("#87968a")
+		facade_material.roughness = 0.82
+		facade_material.emission_enabled = true
+		facade_material.emission = Color("#18383a")
+		facade_material.emission_energy_multiplier = 0.42
+		_apply_material(fortress_facade, facade_material)
 		village.add_child(fortress_facade)
 		# CP103: contrafortes laterais e lintel orgânico transformam a massa num portal habitável.
-		var buttress_positions: Array[Vector3] = [Vector3(-5.2, 2.5, 7.2), Vector3(5.2, 2.5, 7.2)]
+		var buttress_positions: Array[Vector3] = [Vector3(-3.8, 1.65, 7.1), Vector3(3.8, 1.65, 7.1)]
 		for buttress_index: int in range(buttress_positions.size()):
 			var buttress: Node3D = CLIFF_ROCK.instantiate() as Node3D
 			if buttress == null:
 				continue
 			buttress.name = "CP103ContraforteVilaR7_%02d" % buttress_index
 			buttress.position = buttress_positions[buttress_index]
-			buttress.scale = Vector3(1.25, 2.9, 1.15)
+			buttress.scale = Vector3(0.62, 1.55, 0.78)
 			buttress.rotation = Vector3(0.04, 0.18 if buttress_index == 0 else -0.18, 0.0)
-			_apply_material(buttress, stone_material)
+			_apply_material(buttress, facade_material)
 			village.add_child(buttress)
 		var entry_lintel: Node3D = SLOPE_ROCK.instantiate() as Node3D
 		if entry_lintel != null:
 			entry_lintel.name = "CP103LintelEntradaVilaR7"
-			entry_lintel.position = Vector3(0.0, 4.2, 5.9)
-			entry_lintel.scale = Vector3(2.2, 0.65, 0.9)
-			_apply_material(entry_lintel, stone_material)
+			entry_lintel.position = Vector3(0.0, 3.25, 6.2)
+			entry_lintel.scale = Vector3(1.65, 0.42, 0.72)
+			_apply_material(entry_lintel, facade_material)
 			village.add_child(entry_lintel)
 	# CP083: terraço e muros de ligação transformam as casas isoladas numa vila fortificada contínua.
 	var elevated_base_positions: Array[Vector3] = [Vector3(-9.0, 0.78, 4.0), Vector3(0.0, 1.42, 9.5), Vector3(9.0, 1.95, 15.0)]
