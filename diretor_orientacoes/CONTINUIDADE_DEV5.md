@@ -3435,3 +3435,15 @@ Dev5 abre a próxima tarefa para preparar o estado de prontidão para revisão d
 **NEXT_ACTION_IMMEDIATE:** executar a verificação de readiness dos candidatos Gamma, validar parser e QA controlada, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-677 — CONCLUÍDO: Readiness de revisão Gamma
+
+Os três previews Gamma passaram parser `0` e sessões de 36 segundos (`124` cada), com rotas, grounding, atmosfera, iluminação e backup confirmados. O pacote está pronto para revisão de Dev3, Dev4 e Dev6. Publicação sincronizada em `a607c95` (`0 0`).
+
+## CP-D5-678 — ACTIVO: Apoio Gamma / revisão de limites de integração
+
+Dev5 abre a próxima tarefa para verificar que nenhum candidato Gamma atravessa as fronteiras de produção e que os limites de integração condicionada continuam explícitos. O foco é auditar referências a `ForestLakeRegion.gd`, `TempleLevel.gd` e `Player.gd`, mantendo todos os previews isolados até aprovação dos proprietários regionais.
+
+**NEXT_ACTION_IMMEDIATE:** executar auditoria de dependências e fronteiras, validar parser e runtime dos previews, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
