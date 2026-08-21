@@ -18,7 +18,7 @@ var elapsed: float = 0.0
 var region9_gate_light: OmniLight3D
 var route_start := Vector3(169.0, 31.2, 398.0)
 var route_end := Vector3(148.0, 32.4, 438.0)
-var r9_camera_position := Vector3(178.0, 29.0, 374.0)
+var r9_camera_position := Vector3(160.0, 23.0, 364.0)
 
 func _ready() -> void:
 	_build_environment()
@@ -37,7 +37,7 @@ func _ready() -> void:
 	route_end.y = end_ground + 2.1
 	var threshold_for_camera := highlands.get_node_or_null("LimiarOrganicoRegiao09") as Node3D
 	if threshold_for_camera != null:
-		r9_camera_position.y = threshold_for_camera.global_position.y + 4.0
+		r9_camera_position.y = threshold_for_camera.global_position.y + 1.0
 	else:
 		r9_camera_position.y = float(terrain.call("height_at", r9_camera_position.x, r9_camera_position.z)) + 4.0
 	validation_camera = Camera3D.new()
@@ -165,9 +165,9 @@ func _process(delta: float) -> void:
 		var trail_target := Vector3(169.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.65, 414.0).lerp(Vector3(148.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.55, 438.0), trail_progress)
 		validation_camera.look_at(trail_target, Vector3.UP)
 	else:
-		validation_camera.fov = 62.0
+		validation_camera.fov = 54.0
 		validation_camera.position = r9_camera_position
-		validation_camera.look_at(Vector3(140.0, 19.0, 357.0), Vector3.UP)
+		validation_camera.look_at(Vector3(140.0, 18.5, 359.0), Vector3.UP)
 		var r9_terrain := get_node_or_null("TerrainPatch") as Node3D
 		if r9_terrain != null:
 			r9_terrain.visible = true

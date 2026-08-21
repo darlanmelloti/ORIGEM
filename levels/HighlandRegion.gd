@@ -280,6 +280,51 @@ func _build_elevated_village() -> void:
 		var house_local_z: float = 4.0 + float(row) * 11.0
 		house.position = Vector3(house_local_x, 1.15 + float(row) * 2.85, house_local_z)
 		village.add_child(house)
+	# CP083: terraço e muros de ligação transformam as casas isoladas numa vila fortificada contínua.
+	var elevated_base_positions: Array[Vector3] = [Vector3(-9.0, 0.78, 4.0), Vector3(0.0, 1.42, 9.5), Vector3(9.0, 1.95, 15.0)]
+	for base_index: int in range(elevated_base_positions.size()):
+		var elevated_base: Node3D = SLOPE_ROCK.instantiate() as Node3D
+		if elevated_base == null:
+			continue
+		elevated_base.name = "CP083TerracoElevadoR7_%02d" % base_index
+		elevated_base.position = elevated_base_positions[base_index]
+		elevated_base.scale = Vector3(3.6, 0.72, 2.0)
+		elevated_base.rotation = Vector3(0.02, -0.08 + float(base_index) * 0.12, 0.0)
+		_apply_material(elevated_base, stone_material)
+		village.add_child(elevated_base)
+	var connecting_wall_positions: Array[Vector3] = [Vector3(-4.7, 2.35, 6.9), Vector3(4.5, 3.0, 12.3)]
+	for wall_index: int in range(connecting_wall_positions.size()):
+		var connecting_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
+		if connecting_wall == null:
+			continue
+		connecting_wall.name = "CP083MuroLigacaoR7_%02d" % wall_index
+		connecting_wall.position = connecting_wall_positions[wall_index]
+		connecting_wall.scale = Vector3(2.75, 1.18, 0.72)
+		connecting_wall.rotation = Vector3(0.02, 0.18 if wall_index == 0 else -0.14, 0.0)
+		_apply_material(connecting_wall, stone_material)
+		village.add_child(connecting_wall)
+	# Soleira larga de chegada alinhada ao corredor cartográfico R6→R7.
+	for step_index: int in range(3):
+		var entrance_step: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if entrance_step == null:
+			continue
+		entrance_step.name = "CP083SoleiraR6R7_%02d" % step_index
+		entrance_step.position = Vector3(0.0, 0.32 + float(step_index) * 0.34, -4.6 + float(step_index) * 1.35)
+		entrance_step.scale = Vector3(2.8, 0.34, 0.82)
+		_apply_material(entrance_step, stone_material)
+		village.add_child(entrance_step)
+	# CP084: entulho orgânico aterra a ligação entre casas, muros e soleira; não são marcadores de QA.
+	var debris_positions: Array[Vector3] = [Vector3(-6.8, 1.08, 6.0), Vector3(-2.4, 1.72, 8.4), Vector3(2.8, 2.18, 11.2), Vector3(7.2, 2.68, 14.2), Vector3(-1.2, 0.72, -2.8), Vector3(3.6, 1.04, -1.6)]
+	for debris_index: int in range(debris_positions.size()):
+		var debris: Node3D = ROCK_LARGE.instantiate() as Node3D
+		if debris == null:
+			continue
+		debris.name = "CP084DetritoOrganicoR7_%02d" % debris_index
+		debris.position = debris_positions[debris_index]
+		debris.scale = Vector3(0.34 + float(debris_index % 3) * 0.08, 0.22 + float(debris_index % 2) * 0.08, 0.28)
+		debris.rotation = Vector3(0.04 * float(debris_index), -0.22 + float(debris_index) * 0.31, 0.08)
+		_apply_material(debris, stone_material)
+		village.add_child(debris)
 	for pillar_index: int in range(4):
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
 		if pillar == null:
@@ -393,12 +438,12 @@ func _make_village_house(index: int) -> Node3D:
 	var house: Node3D = Node3D.new()
 	house.name = "CasaDePedra_%02d" % index
 	var house_stone_material: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
-	house_stone_material.albedo_color = Color("#b9aa86")
+	house_stone_material.albedo_color = Color("#a49678")
 	house_stone_material.emission_enabled = true
 	house_stone_material.emission = Color("#765e37")
 	house_stone_material.emission_energy_multiplier = 0.52
 	var house_roof_material: StandardMaterial3D = roof_material.duplicate() as StandardMaterial3D
-	house_roof_material.albedo_color = Color("#726951")
+	house_roof_material.albedo_color = Color("#514b3d")
 	var base: Node3D = ROCK_LARGE.instantiate() as Node3D
 	if base != null:
 		base.name = "AfloramentoBaseDaCasa"
