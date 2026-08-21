@@ -3423,3 +3423,15 @@ Dev5 abre a próxima tarefa derivada para consolidar o pacote final de revisão 
 **NEXT_ACTION_IMMEDIATE:** executar a verificação final de rastreabilidade, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-676 — CONCLUÍDO: Revisão final de rastreabilidade Gamma
+
+A verificação final confirmou a ligação entre contrato, âncoras, previews, relatórios, evidências de runtime e backup. Não foram encontrados artefactos funcionais em falta; a branch foi publicada e sincronizada em `836d349` (`0 0`).
+
+## CP-D5-677 — ACTIVO: Apoio Gamma / readiness de revisão
+
+Dev5 abre a próxima tarefa para preparar o estado de prontidão para revisão das equipas Beta e Gamma. O pacote permanece candidato isolado: qualquer integração no mundo principal requer aprovação dos proprietários regionais, revisão visual Dev3, auditoria técnica Dev4 e validação ambiental Dev6.
+
+**NEXT_ACTION_IMMEDIATE:** executar a verificação de readiness dos candidatos Gamma, validar parser e QA controlada, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
