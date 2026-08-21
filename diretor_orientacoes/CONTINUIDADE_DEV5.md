@@ -3651,3 +3651,15 @@ Dev5 abre a próxima tarefa para manter a prontidão da revisão final do pacote
 **NEXT_ACTION_IMMEDIATE:** consultar novas orientações, validar readiness final, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-695 — CONCLUÍDO: Prontidão de revisão final Gamma
+
+A verificação confirmou a branch sincronizada em `dd0a571` (`0 0`), ausência de novas orientações, pacote completo, worktree limpo, parser Godot `0`, revisão pendente, promoção automática desactivada e produção intacta.
+
+## CP-D5-696 — ACTIVO: Apoio Gamma / monitorização final de owners
+
+Dev5 abre a próxima tarefa para monitorizar a decisão final dos owners Gamma, mantendo os artefactos isolados e prontos para aprovação ou pedido de alteração. Nenhuma promoção automática será executada.
+
+**NEXT_ACTION_IMMEDIATE:** consultar novas orientações remotas, validar o estado dos owners e a evidência final, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
