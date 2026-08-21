@@ -4323,3 +4323,15 @@ Dev5 abre a próxima tarefa para consolidar a confirmação final condicionada, 
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, confirmar estado final condicionado, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-09 — CONCLUÍDO: Confirmação final condicionada AAA
+
+O estado final foi confirmado em `ce90099`, com `0 0`, sem aprovação ou pedido de alteração dos owners. Forward+/Vulkan é recomendado apenas isoladamente; o renderer de produção permanece inalterado, a aprovação no hardware-alvo está pendente e o rollback está disponível.
+
+## CP-AAA-10 — ACTIVO: Validação no hardware-alvo e gate de promoção
+
+Dev5 abre a próxima tarefa para validar o perfil recomendado na GTX 1050 Ti ou receber confirmação formal de Dev4, mantendo o gate de promoção e a produção intactos.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar hardware/gate de promoção, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
