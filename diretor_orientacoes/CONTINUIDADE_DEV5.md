@@ -3795,3 +3795,15 @@ Dev5 abre a próxima tarefa para auditar o encerramento técnico do pacote Gamma
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar encerramento técnico, validar parser e evidências, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-707 — CONCLUÍDO: Auditoria de encerramento técnico Gamma
+
+A branch foi confirmada sincronizada em `9ed51aa` (`0 0`), com artefactos presentes, worktree limpo, parser Godot `0`, grounding máximo de `0,05 m`, limite de 16 luzes, aprovação dos owners pendente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-708 — ACTIVO: Apoio Gamma / preservação pós-encerramento
+
+Dev5 abre a próxima tarefa para preservar o pacote Gamma após o encerramento técnico, mantendo a rastreabilidade de R4/R5/R6 e o handoff disponível para aprovação formal ou novas orientações.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar preservação pós-encerramento, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
