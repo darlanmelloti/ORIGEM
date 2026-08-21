@@ -24,6 +24,7 @@ func _ready() -> void:
 	_build_r4_forest()
 	_build_r5_camp()
 	_build_r6_submerged_reveal()
+	_build_r6_abyssal_light()
 	await get_tree().physics_frame
 	_run_gamma_grounding()
 	_build_route_reader()
@@ -42,6 +43,17 @@ func _build_environment() -> void:
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color(0.39, 0.50, 0.52)
 	environment.ambient_light_energy = 0.78
+	environment.fog_enabled = true
+	environment.fog_light_color = Color(0.20, 0.34, 0.36)
+	environment.fog_light_energy = 0.72
+	environment.fog_density = 0.018
+	environment.fog_height = 2.5
+	environment.fog_height_density = 0.075
+	environment.volumetric_fog_enabled = true
+	environment.volumetric_fog_density = 0.012
+	environment.volumetric_fog_albedo = Color(0.30, 0.46, 0.48)
+	environment.volumetric_fog_emission = Color(0.015, 0.045, 0.055)
+	environment.volumetric_fog_emission_energy = 0.35
 	environment_node.environment = environment
 	add_child(environment_node)
 	var sun := DirectionalLight3D.new()
@@ -131,6 +143,18 @@ func _build_r5_camp() -> void:
 	artifact.position = Vector3(-88.0, 1.0, 182.0)
 	add_child(artifact)
 
+func _build_r6_abyssal_light() -> void:
+	var abyssal_light := OmniLight3D.new()
+	abyssal_light.name = "R6_Abyssal_Blue_Depth_Light"
+	abyssal_light.position = Vector3(52.0, -1.25, 266.0)
+	abyssal_light.light_color = Color(0.02, 0.28, 1.0)
+	abyssal_light.light_energy = 2.2
+	abyssal_light.omni_range = 16.0
+	abyssal_light.shadow_enabled = false
+	add_child(abyssal_light)
+	dynamic_lights += 1
+	print("[GAMMA-ESPELHO-01] r4_fog=volumetric_transition r6_depth_light=blue_abyssal dynamic_lights=%d" % dynamic_lights)
+
 func _build_r6_submerged_reveal() -> void:
 	for index: int in range(4):
 		var ruin := MeshInstance3D.new()
@@ -218,7 +242,7 @@ func _build_overlay() -> void:
 	label.name = "GammaMirrorOverlay"
 	label.position = Vector2(42.0, 38.0)
 	label.size = Vector2(1120.0, 110.0)
-	label.text = "CP-D5-643  |  GAMMA · ESPELHAMENTO REAL R4/R5/R6\nFLORESTA DENSA → ACAMPAMENTO MAJESTIC → RUÍNAS SUBMERSAS\nMAPA CARTOGRÁFICO: AUTORIDADE ESPACIAL · DEV3: AUTORIDADE VISUAL · GTX 1050 Ti: ≤16 LUZES"
+	label.text = "GAMMA-ESPELHO-01  |  ESPELHAMENTO REAL R4/R5/R6\nFLORESTA DENSA → ACAMPAMENTO MAJESTIC → RUÍNAS SUBMERSAS\nNEBLINA R4: TRANSIÇÃO VOLUMÉTRICA · LUZ R6: ABISSAL AZUL · GTX 1050 Ti: ≤16 LUZES"
 	label.add_theme_font_size_override("font_size", 17)
 	label.modulate = Color(0.89, 0.95, 0.97)
 	layer.add_child(label)
