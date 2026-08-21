@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://levels/dev5/GammaR4R5R6MirrorPreview.gd" id="1_gamma"]
+
+[node name="GammaR4R5R6MirrorPreview" type="Node3D"]
+script = ExtResource("1_gamma")

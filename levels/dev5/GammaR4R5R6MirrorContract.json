@@ -1,0 +1,59 @@
+{
+  "contract_id": "DEV5_GAMMA_R4_R5_R6_REAL_MIRROR",
+  "checkpoint": "CP-D5-643",
+  "role": "Acelerador de Mundo Full Stack — Equipa GAMMA",
+  "source_of_truth": {
+    "spatial": "cartographic_map",
+    "visual": "dev3_storyboard_and_3d_direction",
+    "gameplay": "Storyboard_Origem_Gameplay_60s.docx",
+    "existing_grounding": "levels/dev5/R2R3R6GroundingContract.json"
+  },
+  "route": ["R1_Casa_Voss", "R2_Estrada_do_Rio", "R3_Arco_das_Ruinas", "R4_Floresta_Densa", "R5_Acampamento_Majestic", "R6_Ruinas_Submersas"],
+  "gamma_points": {
+    "R4_Floresta_Densa": {
+      "time_window_seconds": [27, 38],
+      "required_state": ["dense_forest", "low_visibility", "large_trees", "fog_transition", "orion_reveal_clearance"],
+      "spatial_rule": "use_existing_cartographic_anchor_only",
+      "visual_target": "storyboard_frame_4"
+    },
+    "R5_Acampamento_Majestic": {
+      "time_window_seconds": [38, 48],
+      "required_state": ["physical_entry", "tents", "campfires", "flags", "tables", "abandoned_equipment", "blue_artifact"],
+      "spatial_rule": "use_existing_cartographic_anchor_only",
+      "visual_target": "storyboard_frame_5"
+    },
+    "R6_Ruinas_Submersas": {
+      "time_window_seconds": [48, 57],
+      "required_state": ["physical_approach", "transparent_water_reveal", "columns", "statues", "buildings", "circular_central_structure", "blue_depth_light"],
+      "spatial_rule": "reuse_R6_grounding_anchor_and_preserve_Elias_XZ",
+      "visual_target": "storyboard_frame_6"
+    }
+  },
+  "fidelity": {
+    "minimum_storyboard_match_percent": 85,
+    "continuous_third_person_gameplay_seconds": [30, 60],
+    "static_slideshow_forbidden": true,
+    "map_animation_as_substitute_for_gameplay_forbidden": true
+  },
+  "runtime_limits": {
+    "max_dynamic_lights": 16,
+    "renderer": "gl_compatibility",
+    "godot_version": "4.7.1",
+    "grounding_vertical_error_max_m": 0.05
+  },
+  "ownership_boundaries": {
+    "dev5": ["integration_contract", "handoff_validation", "grounding_preservation", "runtime_evidence"],
+    "dev6": ["final_environment_art", "vegetation", "water_materials", "atmospheric_effects"],
+    "dev3": ["visual_authority", "camera_language", "atmosphere_and_scale"],
+    "dev1_dev2": ["gameplay_wayfinding_and_geometry_ownership"],
+    "dev4": ["qa_master_and_hardware_budget"]
+  },
+  "acceptance": {
+    "cartographic_anchor_consistency": "required",
+    "R4_R5_R6_route_order": "required",
+    "production_modules_changed": false,
+    "parser_exit": 0,
+    "qa_timeout_exit": 124,
+    "next_checkpoint": "CP-D5-644"
+  }
+}

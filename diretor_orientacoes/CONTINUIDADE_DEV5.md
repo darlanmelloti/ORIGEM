@@ -2956,7 +2956,10 @@ O passe confirmou contrato Full Stack, prioridade R1–R6, parser `0`, QA de 36 
 ## CP-D5-641 — CONCLUÍDO: Passe Full Stack do Acelerador de Mundo
 O passe confirmou contrato Full Stack, prioridade R1–R6, parser `0`, QA de 36 s, produção intacta, handoffs preservados e `DYNAMIC_LIGHTS=0`. Ver `CP_D5_641_ACELERADOR_FULL_STACK.md`, `CP-D5-641_RUNTIME.log` e `CP-D5-641_SHA256SUMS.txt`.
 
-## CP-D5-642 — ACTIVO: Próximo passe Full Stack
+## CP-D5-642 — CONCLUÍDO: Passe Full Stack do Acelerador de Mundo
+O passe confirmou contrato Full Stack, prioridade R1–R6, parser `0`, QA de 36 s, produção intacta, handoffs preservados e `DYNAMIC_LIGHTS=0`. Ver `CP_D5_642_ACELERADOR_FULL_STACK.md`, `CP-D5-642_RUNTIME.log` e `CP-D5-642_SHA256SUMS.txt`.
+
+## CP-D5-643 — ACTIVO: Próximo passe Full Stack
 
 ### ⚡ ESTADO ACTUAL (CICLO ACTIVO)
 
@@ -2964,14 +2967,14 @@ O passe confirmou contrato Full Stack, prioridade R1–R6, parser `0`, QA de 36 
 - **RESPONSAVEL**: Dev5 — Acelerador de Mundo (Full Stack)
 - **STATUS_CODE**: ACTIVE
 - **TAREFA_EM_EXECUCAO_AGORA**: executar a próxima intervenção desbloqueadora sem substituir a propriedade geométrica do Dev2 nem a autoridade visual do Dev3
-- **DEPENDENCIAS_RECEBIDAS**: CP-D5-641 publicado e sincronizado; passe Full Stack aprovado
+- **DEPENDENCIAS_RECEBIDAS**: CP-D5-642 publicado e sincronizado; passe Full Stack aprovado
 - **EVIDENCIA**: parser Godot, QA 36 s, raycasts R2/R3/R6, contrato R1–R6, handoffs Dev2/Dev3/Dev6
 - **APOIO_GLOBAL**: Dev2/R7–R12, Dev3/bootstrap cinematográfico e Dev6/vida R1–R6
 - **NEXT_ACTION_IMMEDIATE**: executar o próximo passe Full Stack e validar novamente antes de sincronizar
 - **DEADLINE_PROXIMO_PUSH**: mesma sessão operacional
 - **WAIT_ALLOWED**: false
 
-Iniciar imediatamente o próximo passe Full Stack do CP-D5-642, sem aguardar confirmação verbal.
+Iniciar imediatamente o próximo passe Full Stack do CP-D5-643, sem aguardar confirmação verbal.
 
 
 
@@ -2980,7 +2983,7 @@ Iniciar imediatamente o próximo passe Full Stack do CP-D5-642, sem aguardar con
 
 A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivamente `EliasThirdPersonPresentation` e `EliasThirdPersonPreview`; as nomenclaturas anteriores foram removidas de scripts, cenas, referências e documentação. A cena QA isolada passou o parser Godot 4.7.1 e manteve uma sessão de 36 segundos, com captura interna do corpo 3D provisório de Elias e da câmara externa. Esta apresentação é uma fundação técnica tridimensional, não a versão artística final do personagem.
 
-**Tarefa activa actual:** `CP-D5-642` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
+**Tarefa activa actual:** `CP-D5-643` — Acelerador de Mundo Full Stack: priorizar R1–R6 e desbloquear Dev2, Dev3 e Dev6 sem consulta passiva ou espera temporal.
 
 
 ### Registo histórico local — CP-D5-130: Recaptura R1→R3 em terceira pessoa
@@ -2988,3 +2991,23 @@ A identidade correcta do jogador é **Elias**. Toda a frente Dev5 usa exclusivam
 A ferramenta isolada `levels/dev5/R1R3ThirdPersonCartographicPreview.*` passou no parser Godot 4.7.1 e numa sessão de 36 segundos, confirmando Elias em terceira pessoa e o Arco canónico no eixo a `z=92`, sem alterar `Player.gd`, produção ou Regiões 7–12. A captura foi **REJECTED_VISUAL** por terreno granular, marcadores técnicos, ruínas de baixa complexidade e silhueta provisória. A ferramenta permanece QA; ver `CP_D5_130_RECAPTURA_R1_R3_TERCEIRA_PESSOA.md`.
 
 Este registo não substitui a tarefa remota activa `CP-D5-244`. A pré-visualização deve ser usada apenas como evidência para uma futura integração Dev1/Dev3 quando a fila canónica a autorizar.
+
+
+## Directiva de Convergência — Espelhamento Real R1–R6 / Equipa GAMMA
+
+A partir desta directiva, o Dev5 actua como **Acelerador de Mundo (Full Stack) — GAMMA**, em coordenação com Dev6, para acelerar o espelhamento cartográfico e o ambiente dos Pontos 4, 5 e 6: **Floresta Densa**, **Acampamento Majestic** e **Ruínas Submersas**. A prioridade é o corredor jogável Casa Voss → Estrada do Rio → Arco das Ruínas → Floresta → Acampamento → Ruínas Submersas, sempre como exploração contínua em terceira pessoa.
+
+A geometria e as posições relativas continuam subordinadas ao mapa cartográfico; a atmosfera, silhueta e escala continuam subordinadas à autoridade visual de Dev3. O incremento não deve substituir propriedade de Dev1/Dev2, Dev3 ou Dev6. O protocolo exige correspondência visual mínima de 85% com o storyboard, evidência de gameplay contínuo de 30–60 segundos, orçamento máximo de 16 luzes dinâmicas, validação do parser Godot 4.7.1 e sincronização após cada ciclo.
+
+### Estado activo após a matriz
+
+- **FUNÇÃO_DEV5**: Acelerador de Mundo Full Stack — GAMMA.
+- **ÂMBITO**: Pontos 4, 5 e 6; suporte de integração sem usurpar autoridades.
+- **PONTO_4**: floresta densa, neblina, árvores gigantes e abertura para Orion.
+- **PONTO_5**: entrada física no Acampamento Majestic, tendas, fogueiras, bandeiras, mesas, equipamentos e artefacto azul.
+- **PONTO_6**: aproximação física ao lago e revelação progressiva das Ruínas Submersas.
+- **CHECKPOINT_ACTIVO**: CP-D5-643 reorientado para o primeiro passe Gamma verificável.
+- **NEXT_ACTION_IMMEDIATE**: inspeccionar activos de R1–R6, criar contrato Gamma sem inventar coordenadas e validar o incremento isolado.
+- **WAIT_ALLOWED**: false.
+
+O ciclo No-Stop permanece activo; a conclusão de um checkpoint fecha apenas a evidência correspondente e abre imediatamente o seguinte.
