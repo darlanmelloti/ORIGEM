@@ -3399,3 +3399,15 @@ Dev5 abre a próxima tarefa derivada para preparar o pacote de entrega visual e 
 **NEXT_ACTION_IMMEDIATE:** verificar os assets e relatórios de evidência Gamma, executar validação final dos previews, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-674 — CONCLUÍDO: Pacote de entrega visual Gamma
+
+O pacote para Dev3, Dev4 e Dev6 foi verificado com os três previews Gamma, relatórios, logs e checksums presentes. A branch permaneceu sincronizada (`0 0`) no commit `10519e7`; o backup `BK21_08_2026_01_47` está presente e não foi sobreposto.
+
+## CP-D5-675 — ACTIVO: Apoio Gamma / preparação para integração condicionada
+
+Dev5 abre a próxima tarefa para preparar a matriz de integração condicionada dos candidatos Gamma, sem efectuar integração automática nos módulos de produção. O foco é consolidar âncoras, proprietários, limites de grounding, leitura visual, orçamento de luzes e critérios de revisão Dev3/Dev4/Dev6.
+
+**NEXT_ACTION_IMMEDIATE:** criar a matriz de integração condicionada, executar parser e sessão QA de 36 segundos do conjunto Gamma, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
