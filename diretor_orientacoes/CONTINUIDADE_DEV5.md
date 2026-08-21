@@ -3603,3 +3603,15 @@ Dev5 abre a próxima tarefa para manter o pacote pronto para qualquer nova orien
 **NEXT_ACTION_IMMEDIATE:** consultar o GitHub, verificar a decisão e a integridade do pacote, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-691 — CONCLUÍDO: Prontidão Gamma para nova orientação
+
+A consulta remota não trouxe novas orientações, o pacote estava completo, o worktree passou, o parser terminou com `0`, a revisão permaneceu pendente e a promoção automática continuou desactivada. Publicação sincronizada em `acee935` (`0 0`).
+
+## CP-D5-692 — ACTIVO: Apoio Gamma / continuidade de decisão
+
+Dev5 abre a próxima tarefa para manter a continuidade de decisão e handoff enquanto aguarda orientações dos owners. O pacote permanece tecnicamente pronto, reversível e isolado, sem alterações automáticas no mundo principal.
+
+**NEXT_ACTION_IMMEDIATE:** consultar o remoto, validar o estado de decisão e os artefactos, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
