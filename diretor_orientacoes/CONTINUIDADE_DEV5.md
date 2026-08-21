@@ -3459,3 +3459,15 @@ Dev5 abre a próxima tarefa para transformar a auditoria de fronteiras num check
 **NEXT_ACTION_IMMEDIATE:** criar o checklist de integração segura, validá-lo contra os previews Gamma e as evidências, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-679 — CONCLUÍDO: Checklist de integração segura Gamma
+
+O checklist foi validado contra contrato, previews e fronteiras: parser `0`, três sessões QA de 36 segundos (`124` cada), grounding `≤0,05 m`, integração automática desactivada, rollback isolado e gate Dev3/Dev4/Dev6/owners regionais. Publicação sincronizada em `0c5c54e` (`0 0`).
+
+## CP-D5-680 — ACTIVO: Apoio Gamma / pacote de handoff aos proprietários
+
+Dev5 abre a próxima tarefa para consolidar o handoff aos proprietários regionais, explicitando artefactos candidatos, evidências verificáveis, limites técnicos e condição de promoção. O mundo principal permanece sem alterações até aprovação formal.
+
+**NEXT_ACTION_IMMEDIATE:** preparar o pacote de handoff aos proprietários, executar verificação de consistência, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
