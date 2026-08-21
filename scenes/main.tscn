@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://levels/Takes5to7Director.gd" id="Takes57"]
 [ext_resource type="Script" path="res://entities/enemies/KharuWarrior.gd" id="Kharu"]
 [ext_resource type="Script" path="res://entities/enemies/EliteKharu.gd" id="EliteKharu"]
-[ext_resource type="Script" path="res://levels/CartographicMirrorQA.gd" id="CartographicMirrorQA"]
 
 [sub_resource type="ProceduralSkyMaterial" id="Sky1"]
 sky_top_color = Color(0.12, 0.42, 0.86, 1)
@@ -122,8 +121,6 @@ navigation_layers = 1
 [node name="TempleLevel" type="Node3D" parent="."]
 script = ExtResource("TempleLvl")
 
-[node name="CartographicMirrorQA" type="Node3D" parent="."]
-script = ExtResource("CartographicMirrorQA")
 
 [node name="Takes5to7Director" type="Node3D" parent="."]
 script = ExtResource("Takes57")
