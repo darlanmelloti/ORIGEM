@@ -3819,3 +3819,15 @@ Dev5 abre a próxima tarefa para manter o pacote Gamma pronto para revisão dos 
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar prontidão dos owners, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-709 — CONCLUÍDO: Prontidão de revisão dos owners Gamma
+
+A branch foi confirmada sincronizada em `c5840bf` (`0 0`), sem novas orientações, com pacote pronto, artefactos presentes, worktree limpo, parser `0`, aprovação dos owners ausente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-710 — ACTIVO: Apoio Gamma / continuidade da revisão formal
+
+Dev5 abre a próxima tarefa para manter a revisão formal Gamma rastreável e o pacote isolado, preservando o handoff de R4/R5/R6 e a disponibilidade para Dev6. Nenhuma promoção automática será executada.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar a continuidade formal, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
