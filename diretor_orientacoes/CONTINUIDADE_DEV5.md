@@ -3903,3 +3903,15 @@ Dev5 abre a próxima tarefa para monitorizar o pacote Gamma após a prontidão p
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar monitorização pós-prontidão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-716 — CONCLUÍDO: Monitorização pós-prontidão Gamma
+
+A branch foi confirmada sincronizada em `3d0f0c9` (`0 0`), sem novas orientações, com pacote e suporte Dev6 disponíveis, 97 artefactos locais gerados fora da entrega, parser `0`, aprovação pendente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-717 — ACTIVO: Apoio Gamma / verificação de decisão pendente
+
+Dev5 abre a próxima tarefa para verificar novamente a decisão dos owners Gamma, preservando o pacote isolado e a integração condicionada de R4/R5/R6.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar decisão pendente, validar parser e evidências, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
