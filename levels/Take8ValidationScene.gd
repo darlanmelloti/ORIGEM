@@ -18,7 +18,10 @@ var elapsed: float = 0.0
 var region9_gate_light: OmniLight3D
 var route_start := Vector3(169.0, 31.2, 398.0)
 var route_end := Vector3(148.0, 32.4, 438.0)
-var r9_camera_position := Vector3(140.0, 16.2, 342.5)
+# CP108: corredor de entrada R7 em baixa perspectiva, com R9 elevado no eixo de fuga.
+# CP109: recuo de segurança para impedir que o tecto da entrada ocupe o topo do frame.
+# CP110: plano de entrada mais próximo, com soleira R7 dominante e horizonte R9 preservado.
+var r9_camera_position := Vector3(140.0, 16.4, 340.5)
 
 func _ready() -> void:
 	_build_environment()
@@ -41,7 +44,7 @@ func _ready() -> void:
 	route_end.y = end_ground + 2.1
 	# CP088: o limiar R9 é uma âncora remota e não pode elevar a câmara da composição R7.
 	# Grounding local é a autoridade desta vista de handoff; mantém perspectiva baixa e evita overhead.
-	r9_camera_position.y = float(terrain.call("height_at", r9_camera_position.x, r9_camera_position.z)) + 1.9
+	r9_camera_position.y = float(terrain.call("height_at", r9_camera_position.x, r9_camera_position.z)) + 2.05
 	validation_camera = Camera3D.new()
 	validation_camera.name = "Take8RouteCamera"
 	validation_camera.current = true
@@ -176,9 +179,9 @@ func _process(delta: float) -> void:
 		var trail_target := Vector3(169.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.65, 414.0).lerp(Vector3(148.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.55, 438.0), trail_progress)
 		validation_camera.look_at(trail_target, Vector3.UP)
 	else:
-		validation_camera.fov = 58.0
+		validation_camera.fov = 56.0
 		validation_camera.position = r9_camera_position
-		validation_camera.look_at(Vector3(140.0, 18.0, 356.0), Vector3.UP)
+		validation_camera.look_at(Vector3(140.0, 15.6, 369.0), Vector3.UP)
 		var r9_terrain := get_node_or_null("TerrainPatch") as Node3D
 		if r9_terrain != null:
 			r9_terrain.visible = true

@@ -309,7 +309,8 @@ func _build_elevated_village() -> void:
 				continue
 			buttress.name = "CP103ContraforteVilaR7_%02d" % buttress_index
 			buttress.position = buttress_positions[buttress_index]
-			buttress.scale = Vector3(0.62, 1.55, 0.78)
+			# CP107: ombreiras compactas, integradas à fachada em vez de pórticos independentes.
+			buttress.scale = Vector3(0.42, 1.05, 0.58)
 			buttress.rotation = Vector3(0.04, 0.18 if buttress_index == 0 else -0.18, 0.0)
 			_apply_material(buttress, facade_material)
 			village.add_child(buttress)
@@ -344,17 +345,18 @@ func _build_elevated_village() -> void:
 		elevated_base.rotation = Vector3(0.02, -0.08 + float(base_index) * 0.12, 0.0)
 		_apply_material(elevated_base, stone_material)
 		village.add_child(elevated_base)
-	var connecting_wall_positions: Array[Vector3] = [Vector3(-4.7, 2.35, 6.9), Vector3(4.5, 3.0, 12.3)]
-	for wall_index: int in range(connecting_wall_positions.size()):
-		var connecting_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
-		if connecting_wall == null:
-			continue
-		connecting_wall.name = "CP083MuroLigacaoR7_%02d" % wall_index
-		connecting_wall.position = connecting_wall_positions[wall_index]
-		connecting_wall.scale = Vector3(2.75, 1.18, 0.72)
-		connecting_wall.rotation = Vector3(0.02, 0.18 if wall_index == 0 else -0.14, 0.0)
-		_apply_material(connecting_wall, stone_material)
-		village.add_child(connecting_wall)
+		# CP107: muros laterais encostados à massa central, fechando a leitura da vila.
+		var connecting_wall_positions: Array[Vector3] = [Vector3(-5.4, 1.72, 7.7), Vector3(5.4, 1.72, 7.7), Vector3(-6.5, 1.85, 11.8), Vector3(6.5, 1.85, 11.8)]
+		for wall_index: int in range(connecting_wall_positions.size()):
+			var connecting_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
+			if connecting_wall == null:
+				continue
+			connecting_wall.name = "CP083MuroLigacaoR7_%02d" % wall_index
+			connecting_wall.position = connecting_wall_positions[wall_index]
+			connecting_wall.scale = Vector3(2.15, 0.72, 0.58)
+			connecting_wall.rotation = Vector3(0.02, -0.10 if wall_index % 2 == 0 else 0.10, 0.0)
+			_apply_material(connecting_wall, stone_material)
+			village.add_child(connecting_wall)
 	# Soleira larga de chegada alinhada ao corredor cartográfico R6→R7.
 	for step_index: int in range(3):
 		var entrance_step: Node3D = ROCK_LARGE.instantiate() as Node3D
