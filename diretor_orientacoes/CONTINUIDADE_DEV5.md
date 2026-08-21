@@ -4275,3 +4275,15 @@ Dev5 abre a próxima tarefa para repetir a telemetria numa cena de gameplay repr
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, recolher telemetria representativa e decidir renderer, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-05 — CONCLUÍDO: Telemetria representativa
+
+A cena R1/Casa Voss completou aproximadamente 36 segundos, com 36 samples medidos após excluir o primeiro frame. O P05 de FPS foi `144,00`, o P95 de frame time `6,944 ms` e o máximo de luzes dinâmicas `1`. A evidência é positiva em headless, mas a decisão FSR1/Forward+ permanece pendente.
+
+## CP-AAA-06 — ACTIVO: Decisão de renderer e validação final condicionada
+
+Dev5 abre a próxima tarefa para resolver/documentar o aviso FSR1, escolher o perfil Compatibility ou Forward+, repetir a validação e manter a produção protegida.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, resolver decisão de renderer, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
