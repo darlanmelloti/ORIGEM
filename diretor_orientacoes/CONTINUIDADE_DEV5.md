@@ -3363,3 +3363,15 @@ Dev5 abre a tarefa derivada de apoio à frente Dev6 para validar o grounding dos
 **NEXT_ACTION_IMMEDIATE:** auditar os adereços R5 existentes, construir ou validar o candidato QA com raycast, executar parser e sessão de 36 segundos, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir o próximo checkpoint.
 
 **WAIT_ALLOWED:** false.
+
+## APOIO-GAMMA-01 — CONCLUÍDA: Grounding de adereços R5
+
+Foi criado e validado o preview `GammaR5PropGroundingPreview.tscn`. Tenda, fogueira e equipamento abandonado foram posicionados na âncora cartográfica R5 e aterrados por raycast, com X/Z preservado, parser `0`, QA de 36 segundos (`124`), produção intacta e zero luzes dinâmicas. Publicação sincronizada em `99982f0` (`0 0`).
+
+## CP-D5-672 — ACTIVO: APOIO-GAMMA-02 / Continuidade R5→R6
+
+Dev5 abre a próxima tarefa derivada para apoiar Dev6 na continuidade visual entre o Acampamento Majestic R5 e a revelação das Ruínas Submersas R6. O foco é validar o corredor de transição, preservando grounding dos adereços, sequência cartográfica, leitura da água transparente e o orçamento de 16 luzes. A prova será isolada e não integra automaticamente módulos de produção.
+
+**NEXT_ACTION_IMMEDIATE:** validar a transição R5→R6 no preview Gamma, executar parser e sessão de 36 segundos, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir o próximo checkpoint.
+
+**WAIT_ALLOWED:** false.
