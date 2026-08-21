@@ -3999,3 +3999,15 @@ Dev5 abre a próxima tarefa para validar o pacote final de revisão Gamma antes 
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar o pacote final de revisão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-724 — CONCLUÍDO: Validação do pacote final de revisão Gamma
+
+A branch foi confirmada sincronizada em `98f7e93` (`0 0`), sem novas orientações nem aprovação formal. O pacote final, checksums e previews permanecem presentes, 97 artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-725 — ACTIVO: Apoio Gamma / auditoria final de handoff
+
+Dev5 abre a próxima tarefa para auditar o handoff final do pacote Gamma para Dev3, Dev4 e Dev6, preservando as fronteiras de integração e aguardando decisão formal dos owners.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar handoff final, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
