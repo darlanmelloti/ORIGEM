@@ -3735,3 +3735,15 @@ Dev5 abre a próxima tarefa para manter a prontidão do pacote Gamma e a coopera
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar prontidão Gamma, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-702 — CONCLUÍDO: Manutenção de prontidão Gamma
+
+A branch foi confirmada sincronizada em `90a5e05` (`0 0`), sem novas orientações, com readiness pronto, suporte Dev6 disponível, artefactos presentes, worktree limpo, parser `0`, aprovação dos owners ausente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-703 — ACTIVO: Apoio Gamma / monitorização de decisão e handoff
+
+Dev5 abre a próxima tarefa para monitorizar a decisão e o handoff Gamma, mantendo o pacote isolado, documentado e pronto para aprovação formal ou nova orientação. Não haverá promoção automática.
+
+**NEXT_ACTION_IMMEDIATE:** consultar o GitHub, validar estado do handoff, parser e evidências, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
