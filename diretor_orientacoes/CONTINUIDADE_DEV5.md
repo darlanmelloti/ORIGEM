@@ -4287,3 +4287,15 @@ Dev5 abre a próxima tarefa para resolver/documentar o aviso FSR1, escolher o pe
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, resolver decisão de renderer, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-06 — CONCLUÍDO: Decisão de renderer condicionada
+
+A referência Compatibility/OpenGL3 manteve P05 FPS `144,00`, P95 frame time `6,944 ms` e uma luz dinâmica. A comparação Forward+ não foi executada; o aviso FSR1 permanece aberto e nenhuma configuração de produção foi alterada.
+
+## CP-AAA-07 — ACTIVO: Comparação Forward+ isolada
+
+Dev5 abre a próxima tarefa para executar a comparação Forward+ em ambiente isolado, sem modificar `project.godot` ou promover o renderer.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, executar comparação Forward+ isolada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
