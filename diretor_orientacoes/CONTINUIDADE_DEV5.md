@@ -3843,3 +3843,15 @@ Dev5 abre a próxima tarefa para preservar a evidência final Gamma, manter a ra
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar evidência final, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-711 — CONCLUÍDO: Preservação de evidência final Gamma
+
+A autorização GitHub foi recuperada e o commit local `ab413a4` foi publicado. Após a espera obrigatória de 10 segundos, a branch local e remota foram confirmadas em `ab413a4` (`0 0`). A transição para CP-D5-711 foi preservada. Existem 97 ficheiros locais não rastreados, sobretudo artefactos `.uid` gerados pelo Godot e ferramentas auxiliares; não foram incluídos no commit nem tratados como produção.
+
+## CP-D5-712 — ACTIVO: Apoio Gamma / auditoria de artefactos não rastreados
+
+Dev5 abre a próxima tarefa para classificar os artefactos locais não rastreados, confirmar que não atravessam a entrega Gamma e manter a branch publicável sem incluir ficheiros gerados indevidos.
+
+**NEXT_ACTION_IMMEDIATE:** auditar os artefactos não rastreados, consultar orientações remotas, validar parser, publicar relatório, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
