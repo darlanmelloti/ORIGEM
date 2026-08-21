@@ -3471,3 +3471,15 @@ Dev5 abre a próxima tarefa para consolidar o handoff aos proprietários regiona
 **NEXT_ACTION_IMMEDIATE:** preparar o pacote de handoff aos proprietários, executar verificação de consistência, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-680 — CONCLUÍDO: Handoff aos proprietários regionais
+
+O pacote de handoff foi preparado com três candidatos, evidências, limites técnicos, gate de aprovação e rollback separado. O parser terminou com `0`, a sessão QA principal cumpriu 36 segundos (`124`) e a publicação foi sincronizada em `3c5ded5` (`0 0`).
+
+## CP-D5-681 — ACTIVO: Apoio Gamma / registo de revisão pendente
+
+Dev5 abre a próxima tarefa para registar formalmente a revisão pendente dos proprietários regionais e manter o pacote preparado para decisão sem promover alterações automaticamente. O foco é preservar a rastreabilidade, a reversibilidade e a separação entre candidato QA e mundo principal.
+
+**NEXT_ACTION_IMMEDIATE:** criar o registo de revisão pendente, validar consistência do pacote, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
