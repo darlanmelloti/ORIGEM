@@ -4191,3 +4191,15 @@ Dev5 abre a próxima tarefa para monitorizar a eventual chegada de aprovação o
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar aprovação ou pedidos, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-740 — CONCLUÍDO: Monitorização de aprovação dos owners
+
+A branch foi confirmada sincronizada em `aa5295f` (`0 0`), sem novas orientações, aprovação ou pedido de alteração. O parser passou, a produção permaneceu intacta, a promoção automática continua desactivada e o rollback permanece disponível.
+
+## CP-D5-741 — ACTIVO: Apoio Gamma / retenção de estado monitorizado
+
+Dev5 abre a próxima tarefa para reter o estado monitorizado do pacote Gamma e manter a consulta remota, a integridade do pacote e a barreira de promoção condicionada.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar estado monitorizado, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
