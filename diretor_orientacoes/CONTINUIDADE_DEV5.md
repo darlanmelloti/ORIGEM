@@ -4251,3 +4251,15 @@ Dev5 abre a próxima tarefa para recolher telemetria de frame time/luzes, resolv
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, recolher telemetria e verificar renderer, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-03 — CONCLUÍDO: Auditoria de telemetria e renderer
+
+A sessão Compatibility/OpenGL3 completou 36 segundos com `QA_EXIT=124` e `PARSER_ERRORS=0`. O runtime não expôs frame time nem contagem de luzes. Foi registado um aviso FSR1 incompatível com Forward+, enquanto a produção permaneceu protegida e a promoção automática bloqueada.
+
+## CP-AAA-04 — ACTIVO: Telemetria isolada de performance
+
+Dev5 abre a próxima tarefa para criar ou activar telemetria segura em cena isolada, confirmar frame time e orçamento de luzes, e decidir a configuração de renderer sem alterar módulos de produção.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, executar telemetria isolada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
