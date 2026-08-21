@@ -3627,3 +3627,15 @@ Dev5 abre a próxima tarefa para monitorizar novas orientações, aprovações o
 **NEXT_ACTION_IMMEDIATE:** consultar o remoto, verificar o estado da orientação Gamma, validar parser e evidência, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-693 — CONCLUÍDO: Monitorização de orientação Gamma
+
+A consulta remota não apresentou novas orientações, aprovações ou pedidos. O pacote e os três previews estavam presentes, o worktree passou, o parser terminou com `0`, a revisão permaneceu pendente e a promoção automática continuou desactivada. Publicação sincronizada em `d7ac931` (`0 0`).
+
+## CP-D5-694 — ACTIVO: Apoio Gamma / preservação de pacote entregue
+
+Dev5 abre a próxima tarefa para preservar a integridade do pacote Gamma entregue e manter a disponibilidade para revisão dos owners, sem modificar automaticamente a produção.
+
+**NEXT_ACTION_IMMEDIATE:** auditar pacote entregue, checksums, parser e estado remoto; publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
