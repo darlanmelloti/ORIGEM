@@ -9,10 +9,13 @@ var samples: Array[Dictionary] = []
 var root_scene: Node
 
 func _initialize() -> void:
-    root_scene = load("res://levels/dev5/CartographicGroundingPreview.tscn").instantiate()
+    var scene_path := OS.get_environment("CP_AAA_SCENE")
+    if scene_path.is_empty():
+        scene_path = "res://levels/dev5/CartographicGroundingPreview.tscn"
+    root_scene = load(scene_path).instantiate()
     root_scene.name = "CPAAA04_IsolatedTelemetryRoot"
     root.add_child(root_scene)
-    print("[CP_AAA_04] mode=isolated_grounding_preview")
+    print("[CP_AAA_04] mode=%s" % scene_path)
     print("[CP_AAA_04] production_modules_changed=false")
     print("[CP_AAA_04] promotion_automatic=false")
 
@@ -41,11 +44,16 @@ func _count_lights(node: Node) -> int:
     return total
 
 func _emit_summary() -> void:
-    var min_fps := INF
-    var max_frame_ms := 0.0
+    var measured: Array[Dictionary] = samples.slice(1) if samples.size() > 1 else []
+    var fps_values: Array[float] = []
+    var frame_values: Array[float] = []
     var max_lights := 0
-    for sample in samples:
-        min_fps = min(min_fps, float(sample["fps"]))
-        max_frame_ms = max(max_frame_ms, float(sample["frame_time_ms"]))
+    for sample in measured:
+        fps_values.append(float(sample["fps"]))
+        frame_values.append(float(sample["frame_time_ms"]))
         max_lights = max(max_lights, int(sample["lights"]))
-    print("[CP_AAA_04_SUMMARY] samples=%d min_fps=%.2f max_frame_time_ms=%.3f max_dynamic_lights=%d" % [samples.size(), min_fps, max_frame_ms, max_lights])
+    fps_values.sort()
+    frame_values.sort()
+    var p05_fps := fps_values[max(0, int(fps_values.size() * 0.05))] if not fps_values.is_empty() else 0.0
+    var p95_frame_ms := frame_values[min(frame_values.size() - 1, int(frame_values.size() * 0.95))] if not frame_values.is_empty() else 0.0
+    print("[CP_AAA_04_SUMMARY] samples=%d measured=%d p05_fps=%.2f p95_frame_time_ms=%.3f max_dynamic_lights=%d first_frame_excluded=true" % [samples.size(), measured.size(), p05_fps, p95_frame_ms, max_lights])
