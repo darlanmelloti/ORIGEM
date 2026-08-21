@@ -3483,3 +3483,15 @@ Dev5 abre a próxima tarefa para registar formalmente a revisão pendente dos pr
 **NEXT_ACTION_IMMEDIATE:** criar o registo de revisão pendente, validar consistência do pacote, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-681 — CONCLUÍDO: Registo de revisão pendente Gamma
+
+O registo formal confirmou o pacote tecnicamente pronto, mas pendente de revisão dos proprietários regionais. O parser terminou com `0`, todos os artefactos foram encontrados, a promoção automática permaneceu desactivada e a publicação foi sincronizada em `6c04f15` (`0 0`).
+
+## CP-D5-682 — ACTIVO: Apoio Gamma / preparação de respostas de revisão
+
+Dev5 abre a próxima tarefa para preparar respostas técnicas às revisões Dev3, Dev4 e Dev6, mantendo perguntas e decisões rastreáveis sem presumir aprovações que ainda não foram emitidas. O escopo continua limitado aos candidatos isolados Gamma e aos critérios de promoção segura.
+
+**NEXT_ACTION_IMMEDIATE:** criar a matriz de respostas e decisões pendentes, validar consistência contra os artefactos, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
