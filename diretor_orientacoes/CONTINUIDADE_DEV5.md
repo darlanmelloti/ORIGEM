@@ -3024,3 +3024,16 @@ O Dev5 continua como **Acelerador de Mundo Full Stack — GAMMA**, com prioridad
 **NEXT_ACTION_IMMEDIATE:** iniciar a validação isolada do CP-D5-644, gerar a evidência técnica, publicar com SHA-256, aguardar 10 segundos, consultar o GitHub e abrir o checkpoint seguinte.
 
 **WAIT_ALLOWED:** false.
+
+
+## CP-D5-644 — CONCLUÍDO: Regressão Gamma do Espelhamento Real
+
+A regressão confirmou o contrato Gamma, a ordem cartográfica `R4>R5>R6`, a preservação das autoridades espacial, visual e artística, o parser Godot `0`, a QA controlada de 36 segundos (`124`), a produção intacta e uma luz dinâmica no preview, abaixo do limite de 16.
+
+## CP-D5-645 — ACTIVO: Próximo passe Gamma
+
+O Acelerador de Mundo Full Stack mantém a equipa GAMMA activa para R4, R5 e R6. O próximo passe deve continuar a validar a exploração contínua em terceira pessoa, as âncoras canónicas e a leitura de floresta, acampamento e ruínas submersas, sem substituir a geometria dos responsáveis, a direcção visual de Dev3 ou os activos finais de Dev6.
+
+**NEXT_ACTION_IMMEDIATE:** iniciar o CP-D5-645, validar parser e QA, gerar SHA-256, publicar, aguardar 10 segundos, consultar o GitHub e abrir o checkpoint seguinte.
+
+**WAIT_ALLOWED:** false.
