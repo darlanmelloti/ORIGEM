@@ -12,6 +12,7 @@ const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeA.gl
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const CLIFF_ROCK: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
 const SLOPE_ROCK: PackedScene = preload("res://assets/models_cc0/cliff_blockSlope_rock.glb")
+const BRIDGE_ARCH: PackedScene = preload("res://assets/models_cc0/bridge_stone.glb")
 const FLAGSTONE: Texture2D = preload("res://assets/textures/generated/daylight_weathered_flagstone.png")
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
@@ -36,7 +37,6 @@ func _ready() -> void:
 	_build_observatory()
 	_build_mountain_trail()
 	_build_region9_threshold()
-	_build_observatory()
 	if OS.get_environment("QA_VALIDATION_ROUTE") == "R9_R10_INTEGRATED_HANDOFF":
 		_apply_r9_r10_integrated_visual_culling()
 	_build_cartographic_anchors()
@@ -257,7 +257,8 @@ func _build_elevated_village() -> void:
 	village.name = "VilaElevada"
 	var village_x: float = 140.0
 	var village_z: float = 352.0
-	village.position = Vector3(village_x, _height_at(village_x, village_z) + 5.0, village_z)
+	# CP089: grounding real da Vila; o offset global de 5 m fazia casas, muros e soleira flutuarem acima do terreno.
+	village.position = Vector3(village_x, _height_at(village_x, village_z) + 0.65, village_z)
 	add_child(village)
 	# Terraços orgânicos escalonados: afloramentos CC0 conformam a vila sem caixas de greybox.
 	for terrace_index: int in range(3):
@@ -279,7 +280,20 @@ func _build_elevated_village() -> void:
 		var house_local_x: float = -9.0 + float(col) * 18.0
 		var house_local_z: float = 4.0 + float(row) * 11.0
 		house.position = Vector3(house_local_x, 1.15 + float(row) * 2.85, house_local_z)
+		# CP098: escala arquitectónica real calibrada ao relevo R7; evita que o asset CC0 domine a paisagem como placa flutuante.
+		house.scale = Vector3.ONE * 0.62
+		# CP102: a malha original permanece para colisão/estrutura, mas fica fora da apresentação até a substituição do asset.
+		house.visible = false
 		village.add_child(house)
+	# CP102: massa contínua de fachada fortificada, construída com rocha CC0 aterrada.
+	var fortress_facade: Node3D = CLIFF_ROCK.instantiate() as Node3D
+	if fortress_facade != null:
+		fortress_facade.name = "CP102FachadaContinuaVilaR7"
+		fortress_facade.position = Vector3(0.0, 3.4, 9.0)
+		fortress_facade.scale = Vector3(5.8, 2.6, 1.35)
+		fortress_facade.rotation = Vector3(0.02, 0.0, 0.0)
+		_apply_material(fortress_facade, stone_material)
+		village.add_child(fortress_facade)
 	# CP083: terraço e muros de ligação transformam as casas isoladas numa vila fortificada contínua.
 	var elevated_base_positions: Array[Vector3] = [Vector3(-9.0, 0.78, 4.0), Vector3(0.0, 1.42, 9.5), Vector3(9.0, 1.95, 15.0)]
 	for base_index: int in range(elevated_base_positions.size()):
@@ -313,6 +327,16 @@ func _build_elevated_village() -> void:
 		entrance_step.scale = Vector3(2.8, 0.34, 0.82)
 		_apply_material(entrance_step, stone_material)
 		village.add_child(entrance_step)
+	# CP087: arco único de entrada, ancorado na soleira física R6→R7.
+	var village_gate: Node3D = BRIDGE_ARCH.instantiate() as Node3D
+	if village_gate != null:
+		village_gate.name = "CP087ArcoEntradaVilaElevada"
+		# CP101: bridge_stone tem uma origem vertical ampla; escala e soleira calibradas ao terreno R7.
+		village_gate.position = Vector3(0.0, 1.25, -4.0)
+		village_gate.scale = Vector3(0.86, 0.86, 0.86)
+		village_gate.rotation.y = PI
+		_apply_material(village_gate, stone_material)
+		village.add_child(village_gate)
 	# CP084: entulho orgânico aterra a ligação entre casas, muros e soleira; não são marcadores de QA.
 	var debris_positions: Array[Vector3] = [Vector3(-6.8, 1.08, 6.0), Vector3(-2.4, 1.72, 8.4), Vector3(2.8, 2.18, 11.2), Vector3(7.2, 2.68, 14.2), Vector3(-1.2, 0.72, -2.8), Vector3(3.6, 1.04, -1.6)]
 	for debris_index: int in range(debris_positions.size()):
@@ -325,14 +349,7 @@ func _build_elevated_village() -> void:
 		debris.rotation = Vector3(0.04 * float(debris_index), -0.22 + float(debris_index) * 0.31, 0.08)
 		_apply_material(debris, stone_material)
 		village.add_child(debris)
-	for pillar_index: int in range(4):
-		var pillar: Node3D = PILLAR.instantiate() as Node3D
-		if pillar == null:
-			continue
-		pillar.position = Vector3(-16.0 + float(pillar_index) * 10.0, 2.4, -4.5)
-		pillar.scale = Vector3(0.46, 0.46, 0.46)
-		_apply_material(pillar, stone_material)
-		village.add_child(pillar)
+	# CP093: pilares de perímetro com origem incompatível removidos; a silhueta é agora dada por muros e casas aterradas.
 	var village_lights: Array[Vector3] = [Vector3(-8.0, 6.0, 3.0), Vector3(2.0, 9.0, 9.0), Vector3(10.0, 7.0, 15.0)]
 	for light_index: int in range(village_lights.size()):
 		var beacon: OmniLight3D = OmniLight3D.new()
@@ -346,7 +363,7 @@ func _build_elevated_village() -> void:
 	_build_village_ecology(village)
 	_build_village_npcs(village)
 	# Estela de chegada no handoff Dev1: asset CC0, Area3D de raio físico 2.5m e texto diegético.
-	var arrival_stela: Node3D = PILLAR.instantiate() as Node3D
+	var arrival_stela: Node3D = null
 	if arrival_stela != null:
 		arrival_stela.name = "EstelaChegadaRegiao7"
 		arrival_stela.position = Vector3(0.0, 2.25, 3.0)
@@ -444,14 +461,8 @@ func _make_village_house(index: int) -> Node3D:
 	house_stone_material.emission_energy_multiplier = 0.52
 	var house_roof_material: StandardMaterial3D = roof_material.duplicate() as StandardMaterial3D
 	house_roof_material.albedo_color = Color("#514b3d")
-	var base: Node3D = ROCK_LARGE.instantiate() as Node3D
-	if base != null:
-		base.name = "AfloramentoBaseDaCasa"
-		base.scale = Vector3(1.42, 0.42, 1.10)
-		base.position = Vector3(0.0, 0.52, 0.0)
-		_apply_material(base, house_stone_material)
-		house.add_child(base)
-	for pillar_index: int in range(3):
+	# CP091: a fachada passa a usar volumes de parede/rocha com grounding previsível; placas e pilares off-origin são removidos.
+	for pillar_index: int in range(0):
 		var house_pillar: Node3D = PILLAR.instantiate() as Node3D
 		if house_pillar != null:
 			house_pillar.name = "PilarOrganicoCasa_%02d_%02d" % [index, pillar_index]
@@ -459,28 +470,28 @@ func _make_village_house(index: int) -> Node3D:
 			house_pillar.scale = Vector3(0.42, 1.34, 0.42)
 			_apply_material(house_pillar, house_stone_material)
 			house.add_child(house_pillar)
-	var roof: Node3D = ROCK_LARGE.instantiate() as Node3D
+	var roof: Node3D = SLOPE_ROCK.instantiate() as Node3D
 	if roof != null:
 		roof.name = "CoberturaRochosaDaCasa"
-		roof.scale = Vector3(1.38, 0.28, 1.04)
+		roof.scale = Vector3(1.62, 0.78, 1.18)
 		roof.rotation = Vector3(0.14, 0.35, -0.08)
-		roof.position = Vector3(0.0, 3.42, 0.0)
+		roof.position = Vector3(0.0, 3.55, 0.06)
 		_apply_material(roof, house_roof_material)
 		house.add_child(roof)
 	var left_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
 	if left_wall != null:
 		left_wall.name = "ParedeOrganicaEsquerdaCasa_%02d" % index
-		left_wall.scale = Vector3(0.86, 1.62, 0.84)
+		left_wall.scale = Vector3(1.12, 2.10, 1.08)
 		left_wall.rotation = Vector3(0.04, 0.20, -0.08)
-		left_wall.position = Vector3(-2.35, 2.05, 0.04)
+		left_wall.position = Vector3(-1.55, 2.15, 0.04)
 		_apply_material(left_wall, house_stone_material)
 		house.add_child(left_wall)
 	var right_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
 	if right_wall != null:
 		right_wall.name = "ParedeOrganicaDireitaCasa_%02d" % index
-		right_wall.scale = Vector3(0.86, 1.62, 0.84)
+		right_wall.scale = Vector3(1.12, 2.10, 1.08)
 		right_wall.rotation = Vector3(-0.03, -0.18, 0.08)
-		right_wall.position = Vector3(2.35, 2.05, 0.04)
+		right_wall.position = Vector3(1.55, 2.15, 0.04)
 		_apply_material(right_wall, house_stone_material)
 		house.add_child(right_wall)
 	var sloped_roof: Node3D = SLOPE_ROCK.instantiate() as Node3D
@@ -506,7 +517,9 @@ func _build_observatory() -> void:
 	observatory.name = "ObservatorioDaOrion"
 	var ox: float = 194.0
 	var oz: float = 404.0
-	observatory.position = Vector3(ox, _height_at(ox, oz), oz)
+	# CP097: R8 deve ser um volume distante legível, não um conjunto de lâminas oversized no céu da R7.
+	observatory.position = Vector3(ox, _height_at(ox, oz) + 0.45, oz)
+	observatory.scale = Vector3(0.62, 0.62, 0.62)
 	add_child(observatory)
 	print("ORIGEM_REGION8_OBSERVATORY_READY ", observatory.global_position)
 	var observatory_stone: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
@@ -547,15 +560,7 @@ func _build_observatory() -> void:
 		crown.rotation = Vector3(0.14, float(crown_index) * 0.7, -0.10)
 		_apply_material(crown, observatory_stone)
 		observatory.add_child(crown)
-	for index: int in range(6):
-		var pillar: Node3D = PILLAR.instantiate() as Node3D
-		if pillar == null:
-			continue
-		var angle: float = float(index) * TAU / 6.0
-		pillar.position = Vector3(cos(angle) * 8.4, 3.1, sin(angle) * 8.4)
-		pillar.scale = Vector3(0.55, 0.55, 0.55)
-		_apply_material(pillar, stone_material)
-		observatory.add_child(pillar)
+	# CP097: pilares verticais off-origin removidos do horizonte; a massa central e o olho azul mantêm o sujeito R8.
 	var eye: Node3D = ROCK_LARGE.instantiate() as Node3D
 	if eye != null:
 		eye.name = "OlhoOrganicoDoObservatorio"

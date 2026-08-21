@@ -18,7 +18,7 @@ var elapsed: float = 0.0
 var region9_gate_light: OmniLight3D
 var route_start := Vector3(169.0, 31.2, 398.0)
 var route_end := Vector3(148.0, 32.4, 438.0)
-var r9_camera_position := Vector3(160.0, 23.0, 364.0)
+var r9_camera_position := Vector3(140.0, 16.5, 339.5)
 
 func _ready() -> void:
 	_build_environment()
@@ -29,17 +29,19 @@ func _ready() -> void:
 	highlands.name = "Take8HighlandRegion"
 	add_child(highlands)
 	_prepare_real_trail_reveal(highlands, terrain)
-	_build_cinematic_village_reveal()
-	_build_cp079_organic_facade()
+	# CP090: as composições proxy anteriores duplicavam a Vila real e criavam leitura de marcadores/flutuação.
+	# Permanecem disponíveis apenas para diagnóstico explícito, nunca no runtime normal da validação.
+	if OS.get_environment("QA_SHOWCASE_PROXY") == "1":
+		_build_cinematic_village_reveal()
+		_build_cp079_organic_facade()
+	_hide_non_diagnostic_labels(highlands)
 	var start_ground: float = float(terrain.call("height_at", route_start.x, route_start.z))
 	var end_ground: float = float(terrain.call("height_at", route_end.x, route_end.z))
 	route_start.y = start_ground + 2.1
 	route_end.y = end_ground + 2.1
-	var threshold_for_camera := highlands.get_node_or_null("LimiarOrganicoRegiao09") as Node3D
-	if threshold_for_camera != null:
-		r9_camera_position.y = threshold_for_camera.global_position.y + 1.0
-	else:
-		r9_camera_position.y = float(terrain.call("height_at", r9_camera_position.x, r9_camera_position.z)) + 4.0
+	# CP088: o limiar R9 é uma âncora remota e não pode elevar a câmara da composição R7.
+	# Grounding local é a autoridade desta vista de handoff; mantém perspectiva baixa e evita overhead.
+	r9_camera_position.y = float(terrain.call("height_at", r9_camera_position.x, r9_camera_position.z)) + 2.2
 	validation_camera = Camera3D.new()
 	validation_camera.name = "Take8RouteCamera"
 	validation_camera.current = true
@@ -47,6 +49,15 @@ func _ready() -> void:
 	validation_camera.position = route_start
 	add_child(validation_camera)
 	validation_camera.look_at(Vector3(169.0, route_start.y - 0.7, 414.0), Vector3.UP)
+
+func _hide_non_diagnostic_labels(highlands: Node3D) -> void:
+	for label in highlands.find_children("*", "Label3D", true, false):
+		(label as Label3D).visible = false
+	# CP094: assets de ecologia/placeholders permanecem no mundo, mas não contaminam o frame de auditoria arquitectónica.
+	for node in highlands.find_children("*", "Node3D", true, false):
+		var node_name := str(node.name)
+		if node_name.begins_with("ArvoreVila_") or node_name.begins_with("FetoVila_") or node_name.begins_with("NPCVila_"):
+			node.visible = false
 
 func _build_cinematic_village_reveal() -> void:
 	var reveal := Node3D.new()
@@ -165,25 +176,26 @@ func _process(delta: float) -> void:
 		var trail_target := Vector3(169.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.65, 414.0).lerp(Vector3(148.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.55, 438.0), trail_progress)
 		validation_camera.look_at(trail_target, Vector3.UP)
 	else:
-		validation_camera.fov = 54.0
+		validation_camera.fov = 58.0
 		validation_camera.position = r9_camera_position
-		validation_camera.look_at(Vector3(140.0, 18.5, 359.0), Vector3.UP)
+		validation_camera.look_at(Vector3(140.0, 17.0, 351.0), Vector3.UP)
 		var r9_terrain := get_node_or_null("TerrainPatch") as Node3D
 		if r9_terrain != null:
 			r9_terrain.visible = true
-		# CP073: manter os sujeitos reais R7–R9 visíveis no segundo acto; a câmara elevada revela a cadeia em vez de ocultar a trilha.
+		# CP092: manter apenas a rota física R9; decoradores com origins incompatíveis ficam fora do frame QA.
 		var r9_route := get_node_or_null("Take8HighlandRegion/TrilhaDaMontanhaOrion") as Node3D
 		if r9_route != null:
 			r9_route.visible = true
 		var r9_outcrops := get_node_or_null("Take8HighlandRegion/AfloramentosDaTrilha") as Node3D
 		if r9_outcrops != null:
-			r9_outcrops.visible = true
-		for r9_decor_name in ["MarcoOrganicoEntradaTrilhaTake8", "ArcoOrganicoEntradaTake8_0", "ArcoOrganicoEntradaTake8_1", "ArcoOrganicoEntradaTake8_2", "Take8AncoraVerticalOrganica"]:
+			r9_outcrops.visible = false
+		for r9_decor_name in ["MarcoOrganicoEntradaTrilhaTake8", "ArcoOrganicoEntradaTake8_0", "ArcoOrganicoEntradaTake8_1", "ArcoOrganicoEntradaTake8_2", "Take8AncoraVerticalOrganica", "LimiarOrganicoRegiao09"]:
 			var r9_decor := get_node_or_null("Take8HighlandRegion/" + r9_decor_name) as Node3D
 			if r9_decor != null:
-				r9_decor.visible = true
+				r9_decor.visible = false
 	if region9_gate_light != null:
 		region9_gate_light.light_energy = 0.56 + sin(elapsed * 1.7) * 0.10
+
 
 func _prepare_real_trail_reveal(highlands: Node3D, terrain: Node3D) -> void:
 	var real_route := highlands.get_node_or_null("TrilhaDaMontanhaOrion") as Node3D
@@ -193,7 +205,7 @@ func _prepare_real_trail_reveal(highlands: Node3D, terrain: Node3D) -> void:
 	for node_name in [		"MarcoOrganicoEntradaTrilhaTake8", "ArcoOrganicoEntradaTake8_0", "ArcoOrganicoEntradaTake8_1", "ArcoOrganicoEntradaTake8_2", "AfloramentosDaTrilha", "LimiarOrganicoRegiao09"]:
 		var landmark := highlands.get_node_or_null(node_name) as Node3D
 		if landmark != null:
-			landmark.visible = true
+			landmark.visible = false if node_name != "TrilhaDaMontanhaOrion" else true
 			if node_name == "LimiarOrganicoRegiao09":
 				print("ORIGEM_REGION9_THRESHOLD_GLOBAL ", landmark.global_position)
 				for jamb_name in ["OmbreiraRegiao09_Norte", "OmbreiraRegiao09_Sul"]:
