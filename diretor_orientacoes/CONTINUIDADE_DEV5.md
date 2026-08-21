@@ -4095,3 +4095,15 @@ Dev5 abre a próxima tarefa para monitorizar a promoção condicionada do pacote
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar promoção condicionada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-732 — CONCLUÍDO: Monitorização de promoção condicionada Gamma
+
+A branch foi confirmada sincronizada em `8f2434d` (`0 0`), sem novas orientações nem aprovação formal. A promoção condicionada permanece disponível mas não autorizada, os artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-733 — ACTIVO: Apoio Gamma / preservação do pacote pré-promoção
+
+Dev5 abre a próxima tarefa para preservar o pacote pré-promoção Gamma, revalidando a separação entre evidência rastreada, alterações condicionais e artefactos locais antes de qualquer decisão dos owners.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar preservação pré-promoção, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
