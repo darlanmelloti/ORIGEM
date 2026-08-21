@@ -3579,3 +3579,15 @@ Dev5 abre a próxima tarefa para preservar a decisão pendente e a reversibilida
 **NEXT_ACTION_IMMEDIATE:** auditar o registo de decisão, confirmar rollback e sincronização remota, validar parser, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-689 — CONCLUÍDO: Preservação de decisão e rollback Gamma
+
+A decisão permaneceu pendente de aprovação formal, a branch estava sincronizada em `7e58f81` (`0 0`), os artefactos estavam presentes, o worktree passou, o parser terminou com `0`, a promoção automática permaneceu desactivada e o rollback ficou disponível por commit.
+
+## CP-D5-690 — ACTIVO: Apoio Gamma / próxima verificação de decisão
+
+Dev5 abre a próxima tarefa para manter o registo de decisão e as evidências Gamma prontos para novas orientações, pedidos de alteração ou aprovação formal. O mundo principal continua sem promoção automática.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar decisão e evidência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
