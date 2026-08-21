@@ -3675,3 +3675,15 @@ Dev5 abre a próxima tarefa para manter a prontidão de promoção condicionada 
 **NEXT_ACTION_IMMEDIATE:** verificar o gate de promoção condicionada, consultar orientações remotas, validar parser e evidência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-697 — CONCLUÍDO: Prontidão de promoção condicionada Gamma
+
+O gate foi verificado na branch sincronizada em `411a67e` (`0 0`). A aprovação dos owners continua ausente, `PROMOTION_ALLOWED=false`, parser Godot `0`, grounding máximo `0,05 m`, limite de 16 luzes, rollback disponível e produção intacta.
+
+## CP-D5-698 — ACTIVO: Apoio Gamma / acompanhamento do gate
+
+Dev5 abre a próxima tarefa para acompanhar o gate de promoção condicionada e manter o pacote isolado enquanto aguardam aprovações explícitas. Nenhuma integração automática será executada.
+
+**NEXT_ACTION_IMMEDIATE:** consultar novas orientações remotas, rever o gate, validar parser e evidência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
