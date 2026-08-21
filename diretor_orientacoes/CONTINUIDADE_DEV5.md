@@ -3855,3 +3855,15 @@ Dev5 abre a próxima tarefa para classificar os artefactos locais não rastreado
 **NEXT_ACTION_IMMEDIATE:** auditar os artefactos não rastreados, consultar orientações remotas, validar parser, publicar relatório, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-712 — CONCLUÍDO: Auditoria de artefactos não rastreados Gamma
+
+A auditoria confirmou a branch sincronizada em `d0b829e` (`0 0`). Foram identificados 98 artefactos locais não rastreados, maioritariamente `.uid` e auxiliares; nenhum foi incluído na entrega Gamma. Não existem alterações rastreadas staged ou modificadas, o diff check passou e o parser Godot terminou com `0`.
+
+## CP-D5-713 — ACTIVO: Apoio Gamma / verificação de integridade de entrega
+
+Dev5 abre a próxima tarefa para verificar a integridade da entrega Gamma, confirmando que apenas artefactos rastreados e aprovados atravessam a publicação e que os ficheiros gerados permanecem fora do pacote.
+
+**NEXT_ACTION_IMMEDIATE:** auditar a fronteira de entrega, consultar orientações remotas, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
