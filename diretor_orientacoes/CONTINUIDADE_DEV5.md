@@ -4215,3 +4215,15 @@ Dev5 abre a próxima tarefa para manter a preservação pré-integração do pac
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar preservação pré-integração, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-742 — CONCLUÍDO: Preservação pré-integração Gamma
+
+A branch foi confirmada sincronizada, a fronteira pré-integração foi preservada, parser `0`, produção intacta, promoção automática desactivada, aprovação pendente e rollback disponível.
+
+## CP-D5-743 — ACTIVO: Apoio Gamma / verificação contínua de preservação
+
+Dev5 abre a próxima tarefa para manter verificação contínua do pacote isolado e da fronteira pré-integração, sem promoção sem aprovação explícita.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar preservação contínua, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
