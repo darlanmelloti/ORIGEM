@@ -3011,3 +3011,16 @@ A geometria e as posições relativas continuam subordinadas ao mapa cartográfi
 - **WAIT_ALLOWED**: false.
 
 O ciclo No-Stop permanece activo; a conclusão de um checkpoint fecha apenas a evidência correspondente e abre imediatamente o seguinte.
+
+
+## CP-D5-643 — CONCLUÍDO: Espelhamento Real Gamma R4/R5/R6
+
+O primeiro passe Gamma entregou contrato, preview isolado e evidência de integração para Floresta Densa, Acampamento Majestic e Ruínas Submersas. O parser Godot 4.7.1 terminou com `PARSER_EXIT=0`, a QA controlada manteve 36 segundos (`QA_EXIT=124`), a rota Gamma foi `R4>R5>R6`, a produção permaneceu inalterada e o preview utilizou uma luz dinâmica, dentro do limite de 16.
+
+## CP-D5-644 — ACTIVO: Continuidade Gamma do Espelhamento Real
+
+O Dev5 continua como **Acelerador de Mundo Full Stack — GAMMA**, com prioridade no espelhamento contínuo do percurso R1→R6 e foco operacional em R4→R5→R6. O próximo passe deve validar novamente as âncoras cartográficas, o grounding, a leitura de gameplay contínuo, a preservação das autoridades de Dev3/Dev6 e a integridade do orçamento de iluminação, sem transformar o checkpoint em paragem.
+
+**NEXT_ACTION_IMMEDIATE:** iniciar a validação isolada do CP-D5-644, gerar a evidência técnica, publicar com SHA-256, aguardar 10 segundos, consultar o GitHub e abrir o checkpoint seguinte.
+
+**WAIT_ALLOWED:** false.
