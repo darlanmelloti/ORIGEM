@@ -4311,3 +4311,15 @@ Dev5 abre a próxima tarefa para consolidar a matriz Compatibility versus Forwar
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, consolidar decisão de renderer, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-08 — CONCLUÍDO: Matriz de decisão do perfil de renderer
+
+A matriz Compatibility/OpenGL3 versus Forward+/Vulkan foi consolidada. Forward+/Vulkan é tecnicamente preferível de forma isolada por remover o aviso FSR1, mas o perfil de produção permaneceu inalterado até confirmação no hardware-alvo e aprovação formal.
+
+## CP-AAA-09 — ACTIVO: Confirmação final condicionada AAA
+
+Dev5 abre a próxima tarefa para consolidar a confirmação final condicionada, mantendo a recomendação isolada Forward+/Vulkan, o renderer de produção intacto e o gate de owners activo.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, confirmar estado final condicionado, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
