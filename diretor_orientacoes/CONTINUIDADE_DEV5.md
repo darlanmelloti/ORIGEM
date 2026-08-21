@@ -3507,3 +3507,15 @@ Dev5 abre a próxima tarefa para manter a sincronização da revisão Gamma, pre
 **NEXT_ACTION_IMMEDIATE:** verificar novas orientações remotas e o estado do pacote, executar validação de consistência, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-683 — CONCLUÍDO: Sincronização de revisão Gamma
+
+A ponta remota não apresentou novas orientações; o pacote permaneceu completo, com revisão pendente e promoção automática desactivada. Publicação sincronizada em `f4f9fc6` (`0 0`).
+
+## CP-D5-684 — ACTIVO: Apoio Gamma / manutenção de estado de revisão
+
+Dev5 abre a próxima tarefa para manter o estado de revisão dos candidatos Gamma estável e auditável enquanto aguarda decisões dos owners. O foco é verificar que nenhum artefacto foi alterado fora do escopo, que os checksums continuam disponíveis e que a condição de rollback permanece pronta.
+
+**NEXT_ACTION_IMMEDIATE:** auditar estado limpo, checksums e rollback, validar parser e runtime mínimo, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
