@@ -4155,3 +4155,15 @@ Dev5 abre a próxima tarefa para reter formalmente o estado de decisão condicio
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar retenção da decisão condicionada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-737 — CONCLUÍDO: Retenção da decisão condicionada Gamma
+
+A branch foi confirmada sincronizada em `720022c` (`0 0`), sem novas orientações nem aprovação formal. A decisão condicionada foi retida, parser `0`, produção intacta, promoção automática desactivada, handoffs preparados e rollback disponível.
+
+## CP-D5-738 — ACTIVO: Apoio Gamma / preservação de gate de promoção
+
+Dev5 abre a próxima tarefa para preservar o gate de promoção do pacote Gamma e confirmar que a promoção só poderá ocorrer após aprovação explícita dos owners, sem integração automática.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar gate de promoção, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
