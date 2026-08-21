@@ -3951,3 +3951,15 @@ Dev5 abre a próxima tarefa para preservar a prontidão do pacote Gamma e manter
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar preservação de prontidão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-720 — CONCLUÍDO: Preservação de prontidão para aprovação Gamma
+
+A branch foi confirmada sincronizada em `5929503` (`0 0`), sem novas orientações, com pacote e evidências presentes, 97 artefactos locais gerados fora da entrega, parser `0`, aprovação pendente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-721 — ACTIVO: Apoio Gamma / manutenção do gate de aprovação
+
+Dev5 abre a próxima tarefa para manter o gate de aprovação Gamma documentado e reversível, sem promoção automática enquanto os owners não emitirem decisão explícita.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar o gate de aprovação, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
