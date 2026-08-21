@@ -4227,3 +4227,15 @@ Dev5 abre a próxima tarefa para manter verificação contínua do pacote isolad
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar preservação contínua, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-01 — CONCLUÍDO: Auditoria da evidência AAA Casa Voss
+
+A auditoria confirmou parser `0`, evidência visual positiva e ausência de sinais visíveis de queda livre ou bloqueio. O vídeo tem aproximadamente 7 segundos e não cumpre o gate obrigatório de 36 segundos; também não demonstra a transição interior–exterior nem telemetria de performance. A aprovação AAA formal permanece pendente. A produção não foi promovida nem alterada por esta auditoria.
+
+## CP-AAA-02 — ACTIVO: Recolha de evidência AAA condicionada
+
+Dev5 abre a próxima tarefa para obter runtime mínimo de 36 segundos, telemetria de frame time/luzes, confirmação versionada dos parâmetros de grounding e captura da transição interior–exterior da Casa Voss.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, recolher evidência AAA condicionada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
