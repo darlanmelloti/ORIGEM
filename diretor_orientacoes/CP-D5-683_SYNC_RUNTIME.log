@@ -1,0 +1,30 @@
+REMOTE_HEAD=6c48b02
+LOCAL_HEAD=6c48b02
+AHEAD_BEHIND=0	0
+
+REMOTE_ORIENTATIONS
+6c48b02 chore(dev5): open gamma review synchronization cp d5 683
+4942337 test(dev5): validate gamma review response matrix cp d5 682
+d8d41b8 chore(dev5): open gamma review response matrix cp d5 682
+6c04f15 test(dev5): register gamma pending review cp d5 681
+fff745e chore(dev5): open gamma pending review register cp d5 681
+3c5ded5 test(dev5): publish gamma owner handoff cp d5 680
+c506c42 chore(dev5): open gamma owner handoff package cp d5 680
+0c5c54e test(dev5): validate safe gamma integration checklist cp d5 679
+
+PACKAGE_CHECK
+PRESENT=diretor_orientacoes/CP_D5_682_MATRIZ_RESPOSTAS_REVISAO.md
+PRESENT=diretor_orientacoes/CP_D5_681_REGISTO_REVISAO_PENDENTE.md
+PRESENT=diretor_orientacoes/CP_D5_680_HANDOFF_PROPRIETARIOS.md
+PRESENT=diretor_orientacoes/CP_D5_679_CHECKLIST_INTEGRACAO_SEGURA.md
+PRESENT=levels/dev5/GammaR4R5R6MirrorPreview.tscn
+PRESENT=levels/dev5/GammaR5PropGroundingPreview.tscn
+PRESENT=levels/dev5/GammaR5R6TransitionPreview.tscn
+
+DECISION_STATE
+REVIEW_STATUS=pending
+PROMOTION_AUTOMATIC=false
+PRODUCTION_MODULES_CHANGED=false
+GROUNDING_MAX_M=0.05
+LIGHT_LIMIT=16
+GAMMA_ROUTE=R4>R5>R6
