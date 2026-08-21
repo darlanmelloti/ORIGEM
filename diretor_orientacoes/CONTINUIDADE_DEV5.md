@@ -3351,3 +3351,15 @@ O Acelerador de Mundo Full Stack mantém a equipa GAMMA activa para o espelhamen
 **NEXT_ACTION_IMMEDIATE:** iniciar a validação isolada do CP-D5-670, gerar evidência técnica, publicar com SHA-256, aguardar 10 segundos, consultar o GitHub e abrir o checkpoint seguinte.
 
 **WAIT_ALLOWED:** false.
+
+## GAMMA-ESPELHO-01 — CONCLUÍDA: Neblina R4 e luz abissal R6
+
+A tarefa da nova directiva foi executada no preview isolado. R4 recebeu transição de fog global e volumetric fog; R6 recebeu `R6_Abyssal_Blue_Depth_Light`. O parser terminou com `0`, a sessão QA terminou após 36 segundos (`124`), o percurso `R4>R5>R6` permaneceu válido, o grounding continuou limitado a `0,05 m`, a produção não foi alterada e o orçamento ficou em `2/16` luzes dinâmicas. O backup indicado foi criado sem sobreposição em `/home/ubuntu/BACKUPS_ORIGEM/BK21_08_2026_01_47`.
+
+## CP-D5-671 — ACTIVO: APOIO-GAMMA-01 / Grounding de adereços R5
+
+Dev5 abre a tarefa derivada de apoio à frente Dev6 para validar o grounding dos adereços do Acampamento Majestic — tendas, fogueiras e equipamento abandonado — preservando a âncora R5, o percurso contínuo de terceira pessoa e o limite de 16 luzes. A validação será isolada, sem integração automática em `ForestLakeRegion.gd` ou outros módulos de produção.
+
+**NEXT_ACTION_IMMEDIATE:** auditar os adereços R5 existentes, construir ou validar o candidato QA com raycast, executar parser e sessão de 36 segundos, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir o próximo checkpoint.
+
+**WAIT_ALLOWED:** false.
