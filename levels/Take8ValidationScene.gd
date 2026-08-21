@@ -17,7 +17,7 @@ var elapsed: float = 0.0
 var region9_gate_light: OmniLight3D
 var route_start := Vector3(169.0, 31.2, 398.0)
 var route_end := Vector3(148.0, 32.4, 438.0)
-var r9_camera_position := Vector3(205.0, 42.0, 372.0)
+var r9_camera_position := Vector3(178.0, 29.0, 374.0)
 
 func _ready() -> void:
 	_build_environment()
@@ -57,7 +57,7 @@ func _build_cinematic_village_reveal() -> void:
 		if base != null:
 			base.name = "CP090CasaBase_%02d" % index
 			base.position = house_positions[index]
-			base.scale = Vector3(2.2, 0.48, 1.65)
+			base.scale = Vector3(3.5, 0.85, 2.6)
 			reveal.add_child(base)
 			_apply_cp090_material(base)
 		for pillar_index: int in range(3):
@@ -65,14 +65,14 @@ func _build_cinematic_village_reveal() -> void:
 			if pillar != null:
 				pillar.name = "CP090CasaPilar_%02d_%02d" % [index, pillar_index]
 				pillar.position = house_positions[index] + Vector3(-1.4 + float(pillar_index) * 1.4, 1.65, 0.0)
-				pillar.scale = Vector3(0.42, 1.25, 0.42)
+				pillar.scale = Vector3(0.65, 2.2, 0.65)
 				reveal.add_child(pillar)
 				_apply_cp090_material(pillar)
 		var roof := HOUSE_ROOF.instantiate() as Node3D
 		if roof != null:
 			roof.name = "CP090CasaCobertura_%02d" % index
 			roof.position = house_positions[index] + Vector3(0.0, 2.42, 0.0)
-			roof.scale = Vector3(1.95, 0.30, 1.48)
+			roof.scale = Vector3(3.1, 0.55, 2.35)
 			reveal.add_child(roof)
 			_apply_cp090_material(roof)
 		var hearth := OmniLight3D.new()
@@ -102,12 +102,12 @@ func _build_cinematic_village_reveal() -> void:
 
 func _apply_cp090_material(node: Node3D) -> void:
 	var material := StandardMaterial3D.new()
-	material.albedo_color = Color("#8a806d")
+	material.albedo_color = Color("#b2a083")
 	material.roughness = 0.92
 	material.metallic = 0.0
 	material.emission_enabled = true
-	material.emission = Color("#3c3328")
-	material.emission_energy_multiplier = 0.22
+	material.emission = Color("#6b4f32")
+	material.emission_energy_multiplier = 0.34
 	for mesh in node.find_children("*", "MeshInstance3D", true, false):
 		(mesh as MeshInstance3D).material_override = material
 
@@ -121,9 +121,9 @@ func _process(delta: float) -> void:
 		var trail_target := Vector3(169.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.65, 414.0).lerp(Vector3(148.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.55, 438.0), trail_progress)
 		validation_camera.look_at(trail_target, Vector3.UP)
 	else:
-		validation_camera.fov = 55.0
+		validation_camera.fov = 62.0
 		validation_camera.position = r9_camera_position
-		validation_camera.look_at(Vector3(145.0, 23.0, 360.0), Vector3.UP)
+		validation_camera.look_at(Vector3(140.0, 19.0, 357.0), Vector3.UP)
 		var r9_terrain := get_node_or_null("TerrainPatch") as Node3D
 		if r9_terrain != null:
 			r9_terrain.visible = true
