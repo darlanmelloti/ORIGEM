@@ -4335,3 +4335,15 @@ Dev5 abre a próxima tarefa para validar o perfil recomendado na GTX 1050 Ti ou 
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar hardware/gate de promoção, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-10 — CONCLUÍDO: Gate de hardware AAA
+
+A GTX 1050 Ti não está disponível no ambiente: `nvidia-smi` e GPU PCI não foram detectados. O renderer de produção permaneceu inalterado, a promoção está bloqueada e a validação final requer hardware-alvo ou confirmação formal de Dev4.
+
+## CP-AAA-11 — ACTIVO: Manutenção do gate AAA pendente
+
+Dev5 abre a próxima tarefa para manter o gate pendente, monitorizar novas orientações/aprovações e preservar o pacote isolado sem promoção automática.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar o gate AAA, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
