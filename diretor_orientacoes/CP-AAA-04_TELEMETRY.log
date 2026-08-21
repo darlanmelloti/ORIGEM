@@ -1,0 +1,57 @@
+CHECKPOINT=CP-AAA-04
+START_UTC=2026-08-21T08:00:58Z
+HEAD=6116853
+REMOTE=6116853
+AHEAD_BEHIND=0	0
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3421)
+
+ERROR: FSR1 is only available when using the Forward+ renderer.
+   at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:979)
+[CP_AAA_04] mode=isolated_grounding_preview
+[CP_AAA_04] production_modules_changed=false
+[CP_AAA_04] promotion_automatic=false
+[DEV5_GROUNDING] id=anexo_casa_voss grounded=true desired_y=15.00 impact_y=-2.78 xz_preserved=true collider=TerrenoColisorQA
+[DEV5_GROUNDING] id=ponte_marco_2 grounded=true desired_y=18.00 impact_y=-2.71 xz_preserved=true collider=TerrenoColisorQA
+[CP_AAA_04_SAMPLE] t=0.07 fps=1.00 frame_time_ms=1000.000 lights=1
+[CP_AAA_04_SAMPLE] t=1.00 fps=126.00 frame_time_ms=7.937 lights=1
+[CP_AAA_04_SAMPLE] t=2.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=3.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=4.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=5.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=6.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=7.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=8.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=9.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=10.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=11.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=12.01 fps=144.00 frame_time_ms=6.944 lights=1
+[CP_AAA_04_SAMPLE] t=13.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=14.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=15.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=16.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=17.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=18.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=19.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=20.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=21.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=22.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=23.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=24.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=25.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=26.01 fps=144.00 frame_time_ms=6.944 lights=1
+[CP_AAA_04_SAMPLE] t=27.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=28.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=29.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=30.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=31.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=32.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=33.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=34.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=35.01 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SAMPLE] t=36.00 fps=145.00 frame_time_ms=6.897 lights=1
+[CP_AAA_04_SUMMARY] samples=37 min_fps=1.00 max_frame_time_ms=1000.000 max_dynamic_lights=1
+TELEMETRY_EXIT=0
+END_UTC=2026-08-21T08:01:35Z
