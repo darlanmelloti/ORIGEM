@@ -4107,3 +4107,15 @@ Dev5 abre a próxima tarefa para preservar o pacote pré-promoção Gamma, reval
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar preservação pré-promoção, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-733 — CONCLUÍDO: Preservação do pacote pré-promoção Gamma
+
+A branch foi confirmada sincronizada em `20e0f24` (`0 0`), sem novas orientações nem aprovação formal. A separação entre evidência rastreada, alterações condicionais e artefactos locais foi preservada, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-734 — ACTIVO: Apoio Gamma / auditoria de integridade pré-decisão
+
+Dev5 abre a próxima tarefa para auditar a integridade pré-decisão do pacote Gamma e confirmar que o estado permanece pronto, reversível e sem promoção automática enquanto os owners não emitirem aprovação explícita.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar integridade pré-decisão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
