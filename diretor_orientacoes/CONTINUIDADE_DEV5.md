@@ -3567,3 +3567,15 @@ Dev5 abre a próxima tarefa para manter o registo de decisão Gamma pronto para 
 **NEXT_ACTION_IMMEDIATE:** preparar o registo de decisão, validar consistência, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-688 — CONCLUÍDO: Registo de decisão Gamma
+
+O registo de decisão foi validado com artefactos presentes, worktree limpo, parser `0`, revisão pendente, promoção automática desactivada, rollback preparado e produção intacta. Publicação sincronizada em `11232ab` (`0 0`).
+
+## CP-D5-689 — ACTIVO: Apoio Gamma / preservação de decisão e rollback
+
+Dev5 abre a próxima tarefa para preservar a decisão pendente e a reversibilidade do pacote Gamma, mantendo o registo pronto para novas orientações remotas ou aprovações formais. Nenhuma alteração será promovida automaticamente ao mundo principal.
+
+**NEXT_ACTION_IMMEDIATE:** auditar o registo de decisão, confirmar rollback e sincronização remota, validar parser, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
