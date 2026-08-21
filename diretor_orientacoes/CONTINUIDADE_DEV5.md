@@ -4023,3 +4023,15 @@ Dev5 abre a próxima tarefa para monitorizar o handoff final Gamma e manter a co
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar o handoff, validar parser e evidências, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-726 — CONCLUÍDO: Monitorização do handoff final Gamma
+
+A branch foi confirmada sincronizada em `03178f5` (`0 0`), sem novas orientações nem aprovação formal. O handoff para Dev3, Dev4 e Dev6 permanece pronto, 97 artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-727 — ACTIVO: Apoio Gamma / verificação de consistência do handoff
+
+Dev5 abre a próxima tarefa para verificar a consistência final entre os relatórios, checksums, previews e o marcador de continuidade, sem promover alterações ao mundo principal.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar consistência, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
