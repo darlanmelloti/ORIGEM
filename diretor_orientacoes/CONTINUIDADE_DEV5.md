@@ -3543,3 +3543,15 @@ Dev5 abre a próxima tarefa para manter o pacote Gamma pronto e rastreável, ver
 **NEXT_ACTION_IMMEDIATE:** validar evidência e checksums existentes, confirmar parser e QA mínima, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-686 — CONCLUÍDO: Manutenção de evidência Gamma
+
+Os checksums CP-D5-679 a CP-D5-685, os três previews e o relatório de continuidade foram confirmados. O worktree passou, o parser terminou com `0`, a QA principal cumpriu 36 segundos (`124`), o rollback está disponível e a promoção automática continua desactivada. Publicação sincronizada em `3202c6f` (`0 0`).
+
+## CP-D5-687 — ACTIVO: Apoio Gamma / continuidade de handoff
+
+Dev5 abre a próxima tarefa para manter o handoff Gamma operacional enquanto as revisões dos owners permanecem pendentes. O foco continua na rastreabilidade, evidência, reversibilidade e disponibilidade para incorporar orientações novas sem alterar o mundo principal.
+
+**NEXT_ACTION_IMMEDIATE:** verificar o estado remoto e o handoff, validar consistência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
