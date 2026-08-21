@@ -4167,3 +4167,15 @@ Dev5 abre a próxima tarefa para preservar o gate de promoção do pacote Gamma 
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar gate de promoção, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-738 — CONCLUÍDO: Preservação do gate de promoção Gamma
+
+A branch foi confirmada sincronizada em `c172c5c` (`0 0`), sem novas orientações nem aprovação formal. O gate exige aprovação explícita, parser `0`, produção intacta, promoção automática desactivada, handoffs preparados e rollback disponível.
+
+## CP-D5-739 — ACTIVO: Apoio Gamma / retenção de pacote pronto para aprovação
+
+Dev5 abre a próxima tarefa para reter o pacote Gamma no estado pronto para aprovação, preservando todas as barreiras de integração e a rastreabilidade dos artefactos.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar retenção do pacote pronto, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
