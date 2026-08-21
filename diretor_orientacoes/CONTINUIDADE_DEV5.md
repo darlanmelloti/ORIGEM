@@ -4143,3 +4143,15 @@ Dev5 abre a próxima tarefa para verificar a integridade final do pacote Gamma a
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar pacote antes de decisão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-736 — CONCLUÍDO: Verificação do pacote antes de decisão
+
+A branch foi confirmada sincronizada em `a216dde` (`0 0`), sem novas orientações nem aprovação formal. A verificação do pacote passou, parser `0`, fronteira de produção preservada, promoção automática desactivada, handoffs preparados e rollback disponível.
+
+## CP-D5-737 — ACTIVO: Apoio Gamma / retenção de decisão condicionada
+
+Dev5 abre a próxima tarefa para reter formalmente o estado de decisão condicionada do pacote Gamma, sem integração em produção enquanto não houver aprovação explícita dos owners.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar retenção da decisão condicionada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
