@@ -3879,3 +3879,15 @@ Dev5 abre a próxima tarefa para auditar a prontidão final do pacote Gamma ante
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar prontidão final, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-714 — CONCLUÍDO: Prontidão final do pacote Gamma
+
+A branch foi confirmada sincronizada em `66c306b` (`0 0`), sem novas orientações, com artefactos e checksums presentes, 97 artefactos locais gerados fora da entrega, alterações rastreadas não staged, parser `0`, grounding máximo de `0,05 m`, limite de 16 luzes, aprovação pendente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-715 — ACTIVO: Apoio Gamma / verificação final pré-decisão
+
+Dev5 abre a próxima tarefa para executar a verificação final pré-decisão do pacote Gamma, mantendo a rastreabilidade R4/R5/R6, a integração condicionada e a promoção automática desactivada.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar o pacote pré-decisão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
