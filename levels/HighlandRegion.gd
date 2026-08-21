@@ -10,6 +10,8 @@ const TREE_CC0: PackedScene = preload("res://assets/models_cc0/tree_detailed_dar
 const FERN_CC0: PackedScene = preload("res://assets/models_polyhaven/fern_02/fern_02_1k.gltf")
 const ROCK_LARGE: PackedScene = preload("res://assets/models_cc0/stone_largeA.glb")
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
+const CLIFF_ROCK: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
+const SLOPE_ROCK: PackedScene = preload("res://assets/models_cc0/cliff_blockSlope_rock.glb")
 const FLAGSTONE: Texture2D = preload("res://assets/textures/generated/daylight_weathered_flagstone.png")
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
@@ -420,6 +422,30 @@ func _make_village_house(index: int) -> Node3D:
 		roof.position = Vector3(0.0, 3.05, 0.0)
 		_apply_material(roof, house_roof_material)
 		house.add_child(roof)
+	var left_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
+	if left_wall != null:
+		left_wall.name = "ParedeOrganicaEsquerdaCasa_%02d" % index
+		left_wall.scale = Vector3(0.62, 1.10, 0.64)
+		left_wall.rotation = Vector3(0.04, 0.20, -0.08)
+		left_wall.position = Vector3(-2.05, 1.85, 0.04)
+		_apply_material(left_wall, house_stone_material)
+		house.add_child(left_wall)
+	var right_wall: Node3D = CLIFF_ROCK.instantiate() as Node3D
+	if right_wall != null:
+		right_wall.name = "ParedeOrganicaDireitaCasa_%02d" % index
+		right_wall.scale = Vector3(0.62, 1.10, 0.64)
+		right_wall.rotation = Vector3(-0.03, -0.18, 0.08)
+		right_wall.position = Vector3(2.05, 1.85, 0.04)
+		_apply_material(right_wall, house_stone_material)
+		house.add_child(right_wall)
+	var sloped_roof: Node3D = SLOPE_ROCK.instantiate() as Node3D
+	if sloped_roof != null:
+		sloped_roof.name = "CoberturaInclinadaOrganicaCasa_%02d" % index
+		sloped_roof.scale = Vector3(1.16, 0.62, 0.88)
+		sloped_roof.rotation = Vector3(0.12, 0.30, -0.14)
+		sloped_roof.position = Vector3(0.0, 3.62, 0.06)
+		_apply_material(sloped_roof, house_roof_material)
+		house.add_child(sloped_roof)
 	var hearth_light := OmniLight3D.new()
 	hearth_light.name = "LuzDiegeticaCasa_%02d" % index
 	hearth_light.position = Vector3(0.0, 2.5, 0.5)
