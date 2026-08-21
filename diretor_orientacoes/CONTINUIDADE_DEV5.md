@@ -3771,3 +3771,15 @@ Dev5 abre a próxima tarefa para acompanhar a decisão formal dos owners Gamma e
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar decisão formal e integridade do pacote, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-705 — CONCLUÍDO: Monitorização de decisão formal Gamma
+
+A branch foi confirmada sincronizada em `0d85fa4` (`0 0`), sem nova decisão dos owners, com artefactos presentes, worktree limpo, parser Godot `0`, promoção automática desactivada, aprovação explícita ainda necessária, rollback disponível e produção intacta.
+
+## CP-D5-706 — ACTIVO: Apoio Gamma / continuidade pós-decisão
+
+Dev5 abre a próxima tarefa para continuar a rastreabilidade pós-decisão e manter o handoff Gamma reversível enquanto a aprovação formal não é publicada. Nenhuma promoção automática será executada.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar a continuidade pós-decisão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
