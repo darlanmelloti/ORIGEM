@@ -4047,3 +4047,15 @@ Dev5 abre a próxima tarefa para verificar a fronteira de promoção do pacote G
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar a fronteira de promoção, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-728 — CONCLUÍDO: Auditoria da fronteira de promoção Gamma
+
+A branch foi confirmada sincronizada em `fc8e657` (`0 0`), sem novas orientações nem aprovação formal. A fronteira de promoção foi preservada, os artefactos locais gerados continuam fora da entrega, parser `0`, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-729 — ACTIVO: Apoio Gamma / monitorização pós-fronteira
+
+Dev5 abre a próxima tarefa para monitorizar o estado pós-auditoria da fronteira de promoção, mantendo o handoff para Dev3, Dev4 e Dev6 pronto e o pacote R4/R5/R6 reversível.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar monitorização pós-fronteira, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
