@@ -3747,3 +3747,15 @@ Dev5 abre a próxima tarefa para monitorizar a decisão e o handoff Gamma, mante
 **NEXT_ACTION_IMMEDIATE:** consultar o GitHub, validar estado do handoff, parser e evidências, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-703 — CONCLUÍDO: Monitorização de decisão e handoff Gamma
+
+A branch foi confirmada sincronizada em `38dd892` (`0 0`), sem novas orientações, com artefactos presentes, worktree limpo, parser `0`, aprovação dos owners ausente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-704 — ACTIVO: Apoio Gamma / continuidade da revisão final
+
+Dev5 abre a próxima tarefa para manter a revisão final Gamma continuamente rastreável e pronta para a decisão formal dos owners. O pacote permanece isolado, reversível e sem promoção automática.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar continuidade da revisão final, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
