@@ -3555,3 +3555,15 @@ Dev5 abre a próxima tarefa para manter o handoff Gamma operacional enquanto as 
 **NEXT_ACTION_IMMEDIATE:** verificar o estado remoto e o handoff, validar consistência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-687 — CONCLUÍDO: Continuidade de handoff Gamma
+
+O handoff permaneceu operacional, todos os relatórios e previews estavam presentes, a branch foi confirmada em `0 0`, o worktree passou, o parser terminou com `0` e a promoção automática continuou desactivada. Publicação sincronizada em `ee1120b` (`0 0`).
+
+## CP-D5-688 — ACTIVO: Apoio Gamma / registo de decisão
+
+Dev5 abre a próxima tarefa para manter o registo de decisão Gamma pronto para receber aprovações ou pedidos de alteração dos owners, sem presumir resultados. O pacote permanece isolado, reversível e tecnicamente pronto.
+
+**NEXT_ACTION_IMMEDIATE:** preparar o registo de decisão, validar consistência, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
