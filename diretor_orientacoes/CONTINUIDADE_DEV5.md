@@ -3807,3 +3807,15 @@ Dev5 abre a próxima tarefa para preservar o pacote Gamma após o encerramento t
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar preservação pós-encerramento, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-708 — CONCLUÍDO: Preservação pós-encerramento Gamma
+
+A branch foi confirmada sincronizada em `bf165e7` (`0 0`), sem novas orientações, com artefactos presentes, worktree limpo, parser `0`, grounding máximo de `0,05 m`, limite de 16 luzes, aprovação pendente, promoção automática desactivada, rollback disponível e produção intacta.
+
+## CP-D5-709 — ACTIVO: Apoio Gamma / prontidão de revisão dos owners
+
+Dev5 abre a próxima tarefa para manter o pacote Gamma pronto para revisão dos owners, preservando R4/R5/R6, o handoff e a fronteira sem promoção automática.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar prontidão dos owners, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
