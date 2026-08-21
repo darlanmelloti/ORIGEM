@@ -3387,3 +3387,15 @@ Dev5 abre a próxima tarefa derivada para verificar o handoff técnico dos previ
 **NEXT_ACTION_IMMEDIATE:** executar auditoria integrada dos previews Gamma, validar parser e sessões controladas, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir o próximo checkpoint.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-673 — CONCLUÍDO: Verificação de Handoff Gamma
+
+A auditoria integrada confirmou os três previews Gamma, parser `0`, três sessões QA de 36 segundos (`124` cada), grounding R5/R6, sequência R4→R5→R6, transição R5→R6, atmosfera R4, luz abissal R6, produção intacta e máximo declarado de `2/16` luzes. Publicação sincronizada em `cf12136` (`0 0`).
+
+## CP-D5-674 — ACTIVO: Apoio Gamma / pacote de entrega visual
+
+Dev5 abre a próxima tarefa derivada para preparar o pacote de entrega visual e técnica do espelhamento Gamma para revisão de Dev3 e auditoria de Dev4. A tarefa preserva o escopo isolado, a autoridade cartográfica do mapa, a autoridade visual de Dev3, o suporte de ambiente a Dev6 e o limite de 16 luzes.
+
+**NEXT_ACTION_IMMEDIATE:** verificar os assets e relatórios de evidência Gamma, executar validação final dos previews, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
