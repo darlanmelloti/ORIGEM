@@ -3591,3 +3591,15 @@ Dev5 abre a próxima tarefa para manter o registo de decisão e as evidências G
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar decisão e evidência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-690 — CONCLUÍDO: Verificação de decisão Gamma
+
+A consulta remota não apresentou novas decisões; a branch estava sincronizada em `d4fffca` (`0 0`), os artefactos estavam presentes, o worktree passou, o parser terminou com `0`, a decisão permaneceu pendente e a promoção automática continuou desactivada.
+
+## CP-D5-691 — ACTIVO: Apoio Gamma / prontidão para orientação nova
+
+Dev5 abre a próxima tarefa para manter o pacote pronto para qualquer nova orientação remota, aprovação formal ou pedido de alteração. O estado actual continua tecnicamente estável, reversível e sem integração automática no mundo principal.
+
+**NEXT_ACTION_IMMEDIATE:** consultar o GitHub, verificar a decisão e a integridade do pacote, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
