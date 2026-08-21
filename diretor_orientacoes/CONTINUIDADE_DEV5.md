@@ -3867,3 +3867,15 @@ Dev5 abre a próxima tarefa para verificar a integridade da entrega Gamma, confi
 **NEXT_ACTION_IMMEDIATE:** auditar a fronteira de entrega, consultar orientações remotas, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-713 — CONCLUÍDO: Integridade da entrega Gamma
+
+A branch foi confirmada sincronizada em `403340c` (`0 0`). A fronteira rastreada foi preservada: os artefactos Gamma e relatórios estão presentes, 97 artefactos locais gerados permanecem fora da entrega, não há alterações staged ou modificadas, o diff check passou e o parser Godot terminou com `0`.
+
+## CP-D5-714 — ACTIVO: Apoio Gamma / auditoria de prontidão final
+
+Dev5 abre a próxima tarefa para auditar a prontidão final do pacote Gamma antes da decisão dos owners, preservando a integração condicionada, o rollback e a produção sem alterações automáticas.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, auditar prontidão final, validar parser e checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
