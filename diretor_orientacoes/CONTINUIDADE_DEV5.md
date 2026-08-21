@@ -4263,3 +4263,15 @@ Dev5 abre a próxima tarefa para criar ou activar telemetria segura em cena isol
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, executar telemetria isolada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-04 — CONCLUÍDO: Telemetria isolada de performance
+
+A ferramenta isolada recolheu 37 amostras em aproximadamente 36 segundos, com FPS pós-arranque entre 126–145, frame time entre 6,90–7,94 ms e máximo de 1 luz dinâmica. O primeiro frame apresentou pico artificial de arranque. A evidência é positiva para a cena isolada, mas não substitui medição na GTX 1050 Ti; o aviso FSR1 permanece pendente.
+
+## CP-AAA-05 — ACTIVO: Telemetria representativa e decisão de renderer
+
+Dev5 abre a próxima tarefa para repetir a telemetria numa cena de gameplay representativa, excluir o primeiro frame, calcular percentis e decidir/documentar Compatibility sem FSR1 ou Forward+ com FSR1.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, recolher telemetria representativa e decidir renderer, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
