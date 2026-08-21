@@ -3375,3 +3375,15 @@ Dev5 abre a próxima tarefa derivada para apoiar Dev6 na continuidade visual ent
 **NEXT_ACTION_IMMEDIATE:** validar a transição R5→R6 no preview Gamma, executar parser e sessão de 36 segundos, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir o próximo checkpoint.
 
 **WAIT_ALLOWED:** false.
+
+## APOIO-GAMMA-02 — CONCLUÍDA: Continuidade cartográfica R5→R6
+
+Foi criado e validado o preview `GammaR5R6TransitionPreview.tscn`. A continuidade Acampamento Majestic → Água Transparente → Ruínas Submersas foi confirmada com grounding por raycast nas âncoras R5/R6, X/Z preservado, parser `0`, QA de 36 segundos (`124`), produção intacta e zero luzes dinâmicas. Publicação sincronizada em `c230ec2` (`0 0`).
+
+## CP-D5-673 — ACTIVO: Apoio Gamma / verificação de handoff
+
+Dev5 abre a próxima tarefa derivada para verificar o handoff técnico dos previews Gamma e preparar o pacote de evidência para Dev3, Dev4 e Dev6. O foco é garantir que contrato, grounding, sequência R4→R5→R6, transição R5→R6, atmosfera e orçamento de luzes permanecem coerentes antes de qualquer integração no mundo principal.
+
+**NEXT_ACTION_IMMEDIATE:** executar auditoria integrada dos previews Gamma, validar parser e sessões controladas, gerar checksums, publicar, aguardar 10 segundos, consultar o GitHub e abrir o próximo checkpoint.
+
+**WAIT_ALLOWED:** false.
