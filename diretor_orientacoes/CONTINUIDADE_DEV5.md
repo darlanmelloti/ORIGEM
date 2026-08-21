@@ -3531,3 +3531,15 @@ Dev5 abre a próxima tarefa para manter a continuidade operacional do pacote Gam
 **NEXT_ACTION_IMMEDIATE:** consultar novas orientações remotas, executar a validação de continuidade Gamma, gerar checksums, publicar, aguardar 10 segundos, consultar novamente o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-685 — CONCLUÍDO: Continuidade No-Stop Gamma
+
+A consulta remota foi executada, não foram detectadas novas orientações, a branch permaneceu sincronizada, o parser terminou com `0`, a QA principal cumpriu 36 segundos (`124`) e as rotas, grounding, limites e estado pendente foram preservados. Publicação sincronizada em `3e6ffdd` (`0 0`).
+
+## CP-D5-686 — ACTIVO: Apoio Gamma / manutenção de evidência
+
+Dev5 abre a próxima tarefa para manter o pacote Gamma pronto e rastreável, verificando a continuidade da evidência, a disponibilidade dos checksums e a condição de revisão pendente sem executar promoção automática.
+
+**NEXT_ACTION_IMMEDIATE:** validar evidência e checksums existentes, confirmar parser e QA mínima, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
