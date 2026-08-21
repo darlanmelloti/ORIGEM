@@ -4203,3 +4203,15 @@ Dev5 abre a próxima tarefa para reter o estado monitorizado do pacote Gamma e m
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar estado monitorizado, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-741 — CONCLUÍDO: Retenção do estado monitorizado Gamma
+
+A branch foi confirmada sincronizada e o estado monitorizado foi retido com parser `0`, produção intacta, promoção automática desactivada, aprovação pendente e rollback disponível.
+
+## CP-D5-742 — ACTIVO: Apoio Gamma / manutenção de preservação pré-integração
+
+Dev5 abre a próxima tarefa para manter a preservação pré-integração do pacote Gamma e continuar a consulta de orientações, sem promoção ou alterações de produção sem aprovação explícita.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar preservação pré-integração, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
