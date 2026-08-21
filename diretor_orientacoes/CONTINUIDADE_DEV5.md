@@ -4299,3 +4299,15 @@ Dev5 abre a próxima tarefa para executar a comparação Forward+ em ambiente is
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, executar comparação Forward+ isolada, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-AAA-07 — CONCLUÍDO: Comparação Forward+ Vulkan isolada
+
+A comparação Forward+ com Vulkan completou aproximadamente 36 segundos, com `P05 FPS=144,00`, `P95 frame time=6,944 ms`, `max_dynamic_lights=1`, `FSR_WARNING_COUNT=0` e `PARSER_ERRORS=0`. O ensaio foi isolado; `project.godot` não foi alterado.
+
+## CP-AAA-08 — ACTIVO: Decisão condicionada do perfil de renderer
+
+Dev5 abre a próxima tarefa para consolidar a matriz Compatibility versus Forward+ Vulkan, mantendo o perfil de produção inalterado até aprovação formal e confirmação no hardware-alvo.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, consolidar decisão de renderer, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
