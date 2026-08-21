@@ -3687,3 +3687,15 @@ Dev5 abre a próxima tarefa para acompanhar o gate de promoção condicionada e 
 **NEXT_ACTION_IMMEDIATE:** consultar novas orientações remotas, rever o gate, validar parser e evidência, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-698 — CONCLUÍDO: Acompanhamento do gate de promoção Gamma
+
+O gate permaneceu consistente, sem aprovação nova dos owners. A branch foi sincronizada em `6511b85` (`0 0`), o worktree passou, o parser terminou com `0`, o grounding e o limite de luzes foram preservados, a promoção automática ficou desactivada e o rollback continuou disponível.
+
+## CP-D5-699 — ACTIVO: Apoio Gamma / verificação pós-gate
+
+Dev5 abre a próxima tarefa para verificar o estado pós-gate e manter o pacote preparado para uma decisão explícita dos owners. Nenhuma alteração será promovida ao mundo principal sem o gate formal.
+
+**NEXT_ACTION_IMMEDIATE:** consultar o GitHub, validar o estado pós-gate, parser e evidências, publicar, aguardar 10 segundos, consultar novamente e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
