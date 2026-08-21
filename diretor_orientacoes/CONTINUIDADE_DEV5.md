@@ -4179,3 +4179,15 @@ Dev5 abre a próxima tarefa para reter o pacote Gamma no estado pronto para apro
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar retenção do pacote pronto, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-739 — CONCLUÍDO: Retenção do pacote pronto para aprovação
+
+A branch foi confirmada sincronizada em `1fbab04` (`0 0`), sem novas orientações nem aprovação formal. O pacote mantém-se pronto para owners, parser `0`, promoção automática desactivada, produção intacta, handoffs preparados e rollback disponível.
+
+## CP-D5-740 — ACTIVO: Apoio Gamma / monitorização de aprovação dos owners
+
+Dev5 abre a próxima tarefa para monitorizar a eventual chegada de aprovação ou pedido de alteração dos owners e preservar a fronteira de integração enquanto a decisão não chega.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, monitorizar aprovação ou pedidos, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
