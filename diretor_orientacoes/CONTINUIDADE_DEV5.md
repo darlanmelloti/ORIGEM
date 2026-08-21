@@ -4131,3 +4131,15 @@ Dev5 abre a próxima tarefa para preservar a prontidão do pacote Gamma para rev
 **NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, validar readiness para owners, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
 
 **WAIT_ALLOWED:** false.
+
+## CP-D5-735 — CONCLUÍDO: Preservação de readiness para owners Gamma
+
+A branch foi confirmada sincronizada em `328ad07` (`0 0`), sem novas orientações nem aprovação formal. O pacote permanece pronto para revisão, parser `0`, handoffs preparados, produção intacta, promoção automática desactivada e rollback disponível.
+
+## CP-D5-736 — ACTIVO: Apoio Gamma / verificação de pacote antes de decisão
+
+Dev5 abre a próxima tarefa para verificar a integridade final do pacote Gamma antes de decisão dos owners, sem alterar módulos de produção nem promover candidatos condicionais.
+
+**NEXT_ACTION_IMMEDIATE:** consultar orientações remotas, verificar pacote antes de decisão, publicar, aguardar 10 segundos, consultar o GitHub e abrir a próxima tarefa.
+
+**WAIT_ALLOWED:** false.
