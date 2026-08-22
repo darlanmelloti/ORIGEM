@@ -18,20 +18,16 @@ func _ready() -> void:
 		call_deferred("_on_new_game_pressed")
 
 func _on_new_game_pressed() -> void:
-	var path := "res://scenes/main.tscn"
-	if not ResourceLoader.exists(path):
-		push_error("[MainMenu] Cena não encontrada: " + path)
-		print("[MainMenu] Cenas disponíveis:")
-		for f in DirAccess.get_files_at("res://scenes/"):
-			print("  res://scenes/" + f)
+	const path: String = "res://scenes/main.tscn"
+	# CP-ERR-03: resolve a PackedScene explicitamente antes da troca de cena;
+	# isto transforma UID/ext_resource inválido numa mensagem diagnosticável.
+	var packed_scene: PackedScene = ResourceLoader.load(path, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+	if packed_scene == null:
+		push_error("[MainMenu] Não foi possível resolver PackedScene: " + path)
 		return
-
-	var err := get_tree().change_scene_to_file(path)
+	var err: Error = get_tree().change_scene_to_packed(packed_scene)
 	if err != OK:
 		push_error("[MainMenu] Falha ao carregar cena: %s (%d)" % [path, err])
 
 func _on_continue_pressed() -> void:
-	var path := "res://scenes/main.tscn"
-	var err := get_tree().change_scene_to_file(path)
-	if err != OK:
-		push_error("[MainMenu] Falha ao continuar: %s (%d)" % [path, err])
+	_on_new_game_pressed()

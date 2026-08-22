@@ -51,6 +51,13 @@ const BLOCK_SPEED: float = 1.75
 const MOUSE_SENS: float = 0.0018
 
 func _ready() -> void:
+	# CP-ERR-01: a transição pedra–relva usa o mesmo corpo de terreno, mas o relevo
+	# irregular não deve converter uma inclinação navegável em parede física.
+	floor_max_angle = deg_to_rad(70.0)
+	floor_snap_length = 0.35
+	floor_stop_on_slope = false
+	floor_constant_speed = true
+	safe_margin = 0.02
 	add_to_group("player")
 	flashlight_on = true
 	flashlight.visible = true
@@ -255,6 +262,8 @@ func _handle_player(delta: float) -> void:
 	# A retenção é exclusiva do harness de leitura cartográfica e não existe numa execução normal.
 	var qa_arch_forest_hold: bool = OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest" and OS.get_environment("ORIGEM_QA_CARTO_STABILIZE") == "1"
 	var grounded: bool = is_on_floor() or qa_arch_forest_hold
+	# CP-ERR-01: mantém a cápsula ligada ao terreno durante a mudança de
+	# material/triângulo, sem injectar posição nem velocidade no jogo normal.
 	if grounded:
 		player_velocity.y = 0.0
 		if Input.is_action_just_pressed("jump") and not is_blocking and attack_recovery_timer <= 0.0:

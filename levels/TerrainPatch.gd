@@ -80,13 +80,17 @@ func height_at(world_x: float, world_z: float) -> float:
 		var road_progress: float = clampf((world_z - 12.0) / 108.0, 0.0, 1.0)
 		var road_center: float = lerpf(-21.4, -10.0, road_progress) + sin(road_progress * PI * 2.5) * 1.8
 		var lateral_distance: float = abs(world_x - road_center)
-		var shoulder_ratio: float = clampf((lateral_distance - 4.35) / 10.0, 0.0, 1.0)
-		var shoulder_height: float = shoulder_ratio * shoulder_ratio * (2.30 + road_progress * 2.10)
+		# CP-ERR-01/04: a berma começa depois da faixa de passagem da cápsula e
+		# sobe com uma curva suave; evita uma aresta entre estrada e relva.
+		var shoulder_ratio: float = clampf((lateral_distance - 5.40) / 11.0, 0.0, 1.0)
+		var shoulder_smooth: float = shoulder_ratio * shoulder_ratio * (3.0 - 2.0 * shoulder_ratio)
+		var shoulder_height: float = shoulder_smooth * (1.65 + road_progress * 1.55)
 		# Contrafortes de vale em escala macro: começam fora de 11 m do eixo, deixam a estrada totalmente navegável
 		# e crescem só depois da Casa para que Arco e floresta sejam lidos em planos sucessivos, não como cenário comprimido.
 		var macro_progress: float = clampf((world_z - 38.0) / 96.0, 0.0, 1.0)
-		var valley_rim_ratio: float = clampf((lateral_distance - 10.8) / 26.0, 0.0, 1.0)
-		var valley_rim_height: float = valley_rim_ratio * valley_rim_ratio * macro_progress * 12.5
+		var valley_rim_ratio: float = clampf((lateral_distance - 12.5) / 28.0, 0.0, 1.0)
+		var valley_rim_smooth: float = valley_rim_ratio * valley_rim_ratio * (3.0 - 2.0 * valley_rim_ratio)
+		var valley_rim_height: float = valley_rim_smooth * macro_progress * 9.0
 		height += shoulder_height + valley_rim_height
 		# Janela topográfica do miradouro Voss: um colo natural no ombro oriental deixa a bacia revelar-se em planos sucessivos.
 		# Não é um corte plano: conserva ruído, inclinação e colisão, mas impede que a primeira crista oculte todo o mundo cartográfico.
