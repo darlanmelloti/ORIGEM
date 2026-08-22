@@ -17,6 +17,9 @@ var is_blocking: bool = false
 var player_velocity: Vector3 = Vector3.ZERO
 var bob_time: float = 0.0
 var qa_carto_link_frames: int = 0
+var last_safe_position: Vector3 = Vector3.ZERO
+var fall_time: float = 0.0
+var jump_started_this_frame: bool = false
 
 var current_health: int = 100
 const MAX_HEALTH: int = 100
@@ -35,6 +38,9 @@ const STAMINA_RECOVERY_DELAY: float = 0.30
 const JUMP_VELOCITY: float = 4.8
 const JUMP_STAMINA_COST: float = 6.0
 const AIR_CONTROL: float = 0.65
+const FALL_RECOVERY_DELAY: float = 0.85
+const FALL_RECOVERY_DROP: float = 2.0
+const MAX_UNINTENTIONAL_UPWARD_SPEED: float = 0.35
 
 var attack_cooldown: float = 0.0
 var attack_recovery_timer: float = 0.0
@@ -59,6 +65,7 @@ func _ready() -> void:
 	floor_constant_speed = true
 	safe_margin = 0.02
 	add_to_group("player")
+	last_safe_position = global_position
 	flashlight_on = true
 	flashlight.visible = true
 	footstep_timer.timeout.connect(_on_footstep)
@@ -262,6 +269,12 @@ func _handle_player(delta: float) -> void:
 	# A retenção é exclusiva do harness de leitura cartográfica e não existe numa execução normal.
 	var qa_arch_forest_hold: bool = OS.get_environment("ORIGEM_QA_ROUTE") == "arch_to_forest" and OS.get_environment("ORIGEM_QA_CARTO_STABILIZE") == "1"
 	var grounded: bool = is_on_floor() or qa_arch_forest_hold
+	jump_started_this_frame = false
+	if grounded:
+		fall_time = 0.0
+		last_safe_position = global_position
+	# CP-GROUND-04: só um input explícito de salto pode iniciar velocidade vertical positiva.
+	# Isto impede que a resposta de uma pedra/árvore transforme W em sustentação.
 	# CP-ERR-01: mantém a cápsula ligada ao terreno durante a mudança de
 	# material/triângulo, sem injectar posição nem velocidade no jogo normal.
 	if grounded:
@@ -269,11 +282,13 @@ func _handle_player(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and not is_blocking and attack_recovery_timer <= 0.0:
 			if current_stamina >= JUMP_STAMINA_COST:
 				player_velocity.y = JUMP_VELOCITY
+				jump_started_this_frame = true
 				_consume_stamina(JUMP_STAMINA_COST)
 				EventBus.player_message_requested.emit("Salto temporal.", 0.45)
 			else:
 				EventBus.player_message_requested.emit("Sem stamina para saltar.", 0.65)
 	else:
+		fall_time += delta
 		player_velocity.y -= gravity * delta
 
 	if Input.is_action_just_pressed("toggle_flashlight"):
@@ -311,7 +326,16 @@ func _handle_player(delta: float) -> void:
 
 	velocity = player_velocity
 	move_and_slide()
+	# Colisões laterais em pedras e árvores podem devolver uma componente Y positiva.
+	# Ao caminhar isso é sempre um artefacto: cortar a componente evita o voo ao premir W.
+	if not jump_started_this_frame and velocity.y > MAX_UNINTENTIONAL_UPWARD_SPEED:
+		velocity.y = 0.0
 	player_velocity = velocity
+	if fall_time >= FALL_RECOVERY_DELAY and global_position.y < last_safe_position.y - FALL_RECOVERY_DROP:
+		global_position = last_safe_position
+		velocity = Vector3.ZERO
+		player_velocity = Vector3.ZERO
+		fall_time = 0.0
 	if qa_link_walk:
 		qa_carto_link_frames += 1
 		if qa_carto_link_frames == 30:

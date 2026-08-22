@@ -30,18 +30,10 @@ func _ready() -> void:
 	# O lago permanece fora da abertura: a referência pede solo húmido, não um espelho de água no primeiro plano.
 
 func _physics_process(_delta: float) -> void:
-	# Recuperação de segurança: a colisão concava é o piso normal; este ramo só actua se um salto de frame extremo
-	# colocar a cápsula abaixo da altura analítica do relevo. Evita quedas infinitas sem criar plataformas visíveis.
-	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
-	if player == null:
-		return
-	var terrain_y: float = height_at(player.global_position.x, player.global_position.z)
-	if player.global_position.y < terrain_y - 3.0:
-		# CP-GROUND-02: recuperação apenas para queda real, preservando o movimento horizontal.
-		# O limite largo evita que uma diferença normal entre triângulos congele Elias no solo.
-		player.global_position.y = terrain_y + 1.25
-		player.velocity = Vector3(player.velocity.x, 0.0, player.velocity.z)
-		player.set("player_velocity", player.velocity)
+	# CP-GROUND-04: não teletransportar Elias para `height_at()` durante a simulação.
+	# A recuperação de queda pertence ao Player e usa a última posição realmente apoiada;
+	# isto impede que uma falha de colisão se transforme num salto automático sobre uma pedra.
+	pass
 
 func _setup_noises() -> void:
 	land_noise = FastNoiseLite.new()

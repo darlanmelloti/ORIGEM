@@ -25,7 +25,7 @@ check("menu_packed_scene", "change_scene_to_packed" in menu and "CACHE_MODE_IGNO
 check("menu_unpauses_game", "GameManager.change_state(GameManager.GameState.EXPLORING)" in menu, "menu retoma a simulação")
 check("main_unpauses_game", "GameManager.change_state(GameManager.GameState.EXPLORING)" in main_script, "bootstrap retoma a simulação")
 check("terrain_heightmap_collision", "HeightMapShape3D" in terrain and "map_width" in terrain and "map_depth" in terrain and "map_data" in terrain, "colisão regular por heightmap")
-check("terrain_recovery_preserves_horizontal", "Vector3(player.velocity.x, 0.0, player.velocity.z)" in terrain, "recuperação sem zerar deslocamento horizontal")
+check("player_safe_fall_recovery", "last_safe_position" in player and "FALL_RECOVERY_DELAY" in player and "global_position = last_safe_position" in player, "recuperação por última posição segura")
 check("player_uid_matches_sidecar", "uid=\"uid://chgidfkiu6wxn\" path=\"res://entities/player/Player.gd\"" in main_scene, "UID do Player na cena principal")
 
 # Verificação simples de blocos: cada função relevante deve ter corpo indentado.
