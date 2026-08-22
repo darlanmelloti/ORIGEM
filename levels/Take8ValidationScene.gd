@@ -23,8 +23,8 @@ var route_end := Vector3(148.0, 32.4, 438.0)
 # CP110: plano de entrada mais próximo, com soleira R7 dominante e horizonte R9 preservado.
 # CP112: enquadramento compacto da soleira, sem overhead, com fuga R9 ainda visível.
 # CP126: recuo moderado para manter a soleira R7 visível e retirar o tecto do primeiro plano.
-# CP129: desvio lateral mínimo; a fachada mantém massa dominante e o corredor R9 entra no centro-direita.
-var r9_camera_position := Vector3(142.2, 16.8, 342.0)
+# CP130: oblíqua controlada para ler fachada e trilho R9 real no mesmo eixo de progressão.
+var r9_camera_position := Vector3(141.0, 17.6, 340.5)
 
 func _ready() -> void:
 	_build_environment()
@@ -182,7 +182,7 @@ func _process(delta: float) -> void:
 		var trail_target := Vector3(169.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.65, 414.0).lerp(Vector3(148.0, lerpf(route_start.y, route_end.y, trail_progress) - 0.55, 438.0), trail_progress)
 		validation_camera.look_at(trail_target, Vector3.UP)
 	else:
-		validation_camera.fov = 52.0
+		validation_camera.fov = 56.0
 		validation_camera.position = r9_camera_position
 		validation_camera.look_at(Vector3(151.0, 16.2, 382.0), Vector3.UP)
 		var r9_terrain := get_node_or_null("TerrainPatch") as Node3D
@@ -227,11 +227,11 @@ func _prepare_real_trail_reveal(highlands: Node3D, terrain: Node3D) -> void:
 
 func _enhance_real_trail_material(route: Node3D) -> void:
 	var path_material := StandardMaterial3D.new()
-	path_material.albedo_color = Color("#566454")
+	path_material.albedo_color = Color("#718779")
 	path_material.roughness = 0.94
 	path_material.emission_enabled = true
-	path_material.emission = Color("#284c43")
-	path_material.emission_energy_multiplier = 0.65
+	path_material.emission = Color("#3f786b")
+	path_material.emission_energy_multiplier = 0.9
 	for mesh in route.find_children("*", "MeshInstance3D", true, false):
 		(mesh as MeshInstance3D).material_override = path_material
 
