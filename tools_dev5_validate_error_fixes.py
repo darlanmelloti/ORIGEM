@@ -12,6 +12,8 @@ player = (ROOT / "entities/player/Player.gd").read_text()
 terrain = (ROOT / "levels/TerrainPatch.gd").read_text()
 voss = (ROOT / "levels/VossHouse.gd").read_text()
 menu = (ROOT / "ui/menus/MainMenu.gd").read_text()
+main_script = (ROOT / "scripts/main.gd").read_text()
+game_manager = (ROOT / "_autoloads/GameManager.gd").read_text()
 main_scene = (ROOT / "scenes/main.tscn").read_text()
 
 check("player_floor_max_angle", "floor_max_angle = deg_to_rad(70.0)" in player, "ângulo máximo de solo")
@@ -20,10 +22,14 @@ check("player_indent", not re.search(r"\n\t{2,}var grounded: bool", player), "in
 check("terrain_smooth_shoulder", "shoulder_smooth" in terrain and "valley_rim_smooth" in terrain, "bermas com transição suave")
 check("voss_explicit_preload", 'preload("res://levels/CartographicAnchors.gd")' in voss, "resolução explícita de CartographicAnchors")
 check("menu_packed_scene", "change_scene_to_packed" in menu and "CACHE_MODE_IGNORE" in menu, "carga robusta de PackedScene")
+check("menu_unpauses_game", "GameManager.change_state(GameManager.GameState.EXPLORING)" in menu, "menu retoma a simulação")
+check("main_unpauses_game", "GameManager.change_state(GameManager.GameState.EXPLORING)" in main_script, "bootstrap retoma a simulação")
+check("terrain_heightmap_collision", "HeightMapShape3D" in terrain and "map_width" in terrain and "map_depth" in terrain and "map_data" in terrain, "colisão regular por heightmap")
+check("terrain_recovery_preserves_horizontal", "Vector3(player.velocity.x, 0.0, player.velocity.z)" in terrain, "recuperação sem zerar deslocamento horizontal")
 check("player_uid_matches_sidecar", "uid=\"uid://chgidfkiu6wxn\" path=\"res://entities/player/Player.gd\"" in main_scene, "UID do Player na cena principal")
 
 # Verificação simples de blocos: cada função relevante deve ter corpo indentado.
-for path, funcs in [(ROOT / "entities/player/Player.gd", ["func _ready", "func _handle_player"]), (ROOT / "levels/VossHouse.gd", ["func _ready"]), (ROOT / "ui/menus/MainMenu.gd", ["func _on_new_game_pressed"]), (ROOT / "levels/TerrainPatch.gd", ["func height_at", "func _build_terrain"])]:
+for path, funcs in [(ROOT / "entities/player/Player.gd", ["func _ready", "func _handle_player"]), (ROOT / "levels/VossHouse.gd", ["func _ready"]), (ROOT / "ui/menus/MainMenu.gd", ["func _on_new_game_pressed"]), (ROOT / "scripts/main.gd", ["func _ready"]), (ROOT / "levels/TerrainPatch.gd", ["func height_at", "func _build_terrain"])]:
     text = path.read_text().splitlines()
     for func in funcs:
         indexes = [i for i, line in enumerate(text) if line.startswith(func)]

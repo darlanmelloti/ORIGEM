@@ -5,11 +5,16 @@
 extends Node3D
 
 # Escala regional: cobre Casa Voss, vale, vila, trilha e aproximação de Orion num único terreno físico.
-const CELLS_X: int = 192
+# CP-GROUND-03: grelha regular com espaçamento uniforme; a mesma amostragem
+# alimenta a malha visual e o HeightMapShape3D, eliminando desalinhamento físico.
+const CELLS_X: int = 160
 const CELLS_Z: int = 220
 const SIZE_X: float = 640.0
 const SIZE_Z: float = 880.0
+const TERRAIN_Z_MIN: float = -260.0
 const TERRAIN_Z_MAX: float = 620.0
+const TERRAIN_CENTER_Z: float = 180.0
+const TERRAIN_SAMPLE_SPACING: float = 4.0
 const FOREST_GROUND_DIFF: Texture2D = preload("res://assets/textures/pbr/forest_ground_diff.jpg")
 const REGIONAL_WET_GROUND_DIFF: Texture2D = preload("res://assets/textures/generated/regional_wet_forest_floor.png")
 const FOREST_GROUND_ROUGH: Texture2D = preload("res://assets/textures/pbr/forest_ground_roughness.jpg")
@@ -31,10 +36,12 @@ func _physics_process(_delta: float) -> void:
 	if player == null:
 		return
 	var terrain_y: float = height_at(player.global_position.x, player.global_position.z)
-	if player.global_position.y < terrain_y - 0.70:
+	if player.global_position.y < terrain_y - 3.0:
+		# CP-GROUND-02: recuperação apenas para queda real, preservando o movimento horizontal.
+		# O limite largo evita que uma diferença normal entre triângulos congele Elias no solo.
 		player.global_position.y = terrain_y + 1.25
-		player.velocity = Vector3.ZERO
-		player.set("player_velocity", Vector3.ZERO)
+		player.velocity = Vector3(player.velocity.x, 0.0, player.velocity.z)
+		player.set("player_velocity", player.velocity)
 
 func _setup_noises() -> void:
 	land_noise = FastNoiseLite.new()
@@ -120,17 +127,13 @@ func _build_terrain() -> void:
 
 	var surface: SurfaceTool = SurfaceTool.new()
 	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
-	# A renderização histórica usa a ordem original de faces; a física recebe uma cópia com frente para +Y.
-	# Assim preservamos a imagem aprovada e impedimos a cápsula de Elias de atravessar lacunas entre lajes.
-	var collision_surface: SurfaceTool = SurfaceTool.new()
-	collision_surface.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for z_index: int in range(CELLS_Z):
 		for x_index: int in range(CELLS_X):
 			var x0: float = -SIZE_X * 0.5 + SIZE_X * float(x_index) / float(CELLS_X)
 			var x1: float = -SIZE_X * 0.5 + SIZE_X * float(x_index + 1) / float(CELLS_X)
-			# A malha avança até à câmara do prólogo, eliminando qualquer vazio ou espelho artificial no primeiro plano.
-			var z0: float = TERRAIN_Z_MAX - SIZE_Z * float(z_index) / float(CELLS_Z)
-			var z1: float = TERRAIN_Z_MAX - SIZE_Z * float(z_index + 1) / float(CELLS_Z)
+			# A malha avança de TERRAIN_Z_MIN a TERRAIN_Z_MAX com a mesma grelha da física.
+			var z0: float = TERRAIN_Z_MIN + TERRAIN_SAMPLE_SPACING * float(z_index)
+			var z1: float = TERRAIN_Z_MIN + TERRAIN_SAMPLE_SPACING * float(z_index + 1)
 
 			var p00: Vector3 = Vector3(x0, height_at(x0, z0), z0)
 			var p10: Vector3 = Vector3(x1, height_at(x1, z0), z0)
@@ -138,15 +141,24 @@ func _build_terrain() -> void:
 			var p11: Vector3 = Vector3(x1, height_at(x1, z1), z1)
 			_add_terrain_triangle(surface, p00, p01, p10)
 			_add_terrain_triangle(surface, p10, p01, p11)
-			# A forma concava de colisão deve ver o solo pela face superior.
-			_add_terrain_triangle(collision_surface, p00, p10, p01)
-			_add_terrain_triangle(collision_surface, p10, p11, p01)
 
 	surface.generate_normals()
 	surface.generate_tangents()
 	var terrain_mesh: ArrayMesh = surface.commit()
 	terrain_mesh.surface_set_material(0, terrain_material)
-	var collision_mesh: ArrayMesh = collision_surface.commit()
+	# CP-GROUND-03: a colisão regular é gerada dos mesmos vértices que a malha visual.
+	# O espaçamento uniforme permite ao HeightMapShape3D cobrir 640 x 880 m sem escala não uniforme.
+	var map_data: PackedFloat32Array = PackedFloat32Array()
+	map_data.resize((CELLS_X + 1) * (CELLS_Z + 1))
+	for z_index: int in range(CELLS_Z + 1):
+		var sample_z: float = TERRAIN_Z_MIN + TERRAIN_SAMPLE_SPACING * float(z_index)
+		for x_index: int in range(CELLS_X + 1):
+			var sample_x: float = -SIZE_X * 0.5 + TERRAIN_SAMPLE_SPACING * float(x_index)
+			map_data[z_index * (CELLS_X + 1) + x_index] = height_at(sample_x, sample_z)
+	var collision_shape_resource: HeightMapShape3D = HeightMapShape3D.new()
+	collision_shape_resource.map_width = CELLS_X + 1
+	collision_shape_resource.map_depth = CELLS_Z + 1
+	collision_shape_resource.map_data = map_data
 
 	var terrain_visual: MeshInstance3D = MeshInstance3D.new()
 	terrain_visual.name = "TerrenoEsculpido"
@@ -157,7 +169,8 @@ func _build_terrain() -> void:
 	var terrain_body: StaticBody3D = StaticBody3D.new()
 	terrain_body.name = "ColisaoDoTerreno"
 	var terrain_shape: CollisionShape3D = CollisionShape3D.new()
-	terrain_shape.shape = collision_mesh.create_trimesh_shape()
+	terrain_shape.position = Vector3(0.0, 0.0, TERRAIN_CENTER_Z)
+	terrain_shape.shape = collision_shape_resource
 	terrain_body.add_child(terrain_shape)
 	add_child(terrain_body)
 
