@@ -20,6 +20,7 @@ const RUIN_PILLAR_ASSET: PackedScene = preload("res://assets/models_cc0/stone_ta
 const RUIN_WALL_ASSET: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
 const STONE_BRIDGE_ASSET: PackedScene = preload("res://assets/models_cc0/bridge_stone.glb")
 const FOREST_SECTOR_SCRIPT: Script = preload("res://levels/ForestSector3D.gd")
+const VOSS_AMBIENT_LIFE_SCRIPT: Script = preload("res://levels/regions/r1/VossAmbientLife.gd")
 const DAYLIGHT_VARIANT_ENABLED: bool = true
 const FOREST_GROUND_DIFF: Texture2D = preload("res://assets/textures/pbr/forest_ground_diff.jpg")
 const WET_SLATE_ROOF_DIFF: Texture2D = preload("res://assets/textures/generated/wet_slate_roof_v2.png")
@@ -77,6 +78,7 @@ func _ready() -> void:
 	_build_side_annex(house)
 	_build_interior(house)
 	_build_exterior_details(house)
+	_build_ambient_life(house)
 	_build_voss_panoramic_threshold(house)
 	# O antigo miradouro visual dominava a vista macro sem contribuir para a rota física; a bacia deve abrir directamente após a soleira.
 	# A Estrada de Lama auxiliar sobrepunha as lajes físicas e produzia uma faixa escura vista da soleira; a rota real mantém-se nas lajes cartográficas.
@@ -97,6 +99,14 @@ func _ready() -> void:
 	# O harness cartográfico pode pedir a mesma limpeza de auxiliares técnicos usada na abertura, sem alterar a visibilidade no jogo normal.
 	if OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1":
 		get_tree().create_timer(0.90).timeout.connect(_hide_late_opening_technical_markers)
+
+func _build_ambient_life(house: Node3D) -> void:
+	# Incremento R1: objetos domésticos e variação mínima de luz, sem geometria física adicional.
+	var ambient_life: Node3D = VOSS_AMBIENT_LIFE_SCRIPT.new() as Node3D
+	if ambient_life == null:
+		return
+	house.add_child(ambient_life)
+	ambient_life.call("build", house)
 
 func _build_voss_panoramic_threshold(house: Node3D) -> void:
 	# Soleira CP255: pedras orgânicas baixas prolongam o vão da porta até à Estrada do Rio.
