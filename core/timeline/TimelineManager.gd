@@ -103,11 +103,22 @@ func save_data() -> Dictionary:
 	}
 
 func load_data(data: Dictionary) -> void:
-	current_era = data.get("current_era", Era.MODERN)
-	visited_eras = data.get("visited_eras", [Era.MODERN])
-	active_consequences = data.get("active_consequences", [])
-	timeline_events = data.get("timeline_events", {})
-	active_profile_id = data.get("active_profile_id", _profile_for_era(current_era))
+	current_era = int(data.get("current_era", Era.MODERN)) as Era
+	# JSON devolve Array sem tipo; reconstrói explicitamente Array[int] para respeitar a tipagem de visited_eras.
+	visited_eras.clear()
+	var raw_visited_eras: Array = data.get("visited_eras", [Era.MODERN]) as Array
+	for era_value: Variant in raw_visited_eras:
+		if typeof(era_value) == TYPE_INT or typeof(era_value) == TYPE_FLOAT:
+			visited_eras.append(int(era_value))
+	if visited_eras.is_empty():
+		visited_eras.append(Era.MODERN)
+	# O mesmo tratamento impede que a variante JSON substitua o Array[String] tipado.
+	active_consequences.clear()
+	var raw_consequences: Array = data.get("active_consequences", []) as Array
+	for consequence_value: Variant in raw_consequences:
+		active_consequences.append(str(consequence_value))
+	timeline_events = data.get("timeline_events", {}) as Dictionary
+	active_profile_id = str(data.get("active_profile_id", _profile_for_era(current_era)))
 	emit_active_profile()
 
 func _profile_for_era(era: Era) -> String:

@@ -121,6 +121,8 @@ func _ready() -> void:
 		get_tree().create_timer(1.00).timeout.connect(_open_front_door_for_qa)
 	elif qa_interaction == "voss_clues":
 		get_tree().create_timer(1.00).timeout.connect(_inspect_voss_clues_for_qa)
+	elif qa_interaction == "voss_rest":
+		get_tree().create_timer(1.00).timeout.connect(_rest_at_voss_fire_for_qa)
 	# O harness cartográfico pode pedir a mesma limpeza de auxiliares técnicos usada na abertura, sem alterar a visibilidade no jogo normal.
 	if OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1":
 		get_tree().create_timer(0.90).timeout.connect(_hide_late_opening_technical_markers)
@@ -762,6 +764,19 @@ func inspect_voss_clue(clue_id: String) -> Dictionary:
 		"text": clue_data.get("repeat_text", "") if was_seen else clue_data.get("first_text", ""),
 		"first_time": not was_seen
 	}
+
+func _rest_at_voss_fire_for_qa() -> void:
+	var main_scene: Node = get_tree().get_first_node_in_group("main_scene")
+	if main_scene != null and main_scene.has_method("rest_at_voss_fire"):
+		main_scene.call("rest_at_voss_fire")
+		var saved: bool = SaveManager.has_save(0)
+		var loaded: bool = SaveManager.load_game(0) if saved else false
+		var player: Node = get_tree().get_first_node_in_group("player")
+		var recovered: bool = player != null and int(player.get("current_health")) == 100 and is_equal_approx(float(player.get("current_stamina")), 100.0)
+		print("[ORIGEM_R1_REST] salvo=%s carregado=%s recuperado=%s" % [str(saved), str(loaded), str(recovered)])
+		SaveManager.delete_save(0)
+	else:
+		push_error("[ORIGEM_R1_REST_ERROR] Cena principal não encontrou o ponto de repouso.")
 
 func _inspect_voss_clues_for_qa() -> void:
 	var house: Node3D = get_node_or_null("CasaVoss") as Node3D
@@ -1715,6 +1730,7 @@ func _build_interior(house: Node3D) -> void:
 	_add_box(house, "Lareira", Vector3(-1.38, 1.12, 3.02), Vector3(1.46, 1.30, 0.58), stone_material, true)
 	_add_box(house, "BrasaDaLareira", Vector3(-1.38, 1.22, 2.70), Vector3(0.82, 0.14, 0.18), warm_glow_material, false)
 	_add_light(house, Vector3(-1.38, 1.85, 2.30), Color(1.0, 0.38, 0.12, 1.0), 2.0, 6.0, "LuzDaLareira")
+	_add_interactable(house, "VossRestFire", Vector3(-1.38, 1.32, 2.46), Vector3(1.78, 1.35, 1.20), "GatilhoRepousoDaLareira")
 	_add_light(house, Vector3(0.0, 3.0, -2.2), Color(1.0, 0.62, 0.29, 1.0), 0.75, 5.0, "LuzDaEntrada")
 	# Preenchimento doméstico sem sombras: revela mesa, mapa e estrutura da casa em GL Compatibility, mantendo a lareira como fonte de calor dominante.
 	_add_light(house, Vector3(0.18, 2.72, 0.18), Color(0.34, 0.42, 0.48, 1.0), 3.60, 12.0, "PreenchimentoInteriorCasaVoss")

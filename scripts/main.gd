@@ -253,6 +253,8 @@ func _on_player_interacted(object_name: String) -> void:
 			_toggle_chronos_prototype()
 		"TomasTable", "MountainMap", "MiguelTools":
 			_inspect_voss_clue(object_name)
+		"VossRestFire":
+			rest_at_voss_fire()
 		"VossFrontDoor":
 			_open_voss_front_door()
 
@@ -268,6 +270,14 @@ func _inspect_voss_clue(clue_id: String) -> void:
 	var clue_text: String = str(clue.get("text", ""))
 	if clue_text != "":
 		_show_msg(clue_text, 5.2)
+
+func rest_at_voss_fire() -> void:
+	var player: Node = get_tree().get_first_node_in_group("player")
+	if player != null and player.has_method("rest_at_safe_point"):
+		player.call("rest_at_safe_point")
+	SaveManager.save_game(0)
+	_show_msg("REPOUSO — Casa Voss\n\nElias recupera junto à lareira. A memória deste instante foi guardada.", 3.6)
+	print("[ORIGEM_R1_REST_SAVE] slot=0 sucesso=%s" % str(SaveManager.has_save(0)))
 
 func _open_voss_front_door() -> void:
 	var voss_house: Node = get_tree().get_first_node_in_group("voss_house_controller")

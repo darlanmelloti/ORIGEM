@@ -52,6 +52,7 @@ const MOUSE_SENS: float = 0.0018
 
 func _ready() -> void:
 	add_to_group("player")
+	add_to_group("Persist")
 	flashlight_on = true
 	flashlight.visible = true
 	footstep_timer.timeout.connect(_on_footstep)
@@ -249,6 +250,36 @@ func restore_health(amount: int) -> void:
 	current_health = clampi(current_health + amount, 0, MAX_HEALTH)
 	EventBus.player_health_changed.emit(current_health, MAX_HEALTH)
 	EventBus.player_message_requested.emit("A energia da nascente restaura Elias.", 1.4)
+
+func rest_at_safe_point() -> void:
+	current_health = MAX_HEALTH
+	current_stamina = MAX_STAMINA
+	stamina_recovery_delay = 0.0
+	EventBus.player_health_changed.emit(current_health, MAX_HEALTH)
+	EventBus.player_stamina_changed.emit(current_stamina, MAX_STAMINA)
+
+func save_data() -> Dictionary:
+	return {
+		"position": [position.x, position.y, position.z],
+		"rotation_y": rotation.y,
+		"health": current_health,
+		"stamina": current_stamina
+	}
+
+func load_data(data: Dictionary) -> void:
+	current_health = clampi(int(data.get("health", current_health)), 1, MAX_HEALTH)
+	current_stamina = clampf(float(data.get("stamina", current_stamina)), 0.0, MAX_STAMINA)
+	EventBus.player_health_changed.emit(current_health, MAX_HEALTH)
+	EventBus.player_stamina_changed.emit(current_stamina, MAX_STAMINA)
+	var saved_position: Array = data.get("position", []) as Array
+	if saved_position.size() == 3:
+		call_deferred("_restore_saved_pose", Vector3(float(saved_position[0]), float(saved_position[1]), float(saved_position[2])), float(data.get("rotation_y", rotation.y)))
+
+func _restore_saved_pose(saved_position: Vector3, saved_rotation_y: float) -> void:
+	position = saved_position
+	rotation.y = saved_rotation_y
+	velocity = Vector3.ZERO
+	player_velocity = Vector3.ZERO
 
 func _handle_player(delta: float) -> void:
 	# CP-CARTO-80: o renderer llvmpipe pode avançar a física antes de a colisão concava regional estabilizar.
