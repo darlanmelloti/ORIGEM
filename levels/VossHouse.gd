@@ -21,6 +21,7 @@ const RUIN_WALL_ASSET: PackedScene = preload("res://assets/models_cc0/cliff_cave
 const STONE_BRIDGE_ASSET: PackedScene = preload("res://assets/models_cc0/bridge_stone.glb")
 const FOREST_SECTOR_SCRIPT: Script = preload("res://levels/ForestSector3D.gd")
 const VOSS_AMBIENT_LIFE_SCRIPT: Script = preload("res://levels/regions/r1/VossAmbientLife.gd")
+const VOSS_DOOR_REVEAL_SCRIPT: Script = preload("res://levels/regions/r1/VossDoorReveal.gd")
 const DAYLIGHT_VARIANT_ENABLED: bool = true
 const FOREST_GROUND_DIFF: Texture2D = preload("res://assets/textures/pbr/forest_ground_diff.jpg")
 const WET_SLATE_ROOF_DIFF: Texture2D = preload("res://assets/textures/generated/wet_slate_roof_v2.png")
@@ -58,6 +59,7 @@ const OPENING_SKIP_HOLD_SECONDS: float = 1.50
 # Este limite só existe no modo QA e preserva a janela visual sem prolongar o prólogo normal do jogador.
 const QA_CINEMATIC_CAPTURE_HOLD_SECONDS: float = 300.0
 var front_door_open: bool = false
+var door_reveal: Node = null
 
 func _ready() -> void:
 	add_to_group("voss_house_controller")
@@ -96,6 +98,9 @@ func _ready() -> void:
 	_build_forest_ground_integration_92(house)
 	_build_opening_camera()
 	_build_exterior_porch_light()
+	_prepare_door_reveal()
+	if OS.get_environment("ORIGEM_QA_INTERACT") == "voss_door":
+		get_tree().create_timer(1.00).timeout.connect(_open_front_door_for_qa)
 	# O harness cartográfico pode pedir a mesma limpeza de auxiliares técnicos usada na abertura, sem alterar a visibilidade no jogo normal.
 	if OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1":
 		get_tree().create_timer(0.90).timeout.connect(_hide_late_opening_technical_markers)
@@ -727,6 +732,19 @@ func _update_opening_skip_prompt() -> void:
 	else:
 		opening_skip_label.text = "Mantenha [E] para saltar o prólogo"
 
+func _prepare_door_reveal() -> void:
+	door_reveal = VOSS_DOOR_REVEAL_SCRIPT.new() as Node
+	if door_reveal != null:
+		add_child(door_reveal)
+
+func _open_front_door_for_qa() -> void:
+	var opened: bool = open_front_door()
+	print("[ORIGEM_QA_DOOR] Casa Voss abertura=%s rota=EstradaDoRio" % str(opened))
+
+func _play_door_reveal(house: Node3D) -> void:
+	if door_reveal != null and door_reveal.has_method("play"):
+		door_reveal.call("play", house)
+
 func _try_open_front_door_by_proximity() -> void:
 	var house: Node3D = get_node_or_null("CasaVoss") as Node3D
 	var elias: Node3D = get_tree().get_first_node_in_group("player") as Node3D
@@ -766,6 +784,7 @@ func open_front_door() -> bool:
 		door_tween.tween_property(right_panel, "rotation:y", deg_to_rad(24.0), 0.62).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	# As folhas não devem continuar como tábuas de barricada depois da abertura: são removidas após a animação.
 	door_tween.finished.connect(_clear_open_door_leaves.bind(left_panel, right_panel))
+	get_tree().create_timer(0.28).timeout.connect(_play_door_reveal.bind(house))
 	return true
 
 func _clear_open_door_leaves(left_panel: Node3D, right_panel: Node3D) -> void:
