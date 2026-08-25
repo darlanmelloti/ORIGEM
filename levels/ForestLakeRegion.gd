@@ -23,6 +23,7 @@ const GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_groun
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
+const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -43,6 +44,7 @@ func _ready() -> void:
 	_build_cartographic_forest_threshold()
 	_build_arch_to_forest_transition()
 	_build_arch_forest_understory()
+	_build_r4_clearing_sightline()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
 	_build_cartographic_river_inlet()
@@ -273,6 +275,12 @@ func _build_arch_forest_understory() -> void:
 			rock.rotation.y = -0.28 + float(index) * 0.61
 			understory.add_child(rock)
 
+func _build_r4_clearing_sightline() -> void:
+	# DEV4-R4-CLEARING-SIGHTLINE-001: moldura baixa, húmida e lateral para a visada de Orion sem fechar o trilho.
+	var clearing: R4ForestClearingSightline = R4_FOREST_CLEARING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), ROCK, FERN) as R4ForestClearingSightline
+	if clearing == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a clareira da visada Orion.")
+
 func _build_forest_wayfinding() -> void:
 	# Balizas baixas, quentes e espaçadas: guiam Elias no sub-bosque sem transformar a floresta num corredor iluminado.
 	var markers: Node3D = Node3D.new()
@@ -313,13 +321,16 @@ func _build_forest_wayfinding() -> void:
 		glow.mesh = ember_mesh
 		glow.position = Vector3(x_value, ground_y + 0.94, z_value)
 		markers.add_child(glow)
-		var light: OmniLight3D = OmniLight3D.new()
-		light.light_color = Color(0.82, 0.20, 0.045, 1.0)
-		light.light_energy = 0.08
-		light.omni_range = 2.6
-		light.shadow_enabled = false
-		light.position = glow.position
-		markers.add_child(light)
+		# Contrato R4: apenas uma baliza dinâmica local; as restantes preservam a brasa visual sem custo de luz.
+		if index == 1:
+			var light: OmniLight3D = OmniLight3D.new()
+			light.name = "LuzBalizaFlorestalUnica"
+			light.light_color = Color(0.82, 0.20, 0.045, 1.0)
+			light.light_energy = 0.08
+			light.omni_range = 2.6
+			light.shadow_enabled = false
+			light.position = glow.position
+			markers.add_child(light)
 
 func _lake_shore_x(world_z: float) -> float:
 	var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS

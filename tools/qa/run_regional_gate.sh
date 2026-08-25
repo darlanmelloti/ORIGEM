@@ -139,6 +139,28 @@ if [[ "$REGION" == "R3" ]]; then
   printf '[GATE:%s] Arco R3 aprovado\n' "$REGION"
 fi
 
+if [[ "$REGION" == "R4" ]]; then
+  printf '[GATE:%s] prova de mundo DEV4-R4-CLEARING-SIGHTLINE-001\n' "$REGION"
+  R4_CLEARING_LOG="/tmp/origem_${REGION}_clearing_$$.log"
+  set +e
+  ORIGEM_QA_AUTOSTART_NEW_GAME=1 ORIGEM_QA_R4_CLEARING=1 GODOT_SILENCE_ROOT_WARNING=1 timeout 30s "$GODOT" --headless --path . --rendering-driver opengl3 >"$R4_CLEARING_LOG" 2>&1
+  r4_clearing_status=$?
+  set -e
+  if [[ "$r4_clearing_status" -ne 0 ]]; then
+    cat "$R4_CLEARING_LOG"
+    exit 14
+  fi
+  if ! grep -q '\[ORIGEM_R4_CLEARING_OK\]' "$R4_CLEARING_LOG"; then
+    cat "$R4_CLEARING_LOG"
+    exit 14
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R4_CLEARING_ERROR' "$R4_CLEARING_LOG"; then
+    cat "$R4_CLEARING_LOG"
+    exit 14
+  fi
+  printf '[GATE:%s] clareira R4 e orçamento de baliza aprovados\n' "$REGION"
+fi
+
 printf '[GATE:%s] 5/5 contratos e rotas\n' "$REGION"
 CONTRACT_LOG="/tmp/origem_${REGION}_contract_$$.log"
 GODOT_SILENCE_ROOT_WARNING=1 "$GODOT" --headless --path . --script res://qa/regions/verify_region_contracts.gd >"$CONTRACT_LOG" 2>&1

@@ -105,12 +105,14 @@ func _ready():
 		call_deferred("_verify_r2_world_life_qa")
 	if OS.has_environment("ORIGEM_QA_R3_ARCH"):
 		get_tree().create_timer(1.20).timeout.connect(_verify_r3_arch_qa)
+	if OS.has_environment("ORIGEM_QA_R4_CLEARING"):
+		get_tree().create_timer(1.20).timeout.connect(_verify_r4_clearing_qa)
 	# CINE-PAIR-10: apenas um retorno real do interior deve substituir o spawn normal da Casa Voss.
 	var exterior_player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
 		OrionTransitionState.restore_exterior_player(exterior_player)
 	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
-	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_R3_ARCH"):
+	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_R3_ARCH") and not OS.has_environment("ORIGEM_QA_R4_CLEARING"):
 		_start_narrative()
 
 func _run_codex_qa() -> void:
@@ -223,6 +225,36 @@ func _verify_r3_arch_qa() -> void:
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R3_ARCH_ERROR] %s" % issue)
+	get_tree().quit(1)
+
+func _verify_r4_clearing_qa() -> void:
+	var issues: PackedStringArray = PackedStringArray()
+	var r4: Node = find_child("RegiaoFlorestaLagoExploravel", true, false)
+	if r4 == null:
+		issues.append("a região física R4 não foi instanciada")
+	else:
+		var clearing: Node = r4.get_node_or_null("R4ClareiraDaVisadaOrion")
+		if clearing == null:
+			issues.append("a clareira R4 da visada Orion está em falta")
+		else:
+			var frames: Array[Node] = clearing.find_children("QuadroAbertoOrion*", "Node3D", true, false)
+			if frames.size() != 4:
+				issues.append("a clareira R4 não possui os quatro quadros laterais esperados")
+			elif not clearing.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a clareira R4 não pode acrescentar luz dinâmica")
+		var markers: Node = r4.get_node_or_null("BalizasDoTrilhoFlorestal")
+		if markers == null:
+			issues.append("as balizas de orientação R4 estão em falta")
+		else:
+			var marker_lights: Array[Node] = markers.find_children("*", "OmniLight3D", true, false)
+			if marker_lights.size() != 1:
+				issues.append("a R4 deve manter exatamente uma baliza dinâmica local")
+	if issues.is_empty():
+		print("[ORIGEM_R4_CLEARING_OK] clareira lateral, quatro quadros e uma baliza dinâmica aprovados.")
+		get_tree().quit()
+		return
+	for issue: String in issues:
+		printerr("[ORIGEM_R4_CLEARING_ERROR] %s" % issue)
 	get_tree().quit(1)
 
 func _apply_exterior_light_budget() -> void:
