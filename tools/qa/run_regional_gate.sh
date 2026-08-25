@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ORIGEM — Porta de qualidade para entregas regionais.
-# Uso: tools/qa/run_regional_gate.sh R3 [base-ref]
+# Uso: tools/qa/run_regional_gate.sh R2|R3|R4|R5|R6 [base-ref]
 # Requer: Git e Godot 4.x. Pode definir GODOT_BIN com o caminho do executável.
 
 set -euo pipefail
@@ -10,12 +10,13 @@ BASE_REF="${2:-origin/integration/r1-r6-sprint1}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
-if [[ ! "$REGION" =~ ^R[3-6]$ ]]; then
-  echo "Uso: $0 R3|R4|R5|R6 [base-ref]" >&2
+if [[ ! "$REGION" =~ ^R[2-6]$ ]]; then
+  echo "Uso: $0 R2|R3|R4|R5|R6 [base-ref]" >&2
   exit 2
 fi
 
 case "$REGION" in
+  R2) ROUTES=(road_to_arch positive_bridge road_return_voss); MODULE='levels/regions/R2_RiverRoad.gd' ;;
   R3) ROUTES=(road_to_arch arch_to_forest); MODULE='levels/regions/R3_ArchRuins.gd' ;;
   R4) ROUTES=(arch_to_forest forest_to_majestic forest_to_ruins); MODULE='levels/regions/R4_DenseForest.gd' ;;
   R5) ROUTES=(forest_to_majestic majestic_to_lake); MODULE='levels/regions/R5_MajesticCamp.gd' ;;
