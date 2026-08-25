@@ -94,6 +94,10 @@ if [[ "$REGION" == "R2" ]]; then
     cat "$WORLD_LIFE_LOG"
     exit 12
   fi
+  if ! grep -q '\[ORIGEM_R2_ORION_STATION_OK\]' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
   if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R2_WORLD_LIFE_ERROR' "$WORLD_LIFE_LOG"; then
     cat "$WORLD_LIFE_LOG"
     exit 12

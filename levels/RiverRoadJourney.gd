@@ -40,6 +40,7 @@ func _ready() -> void:
 	_build_river_road()
 	_build_river()
 	_build_first_orion_reflection()
+	_build_orion_reflection_observation_station()
 	_build_river_margins()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
@@ -554,6 +555,72 @@ func _build_first_orion_reflection() -> void:
 	reflection.material_override = _make_orion_reflection_material()
 	reflection.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	reflection_root.add_child(reflection)
+
+func _build_orion_reflection_observation_station() -> void:
+	# DEV2-R2-ORION-REFLECTION-002 — a anomalia é observada a partir de uma margem arqueológica;
+	# a água continua apenas um pulso localizado e nunca se torna uma seta luminosa para o jogador seguir.
+	var station_z: float = 51.0
+	var river_center_x: float = _river_x(station_z)
+	var river_width: float = 14.0
+	var station_x: float = river_center_x - river_width * 0.5 - 1.55
+	var ground_y: float = _height_at(station_x, station_z)
+	var station: Node3D = Node3D.new()
+	station.name = "EstacaoDeObservacaoDoReflexoOrion"
+	add_child(station)
+
+	# O pequeno patamar de cinco lajes é irregular e apontado para a água; fica longe do leito da Estrada.
+	var slab_specs: Array[Dictionary] = [
+		{"x": -0.68, "z": -1.06, "w": 0.88, "d": 0.98, "yaw": -0.16},
+		{"x": 0.32, "z": -1.16, "w": 0.96, "d": 0.86, "yaw": 0.09},
+		{"x": -0.82, "z": 0.00, "w": 0.92, "d": 1.06, "yaw": 0.12},
+		{"x": 0.34, "z": -0.02, "w": 0.84, "d": 0.96, "yaw": -0.10},
+		{"x": -0.20, "z": 1.03, "w": 1.10, "d": 0.90, "yaw": 0.03}
+	]
+	for index: int in range(slab_specs.size()):
+		var spec: Dictionary = slab_specs[index]
+		var slab_x: float = station_x + (spec["x"] as float)
+		var slab_z: float = station_z + (spec["z"] as float)
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeDaEstacaoOrion_%02d" % (index + 1)
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(spec["w"] as float, 0.12, spec["d"] as float)
+		slab.mesh = slab_mesh
+		slab.material_override = path_material
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		slab.position = Vector3(slab_x, _height_at(slab_x, slab_z) + 0.075, slab_z)
+		slab.rotation.y = spec["yaw"] as float
+		station.add_child(slab)
+		_add_world_life_collision(station, "ColisorLajeDaEstacaoOrion_%02d" % (index + 1), Vector3(slab_x, _height_at(slab_x, slab_z) + 0.015, slab_z), Vector3(spec["w"] as float, 0.12, spec["d"] as float))
+
+	# Dois vestígios baixos moldam uma linha de visada em vez de um portão ou de uma barreira para a rota.
+	for side: float in [-1.0, 1.0]:
+		var marker: Node3D = RUIN_PILLAR.instantiate() as Node3D
+		if marker == null:
+			continue
+		marker.name = "VestigioDaEstacaoOrion_%s" % ("Oeste" if side < 0.0 else "Este")
+		var marker_x: float = station_x + side * 1.12
+		var marker_z: float = station_z + 0.90
+		marker.position = Vector3(marker_x, _height_at(marker_x, marker_z) - 0.05, marker_z)
+		marker.scale = Vector3(0.24, 0.52 if side < 0.0 else 0.40, 0.24)
+		marker.rotation = Vector3(0.08 * side, -0.34 + side * 0.22, 0.03 * side)
+		_apply_material(marker, ruin_material)
+		station.add_child(marker)
+		_add_world_life_collision(station, "ColisorVestigioDaEstacaoOrion_%s" % ("Oeste" if side < 0.0 else "Este"), Vector3(marker_x, _height_at(marker_x, marker_z) + 0.24, marker_z), Vector3(0.48, 0.54, 0.48))
+
+	# Pequenas pedras dirigem o olhar para o reflexo, sem luz adicional nem decoração em linha repetida.
+	for index: int in range(3):
+		var guide_stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if guide_stone == null:
+			continue
+		guide_stone.name = "PedraDeVisadaOrion_%02d" % (index + 1)
+		var guide_x: float = station_x + 1.40 + float(index) * 0.62
+		var guide_z: float = station_z - 0.82 + float(index) * 0.74
+		guide_stone.position = Vector3(guide_x, _height_at(guide_x, guide_z) + 0.035, guide_z)
+		var guide_scale: float = 0.13 + float(index) * 0.032
+		guide_stone.scale = Vector3(guide_scale, guide_scale * 0.60, guide_scale)
+		guide_stone.rotation.y = -0.46 + float(index) * 0.39
+		_apply_material(guide_stone, ruin_material)
+		station.add_child(guide_stone)
 
 func _make_orion_reflection_material() -> ShaderMaterial:
 	var shader: Shader = Shader.new()
