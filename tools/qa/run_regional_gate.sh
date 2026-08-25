@@ -117,6 +117,28 @@ if [[ "$REGION" == "R2" ]]; then
   printf '[GATE:%s] marcos físicos R2 aprovados\n' "$REGION"
 fi
 
+if [[ "$REGION" == "R3" ]]; then
+  printf '[GATE:%s] prova de mundo DEV3-R3-ARCH-AWAKENING-RECOVERY-001\n' "$REGION"
+  R3_ARCH_LOG="/tmp/origem_${REGION}_arch_$$.log"
+  set +e
+  ORIGEM_QA_AUTOSTART_NEW_GAME=1 ORIGEM_QA_R3_ARCH=1 GODOT_SILENCE_ROOT_WARNING=1 timeout 30s "$GODOT" --headless --path . --rendering-driver opengl3 >"$R3_ARCH_LOG" 2>&1
+  r3_arch_status=$?
+  set -e
+  if [[ "$r3_arch_status" -ne 0 ]]; then
+    cat "$R3_ARCH_LOG"
+    exit 13
+  fi
+  if ! grep -q '\[ORIGEM_R3_ARCH_OK\]' "$R3_ARCH_LOG"; then
+    cat "$R3_ARCH_LOG"
+    exit 13
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R3_ARCH_ERROR' "$R3_ARCH_LOG"; then
+    cat "$R3_ARCH_LOG"
+    exit 13
+  fi
+  printf '[GATE:%s] Arco R3 aprovado\n' "$REGION"
+fi
+
 printf '[GATE:%s] 5/5 contratos e rotas\n' "$REGION"
 CONTRACT_LOG="/tmp/origem_${REGION}_contract_$$.log"
 GODOT_SILENCE_ROOT_WARNING=1 "$GODOT" --headless --path . --script res://qa/regions/verify_region_contracts.gd >"$CONTRACT_LOG" 2>&1
