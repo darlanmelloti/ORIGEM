@@ -38,6 +38,7 @@ func _ready() -> void:
 	_build_road_entry_orientation()
 	_build_river_road()
 	_build_river()
+	_build_first_orion_reflection()
 	_build_river_margins()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
@@ -421,6 +422,55 @@ func _build_river() -> void:
 		bed_rock.rotation.y = bed_data["yaw"] as float
 		_apply_material(bed_rock, bed_rock_mat)
 		river_root.add_child(bed_rock)
+
+func _build_first_orion_reflection() -> void:
+	# R2: a primeira anomalia azul aparece como reflexo breve no curso, orientando o olhar para Orion.
+	# É uma camada localizada e transparente; não torna a água emissiva de forma constante.
+	var reflection_root: Node3D = Node3D.new()
+	reflection_root.name = "PrimeiroReflexoAzulOrion"
+	add_child(reflection_root)
+	var surface: SurfaceTool = SurfaceTool.new()
+	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var z0: float = 43.0
+	var z1: float = 56.0
+	var width: float = 3.6
+	var x0: float = _river_x(z0)
+	var x1: float = _river_x(z1)
+	var y0: float = (_height_at(x0 - width * 0.35, z0) + _height_at(x0 + width * 0.35, z0)) * 0.5 + 0.235
+	var y1: float = (_height_at(x1 - width * 0.35, z1) + _height_at(x1 + width * 0.35, z1)) * 0.5 + 0.235
+	var left0: Vector3 = Vector3(x0 - width * 0.5, y0, z0)
+	var right0: Vector3 = Vector3(x0 + width * 0.5, y0, z0)
+	var left1: Vector3 = Vector3(x1 - width * 0.5, y1, z1)
+	var right1: Vector3 = Vector3(x1 + width * 0.5, y1, z1)
+	_add_water_triangle(surface, left0, left1, right0, Vector2(0.0, 0.0), Vector2(0.0, 1.0), Vector2(1.0, 0.0))
+	_add_water_triangle(surface, right0, left1, right1, Vector2(1.0, 0.0), Vector2(0.0, 1.0), Vector2(1.0, 1.0))
+	var reflection: MeshInstance3D = MeshInstance3D.new()
+	reflection.name = "ReflexoAzulOrientadoParaOrion"
+	reflection.mesh = surface.commit()
+	reflection.material_override = _make_orion_reflection_material()
+	reflection.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	reflection_root.add_child(reflection)
+
+func _make_orion_reflection_material() -> ShaderMaterial:
+	var shader: Shader = Shader.new()
+	shader.code = """
+shader_type spatial;
+render_mode cull_disabled, unshaded, blend_mix, depth_draw_never;
+void fragment() {
+	float phase = fract(TIME / 9.0);
+	float rise = smoothstep(0.04, 0.14, phase);
+	float fall = 1.0 - smoothstep(0.34, 0.58, phase);
+	float ripple = 0.5 + 0.5 * sin(UV.y * 34.0 - TIME * 2.2);
+	float mask = rise * fall * (0.55 + ripple * 0.45);
+	ALBEDO = vec3(0.055, 0.24, 0.34);
+	EMISSION = vec3(0.06, 0.34, 0.52);
+	EMISSION_ENERGY = 0.55 * mask;
+	ALPHA = 0.22 * mask;
+}
+"""
+	var material: ShaderMaterial = ShaderMaterial.new()
+	material.shader = shader
+	return material
 
 func _build_positive_valley_bridge() -> void:
 	# CP280 — ponte de leitura no eixo positivo: integra Casa, rio, Estrada e Arco na sequência do mapa.
@@ -922,9 +972,11 @@ void vertex() {
 	VERTEX.y += sin(VERTEX.x * 0.52 + TIME * 0.9) * 0.042 + cos(VERTEX.z * 0.35 + TIME * 0.7) * 0.028;
 }
 void fragment() {
-	float ripple = sin(UV.y * 18.0 + TIME * 0.85) * 0.5 + 0.5;
+	// Fluxo longitudinal discreto: a água desloca a leitura ao longo do rio sem virar uma faixa emissiva.
+	float flow = 0.5 + 0.5 * sin(UV.y * 26.0 - TIME * 1.15 + sin(UV.x * 8.0));
+	float ripple = sin(UV.y * 18.0 + TIME * 0.85 + flow * 0.7) * 0.5 + 0.5;
 			// Água de vale profunda: uma variação azul-petróleo discreta separa o leito das margens sem reflexo plano nem emissão.
-		ALBEDO = mix(vec3(0.018, 0.084, 0.092), vec3(0.042, 0.198, 0.208), ripple * 0.36 + 0.28);
+		ALBEDO = mix(vec3(0.018, 0.084, 0.092), vec3(0.042, 0.198, 0.208), ripple * 0.28 + flow * 0.10 + 0.25);
 		ROUGHNESS = 0.44;
 		SPECULAR = 0.20;
 
