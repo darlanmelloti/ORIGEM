@@ -16,7 +16,7 @@ if [[ ! "$REGION" =~ ^R[2-6]$ ]]; then
 fi
 
 case "$REGION" in
-  R2) ROUTES=(road_to_arch positive_bridge); MODULE='levels/regions/R2_RiverRoad.gd' ;;
+  R2) ROUTES=(road_to_arch positive_bridge road_return_voss); MODULE='levels/regions/R2_RiverRoad.gd' ;;
   R3) ROUTES=(road_to_arch arch_to_forest); MODULE='levels/regions/R3_ArchRuins.gd' ;;
   R4) ROUTES=(arch_to_forest forest_to_majestic forest_to_ruins); MODULE='levels/regions/R4_DenseForest.gd' ;;
   R5) ROUTES=(forest_to_majestic majestic_to_lake); MODULE='levels/regions/R5_MajesticCamp.gd' ;;

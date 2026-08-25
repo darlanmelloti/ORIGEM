@@ -1,18 +1,19 @@
 # Porta de Qualidade Regional
 
-A porta de qualidade deve ser executada por Dev3–Dev6 antes de pedir integração na branch `integration/r1-r6-sprint1`. O objetivo é impedir que uma entrega regional quebre os contratos, a rota jogável ou o parser Godot.
+A porta de qualidade deve ser executada por Dev2–Dev6 antes de pedir integração na branch `integration/r1-r6-sprint1`. O objetivo é impedir que uma entrega regional quebre os contratos, a rota jogável ou o parser Godot.
 
 ## Comando
 
 ```bash
 export GODOT_BIN="/caminho/para/Godot_v4.x"
-tools/qa/run_regional_gate.sh R3 origin/integration/r1-r6-sprint1
+tools/qa/run_regional_gate.sh R2 origin/integration/r1-r6-sprint1
 ```
 
-Substitua `R3` pela região entregue. Se a branch local já estiver atualizada contra a integração comum, o segundo argumento pode ser omitido.
+Substitua `R2` pela região entregue. Se a branch local já estiver atualizada contra a integração comum, o segundo argumento pode ser omitido.
 
 | Região | Rotas verificadas |
 |---|---|
+| R2 — Estrada do Rio | `road_to_arch`, `positive_bridge`, `road_return_voss` |
 | R3 — Arco das Ruínas | `road_to_arch`, `arch_to_forest` |
 | R4 — Floresta Densa | `arch_to_forest`, `forest_to_majestic`, `forest_to_ruins` |
 | R5 — Acampamento Majestic | `forest_to_majestic`, `majestic_to_lake` |

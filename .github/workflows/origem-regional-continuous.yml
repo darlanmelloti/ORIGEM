@@ -5,6 +5,7 @@ on:
     branches:
       - integration/r1-r6-sprint1
       - feature/dev2-r2-river-road
+      - dev2/r2-river-road
       - dev3/r3-arch-ruins
       - dev4/r4-dense-forest
       - dev5/r5-majestic-camp
@@ -50,7 +51,7 @@ jobs:
             requested="${{ github.head_ref || github.ref_name }}"
           fi
           case "$requested" in
-            feature/dev2-r2-river-road) regions='["R2"]' ;;
+            feature/dev2-r2-river-road|dev2/r2-river-road) regions='["R2"]' ;;
             dev3/r3-arch-ruins) regions='["R3"]' ;;
             dev4/r4-dense-forest) regions='["R4"]' ;;
             dev5/r5-majestic-camp) regions='["R5"]' ;;
