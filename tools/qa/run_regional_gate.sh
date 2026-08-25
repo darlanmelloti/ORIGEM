@@ -79,6 +79,30 @@ if [[ "$REGION" == "R2" ]]; then
     exit 7
   fi
   printf '[GATE:%s] estabilidade R1→R2 aprovada\n' "$REGION"
+
+  printf '[GATE:%s] marcos físicos DEV2-R2-WORLD-LIFE-001\n' "$REGION"
+  WORLD_LIFE_LOG="/tmp/origem_${REGION}_world_life_$$.log"
+  set +e
+  ORIGEM_QA_AUTOSTART_NEW_GAME=1 ORIGEM_QA_ROUTE=road_to_arch ORIGEM_QA_R2_WORLD_LIFE=1 GODOT_SILENCE_ROOT_WARNING=1 timeout 22s "$GODOT" --headless --path . --rendering-driver opengl3 >"$WORLD_LIFE_LOG" 2>&1
+  world_life_status=$?
+  set -e
+  if [[ "$world_life_status" -ne 0 && "$world_life_status" -ne 124 ]]; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
+  if ! grep -q '\[ORIGEM_R2_WORLD_LIFE_OK\]' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
+  if ! grep -q '\[ORIGEM_R2_ORION_STATION_OK\]' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R2_WORLD_LIFE_ERROR' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
+  printf '[GATE:%s] marcos físicos R2 aprovados\n' "$REGION"
 fi
 
 printf '[GATE:%s] 5/5 contratos e rotas\n' "$REGION"

@@ -24,6 +24,41 @@ func create_contract():
 	)
 	return contract
 
+func build(world_root: Node3D, context: Dictionary) -> Node3D:
+	if world_root == null:
+		return null
+	var existing: Node3D = world_root.get_node_or_null(integration_node_name()) as Node3D
+	if existing != null:
+		return existing
+	var region_node: Node3D = Node3D.new()
+	region_node.name = integration_node_name()
+	world_root.add_child(region_node)
+	return region_node
+
+func get_bounds() -> AABB:
+	return create_contract().bounds
+
+func get_anchor() -> Vector2:
+	return create_contract().entry_anchor
+
+func run_qa_contract() -> Dictionary:
+	var contract = create_contract()
+	var issues: PackedStringArray = contract.validate()
+	if contract.owner != "Dev2":
+		issues.append("owner deve ser Dev2")
+	if contract.allowed_dynamic_lights > 2:
+		issues.append("R2 excede o limite de duas luzes dinâmicas")
+	if not contract.qa_routes.has("road_to_arch"):
+		issues.append("rota road_to_arch ausente")
+	return {
+		"region_id": contract.region_id,
+		"valid": issues.is_empty(),
+		"issues": issues,
+		"bounds": contract.bounds,
+		"anchor": contract.entry_anchor,
+		"qa_routes": contract.qa_routes,
+	}
+
 static func integration_node_name() -> String:
 	return "EstradaDoRioExploravel"
 

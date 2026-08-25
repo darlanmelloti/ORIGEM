@@ -7,8 +7,14 @@ extends SceneTree
 const R2_SCRIPT: Script = preload("res://levels/regions/R2_RiverRoad.gd")
 
 func _init() -> void:
-	var contract = R2_SCRIPT.new().create_contract()
+	var region = R2_SCRIPT.new()
+	var contract = region.create_contract()
 	var issues: PackedStringArray = contract.validate()
+	if not region.has_method("build") or not region.has_method("get_bounds") or not region.has_method("get_anchor") or not region.has_method("run_qa_contract"):
+		issues.append("R2 não expõe a interface regional mínima")
+	var qa_result: Dictionary = region.run_qa_contract()
+	if not bool(qa_result.get("valid", false)):
+		issues.append("run_qa_contract() reportou falha")
 	if contract.region_id != 2:
 		issues.append("R2 deve declarar region_id=2")
 	if contract.owner != "Dev2":

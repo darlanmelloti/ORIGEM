@@ -176,17 +176,38 @@ jobs:
               state: 'open',
               per_page: 100
             });
-            const existing = openIssues.find((issue) => issue.title === title && !issue.pull_request);
-            if (!existing) {
-              await github.rest.issues.create({
+            let currentIssue = openIssues.find((issue) => issue.title === title && !issue.pull_request);
+            if (!currentIssue) {
+              const { data: createdIssue } = await github.rest.issues.create({
                 owner: repoOwner,
                 repo,
                 title,
                 body: `## Continuidade automática Dev2\n\nO contrato \`${contractPath}\` declara **${taskId}** como a próxima tarefa ativa de Dev2.\n\nA porta R2 acabou de ser aprovada. Isto não encerra o ciclo: a implementação, validação, publicação e substituição por uma nova tarefa ativa são obrigatórias.\n\n---\n\n${contract}`
               });
+              currentIssue = createdIssue;
               core.info(`Issue de continuidade criada para ${taskId}.`);
             } else {
-              core.info(`Issue de continuidade já está aberta: #${existing.number}.`);
+              core.info(`Issue de continuidade já está aberta: #${currentIssue.number}.`);
+            }
+            const previousIssues = openIssues.filter((issue) =>
+              !issue.pull_request &&
+              issue.title.startsWith('[Dev2 Continuous]') &&
+              issue.number !== currentIssue.number
+            );
+            for (const issue of previousIssues) {
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                body: `Encerrada automaticamente: a tarefa ativa foi avançada para **${taskId}** e é acompanhada por #${currentIssue.number}.`
+              });
+              await github.rest.issues.update({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              core.info(`Issue Dev2 obsoleta encerrada: #${issue.number}.`);
             }
             await core.summary
               .addHeading('Dev2 — continuidade ativa')

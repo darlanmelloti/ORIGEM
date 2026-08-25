@@ -36,9 +36,11 @@ func _ready() -> void:
 	ruin_material = _make_ruin_material()
 	_build_compacted_roadbed()
 	_build_road_entry_orientation()
+	_build_world_life_landmarks()
 	_build_river_road()
 	_build_river()
 	_build_first_orion_reflection()
+	_build_orion_reflection_observation_station()
 	_build_river_margins()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
@@ -293,6 +295,109 @@ func _build_road_entry_orientation() -> void:
 		_apply_material(footing, ruin_material)
 		markers.add_child(footing)
 
+func _build_world_life_landmarks() -> void:
+	# DEV2-R2-WORLD-LIFE-001 — três leituras espaciais distintas transformam a estrada num percurso,
+	# sem alterar a rota, acrescentar luzes ou fechar a vista física do Arco.
+	var landmarks: Node3D = Node3D.new()
+	landmarks.name = "MarcosVidaDeViagemR2"
+	add_child(landmarks)
+
+	# 1) A pedra junto à saída recorda a instrução de Tomás: seguir as pedras, não a luz azul.
+	var tomas_z: float = 24.0
+	var tomas_x: float = _road_x(tomas_z) - 3.72
+	var tomas_root: Node3D = Node3D.new()
+	tomas_root.name = "MarcoPedrasDeTomas"
+	landmarks.add_child(tomas_root)
+	for index: int in range(3):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraDeTomás_%02d" % (index + 1)
+		var local_z: float = float(index - 1) * 0.68
+		stone.position = Vector3(tomas_x + float(index % 2) * 0.42, _height_at(tomas_x, tomas_z + local_z) + 0.04, tomas_z + local_z)
+		var stone_scale: float = 0.20 + float(index) * 0.045
+		stone.scale = Vector3(stone_scale, stone_scale * 0.56, stone_scale)
+		stone.rotation.y = 0.48 + float(index) * 0.73
+		_apply_material(stone, ruin_material)
+		tomas_root.add_child(stone)
+	var tomas_marker: Node3D = RUIN_PILLAR.instantiate() as Node3D
+	if tomas_marker != null:
+		tomas_marker.name = "LajeInscritaDeTomas"
+		tomas_marker.position = Vector3(tomas_x - 0.34, _height_at(tomas_x - 0.34, tomas_z) - 0.03, tomas_z + 0.16)
+		tomas_marker.scale = Vector3(0.24, 0.46, 0.24)
+		tomas_marker.rotation = Vector3(0.06, -0.36, 0.02)
+		_apply_material(tomas_marker, ruin_material)
+		tomas_root.add_child(tomas_marker)
+	_add_world_life_collision(tomas_root, "ColisorMarcoPedrasDeTomas", Vector3(tomas_x, _height_at(tomas_x, tomas_z) + 0.26, tomas_z), Vector3(0.96, 0.52, 1.54))
+
+	# 2) Vegetação baixa na margem da estrada deixa o rio enquadrado, mas nunca forma uma parede de árvores.
+	var margin_z: float = 49.0
+	var margin_x: float = _road_x(margin_z) + 3.58
+	var margin_root: Node3D = Node3D.new()
+	margin_root.name = "PassagemMargemBaixa"
+	landmarks.add_child(margin_root)
+	var margin_rock: Node3D = SLOPE_ROCK.instantiate() as Node3D
+	if margin_rock != null:
+		margin_rock.name = "RochedoDaPassagemDeMargem"
+		margin_rock.position = Vector3(margin_x + 0.42, _height_at(margin_x + 0.42, margin_z) + 0.02, margin_z - 0.34)
+		margin_rock.scale = Vector3(0.30, 0.22, 0.30)
+		margin_rock.rotation.y = -0.58
+		_apply_material(margin_rock, ruin_material)
+		margin_root.add_child(margin_rock)
+	for index: int in range(4):
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern == null:
+			continue
+		fern.name = "FetoDaPassagemDeMargem_%02d" % (index + 1)
+		var fern_x: float = margin_x + 0.52 + float(index % 2) * 0.72
+		var fern_z: float = margin_z - 1.05 + float(index) * 0.66
+		fern.position = Vector3(fern_x, _height_at(fern_x, fern_z) + 0.02, fern_z)
+		var fern_scale: float = 0.40 + float(index % 2) * 0.07
+		fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+		fern.rotation.y = float(index) * 1.13
+		margin_root.add_child(fern)
+	_add_world_life_collision(margin_root, "ColisorPassagemMargemBaixa", Vector3(margin_x + 0.42, _height_at(margin_x + 0.42, margin_z) + 0.18, margin_z - 0.34), Vector3(0.82, 0.36, 0.92))
+
+	# 3) O vestígio baixo antecede o Arco sem competir com a sua silhueta em Z≈92.
+	var ruin_z: float = 80.0
+	var ruin_x: float = _road_x(ruin_z) - 3.62
+	var ruin_root: Node3D = Node3D.new()
+	ruin_root.name = "VestigioAntesDoArco"
+	landmarks.add_child(ruin_root)
+	var remnant: Node3D = RUIN_PILLAR.instantiate() as Node3D
+	if remnant != null:
+		remnant.name = "FragmentoDeMarcoPreArco"
+		remnant.position = Vector3(ruin_x, _height_at(ruin_x, ruin_z) - 0.04, ruin_z)
+		remnant.scale = Vector3(0.30, 0.72, 0.30)
+		remnant.rotation = Vector3(0.12, 0.38, -0.06)
+		_apply_material(remnant, ruin_material)
+		ruin_root.add_child(remnant)
+	for index: int in range(2):
+		var debris: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if debris == null:
+			continue
+		debris.name = "PedraDoVestigioPreArco_%02d" % (index + 1)
+		var debris_x: float = ruin_x + 0.52 + float(index) * 0.58
+		var debris_z: float = ruin_z - 0.48 + float(index) * 0.82
+		debris.position = Vector3(debris_x, _height_at(debris_x, debris_z) + 0.04, debris_z)
+		var debris_scale: float = 0.21 + float(index) * 0.05
+		debris.scale = Vector3(debris_scale, debris_scale * 0.62, debris_scale)
+		debris.rotation.y = -0.56 + float(index) * 1.18
+		_apply_material(debris, ruin_material)
+		ruin_root.add_child(debris)
+	_add_world_life_collision(ruin_root, "ColisorVestigioAntesDoArco", Vector3(ruin_x, _height_at(ruin_x, ruin_z) + 0.38, ruin_z), Vector3(0.88, 0.76, 0.96))
+
+func _add_world_life_collision(parent: Node3D, collision_name: String, center: Vector3, size: Vector3) -> void:
+	var body: StaticBody3D = StaticBody3D.new()
+	body.name = collision_name
+	body.position = center
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = size
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	collision.shape = shape
+	body.add_child(collision)
+	parent.add_child(body)
+
 func _build_river_road() -> void:
 	var road: Node3D = Node3D.new()
 	road.name = "EstradaDoRio_Real"
@@ -450,6 +555,72 @@ func _build_first_orion_reflection() -> void:
 	reflection.material_override = _make_orion_reflection_material()
 	reflection.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	reflection_root.add_child(reflection)
+
+func _build_orion_reflection_observation_station() -> void:
+	# DEV2-R2-ORION-REFLECTION-002 — a anomalia é observada a partir de uma margem arqueológica;
+	# a água continua apenas um pulso localizado e nunca se torna uma seta luminosa para o jogador seguir.
+	var station_z: float = 51.0
+	var river_center_x: float = _river_x(station_z)
+	var river_width: float = 14.0
+	var station_x: float = river_center_x - river_width * 0.5 - 1.55
+	var ground_y: float = _height_at(station_x, station_z)
+	var station: Node3D = Node3D.new()
+	station.name = "EstacaoDeObservacaoDoReflexoOrion"
+	add_child(station)
+
+	# O pequeno patamar de cinco lajes é irregular e apontado para a água; fica longe do leito da Estrada.
+	var slab_specs: Array[Dictionary] = [
+		{"x": -0.68, "z": -1.06, "w": 0.88, "d": 0.98, "yaw": -0.16},
+		{"x": 0.32, "z": -1.16, "w": 0.96, "d": 0.86, "yaw": 0.09},
+		{"x": -0.82, "z": 0.00, "w": 0.92, "d": 1.06, "yaw": 0.12},
+		{"x": 0.34, "z": -0.02, "w": 0.84, "d": 0.96, "yaw": -0.10},
+		{"x": -0.20, "z": 1.03, "w": 1.10, "d": 0.90, "yaw": 0.03}
+	]
+	for index: int in range(slab_specs.size()):
+		var spec: Dictionary = slab_specs[index]
+		var slab_x: float = station_x + (spec["x"] as float)
+		var slab_z: float = station_z + (spec["z"] as float)
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeDaEstacaoOrion_%02d" % (index + 1)
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(spec["w"] as float, 0.12, spec["d"] as float)
+		slab.mesh = slab_mesh
+		slab.material_override = path_material
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		slab.position = Vector3(slab_x, _height_at(slab_x, slab_z) + 0.075, slab_z)
+		slab.rotation.y = spec["yaw"] as float
+		station.add_child(slab)
+		_add_world_life_collision(station, "ColisorLajeDaEstacaoOrion_%02d" % (index + 1), Vector3(slab_x, _height_at(slab_x, slab_z) + 0.015, slab_z), Vector3(spec["w"] as float, 0.12, spec["d"] as float))
+
+	# Dois vestígios baixos moldam uma linha de visada em vez de um portão ou de uma barreira para a rota.
+	for side: float in [-1.0, 1.0]:
+		var marker: Node3D = RUIN_PILLAR.instantiate() as Node3D
+		if marker == null:
+			continue
+		marker.name = "VestigioDaEstacaoOrion_%s" % ("Oeste" if side < 0.0 else "Este")
+		var marker_x: float = station_x + side * 1.12
+		var marker_z: float = station_z + 0.90
+		marker.position = Vector3(marker_x, _height_at(marker_x, marker_z) - 0.05, marker_z)
+		marker.scale = Vector3(0.24, 0.52 if side < 0.0 else 0.40, 0.24)
+		marker.rotation = Vector3(0.08 * side, -0.34 + side * 0.22, 0.03 * side)
+		_apply_material(marker, ruin_material)
+		station.add_child(marker)
+		_add_world_life_collision(station, "ColisorVestigioDaEstacaoOrion_%s" % ("Oeste" if side < 0.0 else "Este"), Vector3(marker_x, _height_at(marker_x, marker_z) + 0.24, marker_z), Vector3(0.48, 0.54, 0.48))
+
+	# Pequenas pedras dirigem o olhar para o reflexo, sem luz adicional nem decoração em linha repetida.
+	for index: int in range(3):
+		var guide_stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if guide_stone == null:
+			continue
+		guide_stone.name = "PedraDeVisadaOrion_%02d" % (index + 1)
+		var guide_x: float = station_x + 1.40 + float(index) * 0.62
+		var guide_z: float = station_z - 0.82 + float(index) * 0.74
+		guide_stone.position = Vector3(guide_x, _height_at(guide_x, guide_z) + 0.035, guide_z)
+		var guide_scale: float = 0.13 + float(index) * 0.032
+		guide_stone.scale = Vector3(guide_scale, guide_scale * 0.60, guide_scale)
+		guide_stone.rotation.y = -0.46 + float(index) * 0.39
+		_apply_material(guide_stone, ruin_material)
+		station.add_child(guide_stone)
 
 func _make_orion_reflection_material() -> ShaderMaterial:
 	var shader: Shader = Shader.new()
