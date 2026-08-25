@@ -151,9 +151,42 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("os marcos R2 não podem criar luzes dinâmicas")
 		if not r2.find_children("LuzEstacaoOrion*", "OmniLight3D", true, false).is_empty():
 			issues.append("a estação Orion não pode criar luzes dinâmicas")
-	if issues.is_empty():
-		print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
-		print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
+		var traveller_rest: Node = r2.get_node_or_null("PontoDescansoDoViajante")
+		if traveller_rest == null:
+			issues.append("o ponto de descanso do viajante está em falta")
+		else:
+			for rest_name: String in PackedStringArray(["AbrigoBaixoDePedraCaida", "LajeBancoDeObservacao", "MochilaDeMiguel", "FogueiraExtintaSemLuz"]):
+				if traveller_rest.get_node_or_null(rest_name) == null:
+					issues.append("elemento do descanso em falta: %s" % rest_name)
+				if not traveller_rest.find_children("*", "OmniLight3D", true, false).is_empty():
+					issues.append("o ponto de descanso não pode criar luz dinâmica")
+
+		if r2.get_node_or_null("AproximacaoPonteLateralR2") == null:
+			issues.append("a aproximação física à ponte lateral está em falta")
+		elif r2.find_child("LajePartidaAcessoPonte_Oeste_01", true, false) == null or r2.find_child("LajePartidaAcessoPonte_Este_01", true, false) == null:
+			issues.append("a aproximação à ponte não possui lajes partidas nos dois encontros")
+		elif not r2.find_children("LuzAproximacaoPonte*", "OmniLight3D", true, false).is_empty():
+			issues.append("a aproximação à ponte não pode criar luz dinâmica")
+		if r2.get_node_or_null("MarcoCairnRegresso") == null:
+			issues.append("o cairn de regresso R2 está em falta")
+		elif r2.find_child("LajeTombadaDoCairn", true, false) == null:
+			issues.append("o cairn de regresso não possui laje tombada")
+		elif not r2.find_children("LuzCairn*", "OmniLight3D", true, false).is_empty():
+			issues.append("o cairn de regresso não pode criar luz dinâmica")
+		var edge: Node = r2.get_node_or_null("MargemGeologicaAntesDoArcoR2")
+		if edge == null:
+			issues.append("a margem geológica R2 está em falta")
+		elif edge.find_child("AfloramentoBaixoMargemArco_02", true, false) == null:
+			issues.append("a margem geológica não possui os dois afloramentos")
+		elif not edge.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("a margem geológica não pode criar luz dinâmica")
+		if issues.is_empty():
+			print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
+			print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
+			print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
+			print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
+			print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
+			print("[ORIGEM_R2_RIVER_EDGE_OK] margem geológica ribeirinha presente; leitura lateral sem luz dinâmica.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)

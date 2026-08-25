@@ -37,13 +37,17 @@ func _ready() -> void:
 	_build_compacted_roadbed()
 	_build_road_entry_orientation()
 	_build_world_life_landmarks()
+	_build_traveller_rest_point()
+	_build_return_route_cairn()
 	_build_river_road()
 	_build_river()
 	_build_first_orion_reflection()
 	_build_orion_reflection_observation_station()
 	_build_river_margins()
+	_build_pre_arch_river_edge()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
+	_build_positive_bridge_approach()
 	_build_macro_river_cutbanks()
 	_build_ruin_arch()
 	_build_cartographic_southwest_readability()
@@ -387,6 +391,145 @@ func _build_world_life_landmarks() -> void:
 		ruin_root.add_child(debris)
 	_add_world_life_collision(ruin_root, "ColisorVestigioAntesDoArco", Vector3(ruin_x, _height_at(ruin_x, ruin_z) + 0.38, ruin_z), Vector3(0.88, 0.76, 0.96))
 
+func _build_traveller_rest_point() -> void:
+	# DEV2-R2-TRAVELLER-REST-003: ponto de observação silencioso, distinto da Casa Voss e do Acampamento Majestic.
+	# Fica a leste da estrada, fora do leito de 4,15 m, sem save, cura, fogo ativo, partículas ou luz dinâmica.
+	var rest_z: float = 64.0
+	var rest_x: float = _road_x(rest_z) + 5.35
+	var rest_root: Node3D = Node3D.new()
+	rest_root.name = "PontoDescansoDoViajante"
+	add_child(rest_root)
+	var ground_y: float = _height_at(rest_x, rest_z)
+	var rest_stone_mat: StandardMaterial3D = StandardMaterial3D.new()
+	rest_stone_mat.albedo_color = Color(0.19, 0.17, 0.12, 1.0)
+	rest_stone_mat.roughness = 0.94
+	var cloth_mat: StandardMaterial3D = StandardMaterial3D.new()
+	cloth_mat.albedo_color = Color(0.07, 0.09, 0.075, 1.0)
+	cloth_mat.roughness = 0.96
+	var wood_mat: StandardMaterial3D = StandardMaterial3D.new()
+	wood_mat.albedo_color = Color(0.20, 0.12, 0.065, 1.0)
+	wood_mat.roughness = 0.90
+
+	# Abrigo baixo de pedra caída: enquadra o rio sem formar parede ou segundo arco.
+	var shelter: Node3D = Node3D.new()
+	shelter.name = "AbrigoBaixoDePedraCaida"
+	rest_root.add_child(shelter)
+	for index: int in range(3):
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var side: float = -1.0 if index == 0 else 1.0
+		rock.name = "PedraAbrigoViajante_%02d" % (index + 1)
+		rock.position = Vector3(rest_x + side * (0.68 + (0.32 if index == 2 else 0.0)), _height_at(rest_x + side * 0.68, rest_z + float(index) * 0.38) + 0.28, rest_z + float(index - 1) * 0.42)
+		rock.scale = Vector3(0.46 + float(index) * 0.05, 0.34 + float(index) * 0.05, 0.38)
+		rock.rotation = Vector3(0.08 * side, 0.36 * float(index), -0.06 * side)
+		_apply_material(rock, rest_stone_mat)
+		shelter.add_child(rock)
+
+	# Banco/laje orientado para a água e para a Montanha Orion, com colisor coincidente.
+	var bench_mesh: BoxMesh = BoxMesh.new()
+	bench_mesh.size = Vector3(1.72, 0.22, 0.62)
+	var bench: MeshInstance3D = MeshInstance3D.new()
+	bench.name = "LajeBancoDeObservacao"
+	bench.mesh = bench_mesh
+	bench.material_override = rest_stone_mat
+	bench.position = Vector3(rest_x, ground_y + 0.48, rest_z - 0.08)
+	bench.rotation.y = 0.10
+	rest_root.add_child(bench)
+	var bench_body: StaticBody3D = StaticBody3D.new()
+	bench_body.name = "ColisorLajeBancoDeObservacao"
+	bench_body.position = bench.position
+	bench_body.rotation.y = bench.rotation.y
+	var bench_collision: CollisionShape3D = CollisionShape3D.new()
+	var bench_shape: BoxShape3D = BoxShape3D.new()
+	bench_shape.size = Vector3(1.72, 0.22, 0.62)
+	bench_collision.shape = bench_shape
+	bench_body.add_child(bench_collision)
+	rest_root.add_child(bench_body)
+
+	# Mochila de Miguel e ferramentas desaparecidas: leitura narrativa, sem interação ou sistema de descanso.
+	var pack_mesh: BoxMesh = BoxMesh.new()
+	pack_mesh.size = Vector3(0.58, 0.72, 0.34)
+	var pack: MeshInstance3D = MeshInstance3D.new()
+	pack.name = "MochilaDeMiguel"
+	pack.mesh = pack_mesh
+	pack.material_override = cloth_mat
+	pack.position = Vector3(rest_x + 0.96, ground_y + 0.38, rest_z + 0.32)
+	pack.rotation = Vector3(0.10, -0.26, 0.12)
+	rest_root.add_child(pack)
+	for index: int in range(2):
+		var tool_mesh: CylinderMesh = CylinderMesh.new()
+		tool_mesh.top_radius = 0.035
+		tool_mesh.bottom_radius = 0.045
+		tool_mesh.height = 0.86
+		var tool: MeshInstance3D = MeshInstance3D.new()
+		tool.name = "FerramentaDesaparecida_%02d" % (index + 1)
+		tool.mesh = tool_mesh
+		tool.material_override = wood_mat
+		tool.position = Vector3(rest_x + 1.06 + float(index) * 0.18, ground_y + 0.10, rest_z + 0.72 + float(index) * 0.12)
+		tool.rotation = Vector3(0.12, 0.24 * float(index), 1.18 - float(index) * 0.16)
+		rest_root.add_child(tool)
+
+	# Fogueira extinta: apenas anel de pedras frias, sem OmniLight3D, emissão ou partículas.
+	var hearth: Node3D = Node3D.new()
+	hearth.name = "FogueiraExtintaSemLuz"
+	rest_root.add_child(hearth)
+	for index: int in range(5):
+		var ember_rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if ember_rock == null:
+			continue
+		ember_rock.name = "PedraFogueiraFria_%02d" % (index + 1)
+		var angle: float = TAU * float(index) / 5.0
+		var fire_x: float = rest_x - 0.78 + cos(angle) * 0.48
+		var fire_z: float = rest_z - 0.76 + sin(angle) * 0.48
+		ember_rock.position = Vector3(fire_x, _height_at(fire_x, fire_z) + 0.08, fire_z)
+		ember_rock.scale = Vector3(0.14, 0.09, 0.14)
+		ember_rock.rotation.y = angle
+		_apply_material(ember_rock, rest_stone_mat)
+		hearth.add_child(ember_rock)
+
+func _build_return_route_cairn() -> void:
+	# DEV2-R2-RIVER-CAIRN-004: marco baixo de retorno, ambiental e sem segundo Arco ou barreira de passagem.
+	var cairn_z: float = 31.0
+	var cairn_x: float = _road_x(cairn_z) + 4.85
+	var cairn_root: Node3D = Node3D.new()
+	cairn_root.name = "MarcoCairnRegresso"
+	add_child(cairn_root)
+	var cairn_material: StandardMaterial3D = StandardMaterial3D.new()
+	cairn_material.albedo_color = Color(0.22, 0.20, 0.15, 1.0)
+	cairn_material.roughness = 0.95
+	for index: int in range(3):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		var stone_x: float = cairn_x + float(index - 1) * 0.34
+		var stone_z: float = cairn_z + float(index % 2) * 0.26
+		stone.name = "PedraCairnRegresso_%02d" % (index + 1)
+		stone.position = Vector3(stone_x, _height_at(stone_x, stone_z) + 0.12 + float(index) * 0.16, stone_z)
+		stone.scale = Vector3(0.24 + float(index) * 0.04, 0.18 + float(index) * 0.06, 0.22 + float(index) * 0.03)
+		stone.rotation = Vector3(0.04 * float(index), 0.52 * float(index), -0.06 * float(index))
+		_apply_material(stone, cairn_material)
+		cairn_root.add_child(stone)
+	var fallen_slab_mesh: BoxMesh = BoxMesh.new()
+	fallen_slab_mesh.size = Vector3(0.88, 0.14, 0.42)
+	var fallen_slab: MeshInstance3D = MeshInstance3D.new()
+	fallen_slab.name = "LajeTombadaDoCairn"
+	fallen_slab.mesh = fallen_slab_mesh
+	fallen_slab.material_override = cairn_material
+	fallen_slab.position = Vector3(cairn_x + 0.02, _height_at(cairn_x, cairn_z - 0.46) + 0.08, cairn_z - 0.46)
+	fallen_slab.rotation = Vector3(0.08, -0.18, 0.24)
+	cairn_root.add_child(fallen_slab)
+	var slab_body: StaticBody3D = StaticBody3D.new()
+	slab_body.name = "ColisorLajeTombadaDoCairn"
+	slab_body.position = fallen_slab.position
+	slab_body.rotation = fallen_slab.rotation
+	var slab_collision: CollisionShape3D = CollisionShape3D.new()
+	var slab_shape: BoxShape3D = BoxShape3D.new()
+	slab_shape.size = fallen_slab_mesh.size
+	slab_collision.shape = slab_shape
+	slab_body.add_child(slab_collision)
+	cairn_root.add_child(slab_body)
+
 func _add_world_life_collision(parent: Node3D, collision_name: String, center: Vector3, size: Vector3) -> void:
 	var body: StaticBody3D = StaticBody3D.new()
 	body.name = collision_name
@@ -673,6 +816,48 @@ func _build_positive_valley_bridge() -> void:
 		_apply_material(footing, ruin_material)
 		bridge_root.add_child(footing)
 
+func _build_positive_bridge_approach() -> void:
+	# DEV2-R2-RIVER-FOOTBRIDGE-005: aproximação arqueológica lateral à ponte positiva, sem tocar o eixo Casa Voss → Arco.
+	var bridge_z: float = 58.0
+	var bridge_x: float = _river_x(bridge_z)
+	var approach_root: Node3D = Node3D.new()
+	approach_root.name = "AproximacaoPonteLateralR2"
+	add_child(approach_root)
+	for side: float in [-1.0, 1.0]:
+		var side_name: String = "Oeste" if side < 0.0 else "Este"
+		var bank_x: float = bridge_x + side * 5.65
+		var bank_z: float = bridge_z + side * 1.18
+		var bank: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if bank != null:
+			bank.name = "EncontroBaixoAproximacaoPonte_%s" % side_name
+			bank.position = Vector3(bank_x, _height_at(bank_x, bank_z) + 0.10, bank_z)
+			bank.scale = Vector3(0.58, 0.34, 0.46)
+			bank.rotation = Vector3(0.06 * side, 0.42 * side, -0.04)
+			_apply_material(bank, ruin_material)
+			approach_root.add_child(bank)
+			_add_world_life_collision(approach_root, "ColisorEncontroBaixoPonte_%s" % side_name, Vector3(bank_x, _height_at(bank_x, bank_z) + 0.28, bank_z), Vector3(0.92, 0.56, 0.86))
+		for index: int in range(2):
+			var slab_x: float = bank_x - side * (0.92 + float(index) * 0.72)
+			var slab_z: float = bank_z + side * (0.62 + float(index) * 0.78)
+			var access_slab: MeshInstance3D = MeshInstance3D.new()
+			access_slab.name = "LajePartidaAcessoPonte_%s_%02d" % [side_name, index + 1]
+			var slab_mesh: BoxMesh = BoxMesh.new()
+			slab_mesh.size = Vector3(0.78 - float(index) * 0.08, 0.11, 0.62 + float(index) * 0.06)
+			access_slab.mesh = slab_mesh
+			access_slab.material_override = path_material
+			access_slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			access_slab.position = Vector3(slab_x, _height_at(slab_x, slab_z) + 0.075, slab_z)
+			access_slab.rotation.y = -0.18 * side + 0.08 * float(index)
+			approach_root.add_child(access_slab)
+			_add_world_life_collision(approach_root, "ColisorLajeAcessoPonte_%s_%02d" % [side_name, index + 1], Vector3(slab_x, _height_at(slab_x, slab_z) + 0.02, slab_z), slab_mesh.size)
+			var fern: Node3D = FERN.instantiate() as Node3D
+			if fern != null:
+				fern.name = "FetoAcessoPonte_%s_%02d" % [side_name, index + 1]
+				fern.position = Vector3(slab_x + side * 0.58, _height_at(slab_x + side * 0.58, slab_z) + 0.02, slab_z + side * 0.26)
+				fern.scale = Vector3(0.30 + float(index) * 0.05, 0.30 + float(index) * 0.05, 0.30 + float(index) * 0.05)
+				fern.rotation.y = side * 0.65 + float(index) * 0.42
+				approach_root.add_child(fern)
+
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
 	var margins: Node3D = Node3D.new()
@@ -720,6 +905,58 @@ func _build_river_margins() -> void:
 				fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 				fern.rotation.y = rng.randf_range(-PI, PI)
 				margins.add_child(fern)
+
+func _build_pre_arch_river_edge() -> void:
+	# DEV2-R2-RIVER-EDGE-006: margem geológica curta antes do Arco; visual lateral, sem rota alternativa ou luz nova.
+	var edge_root: Node3D = Node3D.new()
+	edge_root.name = "MargemGeologicaAntesDoArcoR2"
+	add_child(edge_root)
+	var wet_edge_material: StandardMaterial3D = StandardMaterial3D.new()
+	wet_edge_material.albedo_color = Color(0.10, 0.14, 0.13, 1.0)
+	wet_edge_material.roughness = 0.84
+	wet_edge_material.emission_enabled = false
+	var edge_specs: Array[Dictionary] = [
+		{"z": 73.0, "side": 1.0, "offset": 6.90, "scale": 0.62, "yaw": -0.34},
+		{"z": 82.0, "side": -1.0, "offset": 6.55, "scale": 0.54, "yaw": 0.48}
+	]
+	for index: int in range(edge_specs.size()):
+		var spec: Dictionary = edge_specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var x_value: float = _river_x(z_value) + side * (spec["offset"] as float)
+		var outcrop: Node3D = SLOPE_ROCK.instantiate() as Node3D
+		if outcrop != null:
+			outcrop.name = "AfloramentoBaixoMargemArco_%02d" % (index + 1)
+			outcrop.position = Vector3(x_value, _height_at(x_value, z_value) + 0.05, z_value)
+			var scale_value: float = spec["scale"] as float
+			outcrop.scale = Vector3(scale_value * 1.18, scale_value * 0.72, scale_value)
+			outcrop.rotation.y = spec["yaw"] as float
+			_apply_material(outcrop, wet_edge_material)
+			edge_root.add_child(outcrop)
+		for rock_index: int in range(3):
+			var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+			if rock == null:
+				continue
+			rock.name = "PedraHumidaMargemArco_%02d_%02d" % [index + 1, rock_index + 1]
+			var rock_x: float = x_value - side * (0.72 + float(rock_index) * 0.48)
+			var rock_z: float = z_value - 0.62 + float(rock_index) * 0.58
+			var rock_scale: float = 0.13 + float(rock_index) * 0.035
+			rock.position = Vector3(rock_x, _height_at(rock_x, rock_z) + 0.035, rock_z)
+			rock.scale = Vector3(rock_scale, rock_scale * 0.64, rock_scale)
+			rock.rotation.y = 0.24 * float(rock_index) + side * 0.36
+			_apply_material(rock, wet_edge_material)
+			edge_root.add_child(rock)
+		for fern_index: int in range(2):
+			var fern: Node3D = FERN.instantiate() as Node3D
+			if fern == null:
+				continue
+			fern.name = "FetoDispersoMargemArco_%02d_%02d" % [index + 1, fern_index + 1]
+			var fern_x: float = x_value + side * (0.82 + float(fern_index) * 0.64)
+			var fern_z: float = z_value + 0.18 + float(fern_index) * 0.72
+			fern.position = Vector3(fern_x, _height_at(fern_x, fern_z) + 0.02, fern_z)
+			fern.scale = Vector3(0.28 + float(fern_index) * 0.06, 0.28 + float(fern_index) * 0.06, 0.28 + float(fern_index) * 0.06)
+			fern.rotation.y = side * 0.58 + float(fern_index) * 0.44
+			edge_root.add_child(fern)
 
 func _build_arch_forest_riparian_screen() -> void:
 	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,
