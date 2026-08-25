@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-CAIRN-004
+task_id: DEV2-R2-RIVER-FOOTBRIDGE-005
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -23,19 +23,23 @@ A estação `EstacaoDeObservacaoDoReflexoOrion` foi acrescentada à margem segur
 
 A Estrada do Rio recebeu um ponto de descanso físico e silencioso, distinto da Casa Voss e do Acampamento Majestic. O ponto contém abrigo baixo de pedra caída, banco/laje de observação, mochila de Miguel, ferramentas desaparecidas e fogueira extinta sem luz dinâmica. A porta regional R2 passou no CI após a implementação.
 
-## Tarefa ativa — DEV2-R2-RIVER-CAIRN-004
+## Entrega anterior aprovada — DEV2-R2-RIVER-CAIRN-004
 
-A Estrada do Rio deve receber um **marco de pedra discreto no regresso da rota**, orientando o jogador de volta à Casa Voss sem criar um segundo Arco, seta luminosa ou barreira visual. O marco deve funcionar como cairn arqueológico baixo, com duas ou três pedras reais, uma laje tombada e um pequeno espaço livre de passagem. A leitura deve permanecer ambiental e não abrir novo sistema de interação.
+`MarcoCairnRegresso` foi construído como cairn arqueológico baixo com pedras reais, laje tombada e colisor coincidente fora da faixa da estrada. A prova `[ORIGEM_R2_RIVER_CAIRN_OK]` é obrigatória na porta R2 e confirma a passagem livre, sem luz dinâmica ou nova interação.
+
+## Tarefa ativa — DEV2-R2-RIVER-FOOTBRIDGE-005
+
+A travessia lateral já visível no vale deve ganhar **leitura física de aproximação**, sem deslocar a ponte positiva existente nem transformar a margem numa rota alternativa obrigatória. A entrega deve adicionar dois encontros de pedra baixos, lajes partidas de acesso e vegetação ribeirinha esparsa que façam a ponte parecer uma construção antiga usada apenas como ponto de observação. Nenhum elemento pode cruzar o eixo Casa Voss → Arco, criar luz dinâmica ou tornar a ponte uma atalho de progressão.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
-| Cartografia | Preservar Casa Voss → Estrada do Rio → Arco e manter o Arco físico em Z aproximado 92 |
-| Desempenho | Não acrescentar luzes dinâmicas, partículas ou emissão azul persistente |
-| Jogabilidade | O cairn fica fora do leito de 4,15 m e não bloqueia `road_return_voss`, `road_to_arch` ou `positive_bridge` |
-| Geometria | Usar pedras, laje e colisor coincidente; não usar painel, parede de árvores ou barreira invisível |
-| Narrativa | O marco sugere a rota de retorno e a passagem de viajantes sem contradizer Miguel ou o Códice de Elias |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R2`, manter as provas anteriores e acrescentar `[ORIGEM_R2_RIVER_CAIRN_OK]` antes de abrir PR |
+| Cartografia | Preservar Casa Voss → Estrada do Rio → Arco e a posição da ponte lateral existente |
+| Desempenho | Zero luz dinâmica, partículas e emissão persistente; reutilizar pedra e fetos reais já presentes |
+| Jogabilidade | A aproximação permanece lateral, fora do eixo de 4,15 m e não bloqueia `road_return_voss`, `road_to_arch` ou `positive_bridge` |
+| Geometria | Usar encontros, lajes e vegetação ribeirinha esparsa reais; não usar painéis nem uma parede de árvores |
+| Narrativa | A ponte deve parecer uma observação arqueológica secundária, sem competir com a ordem de progressão Casa → Estrada → Arco |
+| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar uma prova específica da leitura de aproximação antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -43,4 +47,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-CAIRN-004`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+`DEV2-R2-RIVER-EDGE-006` deverá enriquecer uma margem curta após a aprovação da tarefa atual, sem tornar o rio atravessável nem aumentar o orçamento de luz.
