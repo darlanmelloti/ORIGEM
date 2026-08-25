@@ -19,6 +19,7 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 const GROUND_ROUGHNESS: Texture2D = preload("res://assets/textures/pbr/forest_ground_roughness.jpg")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 const R3_ARCH_AWAKENING_SCRIPT: Script = preload("res://levels/regions/r3/ArchAwakening.gd")
+const R3_ARCH_FOREST_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r3/ArchForestHandoff.gd")
 
 # Escala física do primeiro corredor: a âncora lógica do mapa mantém-se para UI e narrativa,
 # mas o marco arqueológico é recuado para criar uma viagem visível e percorrível.
@@ -56,6 +57,7 @@ func _ready() -> void:
 	_build_return_voss_sightline()
 	_build_return_environment_markers()
 	_build_arch_forest_riparian_screen()
+	_build_r3_arch_forest_handoff()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
 	_build_macro_river_cutbanks()
@@ -1339,6 +1341,12 @@ func _build_arch_forest_riparian_screen() -> void:
 			rock.rotation.y = (spec["yaw"] as float) + 0.38
 			_apply_material(rock, ruin_material)
 			screen_root.add_child(rock)
+
+func _build_r3_arch_forest_handoff() -> void:
+	# DEV3-R3-FOREST-HANDOFF-002: sequência aberta posterior ao Arco, sem alterar a geometria ou o território da R4.
+	var handoff: R3ArchForestHandoff = R3_ARCH_FOREST_HANDOFF_SCRIPT.call("install", self, Callable(self, "_road_x"), Callable(self, "_height_at"), RUIN_ROCK, FERN, ruin_material) as R3ArchForestHandoff
+	if handoff == null:
+		push_error("[ORIGEM_R3] Não foi possível instalar o handoff aberto para a Floresta.")
 
 func _build_macro_river_cutbanks() -> void:
 	# Afloramentos de margem em escala intermédia: quebram a leitura de faixa plana de água e deixam a hidrologia orientar a vista.

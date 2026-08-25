@@ -306,6 +306,16 @@ func _verify_r3_arch_qa() -> void:
 		var arch_lights: Array[Node] = arch.find_children("*", "OmniLight3D", true, false)
 		if arch_lights.size() != 2:
 			issues.append("o Arco R3 deve manter exatamente duas luzes Omni locais")
+		var river_region: Node = arch.get_parent()
+		var handoff: Node = river_region.get_node_or_null("R3HandoffParaFloresta") if river_region != null else null
+		if handoff == null:
+			issues.append("o handoff aberto R3 para a floresta está em falta")
+		else:
+			var handoff_markers: Array[Node] = handoff.find_children("MarcoAbertoPosArco*", "Node3D", true, false)
+			if handoff_markers.size() != 4:
+				issues.append("o handoff R3 não possui os quatro marcos abertos esperados")
+			elif not handoff.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("o handoff R3 não pode acrescentar luz dinâmica")
 		var awakening: Node = arch.get_node_or_null("R3ArchAwakening")
 		if awakening == null or not awakening.has_method("awake_once"):
 			issues.append("o controlador de despertar R3 está em falta")
@@ -317,7 +327,7 @@ func _verify_r3_arch_qa() -> void:
 			elif awakening.get_node_or_null("EfeitosDoDespertar") == null:
 				issues.append("os efeitos moderados do despertar R3 estão em falta")
 	if issues.is_empty():
-		print("[ORIGEM_R3_ARCH_OK] Arco Z≈92, colisores laterais, duas luzes e despertar único aprovados.")
+		print("[ORIGEM_R3_ARCH_OK] Arco Z≈92, colisores laterais, duas luzes, despertar único e handoff aberto aprovados.")
 		get_tree().quit()
 		return
 	for issue: String in issues:
