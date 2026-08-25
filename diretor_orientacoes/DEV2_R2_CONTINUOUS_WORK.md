@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-TRAVELLER-REST-003
+task_id: DEV2-R2-RIVER-CAIRN-004
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -19,19 +19,22 @@ A camada de vida física foi concluída e passou a porta R2: `MarcoPedrasDeTomas
 
 A estação `EstacaoDeObservacaoDoReflexoOrion` foi acrescentada à margem segura do primeiro reflexo, em Z 51. Ela contém cinco lajes húmidas irregulares, dois vestígios baixos e três pedras de visada, todos sem luz dinâmica nova. A prova `[ORIGEM_R2_ORION_STATION_OK]` passou dentro da porta R2 e confirma que a estação preserva a estrada, o Arco e a reflexão localizada.
 
-## Tarefa ativa — DEV2-R2-TRAVELLER-REST-003
+## Entrega anterior aprovada — DEV2-R2-TRAVELLER-REST-003
 
-A Estrada do Rio deve receber um **pequeno ponto de descanso de viajante**, distinto do repouso protegido da Casa Voss e do Acampamento Majestic. A entrega deve criar uma área de observação física e silenciosa junto ao percurso inicial: abrigo baixo de pedra caída, banco/laje para sentar, mochila arqueológica e uma fogueira extinta sem luz dinâmica. O ponto deve sugerir que Miguel passou por ali, mas não pode salvar, curar ou abrir um sistema de descanso novo nesta fase.
+`PontoDeDescansoDoViajante` foi implantado em Z 37, fora da faixa central da estrada. O banco de laje, a `MochilaDeMiguel`, o abrigo baixo e a `FogueiraExtintaDoViajante` contam a passagem de Miguel sem criar interação de save, cura, luz dinâmica, emissão persistente ou partículas. A prova `[ORIGEM_R2_TRAVELLER_REST_OK]` passou dentro da porta regional R2.
+
+## Tarefa ativa — DEV2-R2-RIVER-CAIRN-004
+
+O regresso pela Estrada do Rio deve receber um **cairn baixo e legível** na margem exterior, usado como marco de decisão para quem volta da direção do Arco. A entrega deve criar pedras empilhadas assimetricamente e uma pequena laje de percurso caída, com posição que faça sentido ao olhar para Casa Voss sem competir com os marcos de Tomás. Não pode tornar-se um segundo Arco, bloquear a estrada, criar luzes nem acrescentar uma seta UI.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
-| Cartografia | Preservar Casa Voss → Estrada do Rio → Arco e manter o Arco físico em Z aproximado 92 |
-| Desempenho | Não acrescentar luzes dinâmicas R2; a fogueira é extinta, sem emissão persistente nem partículas caras |
-| Jogabilidade | O ponto fica fora do leito de 4,15 m da estrada e não bloqueia `road_return_voss`, `road_to_arch` ou `positive_bridge` |
-| Geometria | Usar rochas, lajes, mochila e prop físico reais; não usar painéis, árvores em parede ou colisores invisíveis na rota |
-| Narrativa | A mochila e as ferramentas devem ligar-se ao desaparecimento de Miguel, sem contradizer o Códice de Elias |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R2`, manter as provas de vida/reflexo e acrescentar uma prova específica do ponto de descanso antes de abrir PR |
+| Cartografia | O cairn deve ficar entre o ponto de viajante e o Arco, mas fora do leito de 4,15 m da estrada |
+| Desempenho | Zero luz dinâmica e zero emissão persistente; reutilizar pedra real existente |
+| Jogabilidade | Preservar `road_return_voss`, `road_to_arch` e `positive_bridge` sem colisores invisíveis no eixo |
+| Narrativa | O marco reforça “seguir as pedras” no retorno, sem reescrever as pistas de Tomás ou Miguel |
+| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar uma prova específica do cairn antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -39,4 +42,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-`DEV2-R2-RIVER-CAIRN-004` deverá adicionar um marco de pedra discreto ao regresso da estrada, depois de a tarefa atual ser aprovada, sem criar um segundo Arco ou uma barreira visual.
+`DEV2-R2-RIVER-FOOTBRIDGE-005` deverá aprofundar a leitura física de uma travessia lateral apenas depois da tarefa atual ser aprovada, sem deslocar a ponte positiva existente.

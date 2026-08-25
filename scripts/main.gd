@@ -147,13 +147,21 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("a estação arqueológica do reflexo Orion está em falta")
 		elif r2.find_child("LajeDaEstacaoOrion_05", true, false) == null:
 			issues.append("a estação Orion não possui as cinco lajes físicas esperadas")
+		var traveller_rest: Node = r2.get_node_or_null("PontoDeDescansoDoViajante")
+		if traveller_rest == null:
+			issues.append("o ponto de viajante de Miguel está em falta")
+		elif traveller_rest.get_node_or_null("BancoDeLajeDoViajante") == null or traveller_rest.get_node_or_null("MochilaDeMiguel") == null or traveller_rest.get_node_or_null("FogueiraExtintaDoViajante") == null:
+			issues.append("o ponto de viajante não possui banco, mochila e fogueira extinta")
 		if not r2.find_children("LuzMarcoVida*", "OmniLight3D", true, false).is_empty():
 			issues.append("os marcos R2 não podem criar luzes dinâmicas")
 		if not r2.find_children("LuzEstacaoOrion*", "OmniLight3D", true, false).is_empty():
 			issues.append("a estação Orion não pode criar luzes dinâmicas")
+		if not r2.find_children("LuzPontoViajante*", "OmniLight3D", true, false).is_empty():
+			issues.append("o ponto de viajante não pode criar luzes dinâmicas")
 	if issues.is_empty():
 		print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
 		print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
+		print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto físico de Miguel presente; sem save, cura ou luz dinâmica nova.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)
