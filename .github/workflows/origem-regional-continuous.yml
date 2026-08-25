@@ -94,3 +94,22 @@ jobs:
           GODOT_BIN: ${{ runner.temp }}/godot/Godot_v4.7.1-stable_linux.x86_64
         shell: bash
         run: tools/qa/run_regional_gate.sh "${{ matrix.region }}" HEAD
+
+
+  regional-gate-summary:
+    name: ORIGEM Regional Gate
+    needs: regional-gate
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exigir aprovação de todas as regiões selecionadas
+        shell: bash
+        run: |
+          set -euo pipefail
+          result="${{ needs.regional-gate.result }}"
+          echo "Resultado agregado: $result"
+          if [[ "$result" != "success" ]]; then
+            echo "Pelo menos uma porta regional falhou ou foi cancelada." >&2
+            exit 1
+          fi
+          echo "Todas as regiões selecionadas passaram na porta contínua."
