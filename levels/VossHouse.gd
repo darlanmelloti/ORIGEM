@@ -764,7 +764,14 @@ func inspect_voss_clue(clue_id: String) -> Dictionary:
 	}
 
 func _inspect_voss_clues_for_qa() -> void:
+	var house: Node3D = get_node_or_null("CasaVoss") as Node3D
 	for clue_id: String in ["TomasTable", "MountainMap", "MiguelTools"]:
+		var trigger: StaticBody3D = house.get_node_or_null(clue_id) as StaticBody3D if house != null else null
+		var physics_ready: bool = trigger != null and trigger.is_in_group("interactable") and trigger.collision_layer == 4
+		print("[ORIGEM_R1_CLUE_PHYSICS] id=%s ready=%s" % [clue_id, str(physics_ready)])
+		if not physics_ready:
+			push_error("[ORIGEM_R1_CLUE_ERROR] Gatilho físico inválido: %s" % clue_id)
+			continue
 		var clue: Dictionary = inspect_voss_clue(clue_id)
 		print("[ORIGEM_R1_CLUE] id=%s first_time=%s" % [clue_id, str(clue.get("first_time", false))])
 
