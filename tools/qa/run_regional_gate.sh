@@ -63,13 +63,31 @@ if grep -Eqi 'parse error|parser error|script error|fatal error' "$PARSER_LOG"; 
   exit 6
 fi
 
-printf '[GATE:%s] 4/4 contratos e rotas\n' "$REGION"
+if [[ "$REGION" == "R2" ]]; then
+  printf '[GATE:%s] 4/5 estabilidade física R1→R2\n' "$REGION"
+  GROUND_LOG="/tmp/origem_${REGION}_grounding_$$.log"
+  set +e
+  ORIGEM_QA_AUTOSTART_NEW_GAME=1 ORIGEM_QA_GROUNDING=1 ORIGEM_QA_ROUTE=road_to_arch GODOT_SILENCE_ROOT_WARNING=1 timeout 24s "$GODOT" --headless --path . --rendering-driver opengl3 >"$GROUND_LOG" 2>&1
+  grounding_status=$?
+  set -e
+  if [[ "$grounding_status" -ne 0 ]]; then
+    cat "$GROUND_LOG"
+    exit 7
+  fi
+  if ! grep -q '\[QA-GROUND-01-RESULT\].*"passed":true' "$GROUND_LOG"; then
+    cat "$GROUND_LOG"
+    exit 7
+  fi
+  printf '[GATE:%s] estabilidade R1→R2 aprovada\n' "$REGION"
+fi
+
+printf '[GATE:%s] 5/5 contratos e rotas\n' "$REGION"
 CONTRACT_LOG="/tmp/origem_${REGION}_contract_$$.log"
 GODOT_SILENCE_ROOT_WARNING=1 "$GODOT" --headless --path . --script res://qa/regions/verify_region_contracts.gd >"$CONTRACT_LOG" 2>&1
 if ! grep -q '\[ORIGEM_REGION_CONTRACT_OK\]' "$CONTRACT_LOG"; then
   cat "$CONTRACT_LOG"
-  exit 7
-fi
+      exit 8
+  fi
 
 for route in "${ROUTES[@]}"; do
   ROUTE_LOG="/tmp/origem_${REGION}_${route}_$$.log"
@@ -79,15 +97,15 @@ for route in "${ROUTES[@]}"; do
   set -e
   if [[ "$route_status" -ne 0 && "$route_status" -ne 124 ]]; then
     cat "$ROUTE_LOG"
-    exit 8
+    exit 9
   fi
   if ! grep -q '\[ORIGEM_QA_ROUTE\]' "$ROUTE_LOG"; then
     cat "$ROUTE_LOG"
-    exit 9
+    exit 10
   fi
   if grep -Eqi 'parse error|parser error|script error|shader error|fatal error' "$ROUTE_LOG"; then
     cat "$ROUTE_LOG"
-    exit 10
+    exit 11
   fi
   printf '[GATE:%s] rota %s aprovada\n' "$REGION" "$route"
 done
