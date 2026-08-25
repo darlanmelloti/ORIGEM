@@ -463,8 +463,8 @@ void fragment() {
 	float ripple = 0.5 + 0.5 * sin(UV.y * 34.0 - TIME * 2.2);
 	float mask = rise * fall * (0.55 + ripple * 0.45);
 	ALBEDO = vec3(0.055, 0.24, 0.34);
-	EMISSION = vec3(0.06, 0.34, 0.52);
-	EMISSION_ENERGY = 0.55 * mask;
+	// Godot 4 não expõe EMISSION_ENERGY em shaders spatial; a intensidade é aplicada na própria cor.
+	EMISSION = vec3(0.033, 0.187, 0.286) * mask;
 	ALPHA = 0.22 * mask;
 }
 """
