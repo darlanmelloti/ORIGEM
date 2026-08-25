@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-FOREST-HANDOFF-002
+task_id: DEV3-R3-INSCRIPTION-LORE-003
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -17,19 +17,22 @@ A entrega declarada do Dev3 não estava presente no repositório remoto no commi
 
 A prova `[ORIGEM_R3_ARCH_OK]` valida a projeção física, os dois colisores laterais, exatamente duas `OmniLight3D` locais e o despertar idempotente. O preenchimento Omni adicional foi removido para manter o orçamento contratual R3.
 
-## Tarefa ativa — DEV3-R3-FOREST-HANDOFF-002
+## Entrega aprovada — DEV3-R3-FOREST-HANDOFF-002
 
-A passagem oriental após o Arco deve ganhar uma **leitura arqueológica de transição para a Floresta Densa**, mantendo o Arco como horizonte e evitando qualquer parede de árvores. A entrega deve acrescentar pedras de orientação baixas, solo mais húmido e vegetação aberta em grupos assimétricos apenas depois do vão, revelando a direção R4 sem comprimir o percurso ou antecipar a floresta como um bloqueio visual.
+`R3HandoffParaFloresta` foi instalado no corredor real depois do Arco com quatro pedras de orientação baixas e oito fetos dispersos. A sequência permanece fora da faixa central, não cria colisores, luzes, painéis ou parede vegetal. A prova `[ORIGEM_R3_ARCH_OK]` confirma os quatro marcos abertos, zero `OmniLight3D` nova e a preservação do Arco, do despertar e das rotas R3.
+
+## Tarefa ativa — DEV3-R3-INSCRIPTION-LORE-003
+
+As inscrições do Arco devem receber uma **leitura arqueológica adicional e discreta**, através de duas pequenas placas de pedra quebrada e texto ambiental complementar ao lado do percurso, sem abrir UI persistente nem adicionar marcadores flutuantes. A informação precisa de dialogar com o despertar existente e apontar para a memória do rio, mantendo a interpretação aberta para futuros capítulos de Orion.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | R3 e documentação Dev3; não alterar âncoras, `ForestLakeRegion.gd` ou módulos R4–R6 sem integração aprovada |
-| Cartografia | Preservar o Arco em Z aproximado 92, o eixo Casa Voss → Estrada → Arco e a rota `arch_to_forest` |
-| Geometria | Usar pedras, terreno e vegetação baixa reais; não usar painéis, árvores repetidas em parede ou cortes de percurso |
-| Luz | Máximo de duas luzes dinâmicas R3 no Arco; a nova transição não pode acrescentar luz dinâmica |
-| Jogabilidade | Não bloquear o vão central, a rota `road_to_arch` ou a saída física para R4 |
-| Narrativa | Reforçar a escolha de atravessar o Arco e avançar para a floresta sem contradizer Tomás, Miguel, Orion ou o Códice |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R3`, `[ORIGEM_R3_ARCH_OK]` e criar uma prova específica do handoff antes de abrir PR |
+| Escopo | R3 e documentação Dev3; não alterar o Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 sem integração aprovada |
+| Cartografia | Preservar Arco em Z aproximado 92 e a saída `arch_to_forest` |
+| Geometria | Duas placas quebradas e elementos baixos reais; nunca usar painel, UI ou bloqueio no vão |
+| Luz | Sem luz dinâmica adicional; manter o máximo de duas luzes do Arco |
+| Narrativa | Complementar “A PEDRA RECORDA” e “NÃO SIGAS A LUZ” sem revelar a verdade de Orion prematuramente |
+| Verificação | Executar `tools/qa/run_regional_gate.sh R3`, `[ORIGEM_R3_ARCH_OK]` e acrescentar prova específica das duas placas antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -37,4 +40,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-INSCRIPTION-LORE-003` deverá aprofundar a leitura narrativa das inscrições após a aprovação da tarefa atual, sem acrescentar interface persistente ou alterar o Códice sem coordenação Dev1.
+`DEV3-R3-ARCH-SOUNDLESS-VFX-004` deverá refinar a leitura visual do despertar após a aprovação da tarefa atual, sem adicionar áudio obrigatório, partículas densas ou novas luzes.
