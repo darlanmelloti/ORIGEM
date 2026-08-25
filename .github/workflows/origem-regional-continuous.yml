@@ -1,0 +1,95 @@
+name: ORIGEM Regional Continuous Gate
+
+on:
+  push:
+    branches:
+      - integration/r1-r6-sprint1
+      - feature/dev2-r2-river-road
+      - dev3/r3-arch-ruins
+      - dev4/r4-dense-forest
+      - dev5/r5-majestic-camp
+      - dev6/r6-submerged-ruins
+  pull_request:
+    branches:
+      - integration/r1-r6-sprint1
+  workflow_dispatch:
+    inputs:
+      region:
+        description: Região a validar (ALL para validar R2–R6)
+        required: true
+        default: ALL
+        type: choice
+        options:
+          - ALL
+          - R2
+          - R3
+          - R4
+          - R5
+          - R6
+
+permissions:
+  contents: read
+
+concurrency:
+  group: origem-regional-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  resolve-regions:
+    name: Determinar regiões afetadas
+    runs-on: ubuntu-latest
+    outputs:
+      regions: ${{ steps.region.outputs.regions }}
+    steps:
+      - id: region
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            requested="${{ inputs.region }}"
+          else
+            requested="${{ github.head_ref || github.ref_name }}"
+          fi
+          case "$requested" in
+            feature/dev2-r2-river-road) regions='["R2"]' ;;
+            dev3/r3-arch-ruins) regions='["R3"]' ;;
+            dev4/r4-dense-forest) regions='["R4"]' ;;
+            dev5/r5-majestic-camp) regions='["R5"]' ;;
+            dev6/r6-submerged-ruins) regions='["R6"]' ;;
+            R2|R3|R4|R5|R6) regions="[\"$requested\"]" ;;
+            *) regions='["R2","R3","R4","R5","R6"]' ;;
+          esac
+          echo "regions=$regions" >> "$GITHUB_OUTPUT"
+
+  regional-gate:
+    name: Porta regional ${{ matrix.region }}
+    needs: resolve-regions
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        region: ${{ fromJSON(needs.resolve-regions.outputs.regions) }}
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Instalar Godot 4.7.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT_VERSION=4.7.1
+          GODOT_DIR="$RUNNER_TEMP/godot"
+          mkdir -p "$GODOT_DIR"
+          curl --fail --location --retry 3 \
+            "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip" \
+            --output "$GODOT_DIR/godot.zip"
+          unzip -q "$GODOT_DIR/godot.zip" -d "$GODOT_DIR"
+          chmod +x "$GODOT_DIR"/Godot_v${GODOT_VERSION}-stable_linux.x86_64
+          echo "$GODOT_DIR" >> "$GITHUB_PATH"
+
+      - name: Executar parser, contratos e rotas
+        env:
+          GODOT_BIN: ${{ runner.temp }}/godot/Godot_v4.7.1-stable_linux.x86_64
+        shell: bash
+        run: tools/qa/run_regional_gate.sh "${{ matrix.region }}" HEAD
