@@ -45,6 +45,7 @@ func _ready() -> void:
 	_build_orion_reflection_observation_station()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
+	_build_pre_arch_river_approach()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
@@ -957,6 +958,47 @@ func _build_pre_arch_river_edge() -> void:
 			fern.scale = Vector3(0.28 + float(fern_index) * 0.06, 0.28 + float(fern_index) * 0.06, 0.28 + float(fern_index) * 0.06)
 			fern.rotation.y = side * 0.58 + float(fern_index) * 0.44
 			edge_root.add_child(fern)
+
+func _build_pre_arch_river_approach() -> void:
+	# DEV2-R2-RIVER-APPROACH-007: leitura baixa do último trecho até ao Arco, sem criar rota nova para o rio.
+	var approach_root: Node3D = Node3D.new()
+	approach_root.name = "AproximacaoUltimoTrechoArcoR2"
+	add_child(approach_root)
+	var stone_material: StandardMaterial3D = StandardMaterial3D.new()
+	stone_material.albedo_color = Color(0.16, 0.18, 0.16, 1.0)
+	stone_material.roughness = 0.90
+	var road_z: float = 87.0
+	var road_x: float = _road_x(road_z)
+	for index: int in range(2):
+		var side: float = -1.0 if index == 0 else 1.0
+		var slab_z: float = road_z + float(index) * 2.10
+		var slab_x: float = road_x + side * 3.30
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeInterrompidaUltimoTrecho_%02d" % (index + 1)
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(1.05, 0.12, 0.74)
+		slab.mesh = slab_mesh
+		slab.material_override = path_material
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		slab.position = Vector3(slab_x, _height_at(slab_x, slab_z) + 0.07, slab_z)
+		slab.rotation = Vector3(0.02 * side, side * 0.22, -0.08 * side)
+		approach_root.add_child(slab)
+		_add_world_life_collision(approach_root, "ColisorLajeInterrompidaUltimoTrecho_%02d" % (index + 1), Vector3(slab_x, _height_at(slab_x, slab_z) + 0.02, slab_z), slab_mesh.size)
+		var border: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if border != null:
+			border.name = "PedraBordaUltimoTrecho_%02d" % (index + 1)
+			border.position = Vector3(slab_x + side * 0.86, _height_at(slab_x + side * 0.86, slab_z) + 0.05, slab_z + side * 0.24)
+			border.scale = Vector3(0.24, 0.18, 0.28)
+			border.rotation.y = side * 0.58
+			_apply_material(border, stone_material)
+			approach_root.add_child(border)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoUltimoTrecho_%02d" % (index + 1)
+			fern.position = Vector3(slab_x - side * 0.74, _height_at(slab_x - side * 0.74, slab_z) + 0.02, slab_z - side * 0.32)
+			fern.scale = Vector3(0.27, 0.27, 0.27)
+			fern.rotation.y = side * 0.44
+			approach_root.add_child(fern)
 
 func _build_arch_forest_riparian_screen() -> void:
 	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,
