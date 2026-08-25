@@ -25,7 +25,7 @@ signal player_entered_area(area_name: String)
 signal player_interacted(object_name: String)
 
 ## Emitido quando o alvo de interação do jogador muda (para UI do HUD).
-signal player_interact_target_changed(has_target: bool)
+signal player_interact_target_changed(has_target: bool, object_name: String)
 
 ## Emitido quando o jogador solicita uma mensagem na UI (texto, duração).
 signal player_message_requested(text: String, duration: float)

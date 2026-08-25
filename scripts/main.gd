@@ -204,8 +204,35 @@ func _seraph_hint():
 		_queue_msg("SERAPH: \"O último fragmento repousa perto das ruínas junto ao lago. Os Kharu protegem a rota, mas não saem do território deles.\"", 4.0)
 
 # ─── EVENTBUS — JOGADOR ───────────────────────────────────────
-func _on_player_interact_target_changed(has_target: bool) -> void:
+func _on_player_interact_target_changed(has_target: bool, object_name: String) -> void:
 	interact_label.visible = has_target
+	if has_target:
+		interact_label.text = _interaction_prompt_for(object_name)
+	else:
+		interact_label.text = ""
+
+func _interaction_prompt_for(object_name: String) -> String:
+	match object_name:
+		"VossFrontDoor":
+			return "[E] Abrir a porta para o vale"
+		"VossRestFire":
+			return "[E] Repousar e guardar"
+		"TomasTable":
+			return "[E] Ler a carta de Tomás"
+		"MountainMap":
+			return "[E] Examinar o mapa da montanha"
+		"MiguelTools":
+			return "[E] Examinar as ferramentas de Miguel"
+		"SwordWall":
+			return "[E] Tomar a espada temporal"
+		"Tablet1", "Tablet2", "Tablet3":
+			return "[E] Recolher fragmento de tradução"
+		"OrionCube":
+			return "[E] Examinar o Cubo de Orion"
+		"TerminalP52":
+			return "[E] Contactar Seraph"
+		_:
+			return "[E] Interagir"
 
 func _on_player_message_requested(text: String, duration: float) -> void:
 	_queue_msg(text, duration)

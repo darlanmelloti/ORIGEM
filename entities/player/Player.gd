@@ -360,8 +360,8 @@ func _on_footstep() -> void:
 func _handle_interaction() -> void:
 	var hit: Object = interact_ray.get_collider()
 	if hit != null and hit.is_in_group("interactable"):
-		EventBus.player_interact_target_changed.emit(true)
+		EventBus.player_interact_target_changed.emit(true, hit.name)
 		if Input.is_action_just_pressed("interact"):
 			EventBus.player_interacted.emit(hit.name)
 	else:
-		EventBus.player_interact_target_changed.emit(false)
+		EventBus.player_interact_target_changed.emit(false, "")
