@@ -38,6 +38,7 @@ func _ready() -> void:
 	_build_road_entry_orientation()
 	_build_world_life_landmarks()
 	_build_traveller_rest_point()
+	_build_return_route_cairn()
 	_build_river_road()
 	_build_river()
 	_build_first_orion_reflection()
@@ -389,117 +390,143 @@ func _build_world_life_landmarks() -> void:
 	_add_world_life_collision(ruin_root, "ColisorVestigioAntesDoArco", Vector3(ruin_x, _height_at(ruin_x, ruin_z) + 0.38, ruin_z), Vector3(0.88, 0.76, 0.96))
 
 func _build_traveller_rest_point() -> void:
-	# DEV2-R2-TRAVELLER-REST-003 — sinal da passagem de Miguel, não um segundo sistema de repouso.
-	# Fica fora da estrada, sem save, cura, luz dinâmica ou partículas, e antecede a anomalia de Orion.
-	var rest_z: float = 37.0
-	var rest_x: float = _road_x(rest_z) + 3.72
-	var rest: Node3D = Node3D.new()
-	rest.name = "PontoDeDescansoDoViajante"
-	add_child(rest)
+	# DEV2-R2-TRAVELLER-REST-003: ponto de observação silencioso, distinto da Casa Voss e do Acampamento Majestic.
+	# Fica a leste da estrada, fora do leito de 4,15 m, sem save, cura, fogo ativo, partículas ou luz dinâmica.
+	var rest_z: float = 64.0
+	var rest_x: float = _road_x(rest_z) + 5.35
+	var rest_root: Node3D = Node3D.new()
+	rest_root.name = "PontoDescansoDoViajante"
+	add_child(rest_root)
+	var ground_y: float = _height_at(rest_x, rest_z)
+	var rest_stone_mat: StandardMaterial3D = StandardMaterial3D.new()
+	rest_stone_mat.albedo_color = Color(0.19, 0.17, 0.12, 1.0)
+	rest_stone_mat.roughness = 0.94
+	var cloth_mat: StandardMaterial3D = StandardMaterial3D.new()
+	cloth_mat.albedo_color = Color(0.07, 0.09, 0.075, 1.0)
+	cloth_mat.roughness = 0.96
+	var wood_mat: StandardMaterial3D = StandardMaterial3D.new()
+	wood_mat.albedo_color = Color(0.20, 0.12, 0.065, 1.0)
+	wood_mat.roughness = 0.90
 
-	# Abrigo baixo de pedras caídas: um limite físico assimétrico, sem fechar a passagem cartográfica.
+	# Abrigo baixo de pedra caída: enquadra o rio sem formar parede ou segundo arco.
+	var shelter: Node3D = Node3D.new()
+	shelter.name = "AbrigoBaixoDePedraCaida"
+	rest_root.add_child(shelter)
 	for index: int in range(3):
-		var shelter_rock: Node3D = RUIN_ROCK.instantiate() as Node3D
-		if shelter_rock == null:
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock == null:
 			continue
-		shelter_rock.name = "PedraDoAbrigoViajante_%02d" % (index + 1)
-		var shelter_x: float = rest_x + 0.92 + float(index) * 0.76
-		var shelter_z: float = rest_z - 1.18 + float(index % 2) * 1.28
-		shelter_rock.position = Vector3(shelter_x, _height_at(shelter_x, shelter_z) + 0.035, shelter_z)
-		var shelter_scale: float = 0.23 + float(index) * 0.048
-		shelter_rock.scale = Vector3(shelter_scale, shelter_scale * 0.72, shelter_scale)
-		shelter_rock.rotation.y = 0.44 + float(index) * 0.86
-		_apply_material(shelter_rock, ruin_material)
-		rest.add_child(shelter_rock)
+		var side: float = -1.0 if index == 0 else 1.0
+		rock.name = "PedraAbrigoViajante_%02d" % (index + 1)
+		rock.position = Vector3(rest_x + side * (0.68 + (0.32 if index == 2 else 0.0)), _height_at(rest_x + side * 0.68, rest_z + float(index) * 0.38) + 0.28, rest_z + float(index - 1) * 0.42)
+		rock.scale = Vector3(0.46 + float(index) * 0.05, 0.34 + float(index) * 0.05, 0.38)
+		rock.rotation = Vector3(0.08 * side, 0.36 * float(index), -0.06 * side)
+		_apply_material(rock, rest_stone_mat)
+		shelter.add_child(rock)
 
-	# Banco de laje: cenográfico e colidível, mas não abre cura, save nem UI de repouso.
-	var bench_x: float = rest_x - 0.18
-	var bench_z: float = rest_z + 0.22
-	var bench: MeshInstance3D = MeshInstance3D.new()
-	bench.name = "BancoDeLajeDoViajante"
+	# Banco/laje orientado para a água e para a Montanha Orion, com colisor coincidente.
 	var bench_mesh: BoxMesh = BoxMesh.new()
-	bench_mesh.size = Vector3(1.72, 0.20, 0.54)
+	bench_mesh.size = Vector3(1.72, 0.22, 0.62)
+	var bench: MeshInstance3D = MeshInstance3D.new()
+	bench.name = "LajeBancoDeObservacao"
 	bench.mesh = bench_mesh
-	bench.material_override = path_material
-	bench.position = Vector3(bench_x, _height_at(bench_x, bench_z) + 0.42, bench_z)
-	bench.rotation.y = -0.20
-	rest.add_child(bench)
-	_add_world_life_collision(rest, "ColisorBancoDeLajeDoViajante", Vector3(bench_x, _height_at(bench_x, bench_z) + 0.32, bench_z), Vector3(1.72, 0.28, 0.54))
-	for side: float in [-1.0, 1.0]:
-		var leg_x: float = bench_x + side * 0.58
-		var leg: Node3D = RUIN_PILLAR.instantiate() as Node3D
-		if leg == null:
-			continue
-		leg.name = "ApoioBancoViajante_%s" % ("Oeste" if side < 0.0 else "Este")
-		leg.position = Vector3(leg_x, _height_at(leg_x, bench_z) - 0.03, bench_z)
-		leg.scale = Vector3(0.16, 0.30, 0.16)
-		leg.rotation.y = -0.20
-		_apply_material(leg, ruin_material)
-		rest.add_child(leg)
+	bench.material_override = rest_stone_mat
+	bench.position = Vector3(rest_x, ground_y + 0.48, rest_z - 0.08)
+	bench.rotation.y = 0.10
+	rest_root.add_child(bench)
+	var bench_body: StaticBody3D = StaticBody3D.new()
+	bench_body.name = "ColisorLajeBancoDeObservacao"
+	bench_body.position = bench.position
+	bench_body.rotation.y = bench.rotation.y
+	var bench_collision: CollisionShape3D = CollisionShape3D.new()
+	var bench_shape: BoxShape3D = BoxShape3D.new()
+	bench_shape.size = Vector3(1.72, 0.22, 0.62)
+	bench_collision.shape = bench_shape
+	bench_body.add_child(bench_collision)
+	rest_root.add_child(bench_body)
 
-	# Mochila arqueológica modular: couro escuro e uma tira clara, apoiada junto ao banco.
-	var backpack_x: float = rest_x - 0.98
-	var backpack_z: float = rest_z - 0.48
-	var backpack: Node3D = Node3D.new()
-	backpack.name = "MochilaDeMiguel"
-	backpack.position = Vector3(backpack_x, _height_at(backpack_x, backpack_z) + 0.18, backpack_z)
-	rest.add_child(backpack)
-	var pack_material: StandardMaterial3D = StandardMaterial3D.new()
-	pack_material.albedo_color = Color(0.13, 0.075, 0.040, 1.0)
-	pack_material.roughness = 0.86
-	var pack_body: MeshInstance3D = MeshInstance3D.new()
-	pack_body.name = "CorpoMochilaDeMiguel"
-	var pack_mesh: CapsuleMesh = CapsuleMesh.new()
-	pack_mesh.radius = 0.22
-	pack_mesh.height = 0.52
-	pack_body.mesh = pack_mesh
-	pack_body.material_override = pack_material
-	pack_body.rotation = Vector3(PI * 0.5, 0.20, 0.0)
-	backpack.add_child(pack_body)
-	var strap: MeshInstance3D = MeshInstance3D.new()
-	strap.name = "TiraMochilaDeMiguel"
-	var strap_mesh: BoxMesh = BoxMesh.new()
-	strap_mesh.size = Vector3(0.10, 0.32, 0.46)
-	strap.mesh = strap_mesh
-	var strap_material: StandardMaterial3D = StandardMaterial3D.new()
-	strap_material.albedo_color = Color(0.34, 0.22, 0.11, 1.0)
-	strap_material.roughness = 0.92
-	strap.material_override = strap_material
-	strap.position = Vector3(-0.04, 0.02, 0.0)
-	backpack.add_child(strap)
-	_add_world_life_collision(rest, "ColisorMochilaDeMiguel", Vector3(backpack_x, _height_at(backpack_x, backpack_z) + 0.18, backpack_z), Vector3(0.48, 0.38, 0.52))
+	# Mochila de Miguel e ferramentas desaparecidas: leitura narrativa, sem interação ou sistema de descanso.
+	var pack_mesh: BoxMesh = BoxMesh.new()
+	pack_mesh.size = Vector3(0.58, 0.72, 0.34)
+	var pack: MeshInstance3D = MeshInstance3D.new()
+	pack.name = "MochilaDeMiguel"
+	pack.mesh = pack_mesh
+	pack.material_override = cloth_mat
+	pack.position = Vector3(rest_x + 0.96, ground_y + 0.38, rest_z + 0.32)
+	pack.rotation = Vector3(0.10, -0.26, 0.12)
+	rest_root.add_child(pack)
+	for index: int in range(2):
+		var tool_mesh: CylinderMesh = CylinderMesh.new()
+		tool_mesh.top_radius = 0.035
+		tool_mesh.bottom_radius = 0.045
+		tool_mesh.height = 0.86
+		var tool: MeshInstance3D = MeshInstance3D.new()
+		tool.name = "FerramentaDesaparecida_%02d" % (index + 1)
+		tool.mesh = tool_mesh
+		tool.material_override = wood_mat
+		tool.position = Vector3(rest_x + 1.06 + float(index) * 0.18, ground_y + 0.10, rest_z + 0.72 + float(index) * 0.12)
+		tool.rotation = Vector3(0.12, 0.24 * float(index), 1.18 - float(index) * 0.16)
+		rest_root.add_child(tool)
 
-	# Fogueira extinta: pedras e carvão sem chama, partículas, emissão ou luz adicional.
-	var fire_x: float = rest_x + 0.84
-	var fire_z: float = rest_z + 0.82
-	var ashes: Node3D = Node3D.new()
-	ashes.name = "FogueiraExtintaDoViajante"
-	ashes.position = Vector3(fire_x, _height_at(fire_x, fire_z) + 0.028, fire_z)
-	rest.add_child(ashes)
-	var ash_material: StandardMaterial3D = StandardMaterial3D.new()
-	ash_material.albedo_color = Color(0.045, 0.040, 0.035, 1.0)
-	ash_material.roughness = 1.0
-	var ash_mesh: CylinderMesh = CylinderMesh.new()
-	ash_mesh.top_radius = 0.32
-	ash_mesh.bottom_radius = 0.38
-	ash_mesh.height = 0.035
-	ash_mesh.radial_segments = 12
-	var ash_disc: MeshInstance3D = MeshInstance3D.new()
-	ash_disc.name = "CinzasFriasDoViajante"
-	ash_disc.mesh = ash_mesh
-	ash_disc.material_override = ash_material
-	ashes.add_child(ash_disc)
+	# Fogueira extinta: apenas anel de pedras frias, sem OmniLight3D, emissão ou partículas.
+	var hearth: Node3D = Node3D.new()
+	hearth.name = "FogueiraExtintaSemLuz"
+	rest_root.add_child(hearth)
 	for index: int in range(5):
-		var fire_stone: Node3D = RUIN_ROCK.instantiate() as Node3D
-		if fire_stone == null:
+		var ember_rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if ember_rock == null:
 			continue
-		fire_stone.name = "PedraFogueiraExtinta_%02d" % (index + 1)
+		ember_rock.name = "PedraFogueiraFria_%02d" % (index + 1)
 		var angle: float = TAU * float(index) / 5.0
-		fire_stone.position = Vector3(cos(angle) * 0.42, 0.01, sin(angle) * 0.42)
-		fire_stone.scale = Vector3(0.105, 0.065, 0.105)
-		fire_stone.rotation.y = angle
-		_apply_material(fire_stone, ruin_material)
-		ashes.add_child(fire_stone)
+		var fire_x: float = rest_x - 0.78 + cos(angle) * 0.48
+		var fire_z: float = rest_z - 0.76 + sin(angle) * 0.48
+		ember_rock.position = Vector3(fire_x, _height_at(fire_x, fire_z) + 0.08, fire_z)
+		ember_rock.scale = Vector3(0.14, 0.09, 0.14)
+		ember_rock.rotation.y = angle
+		_apply_material(ember_rock, rest_stone_mat)
+		hearth.add_child(ember_rock)
+
+func _build_return_route_cairn() -> void:
+	# DEV2-R2-RIVER-CAIRN-004: marco baixo de retorno, ambiental e sem segundo Arco ou barreira de passagem.
+	var cairn_z: float = 31.0
+	var cairn_x: float = _road_x(cairn_z) + 4.85
+	var cairn_root: Node3D = Node3D.new()
+	cairn_root.name = "MarcoCairnRegresso"
+	add_child(cairn_root)
+	var cairn_material: StandardMaterial3D = StandardMaterial3D.new()
+	cairn_material.albedo_color = Color(0.22, 0.20, 0.15, 1.0)
+	cairn_material.roughness = 0.95
+	for index: int in range(3):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		var stone_x: float = cairn_x + float(index - 1) * 0.34
+		var stone_z: float = cairn_z + float(index % 2) * 0.26
+		stone.name = "PedraCairnRegresso_%02d" % (index + 1)
+		stone.position = Vector3(stone_x, _height_at(stone_x, stone_z) + 0.12 + float(index) * 0.16, stone_z)
+		stone.scale = Vector3(0.24 + float(index) * 0.04, 0.18 + float(index) * 0.06, 0.22 + float(index) * 0.03)
+		stone.rotation = Vector3(0.04 * float(index), 0.52 * float(index), -0.06 * float(index))
+		_apply_material(stone, cairn_material)
+		cairn_root.add_child(stone)
+	var fallen_slab_mesh: BoxMesh = BoxMesh.new()
+	fallen_slab_mesh.size = Vector3(0.88, 0.14, 0.42)
+	var fallen_slab: MeshInstance3D = MeshInstance3D.new()
+	fallen_slab.name = "LajeTombadaDoCairn"
+	fallen_slab.mesh = fallen_slab_mesh
+	fallen_slab.material_override = cairn_material
+	fallen_slab.position = Vector3(cairn_x + 0.02, _height_at(cairn_x, cairn_z - 0.46) + 0.08, cairn_z - 0.46)
+	fallen_slab.rotation = Vector3(0.08, -0.18, 0.24)
+	cairn_root.add_child(fallen_slab)
+	var slab_body: StaticBody3D = StaticBody3D.new()
+	slab_body.name = "ColisorLajeTombadaDoCairn"
+	slab_body.position = fallen_slab.position
+	slab_body.rotation = fallen_slab.rotation
+	var slab_collision: CollisionShape3D = CollisionShape3D.new()
+	var slab_shape: BoxShape3D = BoxShape3D.new()
+	slab_shape.size = fallen_slab_mesh.size
+	slab_collision.shape = slab_shape
+	slab_body.add_child(slab_collision)
+	cairn_root.add_child(slab_body)
 
 func _add_world_life_collision(parent: Node3D, collision_name: String, center: Vector3, size: Vector3) -> void:
 	var body: StaticBody3D = StaticBody3D.new()
