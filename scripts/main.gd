@@ -202,6 +202,8 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("os marcadores ambientais não possuem duas pedras de referência")
 		elif not markers.find_children("*", "OmniLight3D", true, false).is_empty():
 			issues.append("os marcadores ambientais não podem criar luz dinâmica")
+		elif not markers.find_children("*", "CollisionShape3D", true, false).is_empty() or not markers.find_children("*", "StaticBody3D", true, false).is_empty() or not markers.find_children("*", "Area3D", true, false).is_empty():
+			issues.append("os marcadores ambientais não podem criar corpos ou formas de colisão")
 		var sightline: Node = r2.get_node_or_null("VisadaRetornoCasaVossR2")
 		if sightline == null:
 			issues.append("a visada de retorno à Casa Voss está em falta")
@@ -228,6 +230,7 @@ func _verify_r2_world_life_qa() -> void:
 		print("[ORIGEM_R2_RIVER_APPROACH_009_OK] recuo arqueológico da margem final presente; acesso lateral sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_RETURN_010_OK] visada baixa para Casa Voss presente; leitura ambiental sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_MARKER_011_OK] dois marcadores ambientais de retorno presentes; sem sinalização explícita ou luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_QA_012_OK] marcadores ambientais sem corpos ou formas de colisão.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)

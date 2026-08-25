@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-MARKER-011
+task_id: DEV2-R2-RIVER-QA-012
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -46,20 +46,23 @@ O recuo final da margem recebeu duas lajes baixas, pedras molhadas e vegetação
 ## Tarefa concluída — DEV2-R2-RIVER-RETURN-010
 A visada ambiental para Casa Voss recebeu duas pedras de referência e uma laje lateral, sem seta, HUD, interação ou luz dinâmica. A prova `[ORIGEM_R2_RIVER_RETURN_010_OK]` passou no CI.
 
-## Tarefa ativa — DEV2-R2-RIVER-MARKER-011
+## Tarefa concluída — DEV2-R2-RIVER-MARKER-011
+Os dois marcadores ambientais de retorno foram adicionados com pedras baixas e fetos abertos, sem sinalização explícita, interação ou luz dinâmica. A prova `[ORIGEM_R2_RIVER_MARKER_011_OK]` passou no CI.
 
-A margem do retorno deve receber **dois marcadores baixos de orientação ambiental**, com pedras e vegetação aberta, reforçando a continuidade Casa Voss → Estrada do Rio sem sinalização explícita. Não criar interação, HUD, luz ou caminho novo.
+## Tarefa ativa — DEV2-R2-RIVER-QA-012
+
+A entrega MARKER-011 deve receber um **gate de não-colisão**: os marcadores ambientais precisam permanecer decorativos, sem `StaticBody3D`, `CollisionShape3D`, `Area3D` ou outro corpo físico. A prova deve ser cumulativa e não alterar a geometria da R2.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
-| Cartografia | Manter os marcadores na linha lateral sem mover estrada, Arco ou âncoras cartográficas |
-| Acesso | Permanecer fora do eixo caminhável e não criar atalho para o rio |
+| Cartografia | Validar os marcadores na linha lateral sem mover estrada, Arco ou âncoras cartográficas |
+| Acesso | Confirmar zero corpos físicos nos marcadores e preservar todas as rotas |
 | Desempenho | Zero luz dinâmica, partículas e emissão persistente; reutilizar pedra e fetos reais já presentes |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
-| Geometria | Usar pedras baixas e vegetação aberta real; não usar painéis, seta ou parede de árvores |
+| Geometria | Não alterar a geometria; validar apenas a ausência de colisores nos marcadores |
 | Narrativa | A visada deve orientar o retorno à Casa Voss sem competir com Orion ou o Arco |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar `[ORIGEM_R2_RIVER_MARKER_011_OK]` antes de abrir PR |
+| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar `[ORIGEM_R2_RIVER_QA_012_OK]` antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -67,4 +70,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-MARKER-011`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-QA-012`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
