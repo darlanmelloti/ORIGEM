@@ -143,10 +143,17 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("a estrada física R2 desapareceu")
 		if r2.get_node_or_null("ArcoDasRuinas_EstradaDoRio") == null:
 			issues.append("o Arco físico R2 desapareceu")
+		if r2.get_node_or_null("EstacaoDeObservacaoDoReflexoOrion") == null:
+			issues.append("a estação arqueológica do reflexo Orion está em falta")
+		elif r2.find_child("LajeDaEstacaoOrion_05", true, false) == null:
+			issues.append("a estação Orion não possui as cinco lajes físicas esperadas")
 		if not r2.find_children("LuzMarcoVida*", "OmniLight3D", true, false).is_empty():
 			issues.append("os marcos R2 não podem criar luzes dinâmicas")
+		if not r2.find_children("LuzEstacaoOrion*", "OmniLight3D", true, false).is_empty():
+			issues.append("a estação Orion não pode criar luzes dinâmicas")
 	if issues.is_empty():
 		print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
+		print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)
