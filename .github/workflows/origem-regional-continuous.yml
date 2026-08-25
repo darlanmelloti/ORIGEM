@@ -30,6 +30,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: origem-regional-${{ github.workflow }}-${{ github.ref }}
@@ -104,7 +105,6 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
 
-
   global-light-budget:
     name: Orçamento global de luz
     runs-on: ubuntu-latest
@@ -141,9 +141,61 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
 
+  dev2-continuity:
+    name: Dev2 — próxima tarefa ativa
+    needs: [resolve-regions, regional-gate, global-light-budget]
+    if: >-
+      needs.regional-gate.result == 'success' &&
+      needs.global-light-budget.result == 'success' &&
+      contains(needs.resolve-regions.outputs.regions, 'R2')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter contrato contínuo do Dev2
+        uses: actions/checkout@v7
+
+      - name: Validar contrato e manter a tarefa rastreável
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const contractPath = 'diretor_orientacoes/DEV2_R2_CONTINUOUS_WORK.md';
+            const contract = fs.readFileSync(contractPath, 'utf8');
+            const state = /^status:\s*ACTIVE\s*$/m.test(contract);
+            const taskId = (contract.match(/^task_id:\s*([^\s]+)\s*$/m) || [])[1];
+            const owner = (contract.match(/^owner:\s*([^\s]+)\s*$/m) || [])[1];
+            const branch = (contract.match(/^branch:\s*([^\s]+)\s*$/m) || [])[1];
+            if (!state || !taskId || owner !== 'Dev2' || branch !== 'dev2/r2-river-road') {
+              core.setFailed('Contrato Dev2 inválido: exige status ACTIVE, task_id, owner Dev2 e branch canónica.');
+              return;
+            }
+            const title = `[Dev2 Continuous] ${taskId}`;
+            const { owner: repoOwner, repo } = context.repo;
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner: repoOwner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            const existing = openIssues.find((issue) => issue.title === title && !issue.pull_request);
+            if (!existing) {
+              await github.rest.issues.create({
+                owner: repoOwner,
+                repo,
+                title,
+                body: `## Continuidade automática Dev2\n\nO contrato \`${contractPath}\` declara **${taskId}** como a próxima tarefa ativa de Dev2.\n\nA porta R2 acabou de ser aprovada. Isto não encerra o ciclo: a implementação, validação, publicação e substituição por uma nova tarefa ativa são obrigatórias.\n\n---\n\n${contract}`
+              });
+              core.info(`Issue de continuidade criada para ${taskId}.`);
+            } else {
+              core.info(`Issue de continuidade já está aberta: #${existing.number}.`);
+            }
+            await core.summary
+              .addHeading('Dev2 — continuidade ativa')
+              .addRaw(`Tarefa: **${taskId}**  \nBranch: \`${branch}\`  \nEstado: **ACTIVE**`)
+              .write();
+
   regional-gate-summary:
     name: ORIGEM Regional Gate
-    needs: [regional-gate, global-light-budget]
+    needs: [regional-gate, global-light-budget, dev2-continuity]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -153,10 +205,16 @@ jobs:
           set -euo pipefail
           regional_result="${{ needs.regional-gate.result }}"
           lighting_result="${{ needs.global-light-budget.result }}"
+          continuity_result="${{ needs.dev2-continuity.result }}"
           echo "Resultado regional: $regional_result"
           echo "Resultado de iluminação: $lighting_result"
+          echo "Resultado de continuidade Dev2: $continuity_result"
           if [[ "$regional_result" != "success" || "$lighting_result" != "success" ]]; then
             echo "Uma porta regional ou a auditoria global de luz falhou ou foi cancelada." >&2
             exit 1
           fi
-          echo "Todas as regiões selecionadas e o orçamento global de luz foram aprovados."
+          if [[ "$continuity_result" != "success" && "$continuity_result" != "skipped" ]]; then
+            echo "A continuidade ativa do Dev2 não foi confirmada." >&2
+            exit 1
+          fi
+          echo "Todas as regiões selecionadas, o orçamento global de luz e a continuidade aplicável foram aprovados."
