@@ -161,10 +161,17 @@ func _verify_r2_world_life_qa() -> void:
 				if not traveller_rest.find_children("*", "OmniLight3D", true, false).is_empty():
 					issues.append("o ponto de descanso não pode criar luz dinâmica")
 
+		if r2.get_node_or_null("MarcoCairnRegresso") == null:
+			issues.append("o cairn de regresso R2 está em falta")
+		elif r2.find_child("LajeTombadaDoCairn", true, false) == null:
+			issues.append("o cairn de regresso não possui laje tombada")
+		elif not r2.find_children("LuzCairn*", "OmniLight3D", true, false).is_empty():
+			issues.append("o cairn de regresso não pode criar luz dinâmica")
 		if issues.is_empty():
 			print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
 			print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
 			print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
+			print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)

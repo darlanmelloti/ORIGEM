@@ -38,6 +38,7 @@ func _ready() -> void:
 	_build_road_entry_orientation()
 	_build_world_life_landmarks()
 	_build_traveller_rest_point()
+	_build_return_route_cairn()
 	_build_river_road()
 	_build_river()
 	_build_first_orion_reflection()
@@ -484,6 +485,48 @@ func _build_traveller_rest_point() -> void:
 		ember_rock.rotation.y = angle
 		_apply_material(ember_rock, rest_stone_mat)
 		hearth.add_child(ember_rock)
+
+func _build_return_route_cairn() -> void:
+	# DEV2-R2-RIVER-CAIRN-004: marco baixo de retorno, ambiental e sem segundo Arco ou barreira de passagem.
+	var cairn_z: float = 31.0
+	var cairn_x: float = _road_x(cairn_z) + 4.85
+	var cairn_root: Node3D = Node3D.new()
+	cairn_root.name = "MarcoCairnRegresso"
+	add_child(cairn_root)
+	var cairn_material: StandardMaterial3D = StandardMaterial3D.new()
+	cairn_material.albedo_color = Color(0.22, 0.20, 0.15, 1.0)
+	cairn_material.roughness = 0.95
+	for index: int in range(3):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		var stone_x: float = cairn_x + float(index - 1) * 0.34
+		var stone_z: float = cairn_z + float(index % 2) * 0.26
+		stone.name = "PedraCairnRegresso_%02d" % (index + 1)
+		stone.position = Vector3(stone_x, _height_at(stone_x, stone_z) + 0.12 + float(index) * 0.16, stone_z)
+		stone.scale = Vector3(0.24 + float(index) * 0.04, 0.18 + float(index) * 0.06, 0.22 + float(index) * 0.03)
+		stone.rotation = Vector3(0.04 * float(index), 0.52 * float(index), -0.06 * float(index))
+		_apply_material(stone, cairn_material)
+		cairn_root.add_child(stone)
+	var fallen_slab_mesh: BoxMesh = BoxMesh.new()
+	fallen_slab_mesh.size = Vector3(0.88, 0.14, 0.42)
+	var fallen_slab: MeshInstance3D = MeshInstance3D.new()
+	fallen_slab.name = "LajeTombadaDoCairn"
+	fallen_slab.mesh = fallen_slab_mesh
+	fallen_slab.material_override = cairn_material
+	fallen_slab.position = Vector3(cairn_x + 0.02, _height_at(cairn_x, cairn_z - 0.46) + 0.08, cairn_z - 0.46)
+	fallen_slab.rotation = Vector3(0.08, -0.18, 0.24)
+	cairn_root.add_child(fallen_slab)
+	var slab_body: StaticBody3D = StaticBody3D.new()
+	slab_body.name = "ColisorLajeTombadaDoCairn"
+	slab_body.position = fallen_slab.position
+	slab_body.rotation = fallen_slab.rotation
+	var slab_collision: CollisionShape3D = CollisionShape3D.new()
+	var slab_shape: BoxShape3D = BoxShape3D.new()
+	slab_shape.size = fallen_slab_mesh.size
+	slab_collision.shape = slab_shape
+	slab_body.add_child(slab_collision)
+	cairn_root.add_child(slab_body)
 
 func _add_world_life_collision(parent: Node3D, collision_name: String, center: Vector3, size: Vector3) -> void:
 	var body: StaticBody3D = StaticBody3D.new()
