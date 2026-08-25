@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# ORIGEM — Porta de qualidade para entregas regionais.
+# Uso: tools/qa/run_regional_gate.sh R3 [base-ref]
+# Requer: Git e Godot 4.x. Pode definir GODOT_BIN com o caminho do executável.
+
+set -euo pipefail
+
+REGION="${1:-}"
+BASE_REF="${2:-origin/integration/r1-r6-sprint1}"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$ROOT"
+
+if [[ ! "$REGION" =~ ^R[3-6]$ ]]; then
+  echo "Uso: $0 R3|R4|R5|R6 [base-ref]" >&2
+  exit 2
+fi
+
+case "$REGION" in
+  R3) ROUTES=(road_to_arch arch_to_forest); MODULE='levels/regions/R3_ArchRuins.gd' ;;
+  R4) ROUTES=(arch_to_forest forest_to_majestic forest_to_ruins); MODULE='levels/regions/R4_DenseForest.gd' ;;
+  R5) ROUTES=(forest_to_majestic majestic_to_lake); MODULE='levels/regions/R5_MajesticCamp.gd' ;;
+  R6) ROUTES=(forest_to_ruins majestic_to_lake ruins_arrival); MODULE='levels/regions/R6_SubmergedRuins.gd' ;;
+esac
+
+if ! git rev-parse --verify "$BASE_REF" >/dev/null 2>&1; then
+  echo "[GATE:$REGION] Base não encontrada: $BASE_REF" >&2
+  exit 3
+fi
+
+if [[ -n "${GODOT_BIN:-}" ]]; then
+  GODOT="$GODOT_BIN"
+elif command -v godot >/dev/null 2>&1; then
+  GODOT="$(command -v godot)"
+else
+  echo "[GATE:$REGION] GODOT_BIN não definido e 'godot' não está no PATH." >&2
+  exit 4
+fi
+
+if [[ ! -f "$MODULE" ]]; then
+  echo "[GATE:$REGION] Módulo contratual em falta: $MODULE" >&2
+  exit 5
+fi
+
+printf '[GATE:%s] Base=%s\n' "$REGION" "$BASE_REF"
+printf '[GATE:%s] 1/4 diff --check\n' "$REGION"
+git diff --check "$BASE_REF"...HEAD
+
+printf '[GATE:%s] 2/4 auditoria de escopo\n' "$REGION"
+CHANGED_FILES="$(git diff --name-only "$BASE_REF"...HEAD)"
+printf '%s\n' "$CHANGED_FILES" | sed '/^$/d' > /tmp/origem_gate_files_$$.txt
+if grep -Eq '^(scripts/main\.gd|entities/player/Player\.gd|levels/CartographicAnchors\.gd|core/timeline/TimelineManager\.gd|ui/menus/CartographicMapUI\.gd)$' /tmp/origem_gate_files_$$.txt; then
+  echo "[GATE:$REGION] AVISO: houve alteração transversal; requer revisão explícita de Dev1."
+  grep -E '^(scripts/main\.gd|entities/player/Player\.gd|levels/CartographicAnchors\.gd|core/timeline/TimelineManager\.gd|ui/menus/CartographicMapUI\.gd)$' /tmp/origem_gate_files_$$.txt
+fi
+rm -f /tmp/origem_gate_files_$$.txt
+
+printf '[GATE:%s] 3/4 parser Godot\n' "$REGION"
+PARSER_LOG="/tmp/origem_${REGION}_parser_$$.log"
+GODOT_SILENCE_ROOT_WARNING=1 "$GODOT" --headless --editor --quit >"$PARSER_LOG" 2>&1
+if grep -Eqi 'parse error|parser error|script error|fatal error' "$PARSER_LOG"; then
+  cat "$PARSER_LOG"
+  exit 6
+fi
+
+printf '[GATE:%s] 4/4 contratos e rotas\n' "$REGION"
+CONTRACT_LOG="/tmp/origem_${REGION}_contract_$$.log"
+GODOT_SILENCE_ROOT_WARNING=1 "$GODOT" --headless --path . --script res://qa/regions/verify_region_contracts.gd >"$CONTRACT_LOG" 2>&1
+if ! grep -q '\[ORIGEM_REGION_CONTRACT_OK\]' "$CONTRACT_LOG"; then
+  cat "$CONTRACT_LOG"
+  exit 7
+fi
+
+for route in "${ROUTES[@]}"; do
+  ROUTE_LOG="/tmp/origem_${REGION}_${route}_$$.log"
+  set +e
+  ORIGEM_QA_AUTOSTART_NEW_GAME=1 ORIGEM_QA_ROUTE="$route" GODOT_SILENCE_ROOT_WARNING=1 timeout 22s "$GODOT" --headless --path . --rendering-driver opengl3 >"$ROUTE_LOG" 2>&1
+  route_status=$?
+  set -e
+  if [[ "$route_status" -ne 0 && "$route_status" -ne 124 ]]; then
+    cat "$ROUTE_LOG"
+    exit 8
+  fi
+  if ! grep -q '\[ORIGEM_QA_ROUTE\]' "$ROUTE_LOG"; then
+    cat "$ROUTE_LOG"
+    exit 9
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error' "$ROUTE_LOG"; then
+    cat "$ROUTE_LOG"
+    exit 10
+  fi
+  printf '[GATE:%s] rota %s aprovada\n' "$REGION" "$route"
+done
+
+printf '[GATE:%s] PASS\n' "$REGION"
