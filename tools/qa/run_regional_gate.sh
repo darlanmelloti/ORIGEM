@@ -110,6 +110,10 @@ if [[ "$REGION" == "R2" ]]; then
     cat "$WORLD_LIFE_LOG"
     exit 12
   fi
+  if ! grep -q '\[ORIGEM_R2_RIVER_MARKER_011_OK\]' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
   if ! grep -q '\[ORIGEM_R2_RIVER_APPROACH_009_OK\]' "$WORLD_LIFE_LOG"; then
     cat "$WORLD_LIFE_LOG"
     exit 12

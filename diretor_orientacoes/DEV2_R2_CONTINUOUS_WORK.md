@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-RETURN-010
+task_id: DEV2-R2-RIVER-MARKER-011
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -43,20 +43,23 @@ A margem final recebeu uma linha curta de três pedras de leitura e vegetação 
 ## Tarefa concluída — DEV2-R2-RIVER-APPROACH-009
 O recuo final da margem recebeu duas lajes baixas, pedras molhadas e vegetação esparsa, mantendo o acesso lateral e o eixo principal livres. A prova `[ORIGEM_R2_RIVER_APPROACH_009_OK]` passou no CI.
 
-## Tarefa ativa — DEV2-R2-RIVER-RETURN-010
+## Tarefa concluída — DEV2-R2-RIVER-RETURN-010
+A visada ambiental para Casa Voss recebeu duas pedras de referência e uma laje lateral, sem seta, HUD, interação ou luz dinâmica. A prova `[ORIGEM_R2_RIVER_RETURN_010_OK]` passou no CI.
 
-O retorno da Estrada do Rio deve receber uma **linha de visada baixa para a Casa Voss**, formada por duas pedras de referência e uma laje curta lateral. A leitura deve ser ambiental, sem seta, HUD ou interação, e não pode bloquear as rotas existentes.
+## Tarefa ativa — DEV2-R2-RIVER-MARKER-011
+
+A margem do retorno deve receber **dois marcadores baixos de orientação ambiental**, com pedras e vegetação aberta, reforçando a continuidade Casa Voss → Estrada do Rio sem sinalização explícita. Não criar interação, HUD, luz ou caminho novo.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
-| Cartografia | Manter a linha lateral de retorno sem mover estrada, Arco ou âncoras cartográficas |
+| Cartografia | Manter os marcadores na linha lateral sem mover estrada, Arco ou âncoras cartográficas |
 | Acesso | Permanecer fora do eixo caminhável e não criar atalho para o rio |
 | Desempenho | Zero luz dinâmica, partículas e emissão persistente; reutilizar pedra e fetos reais já presentes |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
-| Geometria | Usar duas pedras de referência e uma laje curta real; não usar painéis, seta ou parede de árvores |
+| Geometria | Usar pedras baixas e vegetação aberta real; não usar painéis, seta ou parede de árvores |
 | Narrativa | A visada deve orientar o retorno à Casa Voss sem competir com Orion ou o Arco |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar `[ORIGEM_R2_RIVER_RETURN_010_OK]` antes de abrir PR |
+| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar `[ORIGEM_R2_RIVER_MARKER_011_OK]` antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -64,4 +67,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RETURN-010`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-MARKER-011`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.

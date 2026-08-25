@@ -49,6 +49,7 @@ func _ready() -> void:
 	_build_final_river_edge_reading()
 	_build_recessed_river_approach()
 	_build_return_voss_sightline()
+	_build_return_environment_markers()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
@@ -1107,6 +1108,34 @@ func _build_return_voss_sightline() -> void:
 	slab.rotation = Vector3(0.02, 0.16, -0.06)
 	sightline_root.add_child(slab)
 	_add_world_life_collision(sightline_root, "ColisorLajeCurtaVisadaRetornoVoss", Vector3(slab.position.x, slab.position.y - 0.04, slab.position.z), slab_mesh.size)
+
+func _build_return_environment_markers() -> void:
+	# DEV2-R2-RIVER-MARKER-011: dois marcadores ambientais baixos, sem sinalização explícita ou interação.
+	var marker_root: Node3D = Node3D.new()
+	marker_root.name = "MarcadoresAmbientaisRetornoR2"
+	add_child(marker_root)
+	var marker_material: StandardMaterial3D = StandardMaterial3D.new()
+	marker_material.albedo_color = Color(0.14, 0.17, 0.15, 1.0)
+	marker_material.roughness = 0.94
+	for index: int in range(2):
+		var side: float = -1.0 if index == 0 else 1.0
+		var z_value: float = 63.5 + float(index) * 1.35
+		var x_value: float = _road_x(z_value) + side * 5.25
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone != null:
+			stone.name = "PedraMarcadorRetorno_%02d" % (index + 1)
+			stone.position = Vector3(x_value, _height_at(x_value, z_value) + 0.04, z_value)
+			stone.scale = Vector3(0.16, 0.20, 0.15)
+			stone.rotation.y = side * 0.40
+			_apply_material(stone, marker_material)
+			marker_root.add_child(stone)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoMarcadorRetorno_%02d" % (index + 1)
+			fern.position = Vector3(x_value - side * 0.55, _height_at(x_value - side * 0.55, z_value) + 0.02, z_value + 0.22)
+			fern.scale = Vector3(0.19, 0.19, 0.19)
+			fern.rotation.y = -side * 0.35
+			marker_root.add_child(fern)
 
 func _build_arch_forest_riparian_screen() -> void:
 	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,
