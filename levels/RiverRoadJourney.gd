@@ -44,6 +44,7 @@ func _ready() -> void:
 	_build_first_orion_reflection()
 	_build_orion_reflection_observation_station()
 	_build_river_margins()
+	_build_pre_arch_river_edge()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
@@ -904,6 +905,58 @@ func _build_river_margins() -> void:
 				fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 				fern.rotation.y = rng.randf_range(-PI, PI)
 				margins.add_child(fern)
+
+func _build_pre_arch_river_edge() -> void:
+	# DEV2-R2-RIVER-EDGE-006: margem geológica curta antes do Arco; visual lateral, sem rota alternativa ou luz nova.
+	var edge_root: Node3D = Node3D.new()
+	edge_root.name = "MargemGeologicaAntesDoArcoR2"
+	add_child(edge_root)
+	var wet_edge_material: StandardMaterial3D = StandardMaterial3D.new()
+	wet_edge_material.albedo_color = Color(0.10, 0.14, 0.13, 1.0)
+	wet_edge_material.roughness = 0.84
+	wet_edge_material.emission_enabled = false
+	var edge_specs: Array[Dictionary] = [
+		{"z": 73.0, "side": 1.0, "offset": 6.90, "scale": 0.62, "yaw": -0.34},
+		{"z": 82.0, "side": -1.0, "offset": 6.55, "scale": 0.54, "yaw": 0.48}
+	]
+	for index: int in range(edge_specs.size()):
+		var spec: Dictionary = edge_specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var x_value: float = _river_x(z_value) + side * (spec["offset"] as float)
+		var outcrop: Node3D = SLOPE_ROCK.instantiate() as Node3D
+		if outcrop != null:
+			outcrop.name = "AfloramentoBaixoMargemArco_%02d" % (index + 1)
+			outcrop.position = Vector3(x_value, _height_at(x_value, z_value) + 0.05, z_value)
+			var scale_value: float = spec["scale"] as float
+			outcrop.scale = Vector3(scale_value * 1.18, scale_value * 0.72, scale_value)
+			outcrop.rotation.y = spec["yaw"] as float
+			_apply_material(outcrop, wet_edge_material)
+			edge_root.add_child(outcrop)
+		for rock_index: int in range(3):
+			var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+			if rock == null:
+				continue
+			rock.name = "PedraHumidaMargemArco_%02d_%02d" % [index + 1, rock_index + 1]
+			var rock_x: float = x_value - side * (0.72 + float(rock_index) * 0.48)
+			var rock_z: float = z_value - 0.62 + float(rock_index) * 0.58
+			var rock_scale: float = 0.13 + float(rock_index) * 0.035
+			rock.position = Vector3(rock_x, _height_at(rock_x, rock_z) + 0.035, rock_z)
+			rock.scale = Vector3(rock_scale, rock_scale * 0.64, rock_scale)
+			rock.rotation.y = 0.24 * float(rock_index) + side * 0.36
+			_apply_material(rock, wet_edge_material)
+			edge_root.add_child(rock)
+		for fern_index: int in range(2):
+			var fern: Node3D = FERN.instantiate() as Node3D
+			if fern == null:
+				continue
+			fern.name = "FetoDispersoMargemArco_%02d_%02d" % [index + 1, fern_index + 1]
+			var fern_x: float = x_value + side * (0.82 + float(fern_index) * 0.64)
+			var fern_z: float = z_value + 0.18 + float(fern_index) * 0.72
+			fern.position = Vector3(fern_x, _height_at(fern_x, fern_z) + 0.02, fern_z)
+			fern.scale = Vector3(0.28 + float(fern_index) * 0.06, 0.28 + float(fern_index) * 0.06, 0.28 + float(fern_index) * 0.06)
+			fern.rotation.y = side * 0.58 + float(fern_index) * 0.44
+			edge_root.add_child(fern)
 
 func _build_arch_forest_riparian_screen() -> void:
 	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,
