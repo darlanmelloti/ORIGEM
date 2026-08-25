@@ -12,6 +12,11 @@ var player_heading: Polygon2D
 var player_heading_shadow: Polygon2D
 var route_marker: Panel
 var route_marker_label: Label
+var origin_marker: Panel
+var origin_marker_label: Label
+var r1_to_r2_link: Line2D
+var r1_to_r2_label: Label
+var route_to_river_revealed: bool = false
 var is_open: bool = false
 
 # A conversão mundo→mapa vive no registo de âncoras: a UI apenas apresenta a cartografia calibrada pela direcção.
@@ -20,6 +25,8 @@ func _ready() -> void:
 	layer = 12
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build_interface()
+	EventBus.timeline_event_triggered.connect(_on_timeline_event_triggered)
+	_refresh_r1_discovery_state()
 	_set_open(OS.has_environment("ORIGEM_QA_OPEN_MAP"))
 
 func _build_interface() -> void:
@@ -120,6 +127,8 @@ func _build_interface() -> void:
 	route_marker_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_texture.add_child(route_marker_label)
 	_place_route_marker(CARTOGRAPHIC_ANCHORS.ARCO_RUINAS)
+	_build_origin_marker()
+	_build_r1_to_r2_link()
 
 	var title := Label.new()
 	title.name = "TituloMapa"
@@ -155,6 +164,70 @@ func _build_interface() -> void:
 	hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_root.add_child(hint)
 
+func _build_origin_marker() -> void:
+	origin_marker = Panel.new()
+	origin_marker.name = "MarcoCasaVossVisitada"
+	origin_marker.size = Vector2(18.0, 18.0)
+	origin_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var marker_style: StyleBoxFlat = StyleBoxFlat.new()
+	marker_style.bg_color = Color(0.18, 0.72, 0.52, 1.0)
+	marker_style.border_color = Color(0.94, 0.86, 0.56, 1.0)
+	marker_style.set_border_width_all(2)
+	marker_style.corner_radius_top_left = 8
+	marker_style.corner_radius_top_right = 8
+	marker_style.corner_radius_bottom_left = 8
+	marker_style.corner_radius_bottom_right = 8
+	origin_marker.add_theme_stylebox_override("panel", marker_style)
+	var map_position: Vector2 = _map_position(CARTOGRAPHIC_ANCHORS.CASA_VOSS.x, CARTOGRAPHIC_ANCHORS.CASA_VOSS.y)
+	origin_marker.position = map_position - origin_marker.size * 0.5
+	map_texture.add_child(origin_marker)
+	origin_marker_label = Label.new()
+	origin_marker_label.name = "LegendaCasaVossVisitada"
+	origin_marker_label.text = "CASA VOSS"
+	origin_marker_label.add_theme_font_size_override("font_size", 13)
+	origin_marker_label.add_theme_color_override("font_color", Color(0.75, 0.95, 0.78, 1.0))
+	origin_marker_label.add_theme_color_override("font_outline_color", Color(0.03, 0.05, 0.04, 0.96))
+	origin_marker_label.add_theme_constant_override("outline_size", 4)
+	origin_marker_label.position = origin_marker.position + Vector2(12.0, -5.0)
+	origin_marker_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map_texture.add_child(origin_marker_label)
+
+func _build_r1_to_r2_link() -> void:
+	r1_to_r2_link = Line2D.new()
+	r1_to_r2_link.name = "LigacaoCasaVossEstradaDoRio"
+	r1_to_r2_link.width = 4.0
+	r1_to_r2_link.default_color = Color(0.18, 0.76, 0.98, 0.92)
+	r1_to_r2_link.add_point(_map_position(CARTOGRAPHIC_ANCHORS.CASA_VOSS.x, CARTOGRAPHIC_ANCHORS.CASA_VOSS.y))
+	r1_to_r2_link.add_point(_map_position(CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.x, CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.y))
+	map_texture.add_child(r1_to_r2_link)
+	r1_to_r2_label = Label.new()
+	r1_to_r2_label.name = "LegendaLigacaoEstradaDoRio"
+	r1_to_r2_label.text = "ESTRADA DO RIO REVELADA"
+	r1_to_r2_label.add_theme_font_size_override("font_size", 12)
+	r1_to_r2_label.add_theme_color_override("font_color", Color(0.62, 0.86, 1.0, 1.0))
+	r1_to_r2_label.add_theme_color_override("font_outline_color", Color(0.02, 0.035, 0.06, 0.96))
+	r1_to_r2_label.add_theme_constant_override("outline_size", 4)
+	var river_position: Vector2 = _map_position(CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.x, CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO.y)
+	r1_to_r2_label.position = river_position + Vector2(12.0, -20.0)
+	r1_to_r2_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map_texture.add_child(r1_to_r2_label)
+
+func _on_timeline_event_triggered(event_id: String, _era_name: String) -> void:
+	if event_id == "voss_door_opened":
+		_refresh_r1_discovery_state()
+
+func _refresh_r1_discovery_state() -> void:
+	route_to_river_revealed = TimelineManager.has_consequence("road_to_orion_revealed")
+	if r1_to_r2_link != null:
+		r1_to_r2_link.visible = route_to_river_revealed
+	if r1_to_r2_label != null:
+		r1_to_r2_label.visible = route_to_river_revealed
+	if route_marker != null and route_marker_label != null and not route_to_river_revealed:
+		_place_route_marker(CARTOGRAPHIC_ANCHORS.CASA_VOSS)
+		route_marker_label.text = "CASA VOSS — ORIGEM"
+	if OS.has_environment("ORIGEM_QA_OPEN_MAP"):
+		print("[ORIGEM_MAP_R1] casa_visitada=true estrada_revelada=%s" % str(route_to_river_revealed))
+
 func _map_position(world_x: float, world_z: float) -> Vector2:
 	return CARTOGRAPHIC_ANCHORS.map_texture_position(Vector2(world_x, world_z))
 
@@ -167,6 +240,8 @@ func _place_route_marker(destination: Vector2) -> void:
 		route_marker_label.position = route_marker.position + Vector2(12.0, -5.0)
 
 func _update_route_destination(world: Vector2) -> void:
+	if not route_to_river_revealed:
+		return
 	var route: Dictionary = CARTOGRAPHIC_ANCHORS.next_dev1_destination(world)
 	var destination: Vector2 = route["anchor"] as Vector2
 	_place_route_marker(destination)

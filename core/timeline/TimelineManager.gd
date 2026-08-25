@@ -83,11 +83,12 @@ func trigger_event(event_id: String) -> void:
 		return
 	event["triggered"] = true
 	timeline_events[event_id] = event
-	var era_name: String = Era.keys()[current_era]
-	EventBus.timeline_event_triggered.emit(event_id, era_name)
+	# A consequência precisa existir antes do sinal: UI e outros ouvintes consultam o estado no próprio callback.
 	var consequence: String = event.get("consequence", "")
 	if consequence != "" and consequence not in active_consequences:
 		active_consequences.append(consequence)
+	var era_name: String = Era.keys()[current_era]
+	EventBus.timeline_event_triggered.emit(event_id, era_name)
 
 func has_consequence(consequence_id: String) -> bool:
 	return consequence_id in active_consequences
