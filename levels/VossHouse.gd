@@ -63,6 +63,7 @@ var door_reveal: Node = null
 
 func _ready() -> void:
 	add_to_group("voss_house_controller")
+	add_to_group("Persist")
 	terrain_patch = get_parent().get_node_or_null("TerrainPatch") as Node3D
 	_create_materials()
 	var house: Node3D = Node3D.new()
@@ -732,6 +733,44 @@ func _update_opening_skip_prompt() -> void:
 	else:
 		opening_skip_label.text = "Mantenha [E] para saltar o prólogo"
 
+func save_data() -> Dictionary:
+	return {"front_door_open": front_door_open}
+
+func load_data(data: Dictionary) -> void:
+	front_door_open = bool(data.get("front_door_open", false))
+	if front_door_open:
+		call_deferred("_restore_front_door_after_load")
+
+func _disable_front_door_collision(house: Node3D) -> void:
+	for collision_body: StaticBody3D in house.find_children("*", "StaticBody3D", true, false):
+		if collision_body.name in ["PortaVossEsquerda_Colisao", "PortaVossDireita_Colisao", "VossFrontDoor"]:
+			collision_body.collision_layer = 0
+			collision_body.collision_mask = 0
+			for child: Node in collision_body.get_children():
+				if child is CollisionShape3D:
+					(child as CollisionShape3D).set_deferred("disabled", true)
+			collision_body.queue_free()
+
+func _restore_front_door_after_load() -> void:
+	var house: Node3D = get_node_or_null("CasaVoss") as Node3D
+	if house == null:
+		return
+	_disable_front_door_collision(house)
+	for leaf_name: String in ["PortaVossEsquerda", "PortaVossDireita"]:
+		var leaf: Node3D = house.get_node_or_null(leaf_name) as Node3D
+		if leaf != null:
+			leaf.queue_free()
+
+func _register_front_door_discovery() -> void:
+	TimelineManager.trigger_event("voss_door_opened")
+	WorldEvents.trigger_event("voss_door_opened", {
+		"region_id": 1,
+		"region_name": "Casa Voss",
+		"next_region_id": 2,
+		"next_region_name": "Estrada do Rio"
+	})
+	print("[ORIGEM_R1] Marco persistente: Casa Voss → Estrada do Rio.")
+
 func _prepare_door_reveal() -> void:
 	door_reveal = VOSS_DOOR_REVEAL_SCRIPT.new() as Node
 	if door_reveal != null:
@@ -740,6 +779,22 @@ func _prepare_door_reveal() -> void:
 func _open_front_door_for_qa() -> void:
 	var opened: bool = open_front_door()
 	print("[ORIGEM_QA_DOOR] Casa Voss abertura=%s rota=EstradaDoRio" % str(opened))
+	get_tree().create_timer(0.85).timeout.connect(_verify_front_door_persistence_for_qa)
+
+func _verify_front_door_persistence_for_qa() -> void:
+	var local_state: Dictionary = save_data()
+	var timeline_state: Dictionary = TimelineManager.save_data()
+	var timeline_events: Dictionary = timeline_state.get("timeline_events", {}) as Dictionary
+	var door_event: Dictionary = timeline_events.get("voss_door_opened", {}) as Dictionary
+	var has_consequence: bool = TimelineManager.has_consequence("road_to_orion_revealed")
+	SaveManager.save_game(2)
+	var save_written: bool = SaveManager.has_save(2)
+	SaveManager.delete_save(2)
+	var passed: bool = bool(local_state.get("front_door_open", false)) and bool(door_event.get("triggered", false)) and has_consequence and save_written
+	if passed:
+		print("[ORIGEM_R1_PERSIST_OK] porta, Chronos, consequência e SaveManager validados.")
+	else:
+		push_error("[ORIGEM_R1_PERSIST_ERROR] Estado da porta não foi persistido correctamente.")
 
 func _play_door_reveal(house: Node3D) -> void:
 	if door_reveal != null and door_reveal.has_method("play"):
@@ -762,18 +817,12 @@ func open_front_door() -> bool:
 	if house == null:
 		return false
 	front_door_open = true
+	_register_front_door_discovery()
 
 	var left_panel: Node3D = house.get_node_or_null("PortaVossEsquerda") as Node3D
 	var right_panel: Node3D = house.get_node_or_null("PortaVossDireita") as Node3D
 	# Abertura física absoluta: remove qualquer corpo da porta, mesmo se a hierarquia for alterada num passe visual futuro.
-	for collision_body: StaticBody3D in house.find_children("*", "StaticBody3D", true, false):
-		if collision_body.name in ["PortaVossEsquerda_Colisao", "PortaVossDireita_Colisao", "VossFrontDoor"]:
-			collision_body.collision_layer = 0
-			collision_body.collision_mask = 0
-			for child: Node in collision_body.get_children():
-				if child is CollisionShape3D:
-					(child as CollisionShape3D).set_deferred("disabled", true)
-			collision_body.queue_free()
+	_disable_front_door_collision(house)
 
 	var door_tween: Tween = create_tween().set_parallel(true)
 	if left_panel != null:

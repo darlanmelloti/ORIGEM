@@ -20,6 +20,7 @@ var chronos_profiles: Dictionary = {}
 var active_profile_id: String = "KHEPER_TWILIGHT"
 
 func _ready() -> void:
+	add_to_group("Persist")
 	_register_chronos_profiles()
 	_register_base_events()
 	EventBus.timeline_era_changed.connect(_on_era_changed)
@@ -199,6 +200,7 @@ func _register_base_events() -> void:
 		"orion_cube_activated": {"era": Era.MODERN, "description": "O Cubo de Orion foi ativado.", "consequence": "temporal_window_open", "triggered": false},
 		"tablets_united": {"era": Era.MODERN, "description": "Os três fragmentos foram reunidos.", "consequence": "chronos_key_awake", "triggered": false},
 		"captain_kharu_defeated": {"era": Era.MODERN, "description": "O Sentinela Kharu caiu no Santuário da Nascente.", "consequence": "sanctuary_unsealed", "triggered": false},
+		"voss_door_opened": {"era": Era.MODERN, "description": "Elias abriu a porta E da Casa Voss e revelou a Estrada do Rio.", "consequence": "road_to_orion_revealed", "triggered": false},
 	}
 
 func _on_era_changed(from_era: String, to_era: String) -> void:
