@@ -95,6 +95,15 @@ jobs:
         shell: bash
         run: tools/qa/run_regional_gate.sh "${{ matrix.region }}" HEAD
 
+      - name: Guardar evidências de falha
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: origem-${{ matrix.region }}-qa-logs
+          path: /tmp/origem_${{ matrix.region }}_*.log
+          if-no-files-found: warn
+          retention-days: 14
+
 
   regional-gate-summary:
     name: ORIGEM Regional Gate
