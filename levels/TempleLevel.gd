@@ -19,6 +19,7 @@ const HIGHLAND_REGION_SCRIPT: Script = preload("res://levels/HighlandRegion.gd")
 const ORION_DESTINATION_REGION_SCRIPT: Script = preload("res://levels/OrionDestinationRegion.gd")
 const REGIONAL_CINEMATIC_DIRECTOR_SCRIPT: Script = preload("res://levels/RegionalCinematicDirector.gd")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
+const REGION_REGISTRY: Script = preload("res://levels/contracts/RegionRegistry.gd")
 const CARTOGRAPHIC_HANDOFF_PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
 const DAYLIGHT_VARIANT_ENABLED: bool = true
 
@@ -33,6 +34,7 @@ var fireflies: Array[MeshInstance3D] = []
 var elapsed_time: float = 0.0
 var voss_house: Node3D
 var orion_mountains: Node3D
+var region_contracts: Array = []
 
 func _ready() -> void:
 	if has_node("TerrainPatch"):
@@ -43,6 +45,7 @@ func _ready() -> void:
 	_create_terrain()
 	_build_orion_mountains()
 	_build_voss_house()
+	_initialize_region_contracts()
 	# A captura técnica precisa da geografia regional já construída antes de ativar a câmara do take; o fluxo jogável mantém os atrasos cinematográficos normais.
 	if OS.has_environment("ORIGEM_CAPTURE_TAKE") or OS.has_environment("ORIGEM_QA_INTERACT") or OS.has_environment("ORIGEM_QA_ROUTE") or OS.has_environment("ORIGEM_QA_CINE48_HANDOFF"):
 		# Capturas, rotas e interações de QA requerem o mundo regional antes da contagem do roteiro; o jogo normal mantém o carregamento encenado.
@@ -54,6 +57,24 @@ func _ready() -> void:
 		# O vale diurno entra cedo para que o percurso, o rio e os marcos sejam visíveis logo depois da saída da Casa Voss.
 		get_tree().create_timer(1.20).timeout.connect(_build_world_after_voss_prologue)
 	_queue_regional_qa_modes()
+
+func _initialize_region_contracts() -> void:
+	# Sprint R1–R6: os contratos descrevem fronteiras de trabalho, QA e orçamento.
+	# Esta função não cria, move ou remove geometria; a construção existente permanece proprietária de cada região.
+	region_contracts = REGION_REGISTRY.create_r1_r6_contracts()
+	var issues: PackedStringArray = REGION_REGISTRY.validate_r1_r6_contracts(region_contracts)
+	if not issues.is_empty():
+		for issue: String in issues:
+			push_error("[ORIGEM_REGION_CONTRACT] %s" % issue)
+		return
+	if OS.is_debug_build():
+		REGION_REGISTRY.emit_summary(region_contracts)
+
+func get_region_contract(region_id: int):
+	for contract in region_contracts:
+		if contract.region_id == region_id:
+			return contract
+	return null
 
 func _queue_regional_qa_modes() -> void:
 	if OS.get_environment("ORIGEM_QA_ROUTE") == "majestic_to_lake" or OS.get_environment("ORIGEM_QA_ROUTE") == "forest_to_majestic":
