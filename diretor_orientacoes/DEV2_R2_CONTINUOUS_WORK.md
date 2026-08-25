@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-FOOTBRIDGE-005
+task_id: DEV2-R2-RIVER-EDGE-006
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -27,19 +27,23 @@ A Estrada do Rio recebeu um ponto de descanso físico e silencioso, distinto da 
 
 `MarcoCairnRegresso` foi construído como cairn arqueológico baixo com pedras reais, laje tombada e colisor coincidente fora da faixa da estrada. A prova `[ORIGEM_R2_RIVER_CAIRN_OK]` é obrigatória na porta R2 e confirma a passagem livre, sem luz dinâmica ou nova interação.
 
-## Tarefa ativa — DEV2-R2-RIVER-FOOTBRIDGE-005
+## Entrega anterior aprovada — DEV2-R2-RIVER-FOOTBRIDGE-005
 
-A travessia lateral já visível no vale deve ganhar **leitura física de aproximação**, sem deslocar a ponte positiva existente nem transformar a margem numa rota alternativa obrigatória. A entrega deve adicionar dois encontros de pedra baixos, lajes partidas de acesso e vegetação ribeirinha esparsa que façam a ponte parecer uma construção antiga usada apenas como ponto de observação. Nenhum elemento pode cruzar o eixo Casa Voss → Arco, criar luz dinâmica ou tornar a ponte uma atalho de progressão.
+`AproximacaoArqueologicaPonteLateral` foi construída com dois encontros baixos, quatro lajes partidas com colisores coincidentes e três fetos esparsos. A prova `[ORIGEM_R2_FOOTBRIDGE_OK]` confirma que ela é secundária, física e sem luz dinâmica, preservando a ponte positiva e o eixo Casa Voss → Arco.
+
+## Tarefa ativa — DEV2-R2-RIVER-EDGE-006
+
+Uma margem curta antes do Arco deve receber uma **leitura geológica ribeirinha** de baixo custo: dois afloramentos baixos, pedras húmidas e fetos dispersos que enquadrem o rio sem criar uma parede vegetal ou um novo caminho. A entrega deve permanecer lateral, não atravessável e fora da rota principal. Nenhuma luz, painel, emissão persistente ou colisão invisível é permitida.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
-| Cartografia | Preservar Casa Voss → Estrada do Rio → Arco e a posição da ponte lateral existente |
+| Cartografia | Ficar em margem lateral antes do Arco, sem mover a estrada ou as âncoras cartográficas |
 | Desempenho | Zero luz dinâmica, partículas e emissão persistente; reutilizar pedra e fetos reais já presentes |
-| Jogabilidade | A aproximação permanece lateral, fora do eixo de 4,15 m e não bloqueia `road_return_voss`, `road_to_arch` ou `positive_bridge` |
-| Geometria | Usar encontros, lajes e vegetação ribeirinha esparsa reais; não usar painéis nem uma parede de árvores |
-| Narrativa | A ponte deve parecer uma observação arqueológica secundária, sem competir com a ordem de progressão Casa → Estrada → Arco |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar uma prova específica da leitura de aproximação antes de abrir PR |
+| Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
+| Geometria | Usar afloramentos e vegetação esparsa reais; não usar painéis nem uma parede de árvores |
+| Narrativa | O afloramento deve reforçar a antiguidade geológica do vale, sem competir com Orion ou o Arco |
+| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar uma prova específica da margem antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -47,4 +51,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-`DEV2-R2-RIVER-EDGE-006` deverá enriquecer uma margem curta após a aprovação da tarefa atual, sem tornar o rio atravessável nem aumentar o orçamento de luz.
+`DEV2-R2-RIVER-APPROACH-007` deverá aprofundar a leitura do último trecho até ao Arco depois da aprovação da tarefa atual, sem competir com a responsabilidade da R3.
