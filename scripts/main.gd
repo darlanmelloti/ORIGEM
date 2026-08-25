@@ -9,6 +9,7 @@ extends Node3D
 # ═══════════════════════════════════════════════════════════════
 
 const CARTOGRAPHIC_MAP_UI_SCRIPT: Script = preload("res://ui/menus/CartographicMapUI.gd")
+const JOURNEY_OBJECTIVE_HUD_SCRIPT: Script = preload("res://ui/hud/JourneyObjectiveHUD.gd")
 const QA_STATE_TRANSITION_SCRIPT: Script = preload("res://tools/qa/run_player_state_transition.gd")
 const QA_STATE_ROUNDTRIP_SCRIPT: Script = preload("res://tools/qa/run_player_state_roundtrip.gd")
 # Orçamento GTX 1050 Ti: o vale pode conter muitas luzes de narrativa, mas só as 16 mais próximas de Elias permanecem visíveis.
@@ -58,6 +59,7 @@ var msg_queue: Array = []
 var seraph_pulse_time: float = 0.0
 var seraph_active: bool = true
 var cartographic_map_ui: CanvasLayer
+var journey_objective_hud: CanvasLayer
 var map_key_was_pressed: bool = false
 
 # ═══════════════════════════════════════════════════════════════
@@ -70,6 +72,9 @@ func _ready():
 	cartographic_map_ui = CARTOGRAPHIC_MAP_UI_SCRIPT.new() as CanvasLayer
 	if cartographic_map_ui != null:
 		add_child(cartographic_map_ui)
+	journey_objective_hud = JOURNEY_OBJECTIVE_HUD_SCRIPT.new() as CanvasLayer
+	if journey_objective_hud != null:
+		add_child(journey_objective_hud)
 	interact_label.visible = false
 	EventBus.player_interacted.connect(_on_player_interacted)
 	EventBus.player_interact_target_changed.connect(_on_player_interact_target_changed)
