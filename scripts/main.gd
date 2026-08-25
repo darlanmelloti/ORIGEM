@@ -195,6 +195,13 @@ func _verify_r2_world_life_qa() -> void:
 		elif not approach.find_children("*", "OmniLight3D", true, false).is_empty():
 			issues.append("a aproximação do último trecho não pode criar luz dinâmica")
 
+		var sightline: Node = r2.get_node_or_null("VisadaRetornoCasaVossR2")
+		if sightline == null:
+			issues.append("a visada de retorno à Casa Voss está em falta")
+		elif sightline.find_child("LajeCurtaVisadaRetornoVoss", true, false) == null or sightline.find_child("PedraReferenciaRetornoVoss_02", true, false) == null:
+			issues.append("a visada de retorno não possui laje e duas pedras de referência")
+		elif not sightline.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("a visada de retorno não pode criar luz dinâmica")
 		var recessed: Node = r2.get_node_or_null("RecuoMargemFinalArcoR2")
 		if recessed == null:
 			issues.append("o recuo da margem final R2 está em falta")
@@ -212,6 +219,7 @@ func _verify_r2_world_life_qa() -> void:
 		print("[ORIGEM_R2_RIVER_APPROACH_OK] último trecho arqueológico presente; acesso interrompido e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_EDGE_008_OK] linha de pedras da margem final presente; leito não atravessável e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_APPROACH_009_OK] recuo arqueológico da margem final presente; acesso lateral sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_RETURN_010_OK] visada baixa para Casa Voss presente; leitura ambiental sem luz dinâmica.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)

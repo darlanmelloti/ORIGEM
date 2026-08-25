@@ -48,6 +48,7 @@ func _ready() -> void:
 	_build_pre_arch_river_approach()
 	_build_final_river_edge_reading()
 	_build_recessed_river_approach()
+	_build_return_voss_sightline()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
@@ -1071,6 +1072,41 @@ func _build_recessed_river_approach() -> void:
 			fern.scale = Vector3(0.23, 0.23, 0.23)
 			fern.rotation.y = -side * 0.38
 			recess_root.add_child(fern)
+
+func _build_return_voss_sightline() -> void:
+	# DEV2-R2-RIVER-RETURN-010: visada ambiental baixa para Casa Voss, lateral e sem seta ou interação.
+	var sightline_root: Node3D = Node3D.new()
+	sightline_root.name = "VisadaRetornoCasaVossR2"
+	add_child(sightline_root)
+	var reference_material: StandardMaterial3D = StandardMaterial3D.new()
+	reference_material.albedo_color = Color(0.13, 0.16, 0.15, 1.0)
+	reference_material.roughness = 0.93
+	var base_z: float = 67.5
+	var base_x: float = _road_x(base_z) + 4.85
+	for index: int in range(2):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		var side: float = -1.0 if index == 0 else 1.0
+		var stone_x: float = base_x + side * 0.88
+		var stone_z: float = base_z + float(index) * 1.18
+		stone.name = "PedraReferenciaRetornoVoss_%02d" % (index + 1)
+		stone.position = Vector3(stone_x, _height_at(stone_x, stone_z) + 0.05, stone_z)
+		stone.scale = Vector3(0.20, 0.14, 0.24)
+		stone.rotation.y = side * 0.36
+		_apply_material(stone, reference_material)
+		sightline_root.add_child(stone)
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeCurtaVisadaRetornoVoss"
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(0.86, 0.10, 0.52)
+	slab.mesh = slab_mesh
+	slab.material_override = path_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(base_x, _height_at(base_x, base_z + 0.58) + 0.06, base_z + 0.58)
+	slab.rotation = Vector3(0.02, 0.16, -0.06)
+	sightline_root.add_child(slab)
+	_add_world_life_collision(sightline_root, "ColisorLajeCurtaVisadaRetornoVoss", Vector3(slab.position.x, slab.position.y - 0.04, slab.position.z), slab_mesh.size)
 
 func _build_arch_forest_riparian_screen() -> void:
 	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,
