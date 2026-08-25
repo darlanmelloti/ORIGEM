@@ -101,6 +101,8 @@ func _ready():
 		get_tree().root.call_deferred("add_child", roundtrip_runner)
 	if OS.has_environment("ORIGEM_QA_CODEX"):
 		get_tree().create_timer(2.20).timeout.connect(_run_codex_qa)
+	if OS.has_environment("ORIGEM_QA_R2_WORLD_LIFE"):
+		call_deferred("_verify_r2_world_life_qa")
 	# CINE-PAIR-10: apenas um retorno real do interior deve substituir o spawn normal da Casa Voss.
 	var exterior_player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
@@ -126,6 +128,28 @@ func _run_codex_qa() -> void:
 	if elias_codex_ui != null and elias_codex_ui.has_method("run_qa_probe"):
 		elias_codex_ui.call("run_qa_probe")
 	get_tree().quit()
+
+func _verify_r2_world_life_qa() -> void:
+	var issues: PackedStringArray = PackedStringArray()
+	var r2: Node = find_child("EstradaDoRioExploravel", true, false)
+	if r2 == null:
+		issues.append("EstradaDoRioExploravel não foi instanciado")
+	else:
+		var landmarks: Node = r2.get_node_or_null("MarcosVidaDeViagemR2")
+		for landmark_name: String in PackedStringArray(["MarcoPedrasDeTomas", "PassagemMargemBaixa", "VestigioAntesDoArco"]):
+			if landmarks == null or landmarks.get_node_or_null(landmark_name) == null:
+				issues.append("marco em falta: %s" % landmark_name)
+		if r2.get_node_or_null("EstradaDoRio_Real") == null:
+			issues.append("a estrada física R2 desapareceu")
+		if r2.get_node_or_null("ArcoDasRuinas_EstradaDoRio") == null:
+			issues.append("o Arco físico R2 desapareceu")
+		if not r2.find_children("LuzMarcoVida*", "OmniLight3D", true, false).is_empty():
+			issues.append("os marcos R2 não podem criar luzes dinâmicas")
+	if issues.is_empty():
+		print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
+		return
+	for issue: String in issues:
+		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)
 
 func _apply_exterior_light_budget() -> void:
 	var all_lights: Array[Node] = []

@@ -36,6 +36,7 @@ func _ready() -> void:
 	ruin_material = _make_ruin_material()
 	_build_compacted_roadbed()
 	_build_road_entry_orientation()
+	_build_world_life_landmarks()
 	_build_river_road()
 	_build_river()
 	_build_first_orion_reflection()
@@ -292,6 +293,109 @@ func _build_road_entry_orientation() -> void:
 		footing.rotation.y = (marker["yaw"] as float) + 0.5
 		_apply_material(footing, ruin_material)
 		markers.add_child(footing)
+
+func _build_world_life_landmarks() -> void:
+	# DEV2-R2-WORLD-LIFE-001 — três leituras espaciais distintas transformam a estrada num percurso,
+	# sem alterar a rota, acrescentar luzes ou fechar a vista física do Arco.
+	var landmarks: Node3D = Node3D.new()
+	landmarks.name = "MarcosVidaDeViagemR2"
+	add_child(landmarks)
+
+	# 1) A pedra junto à saída recorda a instrução de Tomás: seguir as pedras, não a luz azul.
+	var tomas_z: float = 24.0
+	var tomas_x: float = _road_x(tomas_z) - 3.72
+	var tomas_root: Node3D = Node3D.new()
+	tomas_root.name = "MarcoPedrasDeTomas"
+	landmarks.add_child(tomas_root)
+	for index: int in range(3):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraDeTomás_%02d" % (index + 1)
+		var local_z: float = float(index - 1) * 0.68
+		stone.position = Vector3(tomas_x + float(index % 2) * 0.42, _height_at(tomas_x, tomas_z + local_z) + 0.04, tomas_z + local_z)
+		var stone_scale: float = 0.20 + float(index) * 0.045
+		stone.scale = Vector3(stone_scale, stone_scale * 0.56, stone_scale)
+		stone.rotation.y = 0.48 + float(index) * 0.73
+		_apply_material(stone, ruin_material)
+		tomas_root.add_child(stone)
+	var tomas_marker: Node3D = RUIN_PILLAR.instantiate() as Node3D
+	if tomas_marker != null:
+		tomas_marker.name = "LajeInscritaDeTomas"
+		tomas_marker.position = Vector3(tomas_x - 0.34, _height_at(tomas_x - 0.34, tomas_z) - 0.03, tomas_z + 0.16)
+		tomas_marker.scale = Vector3(0.24, 0.46, 0.24)
+		tomas_marker.rotation = Vector3(0.06, -0.36, 0.02)
+		_apply_material(tomas_marker, ruin_material)
+		tomas_root.add_child(tomas_marker)
+	_add_world_life_collision(tomas_root, "ColisorMarcoPedrasDeTomas", Vector3(tomas_x, _height_at(tomas_x, tomas_z) + 0.26, tomas_z), Vector3(0.96, 0.52, 1.54))
+
+	# 2) Vegetação baixa na margem da estrada deixa o rio enquadrado, mas nunca forma uma parede de árvores.
+	var margin_z: float = 49.0
+	var margin_x: float = _road_x(margin_z) + 3.58
+	var margin_root: Node3D = Node3D.new()
+	margin_root.name = "PassagemMargemBaixa"
+	landmarks.add_child(margin_root)
+	var margin_rock: Node3D = SLOPE_ROCK.instantiate() as Node3D
+	if margin_rock != null:
+		margin_rock.name = "RochedoDaPassagemDeMargem"
+		margin_rock.position = Vector3(margin_x + 0.42, _height_at(margin_x + 0.42, margin_z) + 0.02, margin_z - 0.34)
+		margin_rock.scale = Vector3(0.30, 0.22, 0.30)
+		margin_rock.rotation.y = -0.58
+		_apply_material(margin_rock, ruin_material)
+		margin_root.add_child(margin_rock)
+	for index: int in range(4):
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern == null:
+			continue
+		fern.name = "FetoDaPassagemDeMargem_%02d" % (index + 1)
+		var fern_x: float = margin_x + 0.52 + float(index % 2) * 0.72
+		var fern_z: float = margin_z - 1.05 + float(index) * 0.66
+		fern.position = Vector3(fern_x, _height_at(fern_x, fern_z) + 0.02, fern_z)
+		var fern_scale: float = 0.40 + float(index % 2) * 0.07
+		fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
+		fern.rotation.y = float(index) * 1.13
+		margin_root.add_child(fern)
+	_add_world_life_collision(margin_root, "ColisorPassagemMargemBaixa", Vector3(margin_x + 0.42, _height_at(margin_x + 0.42, margin_z) + 0.18, margin_z - 0.34), Vector3(0.82, 0.36, 0.92))
+
+	# 3) O vestígio baixo antecede o Arco sem competir com a sua silhueta em Z≈92.
+	var ruin_z: float = 80.0
+	var ruin_x: float = _road_x(ruin_z) - 3.62
+	var ruin_root: Node3D = Node3D.new()
+	ruin_root.name = "VestigioAntesDoArco"
+	landmarks.add_child(ruin_root)
+	var remnant: Node3D = RUIN_PILLAR.instantiate() as Node3D
+	if remnant != null:
+		remnant.name = "FragmentoDeMarcoPreArco"
+		remnant.position = Vector3(ruin_x, _height_at(ruin_x, ruin_z) - 0.04, ruin_z)
+		remnant.scale = Vector3(0.30, 0.72, 0.30)
+		remnant.rotation = Vector3(0.12, 0.38, -0.06)
+		_apply_material(remnant, ruin_material)
+		ruin_root.add_child(remnant)
+	for index: int in range(2):
+		var debris: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if debris == null:
+			continue
+		debris.name = "PedraDoVestigioPreArco_%02d" % (index + 1)
+		var debris_x: float = ruin_x + 0.52 + float(index) * 0.58
+		var debris_z: float = ruin_z - 0.48 + float(index) * 0.82
+		debris.position = Vector3(debris_x, _height_at(debris_x, debris_z) + 0.04, debris_z)
+		var debris_scale: float = 0.21 + float(index) * 0.05
+		debris.scale = Vector3(debris_scale, debris_scale * 0.62, debris_scale)
+		debris.rotation.y = -0.56 + float(index) * 1.18
+		_apply_material(debris, ruin_material)
+		ruin_root.add_child(debris)
+	_add_world_life_collision(ruin_root, "ColisorVestigioAntesDoArco", Vector3(ruin_x, _height_at(ruin_x, ruin_z) + 0.38, ruin_z), Vector3(0.88, 0.76, 0.96))
+
+func _add_world_life_collision(parent: Node3D, collision_name: String, center: Vector3, size: Vector3) -> void:
+	var body: StaticBody3D = StaticBody3D.new()
+	body.name = collision_name
+	body.position = center
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = size
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	collision.shape = shape
+	body.add_child(collision)
+	parent.add_child(body)
 
 func _build_river_road() -> void:
 	var road: Node3D = Node3D.new()
