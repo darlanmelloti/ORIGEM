@@ -838,7 +838,8 @@ func _build_positive_bridge_approach() -> void:
 			var slab_x: float = bank_x - side * (0.92 + float(index) * 0.72)
 			var slab_z: float = bank_z + side * (0.62 + float(index) * 0.78)
 			var access_slab: MeshInstance3D = MeshInstance3D.new()
-			access_slab.name = "LajePartidaAcessoPonte_%s_%02d" % ("Oeste" if side < 0.0 else "Este", index + 1)
+			var side_name: String = "Oeste" if side < 0.0 else "Este"
+			access_slab.name = "LajePartidaAcessoPonte_%s_%02d" % [side_name, index + 1]
 			var slab_mesh: BoxMesh = BoxMesh.new()
 			slab_mesh.size = Vector3(0.78 - float(index) * 0.08, 0.11, 0.62 + float(index) * 0.06)
 			access_slab.mesh = slab_mesh
@@ -847,10 +848,10 @@ func _build_positive_bridge_approach() -> void:
 			access_slab.position = Vector3(slab_x, _height_at(slab_x, slab_z) + 0.075, slab_z)
 			access_slab.rotation.y = -0.18 * side + 0.08 * float(index)
 			approach_root.add_child(access_slab)
-			_add_world_life_collision(approach_root, "ColisorLajeAcessoPonte_%s_%02d" % ("Oeste" if side < 0.0 else "Este", index + 1), Vector3(slab_x, _height_at(slab_x, slab_z) + 0.02, slab_z), slab_mesh.size)
+			_add_world_life_collision(approach_root, "ColisorLajeAcessoPonte_%s_%02d" % [side_name, index + 1], Vector3(slab_x, _height_at(slab_x, slab_z) + 0.02, slab_z), slab_mesh.size)
 			var fern: Node3D = FERN.instantiate() as Node3D
 			if fern != null:
-				fern.name = "FetoAcessoPonte_%s_%02d" % ("Oeste" if side < 0.0 else "Este", index + 1)
+				fern.name = "FetoAcessoPonte_%s_%02d" % [side_name, index + 1]
 				fern.position = Vector3(slab_x + side * 0.58, _height_at(slab_x + side * 0.58, slab_z) + 0.02, slab_z + side * 0.26)
 				fern.scale = Vector3(0.30 + float(index) * 0.05, 0.30 + float(index) * 0.05, 0.30 + float(index) * 0.05)
 				fern.rotation.y = side * 0.65 + float(index) * 0.42
