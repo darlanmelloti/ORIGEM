@@ -71,7 +71,7 @@ jobs:
         region: ${{ fromJSON(needs.resolve-regions.outputs.regions) }}
     steps:
       - name: Obter código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
