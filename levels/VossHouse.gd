@@ -60,6 +60,22 @@ const OPENING_SKIP_HOLD_SECONDS: float = 1.50
 const QA_CINEMATIC_CAPTURE_HOLD_SECONDS: float = 300.0
 var front_door_open: bool = false
 var door_reveal: Node = null
+var voss_clues_seen: Dictionary = {"TomasTable": false, "MountainMap": false, "MiguelTools": false}
+
+const VOSS_CLUES: Dictionary = {
+	"TomasTable": {
+		"first_text": "CARTA DE TOMÁS\n\n\"Quando a luz azul surgir no rio, não sigas o brilho. Segue as pedras. O Arco ouvirá o nome Voss.\"",
+		"repeat_text": "A carta de Tomás continua aberta sobre a mesa. A tinta azulada ainda aponta para a Estrada do Rio."
+	},
+	"MountainMap": {
+		"first_text": "MAPA DA MONTANHA\n\nA Estrada do Rio contorna a água e conduz ao Arco das Ruínas. Tomás marcou um símbolo azul a norte.",
+		"repeat_text": "O mapa confirma a rota: Estrada do Rio, Arco das Ruínas, depois a floresta."
+	},
+	"MiguelTools": {
+		"first_text": "FERRAMENTAS DE MIGUEL\n\nA terra branca presa ao aço vem das encostas de Orion. Miguel esteve perto das cavernas antes de desaparecer.",
+		"repeat_text": "As ferramentas de Miguel ainda guardam pó das encostas de Orion."
+	}
+}
 
 func _ready() -> void:
 	add_to_group("voss_house_controller")
@@ -100,8 +116,11 @@ func _ready() -> void:
 	_build_opening_camera()
 	_build_exterior_porch_light()
 	_prepare_door_reveal()
-	if OS.get_environment("ORIGEM_QA_INTERACT") == "voss_door":
+	var qa_interaction: String = OS.get_environment("ORIGEM_QA_INTERACT")
+	if qa_interaction == "voss_door":
 		get_tree().create_timer(1.00).timeout.connect(_open_front_door_for_qa)
+	elif qa_interaction == "voss_clues":
+		get_tree().create_timer(1.00).timeout.connect(_inspect_voss_clues_for_qa)
 	# O harness cartográfico pode pedir a mesma limpeza de auxiliares técnicos usada na abertura, sem alterar a visibilidade no jogo normal.
 	if OS.get_environment("ORIGEM_QA_CLEAN_CARTOGRAPHIC_MARKERS") == "1":
 		get_tree().create_timer(0.90).timeout.connect(_hide_late_opening_technical_markers)
@@ -733,11 +752,31 @@ func _update_opening_skip_prompt() -> void:
 	else:
 		opening_skip_label.text = "Mantenha [E] para saltar o prólogo"
 
+func inspect_voss_clue(clue_id: String) -> Dictionary:
+	if not VOSS_CLUES.has(clue_id):
+		return {}
+	var clue_data: Dictionary = VOSS_CLUES[clue_id] as Dictionary
+	var was_seen: bool = bool(voss_clues_seen.get(clue_id, false))
+	voss_clues_seen[clue_id] = true
+	return {
+		"text": clue_data.get("repeat_text", "") if was_seen else clue_data.get("first_text", ""),
+		"first_time": not was_seen
+	}
+
+func _inspect_voss_clues_for_qa() -> void:
+	for clue_id: String in ["TomasTable", "MountainMap", "MiguelTools"]:
+		var clue: Dictionary = inspect_voss_clue(clue_id)
+		print("[ORIGEM_R1_CLUE] id=%s first_time=%s" % [clue_id, str(clue.get("first_time", false))])
+
 func save_data() -> Dictionary:
-	return {"front_door_open": front_door_open}
+	return {
+		"front_door_open": front_door_open,
+		"voss_clues_seen": voss_clues_seen.duplicate(true)
+	}
 
 func load_data(data: Dictionary) -> void:
 	front_door_open = bool(data.get("front_door_open", false))
+	voss_clues_seen = data.get("voss_clues_seen", voss_clues_seen).duplicate(true)
 	if front_door_open:
 		call_deferred("_restore_front_door_after_load")
 

@@ -246,8 +246,23 @@ func _on_player_interacted(object_name: String) -> void:
 			_show_msg("CÂMARA DO CUBO: O artefacto aguarda os três fragmentos de tradução. O futuro ainda não cedeu.", 3.4)
 		"ChronosPrototypeConsole":
 			_toggle_chronos_prototype()
+		"TomasTable", "MountainMap", "MiguelTools":
+			_inspect_voss_clue(object_name)
 		"VossFrontDoor":
 			_open_voss_front_door()
+
+func _inspect_voss_clue(clue_id: String) -> void:
+	var voss_house: Node = get_tree().get_first_node_in_group("voss_house_controller")
+	if voss_house == null or not voss_house.has_method("inspect_voss_clue"):
+		_show_msg("A memória deste objeto ainda não está disponível.", 2.0)
+		return
+	var result: Variant = voss_house.call("inspect_voss_clue", clue_id)
+	if typeof(result) != TYPE_DICTIONARY:
+		return
+	var clue: Dictionary = result as Dictionary
+	var clue_text: String = str(clue.get("text", ""))
+	if clue_text != "":
+		_show_msg(clue_text, 5.2)
 
 func _open_voss_front_door() -> void:
 	var voss_house: Node = get_tree().get_first_node_in_group("voss_house_controller")
