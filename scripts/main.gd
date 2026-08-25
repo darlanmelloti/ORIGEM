@@ -180,6 +180,13 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("a margem geológica não possui os dois afloramentos")
 		elif not edge.find_children("*", "OmniLight3D", true, false).is_empty():
 			issues.append("a margem geológica não pode criar luz dinâmica")
+		var final_edge: Node = r2.get_node_or_null("LinhaPedrasMargemFinalR2")
+		if final_edge == null:
+			issues.append("a linha de pedras da margem final está em falta")
+		elif final_edge.find_child("PedraLeituraMargemFinal_03", true, false) == null:
+			issues.append("a margem final não possui três pedras de leitura")
+		elif not final_edge.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("a margem final não pode criar luz dinâmica")
 		var approach: Node = r2.get_node_or_null("AproximacaoUltimoTrechoArcoR2")
 		if approach == null:
 			issues.append("a aproximação do último trecho R2 está em falta")
@@ -196,6 +203,7 @@ func _verify_r2_world_life_qa() -> void:
 			print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
 			print("[ORIGEM_R2_RIVER_EDGE_OK] margem geológica ribeirinha presente; leitura lateral sem luz dinâmica.")
 			print("[ORIGEM_R2_RIVER_APPROACH_OK] último trecho arqueológico presente; acesso interrompido e sem luz dinâmica.")
+			print("[ORIGEM_R2_RIVER_EDGE_008_OK] linha de pedras da margem final presente; leito não atravessável e sem luz dinâmica.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)

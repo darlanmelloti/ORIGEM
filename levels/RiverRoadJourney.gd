@@ -46,6 +46,7 @@ func _ready() -> void:
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
+	_build_final_river_edge_reading()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
@@ -999,6 +1000,35 @@ func _build_pre_arch_river_approach() -> void:
 			fern.scale = Vector3(0.27, 0.27, 0.27)
 			fern.rotation.y = side * 0.44
 			approach_root.add_child(fern)
+
+func _build_final_river_edge_reading() -> void:
+	# DEV2-R2-RIVER-EDGE-008: linha curta de pedras na margem final; visual lateral, leito não atravessável.
+	var reading_root: Node3D = Node3D.new()
+	reading_root.name = "LinhaPedrasMargemFinalR2"
+	add_child(reading_root)
+	var edge_material: StandardMaterial3D = StandardMaterial3D.new()
+	edge_material.albedo_color = Color(0.12, 0.16, 0.15, 1.0)
+	edge_material.roughness = 0.92
+	for index: int in range(3):
+		var z_value: float = 89.0 + float(index) * 1.25
+		var side: float = -1.0 if index % 2 == 0 else 1.0
+		var x_value: float = _river_x(z_value) + side * (6.40 + float(index) * 0.28)
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone != null:
+			stone.name = "PedraLeituraMargemFinal_%02d" % (index + 1)
+			stone.position = Vector3(x_value, _height_at(x_value, z_value) + 0.05, z_value)
+			var stone_scale: float = 0.19 + float(index % 2) * 0.035
+			stone.scale = Vector3(stone_scale, stone_scale * 0.58, stone_scale * 0.92)
+			stone.rotation.y = -0.30 + float(index) * 0.42
+			_apply_material(stone, edge_material)
+			reading_root.add_child(stone)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoAbertoMargemFinal_%02d" % (index + 1)
+			fern.position = Vector3(x_value - side * 0.82, _height_at(x_value - side * 0.82, z_value) + 0.02, z_value + 0.36)
+			fern.scale = Vector3(0.24, 0.24, 0.24)
+			fern.rotation.y = side * 0.52
+			reading_root.add_child(fern)
 
 func _build_arch_forest_riparian_screen() -> void:
 	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,

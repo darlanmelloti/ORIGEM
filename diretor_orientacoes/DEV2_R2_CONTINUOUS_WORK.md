@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-EDGE-006
+task_id: DEV2-R2-RIVER-EDGE-008
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -31,19 +31,26 @@ A Estrada do Rio recebeu um ponto de descanso físico e silencioso, distinto da 
 
 `AproximacaoArqueologicaPonteLateral` foi construída com dois encontros baixos, quatro lajes partidas com colisores coincidentes e três fetos esparsos. A prova `[ORIGEM_R2_FOOTBRIDGE_OK]` confirma que ela é secundária, física e sem luz dinâmica, preservando a ponte positiva e o eixo Casa Voss → Arco.
 
-## Tarefa ativa — DEV2-R2-RIVER-EDGE-006
+## Tarefa concluída — DEV2-R2-RIVER-EDGE-006
+A margem curta antes do Arco recebeu dois afloramentos baixos, pedras húmidas e fetos dispersos, sem luz, partículas, emissão persistente ou caminho atravessável. A porta R2 passou no CI.
 
-Uma margem curta antes do Arco deve receber uma **leitura geológica ribeirinha** de baixo custo: dois afloramentos baixos, pedras húmidas e fetos dispersos que enquadrem o rio sem criar uma parede vegetal ou um novo caminho. A entrega deve permanecer lateral, não atravessável e fora da rota principal. Nenhuma luz, painel, emissão persistente ou colisão invisível é permitida.
+## Tarefa concluída — DEV2-R2-RIVER-APPROACH-007
+O último trecho antes do Arco recebeu duas lajes interrompidas, pedras de borda e fetos esparsos, mantendo o eixo principal livre, o acesso secundário e o orçamento de luz. A prova `[ORIGEM_R2_RIVER_APPROACH_OK]` passou no CI.
+
+## Tarefa ativa — DEV2-R2-RIVER-EDGE-008
+
+A margem final junto ao afunilamento do rio deve receber uma **linha curta de pedras de leitura**, com três pedras baixas e vegetação aberta que enquadrem o leito sem o tornar atravessável. A entrega deve permanecer lateral, sem tocar o Arco ou competir com a responsabilidade da R3.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
-| Cartografia | Ficar em margem lateral antes do Arco, sem mover a estrada ou as âncoras cartográficas |
+| Cartografia | Permanecer na margem final antes do Arco, sem mover a estrada ou as âncoras cartográficas |
+| Acesso | Manter a margem lateral e não atravessável; não criar atalho para o rio |
 | Desempenho | Zero luz dinâmica, partículas e emissão persistente; reutilizar pedra e fetos reais já presentes |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
-| Geometria | Usar afloramentos e vegetação esparsa reais; não usar painéis nem uma parede de árvores |
-| Narrativa | O afloramento deve reforçar a antiguidade geológica do vale, sem competir com Orion ou o Arco |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar uma prova específica da margem antes de abrir PR |
+| Geometria | Usar três pedras baixas e vegetação esparsa real; não usar painéis nem parede de árvores |
+| Narrativa | A linha de pedras deve reforçar a margem antiga sem competir com Orion ou o Arco |
+| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar `[ORIGEM_R2_RIVER_EDGE_008_OK]` antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -51,4 +58,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-`DEV2-R2-RIVER-APPROACH-007` deverá aprofundar a leitura do último trecho até ao Arco depois da aprovação da tarefa atual, sem competir com a responsabilidade da R3.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-EDGE-008`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
