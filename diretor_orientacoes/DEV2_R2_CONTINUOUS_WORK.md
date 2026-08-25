@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-EDGE-008
+task_id: DEV2-R2-RIVER-APPROACH-009
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -37,20 +37,23 @@ A margem curta antes do Arco recebeu dois afloramentos baixos, pedras húmidas e
 ## Tarefa concluída — DEV2-R2-RIVER-APPROACH-007
 O último trecho antes do Arco recebeu duas lajes interrompidas, pedras de borda e fetos esparsos, mantendo o eixo principal livre, o acesso secundário e o orçamento de luz. A prova `[ORIGEM_R2_RIVER_APPROACH_OK]` passou no CI.
 
-## Tarefa ativa — DEV2-R2-RIVER-EDGE-008
+## Tarefa concluída — DEV2-R2-RIVER-EDGE-008
+A margem final recebeu uma linha curta de três pedras de leitura e vegetação aberta, mantendo o leito não atravessável e o orçamento de luz inalterado. A porta R2 passou no CI.
 
-A margem final junto ao afunilamento do rio deve receber uma **linha curta de pedras de leitura**, com três pedras baixas e vegetação aberta que enquadrem o leito sem o tornar atravessável. A entrega deve permanecer lateral, sem tocar o Arco ou competir com a responsabilidade da R3.
+## Tarefa ativa — DEV2-R2-RIVER-APPROACH-009
+
+O último recuo da Estrada do Rio antes do Arco deve receber uma **leitura de margem recuada**, com duas lajes baixas e um conjunto discreto de pedras molhadas que indiquem o terreno antigo sem criar caminho novo. A composição deve permanecer fora do eixo principal e não competir com a responsabilidade da R3.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
-| Cartografia | Permanecer na margem final antes do Arco, sem mover a estrada ou as âncoras cartográficas |
-| Acesso | Manter a margem lateral e não atravessável; não criar atalho para o rio |
+| Cartografia | Permanecer no recuo final antes do Arco, sem mover a estrada ou as âncoras cartográficas |
+| Acesso | Manter a leitura lateral, baixa e não atravessável; não criar atalho para o rio |
 | Desempenho | Zero luz dinâmica, partículas e emissão persistente; reutilizar pedra e fetos reais já presentes |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
-| Geometria | Usar três pedras baixas e vegetação esparsa real; não usar painéis nem parede de árvores |
-| Narrativa | A linha de pedras deve reforçar a margem antiga sem competir com Orion ou o Arco |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar `[ORIGEM_R2_RIVER_EDGE_008_OK]` antes de abrir PR |
+| Geometria | Usar duas lajes baixas, pedras molhadas e vegetação esparsa real; não usar painéis nem parede de árvores |
+| Narrativa | O recuo deve reforçar a antiguidade do vale sem competir com Orion ou o Arco |
+| Verificação | Executar `tools/qa/run_regional_gate.sh R2` e acrescentar `[ORIGEM_R2_RIVER_APPROACH_009_OK]` antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -58,4 +61,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-EDGE-008`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-APPROACH-009`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.

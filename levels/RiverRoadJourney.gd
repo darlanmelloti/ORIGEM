@@ -47,6 +47,7 @@ func _ready() -> void:
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
 	_build_final_river_edge_reading()
+	_build_recessed_river_approach()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
@@ -1029,6 +1030,47 @@ func _build_final_river_edge_reading() -> void:
 			fern.scale = Vector3(0.24, 0.24, 0.24)
 			fern.rotation.y = side * 0.52
 			reading_root.add_child(fern)
+
+func _build_recessed_river_approach() -> void:
+	# DEV2-R2-RIVER-APPROACH-009: recuo lateral baixo antes do Arco, sem ampliar o leito nem criar atalho.
+	var recess_root: Node3D = Node3D.new()
+	recess_root.name = "RecuoMargemFinalArcoR2"
+	add_child(recess_root)
+	var wet_material: StandardMaterial3D = StandardMaterial3D.new()
+	wet_material.albedo_color = Color(0.11, 0.15, 0.14, 1.0)
+	wet_material.roughness = 0.94
+	var base_z: float = 84.5
+	var base_x: float = _river_x(base_z) + 6.85
+	for index: int in range(2):
+		var side: float = -1.0 if index == 0 else 1.0
+		var z_value: float = base_z + float(index) * 1.55
+		var x_value: float = base_x + side * 0.58
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeBaixaRecuoArco_%02d" % (index + 1)
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(0.92, 0.10, 0.62)
+		slab.mesh = slab_mesh
+		slab.material_override = path_material
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.06, z_value)
+		slab.rotation.y = side * 0.26
+		recess_root.add_child(slab)
+		_add_world_life_collision(recess_root, "ColisorLajeBaixaRecuoArco_%02d" % (index + 1), Vector3(x_value, _height_at(x_value, z_value) + 0.02, z_value), slab_mesh.size)
+		var wet_stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if wet_stone != null:
+			wet_stone.name = "PedraMolhadaRecuoArco_%02d" % (index + 1)
+			wet_stone.position = Vector3(x_value + side * 0.96, _height_at(x_value + side * 0.96, z_value) + 0.04, z_value - 0.30)
+			wet_stone.scale = Vector3(0.18, 0.11, 0.22)
+			wet_stone.rotation.y = side * 0.48
+			_apply_material(wet_stone, wet_material)
+			recess_root.add_child(wet_stone)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoRecuoMargemArco_%02d" % (index + 1)
+			fern.position = Vector3(x_value - side * 0.76, _height_at(x_value - side * 0.76, z_value) + 0.02, z_value + 0.30)
+			fern.scale = Vector3(0.23, 0.23, 0.23)
+			fern.rotation.y = -side * 0.38
+			recess_root.add_child(fern)
 
 func _build_arch_forest_riparian_screen() -> void:
 	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,

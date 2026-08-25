@@ -195,15 +195,23 @@ func _verify_r2_world_life_qa() -> void:
 		elif not approach.find_children("*", "OmniLight3D", true, false).is_empty():
 			issues.append("a aproximação do último trecho não pode criar luz dinâmica")
 
-		if issues.is_empty():
-			print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
-			print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
-			print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_EDGE_OK] margem geológica ribeirinha presente; leitura lateral sem luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_APPROACH_OK] último trecho arqueológico presente; acesso interrompido e sem luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_EDGE_008_OK] linha de pedras da margem final presente; leito não atravessável e sem luz dinâmica.")
+		var recessed: Node = r2.get_node_or_null("RecuoMargemFinalArcoR2")
+		if recessed == null:
+			issues.append("o recuo da margem final R2 está em falta")
+		elif recessed.find_child("LajeBaixaRecuoArco_02", true, false) == null:
+			issues.append("o recuo da margem final não possui duas lajes baixas")
+		elif not recessed.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("o recuo da margem final não pode criar luz dinâmica")
+	if issues.is_empty():
+		print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
+		print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
+		print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_EDGE_OK] margem geológica ribeirinha presente; leitura lateral sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_APPROACH_OK] último trecho arqueológico presente; acesso interrompido e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_EDGE_008_OK] linha de pedras da margem final presente; leito não atravessável e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_APPROACH_009_OK] recuo arqueológico da margem final presente; acesso lateral sem luz dinâmica.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)
