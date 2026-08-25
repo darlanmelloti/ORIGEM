@@ -10,6 +10,7 @@ extends Node3D
 
 const CARTOGRAPHIC_MAP_UI_SCRIPT: Script = preload("res://ui/menus/CartographicMapUI.gd")
 const JOURNEY_OBJECTIVE_HUD_SCRIPT: Script = preload("res://ui/hud/JourneyObjectiveHUD.gd")
+const ELIAS_CODEX_UI_SCRIPT: Script = preload("res://ui/hud/EliasCodexUI.gd")
 const QA_STATE_TRANSITION_SCRIPT: Script = preload("res://tools/qa/run_player_state_transition.gd")
 const QA_STATE_ROUNDTRIP_SCRIPT: Script = preload("res://tools/qa/run_player_state_roundtrip.gd")
 const QA_GROUNDING_SCRIPT: Script = preload("res://tools/qa/run_player_grounding.gd")
@@ -61,6 +62,7 @@ var seraph_pulse_time: float = 0.0
 var seraph_active: bool = true
 var cartographic_map_ui: CanvasLayer
 var journey_objective_hud: CanvasLayer
+var elias_codex_ui: CanvasLayer
 var map_key_was_pressed: bool = false
 
 # ═══════════════════════════════════════════════════════════════
@@ -76,6 +78,9 @@ func _ready():
 	journey_objective_hud = JOURNEY_OBJECTIVE_HUD_SCRIPT.new() as CanvasLayer
 	if journey_objective_hud != null:
 		add_child(journey_objective_hud)
+	elias_codex_ui = ELIAS_CODEX_UI_SCRIPT.new() as CanvasLayer
+	if elias_codex_ui != null:
+		add_child(elias_codex_ui)
 	interact_label.visible = false
 	EventBus.player_interacted.connect(_on_player_interacted)
 	EventBus.player_interact_target_changed.connect(_on_player_interact_target_changed)
@@ -94,6 +99,8 @@ func _ready():
 	elif OS.has_environment("ORIGEM_QA_STATE_ROUNDTRIP"):
 		var roundtrip_runner: Node = QA_STATE_ROUNDTRIP_SCRIPT.new()
 		get_tree().root.call_deferred("add_child", roundtrip_runner)
+	if OS.has_environment("ORIGEM_QA_CODEX"):
+		get_tree().create_timer(2.20).timeout.connect(_run_codex_qa)
 	# CINE-PAIR-10: apenas um retorno real do interior deve substituir o spawn normal da Casa Voss.
 	var exterior_player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
@@ -101,6 +108,24 @@ func _ready():
 	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
 	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING"):
 		_start_narrative()
+
+func _run_codex_qa() -> void:
+	if OS.has_environment("ORIGEM_QA_CODEX_SAVE"):
+		SaveManager.save_game(2)
+		var voss_house: Node = get_tree().get_first_node_in_group("voss_house_controller")
+		if voss_house != null:
+			voss_house.set("voss_clues_seen", {})
+		var restored: bool = SaveManager.load_game(2)
+		var restored_count: int = 0
+		if voss_house != null and voss_house.has_method("get_codex_entries"):
+			var restored_entries: Dictionary = voss_house.call("get_codex_entries") as Dictionary
+			for entry: Variant in restored_entries.values():
+				if typeof(entry) == TYPE_DICTIONARY and bool((entry as Dictionary).get("seen", false)):
+					restored_count += 1
+		print("[ORIGEM_CODEX_SAVE_QA] restored=%s voss_entries=%d" % [str(restored), restored_count])
+	if elias_codex_ui != null and elias_codex_ui.has_method("run_qa_probe"):
+		elias_codex_ui.call("run_qa_probe")
+	get_tree().quit()
 
 func _apply_exterior_light_budget() -> void:
 	var all_lights: Array[Node] = []
@@ -166,7 +191,9 @@ func _process(delta: float):
 		next_light_budget_refresh_msec = now_msec + LIGHT_BUDGET_REFRESH_MSEC
 	# O controlador corre em modo ALWAYS e lê Esc mesmo quando o menu já suspendeu a árvore.
 	if Input.is_action_just_pressed("ui_cancel"):
-		if is_instance_valid(pause_menu):
+		if elias_codex_ui != null and bool(elias_codex_ui.get("is_open")):
+			elias_codex_ui.call("_set_open", false)
+		elif is_instance_valid(pause_menu):
 			pause_menu.toggle()
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED)
@@ -301,6 +328,8 @@ func _inspect_voss_clue(clue_id: String) -> void:
 	var clue_text: String = str(clue.get("text", ""))
 	if clue_text != "":
 		_show_msg(clue_text, 5.2)
+	if elias_codex_ui != null and elias_codex_ui.has_method("refresh_entries"):
+		elias_codex_ui.call_deferred("refresh_entries")
 
 func rest_at_voss_fire() -> void:
 	var player: Node = get_tree().get_first_node_in_group("player")

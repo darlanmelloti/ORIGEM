@@ -1952,3 +1952,24 @@ func _build_exterior_porch_light() -> void:
 
 func darken(source: StandardMaterial3D, factor: float) -> StandardMaterial3D:
 	return _material(source.albedo_color.darkened(1.0 - factor), source.roughness, source.metallic)
+
+
+## Retorna as pistas canónicas já descobertas como entradas reconsultáveis do Códice de Elias.
+func get_codex_entries() -> Dictionary:
+	return {
+		"tomas_letter": {
+			"title": "CARTA DE TOMÁS",
+			"body": "Tomás escreveu: \"Quando a luz azul surgir no rio, não sigas o brilho. Segue as pedras. O Arco ouvirá o nome Voss.\"\n\nA carta confirma que a Estrada do Rio não é uma fuga: é o primeiro traço de uma investigação que a família Voss tentou ocultar.",
+			"seen": bool(voss_clues_seen.get("TomasTable", false))
+		},
+		"mountain_map": {
+			"title": "MAPA DA MONTANHA",
+			"body": "O mapa assinala uma rota de lajes pela margem do rio: Casa Voss, Estrada do Rio, Arco das Ruínas e, além dele, a floresta. A norte, Tomás desenhou o mesmo símbolo azul que voltou a pulsar sobre Orion.",
+			"seen": bool(voss_clues_seen.get("MountainMap", false))
+		},
+		"miguel_tools": {
+			"title": "FERRAMENTAS DE MIGUEL",
+			"body": "O pó branco preso ao aço vem das encostas de Orion. Miguel levou estas ferramentas até às cavernas antes de desaparecer. A ausência de uma despedida transforma este objeto numa pergunta que Elias terá de responder.",
+			"seen": bool(voss_clues_seen.get("MiguelTools", false))
+		}
+	}
