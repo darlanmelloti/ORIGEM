@@ -105,9 +105,45 @@ jobs:
           retention-days: 14
 
 
+  global-light-budget:
+    name: Orçamento global de luz
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v7
+
+      - name: Instalar Godot 4.7.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT_VERSION=4.7.1
+          GODOT_DIR="$RUNNER_TEMP/godot"
+          mkdir -p "$GODOT_DIR"
+          curl --fail --location --retry 3 \
+            "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip" \
+            --output "$GODOT_DIR/godot.zip"
+          unzip -q "$GODOT_DIR/godot.zip" -d "$GODOT_DIR"
+          chmod +x "$GODOT_DIR"/Godot_v${GODOT_VERSION}-stable_linux.x86_64
+
+      - name: Auditar luzes simultâneas
+        env:
+          GODOT_BIN: ${{ runner.temp }}/godot/Godot_v4.7.1-stable_linux.x86_64
+          OUT_DIR: ${{ runner.temp }}/origem_light_budget
+        shell: bash
+        run: tools/qa/run_light_budget_audit.sh
+
+      - name: Guardar evidências de orçamento
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: origem-global-light-budget-logs
+          path: ${{ runner.temp }}/origem_light_budget/**/*.log
+          if-no-files-found: warn
+          retention-days: 14
+
   regional-gate-summary:
     name: ORIGEM Regional Gate
-    needs: regional-gate
+    needs: [regional-gate, global-light-budget]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -115,10 +151,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          result="${{ needs.regional-gate.result }}"
-          echo "Resultado agregado: $result"
-          if [[ "$result" != "success" ]]; then
-            echo "Pelo menos uma porta regional falhou ou foi cancelada." >&2
+          regional_result="${{ needs.regional-gate.result }}"
+          lighting_result="${{ needs.global-light-budget.result }}"
+          echo "Resultado regional: $regional_result"
+          echo "Resultado de iluminação: $lighting_result"
+          if [[ "$regional_result" != "success" || "$lighting_result" != "success" ]]; then
+            echo "Uma porta regional ou a auditoria global de luz falhou ou foi cancelada." >&2
             exit 1
           fi
-          echo "Todas as regiões selecionadas passaram na porta contínua."
+          echo "Todas as regiões selecionadas e o orçamento global de luz foram aprovados."
