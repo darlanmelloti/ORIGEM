@@ -19,6 +19,7 @@ const ARCH_HUMID_THRESHOLD_SCRIPT: Script = preload("res://levels/regions/r3/Arc
 const ARCH_MARGIN_SILENCE_SCRIPT: Script = preload("res://levels/regions/r3/ArchMarginSilence.gd")
 const ARCH_THRESHOLD_REST_SCRIPT: Script = preload("res://levels/regions/r3/ArchThresholdRest.gd")
 const ARCH_MATERIAL_REST_SCRIPT: Script = preload("res://levels/regions/r3/ArchMaterialRest.gd")
+const ARCH_LATERAL_CALM_SCRIPT: Script = preload("res://levels/regions/r3/ArchLateralCalm.gd")
 const SILENT_CADENCE_DURATION: float = 1.35
 const SILENT_CADENCE_BEATS: int = 3
 const SILENT_CADENCE_SCALE_DELTA: float = 0.12
@@ -60,6 +61,7 @@ func _ready() -> void:
 	ARCH_MARGIN_SILENCE_SCRIPT.call("install", get_parent() as Node3D)
 	ARCH_THRESHOLD_REST_SCRIPT.call("install", get_parent() as Node3D)
 	ARCH_MATERIAL_REST_SCRIPT.call("install", get_parent() as Node3D)
+	ARCH_LATERAL_CALM_SCRIPT.call("install", get_parent() as Node3D)
 	_build_trigger()
 	_build_effects()
 	_apply_awakened_state()
