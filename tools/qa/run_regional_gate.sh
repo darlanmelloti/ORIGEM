@@ -373,6 +373,146 @@ if [[ "$REGION" == "R6" ]]; then
   fi
   printf '[GATE:%s] orçamento R6 de quatro luzes aprovado\n' "$REGION"
 
+  printf '[GATE:%s] prova DEV6-R6-WATERLINE-READING-003\n' "$REGION"
+  R6_WATERLINE_LOG="/tmp/origem_${REGION}_waterline_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_waterline_reading.gd >"$R6_WATERLINE_LOG" 2>&1
+  r6_waterline_status=$?
+  set -e
+  if [[ "$r6_waterline_status" -ne 0 ]]; then
+    cat "$R6_WATERLINE_LOG"
+    exit 18
+  fi
+  if ! grep -q '\[ORIGEM_R6_WATERLINE_OK\]' "$R6_WATERLINE_LOG"; then
+    cat "$R6_WATERLINE_LOG"
+    exit 18
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_WATERLINE_ERROR' "$R6_WATERLINE_LOG"; then
+    cat "$R6_WATERLINE_LOG"
+    exit 18
+  fi
+  printf '[GATE:%s] leitura arqueológica da linha de água aprovada\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV6-R6-BASIN-ARRIVAL-READING-004\n' "$REGION"
+  R6_ARRIVAL_LOG="/tmp/origem_${REGION}_arrival_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_basin_arrival_reading.gd >"$R6_ARRIVAL_LOG" 2>&1
+  r6_arrival_status=$?
+  set -e
+  if [[ "$r6_arrival_status" -ne 0 ]]; then
+    cat "$R6_ARRIVAL_LOG"
+    exit 19
+  fi
+  if ! grep -q '\[ORIGEM_R6_ARRIVAL_OK\]' "$R6_ARRIVAL_LOG"; then
+    cat "$R6_ARRIVAL_LOG"
+    exit 19
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_ARRIVAL_ERROR' "$R6_ARRIVAL_LOG"; then
+    cat "$R6_ARRIVAL_LOG"
+    exit 19
+  fi
+  printf '[GATE:%s] leitura da chegada à bacia aprovada\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV6-R6-BASIN-VISTA-READING-005\n' "$REGION"
+  R6_VISTA_LOG="/tmp/origem_${REGION}_vista_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_basin_vista_reading.gd >"$R6_VISTA_LOG" 2>&1
+  r6_vista_status=$?
+  set -e
+  if [[ "$r6_vista_status" -ne 0 ]]; then
+    cat "$R6_VISTA_LOG"
+    exit 20
+  fi
+  if ! grep -q '\[ORIGEM_R6_BASIN_VISTA_OK\]' "$R6_VISTA_LOG"; then
+    cat "$R6_VISTA_LOG"
+    exit 20
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_BASIN_VISTA_ERROR' "$R6_VISTA_LOG"; then
+    cat "$R6_VISTA_LOG"
+    exit 20
+  fi
+  printf '[GATE:%s] vista estática da bacia aprovada\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV6-R6-OUTER-WATERLINE-SILHOUETTE-006\n' "$REGION"
+  R6_OUTER_WATERLINE_LOG="/tmp/origem_${REGION}_outer_waterline_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_outer_waterline_silhouette.gd >"$R6_OUTER_WATERLINE_LOG" 2>&1
+  r6_outer_waterline_status=$?
+  set -e
+  if [[ "$r6_outer_waterline_status" -ne 0 ]]; then
+    cat "$R6_OUTER_WATERLINE_LOG"
+    exit 22
+  fi
+  if ! grep -q '\[ORIGEM_R6_OUTER_WATERLINE_OK\]' "$R6_OUTER_WATERLINE_LOG"; then
+    cat "$R6_OUTER_WATERLINE_LOG"
+    exit 22
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_OUTER_WATERLINE_ERROR' "$R6_OUTER_WATERLINE_LOG"; then
+    cat "$R6_OUTER_WATERLINE_LOG"
+    exit 22
+  fi
+  printf '[GATE:%s] silhueta exterior da linha de água aprovada\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV6-R6-EASTERN-MARGIN-READING-007\n' "$REGION"
+  R6_EASTERN_MARGIN_LOG="/tmp/origem_${REGION}_eastern_margin_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_reading.gd >"$R6_EASTERN_MARGIN_LOG" 2>&1
+  r6_eastern_margin_status=$?
+  set -e
+  if [[ "$r6_eastern_margin_status" -ne 0 ]]; then
+    cat "$R6_EASTERN_MARGIN_LOG"
+    exit 23
+  fi
+  if ! grep -q '\[ORIGEM_R6_EASTERN_MARGIN_OK\]' "$R6_EASTERN_MARGIN_LOG"; then
+    cat "$R6_EASTERN_MARGIN_LOG"
+    exit 23
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_EASTERN_MARGIN_ERROR' "$R6_EASTERN_MARGIN_LOG"; then
+    cat "$R6_EASTERN_MARGIN_LOG"
+    exit 23
+  fi
+  printf '[GATE:%s] leitura estática da margem oriental aprovada\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV6-R6-EASTERN-MARGIN-DEPTH-008\n' "$REGION"
+  R6_EASTERN_DEPTH_LOG="/tmp/origem_${REGION}_eastern_depth_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_depth.gd >"$R6_EASTERN_DEPTH_LOG" 2>&1
+  r6_eastern_depth_status=$?
+  set -e
+  if [[ "$r6_eastern_depth_status" -ne 0 ]]; then
+    cat "$R6_EASTERN_DEPTH_LOG"
+    exit 24
+  fi
+  if ! grep -q '\[ORIGEM_R6_EASTERN_DEPTH_OK\]' "$R6_EASTERN_DEPTH_LOG"; then
+    cat "$R6_EASTERN_DEPTH_LOG"
+    exit 24
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_EASTERN_DEPTH_ERROR' "$R6_EASTERN_DEPTH_LOG"; then
+    cat "$R6_EASTERN_DEPTH_LOG"
+    exit 24
+  fi
+  printf '[GATE:%s] profundidade estática da margem oriental aprovada\n' "$REGION"
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_lateral_balance.gd >/tmp/origem_${REGION}_eastern_lateral_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_LATERAL_OK\]' /tmp/origem_${REGION}_eastern_lateral_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_vista.gd >/tmp/origem_${REGION}_eastern_vista_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_VISTA_OK\]' /tmp/origem_${REGION}_eastern_vista_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_rhythm_final.gd >/tmp/origem_${REGION}_eastern_rhythm_final_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_RHYTHM_FINAL_OK\]' /tmp/origem_${REGION}_eastern_rhythm_final_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_closure.gd >/tmp/origem_${REGION}_eastern_closure_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_CLOSURE_OK\]' /tmp/origem_${REGION}_eastern_closure_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_readability_final.gd >/tmp/origem_${REGION}_eastern_readability_final_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_READABILITY_FINAL_OK\]' /tmp/origem_${REGION}_eastern_readability_final_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_observation.gd >/tmp/origem_${REGION}_eastern_observation_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_OBSERVATION_OK\]' /tmp/origem_${REGION}_eastern_observation_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_review.gd >/tmp/origem_${REGION}_eastern_review_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_REVIEW_OK\]' /tmp/origem_${REGION}_eastern_review_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_consolidation.gd >/tmp/origem_${REGION}_eastern_consolidation_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_CONSOLIDATION_OK\]' /tmp/origem_${REGION}_eastern_consolidation_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_stabilization.gd >/tmp/origem_${REGION}_eastern_stabilization_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_STABILIZATION_OK\]' /tmp/origem_${REGION}_eastern_stabilization_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_reconciliation.gd >/tmp/origem_${REGION}_eastern_reconciliation_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_RECONCILIATION_OK\]' /tmp/origem_${REGION}_eastern_reconciliation_$$.log
+
   printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
   R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
   set +e

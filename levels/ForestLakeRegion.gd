@@ -70,6 +70,22 @@ const R5_MAJESTIC_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r
 const R5_MAJESTIC_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampStabilization.gd")
 const R5_MAJESTIC_RECONCILIATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReconciliation.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
+const R6_WATERLINE_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6WaterlineReading.gd")
+const R6_BASIN_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinArrivalReading.gd")
+const R6_BASIN_VISTA_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinVistaReading.gd")
+const R6_OUTER_WATERLINE_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r6/R6OuterWaterlineSilhouette.gd")
+const R6_EASTERN_MARGIN_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReading.gd")
+const R6_EASTERN_MARGIN_DEPTH_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginDepth.gd")
+const R6_EASTERN_MARGIN_LATERAL_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginLateralBalance.gd")
+const R6_EASTERN_MARGIN_VISTA_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginVista.gd")
+const R6_EASTERN_MARGIN_RHYTHM_FINAL_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginRhythmFinal.gd")
+const R6_EASTERN_MARGIN_CLOSURE_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginClosure.gd")
+const R6_EASTERN_MARGIN_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReadabilityFinal.gd")
+const R6_EASTERN_MARGIN_OBSERVATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginObservation.gd")
+const R6_EASTERN_MARGIN_REVIEW_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReview.gd")
+const R6_EASTERN_MARGIN_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginConsolidation.gd")
+const R6_EASTERN_MARGIN_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginStabilization.gd")
+const R6_EASTERN_MARGIN_RECONCILIATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReconciliation.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -98,6 +114,7 @@ func _ready() -> void:
 	_build_cartographic_river_inlet()
 	_build_shore_access_steps()
 	_build_basin_arrival_frame()
+	_build_r6_basin_arrival_reading()
 	_build_majestic_lake_transition()
 	_build_basin_approach_silhouettes()
 	_build_cartographic_lake_vistas()
@@ -157,9 +174,23 @@ func _ready() -> void:
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
 	_build_waterline_reading()
+	_build_r6_eastern_margin_reading()
+	_build_r6_eastern_margin_depth()
+	_build_r6_eastern_margin_lateral_balance()
+	_build_r6_eastern_margin_vista()
+	_build_r6_eastern_margin_rhythm_final()
+	_build_r6_eastern_margin_closure()
+	_build_r6_eastern_margin_readability_final()
+	_build_r6_eastern_margin_observation()
+	_build_r6_eastern_margin_review()
+	_build_r6_eastern_margin_consolidation()
+	_build_r6_eastern_margin_stabilization()
+	_build_r6_eastern_margin_reconciliation()
 	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
+	_build_r6_basin_vista_reading()
 	_build_riparian_margin()
+	_build_r6_outer_waterline_silhouette()
 	_build_lakeside_focal_vegetation()
 	_build_majestic_ruins_approach_grounding()
 	_apply_riparian_fern_alpha_test()
@@ -980,6 +1011,12 @@ func _build_basin_arrival_frame() -> void:
 		fern.scale = Vector3.ONE * 0.50
 		fern.rotation.y = 0.46
 		frame.add_child(fern)
+
+func _build_r6_basin_arrival_reading() -> void:
+	# DEV6-R6-BASIN-ARRIVAL-READING-004: reorienta vestígios existentes sem acrescentar geometria, luz ou colisão.
+	var reading: R6BasinArrivalReading = R6_BASIN_ARRIVAL_READING_SCRIPT.call("install", self) as R6BasinArrivalReading
+	if reading == null:
+		push_error("[ORIGEM_R6] Não foi possível instalar a leitura da chegada à bacia.")
 
 func _build_majestic_lake_transition() -> void:
 	# Vestígios de observação da Majestic acompanham a chegada ao lago: tornam a transição narrativa física sem bloquear o trilho.
@@ -1981,6 +2018,16 @@ func _build_cartographic_basin_silhouette() -> void:
 		stream.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		silhouette.add_child(stream)
 
+func _build_r6_basin_vista_reading() -> void:
+	# DEV6-R6-BASIN-VISTA-READING-005: transforma apenas rochas existentes do promontório oriental, sem alterar água, margem ou handoff.
+	var silhouette: Node3D = get_node_or_null("SilhuetaCartograficaDaBacia") as Node3D
+	if silhouette == null:
+		push_error("[ORIGEM_R6] Silhueta cartográfica da bacia indisponível para leitura estática.")
+		return
+	var adjusted: int = int(R6_BASIN_VISTA_READING_SCRIPT.call("apply", silhouette))
+	if adjusted < 1:
+		push_error("[ORIGEM_R6] Não foi possível ajustar as rochas existentes da vista da bacia.")
+
 func _build_submerged_ruins() -> void:
 	var lake: Node3D = Node3D.new()
 	lake.name = "RuinasSubmersasDoLago"
@@ -2149,37 +2196,80 @@ func _build_submerged_ruins() -> void:
 		shallow_path.add_child(shallow_body)
 
 func _build_waterline_reading() -> void:
-	# DEV6-R6-WATERLINE-READING-003: reforço arqueológico exclusivamente visual na linha de água.
-	# Fora do leito, fora do trilho jogável e sem luzes, shaders, emissão, painéis ou colisores.
-	var debris: Node3D = Node3D.new()
-	debris.name = "R6_DetritosLinhaDeAgua"
-	add_child(debris)
-	var anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
-	var placements: Array[Dictionary] = [
-		{"x": 8.0, "z": 223.5, "s": 0.24, "r": 0.33},
-		{"x": 39.0, "z": 218.0, "s": 0.31, "r": 1.12},
-		{"x": 68.0, "z": 217.0, "s": 0.22, "r": -0.47},
-		{"x": 95.0, "z": 224.0, "s": 0.34, "r": 0.86},
-		{"x": 105.0, "z": 247.0, "s": 0.27, "r": 1.74},
-		{"x": 101.5, "z": 271.0, "s": 0.38, "r": -0.62},
-		{"x": 87.0, "z": 286.0, "s": 0.25, "r": 0.45},
-		{"x": 38.0, "z": 287.0, "s": 0.36, "r": 2.08},
-		{"x": 19.0, "z": 272.0, "s": 0.21, "r": -0.28}
-	]
-	for index: int in range(placements.size()):
-		var spec: Dictionary = placements[index]
-		var rock: Node3D = ROCK.instantiate() as Node3D
-		if rock == null:
-			continue
-		var world_x: float = float(spec["x"])
-		var world_z: float = float(spec["z"])
-		var scale_value: float = float(spec["s"])
-		rock.name = "DetritoLinhaAguaR6_%02d" % index
-		rock.position = Vector3(world_x, _height_at(world_x, world_z) + 0.06, world_z)
-		rock.scale = Vector3(scale_value, scale_value * (0.58 + float(index % 3) * 0.16), scale_value * (0.82 + float(index % 2) * 0.14))
-		rock.rotation = Vector3(0.08 * float(index % 2), float(spec["r"]), -0.10 + float(index % 3) * 0.09)
-		_apply_material(rock, ruin_material)
-		debris.add_child(rock)
+	# DEV6-R6-WATERLINE-READING-003: camada modular de vestígios assimétricos fora do leito e das lajes R6.
+	var reading: R6WaterlineReading = R6_WATERLINE_READING_SCRIPT.call("install", self, ROCK, Callable(self, "_height_at")) as R6WaterlineReading
+	if reading == null:
+		push_error("[ORIGEM_R6] Não foi possível instalar a leitura arqueológica da linha de água.")
+
+func _build_r6_eastern_margin_reading() -> void:
+	# DEV6-R6-EASTERN-MARGIN-READING-007: relê apenas os três vestígios já existentes da margem oriental.
+	var waterline_reading: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if waterline_reading == null:
+		push_error("[ORIGEM_R6] Linha de água indisponível para leitura da margem oriental.")
+		return
+	var adjusted: int = int(R6_EASTERN_MARGIN_READING_SCRIPT.call("apply", waterline_reading))
+	if adjusted != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar os três vestígios da margem oriental.")
+
+func _build_r6_eastern_margin_depth() -> void:
+	# DEV6-R6-EASTERN-MARGIN-DEPTH-008: diferencia apenas os três vestígios já aprovados na margem oriental.
+	var waterline_reading: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if waterline_reading == null:
+		push_error("[ORIGEM_R6] Linha de água indisponível para profundidade da margem oriental.")
+		return
+	var adjusted: int = int(R6_EASTERN_MARGIN_DEPTH_SCRIPT.call("apply", waterline_reading))
+	if adjusted != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar os três vestígios de profundidade oriental.")
+
+func _build_r6_eastern_margin_lateral_balance() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_LATERAL_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível equilibrar os vestígios orientais existentes.")
+
+func _build_r6_eastern_margin_vista() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_VISTA_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a vista dos vestígios orientais existentes.")
+
+func _build_r6_eastern_margin_rhythm_final() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_RHYTHM_FINAL_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a cadência final oriental.")
+
+func _build_r6_eastern_margin_closure() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_CLOSURE_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível fechar a leitura oriental estática.")
+
+func _build_r6_eastern_margin_readability_final() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_READABILITY_FINAL_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a legibilidade final oriental.")
+
+func _build_r6_eastern_margin_observation() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_OBSERVATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a observação oriental estática.")
+
+func _build_r6_eastern_margin_review() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_REVIEW_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a revisão oriental estática.")
+
+func _build_r6_eastern_margin_consolidation() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_CONSOLIDATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a consolidação oriental estática.")
+
+func _build_r6_eastern_margin_stabilization() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_STABILIZATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a estabilização oriental estática.")
+
+func _build_r6_eastern_margin_reconciliation() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_RECONCILIATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a reconciliação oriental estática.")
 
 func _make_elliptical_lake_mesh(radius_x: float, radius_z: float) -> ArrayMesh:
 	var surface: SurfaceTool = SurfaceTool.new()
@@ -2267,6 +2357,16 @@ func _build_riparian_margin() -> void:
 			accent_fern.scale = Vector3(0.46, 0.46, 0.46)
 			accent_fern.rotation.y = 0.28 + float(accent_index) * 0.83
 			margin.add_child(accent_fern)
+
+func _build_r6_outer_waterline_silhouette() -> void:
+	# DEV6-R6-OUTER-WATERLINE-SILHOUETTE-006: ajusta somente acentos rochosos existentes da margem exterior.
+	var margin: Node3D = get_node_or_null("MargensRochosasDoLago") as Node3D
+	if margin == null:
+		push_error("[ORIGEM_R6] Margem rochosa indisponível para silhueta exterior.")
+		return
+	var adjusted: int = int(R6_OUTER_WATERLINE_SILHOUETTE_SCRIPT.call("apply", margin))
+	if adjusted < 1:
+		push_error("[ORIGEM_R6] Não foi possível ajustar os acentos rochosos da margem exterior.")
 
 func _build_majestic_ruins_approach_grounding() -> void:
 	# CP284: três grupos irregulares costuram o fim da expedição Majestic à margem das Ruínas sem fechar a aproximação ocidental.

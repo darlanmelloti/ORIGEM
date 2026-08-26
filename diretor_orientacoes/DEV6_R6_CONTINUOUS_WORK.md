@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-WATERLINE-READING-003
+task_id: DEV6-R6-EASTERN-MARGIN-CONSISTENCY-019
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -29,19 +29,67 @@ O módulo `levels/regions/r6/R6ShoreHandoff.gd` adiciona quatro lajes físicas e
 | Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` aprovadas |
 | QA | Parser, sonda de luz, prova de handoff e porta R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-WATERLINE-READING-003
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-READING-007
 
-Melhorar a leitura arqueológica da linha de água junto às ruínas sem adicionar luzes ou novos shaders: compor três conjuntos assimétricos de pedra, raízes ou detritos de expedição parcialmente arrastados pela margem, todos fora do leito jogável e sem bloquear lajes, cascata, estela ou a transição R6→R7. A intenção é reforçar abandono recente e orientar Elias para a margem oposta por geometria real, não por sinalização artificial.
+O módulo `levels/regions/r6/R6EasternMarginReading.gd` ajustou estaticamente os três vestígios arqueológicos existentes do `ConjuntoDaMargemOriental`, sem deslocar as suas bases espaciais. Não foram criados nós, geometria, luzes, colisores, água falsa, partículas, shaders, interface, câmara, rotas artificiais ou conteúdo R7. A prova `[ORIGEM_R6_EASTERN_MARGIN_OK]`, o orçamento de quatro luzes, as leituras R6 cumulativas, o handoff, o parser, a porta R6 e as três rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-DEPTH-008
+
+O módulo `levels/regions/r6/R6EasternMarginDepth.gd` aprofundou a leitura estática dos três vestígios já aprovados da margem oriental, alterando apenas escala e orientação locais. As posições-base, água, cascata, handoff, orçamento de quatro luzes, parser, porta R6 e as três rotas foram preservados e aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-LATERAL-BALANCE-009
+
+O módulo `R6EasternMarginLateralBalance.gd` equilibrava lateralmente os três vestígios existentes já aprovados pela leitura e profundidade, alterando apenas escala e orientação locais. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-VISTA-010
+
+O módulo `R6EasternMarginVista.gd` ajustou estaticamente os três vestígios existentes já aprovados por leitura, profundidade e equilíbrio lateral, sem deslocar as suas bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-RHYTHM-FINAL-011
+
+O módulo `R6EasternMarginRhythmFinal.gd` ajustou estaticamente os três vestígios existentes já aprovados pela leitura de vista, sem deslocar as bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-CLOSURE-012
+
+O módulo `R6EasternMarginClosure.gd` ajustou estaticamente os três vestígios existentes já aprovados pela cadência final, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-READABILITY-FINAL-013
+
+O módulo `R6EasternMarginReadabilityFinal.gd` ajustou estaticamente os três vestígios existentes já aprovados pelo fecho, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-OBSERVATION-014
+
+O módulo `R6EasternMarginObservation.gd` ajustou estaticamente os três vestígios existentes já aprovados pela legibilidade final, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-REVIEW-015
+
+O módulo `R6EasternMarginReview.gd` ajustou estaticamente os três vestígios existentes já aprovados pela observação, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-CONSOLIDATION-016
+
+O módulo `R6EasternMarginConsolidation.gd` ajustou estaticamente os três vestígios existentes já aprovados pela revisão, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-STABILIZATION-017
+
+O módulo `R6EasternMarginStabilization.gd` ajustou estaticamente os três vestígios existentes já aprovados pela consolidação, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-RECONCILIATION-018
+
+O módulo `R6EasternMarginReconciliation.gd` ajustou estaticamente os três vestígios existentes já aprovados pela estabilização, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-CONSISTENCY-019
+
+Auditar e ajustar exclusivamente a consistência estática final de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Módulo `levels/regions/r6/`, QA R6 e montagem mínima em R6 |
-| Cartografia | Âncora R6 e handoff físico para R7 inalterados |
+| Escopo | Material ou transformação estática de elementos R6 existentes; QA R6 e montagem mínima se necessária |
+| Cartografia | Âncora R6, limiar e handoff físico para R7 inalterados |
 | Água | Sem painel, emissão excessiva, nova luz ou shader adicional |
-| Física | Nenhum detrito no leito/trilho jogável; colisores só quando necessários |
+| Física | Sem novos colisores ou bloqueios no leito, trilho, cascata, estela ou lajes |
 | Luz | `r6_total=4` continua obrigatório |
-| QA | Parser, orçamento R6, prova de handoff e todas as rotas R6 antes do PR |
+| QA | Parser, orçamento R6, provas de linha de água, chegada, vista, silhueta exterior, margem oriental e handoff, e todas as rotas R6 antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-WATERLINE-READING-003` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-RECONCILIATION-018` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-CONSISTENCY-019`.
