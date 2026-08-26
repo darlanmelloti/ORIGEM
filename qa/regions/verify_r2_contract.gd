@@ -62,6 +62,10 @@ func _init() -> void:
 		issues.append("R2 aponta para um módulo de origem inesperado")
 	if contract.bounds.size.z < 88.0 or contract.bounds.size.x < 70.0:
 		issues.append("AABB da R2 não cobre o corredor físico declarado")
+	if contract.bounds.size.y <= 0.0 or contract.bounds.size.x <= 0.0 or contract.bounds.size.z <= 0.0:
+		issues.append("AABB da R2 não pode ser degenerada")
+	if contract.bounds.position.y > 0.0 or contract.bounds.end.y < 0.0:
+		issues.append("AABB da R2 deve conter o plano físico y=0")
 	var acceptance = R2_SCRIPT.acceptance_criteria()
 	if acceptance.size() < 4:
 		issues.append("R2 deve declarar pelo menos quatro critérios de aceitação")
@@ -117,4 +121,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_023_OK] orçamento regional R2 coerente com o teto global de duas luzes.")
 	print("[ORIGEM_R2_RIVER_QA_024_OK] interface regional R2 expõe métodos e tipos estáveis.")
 	print("[ORIGEM_R2_RIVER_QA_025_OK] identificadores e nomes canônicos da R2 preservados.")
+	print("[ORIGEM_R2_RIVER_QA_026_OK] AABB R2 não degenerada e com plano físico contido.")
 	quit(0)

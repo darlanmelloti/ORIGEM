@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-QA-025
+task_id: DEV2-R2-RIVER-QA-026
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -88,20 +88,23 @@ O verificador confirmou o orçamento regional de duas luzes coerente com o teto 
 ## Tarefa concluída — DEV2-R2-RIVER-QA-024
 O verificador confirmou a interface regional R2 com métodos e tipos estáveis; a prova passou no CI.
 
-## Tarefa ativa — DEV2-R2-RIVER-QA-025
+## Tarefa concluída — DEV2-R2-RIVER-QA-025
+O verificador confirmou os identificadores e nomes canônicos da R2; a prova passou no CI.
 
-O verificador contratual da R2 deve confirmar a **estabilidade do identificador de integração**, preservando o `region_id`, o nome canônico do nó e o nome de apresentação da Estrada do Rio. Esta tarefa é somente de QA e não altera geometria, navegação ou cenas.
+## Tarefa ativa — DEV2-R2-RIVER-QA-026
+
+O verificador contratual da R2 deve confirmar que a **AABB regional é válida e não degenerada**, contendo as âncoras e projeções físicas necessárias ao corredor. Esta tarefa é somente de QA e não altera geometria, navegação ou cenas.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
 | Cartografia | Validar as três rotas no contrato sem mover estrada, Arco ou âncoras cartográficas |
-| Acesso | Confirmar `region_id=2`, `Estrada do Rio` e `EstradaDoRioExploravel` sem renomeações |
+| Acesso | Confirmar AABB não degenerada com dimensões mínimas e pontos contratuais internos |
 | Desempenho | Zero luz dinâmica, partículas e emissão persistente; reutilizar pedra e fetos reais já presentes |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
 | Narrativa | A visada deve orientar o retorno à Casa Voss sem competir com Orion ou o Arco |
-| Verificação | Executar o verificador contratual e acrescentar `[ORIGEM_R2_RIVER_QA_025_OK]` antes de abrir PR |
+| Verificação | Executar o verificador contratual e acrescentar `[ORIGEM_R2_RIVER_QA_026_OK]` antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -109,4 +112,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-QA-025`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-QA-026`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
