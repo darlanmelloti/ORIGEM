@@ -42,6 +42,7 @@ const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 const R6_WATERLINE_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6WaterlineReading.gd")
 const R6_BASIN_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinArrivalReading.gd")
+const R6_BASIN_VISTA_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinVistaReading.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -102,6 +103,7 @@ func _ready() -> void:
 	_build_waterline_reading()
 	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
+	_build_r6_basin_vista_reading()
 	_build_riparian_margin()
 	_build_lakeside_focal_vegetation()
 	_build_majestic_ruins_approach_grounding()
@@ -1755,6 +1757,16 @@ func _build_cartographic_basin_silhouette() -> void:
 		stream.rotation = Vector3(0.04 * float((stream_index % 3) - 1), 0.12 * float(stream_index), 0.05 * float((stream_index % 2) * 2 - 1))
 		stream.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		silhouette.add_child(stream)
+
+func _build_r6_basin_vista_reading() -> void:
+	# DEV6-R6-BASIN-VISTA-READING-005: transforma apenas rochas existentes do promontório oriental, sem alterar água, margem ou handoff.
+	var silhouette: Node3D = get_node_or_null("SilhuetaCartograficaDaBacia") as Node3D
+	if silhouette == null:
+		push_error("[ORIGEM_R6] Silhueta cartográfica da bacia indisponível para leitura estática.")
+		return
+	var adjusted: int = int(R6_BASIN_VISTA_READING_SCRIPT.call("apply", silhouette))
+	if adjusted < 1:
+		push_error("[ORIGEM_R6] Não foi possível ajustar as rochas existentes da vista da bacia.")
 
 func _build_submerged_ruins() -> void:
 	var lake: Node3D = Node3D.new()

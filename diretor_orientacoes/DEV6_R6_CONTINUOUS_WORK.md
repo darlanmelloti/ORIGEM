@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-BASIN-VISTA-READING-005
+task_id: DEV6-R6-OUTER-WATERLINE-SILHOUETTE-006
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -29,9 +29,9 @@ O módulo `levels/regions/r6/R6ShoreHandoff.gd` adiciona quatro lajes físicas e
 | Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` aprovadas |
 | QA | Parser, sonda de luz, prova de handoff e porta R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-BASIN-VISTA-READING-005
+## Tarefa ativa — DEV6-R6-OUTER-WATERLINE-SILHOUETTE-006
 
-Auditar e ajustar exclusivamente a leitura estática da silhueta da bacia usando materiais e elementos R6 existentes. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
+Auditar e ajustar exclusivamente a silhueta exterior da linha de água com materiais ou elementos R6 existentes. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
 
 | Critério | Obrigatório |
 |---|---|
@@ -40,7 +40,7 @@ Auditar e ajustar exclusivamente a leitura estática da silhueta da bacia usando
 | Água | Sem painel, emissão excessiva, nova luz ou shader adicional |
 | Física | Sem novos colisores ou bloqueios no leito, trilho, cascata, estela ou lajes |
 | Luz | `r6_total=4` continua obrigatório |
-| QA | Parser, orçamento R6, provas de linha de água, chegada e handoff, e todas as rotas R6 antes do PR |
+| QA | Parser, orçamento R6, provas de linha de água, chegada, vista e handoff, e todas as rotas R6 antes do PR |
 
 ## Sucessão obrigatória
 

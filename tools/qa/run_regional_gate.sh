@@ -356,6 +356,26 @@ if [[ "$REGION" == "R6" ]]; then
   fi
   printf '[GATE:%s] leitura da chegada à bacia aprovada\n' "$REGION"
 
+  printf '[GATE:%s] prova DEV6-R6-BASIN-VISTA-READING-005\n' "$REGION"
+  R6_VISTA_LOG="/tmp/origem_${REGION}_vista_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_basin_vista_reading.gd >"$R6_VISTA_LOG" 2>&1
+  r6_vista_status=$?
+  set -e
+  if [[ "$r6_vista_status" -ne 0 ]]; then
+    cat "$R6_VISTA_LOG"
+    exit 20
+  fi
+  if ! grep -q '\[ORIGEM_R6_BASIN_VISTA_OK\]' "$R6_VISTA_LOG"; then
+    cat "$R6_VISTA_LOG"
+    exit 20
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_BASIN_VISTA_ERROR' "$R6_VISTA_LOG"; then
+    cat "$R6_VISTA_LOG"
+    exit 20
+  fi
+  printf '[GATE:%s] vista estática da bacia aprovada\n' "$REGION"
+
   printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
   R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
   set +e
