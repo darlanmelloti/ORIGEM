@@ -29,6 +29,14 @@ func _init() -> void:
 		issues.append("R2 deve declarar a rota road_return_voss")
 	if not contract.source_module.ends_with("levels/RiverRoadJourney.gd"):
 		issues.append("R2 aponta para um módulo de origem inesperado")
+	if contract.bounds.size.z < 88.0 or contract.bounds.size.x < 70.0:
+		issues.append("AABB da R2 não cobre o corredor físico declarado")
+	var acceptance = R2_SCRIPT.acceptance_criteria()
+	if acceptance.size() < 4:
+		issues.append("R2 deve declarar pelo menos quatro critérios de aceitação")
+	for criterion: String in acceptance:
+		if criterion.strip_edges().is_empty():
+			issues.append("R2 não pode conter critério de aceitação vazio")
 	if not contract.is_world_position_inside(Vector3(-21.4, 0.0, 12.0)):
 		issues.append("âncora física de entrada da R2 está fora da AABB")
 	if not contract.is_world_position_inside(Vector3(-10.0, 0.0, 92.0)):
@@ -40,4 +48,5 @@ func _init() -> void:
 		return
 	print("[ORIGEM_R2_CONTRACT_OK] R2 válida: Dev2, duas luzes, estrada→arco, retorno e ponte lateral.")
 	print("[ORIGEM_R2_RIVER_QA_014_OK] contrato R2 preserva as três rotas canônicas e o proprietário Dev2.")
+	print("[ORIGEM_R2_RIVER_QA_015_OK] critérios de aceitação, origem e limites físicos R2 completos.")
 	quit(0)
