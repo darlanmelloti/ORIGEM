@@ -106,6 +106,22 @@ if [[ "$REGION" == "R2" ]]; then
     cat "$WORLD_LIFE_LOG"
     exit 12
   fi
+  if ! grep -q '\[ORIGEM_R2_RIVER_RETURN_010_OK\]' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
+  if ! grep -q '\[ORIGEM_R2_RIVER_MARKER_011_OK\]' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
+  if ! grep -q '\[ORIGEM_R2_RIVER_QA_012_OK\]' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
+  if ! grep -q '\[ORIGEM_R2_RIVER_APPROACH_009_OK\]' "$WORLD_LIFE_LOG"; then
+    cat "$WORLD_LIFE_LOG"
+    exit 12
+  fi
   if ! grep -q '\[ORIGEM_R2_RIVER_FOOTBRIDGE_OK\]' "$WORLD_LIFE_LOG"; then
     cat "$WORLD_LIFE_LOG"
     exit 12
@@ -179,6 +195,62 @@ if [[ "$REGION" == "R4" ]]; then
     exit 18
   fi
   printf '[GATE:%s] leitura arqueológica R4 e clareira aberta aprovadas\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV4-R4-CANOPY-CADENCE-004\n' "$REGION"
+  R4_CANOPY_LOG="/tmp/origem_${REGION}_canopy_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r4_canopy_cadence.gd >"$R4_CANOPY_LOG" 2>&1
+  r4_canopy_status=$?
+  set -e
+  if [[ "$r4_canopy_status" -ne 0 ]]; then
+    cat "$R4_CANOPY_LOG"
+    exit 20
+  fi
+  if ! grep -q '\[ORIGEM_R4_CANOPY_OK\]' "$R4_CANOPY_LOG"; then
+    cat "$R4_CANOPY_LOG"
+    exit 20
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R4_CANOPY_ERROR' "$R4_CANOPY_LOG"; then
+    cat "$R4_CANOPY_LOG"
+    exit 20
+  fi
+  printf '[GATE:%s] cadência de copas R4 aprovada\n' "$REGION"
+
+  declare -a r4_cumulative_proofs=(
+    'verify_r4_understory_edge.gd|[ORIGEM_R4_UNDERSTORY_OK]|sub-bosque lateral'
+    'verify_r4_orion_vista_framing.gd|[ORIGEM_R4_VISTA_OK]|enquadramento da vista Orion'
+    'verify_r4_forest_approach_rhythm.gd|[ORIGEM_R4_APPROACH_OK]|cadência da aproximação florestal'
+    'verify_r4_majestic_edge_balance.gd|[ORIGEM_R4_EDGE_OK]|equilíbrio da margem Majestic'
+    'verify_r4_silhouette_continuity.gd|[ORIGEM_R4_SILHOUETTE_OK]|continuidade da silhueta'
+    'verify_r4_forest_depth_balance.gd|[ORIGEM_R4_DEPTH_OK]|equilíbrio de profundidade lateral'
+    'verify_r4_approach_readability.gd|[ORIGEM_R4_READABILITY_OK]|legibilidade da aproximação Orion'
+    'verify_r4_trail_pacing.gd|[ORIGEM_R4_PACING_OK]|ritmo visual do trilho'
+    'verify_r4_margin_continuity.gd|[ORIGEM_R4_MARGIN_OK]|continuidade da margem ambiental'
+    'verify_r4_approach_composition.gd|[ORIGEM_R4_COMPOSITION_OK]|composição da aproximação'
+    'verify_r4_edge_rhythm.gd|[ORIGEM_R4_EDGE_RHYTHM_OK]|cadência da borda florestal'
+  )
+  for proof in "${r4_cumulative_proofs[@]}"; do
+    IFS='|' read -r r4_qa_file r4_marker r4_label <<< "$proof"
+    printf '[GATE:%s] prova R4 %s\n' "$REGION" "$r4_label"
+    R4_CUMULATIVE_LOG="/tmp/origem_${REGION}_$(basename "$r4_qa_file" .gd)_$$.log"
+    set +e
+    GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script "res://qa/regions/$r4_qa_file" >"$R4_CUMULATIVE_LOG" 2>&1
+    r4_cumulative_status=$?
+    set -e
+    if [[ "$r4_cumulative_status" -ne 0 ]]; then
+      cat "$R4_CUMULATIVE_LOG"
+      exit 21
+    fi
+    if ! grep -Fq "$r4_marker" "$R4_CUMULATIVE_LOG"; then
+      cat "$R4_CUMULATIVE_LOG"
+      exit 21
+    fi
+    if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R4_[A-Z_]+_ERROR' "$R4_CUMULATIVE_LOG"; then
+      cat "$R4_CUMULATIVE_LOG"
+      exit 21
+    fi
+  done
+  printf '[GATE:%s] sequência cumulativa R4 aprovada\n' "$REGION"
 fi
 
 if [[ "$REGION" == "R5" ]]; then
