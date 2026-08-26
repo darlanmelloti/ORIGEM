@@ -14,6 +14,7 @@ const ELIAS_CODEX_UI_SCRIPT: Script = preload("res://ui/hud/EliasCodexUI.gd")
 const QA_STATE_TRANSITION_SCRIPT: Script = preload("res://tools/qa/run_player_state_transition.gd")
 const QA_STATE_ROUNDTRIP_SCRIPT: Script = preload("res://tools/qa/run_player_state_roundtrip.gd")
 const QA_GROUNDING_SCRIPT: Script = preload("res://tools/qa/run_player_grounding.gd")
+const R2_REGION_SCRIPT: Script = preload("res://levels/regions/R2_RiverRoad.gd")
 # Orçamento GTX 1050 Ti: o vale pode conter muitas luzes de narrativa, mas só as 16 mais próximas de Elias permanecem visíveis.
 const MAX_VISIBLE_DYNAMIC_OMNI_LIGHTS: int = 16
 const LIGHT_BUDGET_REFRESH_MSEC: int = 500
@@ -149,10 +150,43 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("a estrada física R2 desapareceu")
 		if r2.get_node_or_null("ArcoDasRuinas_EstradaDoRio") == null:
 			issues.append("o Arco físico R2 desapareceu")
-		if r2.get_node_or_null("EstacaoDeObservacaoDoReflexoOrion") == null:
+		var station: Node = r2.get_node_or_null("EstacaoDeObservacaoDoReflexoOrion")
+		if station == null:
 			issues.append("a estação arqueológica do reflexo Orion está em falta")
-		elif r2.find_child("LajeDaEstacaoOrion_05", true, false) == null:
+		elif station.find_child("LajeDaEstacaoOrion_05", true, false) == null:
 			issues.append("a estação Orion não possui as cinco lajes físicas esperadas")
+		var lookout: Node = r2.get_node_or_null("MiradouroReflexoOrionR2")
+		if lookout == null:
+			issues.append("o miradouro físico do reflexo Orion está em falta")
+		else:
+			if lookout.get_node_or_null("LajeMiradouroReflexoOrion") == null or lookout.get_node_or_null("ColisorLajeMiradouroReflexoOrion") == null:
+				issues.append("o miradouro Orion não possui laje física e colisor coincidente")
+			if not lookout.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("o miradouro Orion não pode criar luz dinâmica")
+		var return_landing: Node = r2.get_node_or_null("LajeConfirmacaoRetornoVossR2")
+		if return_landing == null:
+			issues.append("a laje física de confirmação do retorno Voss está em falta")
+		else:
+			if return_landing.get_node_or_null("LajeConfirmacaoRetornoVoss") == null or return_landing.get_node_or_null("ColisorLajeConfirmacaoRetornoVoss") == null:
+				issues.append("a confirmação do retorno Voss não possui laje e colisor coincidente")
+			if not return_landing.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a confirmação do retorno Voss não pode criar luz dinâmica")
+		var arch_arrival: Node = r2.get_node_or_null("LajeChegadaArcoR2")
+		if arch_arrival == null:
+			issues.append("a laje física de chegada sob o Arco está em falta")
+		else:
+			if arch_arrival.get_node_or_null("LajeChegadaSobArco") == null or arch_arrival.get_node_or_null("ColisorLajeChegadaSobArco") == null:
+				issues.append("a chegada sob o Arco não possui laje e colisor coincidente")
+			if not arch_arrival.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a chegada sob o Arco não pode criar luz dinâmica")
+		var midriver_edge: Node = r2.get_node_or_null("LeituraMargemReflexoOrionR2")
+		if midriver_edge == null:
+			issues.append("a leitura média da margem do reflexo Orion está em falta")
+		else:
+			if midriver_edge.get_node_or_null("PedraLeituraReflexoOrion_02") == null or midriver_edge.get_node_or_null("FetoAbertoLeituraReflexo_02") == null:
+				issues.append("a leitura média da margem não possui pedras e fetos abertos")
+			if not midriver_edge.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a leitura média da margem não pode criar luz dinâmica")
 		if not r2.find_children("LuzMarcoVida*", "OmniLight3D", true, false).is_empty():
 			issues.append("os marcos R2 não podem criar luzes dinâmicas")
 		if not r2.find_children("LuzEstacaoOrion*", "OmniLight3D", true, false).is_empty():
@@ -186,13 +220,66 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("a margem geológica não possui os dois afloramentos")
 		elif not edge.find_children("*", "OmniLight3D", true, false).is_empty():
 			issues.append("a margem geológica não pode criar luz dinâmica")
-		if issues.is_empty():
-			print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
-			print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
-			print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_EDGE_OK] margem geológica ribeirinha presente; leitura lateral sem luz dinâmica.")
+		var final_edge: Node = r2.get_node_or_null("LinhaPedrasMargemFinalR2")
+		if final_edge == null:
+			issues.append("a linha de pedras da margem final está em falta")
+		elif final_edge.find_child("PedraLeituraMargemFinal_03", true, false) == null:
+			issues.append("a margem final não possui três pedras de leitura")
+		elif not final_edge.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("a margem final não pode criar luz dinâmica")
+		var approach: Node = r2.get_node_or_null("AproximacaoUltimoTrechoArcoR2")
+		if approach == null:
+			issues.append("a aproximação do último trecho R2 está em falta")
+		elif approach.find_child("LajeInterrompidaUltimoTrecho_02", true, false) == null:
+			issues.append("a aproximação do último trecho não possui duas lajes interrompidas")
+		elif not approach.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("a aproximação do último trecho não pode criar luz dinâmica")
+
+		var route_contract = R2_REGION_SCRIPT.new().create_contract()
+		for route_name: String in PackedStringArray(["road_to_arch", "road_return_voss", "positive_bridge"]):
+			if not route_contract.qa_routes.has(route_name):
+				issues.append("rota canônica R2 em falta: %s" % route_name)
+		var markers: Node = r2.get_node_or_null("MarcadoresAmbientaisRetornoR2")
+		if markers == null:
+			issues.append("os marcadores ambientais de retorno estão em falta")
+		elif markers.find_child("PedraMarcadorRetorno_02", true, false) == null:
+			issues.append("os marcadores ambientais não possuem duas pedras de referência")
+		elif not markers.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("os marcadores ambientais não podem criar luz dinâmica")
+		elif not markers.find_children("*", "CollisionShape3D", true, false).is_empty() or not markers.find_children("*", "StaticBody3D", true, false).is_empty() or not markers.find_children("*", "Area3D", true, false).is_empty():
+			issues.append("os marcadores ambientais não podem criar corpos ou formas de colisão")
+		var sightline: Node = r2.get_node_or_null("VisadaRetornoCasaVossR2")
+		if sightline == null:
+			issues.append("a visada de retorno à Casa Voss está em falta")
+		elif sightline.find_child("LajeCurtaVisadaRetornoVoss", true, false) == null or sightline.find_child("PedraReferenciaRetornoVoss_02", true, false) == null:
+			issues.append("a visada de retorno não possui laje e duas pedras de referência")
+		elif not sightline.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("a visada de retorno não pode criar luz dinâmica")
+		var recessed: Node = r2.get_node_or_null("RecuoMargemFinalArcoR2")
+		if recessed == null:
+			issues.append("o recuo da margem final R2 está em falta")
+		elif recessed.find_child("LajeBaixaRecuoArco_02", true, false) == null:
+			issues.append("o recuo da margem final não possui duas lajes baixas")
+		elif not recessed.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("o recuo da margem final não pode criar luz dinâmica")
+	if issues.is_empty():
+		print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
+		print("[ORIGEM_R2_ORION_STATION_OK] estação de observação física do reflexo Orion confirmada")
+		print("[ORIGEM_R2_RIVER_LOOKOUT_030_OK] miradouro físico Orion, laje e colisor confirmados sem luz dinâmica nova.")
+		print("[ORIGEM_R2_RIVER_RETURN_031_OK] laje física de confirmação Casa Voss presente e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_ARCH_032_OK] laje física de chegada sob o Arco presente e passagem livre.")
+		print("[ORIGEM_R2_RIVER_EDGE_033_OK] leitura média da margem com pedras e fetos abertos, sem luz dinâmica.")
+		print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_EDGE_OK] margem geológica ribeirinha presente; leitura lateral sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_APPROACH_OK] último trecho arqueológico presente; acesso interrompido e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_EDGE_008_OK] linha de pedras da margem final presente; leito não atravessável e sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_APPROACH_009_OK] recuo arqueológico da margem final presente; acesso lateral sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_RETURN_010_OK] visada baixa para Casa Voss presente; leitura ambiental sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_MARKER_011_OK] dois marcadores ambientais de retorno presentes; sem sinalização explícita ou luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_QA_012_OK] marcadores ambientais sem corpos ou formas de colisão.")
+		print("[ORIGEM_R2_RIVER_ROUTE_013_OK] três rotas canônicas R2 presentes e preservadas.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)

@@ -44,8 +44,17 @@ func _ready() -> void:
 	_build_river()
 	_build_first_orion_reflection()
 	_build_orion_reflection_observation_station()
+	_build_orion_reflection_lookout()
+	_build_return_confirmation_landing()
+	_build_arch_arrival_landing()
+	_build_midriver_reflection_edge()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
+	_build_pre_arch_river_approach()
+	_build_final_river_edge_reading()
+	_build_recessed_river_approach()
+	_build_return_voss_sightline()
+	_build_return_environment_markers()
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
@@ -859,6 +868,171 @@ func _build_positive_bridge_approach() -> void:
 				fern.rotation.y = side * 0.65 + float(index) * 0.42
 				approach_root.add_child(fern)
 
+func _build_orion_reflection_lookout() -> void:
+	# DEV2-R2-RIVER-LOOKOUT-030: micro-miradouro físico para ler o reflexo Orion e reter a orientação de retorno.
+	# Uma única laje lateral cria um ponto jogável, sem corredor novo para o rio, painel, luz ou emissão.
+	var lookout_root: Node3D = Node3D.new()
+	lookout_root.name = "MiradouroReflexoOrionR2"
+	add_child(lookout_root)
+	var lookout_z: float = 56.0
+	var lookout_x: float = _road_x(lookout_z) + 5.90
+	var ground_y: float = _height_at(lookout_x, lookout_z)
+	var lookout_material: StandardMaterial3D = StandardMaterial3D.new()
+	lookout_material.albedo_color = Color(0.16, 0.18, 0.16, 1.0)
+	lookout_material.roughness = 0.91
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(1.48, 0.16, 1.02)
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeMiradouroReflexoOrion"
+	slab.mesh = slab_mesh
+	slab.material_override = lookout_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(lookout_x, ground_y + 0.10, lookout_z)
+	slab.rotation = Vector3(0.02, -0.12, 0.04)
+	lookout_root.add_child(slab)
+	var body: StaticBody3D = StaticBody3D.new()
+	body.name = "ColisorLajeMiradouroReflexoOrion"
+	body.position = slab.position
+	body.rotation = slab.rotation
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = slab_mesh.size
+	collision.shape = shape
+	body.add_child(collision)
+	lookout_root.add_child(body)
+	for index: int in range(2):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraVisadaReflexoOrion_%02d" % (index + 1)
+		var side: float = -1.0 if index == 0 else 1.0
+		stone.position = Vector3(lookout_x + side * 0.78, _height_at(lookout_x + side * 0.78, lookout_z + 0.18) + 0.08, lookout_z + 0.18)
+		stone.scale = Vector3(0.18 + float(index) * 0.03, 0.13 + float(index) * 0.025, 0.20)
+		stone.rotation.y = side * 0.44
+		_apply_material(stone, lookout_material)
+		lookout_root.add_child(stone)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoMiradouroReflexoOrion"
+		fern.position = Vector3(lookout_x + 0.72, _height_at(lookout_x + 0.72, lookout_z - 0.42) + 0.02, lookout_z - 0.42)
+		fern.scale = Vector3(0.24, 0.24, 0.24)
+		fern.rotation.y = 0.52
+		lookout_root.add_child(fern)
+
+func _build_return_confirmation_landing() -> void:
+	# DEV2-R2-RIVER-RETURN-031: laje lateral de confirmação Casa Voss, sem seta, painel ou interação obrigatória.
+	# O ponto fica no lado oposto ao miradouro Orion e orienta a leitura para trás sem abrir atalho ao leito.
+	var landing_root: Node3D = Node3D.new()
+	landing_root.name = "LajeConfirmacaoRetornoVossR2"
+	add_child(landing_root)
+	var landing_z: float = 58.0
+	var landing_x: float = _road_x(landing_z) - 4.85
+	var ground_y: float = _height_at(landing_x, landing_z)
+	var landing_material: StandardMaterial3D = StandardMaterial3D.new()
+	landing_material.albedo_color = Color(0.14, 0.17, 0.15, 1.0)
+	landing_material.roughness = 0.94
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(1.32, 0.14, 0.88)
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeConfirmacaoRetornoVoss"
+	slab.mesh = slab_mesh
+	slab.material_override = landing_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(landing_x, ground_y + 0.08, landing_z)
+	slab.rotation = Vector3(-0.02, 0.18, -0.04)
+	landing_root.add_child(slab)
+	var body: StaticBody3D = StaticBody3D.new()
+	body.name = "ColisorLajeConfirmacaoRetornoVoss"
+	body.position = slab.position
+	body.rotation = slab.rotation
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = slab_mesh.size
+	collision.shape = shape
+	body.add_child(collision)
+	landing_root.add_child(body)
+	for index: int in range(2):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraConfirmacaoRetornoVoss_%02d" % (index + 1)
+		var side: float = -1.0 if index == 0 else 1.0
+		stone.position = Vector3(landing_x + side * 0.72, _height_at(landing_x + side * 0.72, landing_z + 0.22) + 0.06, landing_z + 0.22)
+		stone.scale = Vector3(0.17 + float(index) * 0.025, 0.12 + float(index) * 0.02, 0.19)
+		stone.rotation.y = -side * 0.38
+		_apply_material(stone, landing_material)
+		landing_root.add_child(stone)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoConfirmacaoRetornoVoss"
+		fern.position = Vector3(landing_x - 0.66, _height_at(landing_x - 0.66, landing_z - 0.38) + 0.02, landing_z - 0.38)
+		fern.scale = Vector3(0.22, 0.22, 0.22)
+		fern.rotation.y = -0.48
+		landing_root.add_child(fern)
+
+func _build_arch_arrival_landing() -> void:
+	# DEV2-R2-RIVER-ARCH-032: chegada física curta sob o vão livre do Arco, sem segundo arco ou bloqueio da estrada.
+	var arrival_root: Node3D = Node3D.new()
+	arrival_root.name = "LajeChegadaArcoR2"
+	add_child(arrival_root)
+	var arrival_z: float = ARCH_WORLD_Z - 1.65
+	var arrival_x: float = _road_x(arrival_z)
+	var ground_y: float = _height_at(arrival_x, arrival_z)
+	var arrival_material: StandardMaterial3D = StandardMaterial3D.new()
+	arrival_material.albedo_color = Color(0.18, 0.17, 0.13, 1.0)
+	arrival_material.roughness = 0.92
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(1.86, 0.12, 1.10)
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeChegadaSobArco"
+	slab.mesh = slab_mesh
+	slab.material_override = arrival_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(arrival_x, ground_y + 0.06, arrival_z)
+	slab.rotation.y = atan2((_road_x(arrival_z + 1.0) - _road_x(arrival_z - 1.0)) * 0.5, 2.0)
+	arrival_root.add_child(slab)
+	var body: StaticBody3D = StaticBody3D.new()
+	body.name = "ColisorLajeChegadaSobArco"
+	body.position = slab.position + Vector3(0.0, -0.035, 0.0)
+	body.rotation.y = slab.rotation.y
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = slab_mesh.size
+	collision.shape = shape
+	body.add_child(collision)
+	arrival_root.add_child(body)
+
+func _build_midriver_reflection_edge() -> void:
+	# DEV2-R2-RIVER-EDGE-033: leitura baixa da margem média, aberta para o reflexo Orion e sem rota para o leito.
+	var edge_root: Node3D = Node3D.new()
+	edge_root.name = "LeituraMargemReflexoOrionR2"
+	add_child(edge_root)
+	var edge_z: float = 70.0
+	var edge_x: float = _river_x(edge_z) - 6.55
+	var edge_material: StandardMaterial3D = StandardMaterial3D.new()
+	edge_material.albedo_color = Color(0.11, 0.15, 0.14, 1.0)
+	edge_material.roughness = 0.93
+	for index: int in range(2):
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var side: float = -1.0 if index == 0 else 1.0
+		var rock_x: float = edge_x + side * 0.62
+		var rock_z: float = edge_z + float(index) * 1.12
+		rock.name = "PedraLeituraReflexoOrion_%02d" % (index + 1)
+		rock.position = Vector3(rock_x, _height_at(rock_x, rock_z) + 0.04, rock_z)
+		rock.scale = Vector3(0.22 + float(index) * 0.035, 0.14 + float(index) * 0.02, 0.24)
+		rock.rotation.y = side * 0.36
+		_apply_material(rock, edge_material)
+		edge_root.add_child(rock)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoAbertoLeituraReflexo_%02d" % (index + 1)
+			fern.position = Vector3(rock_x + side * 0.76, _height_at(rock_x + side * 0.76, rock_z - 0.28) + 0.02, rock_z - 0.28)
+			fern.scale = Vector3(0.25 + float(index) * 0.04, 0.25 + float(index) * 0.04, 0.25 + float(index) * 0.04)
+			fern.rotation.y = -side * 0.48
+			edge_root.add_child(fern)
+
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
 	var margins: Node3D = Node3D.new()
@@ -958,6 +1132,180 @@ func _build_pre_arch_river_edge() -> void:
 			fern.scale = Vector3(0.28 + float(fern_index) * 0.06, 0.28 + float(fern_index) * 0.06, 0.28 + float(fern_index) * 0.06)
 			fern.rotation.y = side * 0.58 + float(fern_index) * 0.44
 			edge_root.add_child(fern)
+
+func _build_pre_arch_river_approach() -> void:
+	# DEV2-R2-RIVER-APPROACH-007: leitura baixa do último trecho até ao Arco, sem criar rota nova para o rio.
+	var approach_root: Node3D = Node3D.new()
+	approach_root.name = "AproximacaoUltimoTrechoArcoR2"
+	add_child(approach_root)
+	var stone_material: StandardMaterial3D = StandardMaterial3D.new()
+	stone_material.albedo_color = Color(0.16, 0.18, 0.16, 1.0)
+	stone_material.roughness = 0.90
+	var road_z: float = 87.0
+	var road_x: float = _road_x(road_z)
+	for index: int in range(2):
+		var side: float = -1.0 if index == 0 else 1.0
+		var slab_z: float = road_z + float(index) * 2.10
+		var slab_x: float = road_x + side * 3.30
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeInterrompidaUltimoTrecho_%02d" % (index + 1)
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(1.05, 0.12, 0.74)
+		slab.mesh = slab_mesh
+		slab.material_override = path_material
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		slab.position = Vector3(slab_x, _height_at(slab_x, slab_z) + 0.07, slab_z)
+		slab.rotation = Vector3(0.02 * side, side * 0.22, -0.08 * side)
+		approach_root.add_child(slab)
+		_add_world_life_collision(approach_root, "ColisorLajeInterrompidaUltimoTrecho_%02d" % (index + 1), Vector3(slab_x, _height_at(slab_x, slab_z) + 0.02, slab_z), slab_mesh.size)
+		var border: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if border != null:
+			border.name = "PedraBordaUltimoTrecho_%02d" % (index + 1)
+			border.position = Vector3(slab_x + side * 0.86, _height_at(slab_x + side * 0.86, slab_z) + 0.05, slab_z + side * 0.24)
+			border.scale = Vector3(0.24, 0.18, 0.28)
+			border.rotation.y = side * 0.58
+			_apply_material(border, stone_material)
+			approach_root.add_child(border)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoUltimoTrecho_%02d" % (index + 1)
+			fern.position = Vector3(slab_x - side * 0.74, _height_at(slab_x - side * 0.74, slab_z) + 0.02, slab_z - side * 0.32)
+			fern.scale = Vector3(0.27, 0.27, 0.27)
+			fern.rotation.y = side * 0.44
+			approach_root.add_child(fern)
+
+func _build_final_river_edge_reading() -> void:
+	# DEV2-R2-RIVER-EDGE-008: linha curta de pedras na margem final; visual lateral, leito não atravessável.
+	var reading_root: Node3D = Node3D.new()
+	reading_root.name = "LinhaPedrasMargemFinalR2"
+	add_child(reading_root)
+	var edge_material: StandardMaterial3D = StandardMaterial3D.new()
+	edge_material.albedo_color = Color(0.12, 0.16, 0.15, 1.0)
+	edge_material.roughness = 0.92
+	for index: int in range(3):
+		var z_value: float = 89.0 + float(index) * 1.25
+		var side: float = -1.0 if index % 2 == 0 else 1.0
+		var x_value: float = _river_x(z_value) + side * (6.40 + float(index) * 0.28)
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone != null:
+			stone.name = "PedraLeituraMargemFinal_%02d" % (index + 1)
+			stone.position = Vector3(x_value, _height_at(x_value, z_value) + 0.05, z_value)
+			var stone_scale: float = 0.19 + float(index % 2) * 0.035
+			stone.scale = Vector3(stone_scale, stone_scale * 0.58, stone_scale * 0.92)
+			stone.rotation.y = -0.30 + float(index) * 0.42
+			_apply_material(stone, edge_material)
+			reading_root.add_child(stone)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoAbertoMargemFinal_%02d" % (index + 1)
+			fern.position = Vector3(x_value - side * 0.82, _height_at(x_value - side * 0.82, z_value) + 0.02, z_value + 0.36)
+			fern.scale = Vector3(0.24, 0.24, 0.24)
+			fern.rotation.y = side * 0.52
+			reading_root.add_child(fern)
+
+func _build_recessed_river_approach() -> void:
+	# DEV2-R2-RIVER-APPROACH-009: recuo lateral baixo antes do Arco, sem ampliar o leito nem criar atalho.
+	var recess_root: Node3D = Node3D.new()
+	recess_root.name = "RecuoMargemFinalArcoR2"
+	add_child(recess_root)
+	var wet_material: StandardMaterial3D = StandardMaterial3D.new()
+	wet_material.albedo_color = Color(0.11, 0.15, 0.14, 1.0)
+	wet_material.roughness = 0.94
+	var base_z: float = 84.5
+	var base_x: float = _river_x(base_z) + 6.85
+	for index: int in range(2):
+		var side: float = -1.0 if index == 0 else 1.0
+		var z_value: float = base_z + float(index) * 1.55
+		var x_value: float = base_x + side * 0.58
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeBaixaRecuoArco_%02d" % (index + 1)
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(0.92, 0.10, 0.62)
+		slab.mesh = slab_mesh
+		slab.material_override = path_material
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		slab.position = Vector3(x_value, _height_at(x_value, z_value) + 0.06, z_value)
+		slab.rotation.y = side * 0.26
+		recess_root.add_child(slab)
+		_add_world_life_collision(recess_root, "ColisorLajeBaixaRecuoArco_%02d" % (index + 1), Vector3(x_value, _height_at(x_value, z_value) + 0.02, z_value), slab_mesh.size)
+		var wet_stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if wet_stone != null:
+			wet_stone.name = "PedraMolhadaRecuoArco_%02d" % (index + 1)
+			wet_stone.position = Vector3(x_value + side * 0.96, _height_at(x_value + side * 0.96, z_value) + 0.04, z_value - 0.30)
+			wet_stone.scale = Vector3(0.18, 0.11, 0.22)
+			wet_stone.rotation.y = side * 0.48
+			_apply_material(wet_stone, wet_material)
+			recess_root.add_child(wet_stone)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoRecuoMargemArco_%02d" % (index + 1)
+			fern.position = Vector3(x_value - side * 0.76, _height_at(x_value - side * 0.76, z_value) + 0.02, z_value + 0.30)
+			fern.scale = Vector3(0.23, 0.23, 0.23)
+			fern.rotation.y = -side * 0.38
+			recess_root.add_child(fern)
+
+func _build_return_voss_sightline() -> void:
+	# DEV2-R2-RIVER-RETURN-010: visada ambiental baixa para Casa Voss, lateral e sem seta ou interação.
+	var sightline_root: Node3D = Node3D.new()
+	sightline_root.name = "VisadaRetornoCasaVossR2"
+	add_child(sightline_root)
+	var reference_material: StandardMaterial3D = StandardMaterial3D.new()
+	reference_material.albedo_color = Color(0.13, 0.16, 0.15, 1.0)
+	reference_material.roughness = 0.93
+	var base_z: float = 67.5
+	var base_x: float = _road_x(base_z) + 4.85
+	for index: int in range(2):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		var side: float = -1.0 if index == 0 else 1.0
+		var stone_x: float = base_x + side * 0.88
+		var stone_z: float = base_z + float(index) * 1.18
+		stone.name = "PedraReferenciaRetornoVoss_%02d" % (index + 1)
+		stone.position = Vector3(stone_x, _height_at(stone_x, stone_z) + 0.05, stone_z)
+		stone.scale = Vector3(0.20, 0.14, 0.24)
+		stone.rotation.y = side * 0.36
+		_apply_material(stone, reference_material)
+		sightline_root.add_child(stone)
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeCurtaVisadaRetornoVoss"
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(0.86, 0.10, 0.52)
+	slab.mesh = slab_mesh
+	slab.material_override = path_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(base_x, _height_at(base_x, base_z + 0.58) + 0.06, base_z + 0.58)
+	slab.rotation = Vector3(0.02, 0.16, -0.06)
+	sightline_root.add_child(slab)
+	_add_world_life_collision(sightline_root, "ColisorLajeCurtaVisadaRetornoVoss", Vector3(slab.position.x, slab.position.y - 0.04, slab.position.z), slab_mesh.size)
+
+func _build_return_environment_markers() -> void:
+	# DEV2-R2-RIVER-MARKER-011: dois marcadores ambientais baixos, sem sinalização explícita ou interação.
+	var marker_root: Node3D = Node3D.new()
+	marker_root.name = "MarcadoresAmbientaisRetornoR2"
+	add_child(marker_root)
+	var marker_material: StandardMaterial3D = StandardMaterial3D.new()
+	marker_material.albedo_color = Color(0.14, 0.17, 0.15, 1.0)
+	marker_material.roughness = 0.94
+	for index: int in range(2):
+		var side: float = -1.0 if index == 0 else 1.0
+		var z_value: float = 63.5 + float(index) * 1.35
+		var x_value: float = _road_x(z_value) + side * 5.25
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone != null:
+			stone.name = "PedraMarcadorRetorno_%02d" % (index + 1)
+			stone.position = Vector3(x_value, _height_at(x_value, z_value) + 0.04, z_value)
+			stone.scale = Vector3(0.16, 0.20, 0.15)
+			stone.rotation.y = side * 0.40
+			_apply_material(stone, marker_material)
+			marker_root.add_child(stone)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoMarcadorRetorno_%02d" % (index + 1)
+			fern.position = Vector3(x_value - side * 0.55, _height_at(x_value - side * 0.55, z_value) + 0.02, z_value + 0.22)
+			fern.scale = Vector3(0.19, 0.19, 0.19)
+			fern.rotation.y = -side * 0.35
+			marker_root.add_child(fern)
 
 func _build_arch_forest_riparian_screen() -> void:
 	# Três núcleos orgânicos escalonados na margem oeste: enquadram o afunilamento do rio a partir do Arco,
@@ -1132,7 +1480,7 @@ func _build_ruin_arch() -> void:
 	# O marco conserva apenas as duas brasas litúrgicas: o preenchimento Omni anterior foi removido
 	# para respeitar o contrato R3 (máximo de duas luzes dinâmicas locais).
 	# Camada Dev3: inscrições e despertar persistente, sem criar luzes novas ou bloquear o vão do Arco.
-	var r3_awakening: R3ArchAwakening = R3_ARCH_AWAKENING_SCRIPT.call("install", arch) as R3ArchAwakening
+	var r3_awakening = R3_ARCH_AWAKENING_SCRIPT.call("install", arch)
 	if r3_awakening == null:
 		push_error("[ORIGEM_R3] Não foi possível instalar o despertar do Arco.")
 
