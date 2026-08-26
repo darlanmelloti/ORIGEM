@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-RUNTIME-SIGHTLINE-051
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -150,9 +150,13 @@ O diagnóstico foi concluído sem alterar produção. O isolamento confirmou que
 
 A revisão QA consolidou a matriz de responsabilidades R4/R6 e confirmou que transparência, cota, largura e `cull_back` permanecem rejeitados. A evidência em `reports/r4/CARTOGRAPHIC_INLET_EVIDENCE_REVIEW_049.md` não autoriza produção: qualquer intervenção futura precisa de fonte causal, aprovação conjunta e prova runtime.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
 
-Inventariar em QA os ativos e margens já existentes fora do corredor R4 para determinar se existe alguma candidata modular elegível para futura prova. A tarefa limita-se a inventário espacial, distância ao trilho, propriedade R4/R6 e roteiro de captura; não cria, move, instancia, materializa ou oculta qualquer nó.
+O inventário em `reports/r4/CARTOGRAPHIC_INLET_MODULE_ELIGIBILITY_050.md` confirmou que rochas e fetos existentes pertencem ao mesmo nó-raiz da lâmina e não constituem camada modular independente. Nenhum ativo foi promovido nem alterado; a leitura R4/R6 mantém-se sem autorização de produção.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-RUNTIME-SIGHTLINE-051
+
+Construir somente uma prova QA de leitura runtime que recolha baseline 16:9 de `arch_to_forest`, telemetria dos cinco pontos cartográficos, distância ao corredor e contagem de luzes R4/R6. Não pode aplicar overrides de material, transformação, visibilidade, geometria, colisão, luz, água, âncora, rota ou câmara de jogador.
 
 | Critério | Obrigatório |
 |---|---|
@@ -160,9 +164,9 @@ Inventariar em QA os ativos e margens já existentes fora do corredor R4 para de
 | Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` como microajustes |
 | R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
 | R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
-| Resultado | Inventário de elegibilidade; não é proposta de produção |
-| Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
+| Resultado | Baseline e telemetria QA; não é proposta de produção |
+| Verificação | Parser, orçamento, porta R4 e três rotas antes de publicação |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir a auditoria de elegibilidade, Dev4 deve avançar para uma nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
+Há exatamente uma tarefa ACTIVE. Ao concluir a captura QA, Dev4 deve avançar para nova análise rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
