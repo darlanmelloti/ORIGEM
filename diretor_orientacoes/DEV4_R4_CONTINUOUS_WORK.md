@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-ORION-VISTA-FRAMING-006
+task_id: DEV4-R4-FOREST-APPROACH-RHYTHM-007
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -25,7 +25,9 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-CANOPY-CADENCE-004` instalou `ForestCanopyCadence.gd`: 26 copas laterais existentes receberam variação estática; 20 copas na faixa Orion foram preservadas; não foram criadas luzes ou colisores.
 
-`DEV4-R4-UNDERSTORY-EDGE-005` instalou `ForestUnderstoryEdge.gd`: os doze elementos existentes do sub-bosque foram reposicionados lateralmente com distância mínima validada de 6,16 m ao trilho. Não houve novos nós, malhas, luzes, colisores, partículas, vento, animação, shaders ou pós-processamento. A prova `[ORIGEM_R4_UNDERSTORY_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+`DEV4-R4-UNDERSTORY-EDGE-005` instalou `ForestUnderstoryEdge.gd`: doze elementos existentes do sub-bosque foram reposicionados lateralmente com distância mínima validada de 6,16 m ao trilho. Não houve novos nós, malhas, luzes, colisores, partículas, vento, animação, shaders ou pós-processamento.
+
+`DEV4-R4-ORION-VISTA-FRAMING-006` instalou `ForestOrionVistaFraming.gd`: seis copas laterais existentes foram ajustadas para uma revelação gradual de Orion; duas copas na faixa protegida permaneceram sem modulação. Não foram criadas malhas, materiais, luzes, colisores, animação, partículas, vento, shaders, pós-processamento, interface ou alterações de câmara. A prova `[ORIGEM_R4_VISTA_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
@@ -33,20 +35,21 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Lore | 3 conjuntos laterais | Livre | 0 luzes e colisores | Aprovada |
 | Copas | 20 copas protegidas | ≥6 m | 0 luzes e colisores | Aprovada |
 | Sub-bosque | Sem elementos em Z=126–151 | ≥6,16 m | 0 luzes e colisores | Aprovada |
+| Vista Orion | 2 copas protegidas | ≥6 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-ORION-VISTA-FRAMING-006
+## Tarefa ativa — DEV4-R4-FOREST-APPROACH-RHYTHM-007
 
-Refinar o **enquadramento lateral de Orion** nas bordas exteriores da transição R4. A tarefa deve ajustar apenas posições, escalas e rotações de afloramentos ou copas estáticas já existentes, para criar uma cadência de revelação gradual sem fechar a abertura cartográfica. Não pode alterar câmara, trilho, colisores, âncoras, narrativa explícita, interface, luz, partículas, vento físico, pós-processamento ou a camada de neblina.
+Consolidar a **cadência ambiental da chegada a Majestic** na faixa exterior R4 após a clareira Orion. A tarefa deve ajustar somente posições, escalas e rotações de instâncias estáticas já existentes de árvores, rochas ou fetos entre o fim da clareira e o conector Majestic. O objetivo é conduzir a leitura do trilho para Majestic sem criar muro de vegetação, alterar a rota, a geometria partilhada ou os módulos da Dev5.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Novo módulo em `levels/regions/r4/`, montagem mínima e QA R4 |
-| Clareira | Faixa `Z≈126–151` integralmente aberta, incluindo elementos de lore aprovados |
+| Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 6 m do trilho físico |
-| Visibilidade | Orion e a direção de Majestic devem permanecer legíveis |
-| Desempenho | Somente transformações estáticas de instâncias existentes |
+| Integração R5 | Não alterar módulos, ativos ou lógica de Dev5 |
+| Dinâmica | Zero luz, colisores, partículas, vento, pós-processamento ou animação |
 | Verificação | Parser, prova própria, porta R4 e três rotas antes de publicar |
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-APPROACH-RHYTHM-007` deverá consolidar a cadência ambiental da chegada a Majestic, sem alterar a rota, a geometria partilhada ou os módulos de Dev5.
+`DEV4-R4-MAJESTIC-EDGE-BALANCE-008` deverá equilibrar a borda visual da transição R4→R5, sem modificar a rota, o acampamento ou a iluminação de Majestic.
