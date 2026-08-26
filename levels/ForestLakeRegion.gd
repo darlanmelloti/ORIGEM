@@ -30,6 +30,8 @@ const R4_FOREST_APPROACH_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r
 const R4_FOREST_MAJESTIC_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestMajesticEdgeBalance.gd")
 const R4_FOREST_SILHOUETTE_CONTINUITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestSilhouetteContinuity.gd")
 const R4_FOREST_DEPTH_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestDepthBalance.gd")
+const R4_FOREST_APPROACH_READABILITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachReadability.gd")
+const R4_FOREST_TRAIL_PACING_SCRIPT: Script = preload("res://levels/regions/r4/ForestTrailPacing.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -76,6 +78,8 @@ func _ready() -> void:
 	_build_r4_majestic_edge_balance()
 	_build_r4_silhouette_continuity()
 	_build_r4_depth_balance()
+	_build_r4_approach_readability()
+	_build_r4_trail_pacing()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -399,6 +403,20 @@ func _build_r4_depth_balance() -> void:
 	var balance: R4ForestDepthBalance = R4_FOREST_DEPTH_BALANCE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestDepthBalance
 	if balance == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar o equilíbrio de profundidade lateral.")
+
+func _build_r4_approach_readability() -> void:
+	# DEV4-R4-ORION-APPROACH-READABILITY-011: raízes R4 existentes reforçam a direção lateral para Majestic, sem UI ou efeitos.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var readability: R4ForestApproachReadability = R4_FOREST_APPROACH_READABILITY_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestApproachReadability
+	if readability == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a legibilidade da aproximação Orion.")
+
+func _build_r4_trail_pacing() -> void:
+	# DEV4-R4-FOREST-TRAIL-PACING-012: alterna pedras R4 existentes nas bordas, sem tocar em lajes ou colisores.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var pacing: R4ForestTrailPacing = R4_FOREST_TRAIL_PACING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestTrailPacing
+	if pacing == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o ritmo visual do trilho.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
