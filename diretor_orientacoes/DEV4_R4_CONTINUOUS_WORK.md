@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-OWNERSHIP-CHECK-051
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-CAPTURE-READINESS-052
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -154,20 +154,24 @@ A revisão QA consolidou a matriz de responsabilidades R4/R6 e confirmou que tra
 
 A auditoria QA inventariou duas raízes R4 existentes (`RaizExpostaFlorestal_14` e `RaizExpostaFlorestal_15`) fora da clareira Orion e a 8,75 m e 9,20 m do trilho. As referências não são autorizadas para produção. A reconciliação canónica também retirou a variante local de material incompatível com as quatro variantes formalmente rejeitadas, restaurando a lâmina e a fábrica lacustre canónicas. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_ELIGIBILITY_050.md`.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-OWNERSHIP-CHECK-051
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-OWNERSHIP-CHECK-051
 
-Executar exclusivamente a verificação QA documental de propriedade e causalidade das referências inventariadas. A tarefa deve confirmar a matriz R4/R6, o limite de não repetição das variantes rejeitadas e o roteiro de captura comparativa; não cria, move, instancia, materializa ou oculta qualquer nó e não altera `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6, materiais, luzes, rota, câmara, âncoras ou física.
+A verificação documental confirmou que a causa permanece na lâmina e no material lacustre partilhado sob responsabilidade R6, e que as duas raízes R4 inventariadas não têm aprovação para alteração. O roteiro de captura comparativa foi definido sem criar candidata. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_OWNERSHIP_CHECK_051.md`.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-CAPTURE-READINESS-052
+
+Executar exclusivamente a preparação QA documental do baseline de captura. Verificar que o roteiro 16:9 de `arch_to_forest`, a separação baseline/candidata e os critérios de evidência estão prontos para tarefa futura, sem criar candidata, capturar variante, mover, instanciar, materializar ou ocultar nós e sem alterar `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6, materiais, luzes, rota, câmara, âncoras ou física.
 
 | Critério | Obrigatório |
 |---|---|
 | Produção | Zero modificações de produção nesta tarefa documental |
-| Propriedade | Registar R4/R6 e a necessidade de aprovação conjunta, sem alegar aprovação ausente |
+| Captura | Apenas verificar prontidão; nenhuma candidata ou comparação runtime nesta tarefa |
+| Propriedade | Preservar a exigência de aprovação explícita conjunta R4/R6 |
 | Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` |
 | R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
 | R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
-| Captura futura | Roteiro baseline/candidata no mesmo enquadramento 16:9 de `arch_to_forest` |
 | Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir a verificação de propriedade, Dev4 deve avançar para nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
+Há exatamente uma tarefa ACTIVE. Ao concluir a preparação de captura, Dev4 deve avançar para nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
