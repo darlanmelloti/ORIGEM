@@ -45,6 +45,7 @@ const R4_FOREST_MAJESTIC_THRESHOLD_SCRIPT: Script = preload("res://levels/region
 const R4_FOREST_RIM_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestRimBalance.gd")
 const R4_FOREST_OUTER_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterRhythm.gd")
 const R4_FOREST_RETURN_READING_SCRIPT: Script = preload("res://levels/regions/r4/ForestReturnReading.gd")
+const R4_FOREST_LATERAL_DEPTH_SCRIPT: Script = preload("res://levels/regions/r4/ForestLateralDepth.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -106,6 +107,7 @@ func _ready() -> void:
 	_build_r4_rim_balance()
 	_build_r4_outer_rhythm()
 	_build_r4_return_reading()
+	_build_r4_lateral_depth()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -534,6 +536,13 @@ func _build_r4_return_reading() -> void:
 	var reading: R4ForestReturnReading = R4_FOREST_RETURN_READING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestReturnReading
 	if reading == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a leitura de retorno florestal.")
+
+func _build_r4_lateral_depth() -> void:
+	# DEV4-R4-FOREST-LATERAL-DEPTH-026: ajusta uma árvore R4 sem colisor para aprofundar a leitura lateral antes do conector.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var depth: R4ForestLateralDepth = R4_FOREST_LATERAL_DEPTH_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestLateralDepth
+	if depth == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a profundidade lateral florestal.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
