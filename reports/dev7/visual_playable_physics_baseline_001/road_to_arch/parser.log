@@ -1,0 +1,589 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+WARNING: FSR1 3D scaling is only available when using the Forward+ renderer.
+     at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:1028)
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (222 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   4% ] [90m[1mupdate_scripts_classes[22m | HealthComponent[39m[0m
+[   4% ] [90m[1mupdate_scripts_classes[22m | InteractableComponent[39m[0m
+[   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   5% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   5% ] [90m[1mupdate_scripts_classes[22m | ItemData[39m[0m
+[   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   8% ] [90m[1mupdate_scripts_classes[22m | EliteKharu[39m[0m
+[   8% ] [90m[1mupdate_scripts_classes[22m | Guardian[39m[0m
+[   8% ] [90m[1mupdate_scripts_classes[22m | KharuWarrior[39m[0m
+[   9% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   9% ] [90m[1mupdate_scripts_classes[22m | Player[39m[0m
+[  10% ] [90m[1mupdate_scripts_classes[22m | RegionContract[39m[0m
+[  10% ] [90m[1mupdate_scripts_classes[22m | RegionRegistry[39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | VossAmbientLife[39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | VossDoorReveal[39m[0m
+[  12% ] [90m[1mupdate_scripts_classes[22m | R3ArchAwakening[39m[0m
+[  12% ] [90m[1mupdate_scripts_classes[22m | R4ForestApproachComposition[39m[0m
+[  13% ] [90m[1mupdate_scripts_classes[22m | R4ForestApproachReadability[39m[0m
+[  13% ] [90m[1mupdate_scripts_classes[22m | R4ForestApproachRhythm[39m[0m
+[  13% ] [90m[1mupdate_scripts_classes[22m | R4ForestCanopyCadence[39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | R4ForestCanopyEdge[39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | R4ForestClearingLore[39m[0m
+[  15% ] [90m[1mupdate_scripts_classes[22m | R4ForestClearingSightline[39m[0m
+[  15% ] [90m[1mupdate_scripts_classes[22m | R4ForestDepthBalance[39m[0m
+[  16% ] [90m[1mupdate_scripts_classes[22m | R4ForestEdgeRhythm[39m[0m
+[  16% ] [90m[1mupdate_scripts_classes[22m | R4ForestEntryBalance[39m[0m
+[  17% ] [90m[1mupdate_scripts_classes[22m | R4ForestLiminalDepth[39m[0m
+[  17% ] [90m[1mupdate_scripts_classes[22m | R4ForestMajesticEdgeBalance[39m[0m
+[  17% ] [90m[1mupdate_scripts_classes[22m | R4ForestMarginContinuity[39m[0m
+[  18% ] [90m[1mupdate_scripts_classes[22m | R4ForestMistLayer[39m[0m
+[  18% ] [90m[1mupdate_scripts_classes[22m | R4ForestOrionVistaFraming[39m[0m
+[  19% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterCheck[39m[0m
+[  19% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterClosure[39m[0m
+[  20% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterConsistency[39m[0m
+[  20% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterConsolidation[39m[0m
+[  21% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterDepth[39m[0m
+[  21% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterFinalization[39m[0m
+[  21% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterLateralBalance[39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterMargin[39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterObservation[39m[0m
+[  23% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterReadabilityFinal[39m[0m
+[  23% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterReconciliation[39m[0m
+[  24% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterReview[39m[0m
+[  24% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterRhythm[39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterRhythmFinal[39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterSilhouette[39m[0m
+[  26% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterStabilization[39m[0m
+[  26% ] [90m[1mupdate_scripts_classes[22m | R4ForestOuterVista[39m[0m
+[  26% ] [90m[1mupdate_scripts_classes[22m | R4ForestSilhouetteContinuity[39m[0m
+[  27% ] [90m[1mupdate_scripts_classes[22m | R4ForestThresholdReading[39m[0m
+[  27% ] [90m[1mupdate_scripts_classes[22m | R4ForestTrailPacing[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | R4ForestUnderstoryEdge[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | R5MajesticArtifactTrail[39m[0m
+[  29% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampArrivalReading[39m[0m
+[  29% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampCheck[39m[0m
+[  30% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampClosure[39m[0m
+[  30% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampConsistency[39m[0m
+[  30% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampConsolidation[39m[0m
+[  31% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampEdgeReading[39m[0m
+[  31% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampFinalization[39m[0m
+[  32% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampFocalReading[39m[0m
+[  32% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampObservation[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampReadabilityFinal[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampReconciliation[39m[0m
+[  34% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampReview[39m[0m
+[  34% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampRhythmFinal[39m[0m
+[  34% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampStabilization[39m[0m
+[  35% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampVistaReading[39m[0m
+[  35% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampWindReading[39m[0m
+[  36% ] [90m[1mupdate_scripts_classes[22m | R6BasinArrivalReading[39m[0m
+[  36% ] [90m[1mupdate_scripts_classes[22m | R6BasinVistaReading[39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginCheck[39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginClosure[39m[0m
+[  38% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginConsistency[39m[0m
+[  38% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginConsolidation[39m[0m
+[  39% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginDepth[39m[0m
+[  39% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginFinalization[39m[0m
+[  39% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginLateralBalance[39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginObservation[39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginReadabilityFinal[39m[0m
+[  41% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginReading[39m[0m
+[  41% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginReconciliation[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginReview[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginRhythmFinal[39m[0m
+[  43% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginStabilization[39m[0m
+[  43% ] [90m[1mupdate_scripts_classes[22m | R6EasternMarginVista[39m[0m
+[  43% ] [90m[1mupdate_scripts_classes[22m | R6OuterWaterlineSilhouette[39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | R6ShoreHandoff[39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | R6WaterlineReading[39m[0m
+[  45% ] [90m[1mupdate_scripts_classes[22m | R1VossHouseRegion[39m[0m
+[  45% ] [90m[1mupdate_scripts_classes[22m | R2RiverRoadRegion[39m[0m
+[  46% ] [90m[1mupdate_scripts_classes[22m | R3ArchRuinsRegion[39m[0m
+[  46% ] [90m[1mupdate_scripts_classes[22m | R4DenseForestRegion[39m[0m
+[  47% ] [90m[1mupdate_scripts_classes[22m | R5MajesticCampRegion[39m[0m
+[  47% ] [90m[1mupdate_scripts_classes[22m | R6SubmergedRuinsRegion[39m[0m
+[  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | CartographicAnchors[39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  49% ] [90m[1mupdate_scripts_classes[22m | ExplorableMountains[39m[0m
+[  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | ForestSector3D[39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  54% ] [90m[1mupdate_scripts_classes[22m | RouteCurveProfile[39m[0m
+[  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  79% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  81% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  81% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  86% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  86% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  86% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  87% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  87% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  89% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  97% ] [90m[1mupdate_scripts_classes[22m | PauseMenu[39m[0m
+[  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  99% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (79 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | generated_voss_reference_storm_panorama.png[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | generated_voss_reference_storm_panorama_v2.png[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | bridge_stone.glb[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | cliff_blockSlope_rock.glb[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | cliff_cave_rock.glb[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | stone_largeA.glb[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | stone_largeB.glb[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | stone_smallF.glb[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | stone_tallC.glb[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | tree_default_dark.glb[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | tree_detailed_dark.glb[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | tree_oak_dark.glb[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | ez_pine_medium_pbr.glb[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | ez_pine_tall_pbr.glb[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | ez_pine_wind_variant_pbr.glb[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | fern_02_arm_1k.jpg[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | fern_02_diff_1k.jpg[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | fern_02_nor_gl_1k.jpg[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | fern_02_1k.gltf[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | island_tree_01_arm_1k.jpg[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | island_tree_01_branches_arm_1k.jpg[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | island_tree_01_branches_diff_1k.jpg[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | island_tree_01_branches_nor_gl_1k.jpg[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | island_tree_01_diff_1k.jpg[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | island_tree_01_leaves_arm_1k.jpg[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | island_tree_01_leaves_diff_1k.jpg[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | island_tree_01_leaves_nor_gl_1k.jpg[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | island_tree_01_nor_gl_1k.jpg[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | island_tree_01_1k.gltf[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | Rock004_1K-JPG_Color.jpg[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | Rock004_1K-JPG_NormalGL.jpg[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | Rock004_1K-JPG_Roughness.jpg[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | daylight_weathered_flagstone.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | daylight_weathered_slate_roof.png[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | daylight_weathered_timber.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | majestic_weathered_canvas_albedo.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | mossy_ancient_ruin_stone.png[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | regional_wet_forest_floor.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | weathered_dark_timber.jpg[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | wet_fieldstone_wall.jpg[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | wet_slate_roof.jpg[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | wet_slate_roof_v2.jpg[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | wet_slate_roof_v2.png[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | weathered_planks_diff_1k.jpg[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | weathered_planks_nor_gl_1k.jpg[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | weathered_planks_rough_1k.jpg[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | forest_ground_06_diff_1k.jpg[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | forest_ground_06_nor_gl_1k.jpg[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | forest_ground_06_rough_1k.jpg[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | forest_ground_diff.jpg[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | forest_ground_normal_gl.jpg[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | forest_ground_roughness.jpg[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | mossy_rock_diff.jpg[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | mossy_rock_normal_gl.jpg[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | mossy_rock_roughness.jpg[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | stylized_grass.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | stylized_rock.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | stylized_sky.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | stylized_water.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | mapa_cartografico_origem.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | arch_to_forest_36s.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | abertura_casa_voss_limpa.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | orion_state_30s.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | arch_to_forest_validated.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | majestic_wind_16x9.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | majestic_wind_16x9_scene.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | majestic_wind_camp_close_16x9.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | majestic_wind_frame_01.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | majestic_wind_frame_02.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | majestic_wind_frame_03.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | majestic_wind_from_forest_16x9.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | forest_to_ruins_postload.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | majestic_to_lake_postload.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | ruins_arrival_postload.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | arch_to_forest_postload.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | forest_to_majestic_postload.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | forest_to_majestic_postload.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | majestic_to_lake_postload.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | icon.svg[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (79 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   1% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   2% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   3% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   5% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   6% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   7% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   8% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  10% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  11% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  12% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  13% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  15% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  16% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  17% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  18% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  20% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  21% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  22% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  23% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  25% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  26% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  28% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  30% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  31% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  32% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  33% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  35% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  36% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  37% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  38% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  40% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  41% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  42% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  43% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  45% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  46% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  47% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  48% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  51% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  52% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  53% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  55% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  56% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  57% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  58% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  60% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  61% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  62% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  63% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  65% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  66% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  67% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  68% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  70% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  71% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  73% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  76% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  77% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  78% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  80% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  81% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  82% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  83% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  85% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  86% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  87% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  88% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  90% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  91% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  92% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  93% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  95% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  96% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  97% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+[   0% ] [90m[1mreimport[22m | stylized_water.png[39m[0m
+[   1% ] [90m[1mreimport[22m | stylized_sky.png[39m[0m
+[   2% ] [90m[1mreimport[22m | stylized_rock.png[39m[0m
+[   3% ] [90m[1mreimport[22m | stylized_grass.png[39m[0m
+[   5% ] [90m[1mreimport[22m | mossy_rock_roughness.jpg[39m[0m
+[   6% ] [90m[1mreimport[22m | mossy_rock_normal_gl.jpg[39m[0m
+[   7% ] [90m[1mreimport[22m | mossy_rock_diff.jpg[39m[0m
+[   8% ] [90m[1mreimport[22m | forest_ground_roughness.jpg[39m[0m
+[  10% ] [90m[1mreimport[22m | forest_ground_normal_gl.jpg[39m[0m
+[  11% ] [90m[1mreimport[22m | forest_ground_diff.jpg[39m[0m
+[  12% ] [90m[1mreimport[22m | forest_ground_06_rough_1k.jpg[39m[0m
+[  13% ] [90m[1mreimport[22m | forest_ground_06_nor_gl_1k.jpg[39m[0m
+[  15% ] [90m[1mreimport[22m | forest_ground_06_diff_1k.jpg[39m[0m
+[  16% ] [90m[1mreimport[22m | weathered_planks_rough_1k.jpg[39m[0m
+[  17% ] [90m[1mreimport[22m | weathered_planks_nor_gl_1k.jpg[39m[0m
+ERROR: Error loading image: 'res://assets/textures/generated/wet_slate_roof_v2.jpg'.
+   at: load_image (core/io/image_loader.cpp:102)
+ERROR: Error importing 'res://assets/textures/generated/wet_slate_roof_v2.jpg'.
+   at: _reimport_file (editor/file_system/editor_file_system.cpp:3093)
+[  18% ] [90m[1mreimport[22m | weathered_planks_diff_1k.jpg[39m[0m
+[  20% ] [90m[1mreimport[22m | wet_slate_roof_v2.png[39m[0m
+[  21% ] [90m[1mreimport[22m | wet_slate_roof_v2.jpg[39m[0m
+[  22% ] [90m[1mreimport[22m | wet_slate_roof.jpg[39m[0m
+[  23% ] [90m[1mreimport[22m | icon.svg[39m[0m
+[  25% ] [90m[1mreimport[22m | majestic_to_lake_postload.png[39m[0m
+[  26% ] [90m[1mreimport[22m | forest_to_majestic_postload.png[39m[0m
+[  27% ] [90m[1mreimport[22m | forest_to_majestic_postload.png[39m[0m
+[  28% ] [90m[1mreimport[22m | arch_to_forest_postload.png[39m[0m
+[  30% ] [90m[1mreimport[22m | ruins_arrival_postload.png[39m[0m
+[  31% ] [90m[1mreimport[22m | majestic_to_lake_postload.png[39m[0m
+[  32% ] [90m[1mreimport[22m | forest_to_ruins_postload.png[39m[0m
+[  33% ] [90m[1mreimport[22m | majestic_wind_from_forest_16x9.png[39m[0m
+[  35% ] [90m[1mreimport[22m | majestic_wind_frame_03.png[39m[0m
+[  36% ] [90m[1mreimport[22m | majestic_wind_frame_02.png[39m[0m
+[  37% ] [90m[1mreimport[22m | majestic_wind_frame_01.png[39m[0m
+[  38% ] [90m[1mreimport[22m | majestic_wind_camp_close_16x9.png[39m[0m
+[  40% ] [90m[1mreimport[22m | majestic_wind_16x9_scene.png[39m[0m
+[  41% ] [90m[1mreimport[22m | majestic_wind_16x9.png[39m[0m
+[  42% ] [90m[1mreimport[22m | arch_to_forest_validated.png[39m[0m
+[  43% ] [90m[1mreimport[22m | orion_state_30s.png[39m[0m
+[  45% ] [90m[1mreimport[22m | abertura_casa_voss_limpa.png[39m[0m
+[  46% ] [90m[1mreimport[22m | arch_to_forest_36s.png[39m[0m
+[  47% ] [90m[1mreimport[22m | mapa_cartografico_origem.png[39m[0m
+[  48% ] [90m[1mreimport[22m | generated_voss_reference_storm_panorama.png[39m[0m
+[  50% ] [90m[1mreimport[22m | generated_voss_reference_storm_panorama_v2.png[39m[0m
+[  51% ] [90m[1mreimport[22m | fern_02_arm_1k.jpg[39m[0m
+[  52% ] [90m[1mreimport[22m | fern_02_diff_1k.jpg[39m[0m
+[  53% ] [90m[1mreimport[22m | fern_02_nor_gl_1k.jpg[39m[0m
+[  55% ] [90m[1mreimport[22m | island_tree_01_arm_1k.jpg[39m[0m
+[  56% ] [90m[1mreimport[22m | island_tree_01_branches_arm_1k.jpg[39m[0m
+[  57% ] [90m[1mreimport[22m | island_tree_01_branches_diff_1k.jpg[39m[0m
+[  58% ] [90m[1mreimport[22m | island_tree_01_branches_nor_gl_1k.jpg[39m[0m
+[  60% ] [90m[1mreimport[22m | island_tree_01_diff_1k.jpg[39m[0m
+[  61% ] [90m[1mreimport[22m | island_tree_01_leaves_arm_1k.jpg[39m[0m
+[  62% ] [90m[1mreimport[22m | island_tree_01_leaves_diff_1k.jpg[39m[0m
+[  63% ] [90m[1mreimport[22m | island_tree_01_leaves_nor_gl_1k.jpg[39m[0m
+[  65% ] [90m[1mreimport[22m | wet_fieldstone_wall.jpg[39m[0m
+[  66% ] [90m[1mreimport[22m | weathered_dark_timber.jpg[39m[0m
+[  67% ] [90m[1mreimport[22m | regional_wet_forest_floor.png[39m[0m
+[  68% ] [90m[1mreimport[22m | mossy_ancient_ruin_stone.png[39m[0m
+[  70% ] [90m[1mreimport[22m | majestic_weathered_canvas_albedo.png[39m[0m
+[  71% ] [90m[1mreimport[22m | daylight_weathered_timber.png[39m[0m
+[  72% ] [90m[1mreimport[22m | island_tree_01_nor_gl_1k.jpg[39m[0m
+[  73% ] [90m[1mreimport[22m | Rock004_1K-JPG_Color.jpg[39m[0m
+[  75% ] [90m[1mreimport[22m | Rock004_1K-JPG_NormalGL.jpg[39m[0m
+[  76% ] [90m[1mreimport[22m | daylight_weathered_slate_roof.png[39m[0m
+[  77% ] [90m[1mreimport[22m | daylight_weathered_flagstone.png[39m[0m
+[  78% ] [90m[1mreimport[22m | Rock004_1K-JPG_Roughness.jpg[39m[0m
+[  80% ] [90m[1mreimport[22m | fern_02_1k.gltf[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  81% ] [90m[1mreimport[22m | ez_pine_wind_variant_pbr.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  82% ] [90m[1mreimport[22m | ez_pine_tall_pbr.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  83% ] [90m[1mreimport[22m | ez_pine_medium_pbr.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  85% ] [90m[1mreimport[22m | tree_oak_dark.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  86% ] [90m[1mreimport[22m | tree_detailed_dark.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  87% ] [90m[1mreimport[22m | tree_default_dark.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  88% ] [90m[1mreimport[22m | stone_tallC.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  90% ] [90m[1mreimport[22m | stone_smallF.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  91% ] [90m[1mreimport[22m | stone_largeB.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  92% ] [90m[1mreimport[22m | stone_largeA.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  93% ] [90m[1mreimport[22m | cliff_cave_rock.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  95% ] [90m[1mreimport[22m | cliff_blockSlope_rock.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  96% ] [90m[1mreimport[22m | bridge_stone.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  97% ] [90m[1mreimport[22m | island_tree_01_1k.gltf[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  98% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (79 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
