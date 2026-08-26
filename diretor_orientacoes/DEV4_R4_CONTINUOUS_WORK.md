@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-CANOPY-EDGE-020
+task_id: DEV4-R4-FOREST-OUTER-SILHOUETTE-021
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -73,9 +73,9 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Equilíbrio da entrada | Antes da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Profundidade liminar | Fora da clareira | ≥9 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-CANOPY-EDGE-020
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-SILHOUETTE-021
 
-Refinar a cadência da **borda das copas R4** usando exclusivamente copas ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+Auditar e ajustar apenas a silhueta exterior R4 usando instâncias ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -88,4 +88,4 @@ Refinar a cadência da **borda das copas R4** usando exclusivamente copas ambien
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-SILHOUETTE-021` deverá auditar a silhueta exterior R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-OUTER-RHYTHM-022` deverá rever o ritmo lateral exterior R4 sem modificar rota, câmara ou limites regionais.
