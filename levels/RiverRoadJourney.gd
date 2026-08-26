@@ -45,6 +45,7 @@ func _ready() -> void:
 	_build_first_orion_reflection()
 	_build_orion_reflection_observation_station()
 	_build_orion_reflection_lookout()
+	_build_return_confirmation_landing()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -915,6 +916,57 @@ func _build_orion_reflection_lookout() -> void:
 		fern.scale = Vector3(0.24, 0.24, 0.24)
 		fern.rotation.y = 0.52
 		lookout_root.add_child(fern)
+
+func _build_return_confirmation_landing() -> void:
+	# DEV2-R2-RIVER-RETURN-031: laje lateral de confirmação Casa Voss, sem seta, painel ou interação obrigatória.
+	# O ponto fica no lado oposto ao miradouro Orion e orienta a leitura para trás sem abrir atalho ao leito.
+	var landing_root: Node3D = Node3D.new()
+	landing_root.name = "LajeConfirmacaoRetornoVossR2"
+	add_child(landing_root)
+	var landing_z: float = 58.0
+	var landing_x: float = _road_x(landing_z) - 4.85
+	var ground_y: float = _height_at(landing_x, landing_z)
+	var landing_material: StandardMaterial3D = StandardMaterial3D.new()
+	landing_material.albedo_color = Color(0.14, 0.17, 0.15, 1.0)
+	landing_material.roughness = 0.94
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(1.32, 0.14, 0.88)
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeConfirmacaoRetornoVoss"
+	slab.mesh = slab_mesh
+	slab.material_override = landing_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(landing_x, ground_y + 0.08, landing_z)
+	slab.rotation = Vector3(-0.02, 0.18, -0.04)
+	landing_root.add_child(slab)
+	var body: StaticBody3D = StaticBody3D.new()
+	body.name = "ColisorLajeConfirmacaoRetornoVoss"
+	body.position = slab.position
+	body.rotation = slab.rotation
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = slab_mesh.size
+	collision.shape = shape
+	body.add_child(collision)
+	landing_root.add_child(body)
+	for index: int in range(2):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraConfirmacaoRetornoVoss_%02d" % (index + 1)
+		var side: float = -1.0 if index == 0 else 1.0
+		stone.position = Vector3(landing_x + side * 0.72, _height_at(landing_x + side * 0.72, landing_z + 0.22) + 0.06, landing_z + 0.22)
+		stone.scale = Vector3(0.17 + float(index) * 0.025, 0.12 + float(index) * 0.02, 0.19)
+		stone.rotation.y = -side * 0.38
+		_apply_material(stone, landing_material)
+		landing_root.add_child(stone)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoConfirmacaoRetornoVoss"
+		fern.position = Vector3(landing_x - 0.66, _height_at(landing_x - 0.66, landing_z - 0.38) + 0.02, landing_z - 0.38)
+		fern.scale = Vector3(0.22, 0.22, 0.22)
+		fern.rotation.y = -0.48
+		landing_root.add_child(fern)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.

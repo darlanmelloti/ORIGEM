@@ -159,6 +159,14 @@ func _verify_r2_world_life_qa() -> void:
 				issues.append("o miradouro Orion não possui laje física e colisor coincidente")
 			if not lookout.find_children("*", "OmniLight3D", true, false).is_empty():
 				issues.append("o miradouro Orion não pode criar luz dinâmica")
+		var return_landing: Node = r2.get_node_or_null("LajeConfirmacaoRetornoVossR2")
+		if return_landing == null:
+			issues.append("a laje física de confirmação do retorno Voss está em falta")
+		else:
+			if return_landing.get_node_or_null("LajeConfirmacaoRetornoVoss") == null or return_landing.get_node_or_null("ColisorLajeConfirmacaoRetornoVoss") == null:
+				issues.append("a confirmação do retorno Voss não possui laje e colisor coincidente")
+			if not return_landing.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a confirmação do retorno Voss não pode criar luz dinâmica")
 		if not r2.find_children("LuzMarcoVida*", "OmniLight3D", true, false).is_empty():
 			issues.append("os marcos R2 não podem criar luzes dinâmicas")
 		if not r2.find_children("LuzEstacaoOrion*", "OmniLight3D", true, false).is_empty():
@@ -238,6 +246,7 @@ func _verify_r2_world_life_qa() -> void:
 		print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
 		print("[ORIGEM_R2_ORION_STATION_OK] estação de observação física do reflexo Orion confirmada")
 		print("[ORIGEM_R2_RIVER_LOOKOUT_030_OK] miradouro físico Orion, laje e colisor confirmados sem luz dinâmica nova.")
+		print("[ORIGEM_R2_RIVER_RETURN_031_OK] laje física de confirmação Casa Voss presente e sem luz dinâmica.")
 		print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
