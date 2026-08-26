@@ -6,36 +6,44 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-WIND-READING-002
+task_id: DEV5-R5-CAMP-WIND-READING-003
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
 
 ## Base oficial e fronteira
 
-A fonte de trabalho é a branch canónica `dev5/r5-majestic-camp`, sempre reconciliada com `integration/r1-r6-sprint1` sem sobrescrever trabalho exclusivo. A R5 é ancorada em `(-88, 178)` e preserva as transições físicas `forest_to_majestic` e `majestic_to_lake`.
+A fonte de trabalho é a branch canónica `dev5/r5-majestic-camp`, reconciliada com `integration/r1-r6-sprint1` sem sobrescrever trabalho exclusivo. A R5 é ancorada em `(-88, 178)` e preserva as transições físicas `forest_to_majestic` e `majestic_to_lake`.
 
 `levels/ForestLakeRegion.gd` mantém a geometria partilhada R4–R6. O conteúdo Dev5 novo deve preferir `levels/regions/r5/` e só pode tocar no construtor partilhado para montagem mínima comprovada. Não alterar `TempleLevel.gd`, âncoras, jogador, mapa UI ou módulos de outras regiões.
 
-## Entrega recuperada e aprovada — DEV5-R5-ARTEFACT-TRAIL-001
+## Entrega aprovada — DEV5-R5-ARTEFACT-TRAIL-001
 
-A recuperação local foi validada pela porta R5. Ela adiciona o módulo `MajesticArtifactTrail.gd`, o artefacto azul físico interagível, uma pista de mapa de expedição e uma pista de ferramentas/cordas; o registo da estela completa as três pistas narrativas. A ativação do artefacto dispara `majestic_orion_trace_discovered` na Timeline persistente sem cutscene ou remoção de controlo.
+`MajesticArtifactTrail.gd` contém o artefacto azul físico, uma pista de mapa de expedição e uma pista de ferramentas/cordas; a estela completa as três pistas narrativas. A ativação do artefacto dispara `majestic_orion_trace_discovered` na Timeline persistente, sem cutscene ou remoção de controlo. O orçamento local mantém quatro luzes: fogueira, brasa, preenchimento e luar.
 
-A correção de orçamento remove as três luzes dinâmicas das tochas e o brilho dinâmico da estela. O acampamento fica com quatro luzes locais: fogueira, brasa, preenchimento e luar. A prova `ORIGEM_R5_ARTEFACT_OK` e as rotas R4→R5→R6 passaram.
+## Entrega aprovada — DEV5-R5-CAMP-WIND-READING-002
 
-## Tarefa ativa — DEV5-R5-CAMP-WIND-READING-002
+`MajesticCampWindReading.gd` aplica movimento determinístico e local a duas lonas de chegada e a duas cordas enroladas já existentes no suporte de expedição. O módulo guarda transformações-base e fases distintas, aplicando apenas oscilações de baixa amplitude em `_process`; por isso, não há deriva acumulada, criação contínua de nós, simulação de pano, partículas densas, `Light3D` nova ou alteração de colisão e navegação.
 
-Criar leitura subtil de abandono recente no Acampamento Majestic através de movimento económico de lonas e cordas existentes, com variação de fase e sem física complexa, partículas densas, `Light3D` nova, paredes vegetais ou alteração da rota. A resposta deve ser visível apenas nas lonas de chegada e nas cordas do suporte de expedição, mantendo a fogueira, tendas e ligação à margem como conteúdo físico já aprovado.
+| Critério | Resultado |
+|---|---|
+| Lonas | 2 lonas de chegada, com fases assimétricas e deslocação reduzida |
+| Cordas | 2 cordas existentes, com rotação e elevação local mínima |
+| Luz | 0 luz criada pelo módulo; orçamento R5 de 4 focos preservado |
+| Estabilidade | Transformações-base conservadas; nenhum nó alvo criado ou removido durante a prova |
+| QA | `[ORIGEM_R5_WIND_OK]`, porta R5 e rotas R4→R5→R6 aprovadas |
+
+## Tarefa ativa — DEV5-R5-CAMP-WIND-READING-003
+
+Produzir uma auditoria visual 16:9 da leitura de vento em sessão R5 e confirmar que a largura navegável do conector Majestic não sofre qualquer redução enquanto o módulo está ativo. A intervenção, se necessária, fica limitada a amplitude ou fase já declaradas em `MajesticCampWindReading.gd`; não criar malhas, luzes, nós recorrentes, física de pano, câmara, UI ou alteração da rota.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | R5, módulo `levels/regions/r5/`, QA R5 e integração mínima |
-| Cartografia | Entrada R4, desvio oeste e ligação Majestic→R6 preservados |
-| Visual | Movimento discreto, assimétrico e material; sem greybox, painel ou vento uniforme em toda a região |
-| Luz | Máximo de quatro `Light3D` locais; nenhuma luz nova |
-| Custo | Sem simulação de pano, partículas densas ou criação contínua de nós |
-| QA | Parser, porta R5, prova de artefacto/pistas/orçamento e rotas contratadas antes do PR |
+| Visual | Captura 16:9 no acampamento e confirmação de leitura discreta, sem oscilação uniforme |
+| Navegação | O conector R4→R5 e a ligação Majestic→R6 devem manter a largura e colisão aprovadas |
+| Custo | Sem nova geometria, luz, partículas, shader, física ou nós em runtime |
+| Verificação | Parser, prova R5 de vento, porta R5, rotas `forest_to_majestic` e `majestic_to_lake` |
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-WIND-READING-002` exige um novo `task_id` ativo, commit publicado e porta R5 aprovada.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-WIND-READING-003` exige commit publicado, validação R5 e um novo `task_id` em estado `ACTIVE`.

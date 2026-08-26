@@ -27,6 +27,7 @@ const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMis
 const R4_FOREST_CANOPY_CADENCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestCanopyCadence.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
+const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
 var terrain_patch: Node3D
@@ -66,6 +67,7 @@ func _ready() -> void:
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
+	_build_r5_majestic_wind_reading()
 	_build_majestic_connector()
 	_build_majestic_lake_link()
 	_build_majestic_turn_marker()
@@ -1342,6 +1344,14 @@ func _build_r5_majestic_artifact_trail() -> void:
 	var trail: R5MajesticArtifactTrail = R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT.call("install", camp, PILLAR) as R5MajesticArtifactTrail
 	if trail == null:
 		push_error("[ORIGEM_R5] Não foi possível instalar o trilho narrativo do artefacto.")
+
+func _build_r5_majestic_wind_reading() -> void:
+	# DEV5-R5-CAMP-WIND-READING-002: movimento local e determinístico apenas em lonas de chegada e cordas existentes.
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	var artifact_trail: Node = camp.get_node_or_null("R5TrilhoDoArtefacto") if camp != null else null
+	var reading: R5MajesticCampWindReading = R5_MAJESTIC_WIND_READING_SCRIPT.call("install", camp, artifact_trail) as R5MajesticCampWindReading
+	if reading == null:
+		push_error("[ORIGEM_R5] Não foi possível instalar a leitura de vento do Acampamento Majestic.")
 
 func _build_majestic_connector() -> void:
 
