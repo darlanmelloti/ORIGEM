@@ -41,6 +41,7 @@ const R4_FOREST_LIMINAL_DEPTH_SCRIPT: Script = preload("res://levels/regions/r4/
 const R4_FOREST_OUTER_MARGIN_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterMargin.gd")
 const R4_FOREST_CANOPY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestCanopyEdge.gd")
 const R4_FOREST_OUTER_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterSilhouette.gd")
+const R4_FOREST_OUTER_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterRhythm.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -98,6 +99,7 @@ func _ready() -> void:
 	_build_r4_outer_margin()
 	_build_r4_canopy_edge()
 	_build_r4_outer_silhouette()
+	_build_r4_outer_rhythm()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -498,6 +500,13 @@ func _build_r4_outer_silhouette() -> void:
 	var silhouette: R4ForestOuterSilhouette = R4_FOREST_OUTER_SILHOUETTE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestOuterSilhouette
 	if silhouette == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a silhueta exterior da floresta.")
+
+func _build_r4_outer_rhythm() -> void:
+	# DEV4-R4-FOREST-OUTER-RHYTHM-022: ajusta árvores existentes sem colisor na faixa exterior, sem tocar na rota ou no conector Majestic.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var rhythm: R4ForestOuterRhythm = R4_FOREST_OUTER_RHYTHM_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestOuterRhythm
+	if rhythm == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o ritmo exterior da floresta.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
