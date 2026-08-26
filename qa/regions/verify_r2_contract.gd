@@ -15,6 +15,16 @@ func _init() -> void:
 	var qa_result: Dictionary = region.run_qa_contract()
 	if not bool(qa_result.get("valid", false)):
 		issues.append("run_qa_contract() reportou falha")
+	if int(qa_result.get("region_id", -1)) != contract.region_id:
+		issues.append("run_qa_contract() deve retornar o region_id canônico")
+	if qa_result.get("bounds") != contract.bounds:
+		issues.append("run_qa_contract() deve retornar a AABB contratual")
+	if qa_result.get("anchor") != contract.entry_anchor:
+		issues.append("run_qa_contract() deve retornar a âncora de entrada")
+	if qa_result.get("qa_routes") != contract.qa_routes:
+		issues.append("run_qa_contract() deve retornar as rotas canônicas")
+	if not (qa_result.get("issues") is PackedStringArray and qa_result.get("issues").is_empty()):
+		issues.append("run_qa_contract() válido deve retornar issues vazio")
 	if contract.region_id != 2:
 		issues.append("R2 deve declarar region_id=2")
 	if contract.owner != "Dev2":
@@ -81,4 +91,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_018_OK] notas contratuais R2 consistente com os critérios essenciais.")
 	print("[ORIGEM_R2_RIVER_QA_019_OK] âncoras contratuais de entrada e saída dentro da AABB R2.")
 	print("[ORIGEM_R2_RIVER_QA_020_OK] build R2 idempotente e nó canônico preservado.")
+	print("[ORIGEM_R2_RIVER_QA_021_OK] run_qa_contract R2 retorna metadados canônicos.")
 	quit(0)
