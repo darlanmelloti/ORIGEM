@@ -46,6 +46,7 @@ func _ready() -> void:
 	_build_orion_reflection_observation_station()
 	_build_orion_reflection_lookout()
 	_build_return_confirmation_landing()
+	_build_arch_arrival_landing()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -967,6 +968,38 @@ func _build_return_confirmation_landing() -> void:
 		fern.scale = Vector3(0.22, 0.22, 0.22)
 		fern.rotation.y = -0.48
 		landing_root.add_child(fern)
+
+func _build_arch_arrival_landing() -> void:
+	# DEV2-R2-RIVER-ARCH-032: chegada física curta sob o vão livre do Arco, sem segundo arco ou bloqueio da estrada.
+	var arrival_root: Node3D = Node3D.new()
+	arrival_root.name = "LajeChegadaArcoR2"
+	add_child(arrival_root)
+	var arrival_z: float = ARCH_WORLD_Z - 1.65
+	var arrival_x: float = _road_x(arrival_z)
+	var ground_y: float = _height_at(arrival_x, arrival_z)
+	var arrival_material: StandardMaterial3D = StandardMaterial3D.new()
+	arrival_material.albedo_color = Color(0.18, 0.17, 0.13, 1.0)
+	arrival_material.roughness = 0.92
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(1.86, 0.12, 1.10)
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeChegadaSobArco"
+	slab.mesh = slab_mesh
+	slab.material_override = arrival_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(arrival_x, ground_y + 0.06, arrival_z)
+	slab.rotation.y = atan2((_road_x(arrival_z + 1.0) - _road_x(arrival_z - 1.0)) * 0.5, 2.0)
+	arrival_root.add_child(slab)
+	var body: StaticBody3D = StaticBody3D.new()
+	body.name = "ColisorLajeChegadaSobArco"
+	body.position = slab.position + Vector3(0.0, -0.035, 0.0)
+	body.rotation.y = slab.rotation.y
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = slab_mesh.size
+	collision.shape = shape
+	body.add_child(collision)
+	arrival_root.add_child(body)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.

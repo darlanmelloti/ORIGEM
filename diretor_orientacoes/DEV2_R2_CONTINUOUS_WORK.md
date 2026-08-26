@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-RETURN-031
+task_id: DEV2-R2-RIVER-ARCH-032
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -106,20 +106,23 @@ A prova curta confirmou que `to_dictionary()` não permite mutar o contrato em m
 ## Tarefa concluída — DEV2-R2-RIVER-LOOKOUT-030
 A R2 recebeu o `MiradouroReflexoOrionR2`: laje caminhável, colisor coincidente, duas pedras de visada e feto baixo. O ponto lateral preserva rio → reflexo Orion → retorno Casa Voss → Arco, sem atalho para o leito ou luz dinâmica. O PR #58 passou no CI regional.
 
-## Tarefa ativa — DEV2-R2-RIVER-RETURN-031
+## Tarefa concluída — DEV2-R2-RIVER-RETURN-031
+A R2 recebeu a `LajeConfirmacaoRetornoVossR2`, com laje caminhável, colisor coincidente, pedras de referência e feto baixo. A leitura para Casa Voss foi preservada sem seta, painel, HUD, interação obrigatória, luz dinâmica ou atalho para o leito. O CI regional aprovou o commit `53030dcd`.
 
-A R2 deve receber uma **laje física de confirmação do retorno à Casa Voss**, posicionada no lado oposto do miradouro Orion, com leitura visual para trás sem seta, painel, HUD ou interação obrigatória. Deve preservar o leito, a ponte, o Arco e as três rotas canônicas.
+## Tarefa ativa — DEV2-R2-RIVER-ARCH-032
+
+A R2 deve receber uma **laje física de chegada sob o Arco das Ruínas**, curta e centralizada no eixo já existente, para tornar a conclusão da viagem jogável sem criar geometria falsa, bloquear o vão ou competir com a silhueta do Arco. Deve preservar rio, reflexo Orion, retorno Casa Voss e as três rotas canônicas.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
 | Cartografia | Validar as três rotas no contrato sem mover estrada, Arco ou âncoras cartográficas |
-| Acesso | Laje lateral caminhável de confirmação do retorno, fora do leito e sem novo atalho |
+| Acesso | Laje curta de chegada no eixo da estrada, sob o vão livre do Arco, sem bloquear passagem |
 | Desempenho | Zero luz dinâmica adicional, partículas ou emissão persistente; reutilizar pedra e fetos reais |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
-| Narrativa | A laje deve confirmar visualmente Casa Voss atrás do jogador sem competir com Orion ou o Arco |
-| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_RETURN_031_OK]` antes do PR |
+| Narrativa | A chegada deve fechar a leitura Casa Voss → rio → Orion → Arco sem competir com a silhueta do destino |
+| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_ARCH_032_OK]` antes do PR |
 
 ## Fecho e avanço obrigatório
 
@@ -127,4 +130,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RETURN-031`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-ARCH-032`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
