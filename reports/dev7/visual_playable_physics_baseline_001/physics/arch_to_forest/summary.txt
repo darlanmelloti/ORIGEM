@@ -1,0 +1,2 @@
+[DEV7_GROUNDING_START] route=arch_to_forest
+[QA-GROUND-01-RESULT] {"grounded_frames":0,"lowest_y":-0.756288945674896,"max_post_warmup_y_delta":1.74932271242142,"passed":false,"position":[-9.17260456085205,1.23556125164032,107.185577392578],"probe":"QA-GROUND-01","reason":"insufficient_floor_contact","worst_downward_speed":5.06333446502686}

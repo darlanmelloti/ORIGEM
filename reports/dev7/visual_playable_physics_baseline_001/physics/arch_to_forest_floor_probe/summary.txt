@@ -1,0 +1,6 @@
+[CP_CARTO80_FLOOR] t=0.0s pos=(-9.00,1.32,107.00) esperado_y=1.32 no_chao=false
+[CP_CARTO80_FLOOR] t=0.5s pos=(-9.00,0.14,107.00) esperado_y=1.32 no_chao=false
+[CP_CARTO80_FLOOR] t=1.5s pos=(-9.05,0.29,107.05) esperado_y=1.32 no_chao=false
+[CP_CARTO80_FLOOR] t=3.0s pos=(-9.12,0.51,107.13) esperado_y=1.33 no_chao=false
+[CP_CARTO80_FLOOR] t=6.0s pos=(-9.27,0.88,107.29) esperado_y=1.34 no_chao=false
+[DEV7_ARCH_FOREST_FLOOR_PROBE_EXIT] code=124

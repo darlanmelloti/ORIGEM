@@ -1,0 +1,3 @@
+[DEV7_GROUNDING_START] route=forest_to_majestic
+[QA-GROUND-01-RESULT] {"grounded_frames":180,"lowest_y":1.11352205276489,"max_post_warmup_y_delta":0.0,"passed":true,"position":[-2.5,1.11352205276489,178.0],"probe":"QA-GROUND-01","reason":"ok","worst_downward_speed":1.95999979972839}
+[DEV7_GROUNDING_EXIT] route=forest_to_majestic code=0

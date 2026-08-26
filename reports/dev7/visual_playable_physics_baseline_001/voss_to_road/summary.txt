@@ -1,0 +1,1 @@
+[ORIGEM_REGIONAL_RUNTIME_CAPTURE_OK] route=voss_to_road evidence=reports/dev7/visual_playable_physics_baseline_001/voss_to_road/voss_to_road_postload.png settle_seconds=60
