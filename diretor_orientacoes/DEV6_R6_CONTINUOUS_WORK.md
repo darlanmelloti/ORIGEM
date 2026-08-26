@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016
+task_id: DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-ARCHIVE-017
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -135,17 +135,23 @@ A PR `#390` foi integrada regularmente no commit canónico `8b5397f`, sem bypass
 
 A sucessora documental confirmou a associação regular da PR #390, a preservação do checkpoint 014 e a inexistência de mutação adicional de produção. A tarefa foi concluída pela integração regular; não exige repetição de CI ou captura.
 
-## Tarefa ativa — DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016
+## Tarefa concluída — DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016
 
-Rever e indexar somente a evidência integrada do plano médio R6 para o handoff de arte/QA, sem criar nova captura ou alterar produção. É proibido criar ou modificar nós, meshes, materiais, água, luz, shader, física, colisores, lajes, rotas, âncoras, handoff ou conteúdo R7.
+A revisão documental foi indexada em `reports/r6/MIDGROUND_COMPOSITION_EVIDENCE_REVIEW_016.md` e integrada regularmente pela PR `#451` no commit `39c74df`, dentro da integração canónica `42acaee`. A entrega confirmou por referência o commit de composição `8b5397f`, o marcador da prova 014, a porta R6 e a baseline das três rotas, sem executar nova captura, runtime, gate, CI manual ou mutação de produção.
+
+## Tarefa ativa — DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-ARCHIVE-017
+
+Preservar e arquivar a cadeia de evidências integrada das tarefas 014–016 para consulta de arte/QA, sem criar produção nem repetir validação pesada. Esta sucessora somente pode atuar após uma mudança regular de `head`, `base`, checks ou mergeabilidade; sem esse marco, mantém o checkpoint documental e não monitora continuamente.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Somente revisão de referência integrada, estado da PR mesclada e evidência QA já existente |
-| Cadência | No máximo uma rodada determinística por nova ponta da integração; não repetir CI nem captura sem mudança de base |
-| Evidência | Confirmar `8b5397f`, o marcador da prova 014, a porta R6 e a baseline das três rotas no checkpoint publicado |
-| Publicação | Sem bypass, force-push, cancelamento ou disparos agressivos de CI |
-| Encerramento | Só substituir esta tarefa por nova sucessora QA após revisão de evidência concluída e contractualmente registada |
+| Escopo | Somente referências integradas, estado de PR e artefactos QA R6 já versionados |
+| Proibições | Não criar nem modificar produção, nós, meshes, materiais, água, luz, shader, física, colisores, lajes, rotas, âncoras, handoff ou conteúdo R7 |
+| Cadência | Uma verificação documental por marco regular; não repetir captura, runtime, gate ou CI sem mudança comprovada |
+| Evidência | Preservar `8b5397f`, PR `#390`, PR `#451`, a prova 014, a porta R6 e a baseline das três rotas |
+| Publicação | PR regular somente; sem bypass, force-push, cancelamento ou disparos agressivos de CI |
+| Encerramento | Substituir apenas depois de um arquivo documental integrado ou de uma nova hipótese R6 formalmente autorizada |
+
 
 ## Sucessão obrigatória
 
