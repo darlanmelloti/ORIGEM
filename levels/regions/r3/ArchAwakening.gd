@@ -22,6 +22,7 @@ const ARCH_MATERIAL_REST_SCRIPT: Script = preload("res://levels/regions/r3/ArchM
 const ARCH_LATERAL_CALM_SCRIPT: Script = preload("res://levels/regions/r3/ArchLateralCalm.gd")
 const ARCH_MARGIN_REST_SCRIPT: Script = preload("res://levels/regions/r3/ArchMarginRest.gd")
 const ARCH_LATERAL_STILLNESS_SCRIPT: Script = preload("res://levels/regions/r3/ArchLateralStillness.gd")
+const ARCH_MARGIN_MATTE_SCRIPT: Script = preload("res://levels/regions/r3/ArchMarginMatte.gd")
 const SILENT_CADENCE_DURATION: float = 1.35
 const SILENT_CADENCE_BEATS: int = 3
 const SILENT_CADENCE_SCALE_DELTA: float = 0.12
@@ -66,6 +67,7 @@ func _ready() -> void:
 	ARCH_LATERAL_CALM_SCRIPT.call("install", get_parent() as Node3D)
 	ARCH_MARGIN_REST_SCRIPT.call("install", get_parent() as Node3D)
 	ARCH_LATERAL_STILLNESS_SCRIPT.call("install", get_parent() as Node3D)
+	ARCH_MARGIN_MATTE_SCRIPT.call("install", get_parent() as Node3D)
 	_build_trigger()
 	_build_effects()
 	_apply_awakened_state()
