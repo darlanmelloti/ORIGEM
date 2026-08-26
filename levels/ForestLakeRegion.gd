@@ -25,6 +25,7 @@ const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.g
 const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
 const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMistLayer.gd")
 const R4_FOREST_CANOPY_CADENCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestCanopyCadence.gd")
+const R4_FOREST_ORION_VISTA_SCRIPT: Script = preload("res://levels/regions/r4/ForestOrionVistaFraming.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -66,6 +67,7 @@ func _ready() -> void:
 	_build_forest_canopy_clusters()
 	_build_forest_micro_details()
 	_build_r4_canopy_cadence()
+	_build_r4_orion_vista_framing()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -322,6 +324,21 @@ func _build_r4_canopy_cadence() -> void:
 	var cadence: R4ForestCanopyCadence = R4_FOREST_CANOPY_CADENCE_SCRIPT.call("install", self, Callable(self, "_path_x"), canopy_roots) as R4ForestCanopyCadence
 	if cadence == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a cadência estática das copas.")
+
+func _build_r4_orion_vista_framing() -> void:
+	# DEV4-R4-ORION-VISTA-FRAMING-006: transforma somente copas laterais existentes para uma revelação gradual de Orion.
+	var target_names: PackedStringArray = PackedStringArray([
+		"TransicaoOrganicaArcoFloresta",
+		"CopasFocaisDaFlorestaDensa",
+	])
+	var canopy_roots: Array[Node] = []
+	for target_name: String in target_names:
+		var canopy_root: Node = get_node_or_null(target_name)
+		if canopy_root != null:
+			canopy_roots.append(canopy_root)
+	var framing: R4ForestOrionVistaFraming = R4_FOREST_ORION_VISTA_SCRIPT.call("install", self, Callable(self, "_path_x"), canopy_roots) as R4ForestOrionVistaFraming
+	if framing == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o enquadramento lateral de Orion.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
