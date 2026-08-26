@@ -1,0 +1,1 @@
+[ORIGEM_REGIONAL_RUNTIME_CAPTURE_OK] route=forest_to_ruins evidence=reports/dev7/visual_playable_physics_baseline_001/forest_to_ruins/forest_to_ruins_postload.png settle_seconds=60
