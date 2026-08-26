@@ -33,6 +33,7 @@ permissions:
   issues: write
 
 concurrency:
+  # As validações regionais são obrigatórias para integração; enfileirar é mais seguro do que cancelar uma porta em curso.
   group: origem-regional-${{ github.workflow }}-${{ github.ref }}
   # As entregas regionais devem aguardar em fila; nunca cancelar validações em curso.
   cancel-in-progress: false
@@ -177,26 +178,348 @@ jobs:
               state: 'open',
               per_page: 100
             });
-            const existing = openIssues.find((issue) => issue.title === title && !issue.pull_request);
-            if (!existing) {
-              await github.rest.issues.create({
+            let currentIssue = openIssues.find((issue) => issue.title === title && !issue.pull_request);
+            if (!currentIssue) {
+              const { data: createdIssue } = await github.rest.issues.create({
                 owner: repoOwner,
                 repo,
                 title,
                 body: `## Continuidade automática Dev2\n\nO contrato \`${contractPath}\` declara **${taskId}** como a próxima tarefa ativa de Dev2.\n\nA porta R2 acabou de ser aprovada. Isto não encerra o ciclo: a implementação, validação, publicação e substituição por uma nova tarefa ativa são obrigatórias.\n\n---\n\n${contract}`
               });
+              currentIssue = createdIssue;
               core.info(`Issue de continuidade criada para ${taskId}.`);
             } else {
-              core.info(`Issue de continuidade já está aberta: #${existing.number}.`);
+              core.info(`Issue de continuidade já está aberta: #${currentIssue.number}.`);
+            }
+            const previousIssues = openIssues.filter((issue) =>
+              !issue.pull_request &&
+              issue.title.startsWith('[Dev2 Continuous]') &&
+              issue.number !== currentIssue.number
+            );
+            for (const issue of previousIssues) {
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                body: `Encerrada automaticamente: a tarefa ativa foi avançada para **${taskId}** e é acompanhada por #${currentIssue.number}.`
+              });
+              await github.rest.issues.update({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              core.info(`Issue Dev2 obsoleta encerrada: #${issue.number}.`);
             }
             await core.summary
               .addHeading('Dev2 — continuidade ativa')
               .addRaw(`Tarefa: **${taskId}**  \nBranch: \`${branch}\`  \nEstado: **ACTIVE**`)
               .write();
 
+  dev3-continuity:
+    name: Dev3 — próxima tarefa ativa
+    needs: [resolve-regions, regional-gate, global-light-budget]
+    if: >-
+      needs.regional-gate.result == 'success' &&
+      needs.global-light-budget.result == 'success' &&
+      contains(needs.resolve-regions.outputs.regions, 'R3')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter contrato contínuo do Dev3
+        uses: actions/checkout@v7
+
+      - name: Validar contrato e manter a tarefa rastreável
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const contractPath = 'diretor_orientacoes/DEV3_R3_CONTINUOUS_WORK.md';
+            const contract = fs.readFileSync(contractPath, 'utf8');
+            const state = /^status:\s*ACTIVE\s*$/m.test(contract);
+            const taskId = (contract.match(/^task_id:\s*([^\s]+)\s*$/m) || [])[1];
+            const owner = (contract.match(/^owner:\s*([^\s]+)\s*$/m) || [])[1];
+            const branch = (contract.match(/^branch:\s*([^\s]+)\s*$/m) || [])[1];
+            if (!state || !taskId || owner !== 'Dev3' || branch !== 'dev3/r3-arch-ruins') {
+              core.setFailed('Contrato Dev3 inválido: exige status ACTIVE, task_id, owner Dev3 e branch canónica.');
+              return;
+            }
+            const title = `[Dev3 Continuous] ${taskId}`;
+            const { owner: repoOwner, repo } = context.repo;
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner: repoOwner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            let currentIssue = openIssues.find((issue) => issue.title === title && !issue.pull_request);
+            if (!currentIssue) {
+              const { data: createdIssue } = await github.rest.issues.create({
+                owner: repoOwner,
+                repo,
+                title,
+                body: `## Continuidade automática Dev3\n\nO contrato \`${contractPath}\` declara **${taskId}** como a próxima tarefa ativa de Dev3.\n\nA porta R3 acabou de ser aprovada. Isto não encerra o ciclo: a implementação, validação, publicação e substituição por uma nova tarefa ativa são obrigatórias.\n\n---\n\n${contract}`
+              });
+              currentIssue = createdIssue;
+              core.info(`Issue de continuidade criada para ${taskId}.`);
+            } else {
+              core.info(`Issue de continuidade já está aberta: #${currentIssue.number}.`);
+            }
+            const previousIssues = openIssues.filter((issue) =>
+              !issue.pull_request &&
+              issue.title.startsWith('[Dev3 Continuous]') &&
+              issue.number !== currentIssue.number
+            );
+            for (const issue of previousIssues) {
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                body: `Encerrada automaticamente: a tarefa ativa foi avançada para **${taskId}** e é acompanhada por #${currentIssue.number}.`
+              });
+              await github.rest.issues.update({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              core.info(`Issue Dev3 obsoleta encerrada: #${issue.number}.`);
+            }
+            await core.summary
+              .addHeading('Dev3 — continuidade ativa')
+              .addRaw(`Tarefa: **${taskId}**  \nBranch: \`${branch}\`  \nEstado: **ACTIVE**`)
+              .write();
+
+  dev4-continuity:
+    name: Dev4 — próxima tarefa ativa
+    needs: [resolve-regions, regional-gate, global-light-budget]
+    if: >-
+      needs.regional-gate.result == 'success' &&
+      needs.global-light-budget.result == 'success' &&
+      contains(needs.resolve-regions.outputs.regions, 'R4')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter contrato contínuo do Dev4
+        uses: actions/checkout@v7
+
+      - name: Validar contrato e manter a tarefa rastreável
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const contractPath = 'diretor_orientacoes/DEV4_R4_CONTINUOUS_WORK.md';
+            const contract = fs.readFileSync(contractPath, 'utf8');
+            const state = /^status:\s*ACTIVE\s*$/m.test(contract);
+            const taskId = (contract.match(/^task_id:\s*([^\s]+)\s*$/m) || [])[1];
+            const owner = (contract.match(/^owner:\s*([^\s]+)\s*$/m) || [])[1];
+            const branch = (contract.match(/^branch:\s*([^\s]+)\s*$/m) || [])[1];
+            if (!state || !taskId || owner !== 'Dev4' || branch !== 'dev4/r4-dense-forest') {
+              core.setFailed('Contrato Dev4 inválido: exige status ACTIVE, task_id, owner Dev4 e branch canónica.');
+              return;
+            }
+            const title = `[Dev4 Continuous] ${taskId}`;
+            const { owner: repoOwner, repo } = context.repo;
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner: repoOwner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            let currentIssue = openIssues.find((issue) => issue.title === title && !issue.pull_request);
+            if (!currentIssue) {
+              const { data: createdIssue } = await github.rest.issues.create({
+                owner: repoOwner,
+                repo,
+                title,
+                body: `## Continuidade automática Dev4\n\nO contrato \`${contractPath}\` declara **${taskId}** como a próxima tarefa ativa de Dev4.\n\nA porta R4 acabou de ser aprovada. Isto não encerra o ciclo: a implementação, validação, publicação e substituição por uma nova tarefa ativa são obrigatórias.\n\n---\n\n${contract}`
+              });
+              currentIssue = createdIssue;
+              core.info(`Issue de continuidade criada para ${taskId}.`);
+            } else {
+              core.info(`Issue de continuidade já está aberta: #${currentIssue.number}.`);
+            }
+            const previousIssues = openIssues.filter((issue) =>
+              !issue.pull_request &&
+              issue.title.startsWith('[Dev4 Continuous]') &&
+              issue.number !== currentIssue.number
+            );
+            for (const issue of previousIssues) {
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                body: `Encerrada automaticamente: a tarefa ativa foi avançada para **${taskId}** e é acompanhada por #${currentIssue.number}.`
+              });
+              await github.rest.issues.update({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              core.info(`Issue Dev4 obsoleta encerrada: #${issue.number}.`);
+            }
+            await core.summary
+              .addHeading('Dev4 — continuidade ativa')
+              .addRaw(`Tarefa: **${taskId}**  \nBranch: \`${branch}\`  \nEstado: **ACTIVE**`)
+              .write();
+
+  dev5-continuity:
+    name: Dev5 — próxima tarefa ativa
+    needs: [resolve-regions, regional-gate, global-light-budget]
+    if: >-
+      needs.regional-gate.result == 'success' &&
+      needs.global-light-budget.result == 'success' &&
+      contains(needs.resolve-regions.outputs.regions, 'R5')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter contrato contínuo do Dev5
+        uses: actions/checkout@v7
+
+      - name: Validar contrato e manter a tarefa rastreável
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const contractPath = 'diretor_orientacoes/DEV5_R5_CONTINUOUS_WORK.md';
+            const contract = fs.readFileSync(contractPath, 'utf8');
+            const state = /^status:\s*ACTIVE\s*$/m.test(contract);
+            const taskId = (contract.match(/^task_id:\s*([^\s]+)\s*$/m) || [])[1];
+            const owner = (contract.match(/^owner:\s*([^\s]+)\s*$/m) || [])[1];
+            const branch = (contract.match(/^branch:\s*([^\s]+)\s*$/m) || [])[1];
+            if (!state || !taskId || owner !== 'Dev5' || branch !== 'dev5/r5-majestic-camp') {
+              core.setFailed('Contrato Dev5 inválido: exige status ACTIVE, task_id, owner Dev5 e branch canónica.');
+              return;
+            }
+            const title = `[Dev5 Continuous] ${taskId}`;
+            const { owner: repoOwner, repo } = context.repo;
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner: repoOwner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            let currentIssue = openIssues.find((issue) => issue.title === title && !issue.pull_request);
+            if (!currentIssue) {
+              const { data: createdIssue } = await github.rest.issues.create({
+                owner: repoOwner,
+                repo,
+                title,
+                body: `## Continuidade automática Dev5\n\nO contrato \`${contractPath}\` declara **${taskId}** como a próxima tarefa ativa de Dev5.\n\nA porta R5 acabou de ser aprovada. Isto não encerra o ciclo: a implementação, validação, publicação e substituição por uma nova tarefa ativa são obrigatórias.\n\n---\n\n${contract}`
+              });
+              currentIssue = createdIssue;
+              core.info(`Issue de continuidade criada para ${taskId}.`);
+            } else {
+              core.info(`Issue de continuidade já está aberta: #${currentIssue.number}.`);
+            }
+            const previousIssues = openIssues.filter((issue) =>
+              !issue.pull_request &&
+              issue.title.startsWith('[Dev5 Continuous]') &&
+              issue.number !== currentIssue.number
+            );
+            for (const issue of previousIssues) {
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                body: `Encerrada automaticamente: a tarefa ativa foi avançada para **${taskId}** e é acompanhada por #${currentIssue.number}.`
+              });
+              await github.rest.issues.update({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              core.info(`Issue Dev5 obsoleta encerrada: #${issue.number}.`);
+            }
+            await core.summary
+              .addHeading('Dev5 — continuidade ativa')
+              .addRaw(`Tarefa: **${taskId}**  \nBranch: \`${branch}\`  \nEstado: **ACTIVE**`)
+              .write();
+
+  dev6-continuity:
+    name: Dev6 — próxima tarefa ativa
+    needs: [resolve-regions, regional-gate, global-light-budget]
+    if: >-
+      needs.regional-gate.result == 'success' &&
+      needs.global-light-budget.result == 'success' &&
+      contains(needs.resolve-regions.outputs.regions, 'R6')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter contrato contínuo do Dev6
+        uses: actions/checkout@v7
+
+      - name: Validar contrato e manter a tarefa rastreável
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const contractPath = 'diretor_orientacoes/DEV6_R6_CONTINUOUS_WORK.md';
+            const contract = fs.readFileSync(contractPath, 'utf8');
+            const state = /^status:\s*ACTIVE\s*$/m.test(contract);
+            const taskId = (contract.match(/^task_id:\s*([^\s]+)\s*$/m) || [])[1];
+            const owner = (contract.match(/^owner:\s*([^\s]+)\s*$/m) || [])[1];
+            const branch = (contract.match(/^branch:\s*([^\s]+)\s*$/m) || [])[1];
+            if (!state || !taskId || owner !== 'Dev6' || branch !== 'dev6/r6-submerged-ruins') {
+              core.setFailed('Contrato Dev6 inválido: exige status ACTIVE, task_id, owner Dev6 e branch canónica.');
+              return;
+            }
+            const title = `[Dev6 Continuous] ${taskId}`;
+            const { owner: repoOwner, repo } = context.repo;
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner: repoOwner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            let currentIssue = openIssues.find((issue) => issue.title === title && !issue.pull_request);
+            if (!currentIssue) {
+              const { data: createdIssue } = await github.rest.issues.create({
+                owner: repoOwner,
+                repo,
+                title,
+                body: `## Continuidade automática Dev6\n\nO contrato \`${contractPath}\` declara **${taskId}** como a próxima tarefa ativa de Dev6.\n\nA porta R6 acabou de ser aprovada. Isto não encerra o ciclo: a implementação, validação, publicação e substituição por uma nova tarefa ativa são obrigatórias.\n\n---\n\n${contract}`
+              });
+              currentIssue = createdIssue;
+              core.info(`Issue de continuidade criada para ${taskId}.`);
+            } else {
+              core.info(`Issue de continuidade já está aberta: #${currentIssue.number}.`);
+            }
+            const previousIssues = openIssues.filter((issue) =>
+              !issue.pull_request &&
+              issue.title.startsWith('[Dev6 Continuous]') &&
+              issue.number !== currentIssue.number
+            );
+            for (const issue of previousIssues) {
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                body: `Encerrada automaticamente: a tarefa ativa foi avançada para **${taskId}** e é acompanhada por #${currentIssue.number}.`
+              });
+              await github.rest.issues.update({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              core.info(`Issue Dev6 obsoleta encerrada: #${issue.number}.`);
+            }
+            await core.summary
+              .addHeading('Dev6 — continuidade ativa')
+              .addRaw(`Tarefa: **${taskId}**  \nBranch: \`${branch}\`  \nEstado: **ACTIVE**`)
+              .write();
+
   regional-gate-summary:
     name: ORIGEM Regional Gate
-    needs: [regional-gate, global-light-budget, dev2-continuity]
+    needs:
+      [
+        regional-gate,
+        global-light-budget,
+        dev2-continuity,
+        dev3-continuity,
+        dev4-continuity,
+        dev5-continuity,
+        dev6-continuity,
+      ]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -207,15 +530,39 @@ jobs:
           regional_result="${{ needs.regional-gate.result }}"
           lighting_result="${{ needs.global-light-budget.result }}"
           continuity_result="${{ needs.dev2-continuity.result }}"
+          dev3_continuity_result="${{ needs.dev3-continuity.result }}"
+          dev4_continuity_result="${{ needs.dev4-continuity.result }}"
+          dev5_continuity_result="${{ needs.dev5-continuity.result }}"
+          dev6_continuity_result="${{ needs.dev6-continuity.result }}"
           echo "Resultado regional: $regional_result"
           echo "Resultado de iluminação: $lighting_result"
           echo "Resultado de continuidade Dev2: $continuity_result"
+          echo "Resultado de continuidade Dev3: $dev3_continuity_result"
+          echo "Resultado de continuidade Dev4: $dev4_continuity_result"
+          echo "Resultado de continuidade Dev5: $dev5_continuity_result"
+          echo "Resultado de continuidade Dev6: $dev6_continuity_result"
           if [[ "$regional_result" != "success" || "$lighting_result" != "success" ]]; then
             echo "Uma porta regional ou a auditoria global de luz falhou ou foi cancelada." >&2
             exit 1
           fi
           if [[ "$continuity_result" != "success" && "$continuity_result" != "skipped" ]]; then
             echo "A continuidade ativa do Dev2 não foi confirmada." >&2
+            exit 1
+          fi
+          if [[ "$dev3_continuity_result" != "success" && "$dev3_continuity_result" != "skipped" ]]; then
+            echo "A continuidade ativa do Dev3 não foi confirmada." >&2
+            exit 1
+          fi
+          if [[ "$dev4_continuity_result" != "success" && "$dev4_continuity_result" != "skipped" ]]; then
+            echo "A continuidade ativa do Dev4 não foi confirmada." >&2
+            exit 1
+          fi
+          if [[ "$dev5_continuity_result" != "success" && "$dev5_continuity_result" != "skipped" ]]; then
+            echo "A continuidade ativa do Dev5 não foi confirmada." >&2
+            exit 1
+          fi
+          if [[ "$dev6_continuity_result" != "success" && "$dev6_continuity_result" != "skipped" ]]; then
+            echo "A continuidade ativa do Dev6 não foi confirmada." >&2
             exit 1
           fi
           echo "Todas as regiões selecionadas, o orçamento global de luz e a continuidade aplicável foram aprovados."

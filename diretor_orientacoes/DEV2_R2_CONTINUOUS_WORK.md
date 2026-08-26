@@ -6,28 +6,131 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-WORLD-LIFE-001
+task_id: DEV2-R2-RIVER-EDGE-033
 owner: Dev2
 branch: dev2/r2-river-road
 ```
 
-## Tarefa ativa — DEV2-R2-WORLD-LIFE-001
+## Entrega anterior aprovada — DEV2-R2-WORLD-LIFE-001
 
-A Estrada do Rio deve ganhar uma camada de **vida física de viagem**, sem encurtar a rota ou alterar as âncoras cartográficas. A entrega deve adicionar três marcos de orientação reais e distintos ao percurso exterior: uma marca de pedra junto à saída da Casa Voss, uma passagem de margem/vegetação baixa que enquadre o rio e um vestígio arqueológico antes da leitura do Arco. Estes elementos devem ser geometria navegável ou decorativa real; não podem ser painéis, emissões que simulem água, paredes repetidas de árvores ou bloqueios novos.
+A camada de vida física foi concluída e passou a porta R2: `MarcoPedrasDeTomas`, `PassagemMargemBaixa` e `VestigioAntesDoArco` são volumes reais fora do leito da estrada, com colisores baixos apenas nos elementos pétreos. A prova `[ORIGEM_R2_WORLD_LIFE_OK]` agora é obrigatória na porta regional. A estrada, o Arco em Z aproximado 92 e o orçamento R2 de duas luzes permanecem preservados.
+
+## Entrega anterior aprovada — DEV2-R2-ORION-REFLECTION-002
+
+A estação `EstacaoDeObservacaoDoReflexoOrion` foi acrescentada à margem segura do primeiro reflexo, em Z 51. Ela contém cinco lajes húmidas irregulares, dois vestígios baixos e três pedras de visada, todos sem luz dinâmica nova. A prova `[ORIGEM_R2_ORION_STATION_OK]` passou dentro da porta R2 e confirma que a estação preserva a estrada, o Arco e a reflexão localizada.
+
+## Tarefa concluída — DEV2-R2-TRAVELLER-REST-003
+
+A Estrada do Rio recebeu um ponto de descanso físico e silencioso, distinto da Casa Voss e do Acampamento Majestic. O ponto contém abrigo baixo de pedra caída, banco/laje de observação, mochila de Miguel, ferramentas desaparecidas e fogueira extinta sem luz dinâmica. A porta regional R2 passou no CI após a implementação.
+
+## Entrega anterior aprovada — DEV2-R2-RIVER-CAIRN-004
+
+`MarcoCairnRegresso` foi construído como cairn arqueológico baixo com pedras reais, laje tombada e colisor coincidente fora da faixa da estrada. A prova `[ORIGEM_R2_RIVER_CAIRN_OK]` é obrigatória na porta R2 e confirma a passagem livre, sem luz dinâmica ou nova interação.
+
+## Entrega anterior aprovada — DEV2-R2-RIVER-FOOTBRIDGE-005
+
+`AproximacaoArqueologicaPonteLateral` foi construída com dois encontros baixos, quatro lajes partidas com colisores coincidentes e três fetos esparsos. A prova `[ORIGEM_R2_FOOTBRIDGE_OK]` confirma que ela é secundária, física e sem luz dinâmica, preservando a ponte positiva e o eixo Casa Voss → Arco.
+
+## Tarefa concluída — DEV2-R2-RIVER-EDGE-006
+A margem curta antes do Arco recebeu dois afloramentos baixos, pedras húmidas e fetos dispersos, sem luz, partículas, emissão persistente ou caminho atravessável. A porta R2 passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-APPROACH-007
+O último trecho antes do Arco recebeu duas lajes interrompidas, pedras de borda e fetos esparsos, mantendo o eixo principal livre, o acesso secundário e o orçamento de luz. A prova `[ORIGEM_R2_RIVER_APPROACH_OK]` passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-EDGE-008
+A margem final recebeu uma linha curta de três pedras de leitura e vegetação aberta, mantendo o leito não atravessável e o orçamento de luz inalterado. A porta R2 passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-APPROACH-009
+O recuo final da margem recebeu duas lajes baixas, pedras molhadas e vegetação esparsa, mantendo o acesso lateral e o eixo principal livres. A prova `[ORIGEM_R2_RIVER_APPROACH_009_OK]` passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-RETURN-010
+A visada ambiental para Casa Voss recebeu duas pedras de referência e uma laje lateral, sem seta, HUD, interação ou luz dinâmica. A prova `[ORIGEM_R2_RIVER_RETURN_010_OK]` passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-MARKER-011
+Os dois marcadores ambientais de retorno foram adicionados com pedras baixas e fetos abertos, sem sinalização explícita, interação ou luz dinâmica. A prova `[ORIGEM_R2_RIVER_MARKER_011_OK]` passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-012
+O gate passou a verificar que os marcadores ambientais não possuem `StaticBody3D`, `CollisionShape3D` ou `Area3D`. A prova `[ORIGEM_R2_RIVER_QA_012_OK]` passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-ROUTE-013
+A prova foi corrigida para usar a API contratual oficial de R2 e confirmou `road_to_arch`, `road_return_voss` e `positive_bridge`; o CI passou após a normalização da indentação.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-014
+O verificador contratual passou a exigir `road_to_arch`, `road_return_voss` e `positive_bridge`, mantendo o proprietário `Dev2`; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-015
+O verificador confirmou a completude dos critérios, a origem `RiverRoadJourney.gd` e a AABB física da R2; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-016
+O verificador confirmou o vocabulário mínimo de rota, reflexo, ponte e luz; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-017
+O verificador confirmou as restrições de Orion, água não emissiva e ponte não dominante; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-018
+O verificador confirmou a consistência entre as notas do contrato e os critérios essenciais; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-019
+O verificador confirmou as âncoras contratuais de entrada e saída dentro da AABB R2; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-020
+O verificador confirmou a idempotência de `build()` e o nome canônico do nó regional; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-021
+O verificador confirmou os metadados retornados por `run_qa_contract()` sincronizados com o contrato; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-022
+O verificador confirmou a composição exata das três rotas canônicas e a ausência de atalhos extras; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-023
+O verificador confirmou o orçamento regional de duas luzes coerente com o teto global; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-024
+O verificador confirmou a interface regional R2 com métodos e tipos estáveis; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-025
+O verificador confirmou os identificadores e nomes canônicos da R2; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-026
+O verificador confirmou a AABB não degenerada, dimensões mínimas e plano físico contido; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-027
+O verificador confirmou a correspondência entre âncoras cartográficas oficiais e pontos físicos da R2; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-028
+O verificador confirmou a serialização completa dos campos contratuais essenciais; a prova passou no CI.
+
+## Tarefa concluída — DEV2-R2-RIVER-QA-029
+A prova curta confirmou que `to_dictionary()` não permite mutar o contrato em memória; o parser e a porta R2 foram aprovados localmente.
+
+## Tarefa concluída — DEV2-R2-RIVER-LOOKOUT-030
+A R2 recebeu o `MiradouroReflexoOrionR2`: laje caminhável, colisor coincidente, duas pedras de visada e feto baixo. O ponto lateral preserva rio → reflexo Orion → retorno Casa Voss → Arco, sem atalho para o leito ou luz dinâmica. O PR #58 passou no CI regional.
+
+## Tarefa concluída — DEV2-R2-RIVER-RETURN-031
+A R2 recebeu a `LajeConfirmacaoRetornoVossR2`, com laje caminhável, colisor coincidente, pedras de referência e feto baixo. A leitura para Casa Voss foi preservada sem seta, painel, HUD, interação obrigatória, luz dinâmica ou atalho para o leito. O CI regional aprovou o commit `53030dcd`.
+
+## Tarefa concluída — DEV2-R2-RIVER-ARCH-032
+A R2 recebeu a `LajeChegadaArcoR2`, curta e centralizada no eixo da estrada sob o vão livre do Arco, com colisor coincidente e sem bloquear a passagem. O CI regional aprovou o commit rebased `6b8c10e2`; a execução concorrente `32923814157` ficou verde.
+
+## Tarefa ativa — DEV2-R2-RIVER-EDGE-033
+
+A R2 deve receber uma **leitura física baixa da margem do rio no trecho médio**, com duas pedras reais e vegetação aberta que enquadrem o reflexo Orion sem formar parede, sem criar caminho novo para a água e sem competir com a chegada ao Arco.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
-| Cartografia | Preservar Casa Voss → Estrada do Rio → Arco e a leitura da silhueta física do Arco em Z aproximado 92 |
-| Desempenho | Respeitar orçamento contratual R2: no máximo 2 luzes dinâmicas regionais; não criar efeitos de água por emissão persistente |
-| Jogabilidade | Manter as rotas `road_return_voss`, `road_to_arch` e `positive_bridge` atravessáveis |
-| Narrativa | Cada marco deve reforçar a pista “seguir as pedras, não a luz azul”, sem contradizer Tomás, Miguel ou Orion |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R2`, anexar os logs relevantes e abrir PR para `integration/r1-r6-sprint1` |
+| Cartografia | Validar as três rotas no contrato sem mover estrada, Arco ou âncoras cartográficas |
+| Acesso | Leitura lateral baixa da margem, fora do leito, sem novo caminho para a água |
+| Desempenho | Zero luz dinâmica adicional, partículas ou emissão persistente; reutilizar pedra e fetos reais |
+| Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
+| Geometria | Não alterar a geometria; validar apenas metadados contratuais |
+| Narrativa | A margem deve enquadrar o reflexo Orion e manter a viagem Casa Voss → Arco legível |
+| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_EDGE_033_OK]` antes do PR |
 
 ## Fecho e avanço obrigatório
 
-Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 estiver verde e uma nova secção **Tarefa ativa** tiver substituído esta, com outro `task_id`. Se a tarefa for concluída sem substituição, a esteira regional deve abrir automaticamente um item de continuidade no GitHub e manter o estado operacional como **ACTIVE**.
+Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 estiver verde e uma nova secção **Tarefa ativa** tiver substituído esta, com outro `task_id`. Se a tarefa for concluída sem substituição, a esteira regional abre automaticamente um item de continuidade no GitHub e mantém o estado operacional como **ACTIVE**.
 
 ## Próxima fila reservada
 
-`DEV2-R2-ORION-REFLECTION-002` deverá ampliar apenas a leitura física e de baixo custo do reflexo de Orion ao longo do rio, depois de a tarefa atual ser aprovada. A sua definição detalhada será movida para “Tarefa ativa” por Dev2 no momento do fecho da entrega 001.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-EDGE-033`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
