@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-ARCHIVE-019
+task_id: DEV5-R5-CAMP-PUBLISH-022
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -93,9 +93,21 @@ O módulo `MajesticCampCheck.gd` ajustou estaticamente duas caixas visuais já a
 
 O módulo `MajesticCampFinalization.gd` ajustou estaticamente duas caixas visuais já aprovadas pela verificação. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
 
-## Tarefa ativa — DEV5-R5-CAMP-ARCHIVE-019
+## Entrega aprovada — DEV5-R5-CAMP-ARCHIVE-019
 
-Auditar exclusivamente o arquivo estático do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
+A validação documental da cadeia do Acampamento Majestic foi consolidada. A porta R5 e as duas rotas foram aprovadas, com caixas existentes, colisores, conectores e orçamento preservados; não foi feita alteração adicional ao mundo.
+
+## Entrega aprovada — DEV5-R5-CAMP-POSTCHECK-020
+
+O postcheck documental confirmou, com a porta R5 aprovada, que não houve regressão após o arquivo. Caixas, colisores, rotas, orçamento e conectores permanecem preservados; não foi feita alteração adicional ao mundo.
+
+## Entrega aprovada — DEV5-R5-CAMP-CLOSEOUT-021
+
+O closeout documental consolidou a cadeia R5 pronta para integração futura. As portas, rotas, caixas, colisores, conectores, orçamento e bundles foram verificados; não houve alteração adicional ao mundo.
+
+## Tarefa ativa — DEV5-R5-CAMP-PUBLISH-022
+
+Preparar exclusivamente a publicação segura da cadeia R5 quando o canal oficial recuperar. Antes de qualquer escrita remota, comparar ahead/behind, preservar commits exclusivos, usar a integração ensaiada e nunca reescrever a branch canónica.
 
 | Critério | Obrigatório |
 |---|---|
@@ -107,4 +119,4 @@ Auditar exclusivamente o arquivo estático do Acampamento Majestic com elementos
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-FINALIZATION-018` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-ARCHIVE-019`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-CLOSEOUT-021` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-PUBLISH-022`.
