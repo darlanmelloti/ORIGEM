@@ -201,6 +201,26 @@ if [[ "$REGION" == "R5" ]]; then
     exit 15
   fi
   printf '[GATE:%s] artefacto, pistas e orçamento R5 aprovados\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV5-R5-CAMP-WIND-READING-002\n' "$REGION"
+  R5_WIND_LOG="/tmp/origem_${REGION}_wind_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_wind_reading.gd >"$R5_WIND_LOG" 2>&1
+  r5_wind_status=$?
+  set -e
+  if [[ "$r5_wind_status" -ne 0 ]]; then
+    cat "$R5_WIND_LOG"
+    exit 19
+  fi
+  if ! grep -q '\[ORIGEM_R5_WIND_OK\]' "$R5_WIND_LOG"; then
+    cat "$R5_WIND_LOG"
+    exit 19
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R5_WIND_ERROR' "$R5_WIND_LOG"; then
+    cat "$R5_WIND_LOG"
+    exit 19
+  fi
+  printf '[GATE:%s] leitura de vento R5 aprovada\n' "$REGION"
 fi
 
 if [[ "$REGION" == "R6" ]]; then
