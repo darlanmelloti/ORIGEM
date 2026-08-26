@@ -1,7 +1,7 @@
 # ORIGEM — Revisão de Evidências da Composição de Plano Médio R6 016
 
-**Tarefa:** `DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016`  
-**Escopo:** revisão e indexação de evidências já integradas; sem nova captura, execução runtime, gate ou alteração de produção.  
+**Tarefa:** `DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016`
+**Escopo:** revisão e indexação de evidências já integradas; sem nova captura, execução runtime, gate ou alteração de produção.
 **Referência de produção:** `5581765` — composição arqueológica R6 integrada pela PR [#390](https://github.com/darlanmelloti/ORIGEM/pull/390) no commit canónico `8b5397f`.
 
 ## Situação integrada
