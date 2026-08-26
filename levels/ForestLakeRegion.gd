@@ -24,6 +24,8 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
 const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMistLayer.gd")
+const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
+const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -59,12 +61,14 @@ func _ready() -> void:
 	_build_forest_micro_details()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
+	_build_r5_majestic_artifact_trail()
 	_build_majestic_connector()
 	_build_majestic_lake_link()
 	_build_majestic_turn_marker()
 	_build_take9_corridor_fill()
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
+	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
 	_build_riparian_margin()
 	_build_lakeside_focal_vegetation()
@@ -1243,16 +1247,7 @@ func _build_majestic_camp() -> void:
 		torch.material_override = supply_material
 		torch.position = Vector3(cos(torch_angle) * 9.0, 1.05, sin(torch_angle) * 9.0)
 		camp.add_child(torch)
-		var torch_light: OmniLight3D = OmniLight3D.new()
-		torch_light.name = "TochaMajestic_%02d" % torch_index
-		torch_light.light_color = Color(1.0, 0.30, 0.075, 1.0)
-		torch_light.light_energy = 0.84
-		torch_light.omni_range = 9.0
-		torch_light.shadow_enabled = false
-		torch_light.position = torch.position + Vector3(0.0, 1.05, 0.0)
-		torch_light.set_meta("base_energy", torch_light.light_energy)
-		camp.add_child(torch_light)
-		camp_light_sources.append(torch_light)
+		# Tochas abandonadas permanecem como prop físico, sem Light3D: o orçamento R5 é reservado à fogueira, preenchimento e luar.
 
 	# Silhuetas de chegada: dois mastros e lonas inclinadas anunciam o acampamento no fim da ligação, sem criar qualquer luz adicional.
 	var arrival_markers: Node3D = Node3D.new()
@@ -1309,15 +1304,19 @@ func _build_majestic_camp() -> void:
 	stela_collision.shape = stela_shape
 	stela_collision.position = Vector3(0.0, 1.32, 0.0)
 	camp_stela.add_child(stela_collision)
-	var stela_light: OmniLight3D = OmniLight3D.new()
-	stela_light.name = "RessonanciaDaEstelaMajestic"
-	stela_light.light_color = Color(0.13, 0.42, 0.80, 1.0)
-	stela_light.light_energy = 0.34
-	stela_light.omni_range = 5.4
-	stela_light.shadow_enabled = false
-	stela_light.position = Vector3(0.0, 1.92, 0.0)
-	camp_stela.add_child(stela_light)
+	# A estela conserva o papel narrativo sem criar uma quinta luz regional; a assinatura azul pertence ao artefacto físico Dev5.
+
 	camp.add_child(camp_stela)
+
+func _build_r5_majestic_artifact_trail() -> void:
+	# DEV5-R5-ARTEFACT-TRAIL-001: artefacto Orion e pistas reutilizam a estrutura funcional já presente no acampamento.
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_error("[ORIGEM_R5] Acampamento Majestic indisponível para as pistas do artefacto.")
+		return
+	var trail: R5MajesticArtifactTrail = R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT.call("install", camp, PILLAR) as R5MajesticArtifactTrail
+	if trail == null:
+		push_error("[ORIGEM_R5] Não foi possível instalar o trilho narrativo do artefacto.")
 
 func _build_majestic_connector() -> void:
 
@@ -1524,6 +1523,12 @@ func _build_take6_corridor_accent() -> void:
 			af.rotation.y = -(ad["yaw"] as float)
 			accent.add_child(af)
 
+func _build_r6_shore_handoff() -> void:
+	# DEV6-R6-SHORE-HANDOFF-002: indica a continuidade para R7 por lajes e marcos físicos, sem construir a Vila Elevada.
+	var handoff: R6ShoreHandoff = R6_SHORE_HANDOFF_SCRIPT.call("install", self, ROCK, PILLAR, Callable(self, "_height_at")) as R6ShoreHandoff
+	if handoff == null:
+		push_error("[ORIGEM_R6] Não foi possível construir o handoff físico para a futura Vila Elevada.")
+
 func _build_cartographic_basin_silhouette() -> void:
 	# Promontório oriental e queda de água: traduzem a borda elevada da Bacia Central indicada no mapa sem bloquear o acesso oeste.
 	var silhouette: Node3D = Node3D.new()
@@ -1628,16 +1633,8 @@ func _build_submerged_ruins() -> void:
 	sub_center.shadow_enabled = false
 	sub_center.position = Vector3(0.0, -1.80, 0.0)
 	lake.add_child(sub_center)
-	# Luz submersa lateral: deslocada para o quadrante dos pilares mais altos para destacar a silhueta de colapso.
-	var sub_lateral: OmniLight3D = OmniLight3D.new()
-	sub_lateral.name = "LuzSubaquaticaLateral"
-	sub_lateral.light_color = Color(0.04, 0.22, 0.44, 1.0)
-	sub_lateral.light_energy = 0.90
-	sub_lateral.omni_range = 26.0
-	sub_lateral.omni_attenuation = 0.90
-	sub_lateral.shadow_enabled = false
-	sub_lateral.position = Vector3(14.0, -2.40, 8.0)
-	lake.add_child(sub_lateral)
+	# O preenchimento submerso central já sustenta os pilares; não é criada luz lateral para manter o orçamento regional R6.
+
 	for index: int in range(8):
 		var angle: float = float(index) * TAU / 8.0
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
@@ -1677,15 +1674,8 @@ func _build_submerged_ruins() -> void:
 		landmark.rotation = Vector3(0.11 + float(landmark_index) * 0.10, 0.38 + float(landmark_index) * 0.41, -0.07 + float(landmark_index) * 0.06)
 		_apply_material(landmark, ruin_material)
 		lake.add_child(landmark)
-		# Baliza arqueológica discreta: delineia os marcos emergentes na captura sem criar um perímetro artificial de luz.
-		var landmark_beacon: OmniLight3D = OmniLight3D.new()
-		landmark_beacon.name = "BrilhoMarcoRuina_%02d" % landmark_index
-		landmark_beacon.light_color = Color(0.16, 0.44, 0.68, 1.0)
-		landmark_beacon.light_energy = 0.56
-		landmark_beacon.omni_range = 9.5
-		landmark_beacon.shadow_enabled = false
-		landmark_beacon.position = landmark.position + Vector3(0.0, 2.65 * landmark_scale, 0.0)
-		lake.add_child(landmark_beacon)
+		# Marcos emergentes leem por geometria, escala e luz da bacia, sem balizas dinâmicas adicionais.
+
 		var landmark_body: StaticBody3D = StaticBody3D.new()
 		landmark_body.name = "ColisorMarcoRuinaEmergente_%02d" % landmark_index
 		landmark_body.position = landmark.position + Vector3(0.0, 2.55 * landmark_scale, 0.0)
@@ -1729,14 +1719,8 @@ func _build_submerged_ruins() -> void:
 	stela_collision.shape = stela_shape
 	arrival_stela.add_child(stela_collision)
 	lake.add_child(arrival_stela)
-	var stela_glow: OmniLight3D = OmniLight3D.new()
-	stela_glow.name = "BrilhoDaEstelaDaChegada"
-	stela_glow.light_color = Color(0.22, 0.48, 0.72, 1.0)
-	stela_glow.light_energy = 0.42
-	stela_glow.omni_range = 6.0
-	stela_glow.shadow_enabled = false
-	stela_glow.position = arrival_stela.position + Vector3(0.0, 1.15, 0.0)
-	lake.add_child(stela_glow)
+	# A estela é legível pela sua silhueta e pelo preenchimento da margem; não acrescenta uma quinta luz às quatro R6.
+
 	# Lajes rasas: prolongam a chegada ocidental por alguns metros dentro da bacia, sem criar uma ponte artificial sobre o lago.
 	var shallow_path: Node3D = Node3D.new()
 	shallow_path.name = "LajesRasasDasRuinas"
