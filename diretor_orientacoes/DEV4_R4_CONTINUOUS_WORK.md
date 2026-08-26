@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-STABILIZATION-047
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-POSTCHECK-048
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -141,14 +141,18 @@ A correcção modular instalou `ForestCartographicInletMaterial.gd` somente na l
 
 A captura canónica de `arch_to_forest` confirmou que a superfície opaca clara deixou de dominar o primeiro plano. O afluente permanece lido como faixa azul-esverdeada escura, com rota, corredor, clareira Orion e integração R6 preservados. Parser, orçamento, porta R4 e as três rotas foram aprovados; a evidência está em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_RUNTIME_REVIEW_046.md` e no directório de captura associado.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-STABILIZATION-047
+## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-STABILIZATION-047
 
-Executar exclusivamente a estabilização documental da cadeia 044–046. Confirmar a ponta remota, a preservação da evidência e o contrato local R4/R6, sem criar ou alterar produção, `_create_lake_material()`, água R6, `ForestLakeRegion.gd`, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física.
+A estabilização documental indexou a cadeia 044–046, confirmou que não houve alterações de produção ou QA desde a correcção 045 e revalidou parser, orçamento, porta R4 e as três rotas. A evidência e os identificadores de integridade estão em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_STABILIZATION_047.md`.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-POSTCHECK-048
+
+Executar exclusivamente o pós-check de publicação da cadeia 044–047. Confirmar a ponta remota, a presença da evidência e a integridade regional, sem criar ou alterar produção, `_create_lake_material()`, água R6, `ForestLakeRegion.gd`, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Zero alterações de produção nesta tarefa de estabilização |
-| Evidência | Preservar e indexar diagnóstico 044, correcção 045 e revisão runtime 046 |
+| Produção | Zero alterações de produção nesta tarefa de pós-check |
+| Evidência | Confirmar no remoto os relatórios 044–047 e a captura runtime 046 |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
 | Integração | Preservar R5 e R6; não modificar activos, lógica, iluminação, água ou rotas dessas frentes |
@@ -157,4 +161,4 @@ Executar exclusivamente a estabilização documental da cadeia 044–046. Confir
 
 ## Próxima fila reservada
 
-`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-STABILIZATION-047` permanece ACTIVE até que a estabilização documental confirme a cadeia sem regressão ou o contrato canónico determine nova prioridade.
+`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-POSTCHECK-048` permanece ACTIVE até que o pós-check remoto confirme a publicação íntegra ou o contrato canónico determine nova prioridade.
