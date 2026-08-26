@@ -52,6 +52,7 @@ const R4_FOREST_MAJESTIC_APPROACH_SCRIPT: Script = preload("res://levels/regions
 const R4_FOREST_OUTER_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterSilhouette.gd")
 const R4_FOREST_ORION_RETURN_SCRIPT: Script = preload("res://levels/regions/r4/ForestOrionReturn.gd")
 const R4_FOREST_MAJESTIC_MARGIN_SCRIPT: Script = preload("res://levels/regions/r4/ForestMajesticMargin.gd")
+const R4_FOREST_ORION_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOrionEdge.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -120,6 +121,7 @@ func _ready() -> void:
 	_build_r4_outer_silhouette()
 	_build_r4_orion_return()
 	_build_r4_majestic_margin()
+	_build_r4_orion_edge()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -597,6 +599,13 @@ func _build_r4_majestic_margin() -> void:
 	var margin: R4ForestMajesticMargin = R4_FOREST_MAJESTIC_MARGIN_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestMajesticMargin
 	if margin == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a margem florestal Majestic.")
+
+func _build_r4_orion_edge() -> void:
+	# DEV4-R4-FOREST-ORION-EDGE-033: ajusta uma árvore R4 sem colisor após Orion, preservando clareira e rota.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var edge: R4ForestOrionEdge = R4_FOREST_ORION_EDGE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestOrionEdge
+	if edge == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a borda florestal Orion.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
