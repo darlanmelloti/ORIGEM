@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-TRAIL-PACING-012
+task_id: DEV4-R4-FOREST-MARGIN-CONTINUITY-013
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -39,6 +39,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-ORION-APPROACH-READABILITY-011` instalou `ForestApproachReadability.gd`: quatro raízes R4 existentes foram ajustadas nas bordas laterais da faixa `Z=152–170` para reforçar a direção ambiental sem texto, interface ou eventos. A prova `[ORIGEM_R4_READABILITY_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-TRAIL-PACING-012` instalou `ForestTrailPacing.gd`: duas pedras húmidas R4 existentes foram alternadas nas bordas da faixa `Z=152–170`, sem alterar lajes, rota, câmara, física ou módulos Dev5. A prova `[ORIGEM_R4_PACING_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -51,10 +53,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Silhuetas | Clareira e física preservadas | ≥6 m | 0 luzes e colisores | Aprovada |
 | Profundidade | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Legibilidade | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
+| Ritmo do trilho | Lajes preservadas | ≥6 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-TRAIL-PACING-012
+## Tarefa ativa — DEV4-R4-FOREST-MARGIN-CONTINUITY-013
 
-Rever o **ritmo visual do trilho R4** por transformações estáticas de detalhes ambientais já existentes nas bordas exteriores. A tarefa deve alternar planos de leitura sem alterar as lajes, a rota, a câmara, a clareira Orion, a física, módulos Dev5, iluminação, partículas, vento, pós-processamento ou criar elementos narrativos.
+Consolidar a **continuidade da margem ambiental R4** por transformações estáticas de elementos existentes nas bordas exteriores da floresta. A tarefa deve suavizar a passagem visual após a clareira sem alterar rota, câmara, lajes, clareira Orion, física, módulos Dev5, iluminação, partículas, vento, pós-processamento ou criar conteúdo narrativo.
 
 | Critério | Obrigatório |
 |---|---|
@@ -67,4 +70,4 @@ Rever o **ritmo visual do trilho R4** por transformações estáticas de detalhe
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-MARGIN-CONTINUITY-013` deverá consolidar a margem ambiental R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-APPROACH-COMPOSITION-014` deverá equilibrar a composição da aproximação R4 sem modificar a rota, a câmara ou os limites regionais.
