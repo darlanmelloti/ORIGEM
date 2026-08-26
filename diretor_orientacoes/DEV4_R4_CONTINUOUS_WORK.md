@@ -8,12 +8,12 @@
 status: ACTIVE
 task_id: DEV4-R4-CARTOGRAPHIC-INLET-EVIDENCE-REVIEW-049
 owner: Dev4
-branch: dev4/r4-inlet-continuity
+branch: dev4/r4-dense-forest
 ```
 
 ## Base oficial e fronteira
 
-A base de trabalho é o repositório oficial do ORIGEM, a partir de `integration/r1-r6-sprint1`. A continuidade documental usa `dev4/r4-inlet-continuity`; a branch histórica `dev4/r4-dense-forest` não é fonte de produção até ser reconciliada separadamente, pois contém trabalho concorrente não reauditorado. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
+A base de trabalho é o repositório oficial do ORIGEM, a partir de `integration/r1-r6-sprint1`. A branch canónica Dev4 continua `dev4/r4-dense-forest`; esta revisão documental foi publicada por uma branch auxiliar derivada da integração. A branch canónica não é fonte de produção até ser reconciliada separadamente, pois contém trabalho concorrente não reauditorado. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
 
 O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mínima em `levels/ForestLakeRegion.gd` é permitida apenas para instalar módulos R4 aditivos; não editar âncoras, `RiverRoadJourney.gd`, módulos R1–R3/R5–R6 ou sistemas transversais protegidos.
 
