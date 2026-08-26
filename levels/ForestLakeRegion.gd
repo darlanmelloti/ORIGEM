@@ -23,6 +23,7 @@ const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/moss
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
+const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMistLayer.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -56,6 +57,7 @@ func _ready() -> void:
 	_build_dense_forest()
 	_build_forest_canopy_clusters()
 	_build_forest_micro_details()
+	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_majestic_connector()
 	_build_majestic_lake_link()
@@ -279,6 +281,25 @@ func _build_r4_clearing_sightline() -> void:
 	var clearing: R4ForestClearingSightline = R4_FOREST_CLEARING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), ROCK, FERN) as R4ForestClearingSightline
 	if clearing == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a clareira da visada Orion.")
+
+func _build_r4_mist_layer() -> void:
+	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
+	var target_names: PackedStringArray = PackedStringArray([
+		"LimiarCartograficoDaFloresta",
+		"TransicaoOrganicaArcoFloresta",
+		"SubBosqueDoLimiarArcoFloresta",
+		"FlorestaDensaRegional",
+		"CopasFocaisDaFlorestaDensa",
+		"RaizesPedrasESinaisP0",
+	])
+	var targets: Array[Node] = []
+	for target_name: String in target_names:
+		var target: Node = get_node_or_null(target_name)
+		if target != null:
+			targets.append(target)
+	var mist_layer: R4ForestMistLayer = R4_FOREST_MIST_SCRIPT.call("install", self, targets) as R4ForestMistLayer
+	if mist_layer == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a camada local de neblina.")
 
 func _build_forest_wayfinding() -> void:
 	# Balizas baixas, quentes e espaçadas: guiam Elias no sub-bosque sem transformar a floresta num corredor iluminado.
