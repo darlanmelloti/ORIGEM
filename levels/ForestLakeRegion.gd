@@ -44,6 +44,7 @@ const R6_WATERLINE_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6W
 const R6_BASIN_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinArrivalReading.gd")
 const R6_BASIN_VISTA_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinVistaReading.gd")
 const R6_OUTER_WATERLINE_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r6/R6OuterWaterlineSilhouette.gd")
+const R6_EASTERN_MARGIN_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReading.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -102,6 +103,7 @@ func _ready() -> void:
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
 	_build_waterline_reading()
+	_build_r6_eastern_margin_reading()
 	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
 	_build_r6_basin_vista_reading()
@@ -1942,6 +1944,16 @@ func _build_waterline_reading() -> void:
 	var reading: R6WaterlineReading = R6_WATERLINE_READING_SCRIPT.call("install", self, ROCK, Callable(self, "_height_at")) as R6WaterlineReading
 	if reading == null:
 		push_error("[ORIGEM_R6] Não foi possível instalar a leitura arqueológica da linha de água.")
+
+func _build_r6_eastern_margin_reading() -> void:
+	# DEV6-R6-EASTERN-MARGIN-READING-007: relê apenas os três vestígios já existentes da margem oriental.
+	var waterline_reading: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if waterline_reading == null:
+		push_error("[ORIGEM_R6] Linha de água indisponível para leitura da margem oriental.")
+		return
+	var adjusted: int = int(R6_EASTERN_MARGIN_READING_SCRIPT.call("apply", waterline_reading))
+	if adjusted != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar os três vestígios da margem oriental.")
 
 func _make_elliptical_lake_mesh(radius_x: float, radius_z: float) -> ArrayMesh:
 	var surface: SurfaceTool = SurfaceTool.new()

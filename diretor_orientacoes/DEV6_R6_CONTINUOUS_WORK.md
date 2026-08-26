@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-EASTERN-MARGIN-READING-007
+task_id: DEV6-R6-EASTERN-MARGIN-DEPTH-008
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -29,9 +29,13 @@ O módulo `levels/regions/r6/R6ShoreHandoff.gd` adiciona quatro lajes físicas e
 | Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` aprovadas |
 | QA | Parser, sonda de luz, prova de handoff e porta R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-READING-007
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-READING-007
 
-Auditar e ajustar exclusivamente a leitura estática de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
+O módulo `levels/regions/r6/R6EasternMarginReading.gd` ajustou estaticamente os três vestígios arqueológicos existentes do `ConjuntoDaMargemOriental`, sem deslocar as suas bases espaciais. Não foram criados nós, geometria, luzes, colisores, água falsa, partículas, shaders, interface, câmara, rotas artificiais ou conteúdo R7. A prova `[ORIGEM_R6_EASTERN_MARGIN_OK]`, o orçamento de quatro luzes, as leituras R6 cumulativas, o handoff, o parser, a porta R6 e as três rotas foram aprovados.
+
+## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-DEPTH-008
+
+Auditar e ajustar exclusivamente a profundidade estática de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
 
 | Critério | Obrigatório |
 |---|---|
@@ -40,8 +44,8 @@ Auditar e ajustar exclusivamente a leitura estática de elementos R6 existentes 
 | Água | Sem painel, emissão excessiva, nova luz ou shader adicional |
 | Física | Sem novos colisores ou bloqueios no leito, trilho, cascata, estela ou lajes |
 | Luz | `r6_total=4` continua obrigatório |
-| QA | Parser, orçamento R6, provas de linha de água, chegada, vista, silhueta exterior e handoff, e todas as rotas R6 antes do PR |
+| QA | Parser, orçamento R6, provas de linha de água, chegada, vista, silhueta exterior, margem oriental e handoff, e todas as rotas R6 antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-BASIN-VISTA-READING-005` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-READING-007` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-DEPTH-008`.
