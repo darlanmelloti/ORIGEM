@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-FINALIZATION-018
+task_id: DEV5-R5-CAMP-ARCHIVE-019
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -89,9 +89,13 @@ O módulo `MajesticCampConsistency.gd` ajustou estaticamente duas caixas visuais
 
 O módulo `MajesticCampCheck.gd` ajustou estaticamente duas caixas visuais já aprovadas pela consistência. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
 
-## Tarefa ativa — DEV5-R5-CAMP-FINALIZATION-018
+## Entrega aprovada — DEV5-R5-CAMP-FINALIZATION-018
 
-Auditar exclusivamente a finalização estática do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
+O módulo `MajesticCampFinalization.gd` ajustou estaticamente duas caixas visuais já aprovadas pela verificação. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Tarefa ativa — DEV5-R5-CAMP-ARCHIVE-019
+
+Auditar exclusivamente o arquivo estático do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
 
 | Critério | Obrigatório |
 |---|---|
@@ -103,4 +107,4 @@ Auditar exclusivamente a finalização estática do Acampamento Majestic com ele
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-CHECK-017` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-FINALIZATION-018`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-FINALIZATION-018` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-ARCHIVE-019`.
