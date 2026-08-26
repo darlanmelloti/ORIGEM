@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-POSTCHECK-038
+task_id: DEV4-R4-FOREST-OUTER-CLOSEOUT-039
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -107,9 +107,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-OUTER-ARCHIVE-037` consolidou a validação documental da cadeia exterior R4. A porta cumulativa e as três rotas foram aprovadas, com clareira Orion, corredor de `≥8 m`, bases, luzes e física preservados; não foi feita alteração adicional ao mundo.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-POSTCHECK-038
+`DEV4-R4-FOREST-OUTER-POSTCHECK-038` confirmou documentalmente, com a porta R4 aprovada, que não houve regressão após o arquivo. Clareira, corredor de `≥8 m`, rotas, luzes e física permanecem preservados; não foi feita alteração adicional ao mundo.
 
-Auditar exclusivamente a revisão posterior estática exterior R4 com elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-CLOSEOUT-039
+
+Consolidar exclusivamente o closeout documental exterior R4 para a integração futura, sem alterar elementos ambientais, rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface ou narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -122,4 +124,4 @@ Auditar exclusivamente a revisão posterior estática exterior R4 com elementos 
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-CLOSEOUT-039` deverá rever a leitura exterior R4 sem modificar rota, câmara ou limites regionais.
+`DEV4-R4-FOREST-OUTER-PUBLISH-040` deverá preparar a publicação exterior R4 sem modificar rota, câmara ou limites regionais.
