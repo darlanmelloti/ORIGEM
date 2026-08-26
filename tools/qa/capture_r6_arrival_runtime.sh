@@ -13,9 +13,18 @@ if [ -z "$GODOT" ] || [ ! -x "$GODOT" ]; then
   echo 'Godot 4.7.1 não encontrado; defina GODOT_BIN ou disponibilize o binário no PATH.' >&2
   exit 2
 fi
-OUT="${1:?uso: capture_r6_arrival_runtime.sh <directorio_evidencia>}"
+OUT="${1:?uso: capture_r6_arrival_runtime.sh <directorio_evidencia> [rota]}"
 DISPLAY_NUM="${ORIGEM_QA_DISPLAY:-:124}"
-ROUTE="ruins_arrival"
+ROUTE="${2:-ruins_arrival}"
+case "$ROUTE" in
+  forest_to_ruins) SPAWN_MARKER='Spawn Floresta–Ruínas' ;;
+  majestic_to_lake) SPAWN_MARKER='Spawn Majestic–lago' ;;
+  ruins_arrival) SPAWN_MARKER='Spawn Chegada Ruínas' ;;
+  *)
+    echo "Rota R6 inválida: $ROUTE. Use forest_to_ruins, majestic_to_lake ou ruins_arrival." >&2
+    exit 2
+    ;;
+esac
 SNAPSHOT="$OUT/${ROUTE}_postload.png"
 RUNTIME_LOG="$OUT/runtime.log"
 
@@ -42,7 +51,7 @@ GAME_PID=$!
 
 spawned=0
 for _ in $(seq 1 35); do
-  if grep -q '\[ORIGEM_QA_ROUTE\] Spawn Chegada Ruínas' "$RUNTIME_LOG" 2>/dev/null; then
+  if grep -Fq "[ORIGEM_QA_ROUTE] $SPAWN_MARKER" "$RUNTIME_LOG" 2>/dev/null; then
     spawned=1
     break
   fi
@@ -50,7 +59,7 @@ for _ in $(seq 1 35); do
 done
 if [ "$spawned" -ne 1 ]; then
   cat "$RUNTIME_LOG"
-  echo 'A rota ruins_arrival não confirmou spawn dentro do limite de 35 segundos.' >&2
+  echo "A rota $ROUTE não confirmou spawn dentro do limite de 35 segundos." >&2
   exit 1
 fi
 sleep 4
@@ -70,6 +79,6 @@ if grep -Eqi 'Parse Error|SCRIPT ERROR|Compile Error|Failed loading resource|Una
   exit 1
 fi
 identify "$SNAPSHOT"
-grep '\[ORIGEM_QA_ROUTE\] Spawn Chegada Ruínas' "$RUNTIME_LOG"
+grep -F "[ORIGEM_QA_ROUTE] $SPAWN_MARKER" "$RUNTIME_LOG"
 grep '\[ORIGEM_R6_RUNTIME_COMPOSITION\]' "$OUT/composition.log"
 printf 'route=%s evidence=%s\n' "$ROUTE" "$SNAPSHOT" | tee "$OUT/summary.txt"
