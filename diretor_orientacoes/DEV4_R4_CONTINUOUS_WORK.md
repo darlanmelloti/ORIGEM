@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-ORION-APPROACH-READABILITY-011
+task_id: DEV4-R4-FOREST-TRAIL-PACING-012
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -37,6 +37,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-DEPTH-BALANCE-010` instalou `ForestDepthBalance.gd`: três fetos R4 existentes foram reorganizados em dois planos laterais estáticos na faixa `Z=153–169`; nenhum nó, luz, colisão, partícula, vento, shader ou pós-processamento foi criado. A prova `[ORIGEM_R4_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-ORION-APPROACH-READABILITY-011` instalou `ForestApproachReadability.gd`: quatro raízes R4 existentes foram ajustadas nas bordas laterais da faixa `Z=152–170` para reforçar a direção ambiental sem texto, interface ou eventos. A prova `[ORIGEM_R4_READABILITY_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -48,10 +50,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Borda Majestic | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Silhuetas | Clareira e física preservadas | ≥6 m | 0 luzes e colisores | Aprovada |
 | Profundidade | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
+| Legibilidade | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-ORION-APPROACH-READABILITY-011
+## Tarefa ativa — DEV4-R4-FOREST-TRAIL-PACING-012
 
-Consolidar a **legibilidade da aproximação Orion→Majestic** com transformações estáticas de instâncias R4 existentes nas bordas exteriores do trilho. A tarefa deve reforçar a direção visual sem fechar corredor, criar narrativa explícita, alterar rota, câmara, clareira Orion, física, módulos Dev5, iluminação, partículas, vento ou pós-processamento.
+Rever o **ritmo visual do trilho R4** por transformações estáticas de detalhes ambientais já existentes nas bordas exteriores. A tarefa deve alternar planos de leitura sem alterar as lajes, a rota, a câmara, a clareira Orion, a física, módulos Dev5, iluminação, partículas, vento, pós-processamento ou criar elementos narrativos.
 
 | Critério | Obrigatório |
 |---|---|
@@ -64,4 +67,4 @@ Consolidar a **legibilidade da aproximação Orion→Majestic** com transformaç
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-TRAIL-PACING-012` deverá rever o ritmo visual do trilho R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-MARGIN-CONTINUITY-013` deverá consolidar a margem ambiental R4 sem modificar a rota, a câmara ou os limites regionais.
