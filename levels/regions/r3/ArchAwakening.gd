@@ -10,6 +10,7 @@ const INSCRIPTION_LORE_SCRIPT: Script = preload("res://levels/regions/r3/ArchIns
 const ARCH_PATINA_SCRIPT: Script = preload("res://levels/regions/r3/ArchPatina.gd")
 const ARCH_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r3/ArchSilhouette.gd")
 const ARCH_ARRIVAL_CUE_SCRIPT: Script = preload("res://levels/regions/r3/ArchArrivalCue.gd")
+const ARCH_GROUND_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r3/ArchGroundRhythm.gd")
 const SILENT_CADENCE_DURATION: float = 1.35
 const SILENT_CADENCE_BEATS: int = 3
 const SILENT_CADENCE_SCALE_DELTA: float = 0.12
@@ -42,6 +43,7 @@ func _ready() -> void:
 	ARCH_PATINA_SCRIPT.call("install", get_parent() as Node3D)
 	ARCH_SILHOUETTE_SCRIPT.call("install", get_parent() as Node3D)
 	ARCH_ARRIVAL_CUE_SCRIPT.call("install", get_parent() as Node3D)
+	ARCH_GROUND_RHYTHM_SCRIPT.call("install", get_parent() as Node3D)
 	_build_trigger()
 	_build_effects()
 	_apply_awakened_state()
