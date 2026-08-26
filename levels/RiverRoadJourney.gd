@@ -18,6 +18,7 @@ const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/moss
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 const GROUND_ROUGHNESS: Texture2D = preload("res://assets/textures/pbr/forest_ground_roughness.jpg")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
+const R3_ARCH_AWAKENING_SCRIPT: Script = preload("res://levels/regions/r3/ArchAwakening.gd")
 
 # Escala física do primeiro corredor: a âncora lógica do mapa mantém-se para UI e narrativa,
 # mas o marco arqueológico é recuado para criar uma viagem visível e percorrível.
@@ -1307,17 +1308,12 @@ func _build_ruin_arch() -> void:
 		crown.rotation = Vector3(0.16 * float(crown_index % 2), float(crown_index) * 0.68, 0.12 * crown_side)
 		_apply_material(crown, ruin_material)
 		arch.add_child(crown)
-	# Preenchimento neutro reduz o corte preto do limiar e conserva as brasas como orientação, sem iluminar toda a Estrada do Rio.
-	var arch_fill: OmniLight3D = OmniLight3D.new()
-	arch_fill.name = "PreenchimentoDoArcoDasRuinas"
-	arch_fill.light_color = Color(0.30, 0.42, 0.46, 1.0)
-	arch_fill.light_energy = 0.54
-	arch_fill.omni_range = 16.0
-	arch_fill.omni_attenuation = 1.32
-	arch_fill.shadow_enabled = false
-	arch_fill.position = Vector3(0.0, 7.8, 2.6)
-	arch_fill.omni_range = 20.0
-	arch.add_child(arch_fill)
+	# O marco conserva apenas as duas brasas litúrgicas: o preenchimento Omni anterior foi removido
+	# para respeitar o contrato R3 (máximo de duas luzes dinâmicas locais).
+	# Camada Dev3: inscrições e despertar persistente, sem criar luzes novas ou bloquear o vão do Arco.
+	var r3_awakening: R3ArchAwakening = R3_ARCH_AWAKENING_SCRIPT.call("install", arch) as R3ArchAwakening
+	if r3_awakening == null:
+		push_error("[ORIGEM_R3] Não foi possível instalar o despertar do Arco.")
 
 func _build_arch_grounding_clusters(arch: Node3D) -> void:
 	# Grupos baixos e assimétricos de pedra quebram a transição recta pilar-solo. Estão fora do vão

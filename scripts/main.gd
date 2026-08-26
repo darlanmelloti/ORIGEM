@@ -104,12 +104,14 @@ func _ready():
 		get_tree().create_timer(2.20).timeout.connect(_run_codex_qa)
 	if OS.has_environment("ORIGEM_QA_R2_WORLD_LIFE"):
 		call_deferred("_verify_r2_world_life_qa")
+	if OS.has_environment("ORIGEM_QA_R3_ARCH"):
+		get_tree().create_timer(1.20).timeout.connect(_verify_r3_arch_qa)
 	# CINE-PAIR-10: apenas um retorno real do interior deve substituir o spawn normal da Casa Voss.
 	var exterior_player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
 		OrionTransitionState.restore_exterior_player(exterior_player)
 	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
-	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING"):
+	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_R3_ARCH"):
 		_start_narrative()
 
 func _run_codex_qa() -> void:
@@ -240,6 +242,38 @@ func _verify_r2_world_life_qa() -> void:
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)
+
+func _verify_r3_arch_qa() -> void:
+	var issues: PackedStringArray = PackedStringArray()
+	var arch: Node3D = find_child("ArcoDasRuinas_EstradaDoRio", true, false) as Node3D
+	if arch == null:
+		issues.append("o Arco R3 não foi instanciado no mundo")
+	else:
+		if absf(arch.global_position.z - 92.0) > 0.55:
+			issues.append("o Arco R3 não preserva a projeção física Z≈92")
+		var pillar_colliders: Array[Node] = arch.find_children("ColisorPilarArco*", "StaticBody3D", true, false)
+		if pillar_colliders.size() != 2:
+			issues.append("os dois colisores laterais do Arco estão em falta")
+		var arch_lights: Array[Node] = arch.find_children("*", "OmniLight3D", true, false)
+		if arch_lights.size() != 2:
+			issues.append("o Arco R3 deve manter exatamente duas luzes Omni locais")
+		var awakening: Node = arch.get_node_or_null("R3ArchAwakening")
+		if awakening == null or not awakening.has_method("awake_once"):
+			issues.append("o controlador de despertar R3 está em falta")
+		else:
+			var first_awake: bool = bool(awakening.call("awake_once"))
+			var second_awake: bool = bool(awakening.call("awake_once"))
+			if not first_awake or second_awake:
+				issues.append("o despertar R3 não é único")
+			elif awakening.get_node_or_null("EfeitosDoDespertar") == null:
+				issues.append("os efeitos moderados do despertar R3 estão em falta")
+	if issues.is_empty():
+		print("[ORIGEM_R3_ARCH_OK] Arco Z≈92, colisores laterais, duas luzes e despertar único aprovados.")
+		get_tree().quit()
+		return
+	for issue: String in issues:
+		printerr("[ORIGEM_R3_ARCH_ERROR] %s" % issue)
+	get_tree().quit(1)
 
 func _apply_exterior_light_budget() -> void:
 	var all_lights: Array[Node] = []
