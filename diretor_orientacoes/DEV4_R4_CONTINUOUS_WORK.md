@@ -6,42 +6,48 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-MIST-LAYER-002
+task_id: DEV4-R4-CANOPY-CADENCE-004
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
 
 ## Base oficial e fronteira
 
-A base de trabalho é o repositório oficial do ORIGEM, branch canónica `dev4/r4-dense-forest`, sincronizada por avanço rápido com `integration/r1-r6-sprint1`. O arquivo do jogo entregue pelo Diretor é representado por esta base versionada; novas cópias ZIP/RAR não são necessárias para iniciar trabalho.
+A base de trabalho é o repositório oficial do ORIGEM, branch canónica `dev4/r4-dense-forest`, sincronizada por avanço rápido com `integration/r1-r6-sprint1`. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
 
-A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva a rota `arch_to_forest` → `forest_to_majestic`. A geometria compartilhada atual está em `levels/ForestLakeRegion.gd`; o conteúdo Dev4 deve ser novo e modular sob `levels/regions/r4/`, sendo a montagem no mundo feita de modo aditivo e rastreável.
+O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mínima em `levels/ForestLakeRegion.gd` é permitida apenas para instalar módulos R4 aditivos; não editar âncoras, `RiverRoadJourney.gd`, módulos R1–R3/R5–R6 ou sistemas transversais protegidos.
 
-## Correção obrigatória de base
+## Entrega concluída — DEV4-R4-MIST-LAYER-002
 
-A auditoria encontrou quatro balizas Omni em `_build_forest_wayfinding`, embora o contrato R4 permita no máximo uma luz dinâmica local. A primeira entrega deve normalizar este legado para uma única baliza dinâmica ou nenhuma, sem escurecer a rota nem transferir a responsabilidade de luz para R3 ou R5.
+`R4CamadaNeblinaLocal` foi instalada por `ForestMistLayer.gd`. A camada não cria geometria, `FogVolume`, planos, partículas, colisores, pós-processamento ou luzes. Aplica apenas uma variação subtil de material nas massas selecionadas da R4.
 
-## Entrega aprovada — DEV4-R4-CLEARING-SIGHTLINE-001
+A clareira de Orion em `Z≈126–151` recebe peso zero; portanto, mantém-se aberta para a leitura de Orion e do caminho para Majestic. A prova `[ORIGEM_R4_MIST_OK]` registou `materiais=128`, `clareira_protegida=42` e `luzes=0`.
 
-`R4ClareiraDaVisadaOrion` foi instalada com quatro quadros laterais de afloramento baixo e oito fetos distribuídos fora do eixo. Não cria luzes nem colisores. A normalização das balizas preserva quatro brasas visuais, mas deixa apenas `LuzBalizaFlorestalUnica` como luz dinâmica local R4. A prova `[ORIGEM_R4_CLEARING_OK]` confirma a clareira, quatro quadros e exatamente uma baliza dinâmica.
+## Entrega concluída — DEV4-R4-ORION-CLEARING-LORE-003
 
-## Tarefa ativa — DEV4-R4-MIST-LAYER-002
+`ForestClearingLore.gd` instala três vestígios de passagem antiga na lateral da clareira: nove pedras gastas em conjuntos assimétricos, todas fora do corredor jogável. A entrega não introduz UI, texto, objetivos, diálogos, colecionáveis, eventos, animações de revelação, colisores ou luzes. A leitura continua material e ambiental, sem antecipar a revelação narrativa de Orion.
 
-Refinar a **neblina baixa da transição R4** com uma camada local subtil e sem pós-processamento pesado. A entrega deve reforçar profundidade entre as massas laterais, preservar a abertura para Orion e a leitura da saída para Majestic. Não pode usar planos de névoa, partículas densas, luzes, volumes opacos ou qualquer elemento que reduza a visibilidade do trilho.
+| Critério | Resultado |
+|---|---|
+| Clareira Orion | Faixa `Z=126–151` mantida livre, com 4.40 m de afastamento mínimo ao trilho |
+| Vestígios | 3 conjuntos laterais e 9 pedras gastas |
+| Luz e física | Zero `Light3D` e zero `StaticBody3D` criados pelo módulo |
+| Atmosfera | Sem alteração à camada local de neblina ou à visibilidade distante |
+| QA | `[ORIGEM_R4_LORE_OK]`, porta R4 e três rotas aprovadas |
+
+## Tarefa ativa — DEV4-R4-CANOPY-CADENCE-004
+
+Ajustar a cadência visual das copas R4 com poucas variações de escala, rotação e agrupamento em massa lateral. O objetivo é eliminar qualquer leitura de repetição sem erguer parede de árvores, invadir a clareira Orion, alterar a geometria partilhada, introduzir animação global, partículas, vento físico, luz, câmara ou pós-processamento. Preferir instâncias estáticas e materiais existentes; o trilho precisa permanecer legível desde o Arco até Majestic.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | R4 e documentação Dev4; não editar âncoras, `RiverRoadJourney.gd` ou módulos R1–R3/R5–R6 |
-| Cartografia | Preservar as três rotas R4 e a clareira aprovada em Z≈130–147 |
-| Atmosfera | Apenas material/efeito local subtil e leve; nenhuma parede de névoa, painel, partículas densas ou pós-processamento global |
-| Visibilidade | Orion e a direção de Majestic devem continuar legíveis entre as copas |
-| Luz | Zero luz dinâmica nova; manter uma única baliza dinâmica local R4 |
-| Verificação | Executar `tools/qa/run_regional_gate.sh R4`, `[ORIGEM_R4_CLEARING_OK]` e uma prova específica de atmosfera antes de abrir PR |
+| Escopo | Novo módulo em `levels/regions/r4/`, montagem mínima e QA R4 |
+| Clareira | Manter integralmente a faixa aberta Z≈126–151 |
+| Corredor | Árvores a pelo menos 6 m do trilho físico |
+| Luz | Zero luz dinâmica nova; baliza local única preservada |
+| Performance | Poucas instâncias estáticas; sem animação ou shader novo |
+| Verificação | Parser, prova própria, porta R4 e três rotas antes do PR |
 
-## Fecho e avanço obrigatório
+## Sucessão obrigatória
 
-Dev4 só pode fechar a tarefa após commit publicado, porta R4 aprovada e substituição por outra **Tarefa ativa** com novo `task_id`. A esteira deve manter uma única issue `[Dev4 Continuous]` aberta e encerrar automaticamente qualquer item Dev4 obsoleto.
-
-## Próxima fila reservada
-
-`DEV4-R4-ORION-CLEARING-LORE-003` deverá acrescentar leitura ambiental à clareira depois da tarefa atmosférica, sem nova interface ou revelação narrativa precoce.
+A esteira mantém uma única issue `[Dev4 Continuous]` e encerra automaticamente o item anterior quando o `task_id` avançar. O fecho de `DEV4-R4-CANOPY-CADENCE-004` exige commit publicado, porta R4 aprovada e nova tarefa em estado `ACTIVE`.
