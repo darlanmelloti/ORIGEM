@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-TRAIL-SILHOUETTE-021
+task_id: DEV4-R4-FOREST-MAJESTIC-THRESHOLD-022
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -57,6 +57,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-CANOPY-EDGE-020` instalou `ForestCanopyEdge.gd`: uma copa focal R4 existente sem colisor associado foi modulada entre `Z=192–199` para refinar a borda exterior sem criar parede vegetal. A prova `[ORIGEM_R4_CANOPY_EDGE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-TRAIL-SILHOUETTE-021` instalou `ForestTrailSilhouette.gd`: uma copa focal R4 existente sem colisor associado foi ajustada entre `Z=170–176` para organizar a silhueta lateral do trilho. A prova `[ORIGEM_R4_TRAIL_SILHOUETTE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -78,10 +80,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Profundidade liminar | Fora da clareira | ≥9 m | 0 luzes e colisores | Aprovada |
 | Margem exterior | Fora da clareira | ≥10 m | 0 luzes e colisores | Aprovada |
 | Borda das copas | Fora da clareira | ≥7 m | 0 luzes e colisores | Aprovada |
+| Silhueta lateral | Fora da clareira | ≥7 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-TRAIL-SILHOUETTE-021
+## Tarefa ativa — DEV4-R4-FOREST-MAJESTIC-THRESHOLD-022
 
-Organizar a **silhueta lateral R4** com transformações estáticas de instâncias ambientais existentes, fora da clareira Orion e sem criar barreiras na margem do trilho. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+Clarificar o **limiar R4 para Majestic** com transformações estáticas de instâncias ambientais existentes, sem aproximar elementos do trilho nem alterar o conector. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -94,4 +97,4 @@ Organizar a **silhueta lateral R4** com transformações estáticas de instânci
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-MAJESTIC-THRESHOLD-022` deverá clarificar o limiar R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-RIM-BALANCE-023` deverá reequilibrar a borda R4 sem modificar a rota, a câmara ou os limites regionais.
