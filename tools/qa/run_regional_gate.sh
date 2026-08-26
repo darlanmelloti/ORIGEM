@@ -179,6 +179,26 @@ if [[ "$REGION" == "R4" ]]; then
     exit 18
   fi
   printf '[GATE:%s] leitura arqueológica R4 e clareira aberta aprovadas\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV4-R4-CANOPY-CADENCE-004\n' "$REGION"
+  R4_CANOPY_LOG="/tmp/origem_${REGION}_canopy_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r4_canopy_cadence.gd >"$R4_CANOPY_LOG" 2>&1
+  r4_canopy_status=$?
+  set -e
+  if [[ "$r4_canopy_status" -ne 0 ]]; then
+    cat "$R4_CANOPY_LOG"
+    exit 20
+  fi
+  if ! grep -q '\[ORIGEM_R4_CANOPY_OK\]' "$R4_CANOPY_LOG"; then
+    cat "$R4_CANOPY_LOG"
+    exit 20
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R4_CANOPY_ERROR' "$R4_CANOPY_LOG"; then
+    cat "$R4_CANOPY_LOG"
+    exit 20
+  fi
+  printf '[GATE:%s] cadência de copas R4 aprovada\n' "$REGION"
 fi
 
 if [[ "$REGION" == "R5" ]]; then
