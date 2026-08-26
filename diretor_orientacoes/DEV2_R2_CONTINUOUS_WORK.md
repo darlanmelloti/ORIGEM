@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-ROAD-038
+task_id: DEV2-R2-RIVER-RIVERBANK-039
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -127,20 +127,23 @@ A continuidade do trecho intermediário da Estrada do Rio foi preparada e mantid
 ## Tarefa concluída — DEV2-R2-RIVER-ROAD-037
 A continuidade do trecho médio foi aceita pela porta R2 e pelo orçamento global no CI `32926397464`; o task_id foi mantido rastreável e a branch permaneceu limpa.
 
-## Tarefa ativa — DEV2-R2-RIVER-ROAD-038
+## Tarefa concluída — DEV2-R2-RIVER-ROAD-038
+A continuidade do trecho médio foi mantida no contrato ativo e aceita pelo orçamento, porta R2 e continuidade Dev2 no CI `32926845148`.
 
-A R2 deve receber uma **laje física curta de continuidade no trecho médio**, alinhada às lajes existentes, com colisor baixo e material coerente, costurando a passagem Casa Voss → rio → Orion → Arco sem duplicar marcos ou alterar âncoras cartográficas.
+## Tarefa ativa — DEV2-R2-RIVER-RIVERBANK-039
+
+A R2 deve receber uma **leitura física baixa de margem no lado oposto ao retorno**, com pedra e feto reais, mantendo o leito não atravessável, o reflexo Orion visível e a orientação Casa Voss → Arco sem nova rota.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
 | Cartografia | Validar as três rotas no contrato sem mover estrada, Arco ou âncoras cartográficas |
-| Acesso | Laje curta alinhada às lajes existentes, com colisor baixo e sem bloquear rotas |
+| Acesso | Leitura lateral baixa fora do leito, sem rota nova ou bloqueio |
 | Desempenho | Zero luz dinâmica adicional, partículas ou emissão persistente; reutilizar pedra e fetos reais |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
-| Narrativa | A continuidade deve reforçar a viagem Casa Voss → rio → Orion → Arco sem duplicar marcos |
-| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_ROAD_037_OK]` antes do PR |
+| Narrativa | A margem deve sustentar o retorno Casa Voss e a leitura Orion → Arco sem duplicar marcos |
+| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_RIVERBANK_039_OK]` antes do PR |
 
 ## Fecho e avanço obrigatório
 
@@ -148,4 +151,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-ROAD-038`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RIVERBANK-039`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
