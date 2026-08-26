@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-WIND-READING-003
+task_id: DEV5-R5-CAMP-COMPOSITION-FOCUS-ANALYSIS-028
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -33,17 +33,114 @@ A fonte de trabalho é a branch canónica `dev5/r5-majestic-camp`, reconciliada 
 | Estabilidade | Transformações-base conservadas; nenhum nó alvo criado ou removido durante a prova |
 | QA | `[ORIGEM_R5_WIND_OK]`, porta R5 e rotas R4→R5→R6 aprovadas |
 
-## Tarefa ativa — DEV5-R5-CAMP-WIND-READING-003
+## Entrega aprovada — DEV5-R5-CAMP-ARRIVAL-READING-004
 
-Produzir uma auditoria visual 16:9 da leitura de vento em sessão R5 e confirmar que a largura navegável do conector Majestic não sofre qualquer redução enquanto o módulo está ativo. A intervenção, se necessária, fica limitada a amplitude ou fase já declaradas em `MajesticCampWindReading.gd`; não criar malhas, luzes, nós recorrentes, física de pano, câmara, UI ou alteração da rota.
+O módulo `levels/regions/r5/MajesticCampArrivalReading.gd` ajustou estaticamente as duas bases de mastro existentes dentro de `SilhuetasDeChegadaMajestic`, sem deslocar as suas posições-base. Não foram criados nós, geometria, luzes, colisores, partículas, shaders, interface, câmara, eventos narrativos ou rotas artificiais. A prova `[ORIGEM_R5_ARRIVAL_READING_OK]`, o artefacto, a leitura de vento, o orçamento de quatro luzes, o parser, a porta R5 e as duas rotas foram aprovados.
+
+## Entrega aprovada — DEV5-R5-CAMP-EDGE-READING-005
+
+O módulo `MajesticCampEdgeReading.gd` ajustou estaticamente três rolos de campo R5 já existentes, sem criar geometria, luz, colisores, efeitos, interface ou alterações de rota. A prova `[ORIGEM_R5_EDGE_OK]`, a porta R5 cumulativa e as rotas `forest_to_majestic` e `majestic_to_lake` foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-VISTA-READING-006
+
+O módulo `MajesticCampVistaReading.gd` ajustou estaticamente duas costuras de tenda R5 já existentes, sem alterar posições, geometria, luzes, colisores, efeitos, interface, câmara ou rotas. A prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-FOCAL-READING-007
+
+O módulo `MajesticCampFocalReading.gd` ajustou estaticamente duas caixas de campo visuais já existentes. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-RHYTHM-FINAL-008
+
+O módulo `MajesticCampRhythmFinal.gd` ajustou estaticamente duas caixas visuais já aprovadas pela leitura focal. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-CLOSURE-009
+
+O módulo `MajesticCampClosure.gd` ajustou estaticamente duas caixas visuais já aprovadas pela cadência final. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-READABILITY-FINAL-010
+
+O módulo `MajesticCampReadabilityFinal.gd` ajustou estaticamente duas caixas visuais já aprovadas pelo fecho. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-OBSERVATION-011
+
+O módulo `MajesticCampObservation.gd` ajustou estaticamente duas caixas visuais já aprovadas pela legibilidade final. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-REVIEW-012
+
+O módulo `MajesticCampReview.gd` ajustou estaticamente duas caixas visuais já aprovadas pela observação. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-CONSOLIDATION-013
+
+O módulo `MajesticCampConsolidation.gd` ajustou estaticamente duas caixas visuais já aprovadas pela revisão. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-STABILIZATION-014
+
+O módulo `MajesticCampStabilization.gd` ajustou estaticamente duas caixas visuais já aprovadas pela consolidação. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-RECONCILIATION-015
+
+O módulo `MajesticCampReconciliation.gd` ajustou estaticamente duas caixas visuais já aprovadas pela estabilização. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-CONSISTENCY-016
+
+O módulo `MajesticCampConsistency.gd` ajustou estaticamente duas caixas visuais já aprovadas pela reconciliação. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-CHECK-017
+
+O módulo `MajesticCampCheck.gd` ajustou estaticamente duas caixas visuais já aprovadas pela consistência. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-FINALIZATION-018
+
+O módulo `MajesticCampFinalization.gd` ajustou estaticamente duas caixas visuais já aprovadas pela verificação. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Entrega aprovada — DEV5-R5-CAMP-ARCHIVE-019
+
+A validação documental da cadeia do Acampamento Majestic foi consolidada. A porta R5 e as duas rotas foram aprovadas, com caixas existentes, colisores, conectores e orçamento preservados; não foi feita alteração adicional ao mundo.
+
+## Entrega aprovada — DEV5-R5-CAMP-POSTCHECK-020
+
+O postcheck documental confirmou, com a porta R5 aprovada, que não houve regressão após o arquivo. Caixas, colisores, rotas, orçamento e conectores permanecem preservados; não foi feita alteração adicional ao mundo.
+
+## Entrega aprovada — DEV5-R5-CAMP-CLOSEOUT-021
+
+O closeout documental consolidou a cadeia R5 pronta para integração futura. As portas, rotas, caixas, colisores, conectores, orçamento e bundles foram verificados; não houve alteração adicional ao mundo.
+
+## Entrega aprovada — DEV5-R5-CAMP-PUBLISH-022
+
+A cadeia R5 foi integrada em *fast-forward* no commit remoto `5e6445b` após reconciliação segura com a integração atual. As portas R4, R5 e R6, as rotas `forest_to_majestic` e `majestic_to_lake`, os colisores e a auditoria global de luz foram aprovados antes da publicação; a CI comum integrada também concluiu com sucesso. Não houve alteração adicional ao mundo nesta entrega documental.
+
+## Entrega aprovada — DEV5-R5-CAMP-POST-PUBLISH-REVIEW-023
+
+A revisão documental pós-publicação confirmou o estado integrado sem regressão de colisores, conectores, rotas ou orçamento de luz. A evidência foi preservada em `reports/r5/POST_PUBLISH_REVIEW_023.md`; não houve alteração ao acampamento nesta entrega.
+
+## Entrega aprovada — DEV5-R5-CAMP-ENVIRONMENTAL-REVIEW-024
+
+A auditoria confirmou que as leituras estáticas existentes já cobrem mastros, rolos, costuras e caixas focais, e que outra variação abstrata não demonstraria ganho sem evidência runtime. A evidência foi preservada em `reports/r5/ENVIRONMENTAL_REVIEW_024.md`; não houve alteração de produção.
+
+## Entrega aprovada — DEV5-R5-RUNTIME-COMPOSITION-CAPTURE-025
+
+As capturas pós-carregamento das duas rotas R5 confirmaram corredor, lajes e saída para o lago, mas não enquadraram o núcleo do acampamento de forma suficiente para escolha artística. A evidência foi preservada em `reports/r5/RUNTIME_COMPOSITION_CAPTURE_025.md`; não houve alteração de produção.
+
+## Entrega aprovada — DEV5-R5-CAMP-COMPOSITION-PROBE-026
+
+A sonda QA localizou sete alvos existentes do núcleo Majestic e calculou o foco `(-85,46; 1,71; 178,41)` com posição de câmara exclusivamente de teste `(-77,46; 6,51; 188,41)`. A porta R5 e as duas rotas passaram sem alteração de `ForestLakeRegion.gd`, da câmara do jogador, âncoras, luz, física, colisores ou navegação. A evidência encontra-se em `reports/r5/CAMP_COMPOSITION_PROBE_026.md` e no checkpoint 411.
+
+## Entrega aprovada — DEV5-R5-CAMP-COMPOSITION-POSTPROBE-027
+
+A captura runtime usou um runner QA temporário, injetado apenas pela variável `ORIGEM_QA_R5_COMPOSITION_CAPTURE`, sem alterar a câmara do jogador. As duas variantes verificaram que o núcleo Majestic existe e que a rota de lajes permanece legível, mas o foco aritmético dos sete elementos não fornece composição suficientemente próxima para recomendar alteração de produção. A evidência encontra-se em `reports/r5/composition_postprobe_027/`.
+
+## Tarefa ativa — DEV5-R5-CAMP-COMPOSITION-FOCUS-ANALYSIS-028
+
+Medir três subgrupos existentes do núcleo Majestic — mesa/mapa, rolos e lonas — e criar três enquadramentos QA temporários, sem modificar a produção. A tarefa deve selecionar apenas um foco legível, ou encerrar a hipótese sem propor alteração caso nenhum subgrupo produza ganho visual verificável.
 
 | Critério | Obrigatório |
 |---|---|
-| Visual | Captura 16:9 no acampamento e confirmação de leitura discreta, sem oscilação uniforme |
-| Navegação | O conector R4→R5 e a ligação Majestic→R6 devem manter a largura e colisão aprovadas |
-| Custo | Sem nova geometria, luz, partículas, shader, física ou nós em runtime |
-| Verificação | Parser, prova R5 de vento, porta R5, rotas `forest_to_majestic` e `majestic_to_lake` |
+| Produção | Nenhuma modificação a `ForestLakeRegion.gd`, câmara de jogo, âncoras, rota, luz ou física |
+| Alvos | Apenas leitura de mastros, lonas, artefacto, rolos e caixas já existentes |
+| Navegação | Corredor R4→R5 e ligação Majestic→R6 mantêm largura, colisão e lajes aprovadas |
+| Custo | Sem geometria, luz, partículas, shader, física ou animação nova |
+| Verificação | Parser, porta R5 e duas rotas antes de propor correção |
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-WIND-READING-003` exige commit publicado, validação R5 e um novo `task_id` em estado `ACTIVE`.
+A esteira regional mantém este contrato em `ACTIVE` e uma única issue `[Dev5 Continuous]`. `DEV5-R5-CAMP-COMPOSITION-FOCUS-ANALYSIS-028` permanece ativo até que uma das composições de QA determine uma necessidade artística R5 espacialmente verificável.

@@ -1,0 +1,45 @@
+[GATE:R4] Base=origin/integration/r1-r6-sprint1
+[GATE:R4] 1/4 diff --check
+[GATE:R4] 2/4 auditoria de escopo
+[GATE:R4] 3/4 parser Godot
+[GATE:R4] prova de mundo DEV4-R4-CLEARING-SIGHTLINE-001
+[GATE:R4] clareira R4 e orçamento de baliza aprovados
+[GATE:R4] prova DEV4-R4-ORION-CLEARING-LORE-003
+[GATE:R4] leitura arqueológica R4 e clareira aberta aprovadas
+[GATE:R4] prova DEV4-R4-CANOPY-CADENCE-004
+[GATE:R4] cadência de copas R4 aprovada
+[GATE:R4] prova R4 sub-bosque lateral
+[GATE:R4] prova R4 enquadramento da vista Orion
+[GATE:R4] prova R4 cadência da aproximação florestal
+[GATE:R4] prova R4 equilíbrio da margem Majestic
+[GATE:R4] prova R4 continuidade da silhueta
+[GATE:R4] prova R4 equilíbrio de profundidade lateral
+[GATE:R4] prova R4 legibilidade da aproximação Orion
+[GATE:R4] prova R4 ritmo visual do trilho
+[GATE:R4] prova R4 continuidade da margem ambiental
+[GATE:R4] prova R4 composição da aproximação
+[GATE:R4] prova R4 cadência da borda florestal
+[GATE:R4] prova R4 margem exterior da floresta
+[GATE:R4] prova R4 cadência das copas de borda
+[GATE:R4] prova R4 silhueta exterior da floresta
+[GATE:R4] prova R4 ritmo exterior da floresta
+[GATE:R4] prova R4 profundidade exterior da floresta
+[GATE:R4] prova R4 equilíbrio lateral exterior da floresta
+[GATE:R4] prova R4 vista exterior da floresta
+[GATE:R4] prova R4 cadência exterior final da floresta
+[GATE:R4] prova R4 fecho exterior da floresta
+[GATE:R4] prova R4 legibilidade exterior final da floresta
+[GATE:R4] prova R4 observação exterior da floresta
+[GATE:R4] prova R4 revisão exterior da floresta
+[GATE:R4] prova R4 consolidação exterior da floresta
+[GATE:R4] prova R4 estabilização exterior da floresta
+[GATE:R4] prova R4 reconciliação exterior da floresta
+[GATE:R4] prova R4 consistência exterior da floresta
+[GATE:R4] prova R4 verificação exterior da floresta
+[GATE:R4] prova R4 finalização exterior da floresta
+[GATE:R4] sequência cumulativa R4 aprovada
+[GATE:R4] 5/5 contratos e rotas
+[GATE:R4] rota arch_to_forest aprovada
+[GATE:R4] rota forest_to_majestic aprovada
+[GATE:R4] rota forest_to_ruins aprovada
+[GATE:R4] PASS

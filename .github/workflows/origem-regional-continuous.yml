@@ -33,8 +33,10 @@ permissions:
   issues: write
 
 concurrency:
+  # As validações regionais são obrigatórias para integração; enfileirar é mais seguro do que cancelar uma porta em curso.
   group: origem-regional-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # As entregas regionais devem aguardar em fila; nunca cancelar validações em curso.
+  cancel-in-progress: false
 
 jobs:
   resolve-regions:

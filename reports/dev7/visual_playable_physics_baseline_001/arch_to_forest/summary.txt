@@ -1,0 +1,1 @@
+[ORIGEM_REGIONAL_RUNTIME_CAPTURE_OK] route=arch_to_forest evidence=reports/dev7/visual_playable_physics_baseline_001/arch_to_forest/arch_to_forest_postload.png settle_seconds=12

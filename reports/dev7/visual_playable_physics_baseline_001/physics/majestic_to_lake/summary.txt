@@ -1,0 +1,3 @@
+[DEV7_GROUNDING_START] route=majestic_to_lake
+[QA-GROUND-01-RESULT] {"grounded_frames":180,"lowest_y":2.23612213134766,"max_post_warmup_y_delta":0.0,"passed":true,"position":[-77.4000015258789,2.23612213134766,178.0],"probe":"QA-GROUND-01","reason":"ok","worst_downward_speed":1.63333320617676}
+[DEV7_GROUNDING_EXIT] route=majestic_to_lake code=0

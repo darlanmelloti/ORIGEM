@@ -1,0 +1,2 @@
+source=/tmp/origem_r6_route_regression_pipeline_stable/r6-route-regression-20260826T102107Z
+settle_seconds=12

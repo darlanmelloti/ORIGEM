@@ -1,0 +1,1 @@
+[ORIGEM_REGIONAL_RUNTIME_CAPTURE_OK] route=ruins_arrival evidence=reports/dev7/visual_playable_physics_baseline_001/ruins_arrival/ruins_arrival_postload.png settle_seconds=12
