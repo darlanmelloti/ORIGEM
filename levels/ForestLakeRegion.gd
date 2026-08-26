@@ -41,6 +41,7 @@ const R4_FOREST_LIMINAL_DEPTH_SCRIPT: Script = preload("res://levels/regions/r4/
 const R4_FOREST_OUTER_MARGIN_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterMargin.gd")
 const R4_FOREST_CANOPY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestCanopyEdge.gd")
 const R4_FOREST_TRAIL_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r4/ForestTrailSilhouette.gd")
+const R4_FOREST_MAJESTIC_THRESHOLD_SCRIPT: Script = preload("res://levels/regions/r4/ForestMajesticThreshold.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -98,6 +99,7 @@ func _ready() -> void:
 	_build_r4_outer_margin()
 	_build_r4_canopy_edge()
 	_build_r4_trail_silhouette()
+	_build_r4_majestic_threshold()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -498,6 +500,13 @@ func _build_r4_trail_silhouette() -> void:
 	var silhouette: R4ForestTrailSilhouette = R4_FOREST_TRAIL_SILHOUETTE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), clusters_root) as R4ForestTrailSilhouette
 	if silhouette == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a silhueta lateral do trilho.")
+
+func _build_r4_majestic_threshold() -> void:
+	# DEV4-R4-FOREST-MAJESTIC-THRESHOLD-022: ajusta pedra húmida R4 existente no limiar, sem tocar no conector ou em Dev5.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var threshold: R4ForestMajesticThreshold = R4_FOREST_MAJESTIC_THRESHOLD_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestMajesticThreshold
+	if threshold == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o limiar Majestic florestal.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
