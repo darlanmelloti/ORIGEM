@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-WIND-READING-003
+task_id: DEV5-R5-CAMP-ARRIVAL-READING-004
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -33,17 +33,18 @@ A fonte de trabalho é a branch canónica `dev5/r5-majestic-camp`, reconciliada 
 | Estabilidade | Transformações-base conservadas; nenhum nó alvo criado ou removido durante a prova |
 | QA | `[ORIGEM_R5_WIND_OK]`, porta R5 e rotas R4→R5→R6 aprovadas |
 
-## Tarefa ativa — DEV5-R5-CAMP-WIND-READING-003
+## Tarefa ativa — DEV5-R5-CAMP-ARRIVAL-READING-004
 
-Produzir uma auditoria visual 16:9 da leitura de vento em sessão R5 e confirmar que a largura navegável do conector Majestic não sofre qualquer redução enquanto o módulo está ativo. A intervenção, se necessária, fica limitada a amplitude ou fase já declaradas em `MajesticCampWindReading.gd`; não criar malhas, luzes, nós recorrentes, física de pano, câmara, UI ou alteração da rota.
+Reforçar a leitura ambiental estática da chegada ao Acampamento Majestic com detalhes R5 já existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração da rota. A entrega deve manter o conector R4→R5 e a passagem Majestic→R6 inteiramente livres e não pode alterar os módulos de outras regiões.
 
 | Critério | Obrigatório |
 |---|---|
-| Visual | Captura 16:9 no acampamento e confirmação de leitura discreta, sem oscilação uniforme |
-| Navegação | O conector R4→R5 e a ligação Majestic→R6 devem manter a largura e colisão aprovadas |
-| Custo | Sem nova geometria, luz, partículas, shader, física ou nós em runtime |
-| Verificação | Parser, prova R5 de vento, porta R5, rotas `forest_to_majestic` e `majestic_to_lake` |
+| Escopo | Novo módulo em `levels/regions/r5/`, ou extensão mínima de módulo R5 já existente, sem alterar a geometria partilhada salvo montagem comprovada |
+| Leitura | Detalhes estáticos da chegada, sem texto, UI ou evento narrativo precoce |
+| Navegação | Corredor R4→R5 e ligação Majestic→R6 mantêm largura, colisão e lajes aprovadas |
+| Custo | Sem nova geometria, luz, partículas, shader, física, nós recorrentes ou animação adicional |
+| Verificação | Parser, prova R5 própria, porta R5 e rotas `forest_to_majestic` e `majestic_to_lake` |
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-WIND-READING-003` exige commit publicado, validação R5 e um novo `task_id` em estado `ACTIVE`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-ARRIVAL-READING-004` exige commit publicado, validação R5 e um novo `task_id` em estado `ACTIVE`.
