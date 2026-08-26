@@ -25,6 +25,7 @@ const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.g
 const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
 const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMistLayer.gd")
 const R4_FOREST_CANOPY_CADENCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestCanopyCadence.gd")
+const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
 const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
@@ -49,6 +50,7 @@ func _ready() -> void:
 	_build_cartographic_forest_threshold()
 	_build_arch_to_forest_transition()
 	_build_arch_forest_understory()
+	_build_r4_understory_edge()
 	_build_r4_clearing_sightline()
 	_build_r4_clearing_lore()
 	_build_forest_wayfinding()
@@ -285,6 +287,13 @@ func _build_arch_forest_understory() -> void:
 			rock.scale = Vector3(rock_scale, rock_scale * 0.76, rock_scale)
 			rock.rotation.y = -0.28 + float(index) * 0.61
 			understory.add_child(rock)
+
+func _build_r4_understory_edge() -> void:
+	# DEV4-R4-UNDERSTORY-EDGE-005: reorganiza somente fetos e rochas já existentes, sem invadir o trilho ou a clareira Orion.
+	var understory: Node = get_node_or_null("SubBosqueDoLimiarArcoFloresta")
+	var edge: R4ForestUnderstoryEdge = R4_FOREST_UNDERSTORY_EDGE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), understory) as R4ForestUnderstoryEdge
+	if edge == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a transição lateral do sub-bosque.")
 
 func _build_r4_clearing_sightline() -> void:
 	# DEV4-R4-CLEARING-SIGHTLINE-001: moldura baixa, húmida e lateral para a visada de Orion sem fechar o trilho.
