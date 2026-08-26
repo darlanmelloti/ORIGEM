@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-CAPTURE-READINESS-052
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-CAPTURE-053
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -158,20 +158,24 @@ A auditoria QA inventariou duas raízes R4 existentes (`RaizExpostaFlorestal_14`
 
 A verificação documental confirmou que a causa permanece na lâmina e no material lacustre partilhado sob responsabilidade R6, e que as duas raízes R4 inventariadas não têm aprovação para alteração. O roteiro de captura comparativa foi definido sem criar candidata. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_OWNERSHIP_CHECK_051.md`.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-CAPTURE-READINESS-052
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-CAPTURE-READINESS-052
 
-Executar exclusivamente a preparação QA documental do baseline de captura. Verificar que o roteiro 16:9 de `arch_to_forest`, a separação baseline/candidata e os critérios de evidência estão prontos para tarefa futura, sem criar candidata, capturar variante, mover, instanciar, materializar ou ocultar nós e sem alterar `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6, materiais, luzes, rota, câmara, âncoras ou física.
+A prontidão estática confirmou a ferramenta canónica de captura, o viewport 16:9, a rota `arch_to_forest`, as dependências QA e a separação obrigatória baseline/candidata. Nenhuma captura runtime nem candidata foi criada. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_CAPTURE_READINESS_052.md`.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-CAPTURE-053
+
+Executar exclusivamente uma captura QA baseline pós-carregamento de `arch_to_forest`, desde que a ponta canónica permaneça estável. A captura não pode criar candidata, modificar produção, mover, instanciar, materializar ou ocultar nós e não altera `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6, materiais, luzes, rota, câmara, âncoras ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Zero modificações de produção nesta tarefa documental |
-| Captura | Apenas verificar prontidão; nenhuma candidata ou comparação runtime nesta tarefa |
-| Propriedade | Preservar a exigência de aprovação explícita conjunta R4/R6 |
+| Produção | Zero modificações de produção nesta tarefa QA |
+| Captura | Somente baseline 16:9 de `arch_to_forest`, sem candidata |
+| Propriedade | Preservar a exigência de aprovação explícita conjunta R4/R6 para qualquer candidata futura |
 | Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` |
 | R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
 | R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
-| Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
+| Verificação | Parser, orçamento, porta R4 e três rotas antes de publicação |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir a preparação de captura, Dev4 deve avançar para nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
+Há exatamente uma tarefa ACTIVE. Ao concluir a captura baseline, Dev4 deve avançar para nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
