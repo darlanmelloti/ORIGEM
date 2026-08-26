@@ -1,0 +1,4 @@
+route	spawn_x	spawn_y	spawn_z	target_x	target_y	target_z	delta_x	delta_z	horizontal_distance
+forest_to_ruins	9.765	1.198	194.000	14.000	1.198	225.000	4.235	31.000	31.288
+majestic_to_lake	-77.400	2.414	178.000	7.330	2.414	186.000	84.730	8.000	85.107
+ruins_arrival	13.679	1.254	222.000	54.000	1.254	252.000	40.321	30.000	50.257
