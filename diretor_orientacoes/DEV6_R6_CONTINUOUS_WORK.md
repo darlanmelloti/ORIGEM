@@ -1,12 +1,12 @@
 # Dev6 — Contrato de Trabalho Contínuo das Ruínas Submersas
 
-> **Regra operacional:** uma porta R6 aprovada nunca encerra o Dev6. Cada entrega validada deve publicar e substituir a tarefa atual por uma nova tarefa em estado `ACTIVE`.
+> **Regra operacional:** uma porta R6 aprovada nunca encerra o Dev6. Cada entrega validada deve publicar e substituir a tarefa atual por uma nova tarefa em estado `ACTIVE`. Quando uma PR permanecer bloqueada exclusivamente pela associação de checks da plataforma, a entrega validada fica preservada como **checkpoint pendente de integração** e existe exactamente uma sucessora QA, sem mutação de produção, até que a promoção regular volte a ser elegível.
 
 ## Estado legível por automação
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
+task_id: DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -125,18 +125,27 @@ A revisão do relatório confirmou as três capturas runtime, logs, telemetria, 
 
 A avaliação visual confirmou que a leitura de protótipo se concentra no plano médio da chegada R6: terreno aberto, lajes isoladas e vestígios arqueológicos pouco agrupados. A evidência foi preservada em `reports/r6/VISUAL_DEBT_ASSESSMENT_013.md`; não houve alteração de produção.
 
-## Tarefa ativa — DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
+## Entrega integrada — DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
 
-Ajustar de forma estática escala e orientação de três a cinco vestígios arqueológicos R6 já existentes no plano médio da chegada. A entrega deve aumentar a massa composicional sem deslocar as posições-base, água, handoff, rotas, luzes ou física.
+O commit `5581765` ajustou exclusivamente escala e rotação locais de `FragmentoDeColunaMargemR6`, `PedraLeituraMargemR6_00` e `PedraLeituraMargemR6_01`. As posições-base, água, quatro luzes, lajes, colisores, handoff R6→R7 e rotas foram preservados. A prova específica, parser, orçamento R6, handoff, porta R6 e pipeline de regressão passaram localmente, com desvio máximo `0.000 m` sob tolerância de `0.050 m` nas três rotas.
+
+A PR `#390` foi integrada regularmente no commit canónico `8b5397f`, sem bypass. A branch Dev6 foi reconciliada no head publicado `4a616f4`, e o checkpoint deixou de estar pendente de integração.
+
+## Tarefa concluída — DEV6-R6-MIDGROUND-COMPOSITION-CHECKPOINT-QA-015
+
+A sucessora documental confirmou a associação regular da PR #390, a preservação do checkpoint 014 e a inexistência de mutação adicional de produção. A tarefa foi concluída pela integração regular; não exige repetição de CI ou captura.
+
+## Tarefa ativa — DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016
+
+Rever e indexar somente a evidência integrada do plano médio R6 para o handoff de arte/QA, sem criar nova captura ou alterar produção. É proibido criar ou modificar nós, meshes, materiais, água, luz, shader, física, colisores, lajes, rotas, âncoras, handoff ou conteúdo R7.
 
 | Critério | Obrigatório |
 |---|---|
-| Alvos | Apenas vestígios R6 existentes; nenhum nó, mesh, material, colisor ou luz nova |
-| Espacial | Posições-base preservadas; somente escala/rotação local estática |
-| Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` imutáveis |
-| Água e luz | Exatamente quatro luzes; sem shader, painel ou emissão adicional |
-| Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de lajes |
-| Validação | Prova específica, parser, orçamento R6, handoff e três rotas aprovados antes de publicar |
+| Escopo | Somente revisão de referência integrada, estado da PR mesclada e evidência QA já existente |
+| Cadência | No máximo uma rodada determinística por nova ponta da integração; não repetir CI nem captura sem mudança de base |
+| Evidência | Confirmar `8b5397f`, o marcador da prova 014, a porta R6 e a baseline das três rotas no checkpoint publicado |
+| Publicação | Sem bypass, force-push, cancelamento ou disparos agressivos de CI |
+| Encerramento | Só substituir esta tarefa por nova sucessora QA após revisão de evidência concluída e contractualmente registada |
 
 ## Sucessão obrigatória
 
