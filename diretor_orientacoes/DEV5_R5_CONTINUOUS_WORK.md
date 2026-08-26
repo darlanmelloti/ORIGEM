@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-ARRIVAL-READING-004
+task_id: DEV5-R5-CAMP-EDGE-READING-005
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -33,9 +33,13 @@ A fonte de trabalho é a branch canónica `dev5/r5-majestic-camp`, reconciliada 
 | Estabilidade | Transformações-base conservadas; nenhum nó alvo criado ou removido durante a prova |
 | QA | `[ORIGEM_R5_WIND_OK]`, porta R5 e rotas R4→R5→R6 aprovadas |
 
-## Tarefa ativa — DEV5-R5-CAMP-ARRIVAL-READING-004
+## Entrega aprovada — DEV5-R5-CAMP-ARRIVAL-READING-004
 
-Reforçar a leitura ambiental estática da chegada ao Acampamento Majestic com detalhes R5 já existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração da rota. A entrega deve manter o conector R4→R5 e a passagem Majestic→R6 inteiramente livres e não pode alterar os módulos de outras regiões.
+O módulo `levels/regions/r5/MajesticCampArrivalReading.gd` ajustou estaticamente as duas bases de mastro existentes dentro de `SilhuetasDeChegadaMajestic`, sem deslocar as suas posições-base. Não foram criados nós, geometria, luzes, colisores, partículas, shaders, interface, câmara, eventos narrativos ou rotas artificiais. A prova `[ORIGEM_R5_ARRIVAL_READING_OK]`, o artefacto, a leitura de vento, o orçamento de quatro luzes, o parser, a porta R5 e as duas rotas foram aprovados.
+
+## Tarefa ativa — DEV5-R5-CAMP-EDGE-READING-005
+
+Reforçar a leitura ambiental estática da margem lateral do Acampamento Majestic com detalhes R5 já existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração da rota. A entrega deve manter o conector R4→R5 e a passagem Majestic→R6 inteiramente livres e não pode alterar os módulos de outras regiões.
 
 | Critério | Obrigatório |
 |---|---|
@@ -47,4 +51,4 @@ Reforçar a leitura ambiental estática da chegada ao Acampamento Majestic com d
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-ARRIVAL-READING-004` exige commit publicado, validação R5 e um novo `task_id` em estado `ACTIVE`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-ARRIVAL-READING-004` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-EDGE-READING-005`.

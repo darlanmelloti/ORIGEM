@@ -293,6 +293,26 @@ if [[ "$REGION" == "R5" ]]; then
     exit 19
   fi
   printf '[GATE:%s] leitura de vento R5 aprovada\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV5-R5-CAMP-ARRIVAL-READING-004\n' "$REGION"
+  R5_ARRIVAL_LOG="/tmp/origem_${REGION}_arrival_reading_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_arrival_reading.gd >"$R5_ARRIVAL_LOG" 2>&1
+  r5_arrival_status=$?
+  set -e
+  if [[ "$r5_arrival_status" -ne 0 ]]; then
+    cat "$R5_ARRIVAL_LOG"
+    exit 24
+  fi
+  if ! grep -q '\[ORIGEM_R5_ARRIVAL_READING_OK\]' "$R5_ARRIVAL_LOG"; then
+    cat "$R5_ARRIVAL_LOG"
+    exit 24
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R5_ARRIVAL_READING_ERROR' "$R5_ARRIVAL_LOG"; then
+    cat "$R5_ARRIVAL_LOG"
+    exit 24
+  fi
+  printf '[GATE:%s] leitura estática da chegada R5 aprovada\n' "$REGION"
 fi
 
 if [[ "$REGION" == "R6" ]]; then
