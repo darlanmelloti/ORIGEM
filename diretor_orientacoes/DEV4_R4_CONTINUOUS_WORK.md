@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-RUNTIME-REVIEW-046
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-STABILIZATION-047
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -137,20 +137,24 @@ A prova isolada confirmou que a lâmina `LaminaDoAfluenteCartografico` é a geom
 
 A correcção modular instalou `ForestCartographicInletMaterial.gd` somente na lâmina `LaminaDoAfluenteCartografico`. A geometria e o traçado do afluente foram preservados; o material local usa mistura alfa, `depth_prepass_alpha` e `ALPHA = 0.68`, enquanto a fábrica lacustre partilhada e a água R6 permanecem inalteradas. As provas conjunta R4/R6, parser, orçamento, portas R4/R6 e três rotas R4 foram aprovados. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_CORRECTION_045.md`.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-RUNTIME-REVIEW-046
+## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-RUNTIME-REVIEW-046
 
-Capturar e rever exclusivamente a rota `arch_to_forest` após a estabilização runtime para confirmar que a superfície opaca clara foi mitigada pela correcção local. A tarefa é documental e de QA: não alterar produção, `_create_lake_material()`, água R6, `ForestLakeRegion.gd`, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física.
+A captura canónica de `arch_to_forest` confirmou que a superfície opaca clara deixou de dominar o primeiro plano. O afluente permanece lido como faixa azul-esverdeada escura, com rota, corredor, clareira Orion e integração R6 preservados. Parser, orçamento, porta R4 e as três rotas foram aprovados; a evidência está em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_RUNTIME_REVIEW_046.md` e no directório de captura associado.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-STABILIZATION-047
+
+Executar exclusivamente a estabilização documental da cadeia 044–046. Confirmar a ponta remota, a preservação da evidência e o contrato local R4/R6, sem criar ou alterar produção, `_create_lake_material()`, água R6, `ForestLakeRegion.gd`, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Zero alterações de produção nesta tarefa de revisão |
-| Evidência | Captura runtime da rota `arch_to_forest` e comparação com a evidência 043/044 |
+| Produção | Zero alterações de produção nesta tarefa de estabilização |
+| Evidência | Preservar e indexar diagnóstico 044, correcção 045 e revisão runtime 046 |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
 | Integração | Preservar R5 e R6; não modificar activos, lógica, iluminação, água ou rotas dessas frentes |
 | Dinâmica | Zero luzes, colisores, partículas, vento, animação, pós-processamento ou física nova |
-| Verificação | Parser, orçamento, porta R4 e três rotas antes de publicar a revisão |
+| Verificação | Comparação remota, parser, orçamento, porta R4 e três rotas antes de publicar |
 
 ## Próxima fila reservada
 
-`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-RUNTIME-REVIEW-046` permanece ACTIVE até que a captura runtime confirme a mitigação sem regressão de rota ou integração.
+`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-STABILIZATION-047` permanece ACTIVE até que a estabilização documental confirme a cadeia sem regressão ou o contrato canónico determine nova prioridade.
