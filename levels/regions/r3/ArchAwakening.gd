@@ -7,6 +7,7 @@ extends Node3D
 
 const EVENT_ID: String = "r3_arch_awakened"
 const INSCRIPTION_LORE_SCRIPT: Script = preload("res://levels/regions/r3/ArchInscriptionLore.gd")
+const ARCH_PATINA_SCRIPT: Script = preload("res://levels/regions/r3/ArchPatina.gd")
 const SILENT_CADENCE_DURATION: float = 1.35
 const SILENT_CADENCE_BEATS: int = 3
 const SILENT_CADENCE_SCALE_DELTA: float = 0.12
@@ -36,6 +37,7 @@ func _ready() -> void:
 	add_to_group("Persist")
 	_build_inscriptions()
 	inscription_lore = INSCRIPTION_LORE_SCRIPT.call("install", get_parent() as Node3D) as Node3D
+	ARCH_PATINA_SCRIPT.call("install", get_parent() as Node3D)
 	_build_trigger()
 	_build_effects()
 	_apply_awakened_state()
