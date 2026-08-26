@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-ORION-RETURN-031
+task_id: DEV4-R4-FOREST-MAJESTIC-MARGIN-032
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -77,6 +77,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-OUTER-SILHOUETTE-030` instalou `ForestOuterSilhouette.gd`: uma copa focal R4 existente sem colisor associado foi ajustada entre `Z=192–199` para consolidar a silhueta exterior. A prova `[ORIGEM_R4_OUTER_SILHOUETTE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-ORION-RETURN-031` instalou `ForestOrionReturn.gd`: uma copa focal R4 existente sem colisor associado foi ajustada entre `Z=152–158` para reforçar a leitura de retorno posterior a Orion sem invadir a clareira. A prova `[ORIGEM_R4_ORION_RETURN_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -108,10 +110,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Margem Orion | Após a clareira | ≥10 m | 0 luzes e colisores | Aprovada |
 | Aproximação Majestic | Antes do conector | ≥11 m | 0 luzes e colisores | Aprovada |
 | Silhueta exterior | Além do conector | ≥7 m | 0 luzes e colisores | Aprovada |
+| Retorno Orion | Após a clareira | ≥7,5 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-ORION-RETURN-031
+## Tarefa ativa — DEV4-R4-FOREST-MAJESTIC-MARGIN-032
 
-Reforçar a **leitura de retorno junto a Orion R4** com transformações estáticas de instâncias ambientais existentes, sem inserir elementos na faixa protegida `Z≈126–151`, criar paredes vegetais ou aproximar elementos do trilho. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+Refinar a **margem R4 anterior a Majestic** com transformações estáticas de instâncias ambientais existentes, sem criar paredes vegetais ou aproximar elementos do trilho e do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -124,4 +127,4 @@ Reforçar a **leitura de retorno junto a Orion R4** com transformações estáti
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-MAJESTIC-MARGIN-032` deverá refinar a margem anterior a Majestic sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-ORION-EDGE-033` deverá modular a borda posterior a Orion sem modificar a rota, a câmara ou os limites regionais.
