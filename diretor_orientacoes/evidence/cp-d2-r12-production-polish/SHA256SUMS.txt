@@ -1,0 +1,4 @@
+0e1cd0ba78e846789811c8db9e9637ae953eea3e211616b1cc65f8fc10b1c430  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r12-production-polish/gameplay-30s.mp4
+b5b0700b043418d46331f68cd0fc722f8bf300b32d8fe8355f6053e5ee29bdbb  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r12-production-polish/print-1600x900.png
+4afbcd42792d2108b8be051f61b26c961287a3ce8a1848c29b8f36a4a7cc1d2b  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r12-production-polish/qa.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  /home/ubuntu/origem-godot/ORIGEM_Base/ORIGEM_Integracao_Controlada_recovered/diretor_orientacoes/evidence/cp-d2-r12-production-polish/duration.txt
