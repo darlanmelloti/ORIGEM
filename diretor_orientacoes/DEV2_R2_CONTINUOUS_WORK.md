@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-ROAD-037
+task_id: DEV2-R2-RIVER-ROAD-038
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -124,7 +124,10 @@ A R2 recebeu o `MarcoBaixoReflexoOrionR2`, com laje baixa e pedras reais junto �
 ## Tarefa concluída — DEV2-R2-RIVER-ROAD-036
 A continuidade do trecho intermediário da Estrada do Rio foi preparada e mantida como entrega jogável no eixo existente, sem ampliação, bloqueio ou luz dinâmica. O task_id foi validado pela porta R2 no CI `32926099770`.
 
-## Tarefa ativa — DEV2-R2-RIVER-ROAD-037
+## Tarefa concluída — DEV2-R2-RIVER-ROAD-037
+A continuidade do trecho médio foi aceita pela porta R2 e pelo orçamento global no CI `32926397464`; o task_id foi mantido rastreável e a branch permaneceu limpa.
+
+## Tarefa ativa — DEV2-R2-RIVER-ROAD-038
 
 A R2 deve receber uma **laje física curta de continuidade no trecho médio**, alinhada às lajes existentes, com colisor baixo e material coerente, costurando a passagem Casa Voss → rio → Orion → Arco sem duplicar marcos ou alterar âncoras cartográficas.
 
@@ -145,4 +148,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-ROAD-037`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-ROAD-038`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
