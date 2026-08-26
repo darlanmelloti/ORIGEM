@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-SILHOUETTE-021
+task_id: DEV4-R4-FOREST-OUTER-RHYTHM-022
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -73,9 +73,9 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Equilíbrio da entrada | Antes da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Profundidade liminar | Fora da clareira | ≥9 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-SILHOUETTE-021
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-RHYTHM-022
 
-Auditar e ajustar apenas a silhueta exterior R4 usando instâncias ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+Refinar exclusivamente o ritmo lateral exterior R4 usando elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -88,4 +88,4 @@ Auditar e ajustar apenas a silhueta exterior R4 usando instâncias ambientais ex
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-RHYTHM-022` deverá rever o ritmo lateral exterior R4 sem modificar rota, câmara ou limites regionais.
+`DEV4-R4-FOREST-OUTER-DEPTH-023` deverá rever a profundidade exterior R4 sem modificar rota, câmara ou limites regionais.
