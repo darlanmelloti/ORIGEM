@@ -1,0 +1,1 @@
+route=majestic_to_lake evidence=/tmp/origem_r6_route_regression_pipeline_stable/r6-route-regression-20260826T102107Z/majestic_to_lake/majestic_to_lake_postload.png

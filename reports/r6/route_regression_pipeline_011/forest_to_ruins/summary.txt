@@ -1,0 +1,1 @@
+route=forest_to_ruins evidence=/tmp/origem_r6_route_regression_pipeline_stable/r6-route-regression-20260826T102107Z/forest_to_ruins/forest_to_ruins_postload.png

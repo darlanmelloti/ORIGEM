@@ -1,0 +1,1 @@
+[ORIGEM_REGIONAL_RUNTIME_CAPTURE_OK] route=forest_to_majestic evidence=reports/runtime_composition_20260826/r5_forest_to_majestic/forest_to_majestic_postload.png settle_seconds=12

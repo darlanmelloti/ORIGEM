@@ -1,0 +1,4 @@
+routes=forest_to_ruins majestic_to_lake ruins_arrival 
+forest_to_ruins: [ORIGEM_R6_RUNTIME_COMPOSITION] water=(60.0, 0.82, 252.0) stela=(52.0, 2.27, 231.0) debris=9 arrival=3 dome=(60.0, 0.72, 252.0) pillars=8 landmarks=3 lights=0 colliders=0
+majestic_to_lake: [ORIGEM_R6_RUNTIME_COMPOSITION] water=(60.0, 0.82, 252.0) stela=(52.0, 2.27, 231.0) debris=9 arrival=3 dome=(60.0, 0.72, 252.0) pillars=8 landmarks=3 lights=0 colliders=0
+ruins_arrival: [ORIGEM_R6_RUNTIME_COMPOSITION] water=(60.0, 0.82, 252.0) stela=(52.0, 2.27, 231.0) debris=9 arrival=3 dome=(60.0, 0.72, 252.0) pillars=8 landmarks=3 lights=0 colliders=0

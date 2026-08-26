@@ -62,7 +62,12 @@ if [ "$spawned" -ne 1 ]; then
   echo "A rota $ROUTE não confirmou spawn dentro do limite de 35 segundos." >&2
   exit 1
 fi
-sleep 4
+CAPTURE_SETTLE_SECONDS="${ORIGEM_QA_CAPTURE_SETTLE_SECONDS:-12}"
+if ! [[ "$CAPTURE_SETTLE_SECONDS" =~ ^[0-9]+$ ]] || [ "$CAPTURE_SETTLE_SECONDS" -lt 4 ]; then
+  echo "Tempo de estabilização de captura inválido: $CAPTURE_SETTLE_SECONDS" >&2
+  exit 2
+fi
+sleep "$CAPTURE_SETTLE_SECONDS"
 WINDOW_ID="$(DISPLAY="$DISPLAY_NUM" xdotool search --onlyvisible --name 'ORIGEM' 2>/dev/null | tail -n 1 || true)"
 if [ -z "$WINDOW_ID" ]; then
   echo 'Janela ORIGEM não encontrada após o spawn R6.' >&2

@@ -1,0 +1,1 @@
+[ORIGEM_REGIONAL_RUNTIME_CAPTURE_OK] route=majestic_to_lake evidence=reports/dev7/visual_playable_physics_baseline_001/majestic_to_lake/majestic_to_lake_postload.png settle_seconds=12

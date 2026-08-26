@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
+task_id: DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -113,19 +113,31 @@ A sequência pós-publicação R6 adicionou apenas instrumentação QA e documen
 
 A baseline versionada dos vetores `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` foi integrada com tolerâncias explícitas de desvio. A extração, o ficheiro de baseline e a verificação são exclusivamente QA e não alteraram produção, âncoras, água, luz, física, spawn, alvo, velocidade, câmara ou corredor físico.
 
-## Tarefa ativa — DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
+## Entrega aprovada — DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
 
-Criar um orquestrador QA único que execute, em sequência reprodutível, a matriz de captura das rotas, a extração da telemetria e a verificação da baseline. O pipeline deve aceitar um diretório de evidência e não alterar a experiência de jogo.
+A pipeline `run_r6_route_regression_pipeline.sh` executou a matriz de captura, a extração e a baseline das três rotas numa única sequência reprodutível. A execução preservada em `reports/r6/route_regression_pipeline_011/` aprovou as três etapas com desvio máximo `0.000 m` sob tolerância `0.050 m`, sem alterar produção, rotas, água, luz, física ou âncoras.
+
+## Entrega aprovada — DEV6-R6-ROUTE-REGRESSION-REPORT-012
+
+A revisão do relatório confirmou as três capturas runtime, logs, telemetria, marcador final da pipeline e somas SHA-256 consistentes. A evidência foi preservada em `reports/r6/ROUTE_REGRESSION_REPORT_012.md`; não houve alteração de produção nesta entrega.
+
+## Entrega aprovada — DEV6-R6-VISUAL-DEBT-ASSESSMENT-013
+
+A avaliação visual confirmou que a leitura de protótipo se concentra no plano médio da chegada R6: terreno aberto, lajes isoladas e vestígios arqueológicos pouco agrupados. A evidência foi preservada em `reports/r6/VISUAL_DEBT_ASSESSMENT_013.md`; não houve alteração de produção.
+
+## Tarefa ativa — DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
+
+Ajustar de forma estática escala e orientação de três a cinco vestígios arqueológicos R6 já existentes no plano médio da chegada. A entrega deve aumentar a massa composicional sem deslocar as posições-base, água, handoff, rotas, luzes ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Não alterar `ForestLakeRegion.gd`, `TempleLevel.gd`, R7–R12 ou âncoras cartográficas |
-| Rotas | Não modificar spawn, alvo, velocidade, `look_at` ou corredor físico |
-| Água e luz | Sem shader, painel, emissão ou `Light3D` novo |
+| Alvos | Apenas vestígios R6 existentes; nenhum nó, mesh, material, colisor ou luz nova |
+| Espacial | Posições-base preservadas; somente escala/rotação local estática |
+| Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` imutáveis |
+| Água e luz | Exatamente quatro luzes; sem shader, painel ou emissão adicional |
 | Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de lajes |
-| QA | Executar matriz, extração e baseline com falha imediata em qualquer etapa |
-| Validação | Parser, orçamento R6, handoff e três rotas aprovados antes do PR |
+| Validação | Prova específica, parser, orçamento R6, handoff e três rotas aprovados antes de publicar |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O pipeline pode avançar apenas após produzir capturas, telemetria e baseline aprovadas numa execução completa; a tarefa seguinte deve substituir `DEV6-R6-ROUTE-REGRESSION-PIPELINE-011` em estado `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. A entrega deve avançar para uma tarefa R6 rastreável somente depois da QA cumulativa e da evidência visual aplicável.

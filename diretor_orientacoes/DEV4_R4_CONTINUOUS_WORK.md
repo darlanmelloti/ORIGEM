@@ -6,14 +6,14 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-POST-PUBLISH-REVIEW-041
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
 
 ## Base oficial e fronteira
 
-A base de trabalho é o repositório oficial do ORIGEM, branch canónica `dev4/r4-dense-forest`, sincronizada com `integration/r1-r6-sprint1`. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
+A base de trabalho é o repositório oficial do ORIGEM, a partir de `integration/r1-r6-sprint1`. A branch canónica Dev4 continua `dev4/r4-dense-forest`; esta revisão documental foi publicada por uma branch auxiliar derivada da integração. A branch canónica não é fonte de produção até ser reconciliada separadamente, pois contém trabalho concorrente não reauditorado. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
 
 O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mínima em `levels/ForestLakeRegion.gd` é permitida apenas para instalar módulos R4 aditivos; não editar âncoras, `RiverRoadJourney.gd`, módulos R1–R3/R5–R6 ou sistemas transversais protegidos.
 
@@ -117,19 +117,52 @@ O closeout documental consolidou a cadeia R4 pronta para integração futura. As
 
 A cadeia exterior R4 foi integrada em *fast-forward* no commit remoto `5e6445b` após reconciliação segura com a integração atual. As portas R4, R5 e R6, as três rotas R4 e a auditoria global de luz foram aprovadas antes da publicação; a CI comum integrada também concluiu com sucesso. Não houve alteração adicional ao mundo nesta entrega documental.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-POST-PUBLISH-REVIEW-041
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-POST-PUBLISH-REVIEW-041
 
-Consolidar uma revisão pós-publicação exclusivamente documental da R4 integrada, cruzando o commit remoto, a CI comum e os limites já validados. Não criar ou alterar elementos do mundo enquanto a revisão estiver em curso.
+A revisão documental pós-publicação confirmou o estado integrado sem regressão de clareira, corredor, rotas, luz ou física. A evidência foi preservada em `reports/r4/POST_PUBLISH_REVIEW_041.md`; não houve alteração ao mundo nesta entrega.
+
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-ENVIRONMENTAL-REVIEW-042
+
+A auditoria confirmou que os elementos exteriores existentes já receberam transformações estáticas extensas e que uma nova variação sem evidência runtime criaria risco cumulativo sem ganho demonstrável. A evidência foi preservada em `reports/r4/ENVIRONMENTAL_REVIEW_042.md`; não houve alteração de produção.
+
+## Entrega aprovada — DEV4-R4-RUNTIME-COMPOSITION-CAPTURE-043
+
+As capturas pós-carregamento das duas rotas R4 confirmaram composição runtime e revelaram uma superfície opaca clara na aproximação `arch_to_forest`. A evidência foi preservada em `reports/r4/RUNTIME_COMPOSITION_CAPTURE_043.md`; não houve alteração de produção.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
+
+Determinar, por isolamento QA, se a superfície opaca observada provém da geometria ou do material do afluente cartográfico. A tarefa não pode alterar o material partilhado, a água R6, as âncoras, as rotas, a câmara, a luz ou a física de produção.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Apenas evidência documental e verificação de estado; não criar módulo ou montagem R4 |
+| Produção | Nenhuma modificação a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
+| Isolamento | Prova/captura de teste fora da montagem de produção |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
-| Integração R5 | Não alterar módulos, ativos, lógica, iluminação ou acampamento de Dev5 |
-| Dinâmica | Zero luz, colisores, partículas, vento, pós-processamento ou animação |
-| Verificação | Confirmar commit integrado, CI comum, porta R4 e três rotas sem alteração de produção |
+| Integração | Preservar R5 e R6; tratar material partilhado como responsabilidade conjunta |
+| Verificação | Parser, orçamento, porta R4 e três rotas antes de propor correção |
 
-## Próxima fila reservada
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
 
-`DEV4-R4-FOREST-OUTER-POST-PUBLISH-REVIEW-041` permanece ACTIVE até que a revisão documental confirme o estado integrado e avance para uma nova tarefa R4 rastreável.
+O diagnóstico foi concluído sem alterar produção. O isolamento confirmou que a faixa deriva de uma lâmina visual ampla combinada com material lacustre opaco e partilhado; transparência, cota, largura e `cull_back` foram testados, rejeitados e revertidos. A evidência e a revisão comparativa foram integradas nos relatórios `CARTOGRAPHIC_INLET_ISOLATION_044.md` e `CARTOGRAPHIC_INLET_VARIANT_REVIEW_047.md`; a porta R4 e as três rotas foram aprovadas.
+
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-EVIDENCE-REVIEW-049
+
+A revisão QA consolidou a matriz de responsabilidades R4/R6 e confirmou que transparência, cota, largura e `cull_back` permanecem rejeitados. A evidência em `reports/r4/CARTOGRAPHIC_INLET_EVIDENCE_REVIEW_049.md` não autoriza produção: qualquer intervenção futura precisa de fonte causal, aprovação conjunta e prova runtime.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+
+Inventariar em QA os ativos e margens já existentes fora do corredor R4 para determinar se existe alguma candidata modular elegível para futura prova. A tarefa limita-se a inventário espacial, distância ao trilho, propriedade R4/R6 e roteiro de captura; não cria, move, instancia, materializa ou oculta qualquer nó.
+
+| Critério | Obrigatório |
+|---|---|
+| Produção | Zero modificações a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
+| Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` como microajustes |
+| R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
+| R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
+| Resultado | Inventário de elegibilidade; não é proposta de produção |
+| Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
+
+## Sucessão obrigatória
+
+Há exatamente uma tarefa ACTIVE. Ao concluir a auditoria de elegibilidade, Dev4 deve avançar para uma nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
