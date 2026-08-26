@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-QA-017
+task_id: DEV2-R2-RIVER-QA-018
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -64,20 +64,23 @@ O verificador confirmou a completude dos critérios, a origem `RiverRoadJourney.
 ## Tarefa concluída — DEV2-R2-RIVER-QA-016
 O verificador confirmou o vocabulário mínimo de rota, reflexo, ponte e luz; a prova passou no CI.
 
-## Tarefa ativa — DEV2-R2-RIVER-QA-017
+## Tarefa concluída — DEV2-R2-RIVER-QA-017
+O verificador confirmou as restrições de Orion, água não emissiva e ponte não dominante; a prova passou no CI.
 
-O verificador contratual da R2 deve confirmar as **restrições narrativas e de renderização**: reflexo orientado para Orion, água não emissiva e ponte sem competir com o Arco. Esta tarefa é somente de QA e não altera geometria, navegação ou cenas.
+## Tarefa ativa — DEV2-R2-RIVER-QA-018
+
+O verificador contratual da R2 deve confirmar a **consistência entre a descrição do contrato e os critérios de aceitação**, garantindo que o contrato continue declarando estrada, margens, ponte e reflexo azul. Esta tarefa é somente de QA e não altera geometria, navegação ou cenas.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
 | Cartografia | Validar as três rotas no contrato sem mover estrada, Arco ou âncoras cartográficas |
-| Acesso | Confirmar três rotas, origem, limites e critérios sobre reflexo, Orion, água não emissiva e Arco |
+| Acesso | Confirmar três rotas, origem, limites e correspondência entre descrição e critérios |
 | Desempenho | Zero luz dinâmica, partículas e emissão persistente; reutilizar pedra e fetos reais já presentes |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
 | Narrativa | A visada deve orientar o retorno à Casa Voss sem competir com Orion ou o Arco |
-| Verificação | Executar o verificador contratual e acrescentar `[ORIGEM_R2_RIVER_QA_017_OK]` antes de abrir PR |
+| Verificação | Executar o verificador contratual e acrescentar `[ORIGEM_R2_RIVER_QA_018_OK]` antes de abrir PR |
 
 ## Fecho e avanço obrigatório
 
@@ -85,4 +88,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-QA-017`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-QA-018`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
