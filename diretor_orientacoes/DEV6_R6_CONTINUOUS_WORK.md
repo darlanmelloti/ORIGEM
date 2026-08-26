@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-ROUTE-TELEMETRY-BASELINE-010
+task_id: DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -27,14 +27,11 @@ O orçamento R6 é exactamente quatro luzes: duas luzes mundiais da bacia, preen
 | `DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007` | Captura pós-carregamento repetível e inventário runtime da composição R6. |
 | `DEV6-R6-CAPTURE-MATRIX-008` | Três rotas R6 com capturas 1600×900 e inventários idênticos de composição. |
 | `DEV6-R6-ROUTE-TARGET-TELEMETRY-009` | Extração QA de vetores de aproximação a partir dos logs existentes, sem modificar runtime. |
+| `DEV6-R6-ROUTE-TELEMETRY-BASELINE-010` | Baseline versionada com tolerância de `0,050 m`; desvio controlado de `0,200 m` rejeitado. |
 
-## Entrega aprovada — DEV6-R6-ROUTE-TARGET-TELEMETRY-009
+## Tarefa ativa — DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
 
-A sonda `extract_r6_route_telemetry.sh` registrou os vetores horizontais aprovados: `forest_to_ruins` com `31.288 m`, `majestic_to_lake` com `85.107 m` e `ruins_arrival` com `50.257 m`. A extração falha em log ausente, formato inválido ou vetor nulo e preserva integralmente o jogo.
-
-## Tarefa ativa — DEV6-R6-ROUTE-TELEMETRY-BASELINE-010
-
-Consolidar os vetores aprovados de `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` como baseline QA versionada e criar uma verificação de desvio tolerante. A verificação deve comparar somente telemetria runtime já emitida, sem alterar o jogo.
+Criar um único orquestrador QA que execute captura da matriz de rotas, extração da telemetria e verificação da baseline em sequência reprodutível. O pipeline deve aceitar diretório de evidência e não alterar a experiência de jogo.
 
 | Critério | Obrigatório |
 |---|---|
@@ -42,9 +39,9 @@ Consolidar os vetores aprovados de `forest_to_ruins`, `majestic_to_lake` e `ruin
 | Rotas | Não modificar spawn, alvo, velocidade, `look_at` ou corredor físico |
 | Água e luz | Sem shader, painel, emissão ou `Light3D` novo |
 | Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de lajes |
-| QA | Baseline e tolerância explícitas; falhar em log ausente ou desvio não permitido |
+| QA | Executar matriz, extração e baseline com falha imediata em qualquer etapa |
 | Validação | Parser, orçamento R6, handoff e três rotas aprovados antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-ROUTE-TELEMETRY-BASELINE-010` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-ROUTE-REGRESSION-PIPELINE-011` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
