@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-THRESHOLD-READING-016
+task_id: DEV4-R4-FOREST-OUTER-PUBLISH-040
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -47,6 +47,14 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-EDGE-RHYTHM-015` instalou `ForestEdgeRhythm.gd`: uma pedra húmida R4 existente foi ajustada entre `Z=174–182` para manter a leitura lateral junto ao conector Majestic. A prova `[ORIGEM_R4_EDGE_RHYTHM_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-THRESHOLD-READING-016` instalou `ForestThresholdReading.gd`: duas raízes R4 existentes foram ajustadas entre `Z=182–190` antes do conector Majestic. A prova `[ORIGEM_R4_THRESHOLD_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-ENTRY-BALANCE-017` instalou `ForestEntryBalance.gd`: dois fetos R4 existentes foram ajustados entre `Z=116–125,5`, antes da clareira Orion. A prova `[ORIGEM_R4_ENTRY_BALANCE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-LIMINAL-DEPTH-018` instalou `ForestLiminalDepth.gd`: uma árvore R4 existente sem colisor associado foi ajustada entre `Z=175–181` para reforçar a profundidade lateral antes do conector Majestic. A prova `[ORIGEM_R4_LIMINAL_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-RHYTHM-022` instalou `ForestOuterRhythm.gd`: oito árvores R4 existentes sem colisor associado foram ajustadas estaticamente na faixa exterior `Z=181–190`, com orientação e escala laterais subtis. A garantia cumulativa de corredor foi elevada a `≥8 m`; não foram criados nós, luzes, colisores, partículas, vento, animação, shaders, pós-processamento, interface ou conteúdo narrativo explícito. A prova `[ORIGEM_R4_OUTER_RHYTHM_OK]`, a silhueta exterior cumulativa, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -63,20 +71,61 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Margem ambiental | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Composição | Física preservada | ≥6 m | 0 luzes e colisores | Aprovada |
 | Cadência de borda | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
+| Leitura do limiar | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
+| Equilíbrio da entrada | Antes da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
+| Profundidade liminar | Fora da clareira | ≥9 m | 0 luzes e colisores | Aprovada |
+| Ritmo exterior | Fora da clareira | ≥8 m | 0 luzes e colisores | Aprovada |
+| Profundidade exterior | Fora da clareira | ≥8 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-THRESHOLD-READING-016
+`DEV4-R4-FOREST-OUTER-DEPTH-023` instalou `ForestOuterDepth.gd`: três árvores R4 já aprovadas pelo ritmo exterior receberam apenas variação estática de escala e orientação. As posições-base, árvores com colisor, clareira, lajes e corredor de `≥8 m` foram preservados. A prova `[ORIGEM_R4_OUTER_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
-Consolidar a **leitura do limiar R4** com transformações estáticas de detalhes ambientais existentes antes do conector Majestic. A tarefa deve manter a direção visual e o corredor livre sem alterar rota, câmara, lajes, clareira Orion, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface ou narrativa explícita.
+`DEV4-R4-FOREST-OUTER-LATERAL-BALANCE-024` instalou `ForestOuterLateralBalance.gd`: duas árvores exteriores já aprovadas pelo ritmo, mas não usadas pela profundidade, receberam só escala e orientação estáticas. As bases espaciais e o corredor de `≥8 m` foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-VISTA-025` instalou `ForestOuterVista.gd`: duas árvores exteriores existentes, sem profundidade ou equilíbrio lateral prévios, receberam variação estática de escala e orientação. As bases e o corredor de `≥8 m` foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-RHYTHM-FINAL-026` instalou `ForestOuterRhythmFinal.gd`: duas árvores de vista exterior receberam variação estática final de escala e orientação. A clareira, as bases, o corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-CLOSURE-027` instalou `ForestOuterClosure.gd`: duas árvores exteriores da cadência final receberam variação estática de fecho. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-READABILITY-FINAL-028` instalou `ForestOuterReadabilityFinal.gd`: duas árvores exteriores do fecho receberam variação estática de legibilidade. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-OBSERVATION-029` instalou `ForestOuterObservation.gd`: duas árvores exteriores da legibilidade final receberam variação estática de observação. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-REVIEW-030` instalou `ForestOuterReview.gd`: duas árvores exteriores da observação receberam variação estática de revisão. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-CONSOLIDATION-031` instalou `ForestOuterConsolidation.gd`: duas árvores exteriores da revisão receberam variação estática de consolidação. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-STABILIZATION-032` instalou `ForestOuterStabilization.gd`: duas árvores exteriores da consolidação receberam variação estática de estabilização. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-RECONCILIATION-033` instalou `ForestOuterReconciliation.gd`: duas árvores exteriores da estabilização receberam variação estática de reconciliação. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-CONSISTENCY-034` instalou `ForestOuterConsistency.gd`: duas árvores exteriores da reconciliação receberam variação estática de consistência. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-CHECK-035` instalou `ForestOuterCheck.gd`: duas árvores exteriores da consistência receberam variação estática de verificação. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-FINALIZATION-036` instalou `ForestOuterFinalization.gd`: duas árvores exteriores da verificação receberam variação estática de finalização. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
+
+`DEV4-R4-FOREST-OUTER-ARCHIVE-037` consolidou a validação documental da cadeia exterior R4. A porta cumulativa e as três rotas foram aprovadas, com clareira Orion, corredor de `≥8 m`, bases, luzes e física preservados; não foi feita alteração adicional ao mundo.
+
+`DEV4-R4-FOREST-OUTER-POSTCHECK-038` confirmou documentalmente, com a porta R4 aprovada, que não houve regressão após o arquivo. Clareira, corredor de `≥8 m`, rotas, luzes e física permanecem preservados; não foi feita alteração adicional ao mundo.
+
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-CLOSEOUT-039
+
+O closeout documental consolidou a cadeia R4 pronta para integração futura. As portas, rotas, clareira Orion, corredor de `≥8 m`, orçamento e bundles foram verificados; não houve alteração adicional ao mundo.
+
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-PUBLISH-040
+
+Preparar exclusivamente a publicação segura da cadeia exterior R4 quando o canal oficial recuperar. Antes de qualquer escrita remota, comparar ahead/behind, preservar commits exclusivos, usar a integração ensaiada e nunca reescrever a branch canónica.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Novo módulo em `levels/regions/r4/`, montagem mínima e QA R4 |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
-| Corredor | Nenhum elemento a menos de 6 m do trilho físico |
+| Corredor | Nenhum elemento a menos de 8 m do trilho físico |
 | Integração R5 | Não alterar módulos, ativos, lógica, iluminação ou acampamento de Dev5 |
 | Dinâmica | Zero luz, colisores, partículas, vento, pós-processamento ou animação |
 | Verificação | Parser, prova própria, porta R4 e três rotas antes de publicar |
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-ENTRY-BALANCE-017` deverá reequilibrar a entrada R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-OUTER-PUBLISH-040` permanece ACTIVE até à recuperação da autenticação oficial; enquanto o canal estiver inválido, manter bundles, ensaios e gates atualizados sem modificar rota, câmara ou limites regionais.

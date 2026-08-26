@@ -35,11 +35,66 @@ const R4_FOREST_TRAIL_PACING_SCRIPT: Script = preload("res://levels/regions/r4/F
 const R4_FOREST_MARGIN_CONTINUITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestMarginContinuity.gd")
 const R4_FOREST_APPROACH_COMPOSITION_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachComposition.gd")
 const R4_FOREST_EDGE_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestEdgeRhythm.gd")
+const R4_FOREST_THRESHOLD_READING_SCRIPT: Script = preload("res://levels/regions/r4/ForestThresholdReading.gd")
+const R4_FOREST_ENTRY_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestEntryBalance.gd")
+const R4_FOREST_LIMINAL_DEPTH_SCRIPT: Script = preload("res://levels/regions/r4/ForestLiminalDepth.gd")
+const R4_FOREST_OUTER_MARGIN_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterMargin.gd")
+const R4_FOREST_CANOPY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestCanopyEdge.gd")
+const R4_FOREST_OUTER_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterSilhouette.gd")
+const R4_FOREST_OUTER_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterRhythm.gd")
+const R4_FOREST_OUTER_DEPTH_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterDepth.gd")
+const R4_FOREST_OUTER_LATERAL_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterLateralBalance.gd")
+const R4_FOREST_OUTER_VISTA_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterVista.gd")
+const R4_FOREST_OUTER_RHYTHM_FINAL_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterRhythmFinal.gd")
+const R4_FOREST_OUTER_CLOSURE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterClosure.gd")
+const R4_FOREST_OUTER_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterReadabilityFinal.gd")
+const R4_FOREST_OUTER_OBSERVATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterObservation.gd")
+const R4_FOREST_OUTER_REVIEW_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterReview.gd")
+const R4_FOREST_OUTER_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterConsolidation.gd")
+const R4_FOREST_OUTER_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterStabilization.gd")
+const R4_FOREST_OUTER_RECONCILIATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterReconciliation.gd")
+const R4_FOREST_OUTER_CONSISTENCY_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterConsistency.gd")
+const R4_FOREST_OUTER_CHECK_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterCheck.gd")
+const R4_FOREST_OUTER_FINALIZATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterFinalization.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
 const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
+const R5_MAJESTIC_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampArrivalReading.gd")
+const R5_MAJESTIC_EDGE_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampEdgeReading.gd")
+const R5_MAJESTIC_VISTA_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampVistaReading.gd")
+const R5_MAJESTIC_FOCAL_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampFocalReading.gd")
+const R5_MAJESTIC_RHYTHM_FINAL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampRhythmFinal.gd")
+const R5_MAJESTIC_CLOSURE_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampClosure.gd")
+const R5_MAJESTIC_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReadabilityFinal.gd")
+const R5_MAJESTIC_OBSERVATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampObservation.gd")
+const R5_MAJESTIC_REVIEW_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReview.gd")
+const R5_MAJESTIC_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampConsolidation.gd")
+const R5_MAJESTIC_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampStabilization.gd")
+const R5_MAJESTIC_RECONCILIATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReconciliation.gd")
+const R5_MAJESTIC_CONSISTENCY_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampConsistency.gd")
+const R5_MAJESTIC_CHECK_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampCheck.gd")
+const R5_MAJESTIC_FINALIZATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampFinalization.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
+const R6_WATERLINE_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6WaterlineReading.gd")
+const R6_BASIN_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinArrivalReading.gd")
+const R6_BASIN_VISTA_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinVistaReading.gd")
+const R6_OUTER_WATERLINE_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r6/R6OuterWaterlineSilhouette.gd")
+const R6_EASTERN_MARGIN_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReading.gd")
+const R6_EASTERN_MARGIN_DEPTH_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginDepth.gd")
+const R6_EASTERN_MARGIN_LATERAL_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginLateralBalance.gd")
+const R6_EASTERN_MARGIN_VISTA_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginVista.gd")
+const R6_EASTERN_MARGIN_RHYTHM_FINAL_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginRhythmFinal.gd")
+const R6_EASTERN_MARGIN_CLOSURE_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginClosure.gd")
+const R6_EASTERN_MARGIN_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReadabilityFinal.gd")
+const R6_EASTERN_MARGIN_OBSERVATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginObservation.gd")
+const R6_EASTERN_MARGIN_REVIEW_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReview.gd")
+const R6_EASTERN_MARGIN_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginConsolidation.gd")
+const R6_EASTERN_MARGIN_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginStabilization.gd")
+const R6_EASTERN_MARGIN_RECONCILIATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReconciliation.gd")
+const R6_EASTERN_MARGIN_CONSISTENCY_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginConsistency.gd")
+const R6_EASTERN_MARGIN_CHECK_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginCheck.gd")
+const R6_EASTERN_MARGIN_FINALIZATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginFinalization.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -68,6 +123,7 @@ func _ready() -> void:
 	_build_cartographic_river_inlet()
 	_build_shore_access_steps()
 	_build_basin_arrival_frame()
+	_build_r6_basin_arrival_reading()
 	_build_majestic_lake_transition()
 	_build_basin_approach_silhouettes()
 	_build_cartographic_lake_vistas()
@@ -86,8 +142,44 @@ func _ready() -> void:
 	_build_r4_margin_continuity()
 	_build_r4_approach_composition()
 	_build_r4_edge_rhythm()
+	_build_r4_threshold_reading()
+	_build_r4_entry_balance()
+	_build_r4_liminal_depth()
+	_build_r4_outer_margin()
+	_build_r4_canopy_edge()
+	_build_r4_outer_silhouette()
+	_build_r4_outer_rhythm()
+	_build_r4_outer_depth()
+	_build_r4_outer_lateral_balance()
+	_build_r4_outer_vista()
+	_build_r4_outer_rhythm_final()
+	_build_r4_outer_closure()
+	_build_r4_outer_readability_final()
+	_build_r4_outer_observation()
+	_build_r4_outer_review()
+	_build_r4_outer_consolidation()
+	_build_r4_outer_stabilization()
+	_build_r4_outer_reconciliation()
+	_build_r4_outer_consistency()
+	_build_r4_outer_check()
+	_build_r4_outer_finalization()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
+	_build_r5_majestic_arrival_reading()
+	_build_r5_majestic_edge_reading()
+	_build_r5_majestic_vista_reading()
+	_build_r5_majestic_focal_reading()
+	_build_r5_majestic_rhythm_final()
+	_build_r5_majestic_closure()
+	_build_r5_majestic_readability_final()
+	_build_r5_majestic_observation()
+	_build_r5_majestic_review()
+	_build_r5_majestic_consolidation()
+	_build_r5_majestic_stabilization()
+	_build_r5_majestic_reconciliation()
+	_build_r5_majestic_consistency()
+	_build_r5_majestic_check()
+	_build_r5_majestic_finalization()
 	_build_r5_majestic_artifact_trail()
 	_build_r5_majestic_wind_reading()
 	_build_majestic_connector()
@@ -97,12 +189,112 @@ func _ready() -> void:
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
 	_build_waterline_reading()
+	_build_r6_eastern_margin_reading()
+	_build_r6_eastern_margin_depth()
+	_build_r6_eastern_margin_lateral_balance()
+	_build_r6_eastern_margin_vista()
+	_build_r6_eastern_margin_rhythm_final()
+	_build_r6_eastern_margin_closure()
+	_build_r6_eastern_margin_readability_final()
+	_build_r6_eastern_margin_observation()
+	_build_r6_eastern_margin_review()
+	_build_r6_eastern_margin_consolidation()
+	_build_r6_eastern_margin_stabilization()
+	_build_r6_eastern_margin_reconciliation()
+	_build_r6_eastern_margin_consistency()
+	_build_r6_eastern_margin_check()
+	_build_r6_eastern_margin_finalization()
 	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
+	_build_r6_basin_vista_reading()
 	_build_riparian_margin()
+	_build_r6_outer_waterline_silhouette()
 	_build_lakeside_focal_vegetation()
 	_build_majestic_ruins_approach_grounding()
 	_apply_riparian_fern_alpha_test()
+
+func _build_r5_majestic_edge_reading() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_error("[ORIGEM_R5] Acampamento indisponível para leitura lateral.")
+		return
+	if int(R5_MAJESTIC_EDGE_READING_SCRIPT.call("apply", camp)) != 3:
+		push_error("[ORIGEM_R5] Não foi possível ajustar os rolos laterais existentes.")
+
+func _build_r5_majestic_vista_reading() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_VISTA_READING_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar as costuras de vista existentes.")
+
+func _build_r5_majestic_focal_reading() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_FOCAL_READING_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar as caixas focais existentes.")
+
+func _build_r5_majestic_rhythm_final() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_RHYTHM_FINAL_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a cadência final das caixas existentes.")
+
+func _build_r5_majestic_closure() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_CLOSURE_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível fechar a leitura das caixas existentes.")
+
+func _build_r5_majestic_readability_final() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_READABILITY_FINAL_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a legibilidade final das caixas existentes.")
+
+func _build_r5_majestic_observation() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_OBSERVATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a observação das caixas existentes.")
+
+func _build_r5_majestic_review() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_REVIEW_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a revisão das caixas existentes.")
+
+func _build_r5_majestic_consolidation() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_CONSOLIDATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a consolidação das caixas existentes.")
+
+func _build_r5_majestic_stabilization() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_STABILIZATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a estabilização das caixas existentes.")
+
+func _build_r5_majestic_reconciliation() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_RECONCILIATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a reconciliação das caixas existentes.")
+
+func _build_r5_majestic_consistency() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_CONSISTENCY_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a consistência das caixas existentes.")
+
+func _build_r5_majestic_check() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_CHECK_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a verificação das caixas existentes.")
+
+func _build_r5_majestic_finalization() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_FINALIZATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a finalização das caixas existentes.")
+
+func _build_r5_majestic_arrival_reading() -> void:
+	# DEV5-R5-CAMP-ARRIVAL-READING-004: relê apenas as duas bases de mastro existentes na entrada do acampamento.
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_error("[ORIGEM_R5] Acampamento indisponível para leitura estática da chegada.")
+		return
+	var adjusted: int = int(R5_MAJESTIC_ARRIVAL_READING_SCRIPT.call("apply", camp))
+	if adjusted != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar as duas bases existentes da chegada Majestic.")
 
 func _apply_riparian_fern_alpha_test() -> void:
 	# CP-CARTO-50: os fetos ribeirinhos não fizeram parte do teste anterior; preserva-se textura PBR e aplica-se apenas o corte alfa compatível.
@@ -445,6 +637,127 @@ func _build_r4_edge_rhythm() -> void:
 	if rhythm == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a cadência da borda florestal.")
 
+func _build_r4_threshold_reading() -> void:
+	# DEV4-R4-FOREST-THRESHOLD-READING-016: ajusta raízes R4 existentes antes do conector, sem tocar em sistemas Dev5.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var reading: R4ForestThresholdReading = R4_FOREST_THRESHOLD_READING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestThresholdReading
+	if reading == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a leitura do limiar florestal.")
+
+func _build_r4_entry_balance() -> void:
+	# DEV4-R4-FOREST-ENTRY-BALANCE-017: ajusta apenas fetos R4 existentes antes da clareira Orion.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var balance: R4ForestEntryBalance = R4_FOREST_ENTRY_BALANCE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestEntryBalance
+	if balance == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o equilíbrio da entrada florestal.")
+
+func _build_r4_liminal_depth() -> void:
+	# DEV4-R4-FOREST-LIMINAL-DEPTH-018: ajusta árvores R4 sem colisão antes do conector, preservando a margem e a física.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var depth: R4ForestLiminalDepth = R4_FOREST_LIMINAL_DEPTH_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestLiminalDepth
+	if depth == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a profundidade liminar florestal.")
+
+func _build_r4_outer_margin() -> void:
+	# DEV4-R4-FOREST-OUTER-MARGIN-019: desloca raízes existentes para a margem exterior, sem criar conteúdo ou tocar no conector Majestic.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var margin: R4ForestOuterMargin = R4_FOREST_OUTER_MARGIN_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestOuterMargin
+	if margin == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a margem exterior da floresta.")
+
+func _build_r4_canopy_edge() -> void:
+	# DEV4-R4-FOREST-CANOPY-EDGE-020: ajusta copas focais existentes na borda exterior, sem tocar em colisores ou no conector Majestic.
+	var canopy_root: Node = get_node_or_null("CopasFocaisDaFlorestaDensa")
+	var edge: R4ForestCanopyEdge = R4_FOREST_CANOPY_EDGE_SCRIPT.call("install", self, Callable(self, "_path_x"), canopy_root) as R4ForestCanopyEdge
+	if edge == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a cadência de copas da borda.")
+
+func _build_r4_outer_silhouette() -> void:
+	# DEV4-R4-FOREST-OUTER-SILHOUETTE-021: reposiciona árvores R4 existentes sem colisores na margem exterior.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var silhouette: R4ForestOuterSilhouette = R4_FOREST_OUTER_SILHOUETTE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestOuterSilhouette
+	if silhouette == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a silhueta exterior da floresta.")
+
+func _build_r4_outer_rhythm() -> void:
+	# DEV4-R4-FOREST-OUTER-RHYTHM-022: ajusta árvores existentes sem colisor na faixa exterior, sem tocar na rota ou no conector Majestic.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var rhythm: R4ForestOuterRhythm = R4_FOREST_OUTER_RHYTHM_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestOuterRhythm
+	if rhythm == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o ritmo exterior da floresta.")
+
+func _build_r4_outer_depth() -> void:
+	# DEV4-R4-FOREST-OUTER-DEPTH-023: diferencia apenas planos estáticos em árvores já aprovadas pelo ritmo exterior.
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	var adjusted: int = int(R4_FOREST_OUTER_DEPTH_SCRIPT.call("apply", forest_root))
+	if adjusted != 3:
+		push_error("[ORIGEM_R4] Não foi possível ajustar as três árvores de profundidade exterior.")
+
+func _build_r4_outer_lateral_balance() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_LATERAL_BALANCE_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível equilibrar as duas árvores exteriores.")
+
+func _build_r4_outer_vista() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_VISTA_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar as duas árvores de vista exterior.")
+
+func _build_r4_outer_rhythm_final() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_RHYTHM_FINAL_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a cadência final exterior.")
+
+func _build_r4_outer_closure() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_CLOSURE_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível fechar a leitura exterior estática.")
+
+func _build_r4_outer_readability_final() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_READABILITY_FINAL_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a legibilidade exterior final.")
+
+func _build_r4_outer_observation() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_OBSERVATION_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a observação exterior estática.")
+
+func _build_r4_outer_review() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_REVIEW_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a revisão exterior estática.")
+
+func _build_r4_outer_consolidation() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_CONSOLIDATION_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a consolidação exterior estática.")
+
+func _build_r4_outer_stabilization() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_STABILIZATION_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a estabilização exterior estática.")
+
+func _build_r4_outer_reconciliation() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_RECONCILIATION_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a reconciliação exterior estática.")
+
+func _build_r4_outer_consistency() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_CONSISTENCY_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a consistência exterior estática.")
+
+func _build_r4_outer_check() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_CHECK_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a verificação exterior estática.")
+
+func _build_r4_outer_finalization() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_FINALIZATION_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a finalização exterior estática.")
+
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
 	var target_names: PackedStringArray = PackedStringArray([
@@ -746,6 +1059,12 @@ func _build_basin_arrival_frame() -> void:
 		fern.scale = Vector3.ONE * 0.50
 		fern.rotation.y = 0.46
 		frame.add_child(fern)
+
+func _build_r6_basin_arrival_reading() -> void:
+	# DEV6-R6-BASIN-ARRIVAL-READING-004: reorienta vestígios existentes sem acrescentar geometria, luz ou colisão.
+	var reading: R6BasinArrivalReading = R6_BASIN_ARRIVAL_READING_SCRIPT.call("install", self) as R6BasinArrivalReading
+	if reading == null:
+		push_error("[ORIGEM_R6] Não foi possível instalar a leitura da chegada à bacia.")
 
 func _build_majestic_lake_transition() -> void:
 	# Vestígios de observação da Majestic acompanham a chegada ao lago: tornam a transição narrativa física sem bloquear o trilho.
@@ -1747,6 +2066,16 @@ func _build_cartographic_basin_silhouette() -> void:
 		stream.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		silhouette.add_child(stream)
 
+func _build_r6_basin_vista_reading() -> void:
+	# DEV6-R6-BASIN-VISTA-READING-005: transforma apenas rochas existentes do promontório oriental, sem alterar água, margem ou handoff.
+	var silhouette: Node3D = get_node_or_null("SilhuetaCartograficaDaBacia") as Node3D
+	if silhouette == null:
+		push_error("[ORIGEM_R6] Silhueta cartográfica da bacia indisponível para leitura estática.")
+		return
+	var adjusted: int = int(R6_BASIN_VISTA_READING_SCRIPT.call("apply", silhouette))
+	if adjusted < 1:
+		push_error("[ORIGEM_R6] Não foi possível ajustar as rochas existentes da vista da bacia.")
+
 func _build_submerged_ruins() -> void:
 	var lake: Node3D = Node3D.new()
 	lake.name = "RuinasSubmersasDoLago"
@@ -1915,22 +2244,19 @@ func _build_submerged_ruins() -> void:
 		shallow_path.add_child(shallow_body)
 
 func _build_waterline_reading() -> void:
-	# DEV6-R6-WATERLINE-READING-003: reforço arqueológico exclusivamente visual na linha de água.
-	# Fora do leito, fora do trilho jogável e sem luzes, shaders, emissão, painéis ou colisores.
+	# DEV6-R6-WATERLINE-READING-003: camada modular de vestígios assimétricos fora do leito e das lajes R6.
+	var reading: R6WaterlineReading = R6_WATERLINE_READING_SCRIPT.call("install", self, ROCK, Callable(self, "_height_at")) as R6WaterlineReading
+	if reading == null:
+		push_error("[ORIGEM_R6] Não foi possível instalar a leitura arqueológica da linha de água.")
+	# DEV6-R6-SHORELINE-LEGIBILITY-005 remoto: detalhes exclusivamente visuais a oeste do corredor Majestic→R6.
 	var debris: Node3D = Node3D.new()
 	debris.name = "R6_DetritosLinhaDeAgua"
 	add_child(debris)
-	var anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
 	var placements: Array[Dictionary] = [
-		{"x": 8.0, "z": 223.5, "s": 0.24, "r": 0.33},
-		{"x": 39.0, "z": 218.0, "s": 0.31, "r": 1.12},
-		{"x": 68.0, "z": 217.0, "s": 0.22, "r": -0.47},
-		{"x": 95.0, "z": 224.0, "s": 0.34, "r": 0.86},
-		{"x": 105.0, "z": 247.0, "s": 0.27, "r": 1.74},
-		{"x": 101.5, "z": 271.0, "s": 0.38, "r": -0.62},
-		{"x": 87.0, "z": 286.0, "s": 0.25, "r": 0.45},
-		{"x": 38.0, "z": 287.0, "s": 0.36, "r": 2.08},
-		{"x": 19.0, "z": 272.0, "s": 0.21, "r": -0.28}
+		{"x": 8.0, "z": 223.5, "s": 0.24, "r": 0.33}, {"x": 39.0, "z": 218.0, "s": 0.31, "r": 1.12},
+		{"x": 68.0, "z": 217.0, "s": 0.22, "r": -0.47}, {"x": 95.0, "z": 224.0, "s": 0.34, "r": 0.86},
+		{"x": 105.0, "z": 247.0, "s": 0.27, "r": 1.74}, {"x": 101.5, "z": 271.0, "s": 0.38, "r": -0.62},
+		{"x": 87.0, "z": 286.0, "s": 0.25, "r": 0.45}, {"x": 38.0, "z": 287.0, "s": 0.36, "r": 2.08}, {"x": 19.0, "z": 272.0, "s": 0.21, "r": -0.28}
 	]
 	for index: int in range(placements.size()):
 		var spec: Dictionary = placements[index]
@@ -1946,8 +2272,6 @@ func _build_waterline_reading() -> void:
 		rock.rotation = Vector3(0.08 * float(index % 2), float(spec["r"]), -0.10 + float(index % 3) * 0.09)
 		_apply_material(rock, ruin_material)
 		debris.add_child(rock)
-	# DEV6-R6-SHORELINE-LEGIBILITY-005: trio de vestígios na margem externa visível desde a chegada.
-	# É exclusivamente visual e fica a oeste do corredor Majestic→R6, fora do leito e sem qualquer corpo físico.
 	var arrival_reading: Node3D = Node3D.new()
 	arrival_reading.name = "R6_LeituraArqueologicaDaMargem"
 	add_child(arrival_reading)
@@ -1959,10 +2283,7 @@ func _build_waterline_reading() -> void:
 		fragment.rotation = Vector3(0.18, 0.62, -0.10)
 		_apply_material(fragment, ruin_material)
 		arrival_reading.add_child(fragment)
-	var arrival_rocks: Array[Dictionary] = [
-		{"x": 0.8, "z": 233.6, "s": 0.34, "r": -0.42},
-		{"x": 7.4, "z": 237.8, "s": 0.27, "r": 0.86}
-	]
+	var arrival_rocks: Array[Dictionary] = [{"x": 0.8, "z": 233.6, "s": 0.34, "r": -0.42}, {"x": 7.4, "z": 237.8, "s": 0.27, "r": 0.86}]
 	for index: int in range(arrival_rocks.size()):
 		var spec: Dictionary = arrival_rocks[index]
 		var arrival_rock: Node3D = ROCK.instantiate() as Node3D
@@ -1977,6 +2298,91 @@ func _build_waterline_reading() -> void:
 		arrival_rock.rotation = Vector3(0.06, float(spec["r"]), -0.08 + float(index) * 0.13)
 		_apply_material(arrival_rock, ruin_material)
 		arrival_reading.add_child(arrival_rock)
+
+func _build_r6_eastern_margin_reading() -> void:
+	# DEV6-R6-EASTERN-MARGIN-READING-007: relê apenas os três vestígios já existentes da margem oriental.
+	var waterline_reading: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if waterline_reading == null:
+		push_error("[ORIGEM_R6] Linha de água indisponível para leitura da margem oriental.")
+		return
+	var adjusted: int = int(R6_EASTERN_MARGIN_READING_SCRIPT.call("apply", waterline_reading))
+	if adjusted != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar os três vestígios da margem oriental.")
+
+func _build_r6_eastern_margin_depth() -> void:
+	# DEV6-R6-EASTERN-MARGIN-DEPTH-008: diferencia apenas os três vestígios já aprovados na margem oriental.
+	var waterline_reading: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if waterline_reading == null:
+		push_error("[ORIGEM_R6] Linha de água indisponível para profundidade da margem oriental.")
+		return
+	var adjusted: int = int(R6_EASTERN_MARGIN_DEPTH_SCRIPT.call("apply", waterline_reading))
+	if adjusted != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar os três vestígios de profundidade oriental.")
+
+func _build_r6_eastern_margin_lateral_balance() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_LATERAL_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível equilibrar os vestígios orientais existentes.")
+
+func _build_r6_eastern_margin_vista() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_VISTA_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a vista dos vestígios orientais existentes.")
+
+func _build_r6_eastern_margin_rhythm_final() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_RHYTHM_FINAL_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a cadência final oriental.")
+
+func _build_r6_eastern_margin_closure() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_CLOSURE_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível fechar a leitura oriental estática.")
+
+func _build_r6_eastern_margin_readability_final() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_READABILITY_FINAL_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a legibilidade final oriental.")
+
+func _build_r6_eastern_margin_observation() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_OBSERVATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a observação oriental estática.")
+
+func _build_r6_eastern_margin_review() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_REVIEW_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a revisão oriental estática.")
+
+func _build_r6_eastern_margin_consolidation() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_CONSOLIDATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a consolidação oriental estática.")
+
+func _build_r6_eastern_margin_stabilization() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_STABILIZATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a estabilização oriental estática.")
+
+func _build_r6_eastern_margin_reconciliation() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_RECONCILIATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a reconciliação oriental estática.")
+
+func _build_r6_eastern_margin_consistency() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_CONSISTENCY_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a consistência oriental estática.")
+
+func _build_r6_eastern_margin_check() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_CHECK_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a verificação oriental estática.")
+
+func _build_r6_eastern_margin_finalization() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_FINALIZATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a finalização oriental estática.")
 
 func _make_elliptical_lake_mesh(radius_x: float, radius_z: float) -> ArrayMesh:
 	var surface: SurfaceTool = SurfaceTool.new()
@@ -2064,6 +2470,16 @@ func _build_riparian_margin() -> void:
 			accent_fern.scale = Vector3(0.46, 0.46, 0.46)
 			accent_fern.rotation.y = 0.28 + float(accent_index) * 0.83
 			margin.add_child(accent_fern)
+
+func _build_r6_outer_waterline_silhouette() -> void:
+	# DEV6-R6-OUTER-WATERLINE-SILHOUETTE-006: ajusta somente acentos rochosos existentes da margem exterior.
+	var margin: Node3D = get_node_or_null("MargensRochosasDoLago") as Node3D
+	if margin == null:
+		push_error("[ORIGEM_R6] Margem rochosa indisponível para silhueta exterior.")
+		return
+	var adjusted: int = int(R6_OUTER_WATERLINE_SILHOUETTE_SCRIPT.call("apply", margin))
+	if adjusted < 1:
+		push_error("[ORIGEM_R6] Não foi possível ajustar os acentos rochosos da margem exterior.")
 
 func _build_majestic_ruins_approach_grounding() -> void:
 	# CP284: três grupos irregulares costuram o fim da expedição Majestic à margem das Ruínas sem fechar a aproximação ocidental.
