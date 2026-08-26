@@ -25,6 +25,8 @@ func _init() -> void:
 		issues.append("R2 deve declarar a rota road_to_arch")
 	if not contract.qa_routes.has("positive_bridge"):
 		issues.append("R2 deve declarar a rota positive_bridge")
+	if not contract.qa_routes.has("road_return_voss"):
+		issues.append("R2 deve declarar a rota road_return_voss")
 	if not contract.source_module.ends_with("levels/RiverRoadJourney.gd"):
 		issues.append("R2 aponta para um módulo de origem inesperado")
 	if not contract.is_world_position_inside(Vector3(-21.4, 0.0, 12.0)):
@@ -36,5 +38,6 @@ func _init() -> void:
 			printerr("[ORIGEM_R2_CONTRACT_ERROR] %s" % issue)
 		quit(1)
 		return
-	print("[ORIGEM_R2_CONTRACT_OK] R2 válida: Dev2, duas luzes, estrada→arco e ponte lateral.")
+	print("[ORIGEM_R2_CONTRACT_OK] R2 válida: Dev2, duas luzes, estrada→arco, retorno e ponte lateral.")
+	print("[ORIGEM_R2_RIVER_QA_014_OK] contrato R2 preserva as três rotas canônicas e o proprietário Dev2.")
 	quit(0)
