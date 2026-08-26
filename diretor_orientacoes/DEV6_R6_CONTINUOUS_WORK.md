@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024
+task_id: DEV6-R6-EASTERN-MARGIN-PUBLISH-025
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -97,9 +97,13 @@ A validação documental da cadeia oriental R6 foi consolidada. A porta R6, o or
 
 O postcheck documental confirmou, com a porta R6 aprovada, que não houve regressão após o arquivo. Água, bases, quatro luzes, rotas e handoff permanecem preservados; não foi feita alteração adicional ao mundo.
 
-## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024
 
-Consolidar exclusivamente o closeout documental oriental R6 para a integração futura, sem alterar água, elementos existentes, câmara, limites regionais, handoff, iluminação, física, rotas, interface ou antecipação da R7.
+O closeout documental consolidou a cadeia oriental R6 pronta para integração futura. As portas, rotas, handoff, água, orçamento de quatro luzes e bundles foram verificados; não houve alteração adicional ao mundo.
+
+## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-PUBLISH-025
+
+Preparar exclusivamente a publicação segura da cadeia oriental R6 quando o canal oficial recuperar. Antes de qualquer escrita remota, comparar ahead/behind, preservar commits exclusivos, usar a integração ensaiada e nunca reescrever a branch canónica.
 
 | Critério | Obrigatório |
 |---|---|
@@ -112,4 +116,4 @@ Consolidar exclusivamente o closeout documental oriental R6 para a integração 
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-POSTCHECK-023` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-PUBLISH-025`.
