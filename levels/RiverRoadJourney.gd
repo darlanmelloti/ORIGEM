@@ -48,6 +48,7 @@ func _ready() -> void:
 	_build_return_confirmation_landing()
 	_build_arch_arrival_landing()
 	_build_midriver_reflection_edge()
+	_build_orion_reflection_marker()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -1058,6 +1059,39 @@ func _build_midriver_reflection_edge() -> void:
 			fern.scale = Vector3(0.25 + float(index) * 0.04, 0.25 + float(index) * 0.04, 0.25 + float(index) * 0.04)
 			fern.rotation.y = -side * 0.48
 			edge_root.add_child(fern)
+
+func _build_orion_reflection_marker() -> void:
+	# DEV2-R2-RIVER-ORION-035: marco baixo de leitura na margem média, sem emissão, interação ou rota nova para a água.
+	var marker_root: Node3D = Node3D.new()
+	marker_root.name = "MarcoBaixoReflexoOrionR2"
+	add_child(marker_root)
+	var marker_z: float = 72.0
+	var marker_x: float = _river_x(marker_z) - 6.85
+	var marker_material: StandardMaterial3D = StandardMaterial3D.new()
+	marker_material.albedo_color = Color(0.13, 0.16, 0.15, 1.0)
+	marker_material.roughness = 0.94
+	var marker_slab_mesh: BoxMesh = BoxMesh.new()
+	marker_slab_mesh.size = Vector3(0.58, 0.12, 0.34)
+	var marker_slab: MeshInstance3D = MeshInstance3D.new()
+	marker_slab.name = "LajeBaixaMarcoReflexoOrion"
+	marker_slab.mesh = marker_slab_mesh
+	marker_slab.material_override = marker_material
+	marker_slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	marker_slab.position = Vector3(marker_x, _height_at(marker_x, marker_z) + 0.08, marker_z)
+	marker_slab.rotation.y = -0.22
+	marker_root.add_child(marker_slab)
+	for index: int in range(2):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraMarcoReflexoOrion_%02d" % (index + 1)
+		var stone_x: float = marker_x + float(index) * 0.62
+		var stone_z: float = marker_z - 0.34 + float(index) * 0.68
+		stone.position = Vector3(stone_x, _height_at(stone_x, stone_z) + 0.05, stone_z)
+		stone.scale = Vector3(0.15 + float(index) * 0.035, 0.11 + float(index) * 0.02, 0.18)
+		stone.rotation.y = -0.42 + float(index) * 0.72
+		_apply_material(stone, marker_material)
+		marker_root.add_child(stone)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
