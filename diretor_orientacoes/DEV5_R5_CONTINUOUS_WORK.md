@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-CLOSEOUT-021
+task_id: DEV5-R5-CAMP-PUBLISH-022
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -101,9 +101,13 @@ A validação documental da cadeia do Acampamento Majestic foi consolidada. A po
 
 O postcheck documental confirmou, com a porta R5 aprovada, que não houve regressão após o arquivo. Caixas, colisores, rotas, orçamento e conectores permanecem preservados; não foi feita alteração adicional ao mundo.
 
-## Tarefa ativa — DEV5-R5-CAMP-CLOSEOUT-021
+## Entrega aprovada — DEV5-R5-CAMP-CLOSEOUT-021
 
-Consolidar exclusivamente o closeout documental do Acampamento Majestic para a integração futura, sem alterar geometria, luz, física, partículas, shader, interface, câmara, rota, conectores ou módulos de outras regiões.
+O closeout documental consolidou a cadeia R5 pronta para integração futura. As portas, rotas, caixas, colisores, conectores, orçamento e bundles foram verificados; não houve alteração adicional ao mundo.
+
+## Tarefa ativa — DEV5-R5-CAMP-PUBLISH-022
+
+Preparar exclusivamente a publicação segura da cadeia R5 quando o canal oficial recuperar. Antes de qualquer escrita remota, comparar ahead/behind, preservar commits exclusivos, usar a integração ensaiada e nunca reescrever a branch canónica.
 
 | Critério | Obrigatório |
 |---|---|
@@ -115,4 +119,4 @@ Consolidar exclusivamente o closeout documental do Acampamento Majestic para a i
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-POSTCHECK-020` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-CLOSEOUT-021`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-CLOSEOUT-021` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-PUBLISH-022`.
