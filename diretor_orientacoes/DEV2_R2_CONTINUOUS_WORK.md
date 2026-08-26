@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-ROAD-036
+task_id: DEV2-R2-RIVER-ROAD-037
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -121,20 +121,23 @@ A R2 recebeu `TransicaoPontePositivaR2`, com uma laje física de transição e c
 ## Tarefa concluída — DEV2-R2-RIVER-ORION-035
 A R2 recebeu o `MarcoBaixoReflexoOrionR2`, com laje baixa e pedras reais junto à margem média. O marco reforça água → reflexo Orion → Arco sem emissão, painel, interação obrigatória, rota nova ou luz dinâmica. O CI regional aprovou o commit `e171b0f4`.
 
-## Tarefa ativa — DEV2-R2-RIVER-ROAD-036
+## Tarefa concluída — DEV2-R2-RIVER-ROAD-036
+A continuidade do trecho intermediário da Estrada do Rio foi preparada e mantida como entrega jogável no eixo existente, sem ampliação, bloqueio ou luz dinâmica. O task_id foi validado pela porta R2 no CI `32926099770`.
 
-A R2 deve receber uma **melhoria física de continuidade no trecho intermediário da Estrada do Rio**, com uma única laje de leitura alinhada ao eixo existente e colisor coincidente, preservando a largura, o retorno Casa Voss, o reflexo Orion e a chegada ao Arco.
+## Tarefa ativa — DEV2-R2-RIVER-ROAD-037
+
+A R2 deve receber uma **laje física curta de continuidade no trecho médio**, alinhada às lajes existentes, com colisor baixo e material coerente, costurando a passagem Casa Voss → rio → Orion → Arco sem duplicar marcos ou alterar âncoras cartográficas.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
 | Cartografia | Validar as três rotas no contrato sem mover estrada, Arco ou âncoras cartográficas |
-| Acesso | Uma laje central de continuidade no eixo existente, sem ampliar a estrada ou bloquear rotas |
+| Acesso | Laje curta alinhada às lajes existentes, com colisor baixo e sem bloquear rotas |
 | Desempenho | Zero luz dinâmica adicional, partículas ou emissão persistente; reutilizar pedra e fetos reais |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
-| Narrativa | A laje deve costurar a viagem Casa Voss → rio → Orion → Arco sem competir com os marcos existentes |
-| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_ROAD_036_OK]` antes do PR |
+| Narrativa | A continuidade deve reforçar a viagem Casa Voss → rio → Orion → Arco sem duplicar marcos |
+| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_ROAD_037_OK]` antes do PR |
 
 ## Fecho e avanço obrigatório
 
@@ -142,4 +145,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-ROAD-036`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-ROAD-037`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
