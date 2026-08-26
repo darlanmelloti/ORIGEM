@@ -6,14 +6,14 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-EVIDENCE-REVIEW-049
 owner: Dev4
-branch: dev4/r4-dense-forest
+branch: dev4/r4-inlet-continuity
 ```
 
 ## Base oficial e fronteira
 
-A base de trabalho é o repositório oficial do ORIGEM, branch canónica `dev4/r4-dense-forest`, sincronizada com `integration/r1-r6-sprint1`. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
+A base de trabalho é o repositório oficial do ORIGEM, a partir de `integration/r1-r6-sprint1`. A continuidade documental usa `dev4/r4-inlet-continuity`; a branch histórica `dev4/r4-dense-forest` não é fonte de produção até ser reconciliada separadamente, pois contém trabalho concorrente não reauditorado. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
 
 O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mínima em `levels/ForestLakeRegion.gd` é permitida apenas para instalar módulos R4 aditivos; não editar âncoras, `RiverRoadJourney.gd`, módulos R1–R3/R5–R6 ou sistemas transversais protegidos.
 
@@ -142,6 +142,23 @@ Determinar, por isolamento QA, se a superfície opaca observada provém da geome
 | Integração | Preservar R5 e R6; tratar material partilhado como responsabilidade conjunta |
 | Verificação | Parser, orçamento, porta R4 e três rotas antes de propor correção |
 
-## Próxima fila reservada
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
 
-`DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044` permanece ACTIVE até que o diagnóstico identifique uma correção modular segura.
+O diagnóstico foi concluído sem alterar produção. O isolamento confirmou que a faixa deriva de uma lâmina visual ampla combinada com material lacustre opaco e partilhado; transparência, cota, largura e `cull_back` foram testados, rejeitados e revertidos. A evidência e a revisão comparativa foram integradas nos relatórios `CARTOGRAPHIC_INLET_ISOLATION_044.md` e `CARTOGRAPHIC_INLET_VARIANT_REVIEW_047.md`; a porta R4 e as três rotas foram aprovadas.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-EVIDENCE-REVIEW-049
+
+Reconciliar exclusivamente em QA documental a divergência entre o diagnóstico do afluente e o brief ambiental modular. A revisão deve definir uma matriz de responsabilidade R4/R6 e critérios de enquadramento para uma eventual intervenção posterior, mas não pode criar nem ajustar materiais, água, geometria, cota, largura, culling, luzes, colisores, âncoras, rotas, câmara ou física.
+
+| Critério | Obrigatório |
+|---|---|
+| Produção | Zero modificações a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
+| Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` como microajustes |
+| R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
+| R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
+| Resultado | Documento de decisão e roteiro QA; nenhuma proposta é autorização de produção |
+| Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
+
+## Sucessão obrigatória
+
+Há exatamente uma tarefa ACTIVE. Ao concluir a revisão, Dev4 deve avançar para uma nova auditoria QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
