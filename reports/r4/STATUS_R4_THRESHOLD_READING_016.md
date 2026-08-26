@@ -1,8 +1,11 @@
 # STATUS R4 — Forest Threshold Reading 016
 
-**Entrega:** `DEV4-R4-FOREST-THRESHOLD-READING-016`  
-**Região:** R4 — Floresta Densa  
-**Responsável:** Dev4  
+**Entrega:** `DEV4-R4-FOREST-THRESHOLD-READING-016`
+
+**Região:** R4 — Floresta Densa
+
+**Responsável:** Dev4
+
 **Estado:** Validada tecnicamente; pronta para publicação
 
 ## Objetivo e alteração entregue
