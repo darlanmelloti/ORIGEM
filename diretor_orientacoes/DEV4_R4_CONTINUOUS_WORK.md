@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-DEPTH-023
+task_id: DEV4-R4-FOREST-OUTER-LATERAL-BALANCE-024
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -75,10 +75,13 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Equilíbrio da entrada | Antes da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Profundidade liminar | Fora da clareira | ≥9 m | 0 luzes e colisores | Aprovada |
 | Ritmo exterior | Fora da clareira | ≥8 m | 0 luzes e colisores | Aprovada |
+| Profundidade exterior | Fora da clareira | ≥8 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-DEPTH-023
+`DEV4-R4-FOREST-OUTER-DEPTH-023` instalou `ForestOuterDepth.gd`: três árvores R4 já aprovadas pelo ritmo exterior receberam apenas variação estática de escala e orientação. As posições-base, árvores com colisor, clareira, lajes e corredor de `≥8 m` foram preservados. A prova `[ORIGEM_R4_OUTER_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
-Refinar exclusivamente a profundidade lateral exterior R4 usando elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-LATERAL-BALANCE-024
+
+Refinar exclusivamente o equilíbrio lateral exterior R4 usando elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -91,4 +94,4 @@ Refinar exclusivamente a profundidade lateral exterior R4 usando elementos ambie
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-LATERAL-BALANCE-024` deverá rever o equilíbrio lateral exterior R4 sem modificar rota, câmara ou limites regionais.
+`DEV4-R4-FOREST-OUTER-VISTA-025` deverá rever a leitura exterior R4 sem modificar rota, câmara ou limites regionais.
