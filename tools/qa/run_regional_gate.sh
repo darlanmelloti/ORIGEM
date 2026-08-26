@@ -222,6 +222,7 @@ if [[ "$REGION" == "R4" ]]; then
     'verify_r4_forest_approach_rhythm.gd|[ORIGEM_R4_APPROACH_OK]|cadência da aproximação florestal'
     'verify_r4_majestic_edge_balance.gd|[ORIGEM_R4_EDGE_OK]|equilíbrio da margem Majestic'
     'verify_r4_silhouette_continuity.gd|[ORIGEM_R4_SILHOUETTE_OK]|continuidade da silhueta'
+    'verify_r4_forest_depth_balance.gd|[ORIGEM_R4_DEPTH_OK]|equilíbrio de profundidade lateral'
   )
   for proof in "${r4_cumulative_proofs[@]}"; do
     IFS='|' read -r r4_qa_file r4_marker r4_label <<< "$proof"
