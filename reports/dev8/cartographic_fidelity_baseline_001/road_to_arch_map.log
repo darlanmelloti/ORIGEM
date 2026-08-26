@@ -1,0 +1,102 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
+Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
+     at: setup2 (main/main.cpp:3577)
+
+WARNING: FSR1 3D scaling is only available when using the Forward+ renderer.
+     at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:1028)
+WARNING: res://scenes/main.tscn:4 - ext_resource, invalid UID: uid://pbower0o7k7e - using text path instead: res://entities/player/Player.gd
+     at: load (scene/resources/resource_format_text.cpp:501)
+WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.
+     at: environment_set_ssr (servers/rendering/storage/environment_storage.cpp:653)
+     GDScript backtrace (most recent call first):
+         [0] _setup_environment (res://levels/LevelEnvironment.gd:65)
+         [1] _ready (res://levels/LevelEnvironment.gd:21)
+WARNING: SDFGI is only available when using the Forward+ renderer.
+     at: environment_set_sdfgi (servers/rendering/storage/environment_storage.cpp:822)
+     GDScript backtrace (most recent call first):
+         [0] _setup_environment (res://levels/LevelEnvironment.gd:72)
+         [1] _ready (res://levels/LevelEnvironment.gd:21)
+[ORIGEM_REGION_CONTRACT] R1 Casa Voss | owner=Dev1 | lights=3 | qa=road_return_voss, voss_to_road, voss_lateral
+[ORIGEM_REGION_CONTRACT] R2 Estrada do Rio | owner=Dev2 | lights=2 | qa=road_to_arch, positive_bridge, road_return_voss
+[ORIGEM_REGION_CONTRACT] R3 Arco das Ruínas | owner=Dev3 | lights=2 | qa=road_to_arch, arch_to_forest
+[ORIGEM_REGION_CONTRACT] R4 Floresta Densa | owner=Dev4 | lights=1 | qa=arch_to_forest, forest_to_majestic, forest_to_ruins
+[ORIGEM_REGION_CONTRACT] R5 Acampamento Majestic | owner=Dev5 | lights=4 | qa=forest_to_majestic, majestic_to_lake
+[ORIGEM_REGION_CONTRACT] R6 Ruínas Submersas | owner=Dev6 | lights=4 | qa=majestic_to_lake, forest_to_ruins, ruins_arrival
+[ORIGEM_R4_UNDERSTORY] ajustados=12 clareira_protegida=0 minima=6.16 luzes=0
+[ORIGEM_R4_LORE] vestigios=3 luzes=0 faixa=126-151
+[ORIGEM_R6_ARRIVAL] pilares_existentes=2 luzes=0 nos_novos=0
+[ORIGEM_R4_CANOPY] ajustadas=26 clareira_protegida=20 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_VISTA] ajustadas=6 clareira_protegida=2 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_APPROACH] ajustados=24 clareira_protegida=23 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_EDGE] ajustados=3 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_SILHOUETTE] ajustadas=8 colisores_ignorados=6 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_DEPTH] ajustados=3 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_READABILITY] ajustadas=4 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_PACING] ajustadas=2 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_MARGIN] ajustadas=2 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_COMPOSITION] ajustadas=2 colisores_ignorados=1 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_EDGE_RHYTHM] ajustadas=1 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_THRESHOLD] ajustadas=2 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_ENTRY_BALANCE] ajustados=2 corredor_rejeitado=0 luzes=0
+[ORIGEM_R4_LIMINAL_DEPTH] ajustadas=1 colisores_preservados=0 luzes=0
+[ORIGEM_R4_OUTER_MARGIN] ajustadas=2 rejeitadas=0 luzes=0
+[ORIGEM_R4_CANOPY_EDGE] ajustadas=1 colisores_preservados=0 luzes=0
+[ORIGEM_R4_OUTER_SILHOUETTE] ajustadas=8 colisores_preservados=0 luzes=0
+[ORIGEM_R4_OUTER_RHYTHM] arvores_existentes_ajustadas=8 luzes=0
+[ORIGEM_R4_OUTER_DEPTH] arvores_existentes_ajustadas=3 luzes=0
+[ORIGEM_R4_OUTER_LATERAL] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_VISTA] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_RHYTHM_FINAL] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_CLOSURE] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_READABILITY_FINAL] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_OBSERVATION] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_REVIEW] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_CONSOLIDATION] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_STABILIZATION] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_RECONCILIATION] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_CONSISTENCY] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_CHECK] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_OUTER_FINALIZATION] arvores_existentes_ajustadas=2 luzes=0
+[ORIGEM_R4_MIST] materiais=128 clareira_protegida=42 luzes=0
+[ORIGEM_R5_ARRIVAL_READING] bases_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_EDGE] rolos_existentes_ajustados=3 luzes=0
+[ORIGEM_R5_VISTA] costuras_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_FOCAL] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_RHYTHM_FINAL] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_CLOSURE] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_READABILITY_FINAL] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_OBSERVATION] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_REVIEW] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_CONSOLIDATION] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_STABILIZATION] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_RECONCILIATION] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_CONSISTENCY] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_CHECK] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_FINALIZATION] caixas_existentes_ajustadas=2 luzes=0
+[ORIGEM_R5_WIND] lonas=2 cordas=2 luzes=0
+[ORIGEM_R6_WATERLINE] conjuntos=3 vestigios=9 luzes=0
+[ORIGEM_R6_EASTERN_MARGIN] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_DEPTH] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_LATERAL] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_VISTA] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_RHYTHM_FINAL] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_CLOSURE] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_READABILITY_FINAL] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_OBSERVATION] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_REVIEW] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_CONSOLIDATION] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_STABILIZATION] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_RECONCILIATION] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_CONSISTENCY] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_CHECK] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_EASTERN_FINALIZATION] vestigios_existentes_ajustados=3 luzes=0
+[ORIGEM_R6_BASIN_VISTA] rochas_existentes_ajustadas=3 luzes=0
+[ORIGEM_R6_OUTER_WATERLINE] acentos_existentes_ajustados=5 luzes=0
+[ORIGEM_QA_ROUTE] Mundo reduzido às Regiões 1–6 para a validação cartográfica.
+[ORIGEM_MAP_R1] casa_visitada=true estrada_revelada=false
+[ORIGEM_QA_ROUTE] Spawn Estrada–Arco ativo em (-20.05, 0.605985, 22.0); foco=(-13.8, 0.0, 92.0)
+[ORIGEM_QA_SNAPSHOT] path=reports/dev8/cartographic_fidelity_baseline_001/road_to_arch_map.png result=0
