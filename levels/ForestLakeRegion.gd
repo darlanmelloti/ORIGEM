@@ -33,6 +33,8 @@ const R4_FOREST_DEPTH_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/
 const R4_FOREST_APPROACH_READABILITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachReadability.gd")
 const R4_FOREST_TRAIL_PACING_SCRIPT: Script = preload("res://levels/regions/r4/ForestTrailPacing.gd")
 const R4_FOREST_MARGIN_CONTINUITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestMarginContinuity.gd")
+const R4_FOREST_APPROACH_COMPOSITION_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachComposition.gd")
+const R4_FOREST_EDGE_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestEdgeRhythm.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -82,6 +84,8 @@ func _ready() -> void:
 	_build_r4_approach_readability()
 	_build_r4_trail_pacing()
 	_build_r4_margin_continuity()
+	_build_r4_approach_composition()
+	_build_r4_edge_rhythm()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -426,6 +430,20 @@ func _build_r4_margin_continuity() -> void:
 	var continuity: R4ForestMarginContinuity = R4_FOREST_MARGIN_CONTINUITY_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestMarginContinuity
 	if continuity == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a continuidade da margem florestal.")
+
+func _build_r4_approach_composition() -> void:
+	# DEV4-R4-FOREST-APPROACH-COMPOSITION-014: equilibra copas focais R4 existentes sem colisores associados.
+	var canopy_root: Node = get_node_or_null("CopasFocaisDaFlorestaDensa")
+	var composition: R4ForestApproachComposition = R4_FOREST_APPROACH_COMPOSITION_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), canopy_root) as R4ForestApproachComposition
+	if composition == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a composição da aproximação.")
+
+func _build_r4_edge_rhythm() -> void:
+	# DEV4-R4-FOREST-EDGE-RHYTHM-015: alterna pedras R4 existentes junto ao conector, sem alterar sistemas Dev5.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var rhythm: R4ForestEdgeRhythm = R4_FOREST_EDGE_RHYTHM_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestEdgeRhythm
+	if rhythm == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a cadência da borda florestal.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
