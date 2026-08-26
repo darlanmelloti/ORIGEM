@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-STABILIZATION-032
+task_id: DEV4-R4-FOREST-OUTER-RECONCILIATION-033
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -95,9 +95,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-OUTER-CONSOLIDATION-031` instalou `ForestOuterConsolidation.gd`: duas árvores exteriores da revisão receberam variação estática de consolidação. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-STABILIZATION-032
+`DEV4-R4-FOREST-OUTER-STABILIZATION-032` instalou `ForestOuterStabilization.gd`: duas árvores exteriores da consolidação receberam variação estática de estabilização. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
 
-Auditar exclusivamente a estabilização estática exterior R4 com elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-RECONCILIATION-033
+
+Auditar exclusivamente a reconciliação estática exterior R4 com elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -110,4 +112,4 @@ Auditar exclusivamente a estabilização estática exterior R4 com elementos amb
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-RECONCILIATION-033` deverá rever a leitura exterior R4 sem modificar rota, câmara ou limites regionais.
+`DEV4-R4-FOREST-OUTER-CONSISTENCY-034` deverá rever a leitura exterior R4 sem modificar rota, câmara ou limites regionais.

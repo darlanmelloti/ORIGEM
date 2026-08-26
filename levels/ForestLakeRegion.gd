@@ -51,6 +51,7 @@ const R4_FOREST_OUTER_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/r
 const R4_FOREST_OUTER_OBSERVATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterObservation.gd")
 const R4_FOREST_OUTER_REVIEW_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterReview.gd")
 const R4_FOREST_OUTER_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterConsolidation.gd")
+const R4_FOREST_OUTER_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterStabilization.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -118,6 +119,7 @@ func _ready() -> void:
 	_build_r4_outer_observation()
 	_build_r4_outer_review()
 	_build_r4_outer_consolidation()
+	_build_r4_outer_stabilization()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -572,6 +574,11 @@ func _build_r4_outer_consolidation() -> void:
 	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
 	if int(R4_FOREST_OUTER_CONSOLIDATION_SCRIPT.call("apply", forest_root)) != 2:
 		push_error("[ORIGEM_R4] Não foi possível ajustar a consolidação exterior estática.")
+
+func _build_r4_outer_stabilization() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_STABILIZATION_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a estabilização exterior estática.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
