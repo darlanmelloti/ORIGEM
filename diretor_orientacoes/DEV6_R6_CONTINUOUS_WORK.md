@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-VISUAL-DEBT-ASSESSMENT-013
+task_id: DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -121,19 +121,23 @@ A pipeline `run_r6_route_regression_pipeline.sh` executou a matriz de captura, a
 
 A revisão do relatório confirmou as três capturas runtime, logs, telemetria, marcador final da pipeline e somas SHA-256 consistentes. A evidência foi preservada em `reports/r6/ROUTE_REGRESSION_REPORT_012.md`; não houve alteração de produção nesta entrega.
 
-## Tarefa ativa — DEV6-R6-VISUAL-DEBT-ASSESSMENT-013
+## Entrega aprovada — DEV6-R6-VISUAL-DEBT-ASSESSMENT-013
 
-Mapear, a partir das capturas runtime R6 aprovadas, os elementos visuais que ainda apresentam leitura de protótipo e preparar um plano artístico modular. Não iniciar alteração de produção antes de delimitar elementos existentes, âncora, rotas, orçamento de quatro luzes e prova de não regressão.
+A avaliação visual confirmou que a leitura de protótipo se concentra no plano médio da chegada R6: terreno aberto, lajes isoladas e vestígios arqueológicos pouco agrupados. A evidência foi preservada em `reports/r6/VISUAL_DEBT_ASSESSMENT_013.md`; não houve alteração de produção.
+
+## Tarefa ativa — DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
+
+Ajustar de forma estática escala e orientação de três a cinco vestígios arqueológicos R6 já existentes no plano médio da chegada. A entrega deve aumentar a massa composicional sem deslocar as posições-base, água, handoff, rotas, luzes ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Apenas auditoria e plano; não alterar `ForestLakeRegion.gd`, `TempleLevel.gd`, R7–R12 ou âncoras |
-| Rotas | Não modificar spawn, alvo, velocidade, `look_at` ou corredor físico |
-| Água e luz | Sem shader, painel, emissão ou `Light3D` novo |
+| Alvos | Apenas vestígios R6 existentes; nenhum nó, mesh, material, colisor ou luz nova |
+| Espacial | Posições-base preservadas; somente escala/rotação local estática |
+| Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` imutáveis |
+| Água e luz | Exatamente quatro luzes; sem shader, painel ou emissão adicional |
 | Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de lajes |
-| Visual | Separar dívida visual real de marcadores QA e não mascarar a leitura com efeitos |
-| Validação | Confirmar orçamento R6, handoff e três rotas antes de propor uma entrega artística |
+| Validação | Prova específica, parser, orçamento R6, handoff e três rotas aprovados antes de publicar |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. A avaliação deve produzir um plano espacial verificável antes de criar uma nova entrega R6 em estado `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. A entrega deve avançar para uma tarefa R6 rastreável somente depois da QA cumulativa e da evidência visual aplicável.

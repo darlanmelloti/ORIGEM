@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-ENVIRONMENTAL-REVIEW-042
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -121,19 +121,27 @@ A cadeia exterior R4 foi integrada em *fast-forward* no commit remoto `5e6445b` 
 
 A revisão documental pós-publicação confirmou o estado integrado sem regressão de clareira, corredor, rotas, luz ou física. A evidência foi preservada em `reports/r4/POST_PUBLISH_REVIEW_041.md`; não houve alteração ao mundo nesta entrega.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-ENVIRONMENTAL-REVIEW-042
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-ENVIRONMENTAL-REVIEW-042
 
-Auditar uma necessidade ambiental concreta da faixa exterior R4 a partir da versão integrada e da sua leitura runtime, sem iniciar alteração de produção antes de documentar o alvo espacial, o orçamento e a prova necessária.
+A auditoria confirmou que os elementos exteriores existentes já receberam transformações estáticas extensas e que uma nova variação sem evidência runtime criaria risco cumulativo sem ganho demonstrável. A evidência foi preservada em `reports/r4/ENVIRONMENTAL_REVIEW_042.md`; não houve alteração de produção.
+
+## Entrega aprovada — DEV4-R4-RUNTIME-COMPOSITION-CAPTURE-043
+
+As capturas pós-carregamento das duas rotas R4 confirmaram composição runtime e revelaram uma superfície opaca clara na aproximação `arch_to_forest`. A evidência foi preservada em `reports/r4/RUNTIME_COMPOSITION_CAPTURE_043.md`; não houve alteração de produção.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
+
+Determinar, por isolamento QA, se a superfície opaca observada provém da geometria ou do material do afluente cartográfico. A tarefa não pode alterar o material partilhado, a água R6, as âncoras, as rotas, a câmara, a luz ou a física de produção.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Auditoria e plano modular; nenhuma montagem ou novo elemento antes de evidência espacial |
+| Produção | Nenhuma modificação a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
+| Isolamento | Prova/captura de teste fora da montagem de produção |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
-| Integração R5 | Não alterar módulos, ativos, lógica, iluminação ou acampamento de Dev5 |
-| Dinâmica | Zero luz, colisores, partículas, vento, pós-processamento ou animação |
-| Verificação | Confirmar rota e orçamento antes de propor uma entrega R4 |
+| Integração | Preservar R5 e R6; tratar material partilhado como responsabilidade conjunta |
+| Verificação | Parser, orçamento, porta R4 e três rotas antes de propor correção |
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-ENVIRONMENTAL-REVIEW-042` permanece ACTIVE até que a auditoria escolha um incremento modular R4 rastreável.
+`DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044` permanece ACTIVE até que o diagnóstico identifique uma correção modular segura.
