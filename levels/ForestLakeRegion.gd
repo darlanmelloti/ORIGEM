@@ -43,6 +43,7 @@ const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6Shore
 const R6_WATERLINE_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6WaterlineReading.gd")
 const R6_BASIN_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinArrivalReading.gd")
 const R6_BASIN_VISTA_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinVistaReading.gd")
+const R6_OUTER_WATERLINE_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r6/R6OuterWaterlineSilhouette.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -105,6 +106,7 @@ func _ready() -> void:
 	_build_cartographic_basin_silhouette()
 	_build_r6_basin_vista_reading()
 	_build_riparian_margin()
+	_build_r6_outer_waterline_silhouette()
 	_build_lakeside_focal_vegetation()
 	_build_majestic_ruins_approach_grounding()
 	_apply_riparian_fern_alpha_test()
@@ -2027,6 +2029,16 @@ func _build_riparian_margin() -> void:
 			accent_fern.scale = Vector3(0.46, 0.46, 0.46)
 			accent_fern.rotation.y = 0.28 + float(accent_index) * 0.83
 			margin.add_child(accent_fern)
+
+func _build_r6_outer_waterline_silhouette() -> void:
+	# DEV6-R6-OUTER-WATERLINE-SILHOUETTE-006: ajusta somente acentos rochosos existentes da margem exterior.
+	var margin: Node3D = get_node_or_null("MargensRochosasDoLago") as Node3D
+	if margin == null:
+		push_error("[ORIGEM_R6] Margem rochosa indisponível para silhueta exterior.")
+		return
+	var adjusted: int = int(R6_OUTER_WATERLINE_SILHOUETTE_SCRIPT.call("apply", margin))
+	if adjusted < 1:
+		push_error("[ORIGEM_R6] Não foi possível ajustar os acentos rochosos da margem exterior.")
 
 func _build_majestic_ruins_approach_grounding() -> void:
 	# CP284: três grupos irregulares costuram o fim da expedição Majestic à margem das Ruínas sem fechar a aproximação ocidental.

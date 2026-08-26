@@ -376,6 +376,26 @@ if [[ "$REGION" == "R6" ]]; then
   fi
   printf '[GATE:%s] vista estática da bacia aprovada\n' "$REGION"
 
+  printf '[GATE:%s] prova DEV6-R6-OUTER-WATERLINE-SILHOUETTE-006\n' "$REGION"
+  R6_OUTER_WATERLINE_LOG="/tmp/origem_${REGION}_outer_waterline_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_outer_waterline_silhouette.gd >"$R6_OUTER_WATERLINE_LOG" 2>&1
+  r6_outer_waterline_status=$?
+  set -e
+  if [[ "$r6_outer_waterline_status" -ne 0 ]]; then
+    cat "$R6_OUTER_WATERLINE_LOG"
+    exit 22
+  fi
+  if ! grep -q '\[ORIGEM_R6_OUTER_WATERLINE_OK\]' "$R6_OUTER_WATERLINE_LOG"; then
+    cat "$R6_OUTER_WATERLINE_LOG"
+    exit 22
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_OUTER_WATERLINE_ERROR' "$R6_OUTER_WATERLINE_LOG"; then
+    cat "$R6_OUTER_WATERLINE_LOG"
+    exit 22
+  fi
+  printf '[GATE:%s] silhueta exterior da linha de água aprovada\n' "$REGION"
+
   printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
   R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
   set +e
