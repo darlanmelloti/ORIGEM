@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-EVIDENCE-REVIEW-049
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -146,9 +146,13 @@ Determinar, por isolamento QA, se a superfície opaca observada provém da geome
 
 O diagnóstico foi concluído sem alterar produção. O isolamento confirmou que a faixa deriva de uma lâmina visual ampla combinada com material lacustre opaco e partilhado; transparência, cota, largura e `cull_back` foram testados, rejeitados e revertidos. A evidência e a revisão comparativa foram integradas nos relatórios `CARTOGRAPHIC_INLET_ISOLATION_044.md` e `CARTOGRAPHIC_INLET_VARIANT_REVIEW_047.md`; a porta R4 e as três rotas foram aprovadas.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-EVIDENCE-REVIEW-049
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-EVIDENCE-REVIEW-049
 
-Reconciliar exclusivamente em QA documental a divergência entre o diagnóstico do afluente e o brief ambiental modular. A revisão deve definir uma matriz de responsabilidade R4/R6 e critérios de enquadramento para uma eventual intervenção posterior, mas não pode criar nem ajustar materiais, água, geometria, cota, largura, culling, luzes, colisores, âncoras, rotas, câmara ou física.
+A revisão QA consolidou a matriz de responsabilidades R4/R6 e confirmou que transparência, cota, largura e `cull_back` permanecem rejeitados. A evidência em `reports/r4/CARTOGRAPHIC_INLET_EVIDENCE_REVIEW_049.md` não autoriza produção: qualquer intervenção futura precisa de fonte causal, aprovação conjunta e prova runtime.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+
+Inventariar em QA os ativos e margens já existentes fora do corredor R4 para determinar se existe alguma candidata modular elegível para futura prova. A tarefa limita-se a inventário espacial, distância ao trilho, propriedade R4/R6 e roteiro de captura; não cria, move, instancia, materializa ou oculta qualquer nó.
 
 | Critério | Obrigatório |
 |---|---|
@@ -156,9 +160,9 @@ Reconciliar exclusivamente em QA documental a divergência entre o diagnóstico 
 | Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` como microajustes |
 | R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
 | R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
-| Resultado | Documento de decisão e roteiro QA; nenhuma proposta é autorização de produção |
+| Resultado | Inventário de elegibilidade; não é proposta de produção |
 | Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir a revisão, Dev4 deve avançar para uma nova auditoria QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
+Há exatamente uma tarefa ACTIVE. Ao concluir a auditoria de elegibilidade, Dev4 deve avançar para uma nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
