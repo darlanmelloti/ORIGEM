@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-EDGE-RHYTHM-015
+task_id: DEV4-R4-FOREST-THRESHOLD-READING-016
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -45,6 +45,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-APPROACH-COMPOSITION-014` instalou `ForestApproachComposition.gd`: duas copas focais R4 sem colisores associados foram equilibradas entre `Z=152–174`; uma copa com colisor foi preservada. A prova `[ORIGEM_R4_COMPOSITION_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-EDGE-RHYTHM-015` instalou `ForestEdgeRhythm.gd`: uma pedra húmida R4 existente foi ajustada entre `Z=174–182` para manter a leitura lateral junto ao conector Majestic. A prova `[ORIGEM_R4_EDGE_RHYTHM_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -60,10 +62,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Ritmo do trilho | Lajes preservadas | ≥6 m | 0 luzes e colisores | Aprovada |
 | Margem ambiental | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Composição | Física preservada | ≥6 m | 0 luzes e colisores | Aprovada |
+| Cadência de borda | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-EDGE-RHYTHM-015
+## Tarefa ativa — DEV4-R4-FOREST-THRESHOLD-READING-016
 
-Rever a **cadência da borda R4** usando transformações estáticas de elementos ambientais existentes junto à transição para Majestic. A tarefa deve manter o conector livre e legível sem alterar rota, câmara, lajes, clareira Orion, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface ou narrativa explícita.
+Consolidar a **leitura do limiar R4** com transformações estáticas de detalhes ambientais existentes antes do conector Majestic. A tarefa deve manter a direção visual e o corredor livre sem alterar rota, câmara, lajes, clareira Orion, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface ou narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -76,4 +79,4 @@ Rever a **cadência da borda R4** usando transformações estáticas de elemento
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-THRESHOLD-READING-016` deverá consolidar a leitura do limiar R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-ENTRY-BALANCE-017` deverá reequilibrar a entrada R4 sem modificar a rota, a câmara ou os limites regionais.
