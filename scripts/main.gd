@@ -146,10 +146,19 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("a estrada física R2 desapareceu")
 		if r2.get_node_or_null("ArcoDasRuinas_EstradaDoRio") == null:
 			issues.append("o Arco físico R2 desapareceu")
-		if r2.get_node_or_null("EstacaoDeObservacaoDoReflexoOrion") == null:
+		var station: Node = r2.get_node_or_null("EstacaoDeObservacaoDoReflexoOrion")
+		if station == null:
 			issues.append("a estação arqueológica do reflexo Orion está em falta")
-		elif r2.find_child("LajeDaEstacaoOrion_05", true, false) == null:
+		elif station.find_child("LajeDaEstacaoOrion_05", true, false) == null:
 			issues.append("a estação Orion não possui as cinco lajes físicas esperadas")
+		var lookout: Node = r2.get_node_or_null("MiradouroReflexoOrionR2")
+		if lookout == null:
+			issues.append("o miradouro físico do reflexo Orion está em falta")
+		else:
+			if lookout.get_node_or_null("LajeMiradouroReflexoOrion") == null or lookout.get_node_or_null("ColisorLajeMiradouroReflexoOrion") == null:
+				issues.append("o miradouro Orion não possui laje física e colisor coincidente")
+			if not lookout.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("o miradouro Orion não pode criar luz dinâmica")
 		if not r2.find_children("LuzMarcoVida*", "OmniLight3D", true, false).is_empty():
 			issues.append("os marcos R2 não podem criar luzes dinâmicas")
 		if not r2.find_children("LuzEstacaoOrion*", "OmniLight3D", true, false).is_empty():
@@ -227,7 +236,8 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("o recuo da margem final não pode criar luz dinâmica")
 	if issues.is_empty():
 		print("[ORIGEM_R2_WORLD_LIFE_OK] 3 marcos físicos presentes; estrada e Arco preservados; sem luz dinâmica nova.")
-		print("[ORIGEM_R2_ORION_STATION_OK] estação física de observação presente; reflexão localizada e sem luz dinâmica nova.")
+		print("[ORIGEM_R2_ORION_STATION_OK] estação de observação física do reflexo Orion confirmada")
+		print("[ORIGEM_R2_RIVER_LOOKOUT_030_OK] miradouro físico Orion, laje e colisor confirmados sem luz dinâmica nova.")
 		print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")

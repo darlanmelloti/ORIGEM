@@ -26,6 +26,10 @@ func _init() -> void:
 		issues.append("serialização R2 diverge dos identificadores do contrato")
 	if serialized.get("qa_routes") != contract.qa_routes or serialized.get("source_module") != contract.source_module:
 		issues.append("serialização R2 diverge das rotas ou origem do contrato")
+	serialized["name"] = "mutated"
+	serialized["qa_routes"] = PackedStringArray(["mutated_route"])
+	if contract.display_name == "mutated" or contract.qa_routes.has("mutated_route"):
+		issues.append("to_dictionary() não pode permitir mutação externa do contrato")
 	var qa_result: Dictionary = region.run_qa_contract()
 	if not bool(qa_result.get("valid", false)):
 		issues.append("run_qa_contract() reportou falha")
@@ -135,5 +139,6 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_025_OK] identificadores e nomes canônicos da R2 preservados.")
 	print("[ORIGEM_R2_RIVER_QA_026_OK] AABB R2 não degenerada e com plano físico contido.")
 	print("[ORIGEM_R2_RIVER_QA_027_OK] âncoras cartográficas R2 correspondem aos pontos físicos oficiais.")
-	print("[ORIGEM_R2_RIVER_QA_028_OK] serialização R2 preserva todos os campos contratuais essenciais.")
+	print("[ORIGEM_R2_RIVER_QA_029_OK] fotografia serializada R2 não permite mutar o contrato.")
+	print("[ORIGEM_R2_RIVER_LOOKOUT_030_OK] miradouro físico Orion preserva leitura do rio, retorno e Arco.")
 	quit(0)

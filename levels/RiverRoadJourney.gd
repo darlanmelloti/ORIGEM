@@ -44,6 +44,7 @@ func _ready() -> void:
 	_build_river()
 	_build_first_orion_reflection()
 	_build_orion_reflection_observation_station()
+	_build_orion_reflection_lookout()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -863,6 +864,57 @@ func _build_positive_bridge_approach() -> void:
 				fern.scale = Vector3(0.30 + float(index) * 0.05, 0.30 + float(index) * 0.05, 0.30 + float(index) * 0.05)
 				fern.rotation.y = side * 0.65 + float(index) * 0.42
 				approach_root.add_child(fern)
+
+func _build_orion_reflection_lookout() -> void:
+	# DEV2-R2-RIVER-LOOKOUT-030: micro-miradouro físico para ler o reflexo Orion e reter a orientação de retorno.
+	# Uma única laje lateral cria um ponto jogável, sem corredor novo para o rio, painel, luz ou emissão.
+	var lookout_root: Node3D = Node3D.new()
+	lookout_root.name = "MiradouroReflexoOrionR2"
+	add_child(lookout_root)
+	var lookout_z: float = 56.0
+	var lookout_x: float = _road_x(lookout_z) + 5.90
+	var ground_y: float = _height_at(lookout_x, lookout_z)
+	var lookout_material: StandardMaterial3D = StandardMaterial3D.new()
+	lookout_material.albedo_color = Color(0.16, 0.18, 0.16, 1.0)
+	lookout_material.roughness = 0.91
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(1.48, 0.16, 1.02)
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeMiradouroReflexoOrion"
+	slab.mesh = slab_mesh
+	slab.material_override = lookout_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(lookout_x, ground_y + 0.10, lookout_z)
+	slab.rotation = Vector3(0.02, -0.12, 0.04)
+	lookout_root.add_child(slab)
+	var body: StaticBody3D = StaticBody3D.new()
+	body.name = "ColisorLajeMiradouroReflexoOrion"
+	body.position = slab.position
+	body.rotation = slab.rotation
+	var collision: CollisionShape3D = CollisionShape3D.new()
+	var shape: BoxShape3D = BoxShape3D.new()
+	shape.size = slab_mesh.size
+	collision.shape = shape
+	body.add_child(collision)
+	lookout_root.add_child(body)
+	for index: int in range(2):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraVisadaReflexoOrion_%02d" % (index + 1)
+		var side: float = -1.0 if index == 0 else 1.0
+		stone.position = Vector3(lookout_x + side * 0.78, _height_at(lookout_x + side * 0.78, lookout_z + 0.18) + 0.08, lookout_z + 0.18)
+		stone.scale = Vector3(0.18 + float(index) * 0.03, 0.13 + float(index) * 0.025, 0.20)
+		stone.rotation.y = side * 0.44
+		_apply_material(stone, lookout_material)
+		lookout_root.add_child(stone)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoMiradouroReflexoOrion"
+		fern.position = Vector3(lookout_x + 0.72, _height_at(lookout_x + 0.72, lookout_z - 0.42) + 0.02, lookout_z - 0.42)
+		fern.scale = Vector3(0.24, 0.24, 0.24)
+		fern.rotation.y = 0.52
+		lookout_root.add_child(fern)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
