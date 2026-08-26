@@ -37,6 +37,15 @@ func _init() -> void:
 		issues.append("R2 deve declarar a rota positive_bridge")
 	if not contract.qa_routes.has("road_return_voss"):
 		issues.append("R2 deve declarar a rota road_return_voss")
+	var canonical_routes := PackedStringArray(["road_to_arch", "positive_bridge", "road_return_voss"])
+	if contract.qa_routes.size() != canonical_routes.size():
+		issues.append("R2 deve declarar exatamente três rotas canônicas")
+	for route: String in canonical_routes:
+		if contract.qa_routes.count(route) != 1:
+			issues.append("rota R2 deve ocorrer exatamente uma vez: %s" % route)
+	for route: String in contract.qa_routes:
+		if not canonical_routes.has(route):
+			issues.append("rota R2 não aprovada no contrato: %s" % route)
 	if not contract.source_module.ends_with("levels/RiverRoadJourney.gd"):
 		issues.append("R2 aponta para um módulo de origem inesperado")
 	if contract.bounds.size.z < 88.0 or contract.bounds.size.x < 70.0:
@@ -92,4 +101,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_019_OK] âncoras contratuais de entrada e saída dentro da AABB R2.")
 	print("[ORIGEM_R2_RIVER_QA_020_OK] build R2 idempotente e nó canônico preservado.")
 	print("[ORIGEM_R2_RIVER_QA_021_OK] run_qa_contract R2 retorna metadados canônicos.")
+	print("[ORIGEM_R2_RIVER_QA_022_OK] rotas R2 são canônicas, únicas e sem atalhos extras.")
 	quit(0)
