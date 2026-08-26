@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
+task_id: DEV6-R6-ROUTE-REGRESSION-REPORT-012
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -113,9 +113,13 @@ A sequência pós-publicação R6 adicionou apenas instrumentação QA e documen
 
 A baseline versionada dos vetores `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` foi integrada com tolerâncias explícitas de desvio. A extração, o ficheiro de baseline e a verificação são exclusivamente QA e não alteraram produção, âncoras, água, luz, física, spawn, alvo, velocidade, câmara ou corredor físico.
 
-## Tarefa ativa — DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
+## Entrega aprovada — DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
 
-Criar um orquestrador QA único que execute, em sequência reprodutível, a matriz de captura das rotas, a extração da telemetria e a verificação da baseline. O pipeline deve aceitar um diretório de evidência e não alterar a experiência de jogo.
+A pipeline `run_r6_route_regression_pipeline.sh` executou a matriz de captura, a extração e a baseline das três rotas numa única sequência reprodutível. A execução preservada em `reports/r6/route_regression_pipeline_011/` aprovou as três etapas com desvio máximo `0.000 m` sob tolerância `0.050 m`, sem alterar produção, rotas, água, luz, física ou âncoras.
+
+## Tarefa ativa — DEV6-R6-ROUTE-REGRESSION-REPORT-012
+
+Consolidar uma revisão QA do relatório da pipeline, verificando a presença das três capturas, da telemetria e das somas de integridade. A tarefa consome apenas os artefactos QA já preservados e não altera a experiência de jogo.
 
 | Critério | Obrigatório |
 |---|---|
@@ -123,9 +127,9 @@ Criar um orquestrador QA único que execute, em sequência reprodutível, a matr
 | Rotas | Não modificar spawn, alvo, velocidade, `look_at` ou corredor físico |
 | Água e luz | Sem shader, painel, emissão ou `Light3D` novo |
 | Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de lajes |
-| QA | Executar matriz, extração e baseline com falha imediata em qualquer etapa |
+| QA | Exigir artefactos das três rotas, telemetria, log final e somas SHA-256 consistentes |
 | Validação | Parser, orçamento R6, handoff e três rotas aprovados antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O pipeline pode avançar apenas após produzir capturas, telemetria e baseline aprovadas numa execução completa; a tarefa seguinte deve substituir `DEV6-R6-ROUTE-REGRESSION-PIPELINE-011` em estado `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. A revisão pode avançar apenas após validar os artefactos preservados sem modificar produção; a tarefa seguinte deve substituir `DEV6-R6-ROUTE-REGRESSION-REPORT-012` em estado `ACTIVE`.

@@ -1,0 +1,1 @@
+route=ruins_arrival evidence=/tmp/origem_r6_route_regression_pipeline_stable/r6-route-regression-20260826T102107Z/ruins_arrival/ruins_arrival_postload.png
