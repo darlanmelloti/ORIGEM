@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-EASTERN-MARGIN-REVIEW-015
+task_id: DEV6-R6-EASTERN-MARGIN-CONSOLIDATION-016
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -61,9 +61,13 @@ O módulo `R6EasternMarginReadabilityFinal.gd` ajustou estaticamente os três ve
 
 O módulo `R6EasternMarginObservation.gd` ajustou estaticamente os três vestígios existentes já aprovados pela legibilidade final, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
 
-## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-REVIEW-015
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-REVIEW-015
 
-Auditar e ajustar exclusivamente a revisão estática final de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
+O módulo `R6EasternMarginReview.gd` ajustou estaticamente os três vestígios existentes já aprovados pela observação, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-CONSOLIDATION-016
+
+Auditar e ajustar exclusivamente a consolidação estática final de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
 
 | Critério | Obrigatório |
 |---|---|
@@ -76,4 +80,4 @@ Auditar e ajustar exclusivamente a revisão estática final de elementos R6 exis
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-OBSERVATION-014` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-REVIEW-015`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-REVIEW-015` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-CONSOLIDATION-016`.
