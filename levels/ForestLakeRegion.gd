@@ -41,6 +41,7 @@ const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/
 const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 const R6_WATERLINE_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6WaterlineReading.gd")
+const R6_BASIN_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r6/R6BasinArrivalReading.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -69,6 +70,7 @@ func _ready() -> void:
 	_build_cartographic_river_inlet()
 	_build_shore_access_steps()
 	_build_basin_arrival_frame()
+	_build_r6_basin_arrival_reading()
 	_build_majestic_lake_transition()
 	_build_basin_approach_silhouettes()
 	_build_cartographic_lake_vistas()
@@ -747,6 +749,12 @@ func _build_basin_arrival_frame() -> void:
 		fern.scale = Vector3.ONE * 0.50
 		fern.rotation.y = 0.46
 		frame.add_child(fern)
+
+func _build_r6_basin_arrival_reading() -> void:
+	# DEV6-R6-BASIN-ARRIVAL-READING-004: reorienta vestígios existentes sem acrescentar geometria, luz ou colisão.
+	var reading: R6BasinArrivalReading = R6_BASIN_ARRIVAL_READING_SCRIPT.call("install", self) as R6BasinArrivalReading
+	if reading == null:
+		push_error("[ORIGEM_R6] Não foi possível instalar a leitura da chegada à bacia.")
 
 func _build_majestic_lake_transition() -> void:
 	# Vestígios de observação da Majestic acompanham a chegada ao lago: tornam a transição narrativa física sem bloquear o trilho.

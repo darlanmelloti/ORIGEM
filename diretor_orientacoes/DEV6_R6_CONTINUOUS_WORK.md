@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-BASIN-ARRIVAL-READING-004
+task_id: DEV6-R6-BASIN-VISTA-READING-005
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -29,19 +29,19 @@ O módulo `levels/regions/r6/R6ShoreHandoff.gd` adiciona quatro lajes físicas e
 | Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` aprovadas |
 | QA | Parser, sonda de luz, prova de handoff e porta R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-BASIN-ARRIVAL-READING-004
+## Tarefa ativa — DEV6-R6-BASIN-VISTA-READING-005
 
-Reforçar a leitura estática da chegada à bacia das Ruínas Submersas com elementos R6 já existentes, sem luz, partículas, shader, emissão de água, painel, interface, câmara, rota artificial, colisão adicional ou construção antecipada da R7. A intervenção deve preservar o limiar real das ruínas, a margem navegável, a cascata, as lajes R6→R7 e as três rotas R6.
+Auditar e ajustar exclusivamente a leitura estática da silhueta da bacia usando materiais e elementos R6 existentes. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Novo módulo em `levels/regions/r6/`, QA R6 e montagem mínima em R6 |
-| Cartografia | Âncora R6 e handoff físico para R7 inalterados |
+| Escopo | Material ou transformação estática de elementos R6 existentes; QA R6 e montagem mínima se necessária |
+| Cartografia | Âncora R6, limiar e handoff físico para R7 inalterados |
 | Água | Sem painel, emissão excessiva, nova luz ou shader adicional |
 | Física | Sem novos colisores ou bloqueios no leito, trilho, cascata, estela ou lajes |
 | Luz | `r6_total=4` continua obrigatório |
-| QA | Parser, orçamento R6, provas de linha de água e handoff, e todas as rotas R6 antes do PR |
+| QA | Parser, orçamento R6, provas de linha de água, chegada e handoff, e todas as rotas R6 antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-BASIN-ARRIVAL-READING-004` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-BASIN-VISTA-READING-005` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.

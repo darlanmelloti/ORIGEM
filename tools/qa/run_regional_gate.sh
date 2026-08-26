@@ -336,6 +336,26 @@ if [[ "$REGION" == "R6" ]]; then
   fi
   printf '[GATE:%s] leitura arqueológica da linha de água aprovada\n' "$REGION"
 
+  printf '[GATE:%s] prova DEV6-R6-BASIN-ARRIVAL-READING-004\n' "$REGION"
+  R6_ARRIVAL_LOG="/tmp/origem_${REGION}_arrival_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_basin_arrival_reading.gd >"$R6_ARRIVAL_LOG" 2>&1
+  r6_arrival_status=$?
+  set -e
+  if [[ "$r6_arrival_status" -ne 0 ]]; then
+    cat "$R6_ARRIVAL_LOG"
+    exit 19
+  fi
+  if ! grep -q '\[ORIGEM_R6_ARRIVAL_OK\]' "$R6_ARRIVAL_LOG"; then
+    cat "$R6_ARRIVAL_LOG"
+    exit 19
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_ARRIVAL_ERROR' "$R6_ARRIVAL_LOG"; then
+    cat "$R6_ARRIVAL_LOG"
+    exit 19
+  fi
+  printf '[GATE:%s] leitura da chegada à bacia aprovada\n' "$REGION"
+
   printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
   R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
   set +e
