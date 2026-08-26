@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-GROUND-RHYTHM-010
+task_id: DEV3-R3-ARCH-EXIT-ECHO-011
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -49,18 +49,22 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 
 `R3LeituraDeChegada` reposiciona três grupos de base laterais existentes para clarificar a aproximação R2→R3, sem criar nós visuais, UI, texto, emissão, luz, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_ARRIVAL_CUE_OK]`, parser, porta R3, rotas e captura de aproximação aprovaram a entrega.
 
-## Tarefa ativa — DEV3-R3-ARCH-GROUND-RHYTHM-010
+## Entrega aprovada — DEV3-R3-ARCH-GROUND-RHYTHM-010
 
-A zona de solo lateral junto ao Arco deve receber uma **revisão de ritmo arqueológico baixo**, feita apenas com grupos existentes e sem estreitar a faixa navegável. A tarefa deve apoiar a transição visual entre chegada e passagem, sem adicionar lajes centrais, obstáculos, UI, luzes, emissores, VFX, áudio ou invadir R4.
+`R3RitmoArqueologicoDoSolo` ajusta três grupos baixos laterais existentes para dar cadência material ao solo, sem lajes centrais, nós novos, UI, luz, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_GROUND_RHYTHM_OK]`, parser, porta R3, rotas e captura lateral aprovaram a entrega.
+
+## Tarefa ativa — DEV3-R3-ARCH-EXIT-ECHO-011
+
+O lado de saída do Arco deve receber um **eco arqueológico discreto**, limitado a elementos R3 baixos e laterais já existentes antes da transição para R4. A tarefa não pode antecipar conteúdo da floresta, criar barreira visual, UI, texto, luz, emissor, VFX, áudio, colisão ou alterar a rota `arch_to_forest`.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Solo | Ajustar só grupos baixos laterais existentes; sem lajes centrais, painéis ou obstruções |
+| Saída | Ajustar só elementos R3 baixos e laterais antes de R4; sem conteúdo ou barreira da floresta |
 | Luz | Não adicionar luz dinâmica; manter exatamente as duas luzes locais existentes no Arco |
 | Jogabilidade | Colisores, despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de ritmo de solo e rotas R3 antes de abrir a PR seguinte |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de saída e rotas R3 antes de abrir a PR seguinte |
 
 ## Fecho e avanço obrigatório
 
@@ -68,4 +72,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-ARCH-EXIT-ECHO-011` deverá refinar a leitura arqueológica discreta do lado de saída, sem antecipar ou invadir a floresta R4.
+`DEV3-R3-ARCH-MATERIAL-CONSISTENCY-012` deverá rever a coerência material entre placas, pátina e vestígios, sem ampliar o orçamento visual.
