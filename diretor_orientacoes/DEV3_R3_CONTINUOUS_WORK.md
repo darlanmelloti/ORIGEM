@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-LATERAL-REST-045
+task_id: DEV3-R3-ARCH-MARGIN-STILL-046
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -185,19 +185,21 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 `R3ImobilidadeLateralEstavel` preserva apenas materiais laterais já existentes, herdados de `r3_margin_silence_stillness`, com rugosidade máxima, metalicidade nula e emissão desligada. A camada não cria geometria, texto, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_LATERAL_STILLNESS_CALM_OK]`, o parser e a porta R3 aprovaram a preservação do vão, da transição e das duas luzes locais depois do rebase sobre a integração actualizada; a entrega foi publicada em `fd5ee26`.
 ## Entrega aprovada — DEV3-R3-ARCH-MARGIN-REST-044
 `R3RepousoCalmoDaMargem` preserva apenas materiais R3 já existentes, herdados de `r3_lateral_stillness_calm`, com rugosidade máxima, metalicidade nula e emissão desligada. A camada não cria geometria, texto, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_MARGIN_REST_CALM_OK]`, a captura visual, o parser e a porta R3 aprovaram a preservação do vão, da transição e das duas luzes locais depois da reconciliação `312a729`; a entrega foi publicada em `3ae8b1c`.
-## Tarefa ativa — DEV3-R3-ARCH-LATERAL-REST-045
-A margem lateral do Arco deve manter um **repouso material lateral sem reflexos**, limitado a materiais R3 já existentes e herdados de `r3_margin_rest_calm`. A tarefa conserva apenas a ausência de reflexão lateral sem criar trilho, texto, UI, placas, objetos, geometria, luzes, emissão, VFX, áudio ou colisores; a rota R2→R4 deve permanecer aberta.
+## Entrega aprovada — DEV3-R3-ARCH-LATERAL-REST-045
+`R3RepousoLateralCalmo` preserva apenas materiais laterais R3 já existentes, herdados de `r3_margin_rest_calm`, com rugosidade máxima, metalicidade nula e emissão desligada. A camada não cria geometria, texto, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_LATERAL_REST_CALM_OK]`, a captura visual, o parser e a porta R3 aprovaram a preservação do vão, da transição e das duas luzes locais; a entrega foi publicada em `099a9d3`.
+## Tarefa ativa — DEV3-R3-ARCH-MARGIN-STILL-046
+A margem do Arco deve manter uma **imobilidade material sem reflexos**, limitada a materiais R3 já existentes e herdados de `r3_lateral_rest_calm`. A tarefa conserva apenas a ausência de reflexão na margem sem criar trilho, texto, UI, placas, objetos, geometria, luzes, emissão, VFX, áudio ou colisores; a rota R2→R4 deve permanecer aberta.
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Material | Actuar somente em materiais laterais existentes já marcados `r3_margin_rest_calm`, sem criar trilho ou objectos novos |
+| Material | Actuar somente em materiais existentes já marcados `r3_lateral_rest_calm`, sem criar trilho ou objectos novos |
 | Luz | Não adicionar luz dinâmica; manter exactamente as duas luzes locais existentes no Arco |
 | Jogabilidade | Colisores, despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de repouso lateral e rotas R3 antes de publicar |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de imobilidade da margem e rotas R3 antes de publicar |
 ## Fecho e avanço obrigatório
 
 Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substituição desta secção por outra **Tarefa ativa** com `task_id` novo. A esteira cria ou mantém uma única issue ativa de continuidade do Dev3 e encerra automaticamente as obsoletas.
 
 ## Próxima fila reservada
-`DEV3-R3-ARCH-LATERAL-REST-045` preserva a margem lateral sem reflexos e sem alterar o corredor.
+`DEV3-R3-ARCH-MARGIN-STILL-046` preserva a margem imóvel sem reflexos e sem alterar o corredor.
