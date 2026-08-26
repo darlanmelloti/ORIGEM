@@ -213,6 +213,7 @@ func _register_base_events() -> void:
 		"tablets_united": {"era": Era.MODERN, "description": "Os três fragmentos foram reunidos.", "consequence": "chronos_key_awake", "triggered": false},
 		"captain_kharu_defeated": {"era": Era.MODERN, "description": "O Sentinela Kharu caiu no Santuário da Nascente.", "consequence": "sanctuary_unsealed", "triggered": false},
 		"voss_door_opened": {"era": Era.MODERN, "description": "Elias abriu a porta E da Casa Voss e revelou a Estrada do Rio.", "consequence": "road_to_orion_revealed", "triggered": false},
+		"majestic_orion_trace_discovered": {"era": Era.MODERN, "description": "Elias encontrou uma marca azul no Acampamento Majestic deixada por uma expedição anterior.", "consequence": "majestic_basin_trace_revealed", "triggered": false},
 	}
 
 func _on_era_changed(from_era: String, to_era: String) -> void:
