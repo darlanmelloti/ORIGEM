@@ -32,6 +32,7 @@ const R4_FOREST_SILHOUETTE_CONTINUITY_SCRIPT: Script = preload("res://levels/reg
 const R4_FOREST_DEPTH_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestDepthBalance.gd")
 const R4_FOREST_APPROACH_READABILITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachReadability.gd")
 const R4_FOREST_TRAIL_PACING_SCRIPT: Script = preload("res://levels/regions/r4/ForestTrailPacing.gd")
+const R4_FOREST_MARGIN_CONTINUITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestMarginContinuity.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -80,6 +81,7 @@ func _ready() -> void:
 	_build_r4_depth_balance()
 	_build_r4_approach_readability()
 	_build_r4_trail_pacing()
+	_build_r4_margin_continuity()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -417,6 +419,13 @@ func _build_r4_trail_pacing() -> void:
 	var pacing: R4ForestTrailPacing = R4_FOREST_TRAIL_PACING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestTrailPacing
 	if pacing == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar o ritmo visual do trilho.")
+
+func _build_r4_margin_continuity() -> void:
+	# DEV4-R4-FOREST-MARGIN-CONTINUITY-013: ajusta raízes R4 existentes após a aproximação, sem criar geometrias ou física.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var continuity: R4ForestMarginContinuity = R4_FOREST_MARGIN_CONTINUITY_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestMarginContinuity
+	if continuity == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a continuidade da margem florestal.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
