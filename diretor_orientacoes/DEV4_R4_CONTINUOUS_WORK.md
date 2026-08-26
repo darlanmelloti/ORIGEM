@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-PUBLISH-040
+task_id: DEV4-R4-FOREST-OUTER-POST-PUBLISH-REVIEW-041
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -113,19 +113,23 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 O closeout documental consolidou a cadeia R4 pronta para integração futura. As portas, rotas, clareira Orion, corredor de `≥8 m`, orçamento e bundles foram verificados; não houve alteração adicional ao mundo.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-PUBLISH-040
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-PUBLISH-040
 
-Preparar exclusivamente a publicação segura da cadeia exterior R4 quando o canal oficial recuperar. Antes de qualquer escrita remota, comparar ahead/behind, preservar commits exclusivos, usar a integração ensaiada e nunca reescrever a branch canónica.
+A cadeia exterior R4 foi integrada em *fast-forward* no commit remoto `5e6445b` após reconciliação segura com a integração atual. As portas R4, R5 e R6, as três rotas R4 e a auditoria global de luz foram aprovadas antes da publicação; a CI comum integrada também concluiu com sucesso. Não houve alteração adicional ao mundo nesta entrega documental.
+
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-POST-PUBLISH-REVIEW-041
+
+Consolidar uma revisão pós-publicação exclusivamente documental da R4 integrada, cruzando o commit remoto, a CI comum e os limites já validados. Não criar ou alterar elementos do mundo enquanto a revisão estiver em curso.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Novo módulo em `levels/regions/r4/`, montagem mínima e QA R4 |
+| Escopo | Apenas evidência documental e verificação de estado; não criar módulo ou montagem R4 |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
 | Integração R5 | Não alterar módulos, ativos, lógica, iluminação ou acampamento de Dev5 |
 | Dinâmica | Zero luz, colisores, partículas, vento, pós-processamento ou animação |
-| Verificação | Parser, prova própria, porta R4 e três rotas antes de publicar |
+| Verificação | Confirmar commit integrado, CI comum, porta R4 e três rotas sem alteração de produção |
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-PUBLISH-040` permanece ACTIVE até à recuperação da autenticação oficial; enquanto o canal estiver inválido, manter bundles, ensaios e gates atualizados sem modificar rota, câmara ou limites regionais.
+`DEV4-R4-FOREST-OUTER-POST-PUBLISH-REVIEW-041` permanece ACTIVE até que a revisão documental confirme o estado integrado e avance para uma nova tarefa R4 rastreável.

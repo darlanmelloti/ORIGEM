@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-EASTERN-MARGIN-PUBLISH-025
+task_id: DEV6-R6-ROUTE-TELEMETRY-BASELINE-010
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -101,19 +101,27 @@ O postcheck documental confirmou, com a porta R6 aprovada, que não houve regres
 
 O closeout documental consolidou a cadeia oriental R6 pronta para integração futura. As portas, rotas, handoff, água, orçamento de quatro luzes e bundles foram verificados; não houve alteração adicional ao mundo.
 
-## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-PUBLISH-025
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-PUBLISH-025
 
-Preparar exclusivamente a publicação segura da cadeia oriental R6 quando o canal oficial recuperar. Antes de qualquer escrita remota, comparar ahead/behind, preservar commits exclusivos, usar a integração ensaiada e nunca reescrever a branch canónica.
+A cadeia oriental R6 foi integrada em *fast-forward* no commit remoto `5e6445b` após reconciliação segura com a integração atual. As portas R4, R5 e R6, o orçamento global de luz, o handoff e as três rotas R6 foram aprovados antes da publicação; a CI comum integrada também concluiu com sucesso. Não houve alteração adicional ao mundo nesta entrega documental.
+
+## Entregas QA integradas — DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007 a DEV6-R6-ROUTE-TARGET-TELEMETRY-009
+
+A sequência pós-publicação R6 adicionou apenas instrumentação QA e documentação de captura: protocolo runtime, matriz de capturas e extração de vetores de rota. Estes incrementos não alteraram `ForestLakeRegion.gd`, âncoras, água, luz, física, spawn, alvo, velocidade, câmara ou corredor físico.
+
+## Tarefa ativa — DEV6-R6-ROUTE-TELEMETRY-BASELINE-010
+
+Consolidar os vetores já emitidos por `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` como baseline QA versionada e criar verificação tolerante de desvio. A tarefa consome exclusivamente telemetria runtime existente e não altera o jogo.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Material ou transformação estática de elementos R6 existentes; QA R6 e montagem mínima se necessária |
-| Cartografia | Âncora R6, limiar e handoff físico para R7 inalterados |
-| Água | Sem painel, emissão excessiva, nova luz ou shader adicional |
-| Física | Sem novos colisores ou bloqueios no leito, trilho, cascata, estela ou lajes |
-| Luz | `r6_total=4` continua obrigatório |
-| QA | Parser, orçamento R6, provas de linha de água, chegada, vista, silhueta exterior, margem oriental e handoff, e todas as rotas R6 antes do PR |
+| Produção | Não alterar `ForestLakeRegion.gd`, `TempleLevel.gd`, R7–R12 ou âncoras cartográficas |
+| Rotas | Não modificar spawn, alvo, velocidade, `look_at` ou corredor físico |
+| Água e luz | Sem shader, painel, emissão ou `Light3D` novo |
+| Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de lajes |
+| QA | Baseline e tolerância explícitas; falhar em log ausente ou desvio não permitido |
+| Validação | Parser, orçamento R6, handoff e três rotas aprovados antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-PUBLISH-025`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. A baseline pode avançar apenas após gerar dados versionados e uma verificação atual aprovada sem modificação de produção; a tarefa seguinte deve substituir `DEV6-R6-ROUTE-TELEMETRY-BASELINE-010` em estado `ACTIVE`.
