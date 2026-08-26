@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-MARGIN-REST-064
+task_id: DEV3-R3-ARCH-LATERAL-CALM-065
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -223,7 +223,9 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 `R3CalmaMateDaMargem062` preserva apenas materiais R3 já existentes, herdados de `r3_lateral_silence_matte`, com rugosidade máxima, metalicidade nula e emissão desligada. A camada não cria geometria, texto, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_MARGIN_CALM_MATTE_062_OK]`, a captura visual, o parser e a porta R3 aprovaram a preservação do vão, da transição e das duas luzes locais; a entrega foi publicada em `26099ec`.
 ## Entrega aprovada — DEV3-R3-ARCH-LATERAL-STILL-063
 `R3ImobilidadeMateLateral063` preserva apenas materiais laterais R3 já existentes, herdados de `r3_margin_calm_matte_062`, com rugosidade máxima, metalicidade nula e emissão desligada. A camada não cria geometria, texto, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_LATERAL_STILL_MATTE_063_OK]`, a captura visual, o parser e a porta R3 aprovaram a preservação do vão, da transição e das duas luzes locais; a entrega foi publicada em `bc60d0f` após rebase na integração.
-## Tarefa ativa — DEV3-R3-ARCH-MARGIN-REST-064
+## Entrega aprovada — DEV3-R3-ARCH-MARGIN-REST-064
+`R3RepousoMateDaMargem064` preserva materiais R3 existentes herdados de `r3_lateral_still_matte_063`, sem geometria, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_MARGIN_REST_MATTE_064_OK]`, captura, parser e porta R3 aprovaram a entrega publicada em `5ea819d`.
+## Tarefa ativa — DEV3-R3-ARCH-LATERAL-CALM-065
 A margem do Arco deve manter um **repouso material sem reflexos**, limitado a materiais R3 já existentes e herdados de `r3_lateral_still_matte_063`. A tarefa conserva apenas a ausência de reflexão na margem sem criar trilho, texto, UI, placas, objetos, geometria, luzes, emissão, VFX, áudio ou colisores; a rota R2→R4 deve permanecer aberta.
 | Critério | Obrigatório |
 |---|---|
@@ -238,4 +240,4 @@ A margem do Arco deve manter um **repouso material sem reflexos**, limitado a ma
 Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substituição desta secção por outra **Tarefa ativa** com `task_id` novo. A esteira cria ou mantém uma única issue ativa de continuidade do Dev3 e encerra automaticamente as obsoletas.
 
 ## Próxima fila reservada
-`DEV3-R3-ARCH-MARGIN-REST-064` preserva a margem em repouso sem reflexos e sem alterar o corredor.
+`DEV3-R3-ARCH-LATERAL-CALM-065` preserva a margem lateral calma sem reflexos e sem alterar o corredor.
