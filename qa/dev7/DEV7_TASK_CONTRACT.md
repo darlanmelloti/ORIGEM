@@ -20,21 +20,22 @@
 | `DEV7-R6-ARCHAEOLOGY-QA-OVERRIDE-CAPTURE-003` | **CONCLUÍDA — variante rejeitada** | O par 1600×900 preservou rota, quatro luzes e transformações, mas não demonstrou ganho visual perceptível para recomendar produção. |
 | `DEV7-R6-ARCHAEOLOGY-EVIDENCE-REVIEW-004` | **CONCLUÍDA — conjunto não inequívoco** | A revisão distinguiu os cinco vestígios de entrada das quatro categorias por prefixo da captura. A rejeição de produção permanece e nenhuma nova variante é autorizada. |
 | `DEV7-R6-ARCHAEOLOGY-TARGET-REGISTRY-005` | **CONCLUÍDA — estável pós-canonização** | O inventário de cinco vestígios de entrada e 15 meshes em quatro categorias históricas foi revalidado por `NodePath`, sem escrita de produção. |
+| `DEV7-R6-CHECKPOINT-EVIDENCE-RECONCILIATION-009` | **CONCLUÍDA — checkpoint reconciliado** | Ledger, reconciliações canónicas/remotas e evidências R6 foram preservados; a última CI regular aprovada confirma a elegibilidade técnica, sem autorização de produção. |
 
 ## Tarefa ativa única
 
 | Campo | Valor |
 |---|---|
-| **Task ID** | `DEV7-R6-CHECKPOINT-EVIDENCE-RECONCILIATION-009` |
-| **Estado** | **ACTIVE — reconciliação QA documental, sem mutação de produção** |
+| **Task ID** | `DEV7-R6-POST-CI-CHECKPOINT-ATTESTATION-021` |
+| **Estado** | **ACTIVE — atestação QA documental, sem mutação de produção** |
 | **Região dona** | R6 — Ruínas Submersas / Dev6 |
-| **Objetivo** | Consolidar um ledger determinístico entre evidência QA local, commits Dev7, head da PR #380, base canónica, checkpoint Dev6/R6 015 e revisão Dev6/R6 016, distinguindo validade local, elegibilidade de integração e decisões regionais pendentes. |
+| **Objetivo** | Atestar o checkpoint Dev7 após CI regular aprovada, consolidando gates, invariantes, referências e condições de próximo marco sem interpretar sucesso técnico como autorização artística. |
 | **Permitido** | Inventário documental de hashes, artefactos QA, estados de gates/CI já reportados, invariantes e critérios de próximo marco seguro. |
 | **Proibido** | Nova captura comparativa, nova variante de material, produção, cenas, mesh, nó, água, luz, partícula, colisor, área, rota, largura de trilho, ancoragem, Player ou câmara; bypass, force-push ou novo disparo agressivo de CI. |
 | **Condição para qualquer teste futuro** | Decisão explícita de Dev6/R6 sobre a hipótese visual, conjunto exato de alvos e enquadramento; os checkpoints/revisões Dev6/R6 015 e 016, por si só, não são autorização. Parser, `git diff --check`, gate R6, rota `forest_to_ruins` e auditoria de quatro luzes continuam obrigatórios. |
 | **Handoff** | R6→R7 permanece protegido; a tarefa não antecipa conteúdo R7. |
 
-> A tarefa ativa seguinte é uma reconciliação de checkpoint, não uma variante visual nem uma alteração de produção. O resultado rejeitado da captura 003 mantém-se vinculativo até decisão regional explícita.
+> A tarefa ativa seguinte é uma atestação de checkpoint, não uma variante visual nem uma alteração de produção. O resultado rejeitado da captura 003 mantém-se vinculativo até decisão regional explícita.
 
 ## Cadência de continuidade
 
