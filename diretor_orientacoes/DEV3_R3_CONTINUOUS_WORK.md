@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-EXIT-ECHO-011
+task_id: DEV3-R3-ARCH-MATERIAL-CONSISTENCY-012
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -53,18 +53,22 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 
 `R3RitmoArqueologicoDoSolo` ajusta três grupos baixos laterais existentes para dar cadência material ao solo, sem lajes centrais, nós novos, UI, luz, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_GROUND_RHYTHM_OK]`, parser, porta R3, rotas e captura lateral aprovaram a entrega.
 
-## Tarefa ativa — DEV3-R3-ARCH-EXIT-ECHO-011
+## Entrega aprovada — DEV3-R3-ARCH-EXIT-ECHO-011
 
-O lado de saída do Arco deve receber um **eco arqueológico discreto**, limitado a elementos R3 baixos e laterais já existentes antes da transição para R4. A tarefa não pode antecipar conteúdo da floresta, criar barreira visual, UI, texto, luz, emissor, VFX, áudio, colisão ou alterar a rota `arch_to_forest`.
+`R3EcoArqueologicoDeSaida` ajusta dois vestígios pós-Arco existentes antes do limite R4, sem criar geometria, UI, texto, luz, emissor, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_EXIT_ECHO_OK]`, parser, porta R3, rotas e captura de saída aprovaram a continuidade aberta para a floresta.
+
+## Tarefa ativa — DEV3-R3-ARCH-MATERIAL-CONSISTENCY-012
+
+Os elementos arqueológicos já instalados no Arco devem receber uma **revisão de coerência material**, limitada a propriedades de material e sem ampliar a presença visual. A tarefa deve alinhar placas, seixos, pátina e vestígios, mas não pode criar geometria, UI, texto adicional, luzes, emissões, VFX, áudio, colisores, obstáculos ou alterar a rota R2→R4.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Saída | Ajustar só elementos R3 baixos e laterais antes de R4; sem conteúdo ou barreira da floresta |
+| Material | Ajustar somente materiais existentes; sem geometria, UI, texto, emissão ou luz adicional |
 | Luz | Não adicionar luz dinâmica; manter exatamente as duas luzes locais existentes no Arco |
 | Jogabilidade | Colisores, despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de saída e rotas R3 antes de abrir a PR seguinte |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de coerência material e rotas R3 antes de abrir a PR seguinte |
 
 ## Fecho e avanço obrigatório
 
@@ -72,4 +76,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-ARCH-MATERIAL-CONSISTENCY-012` deverá rever a coerência material entre placas, pátina e vestígios, sem ampliar o orçamento visual.
+`DEV3-R3-ARCH-NARRATIVE-QUIET-013` deverá reforçar a leitura narrativa ambiental sem texto novo, UI ou efeitos adicionais.
