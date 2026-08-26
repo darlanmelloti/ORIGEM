@@ -7,9 +7,14 @@ extends Node3D
 
 const EVENT_ID: String = "r3_arch_awakened"
 const INSCRIPTION_LORE_SCRIPT: Script = preload("res://levels/regions/r3/ArchInscriptionLore.gd")
+const SILENT_CADENCE_DURATION: float = 1.35
+const SILENT_CADENCE_BEATS: int = 3
+const SILENT_CADENCE_SCALE_DELTA: float = 0.12
 
 var awakened: bool = false
 var effect_time: float = 0.0
+var silent_cadence_elapsed: float = 0.0
+var silent_cadence_active: bool = false
 var effect_root: Node3D
 var inscription_left: Label3D
 var inscription_right: Label3D
@@ -39,8 +44,17 @@ func _process(delta: float) -> void:
 	if not awakened or effect_root == null:
 		return
 	effect_time += delta
-	var pulse: float = 1.0 + sin(effect_time * 2.1) * 0.055
-	effect_root.scale = Vector3(pulse, 1.0 + sin(effect_time * 1.6) * 0.025, pulse)
+	if silent_cadence_active:
+		silent_cadence_elapsed += delta
+		var progression: float = clampf(silent_cadence_elapsed / SILENT_CADENCE_DURATION, 0.0, 1.0)
+		var beat: float = pow(sin(progression * PI * float(SILENT_CADENCE_BEATS)), 2.0) * (1.0 - progression * 0.18)
+		var cadence_scale: float = 1.0 + beat * SILENT_CADENCE_SCALE_DELTA
+		effect_root.scale = Vector3(cadence_scale, 1.0 + beat * 0.055, cadence_scale)
+		if progression >= 1.0:
+			silent_cadence_active = false
+		return
+	var pulse: float = 1.0 + sin(effect_time * 2.1) * 0.030
+	effect_root.scale = Vector3(pulse, 1.0 + sin(effect_time * 1.6) * 0.014, pulse)
 
 func save_data() -> Dictionary:
 	return {"awakened": awakened}
@@ -115,14 +129,31 @@ func awake_once() -> bool:
 	if awakened:
 		return false
 	awakened = true
+	effect_time = 0.0
+	silent_cadence_elapsed = 0.0
+	silent_cadence_active = true
 	_apply_awakened_state()
 	EventBus.world_event_triggered.emit(EVENT_ID)
 	EventBus.player_message_requested.emit("As inscrições do Arco despertam: «a pedra recorda; não sigas a luz». ", 3.2)
 	return true
 
+func get_silent_cadence_contract() -> Dictionary:
+	return {
+		"duration_seconds": SILENT_CADENCE_DURATION,
+		"beats": SILENT_CADENCE_BEATS,
+		"scale_delta": SILENT_CADENCE_SCALE_DELTA,
+		"adds_lights": false,
+		"adds_emitters": false,
+		"adds_audio": false
+	}
+
 func _apply_awakened_state() -> void:
 	if effect_root != null:
 		effect_root.visible = awakened
+		if not awakened:
+			effect_root.scale = Vector3.ONE
+			silent_cadence_elapsed = 0.0
+			silent_cadence_active = false
 	if inscription_left != null:
 		inscription_left.modulate = Color(0.25, 0.78, 0.92, 1.0) if awakened else Color(0.46, 0.56, 0.54, 0.92)
 	if inscription_right != null:
