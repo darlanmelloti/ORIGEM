@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-EASTERN-MARGIN-PUBLISH-025
+task_id: DEV6-R6-POST-PUBLISH-INTEGRITY-026
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -114,6 +114,22 @@ Preparar exclusivamente a publicação segura da cadeia oriental R6 quando o can
 | Luz | `r6_total=4` continua obrigatório |
 | QA | Parser, orçamento R6, provas de linha de água, chegada, vista, silhueta exterior, margem oriental e handoff, e todas as rotas R6 antes do PR |
 
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-PUBLISH-025
+
+A publicação segura da cadeia oriental R6 foi concluída pela PR `#282` (`test(dev6): versionar baseline de telemetria R6`), integrada no commit `571f7f17cf7719b282ff4fb6da240914ee22e6d7`. A baseline versionada das três rotas R6 coexistiu com o contrato canônico da margem oriental. No estado integrado, a porta regional R6 passou, as quatro luzes foram mantidas, o handoff físico R6→R7 foi preservado e as rotas `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` permaneceram dentro da tolerância de `0,050 m`.
+
+## Tarefa ativa — DEV6-R6-POST-PUBLISH-INTEGRITY-026
+
+Executar uma auditoria pós-publicação da integração R6. Esta tarefa é deliberadamente restrita à leitura de evidências e à manutenção das provas; não introduzir alteração visual, física, de rota, água, shader, luz ou conteúdo R7 sem uma falha reproduzível no contrato R6.
+
+| Critério | Obrigatório |
+|---|---|
+| Escopo | QA R6, baseline de telemetria e contrato; nenhuma alteração de produção sem causa comprovada |
+| Cartografia | Âncora R6, limiar e handoff físico para R7 inalterados |
+| Água e luz | Sem painel, emissão excessiva, nova luz ou shader adicional; `r6_total=4` permanece obrigatório |
+| Física | Sem novos colisores ou bloqueios no leito, trilho, cascata, estela ou lajes |
+| QA | `run_regional_gate.sh R6`, auditoria de luz, prova de handoff, leituras canônicas e as três rotas R6 antes de qualquer PR |
+
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-PUBLISH-025`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-PUBLISH-025` exige a publicação integrada da baseline, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-POST-PUBLISH-INTEGRITY-026`.
