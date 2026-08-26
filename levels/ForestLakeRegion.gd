@@ -51,6 +51,7 @@ const R6_EASTERN_MARGIN_VISTA_SCRIPT: Script = preload("res://levels/regions/r6/
 const R6_EASTERN_MARGIN_RHYTHM_FINAL_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginRhythmFinal.gd")
 const R6_EASTERN_MARGIN_CLOSURE_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginClosure.gd")
 const R6_EASTERN_MARGIN_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReadabilityFinal.gd")
+const R6_EASTERN_MARGIN_OBSERVATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginObservation.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -116,6 +117,7 @@ func _ready() -> void:
 	_build_r6_eastern_margin_rhythm_final()
 	_build_r6_eastern_margin_closure()
 	_build_r6_eastern_margin_readability_final()
+	_build_r6_eastern_margin_observation()
 	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
 	_build_r6_basin_vista_reading()
@@ -2001,6 +2003,11 @@ func _build_r6_eastern_margin_readability_final() -> void:
 	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
 	if int(R6_EASTERN_MARGIN_READABILITY_FINAL_SCRIPT.call("apply", waterline)) != 3:
 		push_error("[ORIGEM_R6] Não foi possível ajustar a legibilidade final oriental.")
+
+func _build_r6_eastern_margin_observation() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_OBSERVATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a observação oriental estática.")
 
 func _make_elliptical_lake_mesh(radius_x: float, radius_z: float) -> ArrayMesh:
 	var surface: SurfaceTool = SurfaceTool.new()
