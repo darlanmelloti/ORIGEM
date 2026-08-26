@@ -152,7 +152,7 @@ A R2 deve receber uma **leitura física baixa de margem no lado oposto ao retorn
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
 | Narrativa | A margem deve sustentar o retorno Casa Voss e a leitura Orion → Arco sem duplicar marcos |
-| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_RIVERBANK_039_OK]` antes do PR |
+| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_RIVERBANK_042_OK]` antes do PR |
 
 ## Fecho e avanço obrigatório
 

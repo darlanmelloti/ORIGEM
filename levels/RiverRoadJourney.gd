@@ -49,6 +49,7 @@ func _ready() -> void:
 	_build_arch_arrival_landing()
 	_build_midriver_reflection_edge()
 	_build_orion_reflection_marker()
+	_build_return_side_riverbank_reading()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -1092,6 +1093,37 @@ func _build_orion_reflection_marker() -> void:
 		stone.rotation.y = -0.42 + float(index) * 0.72
 		_apply_material(stone, marker_material)
 		marker_root.add_child(stone)
+
+func _build_return_side_riverbank_reading() -> void:
+	# DEV2-R2-RIVER-RIVERBANK-042: leitura baixa da margem no lado oposto ao retorno, fora do leito e sem rota nova.
+	var bank_root: Node3D = Node3D.new()
+	bank_root.name = "LeituraMargemRetornoCasaVossR2"
+	add_child(bank_root)
+	var bank_z: float = 78.0
+	var bank_x: float = _river_x(bank_z) + 6.45
+	var bank_material: StandardMaterial3D = StandardMaterial3D.new()
+	bank_material.albedo_color = Color(0.12, 0.16, 0.15, 1.0)
+	bank_material.roughness = 0.94
+	for index: int in range(2):
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var side: float = -1.0 if index == 0 else 1.0
+		var rock_x: float = bank_x + side * 0.58
+		var rock_z: float = bank_z + float(index) * 0.92
+		rock.name = "PedraLeituraRetornoCasaVoss_%02d" % (index + 1)
+		rock.position = Vector3(rock_x, _height_at(rock_x, rock_z) + 0.04, rock_z)
+		rock.scale = Vector3(0.20 + float(index) * 0.03, 0.13 + float(index) * 0.02, 0.22)
+		rock.rotation.y = side * 0.34
+		_apply_material(rock, bank_material)
+		bank_root.add_child(rock)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoAbertoLeituraRetorno_%02d" % (index + 1)
+			fern.position = Vector3(rock_x - side * 0.64, _height_at(rock_x - side * 0.64, rock_z + 0.24) + 0.02, rock_z + 0.24)
+			fern.scale = Vector3(0.24 + float(index) * 0.035, 0.24 + float(index) * 0.035, 0.24 + float(index) * 0.035)
+			fern.rotation.y = side * 0.46
+			bank_root.add_child(fern)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
