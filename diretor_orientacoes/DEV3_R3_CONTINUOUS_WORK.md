@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-LATERAL-SILENCE-025
+task_id: DEV3-R3-ARCH-MARGIN-STILL-026
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -109,18 +109,22 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 
 `R3QuietudeDaMargem` preserva apenas materiais laterais já existentes, herdados de `r3_lateral_velvet`, com rugosidade discreta, metalicidade nula e emissão desligada. A camada não cria geometria, texto, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_MARGIN_QUIET_OK]`, o parser e a porta R3 aprovaram a preservação do vão, da transição e das duas luzes locais.
 
-## Tarefa ativa — DEV3-R3-ARCH-LATERAL-SILENCE-025
+## Entrega aprovada — DEV3-R3-ARCH-LATERAL-SILENCE-025
 
-A margem lateral do Arco deve preservar um **silêncio material sem competição**, limitado a materiais R3 já existentes e herdados de `r3_margin_quiet`. A tarefa deve manter apenas a ausência de reflexão residual sem criar trilho, texto, UI, placas, objetos, geometria, luzes, emissão, VFX, áudio ou colisores; a rota R2→R4 deve permanecer aberta.
+`R3SilencioLateral` preserva apenas materiais laterais já existentes, herdados de `r3_margin_quiet`, com rugosidade discreta, metalicidade nula e emissão desligada. A camada não cria geometria, texto, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_LATERAL_SILENCE_OK]`, o parser e a porta R3 aprovaram a preservação do vão, da transição e das duas luzes locais.
+
+## Tarefa ativa — DEV3-R3-ARCH-MARGIN-STILL-026
+
+A margem lateral do Arco deve preservar uma **imobilidade material estável**, limitada a materiais R3 já existentes e herdados de `r3_lateral_silence`. A tarefa deve conservar somente o acabamento lateral mate sem criar trilho, texto, UI, placas, objetos, geometria, luzes, emissão, VFX, áudio ou colisores; a rota R2→R4 deve permanecer aberta.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Material | Actuar somente em materiais laterais existentes já marcados `r3_margin_quiet`, sem criar trilho ou objectos novos |
+| Material | Actuar somente em materiais laterais existentes já marcados `r3_lateral_silence`, sem criar trilho ou objectos novos |
 | Luz | Não adicionar luz dinâmica; manter exactamente as duas luzes locais existentes no Arco |
 | Jogabilidade | Colisores, despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de silêncio lateral e rotas R3 antes de publicar |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de imobilidade da margem e rotas R3 antes de publicar |
 
 ## Fecho e avanço obrigatório
 
@@ -128,4 +132,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-ARCH-LATERAL-SILENCE-025` preserva a margem lateral silenciosa sem alterar o corredor.
+`DEV3-R3-ARCH-MARGIN-STILL-026` preserva a margem lateral imóvel sem alterar o corredor.
