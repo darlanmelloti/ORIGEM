@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-ROUTE-REGRESSION-REPORT-012
+task_id: DEV6-R6-VISUAL-DEBT-ASSESSMENT-013
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -117,19 +117,23 @@ A baseline versionada dos vetores `forest_to_ruins`, `majestic_to_lake` e `ruins
 
 A pipeline `run_r6_route_regression_pipeline.sh` executou a matriz de captura, a extração e a baseline das três rotas numa única sequência reprodutível. A execução preservada em `reports/r6/route_regression_pipeline_011/` aprovou as três etapas com desvio máximo `0.000 m` sob tolerância `0.050 m`, sem alterar produção, rotas, água, luz, física ou âncoras.
 
-## Tarefa ativa — DEV6-R6-ROUTE-REGRESSION-REPORT-012
+## Entrega aprovada — DEV6-R6-ROUTE-REGRESSION-REPORT-012
 
-Consolidar uma revisão QA do relatório da pipeline, verificando a presença das três capturas, da telemetria e das somas de integridade. A tarefa consome apenas os artefactos QA já preservados e não altera a experiência de jogo.
+A revisão do relatório confirmou as três capturas runtime, logs, telemetria, marcador final da pipeline e somas SHA-256 consistentes. A evidência foi preservada em `reports/r6/ROUTE_REGRESSION_REPORT_012.md`; não houve alteração de produção nesta entrega.
+
+## Tarefa ativa — DEV6-R6-VISUAL-DEBT-ASSESSMENT-013
+
+Mapear, a partir das capturas runtime R6 aprovadas, os elementos visuais que ainda apresentam leitura de protótipo e preparar um plano artístico modular. Não iniciar alteração de produção antes de delimitar elementos existentes, âncora, rotas, orçamento de quatro luzes e prova de não regressão.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Não alterar `ForestLakeRegion.gd`, `TempleLevel.gd`, R7–R12 ou âncoras cartográficas |
+| Produção | Apenas auditoria e plano; não alterar `ForestLakeRegion.gd`, `TempleLevel.gd`, R7–R12 ou âncoras |
 | Rotas | Não modificar spawn, alvo, velocidade, `look_at` ou corredor físico |
 | Água e luz | Sem shader, painel, emissão ou `Light3D` novo |
 | Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de lajes |
-| QA | Exigir artefactos das três rotas, telemetria, log final e somas SHA-256 consistentes |
-| Validação | Parser, orçamento R6, handoff e três rotas aprovados antes do PR |
+| Visual | Separar dívida visual real de marcadores QA e não mascarar a leitura com efeitos |
+| Validação | Confirmar orçamento R6, handoff e três rotas antes de propor uma entrega artística |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. A revisão pode avançar apenas após validar os artefactos preservados sem modificar produção; a tarefa seguinte deve substituir `DEV6-R6-ROUTE-REGRESSION-REPORT-012` em estado `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. A avaliação deve produzir um plano espacial verificável antes de criar uma nova entrega R6 em estado `ACTIVE`.
