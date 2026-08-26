@@ -47,6 +47,7 @@ const R4_FOREST_OUTER_LATERAL_BALANCE_SCRIPT: Script = preload("res://levels/reg
 const R4_FOREST_OUTER_VISTA_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterVista.gd")
 const R4_FOREST_OUTER_RHYTHM_FINAL_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterRhythmFinal.gd")
 const R4_FOREST_OUTER_CLOSURE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterClosure.gd")
+const R4_FOREST_OUTER_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterReadabilityFinal.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -110,6 +111,7 @@ func _ready() -> void:
 	_build_r4_outer_vista()
 	_build_r4_outer_rhythm_final()
 	_build_r4_outer_closure()
+	_build_r4_outer_readability_final()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -544,6 +546,11 @@ func _build_r4_outer_closure() -> void:
 	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
 	if int(R4_FOREST_OUTER_CLOSURE_SCRIPT.call("apply", forest_root)) != 2:
 		push_error("[ORIGEM_R4] Não foi possível fechar a leitura exterior estática.")
+
+func _build_r4_outer_readability_final() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_READABILITY_FINAL_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível ajustar a legibilidade exterior final.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
