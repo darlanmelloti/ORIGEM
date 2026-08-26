@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-WATERLINE-READING-003
+task_id: DEV6-R6-SHORELINE-LEGIBILITY-005
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -17,31 +17,34 @@ A R6 mantém a âncora cartográfica `(60, 252)`, a ligação Majestic→margem,
 
 O orçamento R6 é exactamente quatro luzes: duas luzes mundiais da bacia, preenchimento de margem e preenchimento submerso central. A sonda `inspect_r6_light_budget.gd` é obrigatória em cada entrega.
 
-## Entrega aprovada — DEV6-R6-SHORE-HANDOFF-002
+## Entrega aprovada — DEV6-R6-WATERLINE-READING-003
 
-O módulo `levels/regions/r6/R6ShoreHandoff.gd` adiciona quatro lajes físicas e dois marcos arqueológicos assimétricos entre a margem R6 e a futura direção da Vila Elevada. Cada laje possui colisor e os marcos ficam dentro da fronteira R6, sem luzes novas. A montagem mínima em `ForestLakeRegion.gd` preserva R5 e todo o cenário de bacia já validado.
+A composição `R6_DetritosLinhaDeAgua` acrescenta nove detritos arqueológicos assimétricos de margem no `ForestLakeRegion.gd`. Os elementos são exclusivamente visuais, ficam fora da elipse de água e do corredor Majestic→R6, e não introduzem luzes, shader, emissão, painel ou colisores.
 
 | Critério | Resultado |
 |---|---|
-| Lajes e colisores | 4 lajes físicas e 4 colisores validados |
-| Marcos | Ocidental e oriental presentes dentro de R6 |
-| Iluminação | Handoff sem `Light3D`; orçamento R6 continua em quatro |
-| Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` aprovadas |
-| QA | Parser, sonda de luz, prova de handoff e porta R6 aprovados |
+| Linha de água | 9 detritos; nenhum dentro da elipse lacustre |
+| Rota | 0 detritos no corredor de chegada e nenhuma alteração nas lajes |
+| Handoff | R6→R7 preservado sem geometria antecipada de R7 |
+| Iluminação | Nenhuma luz nova; orçamento regional permanece em quatro |
+| QA | Parser, sonda de luz, prova de handoff e três rotas R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-WATERLINE-READING-003
+A porta regional do merge canônico registou a aprovação do orçamento de quatro luzes, do handoff R6→R7 e das rotas `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival`.
 
-Melhorar a leitura arqueológica da linha de água junto às ruínas sem adicionar luzes ou novos shaders: compor três conjuntos assimétricos de pedra, raízes ou detritos de expedição parcialmente arrastados pela margem, todos fora do leito jogável e sem bloquear lajes, cascata, estela ou a transição R6→R7. A intenção é reforçar abandono recente e orientar Elias para a margem oposta por geometria real, não por sinalização artificial.
+## Tarefa ativa — DEV6-R6-SHORELINE-LEGIBILITY-005
+
+Inspecionar a legibilidade arqueológica da margem de R6 na chegada, com foco na relação entre os nove detritos de linha de água, a estela `RuneP0_02`, as ruínas submersas e a cascata. A tarefa deve usar a evidência runtime aprovada da porta regional como ponto de partida e permanecer limitada à R6.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Módulo `levels/regions/r6/`, QA R6 e montagem mínima em R6 |
-| Cartografia | Âncora R6 e handoff físico para R7 inalterados |
-| Água | Sem painel, emissão excessiva, nova luz ou shader adicional |
-| Física | Nenhum detrito no leito/trilho jogável; colisores só quando necessários |
+| Linha de água | Detritos distinguíveis da margem e fora do trilho |
+| Estela | `RuneP0_02` acessível e legível na chegada |
+| Ruínas | Pilares e domo legíveis sob a água sem painel adicional |
+| Cascata | Filetes 3D preservados sem luz ou emissão nova |
+| Handoff | R6→R7 apenas visual e físico, sem construção da R7 |
 | Luz | `r6_total=4` continua obrigatório |
 | QA | Parser, orçamento R6, prova de handoff e todas as rotas R6 antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-WATERLINE-READING-003` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-SHORELINE-LEGIBILITY-005` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
