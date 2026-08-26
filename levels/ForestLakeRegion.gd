@@ -2248,6 +2248,56 @@ func _build_waterline_reading() -> void:
 	var reading: R6WaterlineReading = R6_WATERLINE_READING_SCRIPT.call("install", self, ROCK, Callable(self, "_height_at")) as R6WaterlineReading
 	if reading == null:
 		push_error("[ORIGEM_R6] Não foi possível instalar a leitura arqueológica da linha de água.")
+	# DEV6-R6-SHORELINE-LEGIBILITY-005 remoto: detalhes exclusivamente visuais a oeste do corredor Majestic→R6.
+	var debris: Node3D = Node3D.new()
+	debris.name = "R6_DetritosLinhaDeAgua"
+	add_child(debris)
+	var placements: Array[Dictionary] = [
+		{"x": 8.0, "z": 223.5, "s": 0.24, "r": 0.33}, {"x": 39.0, "z": 218.0, "s": 0.31, "r": 1.12},
+		{"x": 68.0, "z": 217.0, "s": 0.22, "r": -0.47}, {"x": 95.0, "z": 224.0, "s": 0.34, "r": 0.86},
+		{"x": 105.0, "z": 247.0, "s": 0.27, "r": 1.74}, {"x": 101.5, "z": 271.0, "s": 0.38, "r": -0.62},
+		{"x": 87.0, "z": 286.0, "s": 0.25, "r": 0.45}, {"x": 38.0, "z": 287.0, "s": 0.36, "r": 2.08}, {"x": 19.0, "z": 272.0, "s": 0.21, "r": -0.28}
+	]
+	for index: int in range(placements.size()):
+		var spec: Dictionary = placements[index]
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var world_x: float = float(spec["x"])
+		var world_z: float = float(spec["z"])
+		var scale_value: float = float(spec["s"])
+		rock.name = "DetritoLinhaAguaR6_%02d" % index
+		rock.position = Vector3(world_x, _height_at(world_x, world_z) + 0.06, world_z)
+		rock.scale = Vector3(scale_value, scale_value * (0.58 + float(index % 3) * 0.16), scale_value * (0.82 + float(index % 2) * 0.14))
+		rock.rotation = Vector3(0.08 * float(index % 2), float(spec["r"]), -0.10 + float(index % 3) * 0.09)
+		_apply_material(rock, ruin_material)
+		debris.add_child(rock)
+	var arrival_reading: Node3D = Node3D.new()
+	arrival_reading.name = "R6_LeituraArqueologicaDaMargem"
+	add_child(arrival_reading)
+	var fragment: Node3D = PILLAR.instantiate() as Node3D
+	if fragment != null:
+		fragment.name = "FragmentoDeColunaMargemR6"
+		fragment.position = Vector3(3.8, _height_at(3.8, 235.0) + 0.12, 235.0)
+		fragment.scale = Vector3(0.42, 0.56, 0.42)
+		fragment.rotation = Vector3(0.18, 0.62, -0.10)
+		_apply_material(fragment, ruin_material)
+		arrival_reading.add_child(fragment)
+	var arrival_rocks: Array[Dictionary] = [{"x": 0.8, "z": 233.6, "s": 0.34, "r": -0.42}, {"x": 7.4, "z": 237.8, "s": 0.27, "r": 0.86}]
+	for index: int in range(arrival_rocks.size()):
+		var spec: Dictionary = arrival_rocks[index]
+		var arrival_rock: Node3D = ROCK.instantiate() as Node3D
+		if arrival_rock == null:
+			continue
+		var arrival_x: float = float(spec["x"])
+		var arrival_z: float = float(spec["z"])
+		var arrival_scale: float = float(spec["s"])
+		arrival_rock.name = "PedraLeituraMargemR6_%02d" % index
+		arrival_rock.position = Vector3(arrival_x, _height_at(arrival_x, arrival_z) + 0.05, arrival_z)
+		arrival_rock.scale = Vector3(arrival_scale, arrival_scale * 0.58, arrival_scale * 0.82)
+		arrival_rock.rotation = Vector3(0.06, float(spec["r"]), -0.08 + float(index) * 0.13)
+		_apply_material(arrival_rock, ruin_material)
+		arrival_reading.add_child(arrival_rock)
 
 func _build_r6_eastern_margin_reading() -> void:
 	# DEV6-R6-EASTERN-MARGIN-READING-007: relê apenas os três vestígios já existentes da margem oriental.
