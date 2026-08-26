@@ -313,6 +313,8 @@ if [[ "$REGION" == "R5" ]]; then
     exit 24
   fi
   printf '[GATE:%s] leitura estática da chegada R5 aprovada\n' "$REGION"
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_edge_reading.gd >/tmp/origem_${REGION}_edge_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_EDGE_OK\]' /tmp/origem_${REGION}_edge_$$.log
 fi
 
 if [[ "$REGION" == "R6" ]]; then

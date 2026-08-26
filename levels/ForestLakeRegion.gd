@@ -40,6 +40,7 @@ const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
 const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
 const R5_MAJESTIC_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampArrivalReading.gd")
+const R5_MAJESTIC_EDGE_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampEdgeReading.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
 var terrain_patch: Node3D
@@ -90,6 +91,7 @@ func _ready() -> void:
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_arrival_reading()
+	_build_r5_majestic_edge_reading()
 	_build_r5_majestic_artifact_trail()
 	_build_r5_majestic_wind_reading()
 	_build_majestic_connector()
@@ -105,6 +107,14 @@ func _ready() -> void:
 	_build_lakeside_focal_vegetation()
 	_build_majestic_ruins_approach_grounding()
 	_apply_riparian_fern_alpha_test()
+
+func _build_r5_majestic_edge_reading() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_error("[ORIGEM_R5] Acampamento indisponível para leitura lateral.")
+		return
+	if int(R5_MAJESTIC_EDGE_READING_SCRIPT.call("apply", camp)) != 3:
+		push_error("[ORIGEM_R5] Não foi possível ajustar os rolos laterais existentes.")
 
 func _build_r5_majestic_arrival_reading() -> void:
 	# DEV5-R5-CAMP-ARRIVAL-READING-004: relê apenas as duas bases de mastro existentes na entrada do acampamento.
