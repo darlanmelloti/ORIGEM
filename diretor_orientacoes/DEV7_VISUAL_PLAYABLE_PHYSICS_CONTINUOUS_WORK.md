@@ -4,7 +4,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV7-R6-ARCHAEOLOGY-MATERIAL-SILHOUETTE-AUDIT-002
+task_id: DEV7-R6-ARCHAEOLOGY-EVIDENCE-REVIEW-004
 owner: Dev7
 branch: dev7/visual-playable-physics
 ```
@@ -21,19 +21,29 @@ A baseline preservou seis capturas runtime 1600×900 em `reports/dev7/visual_pla
 
 A auditoria visual concluiu que a navegação central permanece legível, mas a prioridade artística é hierarquia de material/silhueta em elementos arqueológicos existentes na transição `forest_to_ruins`. Não se recomenda correção de física, luz ou geometria nesta etapa.
 
-## Tarefa ativa — DEV7-R6-ARCHAEOLOGY-MATERIAL-SILHOUETTE-AUDIT-002
+## Entrega aprovada — DEV7-R6-ARCHAEOLOGY-MATERIAL-SILHOUETTE-AUDIT-002
 
-Mapear exclusivamente em QA os meshes arqueológicos existentes e visíveis ao longo de `forest_to_ruins`, classificando forma, material, distância da rota e contraste contra o terreno. A entrega deve simular overrides de material apenas no ambiente de teste, sem escrever em produção, e recomendar no máximo uma alteração modular para decisão do dono R6.
+A auditoria QA localizou quatro marcos arqueológicos existentes na transição `forest_to_ruins`: Estela da Chegada, Marco de Ruína Emergente, Pilar Submerso e Afloramento da Chegada. Foram simuladas quatro variantes de material apenas em memória de teste, sem mutação de produção, e as quatro luzes R6 foram preservadas. A evidência está em `reports/dev7/R6_ARCHAEOLOGY_MATERIAL_SILHOUETTE_AUDIT_002.md`.
+
+## Entrega concluída — DEV7-R6-ARCHAEOLOGY-QA-OVERRIDE-CAPTURE-003
+
+A captura comparativa foi executada pela cena de jogo em OpenGL Compatibility/Xvfb. `baseline.png` e `override.png` foram guardadas em 1600×900, com quatro materiais temporários aplicados apenas em memória QA. O runner confirmou quatro luzes R6, transformações inalteradas, rota `forest_to_ruins` preservada e zero escritas de produção. A porta R6 e a prova própria aprovaram.
+
+A diferença de píxeis é mensurável, mas a leitura do par não demonstra ganho visual suficientemente perceptível num enquadramento representativo de exploração. A variante foi, portanto, rejeitada como recomendação de produção. A evidência integral está em `reports/dev7/r6_archaeology_override_capture_003/VISUAL_AUDIT.md`.
+
+## Tarefa ativa — DEV7-R6-ARCHAEOLOGY-EVIDENCE-REVIEW-004
+
+Reconciliar, estritamente em QA documental, a divergência entre o conjunto de quatro marcos da auditoria/contrato e os cinco vestígios próximos da rota descritos na proposta arquivada. O objetivo é definir se existe um conjunto de alvos e um enquadramento de prova inequívocos para uma decisão futura de Dev6/R6; não é criar uma nova variante de produção.
 
 | Critério | Obrigatório |
 |---|---|
 | Produção | Nenhuma modificação em cenas, `ForestLakeRegion.gd`, água, câmara, Player, luz ou física |
-| Elementos | Apenas ruínas, estelas, pilares e rochas R6 já existentes |
-| Rota | `forest_to_ruins` preservada, sem alteração de largura ou colisão |
+| Elementos | Apenas referências e inventário dos quatro marcos auditados e cinco vestígios já existentes |
+| Rota | `forest_to_ruins` continua protegida, sem alteração de largura ou colisão |
 | Luzes | R6 mantém exatamente quatro; QA não cria `Light3D` |
-| Evidência | Captura 16:9, inventário espacial e auditoria de contraste |
-| Validação | Parser, gate R6 e rota canónica antes de recomendação |
+| Evidência | Revisão rastreável dos alvos, do enquadramento e do resultado rejeitado |
+| Decisão regional | Qualquer implementação continua dependente de decisão explícita de Dev6/R6 |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir a auditoria, Dev7 deve avançar para uma tarefa de proposta modular `...-003`, ou para uma revisão de evidências se a alteração não for segura. Publicação, CI, dependência ou indisponibilidade transitória não são motivo de paragem.
+Há exatamente uma tarefa ACTIVE. Ao concluir a revisão de evidências, Dev7 deve avançar para a próxima auditoria QA rastreável, mantendo a rejeição de produção enquanto não existir decisão explícita do dono R6. Publicação, CI, dependência ou indisponibilidade transitória não são motivo de paragem.

@@ -13,20 +13,22 @@
 | Task ID | Estado | Resultado |
 |---|---|---|
 | `DEV7-VISUAL-PLAYABLE-PHYSICS-BASELINE-001` | **CONCLUÍDA** | Evidência runtime e física preservada em `reports/dev7/visual_playable_physics_baseline_001/`, sem alteração de produção. |
-| `DEV7-R6-ARCHAEOLOGY-MATERIAL-SILHOUETTE-AUDIT-002` | **CONCLUÍDA** | Inventário espacial, auditoria de contraste e simulação de override QA concluídos sem escrever cenas, recursos R6, luz, água, física, Player, câmara ou ancoragens. A auditoria recomenda uma única candidata modular para decisão do dono R6. |
+| `DEV7-R6-ARCHAEOLOGY-MATERIAL-SILHOUETTE-AUDIT-002` | **CONCLUÍDA** | Inventário espacial, auditoria de contraste e simulação de override QA concluídos sem escrever cenas, recursos R6, luz, água, física, Player, câmara ou ancoragens. A auditoria documenta uma candidata modular, mas não autoriza alteração de produção. |
+| `DEV7-R6-ARCHAEOLOGY-CONTRAST-PROPOSAL-003` | **CONCLUÍDA COMO ESPECIFICAÇÃO QA** | Perfil não emissivo e reversível arquivado para eventual decisão do dono R6; não existe implementação de produção nesta entrega. |
+| `DEV7-R6-ARCHAEOLOGY-QA-OVERRIDE-CAPTURE-003` | **CONCLUÍDA — variante rejeitada para produção** | Par 1600×900 executado na cena de jogo; quatro overrides temporários, quatro luzes R6, rota e transformações preservadas. A diferença é tecnicamente mensurável, mas não cria ganho visual suficientemente legível. Evidência em `reports/dev7/r6_archaeology_override_capture_003/`. |
 
 ## Tarefa ativa única
 
 | Campo | Valor |
 |---|---|
-| **Task ID** | `DEV7-R6-ARCHAEOLOGY-CONTRAST-PROPOSAL-003` |
-| **Estado** | **ACTIVE — AGUARDA DECISÃO EXPLÍCITA DO DONO R6 PARA PRODUÇÃO** |
+| **Task ID** | `DEV7-R6-ARCHAEOLOGY-EVIDENCE-REVIEW-004` |
+| **Estado** | **ACTIVE — revisão QA contínua, sem mutação de produção** |
 | **Região dona** | R6 — Ruínas Submersas / Dev6 |
-| **Objetivo** | Preparar a proposta modular de `Perfil de Contraste de Entrada da Bacia` apenas como especificação e bundle QA, limitada aos cinco pilares R6 existentes identificados na auditoria. |
-| **Candidata** | Override local de material não emissivo, reutilizando texturas arqueológicas existentes e sem alterar materiais partilhados globalmente. |
-| **Escopo permitido em QA** | Mockups, comparação de albedo/rugosidade, inventário de referências e roteiro de validação. |
+| **Objetivo** | Reconciliar a divergência entre os quatro marcos do contrato ativo e os cinco vestígios da proposta arquivada, avaliando apenas a suficiência da evidência e do enquadramento para decisão futura. |
+| **Entrada obrigatória** | `reports/dev7/r6_archaeology_override_capture_003/VISUAL_AUDIT.md`, que rejeitou a variante temporária como recomendação de produção por falta de ganho visual legível. |
+| **Escopo permitido em QA** | Inventário de referências, revisão de enquadramento, comparação documental e roteiro de validação; não criar uma segunda variante de produção. |
 | **Limites de produção** | Nenhuma cena, mesh, nó, água, luz, partícula, colisor, área, rota, largura de trilho, ancoragem, Player ou câmara pode ser alterado por Dev7. |
-| **Condição para implementação regional** | Aprovação explícita de Dev6/R6 e execução de parser Godot 4.7.1, `git diff --check`, gate R6, rota `forest_to_ruins` e auditoria R6 de quatro luzes. |
-| **Handoff** | R6→R7 permanece protegido; a proposta não antecipa conteúdo R7. |
+| **Condição para eventual implementação regional** | Apenas decisão explícita posterior de Dev6/R6, com escopo de alvos inequívoco, evidência visual legível e parser Godot 4.7.1, `git diff --check`, gate R6, rota `forest_to_ruins` e auditoria R6 de quatro luzes. |
+| **Handoff** | R6→R7 permanece protegido; a tarefa não antecipa conteúdo R7. |
 
-> A tarefa ativa seguinte é de **proposta**, não de implementação. Dev7 não transforma a recomendação em alteração de produção sem autorização do dono regional.
+> A tarefa ativa é uma **revisão QA contínua**, não uma espera por produção. Dev7 avança apenas com análise de evidência e fronteira de propriedade R6 preservada.
