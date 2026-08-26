@@ -43,3 +43,21 @@ Os avisos `ERROR: Parameter "material" is null.` que podem surgir no encerrament
 ## Continuidade operacional
 
 O marcador oficial permanece `DEV4-R4-FOREST-OUTER-PUBLISH-MONITOR-042` com estado **ACTIVE**, conforme o contrato de trabalho contínuo Dev4. A próxima passagem deve voltar a comparar a ponta remota, verificar a integração R1–R6 e executar parser, porta R4 e as três rotas antes de publicar qualquer novo registo. Enquanto não existir uma alteração canónica de contrato, esta tarefa não cria módulos, QA de mundo nem mudanças de composição R4.
+
+## Actualização — segunda reconciliação documental
+
+Após a primeira publicação da monitorização, a integração R1–R6 avançou para `2bddf396` com alterações apenas nos marcadores contínuos Dev4–Dev6. A reconciliação foi concluída em `efc12353`. O único conflito foi documental no marcador Dev4: foi preservada a versão já publicada da branch Dev4, que contém o pós-check 041 e a monitorização 042, cronologicamente posteriores ao marcador 041 presente na integração. Os avanços documentais R5–R6 foram aceites sem alteração de conteúdo dessas regiões.
+
+| Controlo pós-reconciliação | Resultado |
+|---|---|
+| Conflito Dev4 | Resolvido mantendo o contrato activo `DEV4-R4-FOREST-OUTER-PUBLISH-MONITOR-042` |
+| Conteúdo R4, QA e relatórios exclusivos | Preservados |
+| Parser Godot headless | Aprovado |
+| Porta canónica R4 | `[GATE:R4] PASS` |
+| `arch_to_forest` | Aprovada |
+| `forest_to_majestic` | Aprovada |
+| `forest_to_ruins` | Aprovada |
+
+> `[ORIGEM_R4_MONITOR_042_INTEGRATION2_OK]`
+
+A resolução não modificou o mundo R4. Os avisos de material nulo do backend dummy, quando presentes ao encerrar o harness, continuam a ser ruído pós-validação e não uma regressão, pois parser, porta e rotas foram aprovados.
