@@ -1,0 +1,63 @@
+DEV7-CI-R5-PLATFORM-RETENTION-013
+observed_utc=2026-08-26T18:13:16Z
+--- workflow_run ---
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m""[m[1;38m,[m
+[1;34m"head"[m[1;38m:[m [32m"833e01f2466fc6a9a5343ca050c126ef57f25f0a"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"in_progress"[m[1;38m,[m
+[1;34m"url"[m[1;38m:[m [32m"https://github.com/darlanmelloti/ORIGEM/actions/runs/32995892692"[m
+[1;38m}[m
+--- r5_job ---
+[1;38m{[m
+[1;34m"completed_at"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"conclusion"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"id"[m[1;38m:[m 98264950721[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Porta regional R5"[m[1;38m,[m
+[1;34m"runner_name"[m[1;38m:[m [32m"GitHub Actions 1000002796"[m[1;38m,[m
+[1;34m"started_at"[m[1;38m:[m [32m"2026-08-26T17:44:44Z"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"in_progress"[m[1;38m,[m
+[1;34m"steps"[m[1;38m:[m [1;38m[[m
+[1;38m{[m
+[1;34m"completed_at"[m[1;38m:[m [32m"2026-08-26T17:44:45Z"[m[1;38m,[m
+[1;34m"conclusion"[m[1;38m:[m [32m"success"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Set up job"[m[1;38m,[m
+[1;34m"started_at"[m[1;38m:[m [32m"2026-08-26T17:44:44Z"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"completed"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"completed_at"[m[1;38m:[m [32m"2026-08-26T18:12:51Z"[m[1;38m,[m
+[1;34m"conclusion"[m[1;38m:[m [32m"success"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Obter código"[m[1;38m,[m
+[1;34m"started_at"[m[1;38m:[m [32m"2026-08-26T17:44:45Z"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"completed"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"completed_at"[m[1;38m:[m [32m"2026-08-26T18:12:53Z"[m[1;38m,[m
+[1;34m"conclusion"[m[1;38m:[m [32m"success"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Instalar Godot 4.7.1"[m[1;38m,[m
+[1;34m"started_at"[m[1;38m:[m [32m"2026-08-26T18:12:51Z"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"completed"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"completed_at"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"conclusion"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Executar parser, contratos e rotas"[m[1;38m,[m
+[1;34m"started_at"[m[1;38m:[m [32m"2026-08-26T18:12:53Z"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"in_progress"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"completed_at"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"conclusion"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Guardar evidências de falha"[m[1;38m,[m
+[1;34m"started_at"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"pending"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"completed_at"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"conclusion"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Post Obter código"[m[1;38m,[m
+[1;34m"started_at"[m[1;38m:[m [36mnull[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"pending"[m
+[1;38m}[m
+[1;38m][m
+[1;38m}[m

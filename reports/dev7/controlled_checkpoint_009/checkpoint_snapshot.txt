@@ -1,0 +1,94 @@
+DEV7-CHECKPOINT-EVIDENCE-RECONCILIATION-009
+--- commits ---
+head=5958a1a9175eb926131eccd4b6149976365003a5
+dev7_remote=5958a1a9175eb926131eccd4b6149976365003a5
+canonical_base=b58aadeb0406aeaaa3edf33c7a74a04d28356d67
+dev7_ahead_behind_canonical=11	0
+--- pr_380 ---
+[1;38m{[m
+[1;34m"base"[m[1;38m:[m [32m"b58aadeb0406aeaaa3edf33c7a74a04d28356d67"[m[1;38m,[m
+[1;34m"checks"[m[1;38m:[m [1;38m[[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Determinar regiões afetadas"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Orçamento global de luz"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Porta regional R2"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Porta regional R3"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Porta regional R4"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Porta regional R5"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Porta regional R6"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Dev2 — próxima tarefa ativa"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Dev3 — próxima tarefa ativa"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Dev4 — próxima tarefa ativa"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Dev5 — próxima tarefa ativa"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"Dev6 — próxima tarefa ativa"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m[1;38m,[m
+[1;38m{[m
+[1;34m"conclusion"[m[1;38m:[m [32m"SUCCESS"[m[1;38m,[m
+[1;34m"name"[m[1;38m:[m [32m"ORIGEM Regional Gate"[m[1;38m,[m
+[1;34m"status"[m[1;38m:[m [32m"COMPLETED"[m
+[1;38m}[m
+[1;38m][m[1;38m,[m
+[1;34m"head"[m[1;38m:[m [32m"5958a1a9175eb926131eccd4b6149976365003a5"[m[1;38m,[m
+[1;34m"merge_state"[m[1;38m:[m [32m"CLEAN"[m[1;38m,[m
+[1;34m"state"[m[1;38m:[m [32m"OPEN"[m[1;38m,[m
+[1;34m"url"[m[1;38m:[m [32m"https://github.com/darlanmelloti/ORIGEM/pull/380"[m
+[1;38m}[m
+--- evidence_sha256 ---
+d7a9581a92fd3a40030ccb88d96ce89d6b5fafc48860174de05be6f11fecdd30  reports/dev7/visual_playable_physics_baseline_001/BASELINE_REPORT.md
+71b6160b3ab3b6e1e0c7e7e0c17c43ef4fee423d019a612fae4175cf3be87da5  reports/dev7/R6_ARCHAEOLOGY_MATERIAL_SILHOUETTE_AUDIT_002.md
+6960dfbebe9c62b1abf988fd446abe19c1c1a78859e0d9d4da01c6a6b128d6bd  reports/dev7/r6_archaeology_override_capture_003/VISUAL_AUDIT.md
+0d314d742deea66c1bf75d51c854a0bee1188dc064ff734c2fbdda70aad0629d  reports/dev7/R6_ARCHAEOLOGY_EVIDENCE_REVIEW_004.md
+d3c3771936cf1ef363b0d20b0a6e28f803f03a6a87fa4e5f76593d8086060694  reports/dev7/R6_ARCHAEOLOGY_TARGET_REGISTRY_005.md
+3e72948abc1f99b84e527f78020663edcba66d9522f230ece9587d8ba1314a98  reports/dev7/continuous_registry_audit_007/R6_POSTCANONICAL_REGISTRY_AUDIT_007.md
+39d04df3191e7cef601c46ca7d47913517e2c784cdaea2fb749fb6eb6fe10be0  reports/dev7/continuous_registry_audit_007/INTEGRATION_CI_POLICY_AUDIT_008.md
+5175d79df0cda0ef1739b82f6255fbd349f633c9bce42f9c91d7d11d7a3674a7  qa/dev7/DEV7_TASK_CONTRACT.md
+--- local_gates ---
+[GATE:R6] PASS
+[QA-BUDGET-01] result=PASS
+nodepaths_unchanged=true (diff vazio verificado)
