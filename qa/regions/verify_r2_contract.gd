@@ -41,6 +41,9 @@ func _init() -> void:
 	for required_term: String in ["rota", "reflexo", "ponte", "luz"]:
 		if not acceptance_text.contains(required_term):
 			issues.append("critérios R2 devem cobrir explicitamente: %s" % required_term)
+	for required_term: String in ["orion", "não torna a água emissiva", "não compete"]:
+		if not acceptance_text.contains(required_term):
+			issues.append("critérios R2 devem preservar a restrição: %s" % required_term)
 	if not contract.is_world_position_inside(Vector3(-21.4, 0.0, 12.0)):
 		issues.append("âncora física de entrada da R2 está fora da AABB")
 	if not contract.is_world_position_inside(Vector3(-10.0, 0.0, 92.0)):
@@ -54,4 +57,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_014_OK] contrato R2 preserva as três rotas canônicas e o proprietário Dev2.")
 	print("[ORIGEM_R2_RIVER_QA_015_OK] critérios de aceitação, origem e limites físicos R2 completos.")
 	print("[ORIGEM_R2_RIVER_QA_016_OK] critérios R2 cobrem rota, reflexo, ponte e iluminação.")
+	print("[ORIGEM_R2_RIVER_QA_017_OK] restrições de Orion, água não emissiva e ponte preservadas.")
 	quit(0)
