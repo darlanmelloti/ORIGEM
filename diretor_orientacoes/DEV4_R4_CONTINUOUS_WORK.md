@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-CORRECTION-045
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-RUNTIME-REVIEW-046
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -133,20 +133,24 @@ As capturas pós-carregamento das duas rotas R4 confirmaram composição runtime
 
 A prova isolada confirmou que a lâmina `LaminaDoAfluenteCartografico` é a geometria observada e que a opacidade plena decorre do material lacustre partilhado, configurado com `depth_draw_opaque` e `ALPHA = 1.0`. O controlo transparente QA preservou a geometria e confirmou que a produção permaneceu intacta. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MATERIAL_ISOLATION_044.md`; parser, orçamento, porta R4 e as três rotas foram aprovados sem alteração de produção.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-CORRECTION-045
+## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-CORRECTION-045
 
-Avaliar e, apenas se a prova conjunta R4/R6 o sustentar, instalar uma correcção modular de material **exclusiva da lâmina do afluente cartográfico**. Não alterar `_create_lake_material()`, água R6, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física. A geometria, posições, largura, corredor e ausência de colisão do afluente devem permanecer idênticos.
+A correcção modular instalou `ForestCartographicInletMaterial.gd` somente na lâmina `LaminaDoAfluenteCartografico`. A geometria e o traçado do afluente foram preservados; o material local usa mistura alfa, `depth_prepass_alpha` e `ALPHA = 0.68`, enquanto a fábrica lacustre partilhada e a água R6 permanecem inalteradas. As provas conjunta R4/R6, parser, orçamento, portas R4/R6 e três rotas R4 foram aprovados. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_CORRECTION_045.md`.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-RUNTIME-REVIEW-046
+
+Capturar e rever exclusivamente a rota `arch_to_forest` após a estabilização runtime para confirmar que a superfície opaca clara foi mitigada pela correcção local. A tarefa é documental e de QA: não alterar produção, `_create_lake_material()`, água R6, `ForestLakeRegion.gd`, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Alteração apenas local e aditiva à instância `LaminaDoAfluenteCartografico`; não alterar material partilhado |
-| Prova conjunta | Confirmar a não regressão de R4 e R6 antes de publicar qualquer material local |
+| Produção | Zero alterações de produção nesta tarefa de revisão |
+| Evidência | Captura runtime da rota `arch_to_forest` e comparação com a evidência 043/044 |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
 | Integração | Preservar R5 e R6; não modificar activos, lógica, iluminação, água ou rotas dessas frentes |
 | Dinâmica | Zero luzes, colisores, partículas, vento, animação, pós-processamento ou física nova |
-| Verificação | Parser, prova própria, orçamento, porta R4 e três rotas antes de publicar |
+| Verificação | Parser, orçamento, porta R4 e três rotas antes de publicar a revisão |
 
 ## Próxima fila reservada
 
-`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-CORRECTION-045` permanece ACTIVE até que uma correcção local seja demonstrada segura pela evidência conjunta R4/R6.
+`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-RUNTIME-REVIEW-046` permanece ACTIVE até que a captura runtime confirme a mitigação sem regressão de rota ou integração.

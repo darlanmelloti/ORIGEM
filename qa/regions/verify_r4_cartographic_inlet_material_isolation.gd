@@ -39,10 +39,13 @@ func _verify() -> void:
 	var production_material := water_mesh.surface_get_material(0) as ShaderMaterial
 	var shader := production_material.shader as Shader if production_material != null else null
 	var shader_code := shader.code if shader != null else ""
-	var opaque_material_isolated := production_material != null \
+	# Antes da correcção 045, a instância usava a variante opaca partilhada.
+	# Depois da correcção, esta mesma prova confirma que a origem continua material,
+	# agora por uma variante local transparente, sem alterar a geometria.
+	var material_contract_isolated := production_material != null \
 		and shader != null \
-		and shader_code.contains("depth_draw_opaque") \
-		and shader_code.contains("ALPHA = 1.0")
+		and ((shader_code.contains("depth_draw_opaque") and shader_code.contains("ALPHA = 1.0")) \
+			or (shader_code.contains("depth_prepass_alpha") and shader_code.contains("ALPHA = 0.68")))
 
 	# A malha de controlo é duplicada e recebe material transparente somente no nó QA.
 	# A superfície de produção não recebe override, não é movida e conserva o mesmo material.
@@ -70,11 +73,11 @@ func _verify() -> void:
 
 	qa_root.queue_free()
 	region.queue_free()
-	if geometry_isolated and opaque_material_isolated and control_preserves_geometry and production_unchanged:
-		print("[ORIGEM_R4_INLET_ISOLATION_OK] geometria=malha afluente 24 vértices/4 segmentos; opacidade=material lacustre partilhado depth_draw_opaque+ALPHA=1.0; controlo transparente preserva geometria; produção intacta.")
+	if geometry_isolated and material_contract_isolated and control_preserves_geometry and production_unchanged:
+		print("[ORIGEM_R4_INLET_ISOLATION_OK] geometria=malha afluente 24 vértices/4 segmentos; origem=contrato de material isolado; controlo transparente preserva geometria; produção intacta.")
 		quit()
 		return
-	_fail("geometria=%s opaco=%s controlo=%s produção=%s" % [geometry_isolated, opaque_material_isolated, control_preserves_geometry, production_unchanged])
+	_fail("geometria=%s material=%s controlo=%s produção=%s" % [geometry_isolated, material_contract_isolated, control_preserves_geometry, production_unchanged])
 
 func _fail(detail: String) -> void:
 	printerr("[ORIGEM_R4_INLET_ISOLATION_ERROR] %s" % detail)

@@ -58,6 +58,7 @@ const R4_FOREST_OUTER_CHECK_SCRIPT: Script = preload("res://levels/regions/r4/Fo
 const R4_FOREST_OUTER_FINALIZATION_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterFinalization.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
+const R4_CARTOGRAPHIC_INLET_MATERIAL_SCRIPT: Script = preload("res://levels/regions/r4/ForestCartographicInletMaterial.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
 const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
 const R5_MAJESTIC_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampArrivalReading.gd")
@@ -875,7 +876,11 @@ func _build_cartographic_river_inlet() -> void:
 		surface.add_vertex(left_b)
 	surface.generate_normals()
 	var water_mesh: ArrayMesh = surface.commit()
-	water_mesh.surface_set_material(0, _create_lake_material())
+	var inlet_material := R4_CARTOGRAPHIC_INLET_MATERIAL_SCRIPT.call("make_material") as ShaderMaterial
+	if inlet_material == null:
+		push_error("[ORIGEM_R4] Material local do afluente indisponível.")
+		return
+	water_mesh.surface_set_material(0, inlet_material)
 	var water: MeshInstance3D = MeshInstance3D.new()
 	water.name = "LaminaDoAfluenteCartografico"
 	water.mesh = water_mesh
