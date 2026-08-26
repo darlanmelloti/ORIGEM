@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-POSTCHECK-020
+task_id: DEV5-R5-CAMP-CLOSEOUT-021
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -97,9 +97,13 @@ O módulo `MajesticCampFinalization.gd` ajustou estaticamente duas caixas visuai
 
 A validação documental da cadeia do Acampamento Majestic foi consolidada. A porta R5 e as duas rotas foram aprovadas, com caixas existentes, colisores, conectores e orçamento preservados; não foi feita alteração adicional ao mundo.
 
-## Tarefa ativa — DEV5-R5-CAMP-POSTCHECK-020
+## Entrega aprovada — DEV5-R5-CAMP-POSTCHECK-020
 
-Auditar exclusivamente a revisão posterior estática do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
+O postcheck documental confirmou, com a porta R5 aprovada, que não houve regressão após o arquivo. Caixas, colisores, rotas, orçamento e conectores permanecem preservados; não foi feita alteração adicional ao mundo.
+
+## Tarefa ativa — DEV5-R5-CAMP-CLOSEOUT-021
+
+Consolidar exclusivamente o closeout documental do Acampamento Majestic para a integração futura, sem alterar geometria, luz, física, partículas, shader, interface, câmara, rota, conectores ou módulos de outras regiões.
 
 | Critério | Obrigatório |
 |---|---|
@@ -111,4 +115,4 @@ Auditar exclusivamente a revisão posterior estática do Acampamento Majestic co
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-ARCHIVE-019` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-POSTCHECK-020`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-POSTCHECK-020` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-CLOSEOUT-021`.
