@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-VISTA-READING-006
+task_id: DEV5-R5-CAMP-FOCAL-READING-007
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -41,9 +41,13 @@ O módulo `levels/regions/r5/MajesticCampArrivalReading.gd` ajustou estaticament
 
 O módulo `MajesticCampEdgeReading.gd` ajustou estaticamente três rolos de campo R5 já existentes, sem criar geometria, luz, colisores, efeitos, interface ou alterações de rota. A prova `[ORIGEM_R5_EDGE_OK]`, a porta R5 cumulativa e as rotas `forest_to_majestic` e `majestic_to_lake` foram aprovadas.
 
-## Tarefa ativa — DEV5-R5-CAMP-VISTA-READING-006
+## Entrega aprovada — DEV5-R5-CAMP-VISTA-READING-006
 
-Refinar exclusivamente a leitura estática da vista do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
+O módulo `MajesticCampVistaReading.gd` ajustou estaticamente duas costuras de tenda R5 já existentes, sem alterar posições, geometria, luzes, colisores, efeitos, interface, câmara ou rotas. A prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Tarefa ativa — DEV5-R5-CAMP-FOCAL-READING-007
+
+Refinar exclusivamente a leitura estática do foco do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
 
 | Critério | Obrigatório |
 |---|---|
@@ -55,4 +59,4 @@ Refinar exclusivamente a leitura estática da vista do Acampamento Majestic com 
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-EDGE-READING-005` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-VISTA-READING-006`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-VISTA-READING-006` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-FOCAL-READING-007`.
