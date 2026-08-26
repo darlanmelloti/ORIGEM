@@ -6,8 +6,8 @@
 | `branch` | `dev8/cartographic-fidelity` |
 | `issue` | #393 |
 | `status` | ACTIVE |
-| `task_id` | `DEV8-CARTOGRAPHIC-DISCOVERY-STATE-HYPOTHESIS-002` |
-| `scope` | Auditoria QA somente de leitura do estado narrativo de descoberta que afecta o marcador e o destino do mapa nas transições R1–R6. |
+| `task_id` | `DEV8-CARTOGRAPHIC-DISCOVERY-EVIDENCE-REVIEW-004` |
+| `scope` | Revisão QA somente de leitura da evidência da descoberta narrativa que afecta o marcador e o destino do mapa nas transições R1–R6. |
 
 ## Invariantes
 
@@ -36,9 +36,14 @@ A tarefa será `CONCLUIDA` somente se as capturas e a telemetria estiverem versi
 - Parser Godot e porta cumulativa R2 passaram; a entrega não modifica produção.
 - A expectativa da Estrada do Rio permanece destino 2. A autoridade devolve 2 em `z=12`; a alegação de destino 3 foi rejeitada por execução real.
 
-## Tarefa ativa — DEV8-CARTOGRAPHIC-DISCOVERY-STATE-HYPOTHESIS-002
+## Tarefa concluída — DEV8-CARTOGRAPHIC-DISCOVERY-STATE-HYPOTHESIS-002
 
-1. Mapear, somente por leitura, os sinais narrativos já existentes que controlam `casa_visitada`, `estrada_revelada` e a descoberta subsequente do mapa.
-2. Formular uma hipótese causal para a diferença entre teleporte técnico de rota e estado de descoberta, sem alterar `CartographicAnchors.gd`, UI, timeline ou Player.
-3. Entregar a hipótese ao Dev1 com posição, rota, captura e caminho de estado. Não implementar mudança de produção.
-4. Manter `production_mutations=0` e exactamente esta tarefa ACTIVE.
+1. Os sinais narrativos foram mapeados somente por leitura e a captura controlada Casa Voss→Estrada confirmou a atualização de `estrada_revelada` após `voss_door_opened`.
+2. A hipótese H-DEV8-002 foi confirmada: o teleporte técnico não substitui a descoberta persistente e não evidencia defeito cartográfico.
+3. A evidência está em `reports/dev8/cartographic_discovery_controlled_capture_003/`, com `production_mutations=0`.
+
+## Tarefa ativa — DEV8-CARTOGRAPHIC-DISCOVERY-EVIDENCE-REVIEW-004
+
+1. Rever e indexar a evidência controlada para o handoff Dev1, sem criar nova captura, runner, timeline ou mudança de produção.
+2. Confirmar que qualquer futura captura R2 use a porta Casa Voss ou um estado de timeline QA explicitamente autorizado e restaurável.
+3. Manter `production_mutations=0` e exactamente esta tarefa ACTIVE.
