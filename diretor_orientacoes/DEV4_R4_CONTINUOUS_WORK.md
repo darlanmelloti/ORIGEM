@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-LIMINAL-DEPTH-018
+task_id: DEV4-R4-FOREST-OUTER-MARGIN-019
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -51,6 +51,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-ENTRY-BALANCE-017` instalou `ForestEntryBalance.gd`: dois fetos R4 existentes foram ajustados entre `Z=116–125,5`, antes da clareira Orion. A prova `[ORIGEM_R4_ENTRY_BALANCE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-LIMINAL-DEPTH-018` instalou `ForestLiminalDepth.gd`: uma árvore R4 existente sem colisor associado foi ajustada entre `Z=175–181` para reforçar a profundidade lateral antes do conector Majestic. A prova `[ORIGEM_R4_LIMINAL_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -69,10 +71,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Cadência de borda | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
 | Leitura do limiar | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
 | Equilíbrio da entrada | Antes da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
+| Profundidade liminar | Fora da clareira | ≥9 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-LIMINAL-DEPTH-018
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-MARGIN-019
 
-Aprofundar a **transição ambiental R4** com transformações estáticas de instâncias existentes fora da clareira Orion e antes do conector Majestic. A tarefa deve preservar a leitura de profundidade lateral e a margem do trilho sem alterar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface ou narrativa explícita.
+Refinar a **margem exterior R4** com transformações estáticas de instâncias ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -85,4 +88,4 @@ Aprofundar a **transição ambiental R4** com transformações estáticas de ins
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-MARGIN-019` deverá refinar a margem exterior R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-CANOPY-EDGE-020` deverá modular a borda das copas R4 sem modificar a rota, a câmara ou os limites regionais.
