@@ -14,6 +14,7 @@ const ARCH_GROUND_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r3/ArchG
 const ARCH_EXIT_ECHO_SCRIPT: Script = preload("res://levels/regions/r3/ArchExitEcho.gd")
 const ARCH_MATERIAL_CONSISTENCY_SCRIPT: Script = preload("res://levels/regions/r3/ArchMaterialConsistency.gd")
 const ARCH_NARRATIVE_QUIET_SCRIPT: Script = preload("res://levels/regions/r3/ArchNarrativeQuiet.gd")
+const ARCH_ARRIVAL_EXIT_BALANCE_SCRIPT: Script = preload("res://levels/regions/r3/ArchArrivalExitBalance.gd")
 const SILENT_CADENCE_DURATION: float = 1.35
 const SILENT_CADENCE_BEATS: int = 3
 const SILENT_CADENCE_SCALE_DELTA: float = 0.12
@@ -50,6 +51,7 @@ func _ready() -> void:
 	ARCH_EXIT_ECHO_SCRIPT.call("install", get_parent() as Node3D)
 	ARCH_MATERIAL_CONSISTENCY_SCRIPT.call("install", get_parent() as Node3D)
 	ARCH_NARRATIVE_QUIET_SCRIPT.call("install", get_parent() as Node3D)
+	ARCH_ARRIVAL_EXIT_BALANCE_SCRIPT.call("install", get_parent() as Node3D)
 	_build_trigger()
 	_build_effects()
 	_apply_awakened_state()
