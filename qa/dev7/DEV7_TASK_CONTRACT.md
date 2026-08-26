@@ -4,28 +4,29 @@
 |---|---|
 | **Responsável** | Dev7 — Direção Visual, Legibilidade Ambiental e Física Jogável |
 | **Branch canónica** | `dev7/visual-playable-physics` |
-| **Base canónica** | `origin/integration/r1-r6-sprint1` |
-| **Contrato atualizado em** | Baseline `DEV7-VISUAL-PLAYABLE-PHYSICS-BASELINE-001` |
+| **Base de integração** | `origin/integration/r1-r6-sprint1` |
 | **Tarefas ACTIVE** | **1** |
+| **Fonte de autoridade operacional** | `diretor_orientacoes/DEV7_VISUAL_PLAYABLE_PHYSICS_CONTINUOUS_WORK.md` |
 
-## Evidência concluída
+## Trabalho concluído
 
 | Task ID | Estado | Resultado |
 |---|---|---|
-| `DEV7-VISUAL-PLAYABLE-PHYSICS-BASELINE-001` | **CONCLUÍDA COM RISCO ENCAMINHADO** | Matriz runtime 1600×900 com seis percursos, grounding repetível, prova de transição de estado e diagnóstico visual preservados em `reports/dev7/visual_playable_physics_baseline_001/`. Não foram modificados ativos de produção, iluminação, colisão, ancoragens, câmara ou `levels/ForestLakeRegion.gd`. |
+| `DEV7-VISUAL-PLAYABLE-PHYSICS-BASELINE-001` | **CONCLUÍDA** | Evidência runtime e física preservada em `reports/dev7/visual_playable_physics_baseline_001/`, sem alteração de produção. |
+| `DEV7-R6-ARCHAEOLOGY-MATERIAL-SILHOUETTE-AUDIT-002` | **CONCLUÍDA** | Inventário espacial, auditoria de contraste e simulação de override QA concluídos sem escrever cenas, recursos R6, luz, água, física, Player, câmara ou ancoragens. A auditoria recomenda uma única candidata modular para decisão do dono R6. |
 
 ## Tarefa ativa única
 
 | Campo | Valor |
 |---|---|
-| **Task ID** | `DEV7-R4-TRAIL-READABILITY-KIT-002` |
-| **Estado** | **ACTIVE — BLOQUEADA POR GATE FÍSICO** |
-| **Região dona** | R4 — Floresta Densa, com integração obrigatória de Dev4. |
-| **Objetivo** | Especificar e, após desbloqueio, implementar um kit modular de leitura de trilho nas margens R4 para ligar visualmente Arco→Floresta→Majestic sem alterar a rota canónica. |
-| **Dependência bloqueadora** | `DEV4-R4-ARCH-FOREST-GROUNDING-RECOVERY`: `arch_to_forest` falha `QA-GROUND-01` e `CP_CARTO80_FLOOR`. |
-| **Permitido** | Módulos visuais estáticos de baixo perfil, reutilizáveis e limitados à região, após a confirmação de grounding. |
-| **Proibido** | Luzes novas; colisores, áreas, obstáculos, personagens ou física nova; alterações a `Player`, câmara, `CartographicAnchors.gd`, rotas canónicas ou `levels/ForestLakeRegion.gd`. |
-| **Limites R4** | Clareira Orion Z≈126–151 preservada; corredor exterior mínimo de 8 m; sem parede de árvores; máximo regional de uma luz dinâmica, sem aumento. |
-| **Gates de saída** | Parser Godot 4.7.1; `git diff --check`; gate R4; gates de interface R5/R6; rotas afetadas; auditoria global de luz; evidência runtime 1600×900 sem ecrã de arranque. |
+| **Task ID** | `DEV7-R6-ARCHAEOLOGY-CONTRAST-PROPOSAL-003` |
+| **Estado** | **ACTIVE — AGUARDA DECISÃO EXPLÍCITA DO DONO R6 PARA PRODUÇÃO** |
+| **Região dona** | R6 — Ruínas Submersas / Dev6 |
+| **Objetivo** | Preparar a proposta modular de `Perfil de Contraste de Entrada da Bacia` apenas como especificação e bundle QA, limitada aos cinco pilares R6 existentes identificados na auditoria. |
+| **Candidata** | Override local de material não emissivo, reutilizando texturas arqueológicas existentes e sem alterar materiais partilhados globalmente. |
+| **Escopo permitido em QA** | Mockups, comparação de albedo/rugosidade, inventário de referências e roteiro de validação. |
+| **Limites de produção** | Nenhuma cena, mesh, nó, água, luz, partícula, colisor, área, rota, largura de trilho, ancoragem, Player ou câmara pode ser alterado por Dev7. |
+| **Condição para implementação regional** | Aprovação explícita de Dev6/R6 e execução de parser Godot 4.7.1, `git diff --check`, gate R6, rota `forest_to_ruins` e auditoria R6 de quatro luzes. |
+| **Handoff** | R6→R7 permanece protegido; a proposta não antecipa conteúdo R7. |
 
-> A existência de uma tarefa bloqueada não autoriza correções especulativas. Dev7 mantém a especificação modular pronta enquanto o proprietário regional resolve e comprova a recuperação física.
+> A tarefa ativa seguinte é de **proposta**, não de implementação. Dev7 não transforma a recomendação em alteração de produção sem autorização do dono regional.
