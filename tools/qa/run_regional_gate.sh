@@ -240,6 +240,7 @@ if [[ "$REGION" == "R4" ]]; then
     'verify_r4_outer_readability_final.gd|[ORIGEM_R4_OUTER_READABILITY_FINAL_OK]|legibilidade exterior final da floresta'
     'verify_r4_outer_observation.gd|[ORIGEM_R4_OUTER_OBSERVATION_OK]|observação exterior da floresta'
     'verify_r4_outer_review.gd|[ORIGEM_R4_OUTER_REVIEW_OK]|revisão exterior da floresta'
+    'verify_r4_outer_consolidation.gd|[ORIGEM_R4_OUTER_CONSOLIDATION_OK]|consolidação exterior da floresta'
   )
   for proof in "${r4_cumulative_proofs[@]}"; do
     IFS='|' read -r r4_qa_file r4_marker r4_label <<< "$proof"
