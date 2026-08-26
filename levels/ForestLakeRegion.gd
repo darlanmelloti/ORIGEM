@@ -50,6 +50,7 @@ const R5_MAJESTIC_OBSERVATION_SCRIPT: Script = preload("res://levels/regions/r5/
 const R5_MAJESTIC_REVIEW_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReview.gd")
 const R5_MAJESTIC_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampConsolidation.gd")
 const R5_MAJESTIC_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampStabilization.gd")
+const R5_MAJESTIC_RECONCILIATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReconciliation.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
 var terrain_patch: Node3D
@@ -110,6 +111,7 @@ func _ready() -> void:
 	_build_r5_majestic_review()
 	_build_r5_majestic_consolidation()
 	_build_r5_majestic_stabilization()
+	_build_r5_majestic_reconciliation()
 	_build_r5_majestic_artifact_trail()
 	_build_r5_majestic_wind_reading()
 	_build_majestic_connector()
@@ -178,6 +180,11 @@ func _build_r5_majestic_stabilization() -> void:
 	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
 	if int(R5_MAJESTIC_STABILIZATION_SCRIPT.call("apply", camp)) != 2:
 		push_error("[ORIGEM_R5] Não foi possível ajustar a estabilização das caixas existentes.")
+
+func _build_r5_majestic_reconciliation() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_RECONCILIATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a reconciliação das caixas existentes.")
 
 func _build_r5_majestic_arrival_reading() -> void:
 	# DEV5-R5-CAMP-ARRIVAL-READING-004: relê apenas as duas bases de mastro existentes na entrada do acampamento.
