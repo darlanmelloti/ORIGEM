@@ -1,0 +1,17 @@
+[GATE:R5] Base=origin/integration/r1-r6-sprint1
+[GATE:R5] 1/4 diff --check
+[GATE:R5] 2/4 auditoria de escopo
+[GATE:R5] AVISO: houve alteração transversal; requer revisão explícita de Dev1.
+scripts/main.gd
+[GATE:R5] 3/4 parser Godot
+[GATE:R5] prova de mundo DEV5-R5-ARTEFACT-TRAIL-001
+[GATE:R5] artefacto, pistas e orçamento R5 aprovados
+[GATE:R5] prova DEV5-R5-CAMP-WIND-READING-002
+[GATE:R5] leitura de vento R5 aprovada
+[GATE:R5] prova DEV5-R5-CAMP-ARRIVAL-READING-004
+[GATE:R5] leitura estática da chegada R5 aprovada
+[GATE:R5] sonda de composição R5 aprovada
+[GATE:R5] 5/5 contratos e rotas
+[GATE:R5] rota forest_to_majestic aprovada
+[GATE:R5] rota majestic_to_lake aprovada
+[GATE:R5] PASS
