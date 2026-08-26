@@ -1311,7 +1311,7 @@ func _build_ruin_arch() -> void:
 	# O marco conserva apenas as duas brasas litúrgicas: o preenchimento Omni anterior foi removido
 	# para respeitar o contrato R3 (máximo de duas luzes dinâmicas locais).
 	# Camada Dev3: inscrições e despertar persistente, sem criar luzes novas ou bloquear o vão do Arco.
-	var r3_awakening: R3ArchAwakening = R3_ARCH_AWAKENING_SCRIPT.call("install", arch) as R3ArchAwakening
+	var r3_awakening = R3_ARCH_AWAKENING_SCRIPT.call("install", arch)
 	if r3_awakening == null:
 		push_error("[ORIGEM_R3] Não foi possível instalar o despertar do Arco.")
 

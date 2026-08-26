@@ -13,13 +13,13 @@ var effect_root: Node3D
 var inscription_left: Label3D
 var inscription_right: Label3D
 
-static func install(arch: Node3D) -> R3ArchAwakening:
+static func install(arch: Node3D):
 	if arch == null:
 		return null
-	var existing: R3ArchAwakening = arch.get_node_or_null("R3ArchAwakening") as R3ArchAwakening
+	var existing = arch.get_node_or_null("R3ArchAwakening")
 	if existing != null:
 		return existing
-	var controller: R3ArchAwakening = R3ArchAwakening.new()
+	var controller = Node3D.new()
 	controller.name = "R3ArchAwakening"
 	arch.add_child(controller)
 	return controller
@@ -113,8 +113,10 @@ func awake_once() -> bool:
 		return false
 	awakened = true
 	_apply_awakened_state()
-	EventBus.world_event_triggered.emit(EVENT_ID)
-	EventBus.player_message_requested.emit("As inscrições do Arco despertam: «a pedra recorda; não sigas a luz». ", 3.2)
+	var event_bus: Node = get_node_or_null("/root/EventBus")
+	if event_bus != null:
+		event_bus.world_event_triggered.emit(EVENT_ID)
+		event_bus.player_message_requested.emit("As inscrições do Arco despertam: «a pedra recorda; não sigas a luz». ", 3.2)
 	return true
 
 func _apply_awakened_state() -> void:
