@@ -16,13 +16,13 @@ WARNING: FSR1 3D scaling is only available when using the Forward+ renderer.
 [0m
 [   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (2 steps)[39m[0m
 [   0% ] [90m[1m_update_scan_actions[22m | wet_slate_roof_v2.jpg[39m[0m
-[  33% ] [90m[1m_update_scan_actions[22m | voss_to_road_postload.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | road_to_arch_postload.png[39m[0m
 [92m[ DONE ][39m [1m_update_scan_actions[22m
 [0m
 [   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (1 steps)[39m[0m
 [   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
 [   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
-[   0% ] [90m[1mreimport[22m | voss_to_road_postload.png[39m[0m
+[   0% ] [90m[1mreimport[22m | road_to_arch_postload.png[39m[0m
 [  50% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
 [92m[ DONE ][39m [1mreimport[22m
 [0m

@@ -96,4 +96,4 @@ WARNING: SDFGI is only available when using the Forward+ renderer.
 [ORIGEM_R6_BASIN_VISTA] rochas_existentes_ajustadas=3 luzes=0
 [ORIGEM_R6_OUTER_WATERLINE] acentos_existentes_ajustados=5 luzes=0
 [ORIGEM_QA_ROUTE] Mundo reduzido às Regiões 1–6 para a validação cartográfica.
-[ORIGEM_QA_ROUTE] Spawn Arco–Floresta ativo em (-9.0, 1.319562, 107.0)
+[ORIGEM_QA_ROUTE] Spawn Estrada–Arco ativo em (-20.05, 0.605985, 22.0); foco=(-13.8, 0.0, 92.0)
