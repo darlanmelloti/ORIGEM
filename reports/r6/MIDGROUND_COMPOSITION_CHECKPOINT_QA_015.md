@@ -1,8 +1,8 @@
 # ORIGEM — Checkpoint QA R6 015
 
-**Tarefa ativa:** `DEV6-R6-MIDGROUND-COMPOSITION-CHECKPOINT-QA-015`  
-**Checkpoint de produção pendente:** `5581765` — `feat(dev6): compor vestígios arqueológicos R6`  
-**Base de integração observada:** `b58aade`  
+**Tarefa ativa:** `DEV6-R6-MIDGROUND-COMPOSITION-CHECKPOINT-QA-015`
+**Checkpoint de produção pendente:** `5581765` — `feat(dev6): compor vestígios arqueológicos R6`
+**Base de integração observada:** `b58aade`
 **PR preservada:** [#390](https://github.com/darlanmelloti/ORIGEM/pull/390)
 
 ## Objetivo
