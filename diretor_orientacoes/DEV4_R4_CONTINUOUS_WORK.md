@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-RHYTHM-024
+task_id: DEV4-R4-FOREST-RETURN-READING-025
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -63,6 +63,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-RIM-BALANCE-023` instalou `ForestRimBalance.gd`: seis árvores R4 existentes sem colisor associado foram equilibradas entre `Z=165–170` para manter a borda lateral aberta. A prova `[ORIGEM_R4_RIM_BALANCE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-OUTER-RHYTHM-024` instalou `ForestOuterRhythm.gd`: uma árvore R4 existente sem colisor associado foi ajustada entre `Z=187,5–192` para modular o ritmo exterior. A prova `[ORIGEM_R4_OUTER_RHYTHM_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -87,10 +89,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Silhueta lateral | Fora da clareira | ≥7 m | 0 luzes e colisores | Aprovada |
 | Limiar Majestic | Conector preservado | ≥6,4 m | 0 luzes e colisores | Aprovada |
 | Equilíbrio da borda | Fora da clareira | ≥10 m | 0 luzes e colisores | Aprovada |
+| Ritmo exterior | Fora da clareira | ≥11 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-RHYTHM-024
+## Tarefa ativa — DEV4-R4-FOREST-RETURN-READING-025
 
-Modular o **ritmo exterior R4** com transformações estáticas de instâncias ambientais existentes, sem criar paredes vegetais ou aproximar elementos do trilho e do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+Reforçar a **leitura de retorno R4** com transformações estáticas de instâncias ambientais existentes, sem criar paredes vegetais ou aproximar elementos do trilho e do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -103,4 +106,4 @@ Modular o **ritmo exterior R4** com transformações estáticas de instâncias a
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-RETURN-READING-025` deverá reforçar a leitura de retorno R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-LATERAL-DEPTH-026` deverá aprofundar a leitura lateral R4 sem modificar a rota, a câmara ou os limites regionais.
