@@ -335,6 +335,8 @@ if [[ "$REGION" == "R5" ]]; then
   grep -q '\[ORIGEM_R5_STABILIZATION_OK\]' /tmp/origem_${REGION}_stabilization_$$.log
   GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_reconciliation.gd >/tmp/origem_${REGION}_reconciliation_$$.log 2>&1
   grep -q '\[ORIGEM_R5_RECONCILIATION_OK\]' /tmp/origem_${REGION}_reconciliation_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_consistency.gd >/tmp/origem_${REGION}_consistency_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_CONSISTENCY_OK\]' /tmp/origem_${REGION}_consistency_$$.log
 fi
 
 if [[ "$REGION" == "R6" ]]; then
