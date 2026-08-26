@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-MIDGROUND-COMPOSITION-CHECKPOINT-QA-015
+task_id: DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -125,21 +125,27 @@ A revisão do relatório confirmou as três capturas runtime, logs, telemetria, 
 
 A avaliação visual confirmou que a leitura de protótipo se concentra no plano médio da chegada R6: terreno aberto, lajes isoladas e vestígios arqueológicos pouco agrupados. A evidência foi preservada em `reports/r6/VISUAL_DEBT_ASSESSMENT_013.md`; não houve alteração de produção.
 
-## Checkpoint pendente de integração — DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
+## Entrega integrada — DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014
 
-O commit `5581765` ajusta exclusivamente escala e rotação locais de `FragmentoDeColunaMargemR6`, `PedraLeituraMargemR6_00` e `PedraLeituraMargemR6_01`. As posições-base, água, quatro luzes, lajes, colisores, handoff R6→R7 e rotas foram preservados. A prova específica, parser, orçamento R6, handoff, porta R6 e pipeline de regressão passaram localmente, com desvio máximo `0.000 m` sob tolerância de `0.050 m` nas três rotas. A PR `#390` permanece aberta para integração regular; nenhuma aprovação por bypass é permitida.
+O commit `5581765` ajustou exclusivamente escala e rotação locais de `FragmentoDeColunaMargemR6`, `PedraLeituraMargemR6_00` e `PedraLeituraMargemR6_01`. As posições-base, água, quatro luzes, lajes, colisores, handoff R6→R7 e rotas foram preservados. A prova específica, parser, orçamento R6, handoff, porta R6 e pipeline de regressão passaram localmente, com desvio máximo `0.000 m` sob tolerância de `0.050 m` nas três rotas.
 
-## Tarefa ativa — DEV6-R6-MIDGROUND-COMPOSITION-CHECKPOINT-QA-015
+A PR `#390` foi integrada regularmente no commit canónico `8b5397f`, sem bypass. A branch Dev6 foi reconciliada no head publicado `4a616f4`, e o checkpoint deixou de estar pendente de integração.
 
-Manter o checkpoint `5581765` e a PR `#390` rastreáveis enquanto a associação regular de checks estiver indisponível. Esta sucessora é exclusivamente QA documental e **não pode alterar produção**: não criar ou modificar nós, meshes, materiais, água, luz, shader, física, colisores, lajes, rotas, âncoras, handoff ou conteúdo R7.
+## Tarefa concluída — DEV6-R6-MIDGROUND-COMPOSITION-CHECKPOINT-QA-015
+
+A sucessora documental confirmou a associação regular da PR #390, a preservação do checkpoint 014 e a inexistência de mutação adicional de produção. A tarefa foi concluída pela integração regular; não exige repetição de CI ou captura.
+
+## Tarefa ativa — DEV6-R6-MIDGROUND-COMPOSITION-EVIDENCE-REVIEW-016
+
+Rever e indexar somente a evidência integrada do plano médio R6 para o handoff de arte/QA, sem criar nova captura ou alterar produção. É proibido criar ou modificar nós, meshes, materiais, água, luz, shader, física, colisores, lajes, rotas, âncoras, handoff ou conteúdo R7.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Somente reconciliação de referência, estado da PR e evidência QA já existente |
+| Escopo | Somente revisão de referência integrada, estado da PR mesclada e evidência QA já existente |
 | Cadência | No máximo uma rodada determinística por nova ponta da integração; não repetir CI nem captura sem mudança de base |
-| Evidência | Confirmar marcador da prova 014, porta R6 e baseline das três rotas no checkpoint publicado |
-| Publicação | Preservar a PR `#390`; sem bypass, force-push, cancelamento ou disparos agressivos de CI |
-| Encerramento | Só substituir esta tarefa depois de a integração regular tornar a PR elegível ou substituir formalmente o checkpoint |
+| Evidência | Confirmar `8b5397f`, o marcador da prova 014, a porta R6 e a baseline das três rotas no checkpoint publicado |
+| Publicação | Sem bypass, force-push, cancelamento ou disparos agressivos de CI |
+| Encerramento | Só substituir esta tarefa por nova sucessora QA após revisão de evidência concluída e contractualmente registada |
 
 ## Sucessão obrigatória
 
