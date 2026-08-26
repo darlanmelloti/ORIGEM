@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-MARGIN-REST-070
+task_id: DEV3-R3-ARCH-LATERAL-CALM-071
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -235,7 +235,9 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 `R3CalmaMateDaMargem068` preserva materiais R3 existentes herdados de `r3_lateral_silence_matte_067`, sem geometria, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_MARGIN_CALM_MATTE_068_OK]`, captura, parser e porta R3 aprovaram a entrega reconciliada publicada em `280b069`.
 ## Entrega aprovada — DEV3-R3-ARCH-LATERAL-STILL-069
 `R3ImobilidadeMateLateral069` preserva materiais R3 existentes herdados de `r3_margin_calm_matte_068`, sem geometria, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_LATERAL_STILL_MATTE_069_OK]`, captura, parser e porta R3 aprovaram a entrega publicada em `51914f4` após rebase na integração.
-## Tarefa ativa — DEV3-R3-ARCH-MARGIN-REST-070
+## Entrega aprovada — DEV3-R3-ARCH-MARGIN-REST-070
+`R3RepousoMateDaMargem070` preserva materiais R3 existentes herdados de `r3_lateral_still_matte_069`, sem geometria, UI, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_MARGIN_REST_MATTE_070_OK]`, captura, parser e porta R3 aprovaram a entrega publicada em `885ce14`.
+## Tarefa ativa — DEV3-R3-ARCH-LATERAL-CALM-071
 A margem do Arco deve manter um **repouso material sem reflexos**, limitado a materiais R3 já existentes e herdados de `r3_lateral_still_matte_063`. A tarefa conserva apenas a ausência de reflexão na margem sem criar trilho, texto, UI, placas, objetos, geometria, luzes, emissão, VFX, áudio ou colisores; a rota R2→R4 deve permanecer aberta.
 | Critério | Obrigatório |
 |---|---|
@@ -250,4 +252,4 @@ A margem do Arco deve manter um **repouso material sem reflexos**, limitado a ma
 Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substituição desta secção por outra **Tarefa ativa** com `task_id` novo. A esteira cria ou mantém uma única issue ativa de continuidade do Dev3 e encerra automaticamente as obsoletas.
 
 ## Próxima fila reservada
-`DEV3-R3-ARCH-MARGIN-REST-070` preserva a margem em repouso sem reflexos e sem alterar o corredor.
+`DEV3-R3-ARCH-LATERAL-CALM-071` preserva a lateral calma sem reflexos e sem alterar o corredor.
