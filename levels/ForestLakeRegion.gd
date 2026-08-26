@@ -72,6 +72,7 @@ func _ready() -> void:
 	_build_take9_corridor_fill()
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
+	_build_waterline_reading()
 	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
 	_build_riparian_margin()
@@ -1764,6 +1765,39 @@ func _build_submerged_ruins() -> void:
 		shallow_collision.shape = shallow_shape
 		shallow_body.add_child(shallow_collision)
 		shallow_path.add_child(shallow_body)
+
+func _build_waterline_reading() -> void:
+	# DEV6-R6-WATERLINE-READING-003: reforço arqueológico exclusivamente visual na linha de água.
+	# Fora do leito, fora do trilho jogável e sem luzes, shaders, emissão, painéis ou colisores.
+	var debris: Node3D = Node3D.new()
+	debris.name = "R6_DetritosLinhaDeAgua"
+	add_child(debris)
+	var anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+	var placements: Array[Dictionary] = [
+		{"x": 8.0, "z": 223.5, "s": 0.24, "r": 0.33},
+		{"x": 39.0, "z": 218.0, "s": 0.31, "r": 1.12},
+		{"x": 68.0, "z": 217.0, "s": 0.22, "r": -0.47},
+		{"x": 95.0, "z": 224.0, "s": 0.34, "r": 0.86},
+		{"x": 105.0, "z": 247.0, "s": 0.27, "r": 1.74},
+		{"x": 101.5, "z": 271.0, "s": 0.38, "r": -0.62},
+		{"x": 87.0, "z": 286.0, "s": 0.25, "r": 0.45},
+		{"x": 38.0, "z": 287.0, "s": 0.36, "r": 2.08},
+		{"x": 19.0, "z": 272.0, "s": 0.21, "r": -0.28}
+	]
+	for index: int in range(placements.size()):
+		var spec: Dictionary = placements[index]
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var world_x: float = float(spec["x"])
+		var world_z: float = float(spec["z"])
+		var scale_value: float = float(spec["s"])
+		rock.name = "DetritoLinhaAguaR6_%02d" % index
+		rock.position = Vector3(world_x, _height_at(world_x, world_z) + 0.06, world_z)
+		rock.scale = Vector3(scale_value, scale_value * (0.58 + float(index % 3) * 0.16), scale_value * (0.82 + float(index % 2) * 0.14))
+		rock.rotation = Vector3(0.08 * float(index % 2), float(spec["r"]), -0.10 + float(index % 3) * 0.09)
+		_apply_material(rock, ruin_material)
+		debris.add_child(rock)
 
 func _make_elliptical_lake_mesh(radius_x: float, radius_z: float) -> ArrayMesh:
 	var surface: SurfaceTool = SurfaceTool.new()
