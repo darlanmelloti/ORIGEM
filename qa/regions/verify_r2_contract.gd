@@ -95,6 +95,10 @@ func _init() -> void:
 		issues.append("âncora contratual de entrada da R2 está fora da AABB")
 	if not contract.is_world_position_inside(exit_world):
 		issues.append("âncora contratual de saída da R2 está fora da AABB")
+	if contract.entry_anchor != R2_SCRIPT.CARTOGRAPHIC_ANCHORS.ESTRADA_RIO_INICIO:
+		issues.append("âncora de entrada R2 diverge da âncora cartográfica oficial")
+	if contract.exit_anchor != R2_SCRIPT.CARTOGRAPHIC_ANCHORS.ARCO_RUINAS:
+		issues.append("âncora de saída R2 diverge da âncora cartográfica oficial")
 	var build_root := Node3D.new()
 	var first_build: Node3D = region.build(build_root, {})
 	var second_build: Node3D = region.build(build_root, {})
@@ -122,4 +126,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_024_OK] interface regional R2 expõe métodos e tipos estáveis.")
 	print("[ORIGEM_R2_RIVER_QA_025_OK] identificadores e nomes canônicos da R2 preservados.")
 	print("[ORIGEM_R2_RIVER_QA_026_OK] AABB R2 não degenerada e com plano físico contido.")
+	print("[ORIGEM_R2_RIVER_QA_027_OK] âncoras cartográficas R2 correspondem aos pontos físicos oficiais.")
 	quit(0)
