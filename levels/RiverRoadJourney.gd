@@ -47,6 +47,7 @@ func _ready() -> void:
 	_build_orion_reflection_lookout()
 	_build_return_confirmation_landing()
 	_build_arch_arrival_landing()
+	_build_midriver_reflection_edge()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -1000,6 +1001,37 @@ func _build_arch_arrival_landing() -> void:
 	collision.shape = shape
 	body.add_child(collision)
 	arrival_root.add_child(body)
+
+func _build_midriver_reflection_edge() -> void:
+	# DEV2-R2-RIVER-EDGE-033: leitura baixa da margem média, aberta para o reflexo Orion e sem rota para o leito.
+	var edge_root: Node3D = Node3D.new()
+	edge_root.name = "LeituraMargemReflexoOrionR2"
+	add_child(edge_root)
+	var edge_z: float = 70.0
+	var edge_x: float = _river_x(edge_z) - 6.55
+	var edge_material: StandardMaterial3D = StandardMaterial3D.new()
+	edge_material.albedo_color = Color(0.11, 0.15, 0.14, 1.0)
+	edge_material.roughness = 0.93
+	for index: int in range(2):
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var side: float = -1.0 if index == 0 else 1.0
+		var rock_x: float = edge_x + side * 0.62
+		var rock_z: float = edge_z + float(index) * 1.12
+		rock.name = "PedraLeituraReflexoOrion_%02d" % (index + 1)
+		rock.position = Vector3(rock_x, _height_at(rock_x, rock_z) + 0.04, rock_z)
+		rock.scale = Vector3(0.22 + float(index) * 0.035, 0.14 + float(index) * 0.02, 0.24)
+		rock.rotation.y = side * 0.36
+		_apply_material(rock, edge_material)
+		edge_root.add_child(rock)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoAbertoLeituraReflexo_%02d" % (index + 1)
+			fern.position = Vector3(rock_x + side * 0.76, _height_at(rock_x + side * 0.76, rock_z - 0.28) + 0.02, rock_z - 0.28)
+			fern.scale = Vector3(0.25 + float(index) * 0.04, 0.25 + float(index) * 0.04, 0.25 + float(index) * 0.04)
+			fern.rotation.y = -side * 0.48
+			edge_root.add_child(fern)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.

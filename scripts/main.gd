@@ -179,6 +179,14 @@ func _verify_r2_world_life_qa() -> void:
 				issues.append("a chegada sob o Arco não possui laje e colisor coincidente")
 			if not arch_arrival.find_children("*", "OmniLight3D", true, false).is_empty():
 				issues.append("a chegada sob o Arco não pode criar luz dinâmica")
+		var midriver_edge: Node = r2.get_node_or_null("LeituraMargemReflexoOrionR2")
+		if midriver_edge == null:
+			issues.append("a leitura média da margem do reflexo Orion está em falta")
+		else:
+			if midriver_edge.get_node_or_null("PedraLeituraReflexoOrion_02") == null or midriver_edge.get_node_or_null("FetoAbertoLeituraReflexo_02") == null:
+				issues.append("a leitura média da margem não possui pedras e fetos abertos")
+			if not midriver_edge.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a leitura média da margem não pode criar luz dinâmica")
 		if not r2.find_children("LuzMarcoVida*", "OmniLight3D", true, false).is_empty():
 			issues.append("os marcos R2 não podem criar luzes dinâmicas")
 		if not r2.find_children("LuzEstacaoOrion*", "OmniLight3D", true, false).is_empty():
@@ -260,6 +268,7 @@ func _verify_r2_world_life_qa() -> void:
 		print("[ORIGEM_R2_RIVER_LOOKOUT_030_OK] miradouro físico Orion, laje e colisor confirmados sem luz dinâmica nova.")
 		print("[ORIGEM_R2_RIVER_RETURN_031_OK] laje física de confirmação Casa Voss presente e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_ARCH_032_OK] laje física de chegada sob o Arco presente e passagem livre.")
+		print("[ORIGEM_R2_RIVER_EDGE_033_OK] leitura média da margem com pedras e fetos abertos, sem luz dinâmica.")
 		print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
