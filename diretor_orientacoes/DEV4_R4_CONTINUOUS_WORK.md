@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-POSTCHECK-048
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-PUBLISH-MONITOR-049
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -145,14 +145,18 @@ A captura canónica de `arch_to_forest` confirmou que a superfície opaca clara 
 
 A estabilização documental indexou a cadeia 044–046, confirmou que não houve alterações de produção ou QA desde a correcção 045 e revalidou parser, orçamento, porta R4 e as três rotas. A evidência e os identificadores de integridade estão em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_STABILIZATION_047.md`.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-POSTCHECK-048
+## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-POSTCHECK-048
 
-Executar exclusivamente o pós-check de publicação da cadeia 044–047. Confirmar a ponta remota, a presença da evidência e a integridade regional, sem criar ou alterar produção, `_create_lake_material()`, água R6, `ForestLakeRegion.gd`, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física.
+O pós-check confirmou a ponta remota sincronizada, a presença e igualdade dos artefactos 044–047, incluindo a captura runtime e o módulo local R4. Parser, orçamento, porta R4 e as três rotas foram aprovados sem alteração de produção. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_POSTCHECK_048.md`.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-PUBLISH-MONITOR-049
+
+Executar exclusivamente a monitorização documental de publicação da cadeia 044–048. Reagir a uma nova ponta canónica de integração ou publicação, confirmando a integridade regional sem criar ou alterar produção, `_create_lake_material()`, água R6, `ForestLakeRegion.gd`, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Zero alterações de produção nesta tarefa de pós-check |
-| Evidência | Confirmar no remoto os relatórios 044–047 e a captura runtime 046 |
+| Produção | Zero alterações de produção nesta tarefa de monitorização |
+| Evidência | Preservar a cadeia de relatórios 044–048 e a captura runtime 046 |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
 | Integração | Preservar R5 e R6; não modificar activos, lógica, iluminação, água ou rotas dessas frentes |
@@ -161,4 +165,4 @@ Executar exclusivamente o pós-check de publicação da cadeia 044–047. Confir
 
 ## Próxima fila reservada
 
-`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-POSTCHECK-048` permanece ACTIVE até que o pós-check remoto confirme a publicação íntegra ou o contrato canónico determine nova prioridade.
+`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-PUBLISH-MONITOR-049` permanece ACTIVE até que uma nova ponta canónica exija reconciliação ou o contrato canónico determine nova prioridade.
