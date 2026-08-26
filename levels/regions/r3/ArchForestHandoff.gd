@@ -59,3 +59,34 @@ func _build(road_x_at: Callable, height_at: Callable, rock_scene: PackedScene, f
 			fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
 			fern.rotation.y = side * (0.42 + float(fern_index) * 0.28)
 			marker_root.add_child(fern)
+	_build_passage_archaeology(road_x_at, height_at, rock_scene, wet_stone if wet_stone != null else stone_material)
+
+func _build_passage_archaeology(road_x_at: Callable, height_at: Callable, rock_scene: PackedScene, stone_material: Material) -> void:
+	# DEV3-R3-PASSAGE-ARCHAEOLOGY-005: três vestígios baixos guiam a leitura depois do Arco sem fechar a rota para R4.
+	var trace_specs: Array[Dictionary] = [
+		{"z": 96.8, "side": 1.0, "offset": 4.35, "scale": 0.12, "yaw": -0.34},
+		{"z": 101.2, "side": -1.0, "offset": 4.62, "scale": 0.15, "yaw": 0.52},
+		{"z": 105.8, "side": 1.0, "offset": 4.86, "scale": 0.11, "yaw": -0.72}
+	]
+	for index: int in range(trace_specs.size()):
+		var spec: Dictionary = trace_specs[index]
+		var z_value: float = spec["z"] as float
+		var side: float = spec["side"] as float
+		var road_x: float = float(road_x_at.call(z_value))
+		var offset: float = spec["offset"] as float
+		var x_value: float = road_x + side * offset
+		var trace_root: Node3D = Node3D.new()
+		trace_root.name = "VestigioDePassagem_%02d" % (index + 1)
+		trace_root.set_meta("r3_road_offset", side * offset)
+		trace_root.set_meta("r3_trace_z", z_value)
+		add_child(trace_root)
+		var fragment: Node3D = rock_scene.instantiate() as Node3D
+		if fragment == null:
+			continue
+		fragment.name = "FragmentoArqueologico_%02d" % (index + 1)
+		fragment.position = Vector3(x_value, float(height_at.call(x_value, z_value)) + 0.018, z_value)
+		var scale_value: float = spec["scale"] as float
+		fragment.scale = Vector3(scale_value * 1.35, scale_value * 0.38, scale_value)
+		fragment.rotation = Vector3(0.06 * side, spec["yaw"] as float, -0.11 * side)
+		fragment.set("material_override", stone_material)
+		trace_root.add_child(fragment)
