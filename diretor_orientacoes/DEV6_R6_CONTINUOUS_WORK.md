@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-EASTERN-MARGIN-RECONCILIATION-018
+task_id: DEV6-R6-EASTERN-MARGIN-CONSISTENCY-019
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -73,9 +73,13 @@ O módulo `R6EasternMarginConsolidation.gd` ajustou estaticamente os três vest�
 
 O módulo `R6EasternMarginStabilization.gd` ajustou estaticamente os três vestígios existentes já aprovados pela consolidação, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
 
-## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-RECONCILIATION-018
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-RECONCILIATION-018
 
-Auditar e ajustar exclusivamente a reconciliação estática final de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
+O módulo `R6EasternMarginReconciliation.gd` ajustou estaticamente os três vestígios existentes já aprovados pela estabilização, sem deslocar bases. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-CONSISTENCY-019
+
+Auditar e ajustar exclusivamente a consistência estática final de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
 
 | Critério | Obrigatório |
 |---|---|
@@ -88,4 +92,4 @@ Auditar e ajustar exclusivamente a reconciliação estática final de elementos 
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-STABILIZATION-017` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-RECONCILIATION-018`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-RECONCILIATION-018` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-CONSISTENCY-019`.

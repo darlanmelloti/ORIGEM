@@ -55,6 +55,7 @@ const R6_EASTERN_MARGIN_OBSERVATION_SCRIPT: Script = preload("res://levels/regio
 const R6_EASTERN_MARGIN_REVIEW_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReview.gd")
 const R6_EASTERN_MARGIN_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginConsolidation.gd")
 const R6_EASTERN_MARGIN_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginStabilization.gd")
+const R6_EASTERN_MARGIN_RECONCILIATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginReconciliation.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -124,6 +125,7 @@ func _ready() -> void:
 	_build_r6_eastern_margin_review()
 	_build_r6_eastern_margin_consolidation()
 	_build_r6_eastern_margin_stabilization()
+	_build_r6_eastern_margin_reconciliation()
 	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
 	_build_r6_basin_vista_reading()
@@ -2029,6 +2031,11 @@ func _build_r6_eastern_margin_stabilization() -> void:
 	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
 	if int(R6_EASTERN_MARGIN_STABILIZATION_SCRIPT.call("apply", waterline)) != 3:
 		push_error("[ORIGEM_R6] Não foi possível ajustar a estabilização oriental estática.")
+
+func _build_r6_eastern_margin_reconciliation() -> void:
+	var waterline: Node3D = get_node_or_null("R6LeituraArqueologicaDaLinhaDeAgua") as Node3D
+	if int(R6_EASTERN_MARGIN_RECONCILIATION_SCRIPT.call("apply", waterline)) != 3:
+		push_error("[ORIGEM_R6] Não foi possível ajustar a reconciliação oriental estática.")
 
 func _make_elliptical_lake_mesh(radius_x: float, radius_z: float) -> ArrayMesh:
 	var surface: SurfaceTool = SurfaceTool.new()
