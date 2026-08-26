@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-RIVERBANK-043
+task_id: DEV2-R2-RIVER-RIVERBANK-044
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -142,7 +142,10 @@ A leitura baixa de margem no lado oposto ao retorno foi aceita pelo orçamento g
 ## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-042
 A leitura física baixa da margem no lado oposto ao retorno foi entregue com pedras e fetos reais, sem rota nova ou luz dinâmica. O commit `e9581c24` passou no CI `32965577081` com orçamento global, porta R2, rotas canônicas e gate regional aprovados.
 
-## Tarefa ativa — DEV2-R2-RIVER-RIVERBANK-043
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-043
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2 e gate regional no CI `32965992645`.
+
+## Tarefa ativa — DEV2-R2-RIVER-RIVERBANK-044
 
 A R2 deve receber uma **leitura física curta de margem próxima ao eixo de retorno**, com pedra real e vegetação aberta, mantendo o leito não atravessável, o reflexo Orion visível e a orientação Casa Voss → Arco sem nova rota.
 
@@ -155,7 +158,7 @@ A R2 deve receber uma **leitura física curta de margem próxima ao eixo de reto
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
 | Narrativa | A margem deve sustentar o retorno Casa Voss e a leitura Orion → Arco sem duplicar marcos |
-| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_RIVERBANK_043_OK]` antes do PR |
+| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_RIVERBANK_044_OK]` antes do PR |
 
 ## Fecho e avanço obrigatório
 
@@ -163,4 +166,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RIVERBANK-043`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RIVERBANK-044`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
