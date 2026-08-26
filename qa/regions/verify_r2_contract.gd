@@ -12,6 +12,12 @@ func _init() -> void:
 	var issues: PackedStringArray = contract.validate()
 	if not region.has_method("build") or not region.has_method("get_bounds") or not region.has_method("get_anchor") or not region.has_method("run_qa_contract"):
 		issues.append("R2 não expõe a interface regional mínima")
+	if not (region.get_bounds() is AABB):
+		issues.append("get_bounds() da R2 deve retornar AABB")
+	if not (region.get_anchor() is Vector2):
+		issues.append("get_anchor() da R2 deve retornar Vector2")
+	if not (region.acceptance_criteria() is PackedStringArray):
+		issues.append("acceptance_criteria() da R2 deve retornar PackedStringArray")
 	var qa_result: Dictionary = region.run_qa_contract()
 	if not bool(qa_result.get("valid", false)):
 		issues.append("run_qa_contract() reportou falha")
@@ -105,4 +111,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_021_OK] run_qa_contract R2 retorna metadados canônicos.")
 	print("[ORIGEM_R2_RIVER_QA_022_OK] rotas R2 são canônicas, únicas e sem atalhos extras.")
 	print("[ORIGEM_R2_RIVER_QA_023_OK] orçamento regional R2 coerente com o teto global de duas luzes.")
+	print("[ORIGEM_R2_RIVER_QA_024_OK] interface regional R2 expõe métodos e tipos estáveis.")
 	quit(0)
