@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-EASTERN-MARGIN-LATERAL-BALANCE-009
+task_id: DEV6-R6-EASTERN-MARGIN-VISTA-010
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -37,9 +37,13 @@ O módulo `levels/regions/r6/R6EasternMarginReading.gd` ajustou estaticamente os
 
 O módulo `levels/regions/r6/R6EasternMarginDepth.gd` aprofundou a leitura estática dos três vestígios já aprovados da margem oriental, alterando apenas escala e orientação locais. As posições-base, água, cascata, handoff, orçamento de quatro luzes, parser, porta R6 e as três rotas foram preservados e aprovados.
 
-## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-LATERAL-BALANCE-009
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-LATERAL-BALANCE-009
 
-Auditar e ajustar exclusivamente o equilíbrio lateral estático de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
+O módulo `R6EasternMarginLateralBalance.gd` equilibrava lateralmente os três vestígios existentes já aprovados pela leitura e profundidade, alterando apenas escala e orientação locais. A prova própria, orçamento de quatro luzes, porta R6, handoff e rotas foram aprovados.
+
+## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-VISTA-010
+
+Auditar e ajustar exclusivamente a leitura estática da vista de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
 
 | Critério | Obrigatório |
 |---|---|
@@ -52,4 +56,4 @@ Auditar e ajustar exclusivamente o equilíbrio lateral estático de elementos R6
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-DEPTH-008` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-LATERAL-BALANCE-009`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-LATERAL-BALANCE-009` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-VISTA-010`.
