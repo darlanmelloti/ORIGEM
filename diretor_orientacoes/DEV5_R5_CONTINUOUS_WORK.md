@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-COMPOSITION-PROBE-026
+task_id: DEV5-R5-CAMP-COMPOSITION-POSTPROBE-027
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -121,9 +121,13 @@ A auditoria confirmou que as leituras estáticas existentes já cobrem mastros, 
 
 As capturas pós-carregamento das duas rotas R5 confirmaram corredor, lajes e saída para o lago, mas não enquadraram o núcleo do acampamento de forma suficiente para escolha artística. A evidência foi preservada em `reports/r5/RUNTIME_COMPOSITION_CAPTURE_025.md`; não houve alteração de produção.
 
-## Tarefa ativa — DEV5-R5-CAMP-COMPOSITION-PROBE-026
+## Entrega aprovada — DEV5-R5-CAMP-COMPOSITION-PROBE-026
 
-Criar uma sonda QA de composição que enquadre o núcleo existente do Acampamento Majestic de forma determinística, sem modificar a `Camera3D` do jogador nem a produção. A tarefa deve produzir apenas evidência de teste e escolher um alvo existente caso seja necessária intervenção artística posterior.
+A sonda QA localizou sete alvos existentes do núcleo Majestic e calculou o foco `(-85,46; 1,71; 178,41)` com posição de câmara exclusivamente de teste `(-77,46; 6,51; 188,41)`. A porta R5 e as duas rotas passaram sem alteração de `ForestLakeRegion.gd`, da câmara do jogador, âncoras, luz, física, colisores ou navegação. A evidência encontra-se em `reports/r5/CAMP_COMPOSITION_PROBE_026.md` e no checkpoint 411.
+
+## Tarefa ativa — DEV5-R5-CAMP-COMPOSITION-POSTPROBE-027
+
+Criar uma captura runtime de QA do núcleo existente do Acampamento Majestic usando apenas a posição determinada pela sonda. A captura deve comparar a legibilidade da mesa de cartografia, mapa, rolos e lonas com as rotas R5 existentes e selecionar, no máximo, uma intervenção modular futura em elemento já existente.
 
 | Critério | Obrigatório |
 |---|---|
@@ -135,4 +139,4 @@ Criar uma sonda QA de composição que enquadre o núcleo existente do Acampamen
 
 ## Sucessão obrigatória
 
-A esteira regional mantém este contrato em `ACTIVE` e uma única issue `[Dev5 Continuous]`. `DEV5-R5-CAMP-COMPOSITION-PROBE-026` permanece ativo até que a sonda escolha uma necessidade artística R5 espacialmente verificável.
+A esteira regional mantém este contrato em `ACTIVE` e uma única issue `[Dev5 Continuous]`. `DEV5-R5-CAMP-COMPOSITION-POSTPROBE-027` permanece ativo até que a captura determine uma necessidade artística R5 espacialmente verificável.
