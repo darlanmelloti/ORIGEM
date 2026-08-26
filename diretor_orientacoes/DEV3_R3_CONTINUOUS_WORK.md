@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-NARRATIVE-QUIET-013
+task_id: DEV3-R3-ARCH-ARRIVAL-EXIT-BALANCE-014
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -61,18 +61,22 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 
 `R3CoerenciaMaterial` harmoniza os materiais já existentes de placas, fraturas, seixos e pátina, sem criar geometria, UI, texto novo, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_MATERIAL_CONSISTENCY_OK]`, parser, porta R3, rotas e captura técnica aprovaram a intervenção.
 
-## Tarefa ativa — DEV3-R3-ARCH-NARRATIVE-QUIET-013
+## Entrega aprovada — DEV3-R3-ARCH-NARRATIVE-QUIET-013
 
-A composição do Arco deve receber uma **leitura narrativa ambiental silenciosa**, construída apenas por relação espacial de elementos R3 existentes. A tarefa deve reforçar a memória do rio e a passagem sem acrescentar texto, UI, placas, luzes, emissão, VFX, áudio, colisores ou objetos novos; deve manter a rota R2→R4 aberta.
+`R3NarrativaSilenciosa` estabelece uma relação espacial mínima entre a placa ocidental, memória material do rio e dois vestígios de saída já existentes. Não cria texto, UI, placas, objetos, geometria, luz, emissão, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_NARRATIVE_QUIET_OK]`, parser, porta R3, rotas e captura aprovaram a composição.
+
+## Tarefa ativa — DEV3-R3-ARCH-ARRIVAL-EXIT-BALANCE-014
+
+A composição do Arco deve receber um **equilíbrio silencioso entre chegada e saída**, ajustando exclusivamente a relação espacial de grupos laterais R3 já existentes. A tarefa deve preservar o Arco como horizonte e tornar a transição legível sem texto, UI, placas, objetos, geometria, luzes, emissão, VFX, áudio ou colisores novos; deve manter a rota R2→R4 aberta.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Narrativa | Reorganizar apenas relações espaciais de elementos R3 existentes; sem texto, UI, placas ou objetos novos |
+| Composição | Reorganizar apenas grupos laterais R3 existentes, equilibrando chegada e saída sem estreitar o corredor |
 | Luz | Não adicionar luz dinâmica; manter exatamente as duas luzes locais existentes no Arco |
 | Jogabilidade | Colisores, despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de leitura narrativa e rotas R3 antes de abrir a PR seguinte |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de equilíbrio espacial e rotas R3 antes de abrir a PR seguinte |
 
 ## Fecho e avanço obrigatório
 
@@ -80,4 +84,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-ARCH-ARRIVAL-EXIT-BALANCE-014` deverá equilibrar a leitura lateral de chegada e saída sem estreitar o corredor.
+`DEV3-R3-ARCH-HUMID-THRESHOLD-015` deverá consolidar a continuidade húmida lateral sem criar trilho ou barreira.
