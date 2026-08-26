@@ -1,47 +1,47 @@
 # Dev6 — Contrato de Trabalho Contínuo das Ruínas Submersas
 
-> **Regra operacional:** uma porta R6 aprovada não encerra o Dev6. Cada entrega validada deve publicar, abrir ou atualizar uma única tarefa de continuidade e avançar o contrato para o próximo incremento seguro.
+> **Regra operacional:** uma porta R6 aprovada nunca encerra o Dev6. Cada entrega validada deve publicar e substituir a tarefa atual por uma nova tarefa em estado `ACTIVE`.
 
 ## Estado legível por automação
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-SHORE-HANDOFF-002
+task_id: DEV6-R6-WATERLINE-READING-003
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
 
-## Base oficial e recuperação da entrega declarada
+## Limites regionais permanentes
 
-A fonte de trabalho é o repositório oficial do ORIGEM na branch canónica `dev6/r6-submerged-ruins`, sincronizada com `integration/r1-r6-sprint1`. A entrega declarada no commit local `3a6f9c8` e na branch local `feature/dev6-r6-submerged-ruins` não existe no remoto GitHub, não pode ser reproduzida a partir do repositório e **não foi aprovada como entrega independente**.
+A R6 mantém a âncora cartográfica `(60, 252)`, a ligação Majestic→margem, a bacia navegável, ruínas, filetes de cascata em geometria 3D e a leitura física para a futura Vila Elevada. A R7 não pode ser construída antecipadamente. Não criar portão, corredor artificial, painel, parede, `Light3D` adicional, emissão de água como substituto de geometria ou mudança em `CartographicAnchors.gd`.
 
-A única feature Dev6 publicada, `feature/dev6-environment-art`, não partilha histórico com a integração atual, não contém o módulo R6 declarado e possui um construtor `_build_submerged_ruins()` byte-a-byte idêntico ao da integração. Nenhuma geometria desta feature deve ser transplantada em bloco. A recuperação segura é a correção incremental validada na branch canónica.
+O orçamento R6 é exactamente quatro luzes: duas luzes mundiais da bacia, preenchimento de margem e preenchimento submerso central. A sonda `inspect_r6_light_budget.gd` é obrigatória em cada entrega.
 
-## Entrega validada — DEV6-R6-LIGHT-BUDGET-001
+## Entrega aprovada — DEV6-R6-SHORE-HANDOFF-002
 
-A Região 6 já possuía bacia, pilares, domo, cascata de filetes 3D, estela de chegada e rotas físicas. A auditoria runtime revelou **sete luzes filhas do lago mais duas luzes mundiais**, ultrapassando o limite contratual de quatro luzes R6. A entrega removeu a luz submersa lateral, as três balizas dos marcos emergentes e o brilho adicional da estela.
+O módulo `levels/regions/r6/R6ShoreHandoff.gd` adiciona quatro lajes físicas e dois marcos arqueológicos assimétricos entre a margem R6 e a futura direção da Vila Elevada. Cada laje possui colisor e os marcos ficam dentro da fronteira R6, sem luzes novas. A montagem mínima em `ForestLakeRegion.gd` preserva R5 e todo o cenário de bacia já validado.
 
-O conjunto final mantém quatro focos reais: dois preenchimentos mundiais da bacia, um preenchimento de margem e uma luz submersa central. A água, os pilares, o domo e a cascata permanecem geometria legível, sem compensação por emissão excessiva.
-
-| Critério | Resultado validado |
+| Critério | Resultado |
 |---|---|
-| Orçamento R6 | 4 luzes: `world=2`, `lake_omni=2`, `lake_spot=0` |
-| Rotas físicas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` aprovadas |
-| Contrato | Contrato R6 e parser Godot 4.7.1 aprovados |
-| Recuperação | Nenhum commit/branch declarado inexistente foi tratado como aprovado |
+| Lajes e colisores | 4 lajes físicas e 4 colisores validados |
+| Marcos | Ocidental e oriental presentes dentro de R6 |
+| Iluminação | Handoff sem `Light3D`; orçamento R6 continua em quatro |
+| Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` aprovadas |
+| QA | Parser, sonda de luz, prova de handoff e porta R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-SHORE-HANDOFF-002
+## Tarefa ativa — DEV6-R6-WATERLINE-READING-003
 
-Criar uma leitura física de chegada R6→R7 a partir da margem oposta: dois sinais arqueológicos assimétricos, uma continuidade clara no trilho de lajes e uma orientação narrativa para a Vila Elevada, sem construir a região R7 nem formar um portão, parede, painel ou corredor artificial. O trabalho deve ser modular em `levels/regions/r6/`, não adicionar `Light3D` e preservar cascata, domo, pilares e as três rotas R6.
+Melhorar a leitura arqueológica da linha de água junto às ruínas sem adicionar luzes ou novos shaders: compor três conjuntos assimétricos de pedra, raízes ou detritos de expedição parcialmente arrastados pela margem, todos fora do leito jogável e sem bloquear lajes, cascata, estela ou a transição R6→R7. A intenção é reforçar abandono recente e orientar Elias para a margem oposta por geometria real, não por sinalização artificial.
 
-| Limite | Obrigatório |
+| Critério | Obrigatório |
 |---|---|
-| Escopo | R6, QA R6, documentação, `ForestLakeRegion.gd` apenas para montagem mínima |
-| Cartografia | Âncora R6 `(60, 252)`, entrada Majestic→margem e handoff físico para a futura R7 preservados |
-| Água | Sem painel, emissão excessiva, novo shader pesado ou luz adicional |
-| Luz | Exatamente quatro luzes R6; a sonda `inspect_r6_light_budget.gd` é obrigatória |
-| QA | Parser, `tools/qa/run_regional_gate.sh R6`, orçamento R6 e as três rotas contratuais antes do PR |
+| Escopo | Módulo `levels/regions/r6/`, QA R6 e montagem mínima em R6 |
+| Cartografia | Âncora R6 e handoff físico para R7 inalterados |
+| Água | Sem painel, emissão excessiva, nova luz ou shader adicional |
+| Física | Nenhum detrito no leito/trilho jogável; colisores só quando necessários |
+| Luz | `r6_total=4` continua obrigatório |
+| QA | Parser, orçamento R6, prova de handoff e todas as rotas R6 antes do PR |
 
-## Fecho e sucessão obrigatória
+## Sucessão obrigatória
 
-Dev6 só conclui uma tarefa após commit publicado, porta R6 aprovada e substituição por um novo `task_id` em estado `ACTIVE`. A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 obsoleto.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-WATERLINE-READING-003` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.

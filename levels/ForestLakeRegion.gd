@@ -25,6 +25,7 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
+const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -66,6 +67,7 @@ func _ready() -> void:
 	_build_take9_corridor_fill()
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
+	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
 	_build_riparian_margin()
 	_build_lakeside_focal_vegetation()
@@ -1529,6 +1531,12 @@ func _build_take6_corridor_accent() -> void:
 			af.scale = Vector3(fs, fs, fs)
 			af.rotation.y = -(ad["yaw"] as float)
 			accent.add_child(af)
+
+func _build_r6_shore_handoff() -> void:
+	# DEV6-R6-SHORE-HANDOFF-002: indica a continuidade para R7 por lajes e marcos físicos, sem construir a Vila Elevada.
+	var handoff: R6ShoreHandoff = R6_SHORE_HANDOFF_SCRIPT.call("install", self, ROCK, PILLAR, Callable(self, "_height_at")) as R6ShoreHandoff
+	if handoff == null:
+		push_error("[ORIGEM_R6] Não foi possível construir o handoff físico para a futura Vila Elevada.")
 
 func _build_cartographic_basin_silhouette() -> void:
 	# Promontório oriental e queda de água: traduzem a borda elevada da Bacia Central indicada no mapa sem bloquear o acesso oeste.
