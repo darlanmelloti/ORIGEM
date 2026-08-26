@@ -27,6 +27,7 @@ const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMis
 const R4_FOREST_CANOPY_CADENCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestCanopyCadence.gd")
 const R4_FOREST_ORION_VISTA_SCRIPT: Script = preload("res://levels/regions/r4/ForestOrionVistaFraming.gd")
 const R4_FOREST_APPROACH_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachRhythm.gd")
+const R4_FOREST_MAJESTIC_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestMajesticEdgeBalance.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -70,6 +71,7 @@ func _ready() -> void:
 	_build_r4_canopy_cadence()
 	_build_r4_orion_vista_framing()
 	_build_r4_forest_approach_rhythm()
+	_build_r4_majestic_edge_balance()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -356,6 +358,21 @@ func _build_r4_forest_approach_rhythm() -> void:
 	var rhythm: R4ForestApproachRhythm = R4_FOREST_APPROACH_RHYTHM_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), roots) as R4ForestApproachRhythm
 	if rhythm == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a cadência da aproximação a Majestic.")
+
+func _build_r4_majestic_edge_balance() -> void:
+	# DEV4-R4-MAJESTIC-EDGE-BALANCE-008: equilibra apenas instâncias R4 junto ao limite anterior a Majestic.
+	var target_names: PackedStringArray = PackedStringArray([
+		"FlorestaDensaRegional",
+		"CopasFocaisDaFlorestaDensa",
+	])
+	var roots: Array[Node] = []
+	for target_name: String in target_names:
+		var source_root: Node = get_node_or_null(target_name)
+		if source_root != null:
+			roots.append(source_root)
+	var balance: R4ForestMajesticEdgeBalance = R4_FOREST_MAJESTIC_EDGE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), roots) as R4ForestMajesticEdgeBalance
+	if balance == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o equilíbrio da borda Majestic.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
