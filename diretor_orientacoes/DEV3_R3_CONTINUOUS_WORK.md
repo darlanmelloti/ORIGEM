@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-PATINA-007
+task_id: DEV3-R3-ARCH-SILHOUETTE-008
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -37,18 +37,22 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 
 `R3LeituraArqueologica` recebeu três seixos de ardósia húmida, baixos e laterais, assentados pela função de altura real do terreno da Estrada do Rio. A memória material permanece sem texto adicional, UI, colisão, luz, áudio ou emissão. A prova `[ORIGEM_R3_RIVER_MEMORY_OK]`, parser, porta R3, rotas e captura técnica aprovaram a integração no limiar físico do Arco.
 
-## Tarefa ativa — DEV3-R3-ARCH-PATINA-007
+## Entrega aprovada — DEV3-R3-ARCH-PATINA-007
 
-A leitura física do Arco deve receber uma **pátina arqueológica localizada**, com variação material discreta nos vestígios já existentes, sem trocar a silhueta modular do marco por painéis, volumes de greybox ou VFX novos. A tarefa não pode aumentar o orçamento de luzes, partículas, emissões ou interferir com o vão, as placas, os seixos ou a continuidade R4.
+`R3PatinaArqueologica` aplica material mate a cinco fragmentos de coroa e base já existentes, mantendo as malhas, a silhueta, o vão, as duas luzes e a ausência de VFX/áudio/colisão. A prova `[ORIGEM_R3_ARCH_PATINA_OK]`, parser, porta R3, rotas e captura técnica aprovaram a intervenção localizada.
+
+## Tarefa ativa — DEV3-R3-ARCH-SILHOUETTE-008
+
+A leitura do Arco à distância deve receber uma **revisão de silhueta não intrusiva**, através de ajustes apenas em elementos arqueológicos já existentes e laterais. A tarefa deve reforçar a orientação cartográfica sem reduzir a folga física, criar um lintel novo, uma parede, árvores de bloqueio, UI, luzes, VFX ou invadir R4.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Material | Pátina discreta em material já existente; sem painéis, geometrias de greybox ou VFX novos |
+| Silhueta | Ajustar somente elementos laterais existentes; nunca criar lintel, parede, painel ou bloqueio visual central |
 | Luz | Não adicionar luz dinâmica; manter exatamente as duas luzes locais existentes no Arco |
-| Jogabilidade | Despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de material e rotas R3 antes de abrir a PR seguinte |
+| Jogabilidade | Colisores, despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de silhueta e rotas R3 antes de abrir a PR seguinte |
 
 ## Fecho e avanço obrigatório
 
@@ -56,4 +60,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-ARCH-SILHOUETTE-008` deverá rever a leitura de silhueta do marco após a pátina, sem aproximar as estruturas da faixa navegável.
+`DEV3-R3-ARCH-ARRIVAL-CUE-009` deverá testar uma leitura de chegada puramente material após a revisão de silhueta, sem novas luzes ou UI.
