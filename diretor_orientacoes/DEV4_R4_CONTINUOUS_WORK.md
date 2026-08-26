@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-CORRECTION-045
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -129,19 +129,24 @@ A auditoria confirmou que os elementos exteriores existentes já receberam trans
 
 As capturas pós-carregamento das duas rotas R4 confirmaram composição runtime e revelaram uma superfície opaca clara na aproximação `arch_to_forest`. A evidência foi preservada em `reports/r4/RUNTIME_COMPOSITION_CAPTURE_043.md`; não houve alteração de produção.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
+## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
 
-Determinar, por isolamento QA, se a superfície opaca observada provém da geometria ou do material do afluente cartográfico. A tarefa não pode alterar o material partilhado, a água R6, as âncoras, as rotas, a câmara, a luz ou a física de produção.
+A prova isolada confirmou que a lâmina `LaminaDoAfluenteCartografico` é a geometria observada e que a opacidade plena decorre do material lacustre partilhado, configurado com `depth_draw_opaque` e `ALPHA = 1.0`. O controlo transparente QA preservou a geometria e confirmou que a produção permaneceu intacta. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MATERIAL_ISOLATION_044.md`; parser, orçamento, porta R4 e as três rotas foram aprovados sem alteração de produção.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-CORRECTION-045
+
+Avaliar e, apenas se a prova conjunta R4/R6 o sustentar, instalar uma correcção modular de material **exclusiva da lâmina do afluente cartográfico**. Não alterar `_create_lake_material()`, água R6, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física. A geometria, posições, largura, corredor e ausência de colisão do afluente devem permanecer idênticos.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Nenhuma modificação a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
-| Isolamento | Prova/captura de teste fora da montagem de produção |
+| Produção | Alteração apenas local e aditiva à instância `LaminaDoAfluenteCartografico`; não alterar material partilhado |
+| Prova conjunta | Confirmar a não regressão de R4 e R6 antes de publicar qualquer material local |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
-| Integração | Preservar R5 e R6; tratar material partilhado como responsabilidade conjunta |
-| Verificação | Parser, orçamento, porta R4 e três rotas antes de propor correção |
+| Integração | Preservar R5 e R6; não modificar activos, lógica, iluminação, água ou rotas dessas frentes |
+| Dinâmica | Zero luzes, colisores, partículas, vento, animação, pós-processamento ou física nova |
+| Verificação | Parser, prova própria, orçamento, porta R4 e três rotas antes de publicar |
 
 ## Próxima fila reservada
 
-`DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044` permanece ACTIVE até que o diagnóstico identifique uma correção modular segura.
+`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-CORRECTION-045` permanece ACTIVE até que uma correcção local seja demonstrada segura pela evidência conjunta R4/R6.
