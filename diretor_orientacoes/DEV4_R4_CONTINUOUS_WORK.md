@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-CLOSURE-027
+task_id: DEV4-R4-FOREST-OUTER-READABILITY-FINAL-028
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -85,9 +85,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-OUTER-RHYTHM-FINAL-026` instalou `ForestOuterRhythmFinal.gd`: duas árvores de vista exterior receberam variação estática final de escala e orientação. A clareira, as bases, o corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-CLOSURE-027
+`DEV4-R4-FOREST-OUTER-CLOSURE-027` instalou `ForestOuterClosure.gd`: duas árvores exteriores da cadência final receberam variação estática de fecho. Clareira, bases, corredor de `≥8 m`, luzes, colisores e rotas foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
 
-Auditar exclusivamente o fecho estático exterior R4 com elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-READABILITY-FINAL-028
+
+Auditar exclusivamente a legibilidade exterior final R4 com elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -100,4 +102,4 @@ Auditar exclusivamente o fecho estático exterior R4 com elementos ambientais ex
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-READABILITY-FINAL-028` deverá rever a legibilidade exterior R4 sem modificar rota, câmara ou limites regionais.
+`DEV4-R4-FOREST-OUTER-OBSERVATION-029` deverá rever a leitura exterior R4 sem modificar rota, câmara ou limites regionais.
