@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-DEPTH-BALANCE-010
+task_id: DEV4-R4-ORION-APPROACH-READABILITY-011
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -35,6 +35,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-SILHOUETTE-CONTINUITY-009` instalou `ForestSilhouetteContinuity.gd`: oito árvores ou copas R4 sem colisores associados foram ajustadas na faixa `Z=152–164`; seis instâncias com colisores foram preservadas. A prova `[ORIGEM_R4_SILHOUETTE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-DEPTH-BALANCE-010` instalou `ForestDepthBalance.gd`: três fetos R4 existentes foram reorganizados em dois planos laterais estáticos na faixa `Z=153–169`; nenhum nó, luz, colisão, partícula, vento, shader ou pós-processamento foi criado. A prova `[ORIGEM_R4_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -45,10 +47,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Aproximação Majestic | 23 elementos protegidos | ≥6 m | 0 luzes e colisores | Aprovada |
 | Borda Majestic | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Silhuetas | Clareira e física preservadas | ≥6 m | 0 luzes e colisores | Aprovada |
+| Profundidade | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-DEPTH-BALANCE-010
+## Tarefa ativa — DEV4-R4-ORION-APPROACH-READABILITY-011
 
-Rever o **equilíbrio de profundidade lateral da floresta R4** nas massas exteriores que antecedem Majestic. A tarefa deve ajustar somente transformações de instâncias estáticas R4 existentes para separar planos de leitura sem criar parede de árvores, modificar rota, câmara, física, clareira Orion, módulos Dev5, iluminação, partículas, vento ou pós-processamento.
+Consolidar a **legibilidade da aproximação Orion→Majestic** com transformações estáticas de instâncias R4 existentes nas bordas exteriores do trilho. A tarefa deve reforçar a direção visual sem fechar corredor, criar narrativa explícita, alterar rota, câmara, clareira Orion, física, módulos Dev5, iluminação, partículas, vento ou pós-processamento.
 
 | Critério | Obrigatório |
 |---|---|
@@ -61,4 +64,4 @@ Rever o **equilíbrio de profundidade lateral da floresta R4** nas massas exteri
 
 ## Próxima fila reservada
 
-`DEV4-R4-ORION-APPROACH-READABILITY-011` deverá consolidar a leitura da aproximação Orion→Majestic sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-TRAIL-PACING-012` deverá rever o ritmo visual do trilho R4 sem modificar a rota, a câmara ou os limites regionais.
