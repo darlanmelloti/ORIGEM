@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-MARGIN-019
+task_id: DEV4-R4-FOREST-CANOPY-EDGE-020
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -53,6 +53,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-LIMINAL-DEPTH-018` instalou `ForestLiminalDepth.gd`: uma árvore R4 existente sem colisor associado foi ajustada entre `Z=175–181` para reforçar a profundidade lateral antes do conector Majestic. A prova `[ORIGEM_R4_LIMINAL_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-OUTER-MARGIN-019` instalou `ForestOuterMargin.gd`: sete árvores R4 existentes sem colisor associado foram ajustadas entre `Z=184–190` para refinar a margem exterior posterior ao conector Majestic. A prova `[ORIGEM_R4_OUTER_MARGIN_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -72,10 +74,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Leitura do limiar | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
 | Equilíbrio da entrada | Antes da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Profundidade liminar | Fora da clareira | ≥9 m | 0 luzes e colisores | Aprovada |
+| Margem exterior | Fora da clareira | ≥10 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-MARGIN-019
+## Tarefa ativa — DEV4-R4-FOREST-CANOPY-EDGE-020
 
-Refinar a **margem exterior R4** com transformações estáticas de instâncias ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+Modular a **borda das copas R4** com transformações estáticas de instâncias existentes, fora da clareira Orion e sem transformar a margem em parede vegetal. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -88,4 +91,4 @@ Refinar a **margem exterior R4** com transformações estáticas de instâncias 
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-CANOPY-EDGE-020` deverá modular a borda das copas R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-TRAIL-SILHOUETTE-021` deverá organizar a silhueta lateral R4 sem modificar a rota, a câmara ou os limites regionais.
