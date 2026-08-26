@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-RIM-BALANCE-023
+task_id: DEV4-R4-FOREST-OUTER-RHYTHM-024
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -61,6 +61,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-MAJESTIC-THRESHOLD-022` instalou `ForestMajesticThreshold.gd`: uma pedra húmida R4 existente foi ajustada entre `Z=182–186` para clarificar o limiar antes do conector Majestic. A prova `[ORIGEM_R4_MAJESTIC_THRESHOLD_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-RIM-BALANCE-023` instalou `ForestRimBalance.gd`: seis árvores R4 existentes sem colisor associado foram equilibradas entre `Z=165–170` para manter a borda lateral aberta. A prova `[ORIGEM_R4_RIM_BALANCE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -84,10 +86,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Borda das copas | Fora da clareira | ≥7 m | 0 luzes e colisores | Aprovada |
 | Silhueta lateral | Fora da clareira | ≥7 m | 0 luzes e colisores | Aprovada |
 | Limiar Majestic | Conector preservado | ≥6,4 m | 0 luzes e colisores | Aprovada |
+| Equilíbrio da borda | Fora da clareira | ≥10 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-RIM-BALANCE-023
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-RHYTHM-024
 
-Reequilibrar a **borda R4** com transformações estáticas de instâncias ambientais existentes, sem criar paredes vegetais ou aproximar elementos do trilho e do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+Modular o **ritmo exterior R4** com transformações estáticas de instâncias ambientais existentes, sem criar paredes vegetais ou aproximar elementos do trilho e do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -100,4 +103,4 @@ Reequilibrar a **borda R4** com transformações estáticas de instâncias ambie
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-RHYTHM-024` deverá modular o ritmo exterior R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-RETURN-READING-025` deverá reforçar a leitura de retorno R4 sem modificar a rota, a câmara ou os limites regionais.
