@@ -52,6 +52,7 @@ func _ready() -> void:
 	_build_return_side_riverbank_reading()
 	_build_return_side_riverbank_landing()
 	_build_return_side_riverbank_marker()
+	_build_return_side_riverbank_reading_slab_061()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -1176,6 +1177,40 @@ func _build_return_side_riverbank_marker() -> void:
 		fern.scale = Vector3(0.30, 0.30, 0.30)
 		fern.rotation.y = -0.45
 		marker_root.add_child(fern)
+
+func _build_return_side_riverbank_reading_slab_061() -> void:
+	# DEV2-R2-RIVER-RIVERBANK-061: laje curta de leitura no retorno, fora do leito e sem abrir travessia.
+	var reading_root: Node3D = Node3D.new()
+	reading_root.name = "LajeLeituraEixoRetornoR2"
+	add_child(reading_root)
+	var reading_z: float = 87.1
+	var reading_x: float = _river_x(reading_z) + 6.35
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeBaixaEixoRetornoR2"
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(0.92, 0.10, 0.58)
+	slab.mesh = slab_mesh
+	slab.material_override = path_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(reading_x, _height_at(reading_x, reading_z) + 0.06, reading_z)
+	slab.rotation.y = 0.16
+	reading_root.add_child(slab)
+	_add_world_life_collision(reading_root, "ColisorLajeBaixaEixoRetornoR2", Vector3(reading_x, _height_at(reading_x, reading_z) + 0.01, reading_z), slab_mesh.size)
+	var marker: Node3D = RUIN_ROCK.instantiate() as Node3D
+	if marker != null:
+		marker.name = "PedraLeituraEixoRetornoR2"
+		marker.position = Vector3(reading_x - 0.58, _height_at(reading_x - 0.58, reading_z + 0.14) + 0.04, reading_z + 0.14)
+		marker.scale = Vector3(0.16, 0.11, 0.19)
+		marker.rotation.y = -0.36
+		_apply_material(marker, ruin_material)
+		reading_root.add_child(marker)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoAbertoLajeEixoRetornoR2"
+		fern.position = Vector3(reading_x + 0.60, _height_at(reading_x + 0.60, reading_z + 0.18) + 0.02, reading_z + 0.18)
+		fern.scale = Vector3(0.24, 0.24, 0.24)
+		fern.rotation.y = 0.38
+		reading_root.add_child(fern)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.

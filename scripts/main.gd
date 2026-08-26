@@ -296,7 +296,15 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("a visada de retorno não possui laje e duas pedras de referência")
 		elif not sightline.find_children("*", "OmniLight3D", true, false).is_empty():
 			issues.append("a visada de retorno não pode criar luz dinâmica")
+		var riverbank_061: Node = r2.get_node_or_null("LajeLeituraEixoRetornoR2")
+		if riverbank_061 == null:
+			issues.append("a laje de leitura do eixo de retorno 061 está em falta")
+		elif riverbank_061.find_child("LajeBaixaEixoRetornoR2", true, false) == null or riverbank_061.find_child("ColisorLajeBaixaEixoRetornoR2", true, false) == null:
+			issues.append("a leitura do eixo de retorno 061 não possui laje e colisor coincidente")
+		elif not riverbank_061.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("a leitura do eixo de retorno 061 não pode criar luz dinâmica")
 		var recessed: Node = r2.get_node_or_null("RecuoMargemFinalArcoR2")
+
 		if recessed == null:
 			issues.append("o recuo da margem final R2 está em falta")
 		elif recessed.find_child("LajeBaixaRecuoArco_02", true, false) == null:
@@ -315,6 +323,8 @@ func _verify_r2_world_life_qa() -> void:
 		print("[ORIGEM_R2_RIVER_RIVERBANK_042_OK] leitura lateral Casa Voss preserva pedras, fetos e ausência de luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_RIVERBANK_051_OK] laje física de leitura do retorno Casa Voss presente sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_RIVERBANK_055_OK] marco físico da margem no eixo de retorno presente sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_RIVERBANK_061_OK] laje física do eixo de retorno presente com colisor coincidente e sem luz dinâmica.")
+
 		print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")
