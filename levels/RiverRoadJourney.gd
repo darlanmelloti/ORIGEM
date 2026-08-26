@@ -50,6 +50,7 @@ func _ready() -> void:
 	_build_midriver_reflection_edge()
 	_build_orion_reflection_marker()
 	_build_return_side_riverbank_reading()
+	_build_return_side_riverbank_landing()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -1124,6 +1125,32 @@ func _build_return_side_riverbank_reading() -> void:
 			fern.scale = Vector3(0.24 + float(index) * 0.035, 0.24 + float(index) * 0.035, 0.24 + float(index) * 0.035)
 			fern.rotation.y = side * 0.46
 			bank_root.add_child(fern)
+
+func _build_return_side_riverbank_landing() -> void:
+	# DEV2-R2-RIVER-RIVERBANK-051: pequena laje de leitura perto do retorno, fora do leito e sem criar travessia.
+	var landing_root: Node3D = Node3D.new()
+	landing_root.name = "LajeLeituraMargemRetornoR2"
+	add_child(landing_root)
+	var landing_z: float = 80.8
+	var landing_x: float = _river_x(landing_z) + 6.10
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeBaixaLeituraRetornoCasaVoss"
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(1.06, 0.12, 0.72)
+	slab.mesh = slab_mesh
+	slab.material_override = path_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(landing_x, _height_at(landing_x, landing_z) + 0.07, landing_z)
+	slab.rotation.y = -0.18
+	landing_root.add_child(slab)
+	_add_world_life_collision(landing_root, "ColisorLajeBaixaLeituraRetornoCasaVoss", Vector3(landing_x, _height_at(landing_x, landing_z) + 0.02, landing_z), slab_mesh.size)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoAbertoLajeLeituraRetorno"
+		fern.position = Vector3(landing_x + 0.72, _height_at(landing_x + 0.72, landing_z + 0.18) + 0.02, landing_z + 0.18)
+		fern.scale = Vector3(0.28, 0.28, 0.28)
+		fern.rotation.y = 0.52
+		landing_root.add_child(fern)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
