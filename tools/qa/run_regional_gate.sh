@@ -416,6 +416,26 @@ if [[ "$REGION" == "R6" ]]; then
   fi
   printf '[GATE:%s] leitura estática da margem oriental aprovada\n' "$REGION"
 
+  printf '[GATE:%s] prova DEV6-R6-EASTERN-MARGIN-DEPTH-008\n' "$REGION"
+  R6_EASTERN_DEPTH_LOG="/tmp/origem_${REGION}_eastern_depth_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_depth.gd >"$R6_EASTERN_DEPTH_LOG" 2>&1
+  r6_eastern_depth_status=$?
+  set -e
+  if [[ "$r6_eastern_depth_status" -ne 0 ]]; then
+    cat "$R6_EASTERN_DEPTH_LOG"
+    exit 24
+  fi
+  if ! grep -q '\[ORIGEM_R6_EASTERN_DEPTH_OK\]' "$R6_EASTERN_DEPTH_LOG"; then
+    cat "$R6_EASTERN_DEPTH_LOG"
+    exit 24
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_EASTERN_DEPTH_ERROR' "$R6_EASTERN_DEPTH_LOG"; then
+    cat "$R6_EASTERN_DEPTH_LOG"
+    exit 24
+  fi
+  printf '[GATE:%s] profundidade estática da margem oriental aprovada\n' "$REGION"
+
   printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
   R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
   set +e
