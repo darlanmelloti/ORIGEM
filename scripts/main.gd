@@ -235,8 +235,8 @@ func _verify_r2_world_life_qa() -> void:
 		print("[ORIGEM_R2_RIVER_APPROACH_009_OK] recuo arqueológico da margem final presente; acesso lateral sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_RETURN_010_OK] visada baixa para Casa Voss presente; leitura ambiental sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_MARKER_011_OK] dois marcadores ambientais de retorno presentes; sem sinalização explícita ou luz dinâmica.")
-			print("[ORIGEM_R2_RIVER_QA_012_OK] marcadores ambientais sem corpos ou formas de colisão.")
-			print("[ORIGEM_R2_RIVER_ROUTE_013_OK] três rotas canônicas R2 presentes e preservadas.")
+		print("[ORIGEM_R2_RIVER_QA_012_OK] marcadores ambientais sem corpos ou formas de colisão.")
+		print("[ORIGEM_R2_RIVER_ROUTE_013_OK] três rotas canônicas R2 presentes e preservadas.")
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R2_WORLD_LIFE_ERROR] %s" % issue)
