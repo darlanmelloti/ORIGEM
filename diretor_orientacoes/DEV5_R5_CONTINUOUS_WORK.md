@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-POST-PUBLISH-REVIEW-023
+task_id: DEV5-R5-CAMP-COMPOSITION-PROBE-026
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -109,18 +109,30 @@ O closeout documental consolidou a cadeia R5 pronta para integração futura. As
 
 A cadeia R5 foi integrada em *fast-forward* no commit remoto `5e6445b` após reconciliação segura com a integração atual. As portas R4, R5 e R6, as rotas `forest_to_majestic` e `majestic_to_lake`, os colisores e a auditoria global de luz foram aprovados antes da publicação; a CI comum integrada também concluiu com sucesso. Não houve alteração adicional ao mundo nesta entrega documental.
 
-## Tarefa ativa — DEV5-R5-CAMP-POST-PUBLISH-REVIEW-023
+## Entrega aprovada — DEV5-R5-CAMP-POST-PUBLISH-REVIEW-023
 
-Consolidar uma revisão pós-publicação exclusivamente documental da R5 integrada, cruzando o commit remoto, a CI comum e os limites de colisão e conectores já validados. Não criar ou alterar elementos do acampamento enquanto a revisão estiver em curso.
+A revisão documental pós-publicação confirmou o estado integrado sem regressão de colisores, conectores, rotas ou orçamento de luz. A evidência foi preservada em `reports/r5/POST_PUBLISH_REVIEW_023.md`; não houve alteração ao acampamento nesta entrega.
+
+## Entrega aprovada — DEV5-R5-CAMP-ENVIRONMENTAL-REVIEW-024
+
+A auditoria confirmou que as leituras estáticas existentes já cobrem mastros, rolos, costuras e caixas focais, e que outra variação abstrata não demonstraria ganho sem evidência runtime. A evidência foi preservada em `reports/r5/ENVIRONMENTAL_REVIEW_024.md`; não houve alteração de produção.
+
+## Entrega aprovada — DEV5-R5-RUNTIME-COMPOSITION-CAPTURE-025
+
+As capturas pós-carregamento das duas rotas R5 confirmaram corredor, lajes e saída para o lago, mas não enquadraram o núcleo do acampamento de forma suficiente para escolha artística. A evidência foi preservada em `reports/r5/RUNTIME_COMPOSITION_CAPTURE_025.md`; não houve alteração de produção.
+
+## Tarefa ativa — DEV5-R5-CAMP-COMPOSITION-PROBE-026
+
+Criar uma sonda QA de composição que enquadre o núcleo existente do Acampamento Majestic de forma determinística, sem modificar a `Camera3D` do jogador nem a produção. A tarefa deve produzir apenas evidência de teste e escolher um alvo existente caso seja necessária intervenção artística posterior.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Apenas evidência documental e verificação de estado; não criar módulo ou montagem R5 |
-| Leitura | Detalhes estáticos da chegada permanecem sem texto, UI ou evento narrativo precoce |
+| Produção | Nenhuma modificação a `ForestLakeRegion.gd`, câmara de jogo, âncoras, rota, luz ou física |
+| Alvos | Apenas leitura de mastros, lonas, artefacto, rolos e caixas já existentes |
 | Navegação | Corredor R4→R5 e ligação Majestic→R6 mantêm largura, colisão e lajes aprovadas |
-| Custo | Sem nova geometria, luz, partículas, shader, física, nós recorrentes ou animação adicional |
-| Verificação | Confirmar commit integrado, CI comum, porta R5 e rotas `forest_to_majestic` e `majestic_to_lake` sem alteração de produção |
+| Custo | Sem geometria, luz, partículas, shader, física ou animação nova |
+| Verificação | Parser, porta R5 e duas rotas antes de propor correção |
 
 ## Sucessão obrigatória
 
-A esteira regional mantém este contrato em `ACTIVE` e uma única issue `[Dev5 Continuous]`. O fecho de `DEV5-R5-CAMP-PUBLISH-022` foi concluído pela publicação e CI comum aprovadas; a revisão `DEV5-R5-CAMP-POST-PUBLISH-REVIEW-023` deve avançar para uma nova tarefa rastreável após confirmar o estado integrado.
+A esteira regional mantém este contrato em `ACTIVE` e uma única issue `[Dev5 Continuous]`. `DEV5-R5-CAMP-COMPOSITION-PROBE-026` permanece ativo até que a sonda escolha uma necessidade artística R5 espacialmente verificável.

@@ -1,0 +1,1 @@
+[ORIGEM_REGIONAL_RUNTIME_CAPTURE_OK] route=arch_to_forest evidence=reports/runtime_composition_20260826/r4_arch_to_forest/arch_to_forest_postload.png settle_seconds=12

@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-PUBLISH-MONITOR-042
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -113,27 +113,35 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 O closeout documental consolidou a cadeia R4 pronta para integração futura. As portas, rotas, clareira Orion, corredor de `≥8 m`, orçamento e bundles foram verificados; não houve alteração adicional ao mundo.
 
-## Entrega publicada — DEV4-R4-FOREST-OUTER-PUBLISH-040
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-PUBLISH-040
 
-A cadeia exterior R4 consolidada foi publicada de forma não destrutiva após reconciliação com `integration/r1-r6-sprint1`, comparação `ahead/behind` e validação final. A publicação preservou os commits exclusivos e não reescreveu a branch canónica.
+A cadeia exterior R4 foi integrada em *fast-forward* no commit remoto `5e6445b` após reconciliação segura com a integração atual. As portas R4, R5 e R6, as três rotas R4 e a auditoria global de luz foram aprovadas antes da publicação; a CI comum integrada também concluiu com sucesso. Não houve alteração adicional ao mundo nesta entrega documental.
 
-## Entrega aprovada — DEV4-R4-FOREST-OUTER-PUBLISH-POSTCHECK-041
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-POST-PUBLISH-REVIEW-041
 
-A pós-validação remota e regional foi concluída sem alteração adicional ao mundo R4. A ponta remota estava sincronizada antes do registo; parser, porta R4 e as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins` foram aprovados.
+A revisão documental pós-publicação confirmou o estado integrado sem regressão de clareira, corredor, rotas, luz ou física. A evidência foi preservada em `reports/r4/POST_PUBLISH_REVIEW_041.md`; não houve alteração ao mundo nesta entrega.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-PUBLISH-MONITOR-042
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-ENVIRONMENTAL-REVIEW-042
 
-Executar exclusivamente a monitorização de publicação da cadeia exterior R4. Confirmar ponta remota, parser, porta R4, três rotas e integridade do contrato sem introduzir alterações adicionais ao mundo, à rota, à câmara ou aos limites regionais.
+A auditoria confirmou que os elementos exteriores existentes já receberam transformações estáticas extensas e que uma nova variação sem evidência runtime criaria risco cumulativo sem ganho demonstrável. A evidência foi preservada em `reports/r4/ENVIRONMENTAL_REVIEW_042.md`; não houve alteração de produção.
+
+## Entrega aprovada — DEV4-R4-RUNTIME-COMPOSITION-CAPTURE-043
+
+As capturas pós-carregamento das duas rotas R4 confirmaram composição runtime e revelaram uma superfície opaca clara na aproximação `arch_to_forest`. A evidência foi preservada em `reports/r4/RUNTIME_COMPOSITION_CAPTURE_043.md`; não houve alteração de produção.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
+
+Determinar, por isolamento QA, se a superfície opaca observada provém da geometria ou do material do afluente cartográfico. A tarefa não pode alterar o material partilhado, a água R6, as âncoras, as rotas, a câmara, a luz ou a física de produção.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Novo módulo em `levels/regions/r4/`, montagem mínima e QA R4 |
+| Produção | Nenhuma modificação a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
+| Isolamento | Prova/captura de teste fora da montagem de produção |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
-| Integração R5 | Não alterar módulos, ativos, lógica, iluminação ou acampamento de Dev5 |
-| Dinâmica | Zero luz, colisores, partículas, vento, pós-processamento ou animação |
-| Verificação | Parser, prova própria, porta R4 e três rotas antes de publicar |
+| Integração | Preservar R5 e R6; tratar material partilhado como responsabilidade conjunta |
+| Verificação | Parser, orçamento, porta R4 e três rotas antes de propor correção |
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-PUBLISH-MONITOR-042` permanece ACTIVE enquanto a publicação oficial requerer confirmação periódica. Esta tarefa não cria conteúdo de mundo novo; preserva rota, câmara, clareira, corredor, luzes e limites regionais.
+`DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044` permanece ACTIVE até que o diagnóstico identifique uma correção modular segura.
