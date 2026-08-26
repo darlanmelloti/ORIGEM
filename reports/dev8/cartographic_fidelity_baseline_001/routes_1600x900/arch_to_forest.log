@@ -2,9 +2,6 @@ Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
 WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
      at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
 OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
-WARNING: Started the engine as `root`/superuser. This is a security risk, and subsystems like audio may not work correctly.
-Set the environment variable `GODOT_SILENCE_ROOT_WARNING` to 1 to silence this warning.
-     at: setup2 (main/main.cpp:3577)
 
 WARNING: FSR1 3D scaling is only available when using the Forward+ renderer.
      at: viewport_set_scaling_3d_mode (servers/rendering/renderer_viewport.cpp:1028)
@@ -98,5 +95,11 @@ WARNING: SDFGI is only available when using the Forward+ renderer.
 [ORIGEM_R6_OUTER_WATERLINE] acentos_existentes_ajustados=5 luzes=0
 [ORIGEM_QA_ROUTE] Mundo reduzido às Regiões 1–6 para a validação cartográfica.
 [ORIGEM_MAP_R1] casa_visitada=true estrada_revelada=false
-[ORIGEM_QA_ROUTE] Spawn Estrada–Arco ativo em (-20.05, 0.605985, 22.0); foco=(-13.8, 0.0, 92.0)
-[ORIGEM_QA_SNAPSHOT] path=reports/dev8/cartographic_fidelity_baseline_001/road_to_arch_map.png result=0
+[ORIGEM_QA_ROUTE] Spawn Arco–Floresta ativo em (-9.0, 1.319562, 107.0)
+[CP_CARTO78_DISTANCE] rota=arch_to_forest marco=1:Casa Voss distancia=99.85m
+[CP_CARTO78_DISTANCE] rota=arch_to_forest marco=2:Estrada do Rio distancia=95.81m
+[CP_CARTO78_DISTANCE] rota=arch_to_forest marco=3:Arco das Ruínas distancia=59.51m
+[CP_CARTO78_DISTANCE] rota=arch_to_forest marco=4:Floresta Densa distancia=9.00m
+[CP_CARTO78_DISTANCE] rota=arch_to_forest marco=5:Acampamento Majestic distancia=106.22m
+[CP_CARTO78_DISTANCE] rota=arch_to_forest marco=6:Ruínas Submersas distancia=160.58m
+[CP_CARTO78_RULER] rota=arch_to_forest mundo=(-9.00,107.00) marco_proximo=4:Floresta Densa distancia=9.00m mapa=(331.5,252.3) proximo=4:RUMO À FLORESTA

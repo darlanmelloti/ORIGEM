@@ -20,16 +20,20 @@ Dev8 **não pode** alterar `CartographicAnchors.gd`, `CartographicMapUI.gd`, `sc
 
 Qualquer sugestão de produção deve terminar num relatório de handoff para o proprietário do módulo. Não deve ser implementada pelo Dev8.
 
-## Primeira tarefa ativa
+## Baseline 001 concluída
+
+A baseline conferiu Casa Voss, Estrada do Rio, Arco, Floresta Densa, Majestic e Ruínas Submersas. As seis rotas reconhecidas — `road_to_arch`, `arch_to_forest`, `forest_to_majestic`, `majestic_to_lake`, `forest_to_ruins` e `ruins_arrival` — foram capturadas pela cena de jogo em 1600×900, sem mutação de produção. A matriz e as telemetrias estão em `reports/dev8/cartographic_fidelity_baseline_001/`.
+
+## Tarefa ativa
 
 | Campo | Valor |
 |---|---|
-| `task_id` | `DEV8-CARTOGRAPHIC-FIDELITY-BASELINE-001` |
-| Tipo | QA observacional e de leitura, sem mutação de produção. |
-| Resultado | Matriz das âncoras 1–6, captura de mapa pelo jogo e telemetria de rota para cada transição reconhecida. |
-| Decisões admitidas | `COERENTE`, `OBSERVAR`, `HIPOTESE_CAUSAL_PARA_DONO_REGIONAL`. |
+| `task_id` | `DEV8-CARTOGRAPHIC-DISCOVERY-STATE-HYPOTHESIS-002` |
+| Tipo | QA somente de leitura, sem mutação de produção. |
+| Resultado | Mapear sinais narrativos existentes que explicam a diferença entre teleporte técnico de rota e marcador/descoberta no mapa. |
+| Decisões admitidas | `COERENTE`, `OBSERVAR`, `HIPOTESE_CAUSAL_PARA_DEV1`. |
 
-A baseline deve conferir Casa Voss, Estrada do Rio, Arco, Floresta Densa, Majestic e Ruínas Submersas. Ela deverá usar somente rotas reconhecidas: `road_to_arch`, `arch_to_forest`, `forest_to_majestic`, `majestic_to_lake`, `forest_to_ruins` e `ruins_arrival`.
+Dev8 deve localizar e documentar os sinais existentes de descoberta; não pode mudar Timeline, UI, âncoras, Player ou rotas para obter uma captura artificialmente favorável.
 
 ## Critérios obrigatórios
 
