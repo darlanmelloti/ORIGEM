@@ -48,6 +48,7 @@ const R4_FOREST_RETURN_READING_SCRIPT: Script = preload("res://levels/regions/r4
 const R4_FOREST_LATERAL_DEPTH_SCRIPT: Script = preload("res://levels/regions/r4/ForestLateralDepth.gd")
 const R4_FOREST_ENTRY_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r4/ForestEntrySilhouette.gd")
 const R4_FOREST_ORION_MARGIN_SCRIPT: Script = preload("res://levels/regions/r4/ForestOrionMargin.gd")
+const R4_FOREST_MAJESTIC_APPROACH_SCRIPT: Script = preload("res://levels/regions/r4/ForestMajesticApproach.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -112,6 +113,7 @@ func _ready() -> void:
 	_build_r4_lateral_depth()
 	_build_r4_entry_silhouette()
 	_build_r4_orion_margin()
+	_build_r4_majestic_approach()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -561,6 +563,13 @@ func _build_r4_orion_margin() -> void:
 	var margin: R4ForestOrionMargin = R4_FOREST_ORION_MARGIN_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestOrionMargin
 	if margin == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a margem exterior de Orion.")
+
+func _build_r4_majestic_approach() -> void:
+	# DEV4-R4-FOREST-MAJESTIC-APPROACH-029: ajusta uma árvore R4 sem colisor antes do conector Majestic.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var approach: R4ForestMajesticApproach = R4_FOREST_MAJESTIC_APPROACH_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestMajesticApproach
+	if approach == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a aproximação florestal Majestic.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
