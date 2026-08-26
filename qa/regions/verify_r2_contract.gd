@@ -31,6 +31,8 @@ func _init() -> void:
 		issues.append("R2 deve permanecer sob propriedade do Dev2")
 	if contract.allowed_dynamic_lights > 2:
 		issues.append("R2 excede o orçamento de duas luzes dinâmicas")
+	if contract.allowed_dynamic_lights < 0 or contract.allowed_dynamic_lights != 2:
+		issues.append("R2 deve declarar exatamente o orçamento global de duas luzes")
 	if not contract.qa_routes.has("road_to_arch"):
 		issues.append("R2 deve declarar a rota road_to_arch")
 	if not contract.qa_routes.has("positive_bridge"):
@@ -102,4 +104,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_020_OK] build R2 idempotente e nó canônico preservado.")
 	print("[ORIGEM_R2_RIVER_QA_021_OK] run_qa_contract R2 retorna metadados canônicos.")
 	print("[ORIGEM_R2_RIVER_QA_022_OK] rotas R2 são canônicas, únicas e sem atalhos extras.")
+	print("[ORIGEM_R2_RIVER_QA_023_OK] orçamento regional R2 coerente com o teto global de duas luzes.")
 	quit(0)
