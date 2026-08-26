@@ -24,6 +24,7 @@ const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/moss
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
+const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -58,6 +59,7 @@ func _ready() -> void:
 	_build_forest_canopy_clusters()
 	_build_forest_micro_details()
 	_build_majestic_camp()
+	_build_r5_majestic_artifact_trail()
 	_build_majestic_connector()
 	_build_majestic_lake_link()
 	_build_majestic_turn_marker()
@@ -1252,16 +1254,7 @@ func _build_majestic_camp() -> void:
 		torch.material_override = supply_material
 		torch.position = Vector3(cos(torch_angle) * 9.0, 1.05, sin(torch_angle) * 9.0)
 		camp.add_child(torch)
-		var torch_light: OmniLight3D = OmniLight3D.new()
-		torch_light.name = "TochaMajestic_%02d" % torch_index
-		torch_light.light_color = Color(1.0, 0.30, 0.075, 1.0)
-		torch_light.light_energy = 0.84
-		torch_light.omni_range = 9.0
-		torch_light.shadow_enabled = false
-		torch_light.position = torch.position + Vector3(0.0, 1.05, 0.0)
-		torch_light.set_meta("base_energy", torch_light.light_energy)
-		camp.add_child(torch_light)
-		camp_light_sources.append(torch_light)
+		# Tochas abandonadas permanecem como prop físico, sem Light3D: o orçamento R5 é reservado à fogueira, preenchimento e luar.
 
 	# Silhuetas de chegada: dois mastros e lonas inclinadas anunciam o acampamento no fim da ligação, sem criar qualquer luz adicional.
 	var arrival_markers: Node3D = Node3D.new()
@@ -1318,15 +1311,19 @@ func _build_majestic_camp() -> void:
 	stela_collision.shape = stela_shape
 	stela_collision.position = Vector3(0.0, 1.32, 0.0)
 	camp_stela.add_child(stela_collision)
-	var stela_light: OmniLight3D = OmniLight3D.new()
-	stela_light.name = "RessonanciaDaEstelaMajestic"
-	stela_light.light_color = Color(0.13, 0.42, 0.80, 1.0)
-	stela_light.light_energy = 0.34
-	stela_light.omni_range = 5.4
-	stela_light.shadow_enabled = false
-	stela_light.position = Vector3(0.0, 1.92, 0.0)
-	camp_stela.add_child(stela_light)
+	# A estela conserva o papel narrativo sem criar uma quinta luz regional; a assinatura azul pertence ao artefacto físico Dev5.
+
 	camp.add_child(camp_stela)
+
+func _build_r5_majestic_artifact_trail() -> void:
+	# DEV5-R5-ARTEFACT-TRAIL-001: artefacto Orion e pistas reutilizam a estrutura funcional já presente no acampamento.
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_error("[ORIGEM_R5] Acampamento Majestic indisponível para as pistas do artefacto.")
+		return
+	var trail: R5MajesticArtifactTrail = R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT.call("install", camp, PILLAR) as R5MajesticArtifactTrail
+	if trail == null:
+		push_error("[ORIGEM_R5] Não foi possível instalar o trilho narrativo do artefacto.")
 
 func _build_majestic_connector() -> void:
 

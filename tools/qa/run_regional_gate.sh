@@ -161,6 +161,28 @@ if [[ "$REGION" == "R4" ]]; then
   printf '[GATE:%s] clareira R4 e orçamento de baliza aprovados\n' "$REGION"
 fi
 
+if [[ "$REGION" == "R5" ]]; then
+  printf '[GATE:%s] prova de mundo DEV5-R5-ARTEFACT-TRAIL-001\n' "$REGION"
+  R5_ARTEFACT_LOG="/tmp/origem_${REGION}_artefact_$$.log"
+  set +e
+  ORIGEM_QA_AUTOSTART_NEW_GAME=1 ORIGEM_QA_R5_ARTEFACT=1 GODOT_SILENCE_ROOT_WARNING=1 timeout 30s "$GODOT" --headless --path . --rendering-driver opengl3 >"$R5_ARTEFACT_LOG" 2>&1
+  r5_artefact_status=$?
+  set -e
+  if [[ "$r5_artefact_status" -ne 0 ]]; then
+    cat "$R5_ARTEFACT_LOG"
+    exit 15
+  fi
+  if ! grep -q '\[ORIGEM_R5_ARTEFACT_OK\]' "$R5_ARTEFACT_LOG"; then
+    cat "$R5_ARTEFACT_LOG"
+    exit 15
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R5_ARTEFACT_ERROR' "$R5_ARTEFACT_LOG"; then
+    cat "$R5_ARTEFACT_LOG"
+    exit 15
+  fi
+  printf '[GATE:%s] artefacto, pistas e orçamento R5 aprovados\n' "$REGION"
+fi
+
 printf '[GATE:%s] 5/5 contratos e rotas\n' "$REGION"
 CONTRACT_LOG="/tmp/origem_${REGION}_contract_$$.log"
 GODOT_SILENCE_ROOT_WARNING=1 "$GODOT" --headless --path . --script res://qa/regions/verify_region_contracts.gd >"$CONTRACT_LOG" 2>&1

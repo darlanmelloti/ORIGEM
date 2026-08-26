@@ -107,12 +107,14 @@ func _ready():
 		get_tree().create_timer(1.20).timeout.connect(_verify_r3_arch_qa)
 	if OS.has_environment("ORIGEM_QA_R4_CLEARING"):
 		get_tree().create_timer(1.20).timeout.connect(_verify_r4_clearing_qa)
+	if OS.has_environment("ORIGEM_QA_R5_ARTEFACT"):
+		get_tree().create_timer(1.20).timeout.connect(_verify_r5_artefact_qa)
 	# CINE-PAIR-10: apenas um retorno real do interior deve substituir o spawn normal da Casa Voss.
 	var exterior_player: Node3D = get_tree().get_first_node_in_group("player") as Node3D
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
 		OrionTransitionState.restore_exterior_player(exterior_player)
 	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
-	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_R3_ARCH") and not OS.has_environment("ORIGEM_QA_R4_CLEARING"):
+	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_R3_ARCH") and not OS.has_environment("ORIGEM_QA_R4_CLEARING") and not OS.has_environment("ORIGEM_QA_R5_ARTEFACT"):
 		_start_narrative()
 
 func _run_codex_qa() -> void:
@@ -255,6 +257,43 @@ func _verify_r4_clearing_qa() -> void:
 		return
 	for issue: String in issues:
 		printerr("[ORIGEM_R4_CLEARING_ERROR] %s" % issue)
+	get_tree().quit(1)
+
+func _verify_r5_artefact_qa() -> void:
+	var issues: PackedStringArray = PackedStringArray()
+	var camp: Node = find_child("AcampamentoMajestic", true, false)
+	if camp == null:
+		issues.append("o Acampamento Majestic não foi instanciado")
+	else:
+		var trail: Node = camp.get_node_or_null("R5TrilhoDoArtefacto")
+		if trail == null:
+			issues.append("o trilho narrativo R5 está em falta")
+		else:
+			var artefact: Node = trail.get_node_or_null("ArtefactoAzulMajestic")
+			if artefact == null or not artefact.is_in_group("interactable"):
+				issues.append("o artefacto azul R5 não é interagível")
+			elif artefact.get_node_or_null("NucleoAzulSemLuzDinamica") == null:
+				issues.append("o artefacto R5 não possui núcleo azul físico")
+			elif not artefact.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("o artefacto R5 não pode criar luz dinâmica")
+			for clue_name: String in PackedStringArray(["PistaMapaExpedicaoMajestic", "PistaFerramentasECordasMajestic"]):
+				var clue: Node = trail.get_node_or_null(clue_name)
+				if clue == null or not clue.is_in_group("interactable"):
+					issues.append("pista R5 indisponível: %s" % clue_name)
+		var omni_lights: Array[Node] = camp.find_children("*", "OmniLight3D", true, false)
+		var spot_lights: Array[Node] = camp.find_children("*", "SpotLight3D", true, false)
+		if omni_lights.size() + spot_lights.size() != 4:
+			issues.append("o Acampamento R5 deve manter exatamente quatro luzes locais")
+	if issues.is_empty():
+		_activate_majestic_orion_trace()
+		if not TimelineManager.has_consequence("majestic_basin_trace_revealed"):
+			issues.append("o artefacto R5 não persistiu a consequência de missão")
+	if issues.is_empty():
+		print("[ORIGEM_R5_ARTEFACT_OK] artefacto reativo, três pistas e quatro luzes locais aprovados.")
+		get_tree().quit()
+		return
+	for issue: String in issues:
+		printerr("[ORIGEM_R5_ARTEFACT_ERROR] %s" % issue)
 	get_tree().quit(1)
 
 func _apply_exterior_light_budget() -> void:
@@ -426,7 +465,13 @@ func _on_player_interacted(object_name: String) -> void:
 		"ShortcutGate":
 			_unlock_sanctuary_shortcut()
 		"RuneP0_01":
-			_show_msg("RUNAS: A água recorda aquilo que o tempo tentou apagar.", 3.0)
+			_show_msg("REGISTO DA EXPEDIÇÃO: outra equipa chegou à bacia antes de Elias. A água guardou o nome, não o rosto.", 3.4)
+		"ArtefactoAzulMajestic":
+			_activate_majestic_orion_trace()
+		"PistaMapaExpedicaoMajestic":
+			_show_msg("MAPA DE EXPEDIÇÃO: a rota desce para a bacia; alguém assinalou a margem antes de abandonar o acampamento.", 3.4)
+		"PistaFerramentasECordasMajestic":
+			_show_msg("FERRAMENTAS E CORDAS: estavam prontas para uma descida técnica em direção à margem. A equipa saiu depressa.", 3.4)
 		"RuneP0_02":
 			_show_msg("RUNAS: Os Kharu vigiam a nascente, mas não compreendem a memória que guardam.", 3.0)
 		"RuneP0_03":
@@ -445,6 +490,15 @@ func _on_player_interacted(object_name: String) -> void:
 			rest_at_voss_fire()
 		"VossFrontDoor":
 			_open_voss_front_door()
+
+func _activate_majestic_orion_trace() -> void:
+	var already_discovered: bool = TimelineManager.has_consequence("majestic_basin_trace_revealed")
+	TimelineManager.trigger_event("majestic_orion_trace_discovered")
+	WorldEvents.trigger_event("majestic_orion_trace_discovered", {"region": "R5", "source": "ArtefactoAzulMajestic"})
+	if already_discovered:
+		_show_msg("O artefacto mantém a mesma pulsação azul. A expedição anterior ainda aponta para a bacia.", 3.2)
+	else:
+		_show_msg("ARTEFACTO MAJESTIC: uma assinatura azul responde à tua presença. Pista obtida: seguir a preparação da expedição para a bacia.", 4.0)
 
 func _inspect_voss_clue(clue_id: String) -> void:
 	var voss_house: Node = get_tree().get_first_node_in_group("voss_house_controller")
