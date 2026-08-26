@@ -161,6 +161,28 @@ if [[ "$REGION" == "R4" ]]; then
   printf '[GATE:%s] clareira R4 e orçamento de baliza aprovados\n' "$REGION"
 fi
 
+if [[ "$REGION" == "R6" ]]; then
+  printf '[GATE:%s] auditoria de quatro luzes das Ruínas Submersas\n' "$REGION"
+  R6_LIGHT_LOG="/tmp/origem_${REGION}_light_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 30s "$GODOT" --headless --path . --script res://qa/regions/inspect_r6_light_budget.gd >"$R6_LIGHT_LOG" 2>&1
+  r6_light_status=$?
+  set -e
+  if [[ "$r6_light_status" -ne 0 ]]; then
+    cat "$R6_LIGHT_LOG"
+    exit 16
+  fi
+  if ! grep -q '\[ORIGEM_R6_LIGHT_AUDIT\] world=2 lake_omni=2 lake_spot=0 r6_total=4' "$R6_LIGHT_LOG"; then
+    cat "$R6_LIGHT_LOG"
+    exit 16
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_LIGHT_AUDIT_ERROR' "$R6_LIGHT_LOG"; then
+    cat "$R6_LIGHT_LOG"
+    exit 16
+  fi
+  printf '[GATE:%s] orçamento R6 de quatro luzes aprovado\n' "$REGION"
+fi
+
 printf '[GATE:%s] 5/5 contratos e rotas\n' "$REGION"
 CONTRACT_LOG="/tmp/origem_${REGION}_contract_$$.log"
 GODOT_SILENCE_ROOT_WARNING=1 "$GODOT" --headless --path . --script res://qa/regions/verify_region_contracts.gd >"$CONTRACT_LOG" 2>&1
