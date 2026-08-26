@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-MARGIN-SILENCE-016
+task_id: DEV3-R3-ARCH-THRESHOLD-REST-017
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -73,7 +73,11 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 
 `R3LimiarHumidoLateral` ajusta apenas materiais existentes de seixos e fraturas laterais, sem trilho, geometria, UI, luz, emissão, VFX, áudio ou colisores. A prova, captura e porta R3 aprovaram a entrega.
 
-## Tarefa ativa — DEV3-R3-ARCH-MARGIN-SILENCE-016
+## Entrega aprovada — DEV3-R3-ARCH-MARGIN-SILENCE-016
+
+`R3SilencioDeMargem` reduz a competição visual apenas na pátina lateral já existente, sem criar geometria, texto, UI, luz, emissão, VFX, áudio ou colisores. A prova específica e a porta R3 aprovaram a entrega.
+
+## Tarefa ativa — DEV3-R3-ARCH-THRESHOLD-REST-017
 
 A transição do Arco deve receber uma **continuidade húmida lateral silenciosa**, limitada ao ajuste de material de superfícies R3 já existentes na margem da passagem. A tarefa deve reforçar a memória do rio sem criar trilho, texto, UI, placas, objetos, geometria, luzes, emissão, VFX, áudio ou colisores; deve manter a rota R2→R4 aberta.
 
