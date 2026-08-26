@@ -51,6 +51,7 @@ func _ready() -> void:
 	_build_orion_reflection_marker()
 	_build_return_side_riverbank_reading()
 	_build_return_side_riverbank_landing()
+	_build_return_side_riverbank_marker()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -1151,6 +1152,30 @@ func _build_return_side_riverbank_landing() -> void:
 		fern.scale = Vector3(0.28, 0.28, 0.28)
 		fern.rotation.y = 0.52
 		landing_root.add_child(fern)
+
+func _build_return_side_riverbank_marker() -> void:
+	# DEV2-R2-RIVER-RIVERBANK-055: marco lateral baixo que confirma a margem do retorno sem abrir travessia para o rio.
+	var marker_root: Node3D = Node3D.new()
+	marker_root.name = "MarcoMargemEixoRetornoR2"
+	add_child(marker_root)
+	var marker_z: float = 84.2
+	var marker_x: float = _river_x(marker_z) + 6.7
+	var marker: Node3D = RUIN_ROCK.instantiate() as Node3D
+	if marker != null:
+		marker.name = "PedraMarcoMargemEixoRetorno"
+		marker.position = Vector3(marker_x, _height_at(marker_x, marker_z) + 0.06, marker_z)
+		marker.scale = Vector3(0.28, 0.19, 0.32)
+		marker.rotation.y = -0.28
+		_apply_material(marker, ruin_material)
+		marker_root.add_child(marker)
+		_add_world_life_collision(marker_root, "ColisorPedraMarcoMargemEixoRetorno", Vector3(marker_x, _height_at(marker_x, marker_z) + 0.15, marker_z), Vector3(0.58, 0.38, 0.64))
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoAbertoMarcoMargemEixoRetorno"
+		fern.position = Vector3(marker_x - 0.74, _height_at(marker_x - 0.74, marker_z + 0.22) + 0.02, marker_z + 0.22)
+		fern.scale = Vector3(0.30, 0.30, 0.30)
+		fern.rotation.y = -0.45
+		marker_root.add_child(fern)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
