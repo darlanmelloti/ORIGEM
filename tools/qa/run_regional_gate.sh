@@ -155,6 +155,132 @@ if [[ "$REGION" == "R3" ]]; then
   printf '[GATE:%s] Arco R3 aprovado\n' "$REGION"
 fi
 
+if [[ "$REGION" == "R4" ]]; then
+  printf '[GATE:%s] prova de mundo DEV4-R4-CLEARING-SIGHTLINE-001\n' "$REGION"
+  R4_CLEARING_LOG="/tmp/origem_${REGION}_clearing_$$.log"
+  set +e
+  ORIGEM_QA_AUTOSTART_NEW_GAME=1 ORIGEM_QA_R4_CLEARING=1 GODOT_SILENCE_ROOT_WARNING=1 timeout 30s "$GODOT" --headless --path . --rendering-driver opengl3 >"$R4_CLEARING_LOG" 2>&1
+  r4_clearing_status=$?
+  set -e
+  if [[ "$r4_clearing_status" -ne 0 ]]; then
+    cat "$R4_CLEARING_LOG"
+    exit 14
+  fi
+  if ! grep -q '\[ORIGEM_R4_CLEARING_OK\]' "$R4_CLEARING_LOG"; then
+    cat "$R4_CLEARING_LOG"
+    exit 14
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R4_CLEARING_ERROR' "$R4_CLEARING_LOG"; then
+    cat "$R4_CLEARING_LOG"
+    exit 14
+  fi
+  printf '[GATE:%s] clareira R4 e orçamento de baliza aprovados\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV4-R4-ORION-CLEARING-LORE-003\n' "$REGION"
+  R4_LORE_LOG="/tmp/origem_${REGION}_lore_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r4_clearing_lore.gd >"$R4_LORE_LOG" 2>&1
+  r4_lore_status=$?
+  set -e
+  if [[ "$r4_lore_status" -ne 0 ]]; then
+    cat "$R4_LORE_LOG"
+    exit 18
+  fi
+  if ! grep -q '\[ORIGEM_R4_LORE_OK\]' "$R4_LORE_LOG"; then
+    cat "$R4_LORE_LOG"
+    exit 18
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R4_LORE_ERROR' "$R4_LORE_LOG"; then
+    cat "$R4_LORE_LOG"
+    exit 18
+  fi
+  printf '[GATE:%s] leitura arqueológica R4 e clareira aberta aprovadas\n' "$REGION"
+fi
+
+if [[ "$REGION" == "R5" ]]; then
+  printf '[GATE:%s] prova de mundo DEV5-R5-ARTEFACT-TRAIL-001\n' "$REGION"
+  R5_ARTEFACT_LOG="/tmp/origem_${REGION}_artefact_$$.log"
+  set +e
+  ORIGEM_QA_AUTOSTART_NEW_GAME=1 ORIGEM_QA_R5_ARTEFACT=1 GODOT_SILENCE_ROOT_WARNING=1 timeout 30s "$GODOT" --headless --path . --rendering-driver opengl3 >"$R5_ARTEFACT_LOG" 2>&1
+  r5_artefact_status=$?
+  set -e
+  if [[ "$r5_artefact_status" -ne 0 ]]; then
+    cat "$R5_ARTEFACT_LOG"
+    exit 15
+  fi
+  if ! grep -q '\[ORIGEM_R5_ARTEFACT_OK\]' "$R5_ARTEFACT_LOG"; then
+    cat "$R5_ARTEFACT_LOG"
+    exit 15
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R5_ARTEFACT_ERROR' "$R5_ARTEFACT_LOG"; then
+    cat "$R5_ARTEFACT_LOG"
+    exit 15
+  fi
+  printf '[GATE:%s] artefacto, pistas e orçamento R5 aprovados\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV5-R5-CAMP-WIND-READING-002\n' "$REGION"
+  R5_WIND_LOG="/tmp/origem_${REGION}_wind_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_wind_reading.gd >"$R5_WIND_LOG" 2>&1
+  r5_wind_status=$?
+  set -e
+  if [[ "$r5_wind_status" -ne 0 ]]; then
+    cat "$R5_WIND_LOG"
+    exit 19
+  fi
+  if ! grep -q '\[ORIGEM_R5_WIND_OK\]' "$R5_WIND_LOG"; then
+    cat "$R5_WIND_LOG"
+    exit 19
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R5_WIND_ERROR' "$R5_WIND_LOG"; then
+    cat "$R5_WIND_LOG"
+    exit 19
+  fi
+  printf '[GATE:%s] leitura de vento R5 aprovada\n' "$REGION"
+fi
+
+if [[ "$REGION" == "R6" ]]; then
+  printf '[GATE:%s] auditoria de quatro luzes das Ruínas Submersas\n' "$REGION"
+  R6_LIGHT_LOG="/tmp/origem_${REGION}_light_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 30s "$GODOT" --headless --path . --script res://qa/regions/inspect_r6_light_budget.gd >"$R6_LIGHT_LOG" 2>&1
+  r6_light_status=$?
+  set -e
+  if [[ "$r6_light_status" -ne 0 ]]; then
+    cat "$R6_LIGHT_LOG"
+    exit 16
+  fi
+  if ! grep -q '\[ORIGEM_R6_LIGHT_AUDIT\] world=2 lake_omni=2 lake_spot=0 r6_total=4' "$R6_LIGHT_LOG"; then
+    cat "$R6_LIGHT_LOG"
+    exit 16
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_LIGHT_AUDIT_ERROR' "$R6_LIGHT_LOG"; then
+    cat "$R6_LIGHT_LOG"
+    exit 16
+  fi
+  printf '[GATE:%s] orçamento R6 de quatro luzes aprovado\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
+  R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_shore_handoff.gd >"$R6_HANDOFF_LOG" 2>&1
+  r6_handoff_status=$?
+  set -e
+  if [[ "$r6_handoff_status" -ne 0 ]]; then
+    cat "$R6_HANDOFF_LOG"
+    exit 17
+  fi
+  if ! grep -q '\[ORIGEM_R6_HANDOFF_OK\]' "$R6_HANDOFF_LOG"; then
+    cat "$R6_HANDOFF_LOG"
+    exit 17
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_HANDOFF_ERROR' "$R6_HANDOFF_LOG"; then
+    cat "$R6_HANDOFF_LOG"
+    exit 17
+  fi
+  printf '[GATE:%s] handoff físico R6→R7 aprovado\n' "$REGION"
+fi
+
 printf '[GATE:%s] 5/5 contratos e rotas\n' "$REGION"
 CONTRACT_LOG="/tmp/origem_${REGION}_contract_$$.log"
 GODOT_SILENCE_ROOT_WARNING=1 "$GODOT" --headless --path . --script res://qa/regions/verify_region_contracts.gd >"$CONTRACT_LOG" 2>&1

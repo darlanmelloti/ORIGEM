@@ -14,7 +14,6 @@ const PINE_TALL: PackedScene = preload("res://assets/models_generated/ez_pine_ta
 const PINE_MEDIUM: PackedScene = preload("res://assets/models_generated/ez_pine_medium_pbr.glb")
 const DARK_TREE: PackedScene = preload("res://assets/models_cc0/tree_detailed_dark.glb")
 const OAK_DARK: PackedScene = preload("res://assets/models_cc0/tree_oak_dark.glb")
-const ISLAND_TREE: PackedScene = preload("res://assets/models_polyhaven/island_tree_01/island_tree_01_1k.gltf")
 const FERN: PackedScene = preload("res://assets/models_polyhaven/fern_02/fern_02_1k.gltf")
 const ROCK: PackedScene = preload("res://assets/models_cc0/cliff_cave_rock.glb")
 const PILLAR: PackedScene = preload("res://assets/models_cc0/stone_tallC.glb")
@@ -23,6 +22,12 @@ const GROUND_NORMAL: Texture2D = preload("res://assets/textures/pbr/forest_groun
 const MOSSY_RUIN_DIFF: Texture2D = preload("res://assets/textures/generated/mossy_ancient_ruin_stone.png")
 const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_rock_normal_gl.jpg")
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
+const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
+const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMistLayer.gd")
+const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
+const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
+const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
+const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -43,6 +48,8 @@ func _ready() -> void:
 	_build_cartographic_forest_threshold()
 	_build_arch_to_forest_transition()
 	_build_arch_forest_understory()
+	_build_r4_clearing_sightline()
+	_build_r4_clearing_lore()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
 	_build_cartographic_river_inlet()
@@ -55,13 +62,18 @@ func _ready() -> void:
 	_build_dense_forest()
 	_build_forest_canopy_clusters()
 	_build_forest_micro_details()
+	_build_r4_mist_layer()
 	_build_majestic_camp()
+	_build_r5_majestic_artifact_trail()
+	_build_r5_majestic_wind_reading()
 	_build_majestic_connector()
 	_build_majestic_lake_link()
 	_build_majestic_turn_marker()
 	_build_take9_corridor_fill()
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
+	_build_waterline_reading()
+	_build_r6_shore_handoff()
 	_build_cartographic_basin_silhouette()
 	_build_riparian_margin()
 	_build_lakeside_focal_vegetation()
@@ -163,7 +175,7 @@ func _build_cartographic_forest_threshold() -> void:
 		var z_value: float = float(spec["z"])
 		var side: float = float(spec["side"])
 		var x_value: float = _path_x(z_value) + side * float(spec["offset"])
-		var source: PackedScene = ISLAND_TREE if tree_index % 2 == 0 else OAK_DARK
+		var source: PackedScene = DARK_TREE
 		var tree: Node3D = source.instantiate() as Node3D
 		if tree == null:
 			continue
@@ -211,7 +223,7 @@ func _build_arch_to_forest_transition() -> void:
 		var z_value: float = group["z"] as float
 		var side: float = group["side"] as float
 		var x_value: float = _path_x(z_value) + side * (group["offset"] as float)
-		var tree_source: PackedScene = DARK_TREE if index % 2 == 0 else OAK_DARK
+		var tree_source: PackedScene = DARK_TREE
 		var tree: Node3D = tree_source.instantiate() as Node3D
 		if tree != null:
 			tree.name = "ArvoreTransicaoArco_%02d" % (index + 1)
@@ -273,6 +285,37 @@ func _build_arch_forest_understory() -> void:
 			rock.rotation.y = -0.28 + float(index) * 0.61
 			understory.add_child(rock)
 
+func _build_r4_clearing_sightline() -> void:
+	# DEV4-R4-CLEARING-SIGHTLINE-001: moldura baixa, húmida e lateral para a visada de Orion sem fechar o trilho.
+	var clearing: R4ForestClearingSightline = R4_FOREST_CLEARING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), ROCK, FERN) as R4ForestClearingSightline
+	if clearing == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a clareira da visada Orion.")
+
+func _build_r4_clearing_lore() -> void:
+	# DEV4-R4-ORION-CLEARING-LORE-003: vestígios laterais de passagem, sem UI, eventos, luzes ou bloqueio do trilho.
+	var lore: R4ForestClearingLore = R4_FOREST_CLEARING_LORE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), ROCK) as R4ForestClearingLore
+	if lore == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a leitura arqueológica da clareira.")
+
+func _build_r4_mist_layer() -> void:
+	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
+	var target_names: PackedStringArray = PackedStringArray([
+		"LimiarCartograficoDaFloresta",
+		"TransicaoOrganicaArcoFloresta",
+		"SubBosqueDoLimiarArcoFloresta",
+		"FlorestaDensaRegional",
+		"CopasFocaisDaFlorestaDensa",
+		"RaizesPedrasESinaisP0",
+	])
+	var targets: Array[Node] = []
+	for target_name: String in target_names:
+		var target: Node = get_node_or_null(target_name)
+		if target != null:
+			targets.append(target)
+	var mist_layer: R4ForestMistLayer = R4_FOREST_MIST_SCRIPT.call("install", self, targets) as R4ForestMistLayer
+	if mist_layer == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a camada local de neblina.")
+
 func _build_forest_wayfinding() -> void:
 	# Balizas baixas, quentes e espaçadas: guiam Elias no sub-bosque sem transformar a floresta num corredor iluminado.
 	var markers: Node3D = Node3D.new()
@@ -313,13 +356,16 @@ func _build_forest_wayfinding() -> void:
 		glow.mesh = ember_mesh
 		glow.position = Vector3(x_value, ground_y + 0.94, z_value)
 		markers.add_child(glow)
-		var light: OmniLight3D = OmniLight3D.new()
-		light.light_color = Color(0.82, 0.20, 0.045, 1.0)
-		light.light_energy = 0.08
-		light.omni_range = 2.6
-		light.shadow_enabled = false
-		light.position = glow.position
-		markers.add_child(light)
+		# Contrato R4: apenas uma baliza dinâmica local; as restantes preservam a brasa visual sem custo de luz.
+		if index == 1:
+			var light: OmniLight3D = OmniLight3D.new()
+			light.name = "LuzBalizaFlorestalUnica"
+			light.light_color = Color(0.82, 0.20, 0.045, 1.0)
+			light.light_energy = 0.08
+			light.omni_range = 2.6
+			light.shadow_enabled = false
+			light.position = glow.position
+			markers.add_child(light)
 
 func _lake_shore_x(world_z: float) -> float:
 	var lake_anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
@@ -731,73 +777,52 @@ func _build_dense_forest() -> void:
 	add_child(forest)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = 40417
-	for index: int in range(104):
-		var z_value: float = 72.0 + float(index / 2) * 4.5 + rng.randf_range(-2.0, 2.0)
-		var side: float = -1.0 if index % 2 == 0 else 1.0
-		var spacing: float = 8.5 + fmod(float(index * 7), 20.0)
+	# R4 ocupa apenas o corredor Arco→Majestic. A distribuição usa sementes, profundidade e largura independentes para criar massas laterais sem filas ou muralhas.
+	for index: int in range(96):
+		var z_value: float = rng.randf_range(96.0, 190.0)
+		var side: float = -1.0 if rng.randf() < 0.5 else 1.0
+		var spacing: float = rng.randf_range(7.6, 22.0)
 		var x_value: float = _path_x(z_value) + side * spacing
-		# Mantém o corredor livre e evita árvores dentro da bacia elíptica das Ruínas Submersas.
-		var lake_dx: float = (x_value - CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.x) / 48.0
-		var lake_dz: float = (z_value - CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS.y) / 38.0
-		var shore_clearance: bool = z_value >= 194.0 and z_value <= 232.0 and abs(x_value - _lake_shore_x(z_value)) < 6.2
-		# A ligação Majestic é horizontal em torno de z=178; sem esta pequena clareira, árvores da dispersão regional entram na câmara e escondem as lajes.
+		# A faixa central mantém a exploração legível. A pequena limpeza lateral junto ao Majestic conserva a passagem para R5.
 		var majestic_connector_clearance: bool = z_value >= 173.0 and z_value <= 183.0 and x_value >= -82.0 and x_value <= 1.0
-		# As clareiras revelam o destino e a margem sem rarefazer a floresta inteira.
-		# Clareira focal do Arco: abre os últimos 20 m antes do marco 3, preservando bosque lateral e a massa florestal posterior.
-		var arch_sightline_clearance: bool = z_value >= 72.0 and z_value <= 92.0
-		if abs(x_value - _path_x(z_value)) < 6.0 or shore_clearance or majestic_connector_clearance or lake_dx * lake_dx + lake_dz * lake_dz < 1.20 or arch_sightline_clearance:
+		if abs(x_value - _path_x(z_value)) < 6.0 or majestic_connector_clearance:
 			continue
 		var tree_source: PackedScene
 		var is_conifer: bool = false
 		var tone_down_cyan_foliage: bool = false
-		var use_grounded_majestic_tree: bool = false
-		# A instância 28 projectava uma conífera de base incompatível com o talude de chegada ao Majestic; teste reversível com árvore aterrada.
-		if index == 28:
-			tree_source = DARK_TREE
-			use_grounded_majestic_tree = true
-		# A maioria dos pontos focais usa malhas orgânicas reais; as coníferas EZ ficam como profundidade económica.
-		elif index % 7 == 0:
-			# Instâncias próximas usam o pinheiro PBR local; evita a silhueta de folhagem plana do Island Tree no percurso jogável.
+		if index == 35:
+			# Uma única conífera PBR dá escala à composição; todas as outras copas respeitam o orçamento da GTX 1050 Ti.
 			tree_source = PINE_TALL
 			is_conifer = true
-		elif index % 5 == 0:
-			tree_source = OAK_DARK
-			tone_down_cyan_foliage = true
+		elif index % 7 == 0:
+			tree_source = DARK_TREE
+			tone_down_cyan_foliage = false
 		elif index % 3 == 0:
 			tree_source = DARK_TREE
-		elif index % 2 == 0:
-			tree_source = PINE_TALL
-			is_conifer = true
 		else:
-			tree_source = PINE_MEDIUM
-			is_conifer = true
+			# A camada de massa usa a árvore escura detalhada, sem aproximar fileiras de pinheiros PBR do trilho.
+			tree_source = DARK_TREE
 		var tree: Node3D = tree_source.instantiate() as Node3D
 		if tree == null:
 			continue
-		tree.name = "ArvoreDaFloresta_%02d" % index
+		tree.name = "PinheiroFocalR4" if index == 35 else "ArvoreDaFloresta_%02d" % index
 		if tone_down_cyan_foliage:
 			_tone_down_cyan_foliage(tree)
 		tree.position = Vector3(x_value, _height_at(x_value, z_value), z_value)
-		var tree_scale: float = 0.20 + fmod(float(index), 4.0) * 0.045
-		if use_grounded_majestic_tree:
-			tree_scale = 0.52
+		var tree_scale: float = rng.randf_range(0.28, 0.50)
+		if index == 35:
+			tree_scale = 0.72
 		elif index % 7 == 0:
-			tree_scale = 0.68 + fmod(float(index), 3.0) * 0.10
-		elif index % 5 == 0:
-			tree_scale *= 1.48
+			tree_scale *= 1.28
 		elif index % 3 == 0:
-			tree_scale *= 1.20
-		# Variações independentes tornam cada conífera reconhecível sem deslocar a sua base nem fechar o trilho.
-		# A altura fica entre 0.85 e 1.35; XZ varia ±15% apenas nos pinheiros económicos.
-		var height_var: float = 0.85 + fmod(float(index * 13 + 7), 50.0) / 100.0
-		var horizontal_var: float = 1.0
-		if is_conifer:
-			horizontal_var = 0.85 + fmod(float(index * 17 + 11), 31.0) / 100.0
+			tree_scale *= 1.12
+		var height_var: float = rng.randf_range(0.88, 1.28)
+		var horizontal_var: float = rng.randf_range(0.86, 1.14) if is_conifer else 1.0
 		tree.scale = Vector3(tree_scale * horizontal_var, tree_scale * height_var, tree_scale * horizontal_var)
 		tree.rotation.y = rng.randf_range(-PI, PI)
 		forest.add_child(tree)
-		# Um subconjunto de troncos ganha colisão: a floresta torna-se física sem saturar o orçamento nem bloquear o corredor central.
-		if index % 3 == 0:
+		# Colisão apenas em marcos espaciais: bloqueia troncos próximos sem transformar todo o sub-bosque num labirinto físico.
+		if index % 6 == 0:
 			var trunk_body: StaticBody3D = StaticBody3D.new()
 			trunk_body.name = "ColisorTroncoFloresta_%02d" % index
 			var trunk_height: float = maxf(2.3, 7.2 * tree_scale * height_var)
@@ -809,20 +834,19 @@ func _build_dense_forest() -> void:
 			trunk_collision.shape = trunk_shape
 			trunk_body.add_child(trunk_collision)
 			forest.add_child(trunk_body)
-	for index: int in range(112):
-		var z_value: float = 70.0 + float(index) * 1.55
-		var side: float = -1.0 if index % 2 == 0 else 1.0
-		var x_value: float = _path_x(z_value) + side * (5.15 + fmod(float(index), 5.0) * 0.82)
-		if z_value >= 194.0 and z_value <= 232.0 and abs(x_value - _lake_shore_x(z_value)) < 4.8:
-			continue
+	# Fetos 1k permanecem no primeiro plano em agrupamentos assimétricos, afastados do conector com R5.
+	for index: int in range(10):
+		var fern_z: float = rng.randf_range(110.0, 170.0)
+		var fern_side: float = -1.0 if rng.randf() < 0.5 else 1.0
+		var fern_x: float = _path_x(fern_z) + fern_side * rng.randf_range(4.6, 6.9)
 		var fern: Node3D = FERN.instantiate() as Node3D
 		if fern == null:
 			continue
 		fern.name = "FetoFloresta_%02d" % index
-		fern.position = Vector3(x_value, _height_at(x_value, z_value) + 0.02, z_value)
-		var fern_scale: float = 0.42 + fmod(float(index), 3.0) * 0.08
+		fern.position = Vector3(fern_x, _height_at(fern_x, fern_z) + 0.02, fern_z)
+		var fern_scale: float = rng.randf_range(0.38, 0.52)
 		fern.scale = Vector3(fern_scale, fern_scale, fern_scale)
-		fern.rotation.y = float(index) * 0.68
+		fern.rotation.y = rng.randf_range(-PI, PI)
 		forest.add_child(fern)
 
 func _build_forest_canopy_clusters() -> void:
@@ -844,7 +868,7 @@ func _build_forest_canopy_clusters() -> void:
 		var z_value: float = data["z"] as float
 		var side: float = data["side"] as float
 		var x_value: float = _path_x(z_value) + side * (data["offset"] as float)
-		var tree_source: PackedScene = ISLAND_TREE if index % 3 != 1 else OAK_DARK
+		var tree_source: PackedScene = DARK_TREE
 		var tree: Node3D = tree_source.instantiate() as Node3D
 		if tree == null:
 			continue
@@ -923,14 +947,7 @@ func _build_forest_micro_details() -> void:
 			p0_stone.rotation = Vector3(0.03, 0.34 + float(marker_index) * 0.58, 0.02)
 			_apply_material(p0_stone, p0_material)
 			details.add_child(p0_stone)
-			var p0_light: OmniLight3D = OmniLight3D.new()
-			p0_light.name = "BrilhoP0Florestal_%02d" % marker_index
-			p0_light.light_color = Color(0.08, 0.25, 0.34, 1.0)
-			p0_light.light_energy = 0.07
-			p0_light.omni_range = 2.4
-			p0_light.shadow_enabled = false
-			p0_light.position = p0_stone.position + Vector3(0.0, 0.80, 0.0)
-			details.add_child(p0_light)
+			# A assinatura P-0 usa apenas emissão na pedra; a única luz local R4 está reservada ao preenchimento central do corredor.
 
 func _build_majestic_camp() -> void:
 	var camp: Node3D = Node3D.new()
@@ -1241,16 +1258,7 @@ func _build_majestic_camp() -> void:
 		torch.material_override = supply_material
 		torch.position = Vector3(cos(torch_angle) * 9.0, 1.05, sin(torch_angle) * 9.0)
 		camp.add_child(torch)
-		var torch_light: OmniLight3D = OmniLight3D.new()
-		torch_light.name = "TochaMajestic_%02d" % torch_index
-		torch_light.light_color = Color(1.0, 0.30, 0.075, 1.0)
-		torch_light.light_energy = 0.84
-		torch_light.omni_range = 9.0
-		torch_light.shadow_enabled = false
-		torch_light.position = torch.position + Vector3(0.0, 1.05, 0.0)
-		torch_light.set_meta("base_energy", torch_light.light_energy)
-		camp.add_child(torch_light)
-		camp_light_sources.append(torch_light)
+		# Tochas abandonadas permanecem como prop físico, sem Light3D: o orçamento R5 é reservado à fogueira, preenchimento e luar.
 
 	# Silhuetas de chegada: dois mastros e lonas inclinadas anunciam o acampamento no fim da ligação, sem criar qualquer luz adicional.
 	var arrival_markers: Node3D = Node3D.new()
@@ -1307,15 +1315,27 @@ func _build_majestic_camp() -> void:
 	stela_collision.shape = stela_shape
 	stela_collision.position = Vector3(0.0, 1.32, 0.0)
 	camp_stela.add_child(stela_collision)
-	var stela_light: OmniLight3D = OmniLight3D.new()
-	stela_light.name = "RessonanciaDaEstelaMajestic"
-	stela_light.light_color = Color(0.13, 0.42, 0.80, 1.0)
-	stela_light.light_energy = 0.34
-	stela_light.omni_range = 5.4
-	stela_light.shadow_enabled = false
-	stela_light.position = Vector3(0.0, 1.92, 0.0)
-	camp_stela.add_child(stela_light)
+	# A estela conserva o papel narrativo sem criar uma quinta luz regional; a assinatura azul pertence ao artefacto físico Dev5.
+
 	camp.add_child(camp_stela)
+
+func _build_r5_majestic_artifact_trail() -> void:
+	# DEV5-R5-ARTEFACT-TRAIL-001: artefacto Orion e pistas reutilizam a estrutura funcional já presente no acampamento.
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_error("[ORIGEM_R5] Acampamento Majestic indisponível para as pistas do artefacto.")
+		return
+	var trail: R5MajesticArtifactTrail = R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT.call("install", camp, PILLAR) as R5MajesticArtifactTrail
+	if trail == null:
+		push_error("[ORIGEM_R5] Não foi possível instalar o trilho narrativo do artefacto.")
+
+func _build_r5_majestic_wind_reading() -> void:
+	# DEV5-R5-CAMP-WIND-READING-002: movimento local e determinístico apenas em lonas de chegada e cordas existentes.
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	var artifact_trail: Node = camp.get_node_or_null("R5TrilhoDoArtefacto") if camp != null else null
+	var reading: R5MajesticCampWindReading = R5_MAJESTIC_WIND_READING_SCRIPT.call("install", camp, artifact_trail) as R5MajesticCampWindReading
+	if reading == null:
+		push_error("[ORIGEM_R5] Não foi possível instalar a leitura de vento do Acampamento Majestic.")
 
 func _build_majestic_connector() -> void:
 
@@ -1522,6 +1542,12 @@ func _build_take6_corridor_accent() -> void:
 			af.rotation.y = -(ad["yaw"] as float)
 			accent.add_child(af)
 
+func _build_r6_shore_handoff() -> void:
+	# DEV6-R6-SHORE-HANDOFF-002: indica a continuidade para R7 por lajes e marcos físicos, sem construir a Vila Elevada.
+	var handoff: R6ShoreHandoff = R6_SHORE_HANDOFF_SCRIPT.call("install", self, ROCK, PILLAR, Callable(self, "_height_at")) as R6ShoreHandoff
+	if handoff == null:
+		push_error("[ORIGEM_R6] Não foi possível construir o handoff físico para a futura Vila Elevada.")
+
 func _build_cartographic_basin_silhouette() -> void:
 	# Promontório oriental e queda de água: traduzem a borda elevada da Bacia Central indicada no mapa sem bloquear o acesso oeste.
 	var silhouette: Node3D = Node3D.new()
@@ -1626,16 +1652,8 @@ func _build_submerged_ruins() -> void:
 	sub_center.shadow_enabled = false
 	sub_center.position = Vector3(0.0, -1.80, 0.0)
 	lake.add_child(sub_center)
-	# Luz submersa lateral: deslocada para o quadrante dos pilares mais altos para destacar a silhueta de colapso.
-	var sub_lateral: OmniLight3D = OmniLight3D.new()
-	sub_lateral.name = "LuzSubaquaticaLateral"
-	sub_lateral.light_color = Color(0.04, 0.22, 0.44, 1.0)
-	sub_lateral.light_energy = 0.90
-	sub_lateral.omni_range = 26.0
-	sub_lateral.omni_attenuation = 0.90
-	sub_lateral.shadow_enabled = false
-	sub_lateral.position = Vector3(14.0, -2.40, 8.0)
-	lake.add_child(sub_lateral)
+	# O preenchimento submerso central já sustenta os pilares; não é criada luz lateral para manter o orçamento regional R6.
+
 	for index: int in range(8):
 		var angle: float = float(index) * TAU / 8.0
 		var pillar: Node3D = PILLAR.instantiate() as Node3D
@@ -1675,15 +1693,8 @@ func _build_submerged_ruins() -> void:
 		landmark.rotation = Vector3(0.11 + float(landmark_index) * 0.10, 0.38 + float(landmark_index) * 0.41, -0.07 + float(landmark_index) * 0.06)
 		_apply_material(landmark, ruin_material)
 		lake.add_child(landmark)
-		# Baliza arqueológica discreta: delineia os marcos emergentes na captura sem criar um perímetro artificial de luz.
-		var landmark_beacon: OmniLight3D = OmniLight3D.new()
-		landmark_beacon.name = "BrilhoMarcoRuina_%02d" % landmark_index
-		landmark_beacon.light_color = Color(0.16, 0.44, 0.68, 1.0)
-		landmark_beacon.light_energy = 0.56
-		landmark_beacon.omni_range = 9.5
-		landmark_beacon.shadow_enabled = false
-		landmark_beacon.position = landmark.position + Vector3(0.0, 2.65 * landmark_scale, 0.0)
-		lake.add_child(landmark_beacon)
+		# Marcos emergentes leem por geometria, escala e luz da bacia, sem balizas dinâmicas adicionais.
+
 		var landmark_body: StaticBody3D = StaticBody3D.new()
 		landmark_body.name = "ColisorMarcoRuinaEmergente_%02d" % landmark_index
 		landmark_body.position = landmark.position + Vector3(0.0, 2.55 * landmark_scale, 0.0)
@@ -1727,14 +1738,8 @@ func _build_submerged_ruins() -> void:
 	stela_collision.shape = stela_shape
 	arrival_stela.add_child(stela_collision)
 	lake.add_child(arrival_stela)
-	var stela_glow: OmniLight3D = OmniLight3D.new()
-	stela_glow.name = "BrilhoDaEstelaDaChegada"
-	stela_glow.light_color = Color(0.22, 0.48, 0.72, 1.0)
-	stela_glow.light_energy = 0.42
-	stela_glow.omni_range = 6.0
-	stela_glow.shadow_enabled = false
-	stela_glow.position = arrival_stela.position + Vector3(0.0, 1.15, 0.0)
-	lake.add_child(stela_glow)
+	# A estela é legível pela sua silhueta e pelo preenchimento da margem; não acrescenta uma quinta luz às quatro R6.
+
 	# Lajes rasas: prolongam a chegada ocidental por alguns metros dentro da bacia, sem criar uma ponte artificial sobre o lago.
 	var shallow_path: Node3D = Node3D.new()
 	shallow_path.name = "LajesRasasDasRuinas"
@@ -1760,6 +1765,39 @@ func _build_submerged_ruins() -> void:
 		shallow_collision.shape = shallow_shape
 		shallow_body.add_child(shallow_collision)
 		shallow_path.add_child(shallow_body)
+
+func _build_waterline_reading() -> void:
+	# DEV6-R6-WATERLINE-READING-003: reforço arqueológico exclusivamente visual na linha de água.
+	# Fora do leito, fora do trilho jogável e sem luzes, shaders, emissão, painéis ou colisores.
+	var debris: Node3D = Node3D.new()
+	debris.name = "R6_DetritosLinhaDeAgua"
+	add_child(debris)
+	var anchor: Vector2 = CARTOGRAPHIC_ANCHORS.RUINAS_SUBMERSAS
+	var placements: Array[Dictionary] = [
+		{"x": 8.0, "z": 223.5, "s": 0.24, "r": 0.33},
+		{"x": 39.0, "z": 218.0, "s": 0.31, "r": 1.12},
+		{"x": 68.0, "z": 217.0, "s": 0.22, "r": -0.47},
+		{"x": 95.0, "z": 224.0, "s": 0.34, "r": 0.86},
+		{"x": 105.0, "z": 247.0, "s": 0.27, "r": 1.74},
+		{"x": 101.5, "z": 271.0, "s": 0.38, "r": -0.62},
+		{"x": 87.0, "z": 286.0, "s": 0.25, "r": 0.45},
+		{"x": 38.0, "z": 287.0, "s": 0.36, "r": 2.08},
+		{"x": 19.0, "z": 272.0, "s": 0.21, "r": -0.28}
+	]
+	for index: int in range(placements.size()):
+		var spec: Dictionary = placements[index]
+		var rock: Node3D = ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var world_x: float = float(spec["x"])
+		var world_z: float = float(spec["z"])
+		var scale_value: float = float(spec["s"])
+		rock.name = "DetritoLinhaAguaR6_%02d" % index
+		rock.position = Vector3(world_x, _height_at(world_x, world_z) + 0.06, world_z)
+		rock.scale = Vector3(scale_value, scale_value * (0.58 + float(index % 3) * 0.16), scale_value * (0.82 + float(index % 2) * 0.14))
+		rock.rotation = Vector3(0.08 * float(index % 2), float(spec["r"]), -0.10 + float(index % 3) * 0.09)
+		_apply_material(rock, ruin_material)
+		debris.add_child(rock)
 
 func _make_elliptical_lake_mesh(radius_x: float, radius_z: float) -> ArrayMesh:
 	var surface: SurfaceTool = SurfaceTool.new()
@@ -2014,27 +2052,21 @@ void fragment() {
 	return material
 
 func _build_forest_corridor_fill() -> void:
-	# CP 197: 3 luzes frias no corredor central da Floresta Densa.
+	# Uma única luz fria e curta diferencia o plano médio da Floresta Densa sem exceder o orçamento regional de uma luz dinâmica.
 	var fill_root: Node3D = Node3D.new()
 	fill_root.name = "PreenchimentoCorredorFloresta"
 	add_child(fill_root)
-	var positions: Array = [
-		[100.0, 0.58, 17.0],
-		[148.0, 0.62, 18.5],
-		[196.0, 0.55, 16.0],
-	]
-	for fp in positions:
-		var fz: float = fp[0]
-		var fx: float = _path_x(fz)
-		var fy: float = _height_at(fx, fz) + 4.5
-		var fill: OmniLight3D = OmniLight3D.new()
-		fill.name = "PreenchimentoFloresta_z%s" % str(int(fz))
-		fill.position = Vector3(fx, fy, fz)
-		fill.light_color = Color(0.52, 0.62, 0.78, 1.0)
-		fill.light_energy = fp[1]
-		fill.omni_range = min(fp[2], 12.0)  # CP 200: limite de alcance para GTX 1050
-		fill.shadow_enabled = false
-		fill_root.add_child(fill)
+	var fz: float = 148.0
+	var fx: float = _path_x(fz)
+	var fy: float = _height_at(fx, fz) + 4.5
+	var fill: OmniLight3D = OmniLight3D.new()
+	fill.name = "PreenchimentoFlorestalUnico"
+	fill.position = Vector3(fx, fy, fz)
+	fill.light_color = Color(0.52, 0.62, 0.78, 1.0)
+	fill.light_energy = 0.60
+	fill.omni_range = 12.0
+	fill.shadow_enabled = false
+	fill_root.add_child(fill)
 
 func _build_south_shore_fill() -> void:
 	# CP 199: margem inferior sul das Ruinas Submersas.
