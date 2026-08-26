@@ -1,0 +1,1 @@
+[QA-GROUND-01-RESULT] {"grounded_frames":180,"lowest_y":0.0411861054599285,"max_post_warmup_y_delta":0.0,"passed":true,"position":[-20.7410507202148,0.0411861054599285,15.139856338501],"probe":"QA-GROUND-01","reason":"ok","worst_downward_speed":2.61333346366882}

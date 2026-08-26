@@ -1,0 +1,1 @@
+[ORIGEM_REGIONAL_RUNTIME_CAPTURE_OK] route=forest_to_majestic evidence=reports/dev7/visual_playable_physics_baseline_001/forest_to_majestic/forest_to_majestic_postload.png settle_seconds=12

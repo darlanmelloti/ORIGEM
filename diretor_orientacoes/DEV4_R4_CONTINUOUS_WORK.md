@@ -6,14 +6,14 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-PUBLISH-MONITOR-049
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
 
 ## Base oficial e fronteira
 
-A base de trabalho é o repositório oficial do ORIGEM, branch canónica `dev4/r4-dense-forest`, sincronizada com `integration/r1-r6-sprint1`. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
+A base de trabalho é o repositório oficial do ORIGEM, a partir de `integration/r1-r6-sprint1`. A branch canónica Dev4 continua `dev4/r4-dense-forest`; esta revisão documental foi publicada por uma branch auxiliar derivada da integração. A branch canónica não é fonte de produção até ser reconciliada separadamente, pois contém trabalho concorrente não reauditorado. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
 
 O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mínima em `levels/ForestLakeRegion.gd` é permitida apenas para instalar módulos R4 aditivos; não editar âncoras, `RiverRoadJourney.gd`, módulos R1–R3/R5–R6 ou sistemas transversais protegidos.
 
@@ -129,40 +129,40 @@ A auditoria confirmou que os elementos exteriores existentes já receberam trans
 
 As capturas pós-carregamento das duas rotas R4 confirmaram composição runtime e revelaram uma superfície opaca clara na aproximação `arch_to_forest`. A evidência foi preservada em `reports/r4/RUNTIME_COMPOSITION_CAPTURE_043.md`; não houve alteração de produção.
 
-## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
 
-A prova isolada confirmou que a lâmina `LaminaDoAfluenteCartografico` é a geometria observada e que a opacidade plena decorre do material lacustre partilhado, configurado com `depth_draw_opaque` e `ALPHA = 1.0`. O controlo transparente QA preservou a geometria e confirmou que a produção permaneceu intacta. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MATERIAL_ISOLATION_044.md`; parser, orçamento, porta R4 e as três rotas foram aprovados sem alteração de produção.
-
-## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-CORRECTION-045
-
-A correcção modular instalou `ForestCartographicInletMaterial.gd` somente na lâmina `LaminaDoAfluenteCartografico`. A geometria e o traçado do afluente foram preservados; o material local usa mistura alfa, `depth_prepass_alpha` e `ALPHA = 0.68`, enquanto a fábrica lacustre partilhada e a água R6 permanecem inalteradas. As provas conjunta R4/R6, parser, orçamento, portas R4/R6 e três rotas R4 foram aprovados. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_CORRECTION_045.md`.
-
-## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-RUNTIME-REVIEW-046
-
-A captura canónica de `arch_to_forest` confirmou que a superfície opaca clara deixou de dominar o primeiro plano. O afluente permanece lido como faixa azul-esverdeada escura, com rota, corredor, clareira Orion e integração R6 preservados. Parser, orçamento, porta R4 e as três rotas foram aprovados; a evidência está em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_RUNTIME_REVIEW_046.md` e no directório de captura associado.
-
-## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-STABILIZATION-047
-
-A estabilização documental indexou a cadeia 044–046, confirmou que não houve alterações de produção ou QA desde a correcção 045 e revalidou parser, orçamento, porta R4 e as três rotas. A evidência e os identificadores de integridade estão em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_STABILIZATION_047.md`.
-
-## Entrega aprovada — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-POSTCHECK-048
-
-O pós-check confirmou a ponta remota sincronizada, a presença e igualdade dos artefactos 044–047, incluindo a captura runtime e o módulo local R4. Parser, orçamento, porta R4 e as três rotas foram aprovados sem alteração de produção. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_LOCAL_MATERIAL_POSTCHECK_048.md`.
-
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-PUBLISH-MONITOR-049
-
-Executar exclusivamente a monitorização documental de publicação da cadeia 044–048. Reagir a uma nova ponta canónica de integração ou publicação, confirmando a integridade regional sem criar ou alterar produção, `_create_lake_material()`, água R6, `ForestLakeRegion.gd`, `TerrainPatch.gd`, âncoras, rota, câmara, luzes ou física.
+Determinar, por isolamento QA, se a superfície opaca observada provém da geometria ou do material do afluente cartográfico. A tarefa não pode alterar o material partilhado, a água R6, as âncoras, as rotas, a câmara, a luz ou a física de produção.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Zero alterações de produção nesta tarefa de monitorização |
-| Evidência | Preservar a cadeia de relatórios 044–048 e a captura runtime 046 |
+| Produção | Nenhuma modificação a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
+| Isolamento | Prova/captura de teste fora da montagem de produção |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 8 m do trilho físico |
-| Integração | Preservar R5 e R6; não modificar activos, lógica, iluminação, água ou rotas dessas frentes |
-| Dinâmica | Zero luzes, colisores, partículas, vento, animação, pós-processamento ou física nova |
-| Verificação | Comparação remota, parser, orçamento, porta R4 e três rotas antes de publicar |
+| Integração | Preservar R5 e R6; tratar material partilhado como responsabilidade conjunta |
+| Verificação | Parser, orçamento, porta R4 e três rotas antes de propor correção |
 
-## Próxima fila reservada
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MATERIAL-ISOLATION-044
 
-`DEV4-R4-CARTOGRAPHIC-INLET-LOCAL-MATERIAL-PUBLISH-MONITOR-049` permanece ACTIVE até que uma nova ponta canónica exija reconciliação ou o contrato canónico determine nova prioridade.
+O diagnóstico foi concluído sem alterar produção. O isolamento confirmou que a faixa deriva de uma lâmina visual ampla combinada com material lacustre opaco e partilhado; transparência, cota, largura e `cull_back` foram testados, rejeitados e revertidos. A evidência e a revisão comparativa foram integradas nos relatórios `CARTOGRAPHIC_INLET_ISOLATION_044.md` e `CARTOGRAPHIC_INLET_VARIANT_REVIEW_047.md`; a porta R4 e as três rotas foram aprovadas.
+
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-EVIDENCE-REVIEW-049
+
+A revisão QA consolidou a matriz de responsabilidades R4/R6 e confirmou que transparência, cota, largura e `cull_back` permanecem rejeitados. A evidência em `reports/r4/CARTOGRAPHIC_INLET_EVIDENCE_REVIEW_049.md` não autoriza produção: qualquer intervenção futura precisa de fonte causal, aprovação conjunta e prova runtime.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+
+Inventariar em QA os ativos e margens já existentes fora do corredor R4 para determinar se existe alguma candidata modular elegível para futura prova. A tarefa limita-se a inventário espacial, distância ao trilho, propriedade R4/R6 e roteiro de captura; não cria, move, instancia, materializa ou oculta qualquer nó.
+
+| Critério | Obrigatório |
+|---|---|
+| Produção | Zero modificações a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
+| Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` como microajustes |
+| R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
+| R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
+| Resultado | Inventário de elegibilidade; não é proposta de produção |
+| Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
+
+## Sucessão obrigatória
+
+Há exatamente uma tarefa ACTIVE. Ao concluir a auditoria de elegibilidade, Dev4 deve avançar para uma nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.

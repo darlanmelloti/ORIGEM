@@ -1,0 +1,3 @@
+[DEV7_GROUNDING_START] route=ruins_arrival
+[QA-GROUND-01-RESULT] {"grounded_frames":180,"lowest_y":1.06395530700684,"max_post_warmup_y_delta":0.0,"passed":true,"position":[13.6787137985229,1.06395530700684,222.0],"probe":"QA-GROUND-01","reason":"ok","worst_downward_speed":1.79666650295258}
+[DEV7_GROUNDING_EXIT] route=ruins_arrival code=0
