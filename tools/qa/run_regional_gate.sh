@@ -317,6 +317,8 @@ if [[ "$REGION" == "R5" ]]; then
   grep -q '\[ORIGEM_R5_EDGE_OK\]' /tmp/origem_${REGION}_edge_$$.log
   GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_vista_reading.gd >/tmp/origem_${REGION}_vista_$$.log 2>&1
   grep -q '\[ORIGEM_R5_VISTA_OK\]' /tmp/origem_${REGION}_vista_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_focal_reading.gd >/tmp/origem_${REGION}_focal_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_FOCAL_OK\]' /tmp/origem_${REGION}_focal_$$.log
 fi
 
 if [[ "$REGION" == "R6" ]]; then

@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-FOCAL-READING-007
+task_id: DEV5-R5-CAMP-RHYTHM-FINAL-008
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -45,9 +45,13 @@ O módulo `MajesticCampEdgeReading.gd` ajustou estaticamente três rolos de camp
 
 O módulo `MajesticCampVistaReading.gd` ajustou estaticamente duas costuras de tenda R5 já existentes, sem alterar posições, geometria, luzes, colisores, efeitos, interface, câmara ou rotas. A prova própria, a porta R5 e as rotas foram aprovadas.
 
-## Tarefa ativa — DEV5-R5-CAMP-FOCAL-READING-007
+## Entrega aprovada — DEV5-R5-CAMP-FOCAL-READING-007
 
-Refinar exclusivamente a leitura estática do foco do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
+O módulo `MajesticCampFocalReading.gd` ajustou estaticamente duas caixas de campo visuais já existentes. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Tarefa ativa — DEV5-R5-CAMP-RHYTHM-FINAL-008
+
+Refinar exclusivamente a cadência estática final do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
 
 | Critério | Obrigatório |
 |---|---|
@@ -59,4 +63,4 @@ Refinar exclusivamente a leitura estática do foco do Acampamento Majestic com e
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-VISTA-READING-006` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-FOCAL-READING-007`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-FOCAL-READING-007` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-RHYTHM-FINAL-008`.
