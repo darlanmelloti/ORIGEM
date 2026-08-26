@@ -316,6 +316,26 @@ if [[ "$REGION" == "R6" ]]; then
   fi
   printf '[GATE:%s] orçamento R6 de quatro luzes aprovado\n' "$REGION"
 
+  printf '[GATE:%s] prova DEV6-R6-WATERLINE-READING-003\n' "$REGION"
+  R6_WATERLINE_LOG="/tmp/origem_${REGION}_waterline_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_waterline_reading.gd >"$R6_WATERLINE_LOG" 2>&1
+  r6_waterline_status=$?
+  set -e
+  if [[ "$r6_waterline_status" -ne 0 ]]; then
+    cat "$R6_WATERLINE_LOG"
+    exit 18
+  fi
+  if ! grep -q '\[ORIGEM_R6_WATERLINE_OK\]' "$R6_WATERLINE_LOG"; then
+    cat "$R6_WATERLINE_LOG"
+    exit 18
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_WATERLINE_ERROR' "$R6_WATERLINE_LOG"; then
+    cat "$R6_WATERLINE_LOG"
+    exit 18
+  fi
+  printf '[GATE:%s] leitura arqueológica da linha de água aprovada\n' "$REGION"
+
   printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
   R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
   set +e

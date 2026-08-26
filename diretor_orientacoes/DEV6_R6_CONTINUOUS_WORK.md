@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-WATERLINE-READING-003
+task_id: DEV6-R6-BASIN-ARRIVAL-READING-004
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -29,19 +29,19 @@ O módulo `levels/regions/r6/R6ShoreHandoff.gd` adiciona quatro lajes físicas e
 | Rotas | `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` aprovadas |
 | QA | Parser, sonda de luz, prova de handoff e porta R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-WATERLINE-READING-003
+## Tarefa ativa — DEV6-R6-BASIN-ARRIVAL-READING-004
 
-Melhorar a leitura arqueológica da linha de água junto às ruínas sem adicionar luzes ou novos shaders: compor três conjuntos assimétricos de pedra, raízes ou detritos de expedição parcialmente arrastados pela margem, todos fora do leito jogável e sem bloquear lajes, cascata, estela ou a transição R6→R7. A intenção é reforçar abandono recente e orientar Elias para a margem oposta por geometria real, não por sinalização artificial.
+Reforçar a leitura estática da chegada à bacia das Ruínas Submersas com elementos R6 já existentes, sem luz, partículas, shader, emissão de água, painel, interface, câmara, rota artificial, colisão adicional ou construção antecipada da R7. A intervenção deve preservar o limiar real das ruínas, a margem navegável, a cascata, as lajes R6→R7 e as três rotas R6.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Módulo `levels/regions/r6/`, QA R6 e montagem mínima em R6 |
+| Escopo | Novo módulo em `levels/regions/r6/`, QA R6 e montagem mínima em R6 |
 | Cartografia | Âncora R6 e handoff físico para R7 inalterados |
 | Água | Sem painel, emissão excessiva, nova luz ou shader adicional |
-| Física | Nenhum detrito no leito/trilho jogável; colisores só quando necessários |
+| Física | Sem novos colisores ou bloqueios no leito, trilho, cascata, estela ou lajes |
 | Luz | `r6_total=4` continua obrigatório |
-| QA | Parser, orçamento R6, prova de handoff e todas as rotas R6 antes do PR |
+| QA | Parser, orçamento R6, provas de linha de água e handoff, e todas as rotas R6 antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-WATERLINE-READING-003` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-BASIN-ARRIVAL-READING-004` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
