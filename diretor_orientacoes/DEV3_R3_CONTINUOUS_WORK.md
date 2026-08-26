@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-PASSAGE-ARCHAEOLOGY-005
+task_id: DEV3-R3-RIVER-MEMORY-006
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -29,18 +29,22 @@ A prova `[ORIGEM_R3_ARCH_OK]` valida a projeção física, os dois colisores lat
 
 A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois `SphereMesh` existentes. O primeiro despertar reinicia uma sequência de três pulsos durante `1,35 s`, com amplitude máxima de escala `0,12`, e regressa a uma oscilação residual menor. Não foram adicionados `Light3D`, emissores, partículas densas, áudio, UI ou bloqueio físico. A prova `[ORIGEM_R3_SILENT_VFX_OK]`, parser, porta regional e rotas R3 aprovaram o comportamento; a captura técnica confirma que o efeito continua subordinado aos pilares do Arco.
 
-## Tarefa ativa — DEV3-R3-PASSAGE-ARCHAEOLOGY-005
+## Entrega aprovada — DEV3-R3-PASSAGE-ARCHAEOLOGY-005
 
-A passagem após o Arco deve ganhar uma **leitura arqueológica de solo discreta**, através de vestígios baixos e esparsos fora da faixa central que convidem o olhar para `arch_to_forest`. O trabalho não pode invadir o território de R4, alterar o Códice, criar UI, painéis, colisores, luzes ou uma parede vegetal.
+`R3HandoffParaFloresta` recebeu três vestígios arqueológicos baixos nos intervalos Z 96,8–105,8. Cada fragmento declara um offset lateral mínimo de 4,20 m, mantém-se fora do corredor, não cria `CollisionShape3D`, `StaticBody3D`, UI ou luz. A prova `[ORIGEM_R3_PASSAGE_ARCHAEOLOGY_OK]`, parser, porta R3, rotas e captura técnica aprovaram a leitura de passagem e a continuidade para R4.
+
+## Tarefa ativa — DEV3-R3-RIVER-MEMORY-006
+
+O limiar do Arco deve ganhar uma **memória do rio ainda mais discreta**, através de uma leitura material estática que relacione pedra, água e caminho sem antecipar a verdade de Orion. A entrega deve reutilizar a linguagem arqueológica R3, sem UI, texto flutuante novo, colisores, luzes, áudio obrigatório ou invasão do território de R4.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Geometria | Vestígios baixos, esparsos e laterais; sem colisores, painéis ou barreiras no corredor |
+| Geometria | Leitura material baixa e lateral; sem painéis, marcadores flutuantes ou barreiras no corredor |
 | Luz | Não adicionar luz dinâmica; manter exatamente as duas luzes locais existentes no Arco |
-| Jogabilidade | A passagem e o despertar continuam únicos, persistentes e sem retirar controlo do jogador |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica dos vestígios e rotas R3 antes de abrir a PR seguinte |
+| Narrativa | Sugerir memória do rio sem explicar Orion ou substituir as inscrições existentes |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica e rotas R3 antes de abrir a PR seguinte |
 
 ## Fecho e avanço obrigatório
 
@@ -48,4 +52,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-RIVER-MEMORY-006` deverá aprofundar a ligação simbólica entre o rio e o Arco após a aprovação dos vestígios de passagem, sem antecipar a verdade de Orion.
+`DEV3-R3-ARCH-PATINA-007` deverá refinar a pátina visual do Arco após a memória do rio, sem aumentar o orçamento de VFX ou luzes.
