@@ -1,17 +1,17 @@
 ## ForestOuterMargin.gd
 ## DEV4-R4-FOREST-OUTER-MARGIN-019
-## Refinamento estático da margem exterior R4 com árvores existentes sem colisão no término florestal.
+## Reorganiza raízes ambientais existentes no bordo exterior sem criar geometrias, luzes, colisores ou efeitos.
 
 class_name R4ForestOuterMargin
 extends Node3D
 
-const NODE_NAME: String = "R4MargemExteriorFlorestal"
-const BAND_START_Z: float = 184.0
+const NODE_NAME: String = "R4MargemExteriorDaFloresta"
+const BAND_START_Z: float = 182.0
 const BAND_END_Z: float = 190.0
-const MIN_PATH_CLEARANCE: float = 10.0
+const MIN_PATH_CLEARANCE: float = 8.75
 
-static func install(parent: Node3D, path_x_at: Callable, height_at: Callable, forest_root: Node) -> R4ForestOuterMargin:
-	if parent == null or forest_root == null:
+static func install(parent: Node3D, path_x_at: Callable, height_at: Callable, details_root: Node) -> R4ForestOuterMargin:
+	if parent == null or details_root == null or not path_x_at.is_valid() or not height_at.is_valid():
 		return null
 	var existing: R4ForestOuterMargin = parent.get_node_or_null(NODE_NAME) as R4ForestOuterMargin
 	if existing != null:
@@ -19,35 +19,34 @@ static func install(parent: Node3D, path_x_at: Callable, height_at: Callable, fo
 	var margin: R4ForestOuterMargin = R4ForestOuterMargin.new()
 	margin.name = NODE_NAME
 	parent.add_child(margin)
-	margin._apply(path_x_at, height_at, forest_root)
+	margin._apply(path_x_at, height_at, details_root)
 	return margin
 
-func _apply(path_x_at: Callable, height_at: Callable, forest_root: Node) -> void:
+func _apply(path_x_at: Callable, height_at: Callable, details_root: Node) -> void:
 	var adjusted: int = 0
-	var collision_preserved: int = 0
+	var protected_or_rejected: int = 0
 	var ordinal: int = 0
-	for child: Node in forest_root.get_children():
-		if not child is Node3D or not String(child.name).begins_with("ArvoreDaFloresta_"):
+	for child: Node in details_root.get_children():
+		if not child is MeshInstance3D or not String(child.name).begins_with("RaizExpostaFlorestal_"):
 			continue
-		var tree: Node3D = child as Node3D
-		var z_value: float = tree.position.z
-		if z_value < BAND_START_Z or z_value > BAND_END_Z:
+		var root: MeshInstance3D = child as MeshInstance3D
+		var original_z: float = root.position.z
+		if original_z < BAND_START_Z or original_z > BAND_END_Z:
 			continue
-		var tree_index: int = int(String(tree.name).trim_prefix("ArvoreDaFloresta_"))
-		if tree_index % 6 == 0:
-			collision_preserved += 1
-			continue
-		var side: float = -1.0 if tree.position.x < float(path_x_at.call(z_value)) else 1.0
-		var target_z: float = z_value + (-0.26 if ordinal % 2 == 0 else 0.24)
-		var target_x: float = float(path_x_at.call(target_z)) + side * (12.10 + float(ordinal % 3) * 1.20)
+		var side: float = -1.0 if root.position.x < float(path_x_at.call(original_z)) else 1.0
+		var target_z: float = clampf(original_z + (-0.18 if ordinal % 2 == 0 else 0.20), BAND_START_Z, BAND_END_Z)
+		var target_x: float = float(path_x_at.call(target_z)) + side * (MIN_PATH_CLEARANCE + float(ordinal) * 0.45)
 		if abs(target_x - float(path_x_at.call(target_z))) < MIN_PATH_CLEARANCE:
+			protected_or_rejected += 1
+			ordinal += 1
 			continue
-		tree.position = Vector3(target_x, float(height_at.call(target_x, target_z)), target_z)
-		tree.rotation.y += -0.09 + float((ordinal * 5) % 4) * 0.07
-		tree.set_meta("r4_outer_margin_static", true)
+		root.position = Vector3(target_x, float(height_at.call(target_x, target_z)) + 0.075, target_z)
+		root.rotation.y += -0.14 + float(ordinal) * 0.17
+		root.set_meta("r4_outer_margin_static", true)
 		adjusted += 1
 		ordinal += 1
 	set_meta("r4_outer_margin_adjusted", adjusted)
-	set_meta("r4_outer_margin_collision_preserved", collision_preserved)
+	set_meta("r4_outer_margin_rejected", protected_or_rejected)
+	set_meta("r4_outer_margin_min_clearance", MIN_PATH_CLEARANCE)
 	set_meta("r4_outer_margin_dynamic_lights", 0)
-	print("[ORIGEM_R4_OUTER_MARGIN] ajustadas=%d colisores_preservados=%d luzes=0" % [adjusted, collision_preserved])
+	print("[ORIGEM_R4_OUTER_MARGIN] ajustadas=%d rejeitadas=%d luzes=0" % [adjusted, protected_or_rejected])

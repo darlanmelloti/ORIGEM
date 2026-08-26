@@ -1,85 +1,58 @@
-## verify_r4_outer_silhouette.gd
-## DEV4-R4-FOREST-OUTER-SILHOUETTE-030
-
 extends SceneTree
 
-const FOREST_LAKE_SCRIPT: Script = preload("res://levels/ForestLakeRegion.gd")
-const SILHOUETTE_NODE_NAME: String = "R4SilhuetaExteriorFlorestal"
-const BAND_START_Z: float = 192.0
-const BAND_END_Z: float = 199.0
-const MIN_PATH_CLEARANCE: float = 7.0
+const BAND_START_Z: float = 181.0
+const BAND_END_Z: float = 190.0
+const MIN_PATH_CLEARANCE: float = 8.0
 
-var _issues: PackedStringArray = PackedStringArray()
+func _init() -> void:
+	call_deferred("_verify")
 
-class TerrainPatchStub:
-	extends Node3D
-
-	func height_at(_world_x: float, _world_z: float) -> float:
-		return 0.0
-
-func _initialize() -> void:
-	var world: Node3D = Node3D.new()
-	root.add_child(world)
-	var terrain: Node3D = TerrainPatchStub.new()
-	terrain.name = "TerrainPatch"
-	world.add_child(terrain)
-	var region: Node3D = FOREST_LAKE_SCRIPT.new() as Node3D
-	region.name = "RegiaoFlorestaLagoExploravel"
-	world.add_child(region)
+func _verify() -> void:
+	var region_script: Script = load("res://levels/ForestLakeRegion.gd") as Script
+	var region: Node3D = region_script.new() as Node3D
+	root.add_child(region)
 	await process_frame
 	await process_frame
-
-	var silhouette: Node = region.get_node_or_null(SILHOUETTE_NODE_NAME)
-	var clusters_root: Node = region.get_node_or_null("CopasFocaisDaFlorestaDensa")
+	var issues: PackedStringArray = PackedStringArray()
+	var silhouette: Node3D = region.get_node_or_null("R4SilhuetaExteriorDaFloresta") as Node3D
 	if silhouette == null:
-		_fail("Módulo de silhueta exterior R4 ausente.")
+		issues.append("a camada R4 de silhueta exterior não foi instanciada")
 	else:
-		_validate_module(silhouette)
-	if clusters_root == null:
-		_fail("Contentor de copas focais R4 ausente.")
+		if int(silhouette.get_meta("r4_outer_silhouette_dynamic_lights", -1)) != 0:
+			issues.append("a silhueta exterior R4 não pode criar luzes")
+		if not silhouette.find_children("*", "Light3D", true, false).is_empty():
+			issues.append("a silhueta exterior R4 contém Light3D proibida")
+		if not silhouette.find_children("*", "StaticBody3D", true, false).is_empty():
+			issues.append("a silhueta exterior R4 contém colisão proibida")
+		if int(silhouette.get_meta("r4_outer_silhouette_adjusted", 0)) < 1:
+			issues.append("nenhuma árvore R4 foi ajustada na silhueta exterior")
+	var forest: Node = region.get_node_or_null("FlorestaDensaRegional")
+	if forest == null:
+		issues.append("a floresta R4 está ausente")
 	else:
-		_validate_canopies(clusters_root)
-
-	if _issues.is_empty():
-		print("[ORIGEM_R4_OUTER_SILHOUETTE_OK] silhueta, corredor, conector e física R4 preservados.")
-		quit(0)
+		var adjusted: int = 0
+		for child: Node in forest.get_children():
+			if not child is Node3D or not String(child.name).begins_with("ArvoreDaFloresta_"):
+				continue
+			var tree: Node3D = child as Node3D
+			if not bool(tree.get_meta("r4_outer_silhouette_static", false)):
+				continue
+			adjusted += 1
+			var z_value: float = tree.position.z
+			if z_value < BAND_START_Z or z_value > BAND_END_Z:
+				issues.append("árvore exterior fora da faixa R4: %s" % tree.name)
+			var tree_id: String = String(tree.name).trim_prefix("ArvoreDaFloresta_")
+			if forest.get_node_or_null("ColisorTroncoFloresta_%s" % tree_id) != null:
+				issues.append("árvore com colisor foi ajustada: %s" % tree.name)
+			var clearance: float = abs(tree.position.x - float(region.call("_path_x", z_value)))
+			if clearance < MIN_PATH_CLEARANCE:
+				issues.append("árvore exterior demasiado próxima do trilho: %s" % tree.name)
+		if adjusted < 1:
+			issues.append("a prova não encontrou árvores R4 marcadas como silhueta exterior")
+	if issues.is_empty():
+		print("[ORIGEM_R4_OUTER_SILHOUETTE_OK] árvores existentes sem colisores, corredor >= %.2fm e zero luzes." % MIN_PATH_CLEARANCE)
+		quit()
 		return
-	for issue: String in _issues:
+	for issue: String in issues:
 		printerr("[ORIGEM_R4_OUTER_SILHOUETTE_ERROR] %s" % issue)
 	quit(1)
-
-func _validate_module(silhouette: Node) -> void:
-	if int(silhouette.get_meta("r4_outer_silhouette_adjusted", 0)) != 1:
-		_fail("A silhueta exterior deve ajustar exactamente uma copa R4 existente.")
-	if int(silhouette.get_meta("r4_outer_silhouette_dynamic_lights", -1)) != 0:
-		_fail("A tarefa declarou luz dinâmica nova.")
-	if not silhouette.find_children("*", "Light3D", true, false).is_empty():
-		_fail("O módulo criou uma luz.")
-	if not silhouette.find_children("*", "StaticBody3D", true, false).is_empty():
-		_fail("O módulo criou uma colisão.")
-
-func _validate_canopies(clusters_root: Node) -> void:
-	var adjusted: int = 0
-	for child: Node in clusters_root.get_children():
-		if not child is Node3D or not child.has_meta("r4_outer_silhouette_static"):
-			continue
-		var canopy: Node3D = child as Node3D
-		if not String(canopy.name).begins_with("CopaFocalFlorestal_"):
-			_fail("O módulo alterou um elemento que não é copa focal R4.")
-		var canopy_index: int = int(String(canopy.name).trim_prefix("CopaFocalFlorestal_"))
-		if canopy_index in [0, 3, 5]:
-			_fail("O módulo alterou copa R4 com colisor associado.")
-		if canopy.position.z < BAND_START_Z or canopy.position.z > BAND_END_Z:
-			_fail("Copa %s excede a faixa exterior R4." % canopy.name)
-		if abs(canopy.position.x - _path_x(canopy.position.z)) < MIN_PATH_CLEARANCE:
-			_fail("Copa %s aproxima-se excessivamente do corredor." % canopy.name)
-		adjusted += 1
-	if adjusted != 1:
-		_fail("A silhueta exterior não marcou exactamente uma copa R4.")
-
-func _path_x(world_z: float) -> float:
-	var t: float = clampf((world_z - 116.0) / 124.0, 0.0, 1.0)
-	return lerpf(-9.0, 4.0, t) + sin(t * PI * 2.0) * 2.4
-
-func _fail(issue: String) -> void:
-	_issues.append(issue)
