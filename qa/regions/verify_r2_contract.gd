@@ -35,6 +35,10 @@ func _init() -> void:
 		issues.append("R2 deve declarar region_id=2")
 	if contract.owner != "Dev2":
 		issues.append("R2 deve permanecer sob propriedade do Dev2")
+	if contract.display_name != "Estrada do Rio":
+		issues.append("R2 deve preservar o nome de apresentação Estrada do Rio")
+	if R2_SCRIPT.integration_node_name() != "EstradaDoRioExploravel":
+		issues.append("R2 deve preservar o nome canônico EstradaDoRioExploravel")
 	if contract.allowed_dynamic_lights > 2:
 		issues.append("R2 excede o orçamento de duas luzes dinâmicas")
 	if contract.allowed_dynamic_lights < 0 or contract.allowed_dynamic_lights != 2:
@@ -112,4 +116,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_022_OK] rotas R2 são canônicas, únicas e sem atalhos extras.")
 	print("[ORIGEM_R2_RIVER_QA_023_OK] orçamento regional R2 coerente com o teto global de duas luzes.")
 	print("[ORIGEM_R2_RIVER_QA_024_OK] interface regional R2 expõe métodos e tipos estáveis.")
+	print("[ORIGEM_R2_RIVER_QA_025_OK] identificadores e nomes canônicos da R2 preservados.")
 	quit(0)
