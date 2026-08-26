@@ -26,4 +26,6 @@ A prova `qa/regions/verify_r4_edge_rhythm.gd` confirmou:
 >
 > `[ORIGEM_R4_EDGE_RHYTHM_OK] borda, conector, corredor e clareira R4 preservados.`
 
-A entrega segue para a porta canónica R4 e para as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins` antes de publicação.
+O parser Godot, a porta canónica R4 e as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins` foram aprovados antes da publicação na branch `dev4/r4-dense-forest`.
+
+Os avisos `ERROR: Parameter "material" is null.` observados após os harnesses pertencem ao backend dummy de renderização no encerramento headless. Não constituíram regressão: os marcadores de prova e a porta regional finalizaram com sucesso, sem novo erro de parser, script ou falha fatal.
