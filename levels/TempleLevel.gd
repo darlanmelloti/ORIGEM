@@ -107,6 +107,9 @@ func _queue_regional_qa_modes() -> void:
 	if carto_route != "" and carto_route != "arch_to_forest" and OS.get_environment("ORIGEM_QA_CARTO_RULER") == "1":
 		# A telemetria só corre no harness e aguarda o spawn específico de cada rota.
 		get_tree().create_timer(1.10).timeout.connect(_emit_cartographic_ruler_qa.bind(carto_route))
+	if OS.has_environment("ORIGEM_QA_R5_CAMP_VISUAL"):
+		# Auditoria visual Dev5: aproxima a câmara do acampamento já construído sem tocar em rota, navegação ou jogo normal.
+		call_deferred("_prepare_r5_camp_visual_qa")
 	if OS.get_environment("ORIGEM_QA_INTERACT") == "lake_stela":
 		get_tree().create_timer(2.40).timeout.connect(_prepare_lake_stela_interaction_qa)
 	elif OS.get_environment("ORIGEM_QA_INTERACT") == "majestic_stela":
@@ -421,6 +424,26 @@ func _prepare_majestic_lake_route_qa() -> void:
 	print("[ORIGEM_QA_ROUTE] Spawn %s ativo em %s; primeira_perna=%s" % [route_label, player.global_position, connector_target])
 	if OS.get_environment("ORIGEM_QA_VIEWPORT_SNAPSHOT") != "" and OS.get_environment("ORIGEM_QA_CARTO_LINK_WALK") != "1":
 		call_deferred("_save_viewport_snapshot_qa")
+
+func _prepare_r5_camp_visual_qa() -> void:
+	var player: CharacterBody3D = get_tree().get_first_node_in_group("player") as CharacterBody3D
+	var region: Node3D = get_node_or_null("RegiaoFlorestaLagoExploravel") as Node3D
+	if player == null or region == null:
+		push_warning("[ORIGEM_R5_VISUAL] Jogador ou região R5 indisponível para a captura técnica.")
+		return
+	var camp: Node3D = region.get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_warning("[ORIGEM_R5_VISUAL] Acampamento Majestic indisponível para a captura técnica.")
+		return
+	player.velocity = Vector3.ZERO
+	player.set("player_velocity", Vector3.ZERO)
+	player.global_position = camp.global_position + Vector3(11.8, 1.72, -8.6)
+	var focal_point: Vector3 = camp.global_position + Vector3(2.2, 1.75, 0.0)
+	player.look_at(focal_point, Vector3.UP)
+	var head: Node3D = player.get_node_or_null("Head") as Node3D
+	if head != null:
+		head.rotation.x = 0.0
+	print("[ORIGEM_R5_VISUAL] Spawn técnico do acampamento ativo em %s; foco=%s" % [player.global_position, focal_point])
 
 func _prepare_lake_approach_route_qa() -> void:
 	var region: Node3D = get_node_or_null("RegiaoFlorestaLagoExploravel") as Node3D

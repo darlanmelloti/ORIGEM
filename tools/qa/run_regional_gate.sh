@@ -308,6 +308,48 @@ if [[ "$REGION" == "R5" ]]; then
     exit 19
   fi
   printf '[GATE:%s] leitura de vento R5 aprovada\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV5-R5-CAMP-ARRIVAL-READING-004\n' "$REGION"
+  R5_ARRIVAL_LOG="/tmp/origem_${REGION}_arrival_reading_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_arrival_reading.gd >"$R5_ARRIVAL_LOG" 2>&1
+  r5_arrival_status=$?
+  set -e
+  if [[ "$r5_arrival_status" -ne 0 ]]; then
+    cat "$R5_ARRIVAL_LOG"
+    exit 24
+  fi
+  if ! grep -q '\[ORIGEM_R5_ARRIVAL_READING_OK\]' "$R5_ARRIVAL_LOG"; then
+    cat "$R5_ARRIVAL_LOG"
+    exit 24
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R5_ARRIVAL_READING_ERROR' "$R5_ARRIVAL_LOG"; then
+    cat "$R5_ARRIVAL_LOG"
+    exit 24
+  fi
+  printf '[GATE:%s] leitura estática da chegada R5 aprovada\n' "$REGION"
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_edge_reading.gd >/tmp/origem_${REGION}_edge_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_EDGE_OK\]' /tmp/origem_${REGION}_edge_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_vista_reading.gd >/tmp/origem_${REGION}_vista_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_VISTA_OK\]' /tmp/origem_${REGION}_vista_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_focal_reading.gd >/tmp/origem_${REGION}_focal_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_FOCAL_OK\]' /tmp/origem_${REGION}_focal_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_rhythm_final.gd >/tmp/origem_${REGION}_rhythm_final_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_RHYTHM_FINAL_OK\]' /tmp/origem_${REGION}_rhythm_final_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_closure.gd >/tmp/origem_${REGION}_closure_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_CLOSURE_OK\]' /tmp/origem_${REGION}_closure_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_readability_final.gd >/tmp/origem_${REGION}_readability_final_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_READABILITY_FINAL_OK\]' /tmp/origem_${REGION}_readability_final_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_observation.gd >/tmp/origem_${REGION}_observation_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_OBSERVATION_OK\]' /tmp/origem_${REGION}_observation_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_review.gd >/tmp/origem_${REGION}_review_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_REVIEW_OK\]' /tmp/origem_${REGION}_review_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_consolidation.gd >/tmp/origem_${REGION}_consolidation_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_CONSOLIDATION_OK\]' /tmp/origem_${REGION}_consolidation_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_stabilization.gd >/tmp/origem_${REGION}_stabilization_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_STABILIZATION_OK\]' /tmp/origem_${REGION}_stabilization_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r5_camp_reconciliation.gd >/tmp/origem_${REGION}_reconciliation_$$.log 2>&1
+  grep -q '\[ORIGEM_R5_RECONCILIATION_OK\]' /tmp/origem_${REGION}_reconciliation_$$.log
 fi
 
 if [[ "$REGION" == "R6" ]]; then

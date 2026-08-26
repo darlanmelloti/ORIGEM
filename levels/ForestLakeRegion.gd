@@ -57,6 +57,18 @@ const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
 const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
+const R5_MAJESTIC_ARRIVAL_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampArrivalReading.gd")
+const R5_MAJESTIC_EDGE_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampEdgeReading.gd")
+const R5_MAJESTIC_VISTA_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampVistaReading.gd")
+const R5_MAJESTIC_FOCAL_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampFocalReading.gd")
+const R5_MAJESTIC_RHYTHM_FINAL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampRhythmFinal.gd")
+const R5_MAJESTIC_CLOSURE_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampClosure.gd")
+const R5_MAJESTIC_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReadabilityFinal.gd")
+const R5_MAJESTIC_OBSERVATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampObservation.gd")
+const R5_MAJESTIC_REVIEW_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReview.gd")
+const R5_MAJESTIC_CONSOLIDATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampConsolidation.gd")
+const R5_MAJESTIC_STABILIZATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampStabilization.gd")
+const R5_MAJESTIC_RECONCILIATION_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReconciliation.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
 var terrain_patch: Node3D
@@ -124,6 +136,18 @@ func _ready() -> void:
 	_build_r4_outer_reconciliation()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
+	_build_r5_majestic_arrival_reading()
+	_build_r5_majestic_edge_reading()
+	_build_r5_majestic_vista_reading()
+	_build_r5_majestic_focal_reading()
+	_build_r5_majestic_rhythm_final()
+	_build_r5_majestic_closure()
+	_build_r5_majestic_readability_final()
+	_build_r5_majestic_observation()
+	_build_r5_majestic_review()
+	_build_r5_majestic_consolidation()
+	_build_r5_majestic_stabilization()
+	_build_r5_majestic_reconciliation()
 	_build_r5_majestic_artifact_trail()
 	_build_r5_majestic_wind_reading()
 	_build_majestic_connector()
@@ -139,6 +163,74 @@ func _ready() -> void:
 	_build_lakeside_focal_vegetation()
 	_build_majestic_ruins_approach_grounding()
 	_apply_riparian_fern_alpha_test()
+
+func _build_r5_majestic_edge_reading() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_error("[ORIGEM_R5] Acampamento indisponível para leitura lateral.")
+		return
+	if int(R5_MAJESTIC_EDGE_READING_SCRIPT.call("apply", camp)) != 3:
+		push_error("[ORIGEM_R5] Não foi possível ajustar os rolos laterais existentes.")
+
+func _build_r5_majestic_vista_reading() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_VISTA_READING_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar as costuras de vista existentes.")
+
+func _build_r5_majestic_focal_reading() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_FOCAL_READING_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar as caixas focais existentes.")
+
+func _build_r5_majestic_rhythm_final() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_RHYTHM_FINAL_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a cadência final das caixas existentes.")
+
+func _build_r5_majestic_closure() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_CLOSURE_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível fechar a leitura das caixas existentes.")
+
+func _build_r5_majestic_readability_final() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_READABILITY_FINAL_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a legibilidade final das caixas existentes.")
+
+func _build_r5_majestic_observation() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_OBSERVATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a observação das caixas existentes.")
+
+func _build_r5_majestic_review() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_REVIEW_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a revisão das caixas existentes.")
+
+func _build_r5_majestic_consolidation() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_CONSOLIDATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a consolidação das caixas existentes.")
+
+func _build_r5_majestic_stabilization() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_STABILIZATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a estabilização das caixas existentes.")
+
+func _build_r5_majestic_reconciliation() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_RECONCILIATION_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a reconciliação das caixas existentes.")
+
+func _build_r5_majestic_arrival_reading() -> void:
+	# DEV5-R5-CAMP-ARRIVAL-READING-004: relê apenas as duas bases de mastro existentes na entrada do acampamento.
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if camp == null:
+		push_error("[ORIGEM_R5] Acampamento indisponível para leitura estática da chegada.")
+		return
+	var adjusted: int = int(R5_MAJESTIC_ARRIVAL_READING_SCRIPT.call("apply", camp))
+	if adjusted != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar as duas bases existentes da chegada Majestic.")
 
 func _apply_riparian_fern_alpha_test() -> void:
 	# CP-CARTO-50: os fetos ribeirinhos não fizeram parte do teste anterior; preserva-se textura PBR e aplica-se apenas o corte alfa compatível.
