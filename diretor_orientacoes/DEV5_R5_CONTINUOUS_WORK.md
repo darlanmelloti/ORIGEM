@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-PUBLISH-022
+task_id: DEV5-R5-CAMP-POST-PUBLISH-REVIEW-023
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -105,18 +105,22 @@ O postcheck documental confirmou, com a porta R5 aprovada, que não houve regres
 
 O closeout documental consolidou a cadeia R5 pronta para integração futura. As portas, rotas, caixas, colisores, conectores, orçamento e bundles foram verificados; não houve alteração adicional ao mundo.
 
-## Tarefa ativa — DEV5-R5-CAMP-PUBLISH-022
+## Entrega aprovada — DEV5-R5-CAMP-PUBLISH-022
 
-Preparar exclusivamente a publicação segura da cadeia R5 quando o canal oficial recuperar. Antes de qualquer escrita remota, comparar ahead/behind, preservar commits exclusivos, usar a integração ensaiada e nunca reescrever a branch canónica.
+A cadeia R5 foi integrada em *fast-forward* no commit remoto `5e6445b` após reconciliação segura com a integração atual. As portas R4, R5 e R6, as rotas `forest_to_majestic` e `majestic_to_lake`, os colisores e a auditoria global de luz foram aprovados antes da publicação; a CI comum integrada também concluiu com sucesso. Não houve alteração adicional ao mundo nesta entrega documental.
+
+## Tarefa ativa — DEV5-R5-CAMP-POST-PUBLISH-REVIEW-023
+
+Consolidar uma revisão pós-publicação exclusivamente documental da R5 integrada, cruzando o commit remoto, a CI comum e os limites de colisão e conectores já validados. Não criar ou alterar elementos do acampamento enquanto a revisão estiver em curso.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Novo módulo em `levels/regions/r5/`, ou extensão mínima de módulo R5 já existente, sem alterar a geometria partilhada salvo montagem comprovada |
-| Leitura | Detalhes estáticos da chegada, sem texto, UI ou evento narrativo precoce |
+| Escopo | Apenas evidência documental e verificação de estado; não criar módulo ou montagem R5 |
+| Leitura | Detalhes estáticos da chegada permanecem sem texto, UI ou evento narrativo precoce |
 | Navegação | Corredor R4→R5 e ligação Majestic→R6 mantêm largura, colisão e lajes aprovadas |
 | Custo | Sem nova geometria, luz, partículas, shader, física, nós recorrentes ou animação adicional |
-| Verificação | Parser, prova R5 própria, porta R5 e rotas `forest_to_majestic` e `majestic_to_lake` |
+| Verificação | Confirmar commit integrado, CI comum, porta R5 e rotas `forest_to_majestic` e `majestic_to_lake` sem alteração de produção |
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-CLOSEOUT-021` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-PUBLISH-022`.
+A esteira regional mantém este contrato em `ACTIVE` e uma única issue `[Dev5 Continuous]`. O fecho de `DEV5-R5-CAMP-PUBLISH-022` foi concluído pela publicação e CI comum aprovadas; a revisão `DEV5-R5-CAMP-POST-PUBLISH-REVIEW-023` deve avançar para uma nova tarefa rastreável após confirmar o estado integrado.
