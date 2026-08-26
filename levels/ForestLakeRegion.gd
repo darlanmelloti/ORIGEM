@@ -38,6 +38,7 @@ const R4_FOREST_EDGE_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/Fo
 const R4_FOREST_THRESHOLD_READING_SCRIPT: Script = preload("res://levels/regions/r4/ForestThresholdReading.gd")
 const R4_FOREST_ENTRY_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestEntryBalance.gd")
 const R4_FOREST_LIMINAL_DEPTH_SCRIPT: Script = preload("res://levels/regions/r4/ForestLiminalDepth.gd")
+const R4_FOREST_OUTER_MARGIN_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterMargin.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -92,6 +93,7 @@ func _ready() -> void:
 	_build_r4_threshold_reading()
 	_build_r4_entry_balance()
 	_build_r4_liminal_depth()
+	_build_r4_outer_margin()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -471,6 +473,13 @@ func _build_r4_liminal_depth() -> void:
 	var depth: R4ForestLiminalDepth = R4_FOREST_LIMINAL_DEPTH_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestLiminalDepth
 	if depth == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a profundidade liminar florestal.")
+
+func _build_r4_outer_margin() -> void:
+	# DEV4-R4-FOREST-OUTER-MARGIN-019: desloca raízes existentes para a margem exterior, sem criar conteúdo ou tocar no conector Majestic.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var margin: R4ForestOuterMargin = R4_FOREST_OUTER_MARGIN_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestOuterMargin
+	if margin == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a margem exterior da floresta.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.

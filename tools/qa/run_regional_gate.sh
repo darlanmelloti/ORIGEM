@@ -228,6 +228,7 @@ if [[ "$REGION" == "R4" ]]; then
     'verify_r4_margin_continuity.gd|[ORIGEM_R4_MARGIN_OK]|continuidade da margem ambiental'
     'verify_r4_approach_composition.gd|[ORIGEM_R4_COMPOSITION_OK]|composição da aproximação'
     'verify_r4_edge_rhythm.gd|[ORIGEM_R4_EDGE_RHYTHM_OK]|cadência da borda florestal'
+    'verify_r4_outer_margin.gd|[ORIGEM_R4_OUTER_MARGIN_OK]|margem exterior da floresta'
   )
   for proof in "${r4_cumulative_proofs[@]}"; do
     IFS='|' read -r r4_qa_file r4_marker r4_label <<< "$proof"
