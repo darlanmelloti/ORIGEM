@@ -223,6 +223,9 @@ if [[ "$REGION" == "R4" ]]; then
     'verify_r4_majestic_edge_balance.gd|[ORIGEM_R4_EDGE_OK]|equilíbrio da margem Majestic'
     'verify_r4_silhouette_continuity.gd|[ORIGEM_R4_SILHOUETTE_OK]|continuidade da silhueta'
     'verify_r4_forest_depth_balance.gd|[ORIGEM_R4_DEPTH_OK]|equilíbrio de profundidade lateral'
+    'verify_r4_approach_readability.gd|[ORIGEM_R4_READABILITY_OK]|legibilidade da aproximação Orion'
+    'verify_r4_trail_pacing.gd|[ORIGEM_R4_PACING_OK]|ritmo visual do trilho'
+    'verify_r4_margin_continuity.gd|[ORIGEM_R4_MARGIN_OK]|continuidade da margem ambiental'
   )
   for proof in "${r4_cumulative_proofs[@]}"; do
     IFS='|' read -r r4_qa_file r4_marker r4_label <<< "$proof"
