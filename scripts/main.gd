@@ -195,6 +195,47 @@ func _verify_r2_world_life_qa() -> void:
 				issues.append("a leitura média da margem não possui pedras e fetos abertos")
 			if not midriver_edge.find_children("*", "OmniLight3D", true, false).is_empty():
 				issues.append("a leitura média da margem não pode criar luz dinâmica")
+		var bridge_transition: Node = r2.get_node_or_null("TransicaoPontePositivaR2")
+		if bridge_transition == null:
+			issues.append("a transição física da ponte positiva está em falta")
+		else:
+			for transition_name: String in PackedStringArray(["LajeTransicaoPontePositiva_Oeste", "LajeTransicaoPontePositiva_Este", "ColisorLajeTransicaoPontePositiva_Oeste", "ColisorLajeTransicaoPontePositiva_Este"]):
+				if bridge_transition.get_node_or_null(transition_name) == null:
+					issues.append("elemento da transição da ponte em falta: %s" % transition_name)
+			if not bridge_transition.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a transição da ponte positiva não pode criar luz dinâmica")
+		var orion_marker: Node = r2.get_node_or_null("MarcoBaixoReflexoOrionR2")
+		if orion_marker == null:
+			issues.append("o marco baixo do reflexo Orion está em falta")
+		else:
+			if orion_marker.get_node_or_null("LajeBaixaMarcoReflexoOrion") == null or orion_marker.get_node_or_null("PedraMarcoReflexoOrion_02") == null:
+				issues.append("o marco baixo Orion não possui laje e pedras reais")
+			if not orion_marker.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("o marco baixo Orion não pode criar luz dinâmica")
+		var return_bank: Node = r2.get_node_or_null("LeituraMargemRetornoCasaVossR2")
+		if return_bank == null:
+			issues.append("a leitura de margem do retorno Casa Voss está em falta")
+		else:
+			if return_bank.get_node_or_null("PedraLeituraRetornoCasaVoss_02") == null or return_bank.get_node_or_null("FetoAbertoLeituraRetorno_02") == null:
+				issues.append("a leitura de margem do retorno não possui pedras e fetos reais")
+			if not return_bank.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a leitura de margem do retorno não pode criar luz dinâmica")
+		var return_bank_landing: Node = r2.get_node_or_null("LajeLeituraMargemRetornoR2")
+		if return_bank_landing == null:
+			issues.append("a laje de leitura da margem do retorno está em falta")
+		else:
+			if return_bank_landing.get_node_or_null("LajeBaixaLeituraRetornoCasaVoss") == null or return_bank_landing.get_node_or_null("ColisorLajeBaixaLeituraRetornoCasaVoss") == null or return_bank_landing.get_node_or_null("FetoAbertoLajeLeituraRetorno") == null:
+				issues.append("a laje de leitura do retorno não possui laje, colisor e feto")
+			if not return_bank_landing.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("a laje de leitura do retorno não pode criar luz dinâmica")
+		var return_marker: Node = r2.get_node_or_null("MarcoMargemEixoRetornoR2")
+		if return_marker == null:
+			issues.append("o marco físico da margem no eixo de retorno está em falta")
+		else:
+			if return_marker.get_node_or_null("PedraMarcoMargemEixoRetorno") == null or return_marker.get_node_or_null("ColisorPedraMarcoMargemEixoRetorno") == null or return_marker.get_node_or_null("FetoAbertoMarcoMargemEixoRetorno") == null:
+				issues.append("o marco de margem do retorno não possui pedra, colisor e feto")
+			if not return_marker.find_children("*", "OmniLight3D", true, false).is_empty():
+				issues.append("o marco de margem do retorno não pode criar luz dinâmica")
 		if not r2.find_children("LuzMarcoVida*", "OmniLight3D", true, false).is_empty():
 			issues.append("os marcos R2 não podem criar luzes dinâmicas")
 		if not r2.find_children("LuzEstacaoOrion*", "OmniLight3D", true, false).is_empty():
@@ -263,7 +304,15 @@ func _verify_r2_world_life_qa() -> void:
 			issues.append("a visada de retorno não possui laje e duas pedras de referência")
 		elif not sightline.find_children("*", "OmniLight3D", true, false).is_empty():
 			issues.append("a visada de retorno não pode criar luz dinâmica")
+		var riverbank_061: Node = r2.get_node_or_null("LajeLeituraEixoRetornoR2")
+		if riverbank_061 == null:
+			issues.append("a laje de leitura do eixo de retorno 061 está em falta")
+		elif riverbank_061.find_child("LajeBaixaEixoRetornoR2", true, false) == null or riverbank_061.find_child("ColisorLajeBaixaEixoRetornoR2", true, false) == null:
+			issues.append("a leitura do eixo de retorno 061 não possui laje e colisor coincidente")
+		elif not riverbank_061.find_children("*", "OmniLight3D", true, false).is_empty():
+			issues.append("a leitura do eixo de retorno 061 não pode criar luz dinâmica")
 		var recessed: Node = r2.get_node_or_null("RecuoMargemFinalArcoR2")
+
 		if recessed == null:
 			issues.append("o recuo da margem final R2 está em falta")
 		elif recessed.find_child("LajeBaixaRecuoArco_02", true, false) == null:
@@ -277,6 +326,13 @@ func _verify_r2_world_life_qa() -> void:
 		print("[ORIGEM_R2_RIVER_RETURN_031_OK] laje física de confirmação Casa Voss presente e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_ARCH_032_OK] laje física de chegada sob o Arco presente e passagem livre.")
 		print("[ORIGEM_R2_RIVER_EDGE_033_OK] leitura média da margem com pedras e fetos abertos, sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_FOOTBRIDGE_034_OK] transições físicas da ponte positiva preservam vão e rota.")
+		print("[ORIGEM_R2_RIVER_ORION_035_OK] marco baixo do reflexo Orion presente, sem emissão ou luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_RIVERBANK_042_OK] leitura lateral Casa Voss preserva pedras, fetos e ausência de luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_RIVERBANK_051_OK] laje física de leitura do retorno Casa Voss presente sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_RIVERBANK_055_OK] marco físico da margem no eixo de retorno presente sem luz dinâmica.")
+		print("[ORIGEM_R2_RIVER_RIVERBANK_061_OK] laje física do eixo de retorno presente com colisor coincidente e sem luz dinâmica.")
+
 		print("[ORIGEM_R2_TRAVELLER_REST_OK] ponto de descanso físico presente; mochila e fogueira extinta sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_CAIRN_OK] cairn de regresso físico presente; passagem livre e sem luz dinâmica.")
 		print("[ORIGEM_R2_RIVER_FOOTBRIDGE_OK] aproximação lateral física presente; ponte preservada e sem luz dinâmica.")

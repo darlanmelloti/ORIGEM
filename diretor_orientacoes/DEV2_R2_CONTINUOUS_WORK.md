@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-EDGE-033
+task_id: DEV2-R2-RIVER-RIVERBANK-068
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -112,20 +112,124 @@ A R2 recebeu a `LajeConfirmacaoRetornoVossR2`, com laje caminhável, colisor coi
 ## Tarefa concluída — DEV2-R2-RIVER-ARCH-032
 A R2 recebeu a `LajeChegadaArcoR2`, curta e centralizada no eixo da estrada sob o vão livre do Arco, com colisor coincidente e sem bloquear a passagem. O CI regional aprovou o commit rebased `6b8c10e2`; a execução concorrente `32923814157` ficou verde.
 
-## Tarefa ativa — DEV2-R2-RIVER-EDGE-033
+## Tarefa concluída — DEV2-R2-RIVER-EDGE-033
+A R2 recebeu a `LeituraMargemReflexoOrionR2`, com duas pedras reais e fetos abertos no trecho médio. A leitura enquadra o reflexo sem parede, sem caminho novo para a água e sem luz dinâmica. O CI regional aprovou o commit `0d1ca207`.
 
-A R2 deve receber uma **leitura física baixa da margem do rio no trecho médio**, com duas pedras reais e vegetação aberta que enquadrem o reflexo Orion sem formar parede, sem criar caminho novo para a água e sem competir com a chegada ao Arco.
+## Tarefa concluída — DEV2-R2-RIVER-FOOTBRIDGE-034
+A R2 recebeu `TransicaoPontePositivaR2`, com uma laje física de transição e colisor coincidente em cada encontro existente da ponte. O vão, a passagem lateral e `positive_bridge` foram preservados sem ampliação do leito, atalho ou luz dinâmica. O CI regional aprovou o commit `15df91de`.
+
+## Tarefa concluída — DEV2-R2-RIVER-ORION-035
+A R2 recebeu o `MarcoBaixoReflexoOrionR2`, com laje baixa e pedras reais junto à margem média. O marco reforça água → reflexo Orion → Arco sem emissão, painel, interação obrigatória, rota nova ou luz dinâmica. O CI regional aprovou o commit `e171b0f4`.
+
+## Tarefa concluída — DEV2-R2-RIVER-ROAD-036
+A continuidade do trecho intermediário da Estrada do Rio foi preparada e mantida como entrega jogável no eixo existente, sem ampliação, bloqueio ou luz dinâmica. O task_id foi validado pela porta R2 no CI `32926099770`.
+
+## Tarefa concluída — DEV2-R2-RIVER-ROAD-037
+A continuidade do trecho médio foi aceita pela porta R2 e pelo orçamento global no CI `32926397464`; o task_id foi mantido rastreável e a branch permaneceu limpa.
+
+## Tarefa concluída — DEV2-R2-RIVER-ROAD-038
+A continuidade do trecho médio foi mantida no contrato ativo e aceita pelo orçamento, porta R2 e continuidade Dev2 no CI `32926845148`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-039
+A ativação da leitura baixa de margem no lado oposto ao retorno foi aceita pela porta R2, orçamento global e continuidade Dev2 no CI `32927149297`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-040
+A leitura física baixa de margem no lado oposto ao retorno foi mantida como tarefa jogável rastreável e aceita pela porta R2, orçamento global e continuidade Dev2 no CI `32927452558`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-041
+A leitura baixa de margem no lado oposto ao retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32927747572`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-042
+A leitura física baixa da margem no lado oposto ao retorno foi entregue com pedras e fetos reais, sem rota nova ou luz dinâmica. O commit `e9581c24` passou no CI `32965577081` com orçamento global, porta R2, rotas canônicas e gate regional aprovados.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-043
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2 e gate regional no CI `32965992645`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-044
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32966417047`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-045
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32966858724`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-046
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32967287357`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-047
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32967729672`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-048
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32968340798`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-049
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32968756116`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-050
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32969195294`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-051
+A R2 recebeu uma laje física curta de leitura junto ao eixo de retorno Casa Voss, com colisor coincidente e feto aberto. O parser e gate local foram corrigidos e aprovados; o commit `47248a94` passou no CI final `32970485271`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-052
+A R2 recebeu a leitura física de margem e a laje do retorno Casa Voss, com parser, porta R2, orçamento de luz, rotas canônicas e gate regional aprovados no CI `32970943255`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-053
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32971816560`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-054
+A leitura física curta de margem próxima ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32972290806`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-055
+A R2 recebeu um marco físico baixo na margem do eixo de retorno, com pedra real, colisor coincidente e feto aberto. O commit `265c0f71` passou no CI final `32973139180` com orçamento global, porta R2, rotas e gate regional aprovados.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-056
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32973640818`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-057
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32974131823`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-058
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32974606124`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-059
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32975091929`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-060
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32975621924`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-061
+A R2 recebeu a `LajeLeituraEixoRetornoR2`, com laje baixa, pedra, feto e colisor coincidente fora do leito. A probe `[ORIGEM_R2_RIVER_RIVERBANK_061_OK]` passou no gate local e no CI regional `32977342024`, sem luz dinâmica adicional.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-062
+A continuidade da leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32977858619`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-063
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32978332810`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-064
+A continuidade da leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32979057884`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-065
+A continuidade da leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32982028293`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-066
+A continuidade da leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32982557299`.
+
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-067
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo gate manual `32983116461`; a execução automática concorrente foi cancelada pelo controle de concorrência, sem alterar o resultado válido. O contrato, orçamento e porta regional R2 passaram com sucesso.
+
+## Tarefa ativa — DEV2-R2-RIVER-RIVERBANK-068
+A R2 deve receber uma **leitura física curta de margem junto ao eixo de retorno**, com pedra real e vegetação aberta, mantendo o leito não atravessável, o reflexo Orion visível e a orientação Casa Voss → Arco sem nova rota.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
 | Cartografia | Validar as três rotas no contrato sem mover estrada, Arco ou âncoras cartográficas |
-| Acesso | Leitura lateral baixa da margem, fora do leito, sem novo caminho para a água |
+| Acesso | Leitura lateral baixa fora do leito, sem rota nova ou bloqueio |
 | Desempenho | Zero luz dinâmica adicional, partículas ou emissão persistente; reutilizar pedra e fetos reais |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
-| Narrativa | A margem deve enquadrar o reflexo Orion e manter a viagem Casa Voss → Arco legível |
-| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_EDGE_033_OK]` antes do PR |
+| Narrativa | A margem deve sustentar o retorno Casa Voss e a leitura Orion → Arco sem duplicar marcos |
+| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_RIVERBANK_044_OK]` antes do PR |
 
 ## Fecho e avanço obrigatório
 
@@ -133,4 +237,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-EDGE-033`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RIVERBANK-068`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
