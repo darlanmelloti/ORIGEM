@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-OWNERSHIP-CHECK-051
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -150,19 +150,24 @@ O diagnóstico foi concluído sem alterar produção. O isolamento confirmou que
 
 A revisão QA consolidou a matriz de responsabilidades R4/R6 e confirmou que transparência, cota, largura e `cull_back` permanecem rejeitados. A evidência em `reports/r4/CARTOGRAPHIC_INLET_EVIDENCE_REVIEW_049.md` não autoriza produção: qualquer intervenção futura precisa de fonte causal, aprovação conjunta e prova runtime.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
 
-Inventariar em QA os ativos e margens já existentes fora do corredor R4 para determinar se existe alguma candidata modular elegível para futura prova. A tarefa limita-se a inventário espacial, distância ao trilho, propriedade R4/R6 e roteiro de captura; não cria, move, instancia, materializa ou oculta qualquer nó.
+A auditoria QA inventariou duas raízes R4 existentes (`RaizExpostaFlorestal_14` e `RaizExpostaFlorestal_15`) fora da clareira Orion e a 8,75 m e 9,20 m do trilho. As referências não são autorizadas para produção. A reconciliação canónica também retirou a variante local de material incompatível com as quatro variantes formalmente rejeitadas, restaurando a lâmina e a fábrica lacustre canónicas. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_ELIGIBILITY_050.md`.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-OWNERSHIP-CHECK-051
+
+Executar exclusivamente a verificação QA documental de propriedade e causalidade das referências inventariadas. A tarefa deve confirmar a matriz R4/R6, o limite de não repetição das variantes rejeitadas e o roteiro de captura comparativa; não cria, move, instancia, materializa ou oculta qualquer nó e não altera `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6, materiais, luzes, rota, câmara, âncoras ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Zero modificações a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
-| Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` como microajustes |
+| Produção | Zero modificações de produção nesta tarefa documental |
+| Propriedade | Registar R4/R6 e a necessidade de aprovação conjunta, sem alegar aprovação ausente |
+| Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` |
 | R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
 | R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
-| Resultado | Inventário de elegibilidade; não é proposta de produção |
+| Captura futura | Roteiro baseline/candidata no mesmo enquadramento 16:9 de `arch_to_forest` |
 | Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir a auditoria de elegibilidade, Dev4 deve avançar para uma nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
+Há exatamente uma tarefa ACTIVE. Ao concluir a verificação de propriedade, Dev4 deve avançar para nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
