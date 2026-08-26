@@ -1,0 +1,21 @@
+DEV7-LOCAL-LEDGER-REFERENCE-AUDIT-011
+scope=local_only_no_ci_trigger_no_r6_mutation
+head=833e01f2466fc6a9a5343ca050c126ef57f25f0a
+--- required_artifacts ---
+OK reports/dev7/visual_playable_physics_baseline_001/BASELINE_REPORT.md
+OK reports/dev7/R6_ARCHAEOLOGY_MATERIAL_SILHOUETTE_AUDIT_002.md
+OK reports/dev7/r6_archaeology_override_capture_003/VISUAL_AUDIT.md
+OK reports/dev7/R6_ARCHAEOLOGY_EVIDENCE_REVIEW_004.md
+OK reports/dev7/R6_ARCHAEOLOGY_TARGET_REGISTRY_005.md
+OK reports/dev7/continuous_registry_audit_007/R6_POSTCANONICAL_REGISTRY_AUDIT_007.md
+OK reports/dev7/continuous_registry_audit_007/INTEGRATION_CI_POLICY_AUDIT_008.md
+OK reports/dev7/controlled_checkpoint_009/DEV7_CHECKPOINT_EVIDENCE_RECONCILIATION_009.md
+OK reports/dev7/controlled_checkpoint_009/CONTINUATION_INTEGRITY_010.md
+--- active_contract ---
+| **Task ID** | `DEV7-R6-CHECKPOINT-EVIDENCE-RECONCILIATION-009` |
+| **Tarefas ACTIVE** | **1** |
+| **Proibido** | Nova captura comparativa, nova variante de material, produção, cenas, mesh, nó, água, luz, partícula, colisor, área, rota, largura de trilho, ancoragem, Player ou câmara; bypass, force-push ou novo disparo agressivo de CI. |
+--- evidence_integrity ---
+evidence_hash_diff_010=empty
+--- whitespace_gate ---
+PASS
