@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-COMPOSITION-POSTPROBE-027
+task_id: DEV5-R5-CAMP-COMPOSITION-FOCUS-ANALYSIS-028
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -125,9 +125,13 @@ As capturas pós-carregamento das duas rotas R5 confirmaram corredor, lajes e sa
 
 A sonda QA localizou sete alvos existentes do núcleo Majestic e calculou o foco `(-85,46; 1,71; 178,41)` com posição de câmara exclusivamente de teste `(-77,46; 6,51; 188,41)`. A porta R5 e as duas rotas passaram sem alteração de `ForestLakeRegion.gd`, da câmara do jogador, âncoras, luz, física, colisores ou navegação. A evidência encontra-se em `reports/r5/CAMP_COMPOSITION_PROBE_026.md` e no checkpoint 411.
 
-## Tarefa ativa — DEV5-R5-CAMP-COMPOSITION-POSTPROBE-027
+## Entrega aprovada — DEV5-R5-CAMP-COMPOSITION-POSTPROBE-027
 
-Criar uma captura runtime de QA do núcleo existente do Acampamento Majestic usando apenas a posição determinada pela sonda. A captura deve comparar a legibilidade da mesa de cartografia, mapa, rolos e lonas com as rotas R5 existentes e selecionar, no máximo, uma intervenção modular futura em elemento já existente.
+A captura runtime usou um runner QA temporário, injetado apenas pela variável `ORIGEM_QA_R5_COMPOSITION_CAPTURE`, sem alterar a câmara do jogador. As duas variantes verificaram que o núcleo Majestic existe e que a rota de lajes permanece legível, mas o foco aritmético dos sete elementos não fornece composição suficientemente próxima para recomendar alteração de produção. A evidência encontra-se em `reports/r5/composition_postprobe_027/`.
+
+## Tarefa ativa — DEV5-R5-CAMP-COMPOSITION-FOCUS-ANALYSIS-028
+
+Medir três subgrupos existentes do núcleo Majestic — mesa/mapa, rolos e lonas — e criar três enquadramentos QA temporários, sem modificar a produção. A tarefa deve selecionar apenas um foco legível, ou encerrar a hipótese sem propor alteração caso nenhum subgrupo produza ganho visual verificável.
 
 | Critério | Obrigatório |
 |---|---|
@@ -139,4 +143,4 @@ Criar uma captura runtime de QA do núcleo existente do Acampamento Majestic usa
 
 ## Sucessão obrigatória
 
-A esteira regional mantém este contrato em `ACTIVE` e uma única issue `[Dev5 Continuous]`. `DEV5-R5-CAMP-COMPOSITION-POSTPROBE-027` permanece ativo até que a captura determine uma necessidade artística R5 espacialmente verificável.
+A esteira regional mantém este contrato em `ACTIVE` e uma única issue `[Dev5 Continuous]`. `DEV5-R5-CAMP-COMPOSITION-FOCUS-ANALYSIS-028` permanece ativo até que uma das composições de QA determine uma necessidade artística R5 espacialmente verificável.
