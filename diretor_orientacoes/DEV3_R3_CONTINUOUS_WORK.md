@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-ARCH-SILHOUETTE-008
+task_id: DEV3-R3-ARCH-ARRIVAL-CUE-009
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -41,18 +41,22 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 
 `R3PatinaArqueologica` aplica material mate a cinco fragmentos de coroa e base já existentes, mantendo as malhas, a silhueta, o vão, as duas luzes e a ausência de VFX/áudio/colisão. A prova `[ORIGEM_R3_ARCH_PATINA_OK]`, parser, porta R3, rotas e captura técnica aprovaram a intervenção localizada.
 
-## Tarefa ativa — DEV3-R3-ARCH-SILHOUETTE-008
+## Entrega aprovada — DEV3-R3-ARCH-SILHOUETTE-008
 
-A leitura do Arco à distância deve receber uma **revisão de silhueta não intrusiva**, através de ajustes apenas em elementos arqueológicos já existentes e laterais. A tarefa deve reforçar a orientação cartográfica sem reduzir a folga física, criar um lintel novo, uma parede, árvores de bloqueio, UI, luzes, VFX ou invadir R4.
+`R3SilhuetaCartografica` ajusta três fragmentos de coroa laterais já existentes para reforçar a leitura vertical do marco, sem criar malhas, lintéis, paredes, luzes, VFX, áudio ou colisores. A prova `[ORIGEM_R3_ARCH_SILHOUETTE_OK]`, parser, porta R3, rotas e captura de aproximação aprovaram a abertura física e a continuidade do eixo.
+
+## Tarefa ativa — DEV3-R3-ARCH-ARRIVAL-CUE-009
+
+A aproximação ao Arco deve ganhar uma **leitura material de chegada** inteiramente lateral e estática, capaz de reforçar a transição R2→R3 sem se tornar marcador UI, painel, emissor ou obstrução. A tarefa deve reutilizar elementos arqueológicos R3 existentes e manter o corredor, o despertar e a saída R4 intactos.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Silhueta | Ajustar somente elementos laterais existentes; nunca criar lintel, parede, painel ou bloqueio visual central |
+| Chegada | Leitura material lateral e estática; sem UI, painel, texto flutuante, emissor, luz ou geometria de bloqueio |
 | Luz | Não adicionar luz dinâmica; manter exatamente as duas luzes locais existentes no Arco |
 | Jogabilidade | Colisores, despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de silhueta e rotas R3 antes de abrir a PR seguinte |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de chegada e rotas R3 antes de abrir a PR seguinte |
 
 ## Fecho e avanço obrigatório
 
@@ -60,4 +64,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-ARCH-ARRIVAL-CUE-009` deverá testar uma leitura de chegada puramente material após a revisão de silhueta, sem novas luzes ou UI.
+`DEV3-R3-ARCH-GROUND-RHYTHM-010` deverá rever o ritmo arqueológico baixo do solo após a leitura de chegada, sem estreitar a faixa navegável.
