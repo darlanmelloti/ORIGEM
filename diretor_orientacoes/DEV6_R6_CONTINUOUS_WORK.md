@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-APPROACH-FRAMING-006
+task_id: DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -33,19 +33,30 @@ A composição `R6_LeituraArqueologicaDaMargem` adiciona um fragmento de coluna 
 | Handoff | R6→R7 preservado sem geometria antecipada de R7 |
 | QA | Parser, sonda de luz, prova de handoff e três rotas R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-APPROACH-FRAMING-006
+## Entrega aprovada — DEV6-R6-APPROACH-FRAMING-006
 
-Validar que a chegada às Ruínas Submersas enquadra de modo coerente a bacia, a estela `RuneP0_02`, a linha de água arqueológica e o primeiro plano de ruínas no renderer `gl_compatibility`. O objectivo é de observabilidade e composição da chegada, não de ampliação de escopo.
+A auditoria comparou as capturas da chegada R6 em `gl_compatibility` com a base anterior e confirmou que a entrega SHORELINE-005 não degradou a observabilidade. A variação observada pertence ao protocolo de captura e não demonstrou causa nova de produção; logo, nenhuma geometria, água, luz, shader, emissão, física ou R7 foi alterada.
+
+| Critério | Resultado |
+|---|---|
+| Produção | Nenhuma alteração adicional necessária |
+| Água e luz | Sem mudança; `r6_total=4` preservado |
+| Física e handoff | Rota, lajes e R6→R7 preservados |
+| QA | Parser, orçamento, handoff e três rotas R6 aprovados |
+
+## Tarefa ativa — DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007
+
+Criar uma sonda QA determinística para a chegada R6 que espere pelo mundo, recolha uma captura pós-carregamento em `gl_compatibility` e registe os nós de composição relevantes. A sonda existe apenas para tornar as evidências de runtime repetíveis; não integra a experiência jogável.
 
 | Critério | Obrigatório |
 |---|---|
-| R6 | Alterações somente dentro da fronteira regional das Ruínas Submersas |
-| Água | Sem shader adicional, painel ou aumento de emissão |
-| Luz | `r6_total=4` continua obrigatório |
-| Física | Sem colisor ou bloqueio novo no trilho Majestic→R6 |
-| Handoff | R6→R7 preservado, sem construção de R7 |
-| QA | Parser, orçamento R6, prova de handoff e todas as rotas R6 antes do PR |
+| Código de produção | Nenhuma alteração em `ForestLakeRegion.gd`, `TempleLevel.gd` ou R7–R12 |
+| Runtime | Esperar a instância de R6 e a conclusão de frames antes da captura |
+| Evidência | Registrar água, estela, detritos, composição de margem, pilares e domo por nome e posição |
+| Luz | Confirmar `r6_total=4` sem criar `Light3D` |
+| Física | Não criar colisores nem alterar rotas |
+| QA | Parser, orçamento R6, handoff e três rotas R6 antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-APPROACH-FRAMING-006` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
