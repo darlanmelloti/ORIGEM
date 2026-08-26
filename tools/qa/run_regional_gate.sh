@@ -203,6 +203,26 @@ if [[ "$REGION" == "R6" ]]; then
     exit 16
   fi
   printf '[GATE:%s] orçamento R6 de quatro luzes aprovado\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
+  R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_shore_handoff.gd >"$R6_HANDOFF_LOG" 2>&1
+  r6_handoff_status=$?
+  set -e
+  if [[ "$r6_handoff_status" -ne 0 ]]; then
+    cat "$R6_HANDOFF_LOG"
+    exit 17
+  fi
+  if ! grep -q '\[ORIGEM_R6_HANDOFF_OK\]' "$R6_HANDOFF_LOG"; then
+    cat "$R6_HANDOFF_LOG"
+    exit 17
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_HANDOFF_ERROR' "$R6_HANDOFF_LOG"; then
+    cat "$R6_HANDOFF_LOG"
+    exit 17
+  fi
+  printf '[GATE:%s] handoff físico R6→R7 aprovado\n' "$REGION"
 fi
 
 printf '[GATE:%s] 5/5 contratos e rotas\n' "$REGION"
