@@ -28,10 +28,10 @@
 | **Task ID** | `DEV7-R6-CHECKPOINT-EVIDENCE-RECONCILIATION-009` |
 | **Estado** | **ACTIVE — reconciliação QA documental, sem mutação de produção** |
 | **Região dona** | R6 — Ruínas Submersas / Dev6 |
-| **Objetivo** | Consolidar um ledger determinístico entre evidência QA local, commits Dev7, head da PR #380 e base canónica, distinguindo validade local, elegibilidade de integração e decisões regionais pendentes. |
+| **Objetivo** | Consolidar um ledger determinístico entre evidência QA local, commits Dev7, head da PR #380, base canónica e checkpoint Dev6/R6 015, distinguindo validade local, elegibilidade de integração e decisões regionais pendentes. |
 | **Permitido** | Inventário documental de hashes, artefactos QA, estados de gates/CI já reportados, invariantes e critérios de próximo marco seguro. |
 | **Proibido** | Nova captura comparativa, nova variante de material, produção, cenas, mesh, nó, água, luz, partícula, colisor, área, rota, largura de trilho, ancoragem, Player ou câmara; bypass, force-push ou novo disparo agressivo de CI. |
-| **Condição para qualquer teste futuro** | Decisão explícita de Dev6/R6 sobre a hipótese visual, conjunto exato de alvos e enquadramento; parser, `git diff --check`, gate R6, rota `forest_to_ruins` e auditoria de quatro luzes continuam obrigatórios. |
+| **Condição para qualquer teste futuro** | Decisão explícita de Dev6/R6 sobre a hipótese visual, conjunto exato de alvos e enquadramento; o checkpoint Dev6/R6 015, por si só, não é autorização. Parser, `git diff --check`, gate R6, rota `forest_to_ruins` e auditoria de quatro luzes continuam obrigatórios. |
 | **Handoff** | R6→R7 permanece protegido; a tarefa não antecipa conteúdo R7. |
 
 > A tarefa ativa seguinte é uma reconciliação de checkpoint, não uma variante visual nem uma alteração de produção. O resultado rejeitado da captura 003 mantém-se vinculativo até decisão regional explícita.
