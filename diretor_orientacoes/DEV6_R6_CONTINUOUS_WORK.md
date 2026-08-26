@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-ROUTE-TELEMETRY-BASELINE-010
+task_id: DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -109,9 +109,13 @@ A cadeia oriental R6 foi integrada em *fast-forward* no commit remoto `5e6445b` 
 
 A sequência pós-publicação R6 adicionou apenas instrumentação QA e documentação de captura: protocolo runtime, matriz de capturas e extração de vetores de rota. Estes incrementos não alteraram `ForestLakeRegion.gd`, âncoras, água, luz, física, spawn, alvo, velocidade, câmara ou corredor físico.
 
-## Tarefa ativa — DEV6-R6-ROUTE-TELEMETRY-BASELINE-010
+## Entrega aprovada — DEV6-R6-ROUTE-TELEMETRY-BASELINE-010
 
-Consolidar os vetores já emitidos por `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` como baseline QA versionada e criar verificação tolerante de desvio. A tarefa consome exclusivamente telemetria runtime existente e não altera o jogo.
+A baseline versionada dos vetores `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival` foi integrada com tolerâncias explícitas de desvio. A extração, o ficheiro de baseline e a verificação são exclusivamente QA e não alteraram produção, âncoras, água, luz, física, spawn, alvo, velocidade, câmara ou corredor físico.
+
+## Tarefa ativa — DEV6-R6-ROUTE-REGRESSION-PIPELINE-011
+
+Criar um orquestrador QA único que execute, em sequência reprodutível, a matriz de captura das rotas, a extração da telemetria e a verificação da baseline. O pipeline deve aceitar um diretório de evidência e não alterar a experiência de jogo.
 
 | Critério | Obrigatório |
 |---|---|
@@ -119,9 +123,9 @@ Consolidar os vetores já emitidos por `forest_to_ruins`, `majestic_to_lake` e `
 | Rotas | Não modificar spawn, alvo, velocidade, `look_at` ou corredor físico |
 | Água e luz | Sem shader, painel, emissão ou `Light3D` novo |
 | Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de lajes |
-| QA | Baseline e tolerância explícitas; falhar em log ausente ou desvio não permitido |
+| QA | Executar matriz, extração e baseline com falha imediata em qualquer etapa |
 | Validação | Parser, orçamento R6, handoff e três rotas aprovados antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. A baseline pode avançar apenas após gerar dados versionados e uma verificação atual aprovada sem modificação de produção; a tarefa seguinte deve substituir `DEV6-R6-ROUTE-TELEMETRY-BASELINE-010` em estado `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O pipeline pode avançar apenas após produzir capturas, telemetria e baseline aprovadas numa execução completa; a tarefa seguinte deve substituir `DEV6-R6-ROUTE-REGRESSION-PIPELINE-011` em estado `ACTIVE`.
