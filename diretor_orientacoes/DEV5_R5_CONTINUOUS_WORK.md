@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV5-R5-CAMP-READABILITY-FINAL-010
+task_id: DEV5-R5-CAMP-OBSERVATION-011
 owner: Dev5
 branch: dev5/r5-majestic-camp
 ```
@@ -57,9 +57,13 @@ O módulo `MajesticCampRhythmFinal.gd` ajustou estaticamente duas caixas visuais
 
 O módulo `MajesticCampClosure.gd` ajustou estaticamente duas caixas visuais já aprovadas pela cadência final. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
 
-## Tarefa ativa — DEV5-R5-CAMP-READABILITY-FINAL-010
+## Entrega aprovada — DEV5-R5-CAMP-READABILITY-FINAL-010
 
-Auditar exclusivamente a legibilidade estática final do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
+O módulo `MajesticCampReadabilityFinal.gd` ajustou estaticamente duas caixas visuais já aprovadas pelo fecho. Os colisores correspondentes foram preservados e verificados; a prova própria, a porta R5 e as rotas foram aprovadas.
+
+## Tarefa ativa — DEV5-R5-CAMP-OBSERVATION-011
+
+Auditar exclusivamente a observação estática final do Acampamento Majestic com elementos R5 existentes, sem criar geometria, luz, física, partículas, shader, interface, câmara ou alteração de rota. A tarefa preserva os conectores R4→R5 e R5→R6 livres e não altera módulos de outras regiões.
 
 | Critério | Obrigatório |
 |---|---|
@@ -71,4 +75,4 @@ Auditar exclusivamente a legibilidade estática final do Acampamento Majestic co
 
 ## Sucessão obrigatória
 
-A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-CLOSURE-009` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-READABILITY-FINAL-010`.
+A esteira regional exige este contrato em `ACTIVE`, mantém uma única issue `[Dev5 Continuous]` e encerra automaticamente tarefas Dev5 obsoletas. O fecho de `DEV5-R5-CAMP-READABILITY-FINAL-010` exige commit publicado, validação R5 e o novo `task_id` em estado `ACTIVE` `DEV5-R5-CAMP-OBSERVATION-011`.

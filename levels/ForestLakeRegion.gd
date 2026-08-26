@@ -45,6 +45,7 @@ const R5_MAJESTIC_VISTA_READING_SCRIPT: Script = preload("res://levels/regions/r
 const R5_MAJESTIC_FOCAL_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampFocalReading.gd")
 const R5_MAJESTIC_RHYTHM_FINAL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampRhythmFinal.gd")
 const R5_MAJESTIC_CLOSURE_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampClosure.gd")
+const R5_MAJESTIC_READABILITY_FINAL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampReadabilityFinal.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
 var terrain_patch: Node3D
@@ -100,6 +101,7 @@ func _ready() -> void:
 	_build_r5_majestic_focal_reading()
 	_build_r5_majestic_rhythm_final()
 	_build_r5_majestic_closure()
+	_build_r5_majestic_readability_final()
 	_build_r5_majestic_artifact_trail()
 	_build_r5_majestic_wind_reading()
 	_build_majestic_connector()
@@ -143,6 +145,11 @@ func _build_r5_majestic_closure() -> void:
 	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
 	if int(R5_MAJESTIC_CLOSURE_SCRIPT.call("apply", camp)) != 2:
 		push_error("[ORIGEM_R5] Não foi possível fechar a leitura das caixas existentes.")
+
+func _build_r5_majestic_readability_final() -> void:
+	var camp: Node3D = get_node_or_null("AcampamentoMajestic") as Node3D
+	if int(R5_MAJESTIC_READABILITY_FINAL_SCRIPT.call("apply", camp)) != 2:
+		push_error("[ORIGEM_R5] Não foi possível ajustar a legibilidade final das caixas existentes.")
 
 func _build_r5_majestic_arrival_reading() -> void:
 	# DEV5-R5-CAMP-ARRIVAL-READING-004: relê apenas as duas bases de mastro existentes na entrada do acampamento.
