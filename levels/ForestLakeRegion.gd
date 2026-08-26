@@ -24,6 +24,7 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
 const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMistLayer.gd")
+const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
 const R6_SHORE_HANDOFF_SCRIPT: Script = preload("res://levels/regions/r6/R6ShoreHandoff.gd")
 
@@ -47,6 +48,7 @@ func _ready() -> void:
 	_build_arch_to_forest_transition()
 	_build_arch_forest_understory()
 	_build_r4_clearing_sightline()
+	_build_r4_clearing_lore()
 	_build_forest_wayfinding()
 	_build_lake_shore_path()
 	_build_cartographic_river_inlet()
@@ -285,6 +287,12 @@ func _build_r4_clearing_sightline() -> void:
 	var clearing: R4ForestClearingSightline = R4_FOREST_CLEARING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), ROCK, FERN) as R4ForestClearingSightline
 	if clearing == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a clareira da visada Orion.")
+
+func _build_r4_clearing_lore() -> void:
+	# DEV4-R4-ORION-CLEARING-LORE-003: vestígios laterais de passagem, sem UI, eventos, luzes ou bloqueio do trilho.
+	var lore: R4ForestClearingLore = R4_FOREST_CLEARING_LORE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), ROCK) as R4ForestClearingLore
+	if lore == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a leitura arqueológica da clareira.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.

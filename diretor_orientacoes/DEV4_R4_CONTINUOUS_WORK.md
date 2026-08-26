@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-ORION-CLEARING-LORE-003
+task_id: DEV4-R4-CANOPY-CADENCE-004
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -19,30 +19,35 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 ## Entrega concluída — DEV4-R4-MIST-LAYER-002
 
-`R4CamadaNeblinaLocal` foi instalada por `ForestMistLayer.gd`. A camada não cria geometria, `FogVolume`, planos, partículas, colisores, pós-processamento ou luzes. Em vez disso, aplica uma variação subtil de material apenas nas massas selecionadas da R4.
+`R4CamadaNeblinaLocal` foi instalada por `ForestMistLayer.gd`. A camada não cria geometria, `FogVolume`, planos, partículas, colisores, pós-processamento ou luzes. Aplica apenas uma variação subtil de material nas massas selecionadas da R4.
 
-A clareira de Orion em `Z≈126–151` recebe peso zero; portanto, mantém-se aberta para a leitura de Orion e do caminho para Majestic. A prova `[ORIGEM_R4_MIST_OK]` registou `materiais=128`, `clareira_protegida=42` e `luzes=0`. A porta `tools/qa/run_regional_gate.sh R4` foi aprovada, incluindo a prova de clareira, contratos e três rotas R4.
+A clareira de Orion em `Z≈126–151` recebe peso zero; portanto, mantém-se aberta para a leitura de Orion e do caminho para Majestic. A prova `[ORIGEM_R4_MIST_OK]` registou `materiais=128`, `clareira_protegida=42` e `luzes=0`.
 
-| Critério mantido | Resultado |
+## Entrega concluída — DEV4-R4-ORION-CLEARING-LORE-003
+
+`ForestClearingLore.gd` instala três vestígios de passagem antiga na lateral da clareira: nove pedras gastas em conjuntos assimétricos, todas fora do corredor jogável. A entrega não introduz UI, texto, objetivos, diálogos, colecionáveis, eventos, animações de revelação, colisores ou luzes. A leitura continua material e ambiental, sem antecipar a revelação narrativa de Orion.
+
+| Critério | Resultado |
 |---|---|
-| Clareira Orion | Preservada, sem camada atmosférica local |
-| Luz | Nenhuma luz nova; baliza única aprovada permanece |
-| Atmosfera | Material local e de baixa intensidade; sem parede de névoa |
-| QA | Parser, prova de neblina e porta canónica R4 aprovados |
+| Clareira Orion | Faixa `Z=126–151` mantida livre, com 4.40 m de afastamento mínimo ao trilho |
+| Vestígios | 3 conjuntos laterais e 9 pedras gastas |
+| Luz e física | Zero `Light3D` e zero `StaticBody3D` criados pelo módulo |
+| Atmosfera | Sem alteração à camada local de neblina ou à visibilidade distante |
+| QA | `[ORIGEM_R4_LORE_OK]`, porta R4 e três rotas aprovadas |
 
-## Tarefa ativa — DEV4-R4-ORION-CLEARING-LORE-003
+## Tarefa ativa — DEV4-R4-CANOPY-CADENCE-004
 
-Acrescentar **leitura ambiental discreta** à clareira Orion com um único conjunto de elementos estáticos de baixo custo. A entrega deve sugerir passagem antiga e direção da montanha por pedras, desgaste de trilho ou afloramentos baixos; não pode criar interface, objetivos, diálogo, colecionáveis, animação de revelação ou lore explícito antes do momento narrativo correto.
+Ajustar a cadência visual das copas R4 com poucas variações de escala, rotação e agrupamento em massa lateral. O objetivo é eliminar qualquer leitura de repetição sem erguer parede de árvores, invadir a clareira Orion, alterar a geometria partilhada, introduzir animação global, partículas, vento físico, luz, câmara ou pós-processamento. Preferir instâncias estáticas e materiais existentes; o trilho precisa permanecer legível desde o Arco até Majestic.
 
 | Critério | Obrigatório |
 |---|---|
-| Escopo | Novo módulo em `levels/regions/r4/` e documentação Dev4 |
-| Clareira | Manter a faixa aberta Z≈126–151, os quatro quadros e oito fetos existentes |
-| Atmosfera | Não reduzir visibilidade de Orion, Majestic ou do trilho |
-| Luz | Zero luz dinâmica nova; preservar a única baliza local existente |
-| Performance | Materiais existentes e um número reduzido de instâncias estáticas |
-| Verificação | Porta canónica R4, prova específica de lore e confirmação das três rotas |
+| Escopo | Novo módulo em `levels/regions/r4/`, montagem mínima e QA R4 |
+| Clareira | Manter integralmente a faixa aberta Z≈126–151 |
+| Corredor | Árvores a pelo menos 6 m do trilho físico |
+| Luz | Zero luz dinâmica nova; baliza local única preservada |
+| Performance | Poucas instâncias estáticas; sem animação ou shader novo |
+| Verificação | Parser, prova própria, porta R4 e três rotas antes do PR |
 
-## Próxima fila reservada
+## Sucessão obrigatória
 
-`DEV4-R4-CANOPY-CADENCE-004` deverá ajustar a cadência visual das copas após a leitura da clareira, sem alterar a geometria compartilhada nem a câmara global.
+A esteira mantém uma única issue `[Dev4 Continuous]` e encerra automaticamente o item anterior quando o `task_id` avançar. O fecho de `DEV4-R4-CANOPY-CADENCE-004` exige commit publicado, porta R4 aprovada e nova tarefa em estado `ACTIVE`.

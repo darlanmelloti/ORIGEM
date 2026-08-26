@@ -159,6 +159,26 @@ if [[ "$REGION" == "R4" ]]; then
     exit 14
   fi
   printf '[GATE:%s] clareira R4 e orçamento de baliza aprovados\n' "$REGION"
+
+  printf '[GATE:%s] prova DEV4-R4-ORION-CLEARING-LORE-003\n' "$REGION"
+  R4_LORE_LOG="/tmp/origem_${REGION}_lore_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r4_clearing_lore.gd >"$R4_LORE_LOG" 2>&1
+  r4_lore_status=$?
+  set -e
+  if [[ "$r4_lore_status" -ne 0 ]]; then
+    cat "$R4_LORE_LOG"
+    exit 18
+  fi
+  if ! grep -q '\[ORIGEM_R4_LORE_OK\]' "$R4_LORE_LOG"; then
+    cat "$R4_LORE_LOG"
+    exit 18
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R4_LORE_ERROR' "$R4_LORE_LOG"; then
+    cat "$R4_LORE_LOG"
+    exit 18
+  fi
+  printf '[GATE:%s] leitura arqueológica R4 e clareira aberta aprovadas\n' "$REGION"
 fi
 
 if [[ "$REGION" == "R5" ]]; then
