@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-ARCHIVE-054
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-PUBLISH-MONITOR-055
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -166,21 +166,25 @@ A prontidão estática confirmou a ferramenta canónica de captura, o viewport 1
 
 A captura baseline pós-carregamento de `arch_to_forest` foi concluída em 1600×900, com spawn e gates confirmados. A superfície ampla clara/opaca permanece visível como referência de baseline; não foi criada candidata e não houve alteração de produção. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_BASELINE_CAPTURE_053.md` e no directório de captura associado.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-ARCHIVE-054
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-ARCHIVE-054
 
-Executar exclusivamente o arquivo documental e a confirmação de publicação da evidência baseline 053. A tarefa não pode criar candidata, executar comparação de variante, mover, instanciar, materializar ou ocultar nós e não altera `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6, materiais, luzes, rota, câmara, âncoras ou física.
+O arquivo confirmou a presença remota e a igualdade SHA-256 do relatório baseline 053, da imagem, da revisão visual e dos logs de captura. Parser, orçamento, porta R4 e rotas continuam aprovados, sem candidata ou alteração de produção. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_BASELINE_ARCHIVE_054.md`.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-PUBLISH-MONITOR-055
+
+Executar exclusivamente a monitorização documental de publicação da cadeia 050–054. Reagir a uma nova ponta canónica de integração ou publicação, confirmando a preservação da evidência e do estado regional sem criar candidata, executar comparação de variante, mover, instanciar, materializar ou ocultar nós e sem alterar `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6, materiais, luzes, rota, câmara, âncoras ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Zero modificações de produção nesta tarefa documental |
-| Evidência | Indexar relatório 053, imagem baseline, logs e revisão visual |
+| Produção | Zero modificações de produção nesta tarefa de monitorização |
+| Evidência | Preservar cadeia 050–054, baseline 053 e o índice de hashes 054 |
 | Candidata | Ausente; nenhuma comparação runtime de variante autorizada |
 | Propriedade | Preservar a exigência de aprovação explícita conjunta R4/R6 para qualquer candidata futura |
 | Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` |
 | R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
 | R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
-| Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
+| Verificação | Comparação remota, parser, orçamento, porta R4 e três rotas antes de publicação |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir o arquivo baseline, Dev4 deve avançar para nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
+Há exatamente uma tarefa ACTIVE. A monitorização 055 só deve avançar quando uma nova ponta canónica exigir reconciliação ou o contrato integrado indicar nova prioridade.
