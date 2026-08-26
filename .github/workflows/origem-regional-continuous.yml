@@ -433,6 +433,79 @@ jobs:
               .addRaw(`Tarefa: **${taskId}**  \nBranch: \`${branch}\`  \nEstado: **ACTIVE**`)
               .write();
 
+  dev6-continuity:
+    name: Dev6 — próxima tarefa ativa
+    needs: [resolve-regions, regional-gate, global-light-budget]
+    if: >-
+      needs.regional-gate.result == 'success' &&
+      needs.global-light-budget.result == 'success' &&
+      contains(needs.resolve-regions.outputs.regions, 'R6')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter contrato contínuo do Dev6
+        uses: actions/checkout@v7
+
+      - name: Validar contrato e manter a tarefa rastreável
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const contractPath = 'diretor_orientacoes/DEV6_R6_CONTINUOUS_WORK.md';
+            const contract = fs.readFileSync(contractPath, 'utf8');
+            const state = /^status:\s*ACTIVE\s*$/m.test(contract);
+            const taskId = (contract.match(/^task_id:\s*([^\s]+)\s*$/m) || [])[1];
+            const owner = (contract.match(/^owner:\s*([^\s]+)\s*$/m) || [])[1];
+            const branch = (contract.match(/^branch:\s*([^\s]+)\s*$/m) || [])[1];
+            if (!state || !taskId || owner !== 'Dev6' || branch !== 'dev6/r6-submerged-ruins') {
+              core.setFailed('Contrato Dev6 inválido: exige status ACTIVE, task_id, owner Dev6 e branch canónica.');
+              return;
+            }
+            const title = `[Dev6 Continuous] ${taskId}`;
+            const { owner: repoOwner, repo } = context.repo;
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner: repoOwner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            let currentIssue = openIssues.find((issue) => issue.title === title && !issue.pull_request);
+            if (!currentIssue) {
+              const { data: createdIssue } = await github.rest.issues.create({
+                owner: repoOwner,
+                repo,
+                title,
+                body: `## Continuidade automática Dev6\n\nO contrato \`${contractPath}\` declara **${taskId}** como a próxima tarefa ativa de Dev6.\n\nA porta R6 acabou de ser aprovada. Isto não encerra o ciclo: a implementação, validação, publicação e substituição por uma nova tarefa ativa são obrigatórias.\n\n---\n\n${contract}`
+              });
+              currentIssue = createdIssue;
+              core.info(`Issue de continuidade criada para ${taskId}.`);
+            } else {
+              core.info(`Issue de continuidade já está aberta: #${currentIssue.number}.`);
+            }
+            const previousIssues = openIssues.filter((issue) =>
+              !issue.pull_request &&
+              issue.title.startsWith('[Dev6 Continuous]') &&
+              issue.number !== currentIssue.number
+            );
+            for (const issue of previousIssues) {
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                body: `Encerrada automaticamente: a tarefa ativa foi avançada para **${taskId}** e é acompanhada por #${currentIssue.number}.`
+              });
+              await github.rest.issues.update({
+                owner: repoOwner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              core.info(`Issue Dev6 obsoleta encerrada: #${issue.number}.`);
+            }
+            await core.summary
+              .addHeading('Dev6 — continuidade ativa')
+              .addRaw(`Tarefa: **${taskId}**  \nBranch: \`${branch}\`  \nEstado: **ACTIVE**`)
+              .write();
+
   regional-gate-summary:
     name: ORIGEM Regional Gate
     needs:
@@ -443,6 +516,7 @@ jobs:
         dev3-continuity,
         dev4-continuity,
         dev5-continuity,
+        dev6-continuity,
       ]
     if: always()
     runs-on: ubuntu-latest
@@ -457,12 +531,14 @@ jobs:
           dev3_continuity_result="${{ needs.dev3-continuity.result }}"
           dev4_continuity_result="${{ needs.dev4-continuity.result }}"
           dev5_continuity_result="${{ needs.dev5-continuity.result }}"
+          dev6_continuity_result="${{ needs.dev6-continuity.result }}"
           echo "Resultado regional: $regional_result"
           echo "Resultado de iluminação: $lighting_result"
           echo "Resultado de continuidade Dev2: $continuity_result"
           echo "Resultado de continuidade Dev3: $dev3_continuity_result"
           echo "Resultado de continuidade Dev4: $dev4_continuity_result"
           echo "Resultado de continuidade Dev5: $dev5_continuity_result"
+          echo "Resultado de continuidade Dev6: $dev6_continuity_result"
           if [[ "$regional_result" != "success" || "$lighting_result" != "success" ]]; then
             echo "Uma porta regional ou a auditoria global de luz falhou ou foi cancelada." >&2
             exit 1
@@ -481,6 +557,10 @@ jobs:
           fi
           if [[ "$dev5_continuity_result" != "success" && "$dev5_continuity_result" != "skipped" ]]; then
             echo "A continuidade ativa do Dev5 não foi confirmada." >&2
+            exit 1
+          fi
+          if [[ "$dev6_continuity_result" != "success" && "$dev6_continuity_result" != "skipped" ]]; then
+            echo "A continuidade ativa do Dev6 não foi confirmada." >&2
             exit 1
           fi
           echo "Todas as regiões selecionadas, o orçamento global de luz e a continuidade aplicável foram aprovados."
