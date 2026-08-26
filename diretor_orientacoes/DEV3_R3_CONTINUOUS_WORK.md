@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV3-R3-RIVER-MEMORY-006
+task_id: DEV3-R3-ARCH-PATINA-007
 owner: Dev3
 branch: dev3/r3-arch-ruins
 ```
@@ -33,18 +33,22 @@ A cadência silenciosa foi aplicada a `EfeitosDoDespertar`, reutilizando os dois
 
 `R3HandoffParaFloresta` recebeu três vestígios arqueológicos baixos nos intervalos Z 96,8–105,8. Cada fragmento declara um offset lateral mínimo de 4,20 m, mantém-se fora do corredor, não cria `CollisionShape3D`, `StaticBody3D`, UI ou luz. A prova `[ORIGEM_R3_PASSAGE_ARCHAEOLOGY_OK]`, parser, porta R3, rotas e captura técnica aprovaram a leitura de passagem e a continuidade para R4.
 
-## Tarefa ativa — DEV3-R3-RIVER-MEMORY-006
+## Entrega aprovada — DEV3-R3-RIVER-MEMORY-006
 
-O limiar do Arco deve ganhar uma **memória do rio ainda mais discreta**, através de uma leitura material estática que relacione pedra, água e caminho sem antecipar a verdade de Orion. A entrega deve reutilizar a linguagem arqueológica R3, sem UI, texto flutuante novo, colisores, luzes, áudio obrigatório ou invasão do território de R4.
+`R3LeituraArqueologica` recebeu três seixos de ardósia húmida, baixos e laterais, assentados pela função de altura real do terreno da Estrada do Rio. A memória material permanece sem texto adicional, UI, colisão, luz, áudio ou emissão. A prova `[ORIGEM_R3_RIVER_MEMORY_OK]`, parser, porta R3, rotas e captura técnica aprovaram a integração no limiar físico do Arco.
+
+## Tarefa ativa — DEV3-R3-ARCH-PATINA-007
+
+A leitura física do Arco deve receber uma **pátina arqueológica localizada**, com variação material discreta nos vestígios já existentes, sem trocar a silhueta modular do marco por painéis, volumes de greybox ou VFX novos. A tarefa não pode aumentar o orçamento de luzes, partículas, emissões ou interferir com o vão, as placas, os seixos ou a continuidade R4.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Apenas `levels/regions/r3/`, QA R3 e documentação Dev3; não alterar Códice, `ForestLakeRegion.gd`, âncoras ou módulos R4–R6 |
 | Cartografia | Preservar Arco em Z aproximado 92, vão físico livre e saída `arch_to_forest` |
-| Geometria | Leitura material baixa e lateral; sem painéis, marcadores flutuantes ou barreiras no corredor |
+| Material | Pátina discreta em material já existente; sem painéis, geometrias de greybox ou VFX novos |
 | Luz | Não adicionar luz dinâmica; manter exatamente as duas luzes locais existentes no Arco |
-| Narrativa | Sugerir memória do rio sem explicar Orion ou substituir as inscrições existentes |
-| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica e rotas R3 antes de abrir a PR seguinte |
+| Jogabilidade | Despertar, placas, seixos e passagem mantêm a respetiva física e ausência de bloqueio |
+| Verificação | Parser, `tools/qa/run_regional_gate.sh R3`, prova específica de material e rotas R3 antes de abrir a PR seguinte |
 
 ## Fecho e avanço obrigatório
 
@@ -52,4 +56,4 @@ Dev3 só pode fechar a tarefa após commit publicado, porta R3 verde e substitui
 
 ## Próxima fila reservada
 
-`DEV3-R3-ARCH-PATINA-007` deverá refinar a pátina visual do Arco após a memória do rio, sem aumentar o orçamento de VFX ou luzes.
+`DEV3-R3-ARCH-SILHOUETTE-008` deverá rever a leitura de silhueta do marco após a pátina, sem aproximar as estruturas da faixa navegável.
