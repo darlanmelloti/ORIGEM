@@ -443,6 +443,8 @@ if [[ "$REGION" == "R6" ]]; then
   grep -q '\[ORIGEM_R6_EASTERN_RHYTHM_FINAL_OK\]' /tmp/origem_${REGION}_eastern_rhythm_final_$$.log
   GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_closure.gd >/tmp/origem_${REGION}_eastern_closure_$$.log 2>&1
   grep -q '\[ORIGEM_R6_EASTERN_CLOSURE_OK\]' /tmp/origem_${REGION}_eastern_closure_$$.log
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_readability_final.gd >/tmp/origem_${REGION}_eastern_readability_final_$$.log 2>&1
+  grep -q '\[ORIGEM_R6_EASTERN_READABILITY_FINAL_OK\]' /tmp/origem_${REGION}_eastern_readability_final_$$.log
 
   printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
   R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
