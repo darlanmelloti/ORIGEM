@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-RIVERBANK-067
+task_id: DEV2-R2-RIVER-RIVERBANK-068
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -214,7 +214,10 @@ A continuidade da leitura física curta de margem junto ao eixo de retorno foi a
 ## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-066
 A continuidade da leitura física curta de margem junto ao eixo de retorno foi aceita pelo orçamento global, porta R2, continuidade Dev2 e gate regional no CI `32982557299`.
 
-## Tarefa ativa — DEV2-R2-RIVER-RIVERBANK-067
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-067
+A leitura física curta de margem junto ao eixo de retorno foi aceita pelo gate manual `32983116461`; a execução automática concorrente foi cancelada pelo controle de concorrência, sem alterar o resultado válido. O contrato, orçamento e porta regional R2 passaram com sucesso.
+
+## Tarefa ativa — DEV2-R2-RIVER-RIVERBANK-068
 A R2 deve receber uma **leitura física curta de margem junto ao eixo de retorno**, com pedra real e vegetação aberta, mantendo o leito não atravessável, o reflexo Orion visível e a orientação Casa Voss → Arco sem nova rota.
 
 | Critério | Obrigatório |
@@ -234,4 +237,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RIVERBANK-067`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RIVERBANK-068`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
