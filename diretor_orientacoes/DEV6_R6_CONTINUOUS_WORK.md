@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-EASTERN-MARGIN-POSTCHECK-023
+task_id: DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -93,9 +93,13 @@ O módulo `R6EasternMarginFinalization.gd` ajustou estaticamente os três vestí
 
 A validação documental da cadeia oriental R6 foi consolidada. A porta R6, o orçamento de quatro luzes, handoff e rotas foram aprovados, com água, bases e física preservadas; não foi feita alteração adicional ao mundo.
 
-## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-POSTCHECK-023
+## Entrega aprovada — DEV6-R6-EASTERN-MARGIN-POSTCHECK-023
 
-Auditar e ajustar exclusivamente a revisão posterior estática de elementos R6 existentes da margem oriental. Não criar nós, geometria, luz, colisão, água falsa, partículas, shader, painel, interface, câmara, rota artificial ou antecipação da R7. A abertura de chegada, o leito navegável, a cascata, o handoff e todas as rotas R6 permanecem inalterados.
+O postcheck documental confirmou, com a porta R6 aprovada, que não houve regressão após o arquivo. Água, bases, quatro luzes, rotas e handoff permanecem preservados; não foi feita alteração adicional ao mundo.
+
+## Tarefa ativa — DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024
+
+Consolidar exclusivamente o closeout documental oriental R6 para a integração futura, sem alterar água, elementos existentes, câmara, limites regionais, handoff, iluminação, física, rotas, interface ou antecipação da R7.
 
 | Critério | Obrigatório |
 |---|---|
@@ -108,4 +112,4 @@ Auditar e ajustar exclusivamente a revisão posterior estática de elementos R6 
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-ARCHIVE-022` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-POSTCHECK-023`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-EASTERN-MARGIN-POSTCHECK-023` exige commit publicado, porta R6 aprovada e a nova tarefa `ACTIVE` `DEV6-R6-EASTERN-MARGIN-CLOSEOUT-024`.
