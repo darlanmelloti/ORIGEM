@@ -60,6 +60,14 @@ func _init() -> void:
 		issues.append("âncora contratual de entrada da R2 está fora da AABB")
 	if not contract.is_world_position_inside(exit_world):
 		issues.append("âncora contratual de saída da R2 está fora da AABB")
+	var build_root := Node3D.new()
+	var first_build: Node3D = region.build(build_root, {})
+	var second_build: Node3D = region.build(build_root, {})
+	if first_build == null or second_build == null or first_build != second_build:
+		issues.append("build() da R2 deve ser idempotente e retornar o mesmo nó")
+	if build_root.get_child_count() != 1 or first_build.name != R2_SCRIPT.integration_node_name():
+		issues.append("build() da R2 deve manter um único nó com nome canônico")
+	build_root.free()
 	if not issues.is_empty():
 		for issue: String in issues:
 			printerr("[ORIGEM_R2_CONTRACT_ERROR] %s" % issue)
@@ -72,4 +80,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_017_OK] restrições de Orion, água não emissiva e ponte preservadas.")
 	print("[ORIGEM_R2_RIVER_QA_018_OK] notas contratuais R2 consistente com os critérios essenciais.")
 	print("[ORIGEM_R2_RIVER_QA_019_OK] âncoras contratuais de entrada e saída dentro da AABB R2.")
+	print("[ORIGEM_R2_RIVER_QA_020_OK] build R2 idempotente e nó canônico preservado.")
 	quit(0)
