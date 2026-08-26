@@ -58,6 +58,7 @@ func _ready() -> void:
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
+	_build_positive_bridge_transition()
 	_build_macro_river_cutbanks()
 	_build_ruin_arch()
 	_build_cartographic_southwest_readability()
@@ -867,6 +868,31 @@ func _build_positive_bridge_approach() -> void:
 				fern.scale = Vector3(0.30 + float(index) * 0.05, 0.30 + float(index) * 0.05, 0.30 + float(index) * 0.05)
 				fern.rotation.y = side * 0.65 + float(index) * 0.42
 				approach_root.add_child(fern)
+
+func _build_positive_bridge_transition() -> void:
+	# DEV2-R2-RIVER-FOOTBRIDGE-034: transições físicas nos encontros já existentes, sem ampliar o leito ou criar atalho.
+	var bridge_z: float = 58.0
+	var bridge_x: float = _river_x(bridge_z)
+	var transition_root: Node3D = Node3D.new()
+	transition_root.name = "TransicaoPontePositivaR2"
+	add_child(transition_root)
+	for side: float in [-1.0, 1.0]:
+		var side_name: String = "Oeste" if side < 0.0 else "Este"
+		var bank_x: float = bridge_x + side * 5.65
+		var bank_z: float = bridge_z + side * 1.18
+		var slab_x: float = bank_x - side * 0.18
+		var slab_z: float = bank_z + side * 0.34
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeTransicaoPontePositiva_%s" % side_name
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(1.12, 0.12, 0.78)
+		slab.mesh = slab_mesh
+		slab.material_override = path_material
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		slab.position = Vector3(slab_x, _height_at(slab_x, slab_z) + 0.07, slab_z)
+		slab.rotation.y = -0.16 * side
+		transition_root.add_child(slab)
+		_add_world_life_collision(transition_root, "ColisorLajeTransicaoPontePositiva_%s" % side_name, Vector3(slab_x, _height_at(slab_x, slab_z) + 0.02, slab_z), slab_mesh.size)
 
 func _build_orion_reflection_lookout() -> void:
 	# DEV2-R2-RIVER-LOOKOUT-030: micro-miradouro físico para ler o reflexo Orion e reter a orientação de retorno.
