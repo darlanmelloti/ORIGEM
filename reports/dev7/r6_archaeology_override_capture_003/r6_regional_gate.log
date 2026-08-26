@@ -1,0 +1,25 @@
+[GATE:R6] Base=origin/integration/r1-r6-sprint1
+[GATE:R6] 1/4 diff --check
+[GATE:R6] 2/4 auditoria de escopo
+[GATE:R6] 3/4 parser Godot
+[GATE:R6] auditoria de quatro luzes das Ruínas Submersas
+[GATE:R6] orçamento R6 de quatro luzes aprovado
+[GATE:R6] prova DEV6-R6-WATERLINE-READING-003
+[GATE:R6] leitura arqueológica da linha de água aprovada
+[GATE:R6] prova DEV6-R6-BASIN-ARRIVAL-READING-004
+[GATE:R6] leitura da chegada à bacia aprovada
+[GATE:R6] prova DEV6-R6-BASIN-VISTA-READING-005
+[GATE:R6] vista estática da bacia aprovada
+[GATE:R6] prova DEV6-R6-OUTER-WATERLINE-SILHOUETTE-006
+[GATE:R6] silhueta exterior da linha de água aprovada
+[GATE:R6] prova DEV6-R6-EASTERN-MARGIN-READING-007
+[GATE:R6] leitura estática da margem oriental aprovada
+[GATE:R6] prova DEV6-R6-EASTERN-MARGIN-DEPTH-008
+[GATE:R6] profundidade estática da margem oriental aprovada
+[GATE:R6] prova DEV6-R6-SHORE-HANDOFF-002
+[GATE:R6] handoff físico R6→R7 aprovado
+[GATE:R6] 5/5 contratos e rotas
+[GATE:R6] rota forest_to_ruins aprovada
+[GATE:R6] rota majestic_to_lake aprovada
+[GATE:R6] rota ruins_arrival aprovada
+[GATE:R6] PASS
