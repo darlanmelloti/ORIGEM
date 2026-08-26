@@ -1946,6 +1946,37 @@ func _build_waterline_reading() -> void:
 		rock.rotation = Vector3(0.08 * float(index % 2), float(spec["r"]), -0.10 + float(index % 3) * 0.09)
 		_apply_material(rock, ruin_material)
 		debris.add_child(rock)
+	# DEV6-R6-SHORELINE-LEGIBILITY-005: trio de vestígios na margem externa visível desde a chegada.
+	# É exclusivamente visual e fica a oeste do corredor Majestic→R6, fora do leito e sem qualquer corpo físico.
+	var arrival_reading: Node3D = Node3D.new()
+	arrival_reading.name = "R6_LeituraArqueologicaDaMargem"
+	add_child(arrival_reading)
+	var fragment: Node3D = PILLAR.instantiate() as Node3D
+	if fragment != null:
+		fragment.name = "FragmentoDeColunaMargemR6"
+		fragment.position = Vector3(3.8, _height_at(3.8, 235.0) + 0.12, 235.0)
+		fragment.scale = Vector3(0.42, 0.56, 0.42)
+		fragment.rotation = Vector3(0.18, 0.62, -0.10)
+		_apply_material(fragment, ruin_material)
+		arrival_reading.add_child(fragment)
+	var arrival_rocks: Array[Dictionary] = [
+		{"x": 0.8, "z": 233.6, "s": 0.34, "r": -0.42},
+		{"x": 7.4, "z": 237.8, "s": 0.27, "r": 0.86}
+	]
+	for index: int in range(arrival_rocks.size()):
+		var spec: Dictionary = arrival_rocks[index]
+		var arrival_rock: Node3D = ROCK.instantiate() as Node3D
+		if arrival_rock == null:
+			continue
+		var arrival_x: float = float(spec["x"])
+		var arrival_z: float = float(spec["z"])
+		var arrival_scale: float = float(spec["s"])
+		arrival_rock.name = "PedraLeituraMargemR6_%02d" % index
+		arrival_rock.position = Vector3(arrival_x, _height_at(arrival_x, arrival_z) + 0.05, arrival_z)
+		arrival_rock.scale = Vector3(arrival_scale, arrival_scale * 0.58, arrival_scale * 0.82)
+		arrival_rock.rotation = Vector3(0.06, float(spec["r"]), -0.08 + float(index) * 0.13)
+		_apply_material(arrival_rock, ruin_material)
+		arrival_reading.add_child(arrival_rock)
 
 func _make_elliptical_lake_mesh(radius_x: float, radius_z: float) -> ArrayMesh:
 	var surface: SurfaceTool = SurfaceTool.new()

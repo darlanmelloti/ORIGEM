@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-SHORELINE-LEGIBILITY-005
+task_id: DEV6-R6-APPROACH-FRAMING-006
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -21,30 +21,31 @@ O orçamento R6 é exactamente quatro luzes: duas luzes mundiais da bacia, preen
 
 A composição `R6_DetritosLinhaDeAgua` acrescenta nove detritos arqueológicos assimétricos de margem no `ForestLakeRegion.gd`. Os elementos são exclusivamente visuais, ficam fora da elipse de água e do corredor Majestic→R6, e não introduzem luzes, shader, emissão, painel ou colisores.
 
+## Entrega aprovada — DEV6-R6-SHORELINE-LEGIBILITY-005
+
+A composição `R6_LeituraArqueologicaDaMargem` adiciona um fragmento de coluna e duas pedras assimétricas na margem exterior oeste. A correção foi motivada por capturas de chegada que mostravam água mas não davam leitura arqueológica suficiente da margem. Os três vestígios ficam fora da elipse de água e do trilho, não têm corpos físicos, luzes, shader, emissão ou painel.
+
 | Critério | Resultado |
 |---|---|
-| Linha de água | 9 detritos; nenhum dentro da elipse lacustre |
-| Rota | 0 detritos no corredor de chegada e nenhuma alteração nas lajes |
+| Linha de água | 9 detritos e 3 vestígios de chegada presentes |
+| Física | 0 colisores no novo conjunto; lajes e rota preservadas |
+| Iluminação | 0 luzes novas; orçamento R6 permanece em quatro |
 | Handoff | R6→R7 preservado sem geometria antecipada de R7 |
-| Iluminação | Nenhuma luz nova; orçamento regional permanece em quatro |
 | QA | Parser, sonda de luz, prova de handoff e três rotas R6 aprovados |
 
-A porta regional do merge canônico registou a aprovação do orçamento de quatro luzes, do handoff R6→R7 e das rotas `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival`.
+## Tarefa ativa — DEV6-R6-APPROACH-FRAMING-006
 
-## Tarefa ativa — DEV6-R6-SHORELINE-LEGIBILITY-005
-
-Inspecionar a legibilidade arqueológica da margem de R6 na chegada, com foco na relação entre os nove detritos de linha de água, a estela `RuneP0_02`, as ruínas submersas e a cascata. A tarefa deve usar a evidência runtime aprovada da porta regional como ponto de partida e permanecer limitada à R6.
+Validar que a chegada às Ruínas Submersas enquadra de modo coerente a bacia, a estela `RuneP0_02`, a linha de água arqueológica e o primeiro plano de ruínas no renderer `gl_compatibility`. O objectivo é de observabilidade e composição da chegada, não de ampliação de escopo.
 
 | Critério | Obrigatório |
 |---|---|
-| Linha de água | Detritos distinguíveis da margem e fora do trilho |
-| Estela | `RuneP0_02` acessível e legível na chegada |
-| Ruínas | Pilares e domo legíveis sob a água sem painel adicional |
-| Cascata | Filetes 3D preservados sem luz ou emissão nova |
-| Handoff | R6→R7 apenas visual e físico, sem construção da R7 |
+| R6 | Alterações somente dentro da fronteira regional das Ruínas Submersas |
+| Água | Sem shader adicional, painel ou aumento de emissão |
 | Luz | `r6_total=4` continua obrigatório |
+| Física | Sem colisor ou bloqueio novo no trilho Majestic→R6 |
+| Handoff | R6→R7 preservado, sem construção de R7 |
 | QA | Parser, orçamento R6, prova de handoff e todas as rotas R6 antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-SHORELINE-LEGIBILITY-005` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-APPROACH-FRAMING-006` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
