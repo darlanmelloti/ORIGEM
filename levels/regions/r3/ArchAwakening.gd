@@ -6,12 +6,14 @@ class_name R3ArchAwakening
 extends Node3D
 
 const EVENT_ID: String = "r3_arch_awakened"
+const INSCRIPTION_LORE_SCRIPT: Script = preload("res://levels/regions/r3/ArchInscriptionLore.gd")
 
 var awakened: bool = false
 var effect_time: float = 0.0
 var effect_root: Node3D
 var inscription_left: Label3D
 var inscription_right: Label3D
+var inscription_lore: Node3D
 
 static func install(arch: Node3D) -> R3ArchAwakening:
 	if arch == null:
@@ -28,6 +30,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_to_group("Persist")
 	_build_inscriptions()
+	inscription_lore = INSCRIPTION_LORE_SCRIPT.call("install", get_parent() as Node3D) as Node3D
 	_build_trigger()
 	_build_effects()
 	_apply_awakened_state()
@@ -124,3 +127,5 @@ func _apply_awakened_state() -> void:
 		inscription_left.modulate = Color(0.25, 0.78, 0.92, 1.0) if awakened else Color(0.46, 0.56, 0.54, 0.92)
 	if inscription_right != null:
 		inscription_right.modulate = Color(0.25, 0.78, 0.92, 1.0) if awakened else Color(0.46, 0.56, 0.54, 0.92)
+	if inscription_lore != null and inscription_lore.has_method("set_awakened"):
+		inscription_lore.call("set_awakened", awakened)
