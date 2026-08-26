@@ -54,6 +54,12 @@ func _init() -> void:
 		issues.append("âncora física de entrada da R2 está fora da AABB")
 	if not contract.is_world_position_inside(Vector3(-10.0, 0.0, 92.0)):
 		issues.append("projeção física do Arco está fora da AABB da R2")
+	var entry_world := Vector3(contract.entry_anchor.x, 0.0, contract.entry_anchor.y)
+	var exit_world := Vector3(contract.exit_anchor.x, 0.0, contract.exit_anchor.y)
+	if not contract.is_world_position_inside(entry_world):
+		issues.append("âncora contratual de entrada da R2 está fora da AABB")
+	if not contract.is_world_position_inside(exit_world):
+		issues.append("âncora contratual de saída da R2 está fora da AABB")
 	if not issues.is_empty():
 		for issue: String in issues:
 			printerr("[ORIGEM_R2_CONTRACT_ERROR] %s" % issue)
@@ -65,4 +71,5 @@ func _init() -> void:
 	print("[ORIGEM_R2_RIVER_QA_016_OK] critérios R2 cobrem rota, reflexo, ponte e iluminação.")
 	print("[ORIGEM_R2_RIVER_QA_017_OK] restrições de Orion, água não emissiva e ponte preservadas.")
 	print("[ORIGEM_R2_RIVER_QA_018_OK] notas contratuais R2 consistente com os critérios essenciais.")
+	print("[ORIGEM_R2_RIVER_QA_019_OK] âncoras contratuais de entrada e saída dentro da AABB R2.")
 	quit(0)
