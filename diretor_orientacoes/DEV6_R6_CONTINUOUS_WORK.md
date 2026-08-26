@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007
+task_id: DEV6-R6-CAPTURE-MATRIX-008
 owner: Dev6
 branch: dev6/r6-submerged-ruins
 ```
@@ -44,19 +44,30 @@ A auditoria comparou as capturas da chegada R6 em `gl_compatibility` com a base 
 | Física e handoff | Rota, lajes e R6→R7 preservados |
 | QA | Parser, orçamento, handoff e três rotas R6 aprovados |
 
-## Tarefa ativa — DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007
+## Entrega aprovada — DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007
 
-Criar uma sonda QA determinística para a chegada R6 que espere pelo mundo, recolha uma captura pós-carregamento em `gl_compatibility` e registe os nós de composição relevantes. A sonda existe apenas para tornar as evidências de runtime repetíveis; não integra a experiência jogável.
+A sonda `capture_r6_arrival_runtime.sh` aguarda o spawn da chegada, estabiliza o viewport e captura evidência 1600×900. A sonda `inspect_r6_runtime_composition.gd` confirma água, estela, nove detritos, três vestígios de margem, domo, oito pilares, três marcos emergentes, zero luzes e zero colisores no conjunto de margem. Duas execuções consecutivas produziram a mesma telemetria.
+
+| Critério | Resultado |
+|---|---|
+| Produção | Nenhuma alteração em gameplay, câmera, luz, água, física ou R7 |
+| Runtime | Spawn pós-carregamento e captura 1600×900 repetíveis |
+| Composição | Inventário R6 com todas as contagens esperadas |
+| QA | Parser, orçamento, handoff e três rotas R6 aprovados |
+
+## Tarefa ativa — DEV6-R6-CAPTURE-MATRIX-008
+
+Estender a sonda de captura pós-carregamento para executar `forest_to_ruins`, `majestic_to_lake` e `ruins_arrival`, produzindo uma imagem 1600×900 e uma confirmação de composição para cada rota. A tarefa mede evidência; não modifica a experiência de jogo.
 
 | Critério | Obrigatório |
 |---|---|
-| Código de produção | Nenhuma alteração em `ForestLakeRegion.gd`, `TempleLevel.gd` ou R7–R12 |
-| Runtime | Esperar a instância de R6 e a conclusão de frames antes da captura |
-| Evidência | Registrar água, estela, detritos, composição de margem, pilares e domo por nome e posição |
-| Luz | Confirmar `r6_total=4` sem criar `Light3D` |
-| Física | Não criar colisores nem alterar rotas |
-| QA | Parser, orçamento R6, handoff e três rotas R6 antes do PR |
+| Produção | Não alterar `ForestLakeRegion.gd`, `TempleLevel.gd`, R7–R12 ou âncoras cartográficas |
+| Câmara | Não alterar a câmera de produção nem a lógica de orientação das rotas |
+| Água e luz | Sem shader, painel, emissão ou `Light3D` novo |
+| Física | Sem `StaticBody3D`, `CollisionShape3D` ou alteração de corredor |
+| Evidência | Esperar cada spawn de rota e registrar composição R6 após a captura |
+| QA | Parser, orçamento R6, handoff e três rotas aprovados antes do PR |
 
 ## Sucessão obrigatória
 
-A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-RUNTIME-CAPTURE-PROTOCOL-007` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
+A esteira mantém uma única issue `[Dev6 Continuous]` e encerra automaticamente qualquer item Dev6 anterior quando o `task_id` avançar. O fecho de `DEV6-R6-CAPTURE-MATRIX-008` exige commit publicado, porta R6 aprovada e nova tarefa `ACTIVE`.
