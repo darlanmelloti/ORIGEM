@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-PUBLISH-040
+task_id: DEV4-R4-FOREST-OUTER-PUBLISH-MONITOR-042
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -113,9 +113,17 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 O closeout documental consolidou a cadeia R4 pronta para integração futura. As portas, rotas, clareira Orion, corredor de `≥8 m`, orçamento e bundles foram verificados; não houve alteração adicional ao mundo.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-PUBLISH-040
+## Entrega publicada — DEV4-R4-FOREST-OUTER-PUBLISH-040
 
-Preparar exclusivamente a publicação segura da cadeia exterior R4 quando o canal oficial recuperar. Antes de qualquer escrita remota, comparar ahead/behind, preservar commits exclusivos, usar a integração ensaiada e nunca reescrever a branch canónica.
+A cadeia exterior R4 consolidada foi publicada de forma não destrutiva após reconciliação com `integration/r1-r6-sprint1`, comparação `ahead/behind` e validação final. A publicação preservou os commits exclusivos e não reescreveu a branch canónica.
+
+## Entrega aprovada — DEV4-R4-FOREST-OUTER-PUBLISH-POSTCHECK-041
+
+A pós-validação remota e regional foi concluída sem alteração adicional ao mundo R4. A ponta remota estava sincronizada antes do registo; parser, porta R4 e as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins` foram aprovados.
+
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-PUBLISH-MONITOR-042
+
+Executar exclusivamente a monitorização de publicação da cadeia exterior R4. Confirmar ponta remota, parser, porta R4, três rotas e integridade do contrato sem introduzir alterações adicionais ao mundo, à rota, à câmara ou aos limites regionais.
 
 | Critério | Obrigatório |
 |---|---|
@@ -128,4 +136,4 @@ Preparar exclusivamente a publicação segura da cadeia exterior R4 quando o can
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-PUBLISH-040` permanece ACTIVE até à recuperação da autenticação oficial; enquanto o canal estiver inválido, manter bundles, ensaios e gates atualizados sem modificar rota, câmara ou limites regionais.
+`DEV4-R4-FOREST-OUTER-PUBLISH-MONITOR-042` permanece ACTIVE enquanto a publicação oficial requerer confirmação periódica. Esta tarefa não cria conteúdo de mundo novo; preserva rota, câmara, clareira, corredor, luzes e limites regionais.
