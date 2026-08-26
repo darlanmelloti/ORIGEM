@@ -7,6 +7,8 @@
 | **Base de integração** | `origin/integration/r1-r6-sprint1` |
 | **Tarefas ACTIVE** | **1** |
 | **Fonte de autoridade operacional** | `diretor_orientacoes/DEV7_VISUAL_PLAYABLE_PHYSICS_CONTINUOUS_WORK.md` |
+| **Modo operacional aprovado** | Verificações pontuais exclusivamente nos marcos de publicação, reconciliação e CI; não manter monitor contínuo entre tarefas. |
+| **Integração** | Sem bypass administrativo e sem auto-merge; observar a política da branch base. |
 
 ## Trabalho concluído
 
@@ -32,3 +34,7 @@
 | **Handoff** | R6→R7 permanece protegido; a tarefa não antecipa conteúdo R7. |
 
 > A tarefa ativa seguinte cria um contrato de evidência, não uma variante visual nem uma alteração de produção. O resultado rejeitado da captura 003 mantém-se vinculativo até decisão regional explícita.
+
+## Cadência de continuidade
+
+Dev7 executa verificações pontuais quando ocorrer um marco verificável de **publicação**, **reconciliação** ou **CI**. Na ausência desses marcos, não há serviço persistente entre tarefas. Esta decisão não reduz as fronteiras: novos comparativos R6 e qualquer mutação de produção permanecem proibidos até autorização explícita de Dev6/R6.
