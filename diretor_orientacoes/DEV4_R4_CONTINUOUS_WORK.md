@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-RUNTIME-SIGHTLINE-051
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-PLAYER-VIEW-RECONCILIATION-052
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -154,9 +154,13 @@ A revisão QA consolidou a matriz de responsabilidades R4/R6 e confirmou que tra
 
 O inventário em `reports/r4/CARTOGRAPHIC_INLET_MODULE_ELIGIBILITY_050.md` confirmou que rochas e fetos existentes pertencem ao mesmo nó-raiz da lâmina e não constituem camada modular independente. Nenhum ativo foi promovido nem alterado; a leitura R4/R6 mantém-se sem autorização de produção.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-RUNTIME-SIGHTLINE-051
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-RUNTIME-SIGHTLINE-051
 
-Construir somente uma prova QA de leitura runtime que recolha baseline 16:9 de `arch_to_forest`, telemetria dos cinco pontos cartográficos, distância ao corredor e contagem de luzes R4/R6. Não pode aplicar overrides de material, transformação, visibilidade, geometria, colisão, luz, água, âncora, rota ou câmara de jogador.
+A baseline gráfica e a telemetria foram preservadas em `reports/r4/inlet_runtime_sightline_051/`. A prova confirmou cinco pontos cartográficos, uma luz R4 e exatamente quatro luzes R6, sem mutação de produção. A faixa opaca permanece visível e nenhuma hipótese de correção foi autorizada.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-PLAYER-VIEW-RECONCILIATION-052
+
+Comparar exclusivamente em QA a baseline de câmara temporária com a leitura de uma travessia real `arch_to_forest`. A tarefa deve medir se a dívida permanece dominante na câmara do jogador, sem modificar a câmara, materiais, visibilidade, geometria, água, luzes, colisores, física, âncoras ou rotas.
 
 | Critério | Obrigatório |
 |---|---|
@@ -164,9 +168,9 @@ Construir somente uma prova QA de leitura runtime que recolha baseline 16:9 de `
 | Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` como microajustes |
 | R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
 | R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
-| Resultado | Baseline e telemetria QA; não é proposta de produção |
+| Resultado | Comparação observacional de câmara QA/jogador; não é proposta de produção |
 | Verificação | Parser, orçamento, porta R4 e três rotas antes de publicação |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir a captura QA, Dev4 deve avançar para nova análise rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
+Há exatamente uma tarefa ACTIVE. Ao concluir a reconciliação de vistas, Dev4 deve avançar para nova análise rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.

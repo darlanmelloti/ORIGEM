@@ -1,0 +1,13 @@
+[ORIGEM_R4_INLET_SIGHTLINE]
+production_mutations=0
+inlet_points=5
+water_aabb_size=(29.502,1.846,63.477)
+point_00=(12.60,163.00) route=(-2.42,0.40,163.00) planar_distance=15.019
+point_01=(13.40,178.00) route=(-2.50,0.09,178.00) planar_distance=15.900
+point_02=(17.80,193.00) route=(-2.58,-0.12,193.00) planar_distance=20.381
+point_03=(25.60,208.00) route=(-1.75,-0.09,208.00) planar_distance=27.352
+point_04=(36.00,224.00) route=(0.58,-0.05,224.00) planar_distance=35.417
+waypoints=9
+r4_lights=1
+r6_lights=4
+r6_light_names=PreenchimentoMundialDoLago,PreenchimentoOpostoDoLago,PreenchimentoAzulDaMargem,LuzSubaquaticaCentral

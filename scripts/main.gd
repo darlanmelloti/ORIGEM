@@ -16,6 +16,7 @@ const QA_STATE_ROUNDTRIP_SCRIPT: Script = preload("res://tools/qa/run_player_sta
 const QA_GROUNDING_SCRIPT: Script = preload("res://tools/qa/run_player_grounding.gd")
 const QA_R5_COMPOSITION_CAPTURE_SCRIPT: Script = preload("res://qa/regions/capture_r5_camp_composition_probe.gd")
 const QA_DEV7_R6_ARCHAEOLOGY_CAPTURE_SCRIPT: Script = preload("res://qa/regions/capture_dev7_r6_archaeology_override.gd")
+const QA_R4_INLET_SIGHTLINE_CAPTURE_SCRIPT: Script = preload("res://qa/regions/capture_r4_inlet_sightline.gd")
 const R2_REGION_SCRIPT: Script = preload("res://levels/regions/R2_RiverRoad.gd")
 # Orçamento GTX 1050 Ti: o vale pode conter muitas luzes de narrativa, mas só as 16 mais próximas de Elias permanecem visíveis.
 const MAX_VISIBLE_DYNAMIC_OMNI_LIGHTS: int = 16
@@ -108,6 +109,9 @@ func _ready():
 	elif OS.has_environment("ORIGEM_QA_R6_ARCHAEOLOGY_CAPTURE"):
 		var archaeology_capture_runner: Node = QA_DEV7_R6_ARCHAEOLOGY_CAPTURE_SCRIPT.new()
 		get_tree().root.call_deferred("add_child", archaeology_capture_runner)
+	elif OS.has_environment("ORIGEM_QA_R4_INLET_SIGHTLINE_CAPTURE"):
+		var inlet_sightline_runner: Node = QA_R4_INLET_SIGHTLINE_CAPTURE_SCRIPT.new()
+		get_tree().root.call_deferred("add_child", inlet_sightline_runner)
 	if OS.has_environment("ORIGEM_QA_CODEX"):
 		get_tree().create_timer(2.20).timeout.connect(_run_codex_qa)
 	if OS.has_environment("ORIGEM_QA_R2_WORLD_LIFE"):
@@ -123,7 +127,7 @@ func _ready():
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
 		OrionTransitionState.restore_exterior_player(exterior_player)
 	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
-	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_R3_ARCH") and not OS.has_environment("ORIGEM_QA_R4_CLEARING") and not OS.has_environment("ORIGEM_QA_R5_ARTEFACT") and not OS.has_environment("ORIGEM_QA_R5_COMPOSITION_CAPTURE") and not OS.has_environment("ORIGEM_QA_R6_ARCHAEOLOGY_CAPTURE"):
+	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_R3_ARCH") and not OS.has_environment("ORIGEM_QA_R4_CLEARING") and not OS.has_environment("ORIGEM_QA_R5_ARTEFACT") and not OS.has_environment("ORIGEM_QA_R5_COMPOSITION_CAPTURE") and not OS.has_environment("ORIGEM_QA_R6_ARCHAEOLOGY_CAPTURE") and not OS.has_environment("ORIGEM_QA_R4_INLET_SIGHTLINE_CAPTURE"):
 		_start_narrative()
 
 func _run_codex_qa() -> void:
