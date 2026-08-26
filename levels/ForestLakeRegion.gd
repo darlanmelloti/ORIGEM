@@ -95,6 +95,7 @@ const R6_EASTERN_MARGIN_RECONCILIATION_SCRIPT: Script = preload("res://levels/re
 const R6_EASTERN_MARGIN_CONSISTENCY_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginConsistency.gd")
 const R6_EASTERN_MARGIN_CHECK_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginCheck.gd")
 const R6_EASTERN_MARGIN_FINALIZATION_SCRIPT: Script = preload("res://levels/regions/r6/R6EasternMarginFinalization.gd")
+const R6_MIDGROUND_ARCHAEOLOGY_COMPOSITION_SCRIPT: Script = preload("res://levels/regions/r6/R6MidgroundArchaeologyComposition.gd")
 
 var terrain_patch: Node3D
 var path_material: StandardMaterial3D
@@ -189,6 +190,7 @@ func _ready() -> void:
 	_build_take6_corridor_accent()
 	_build_submerged_ruins()
 	_build_waterline_reading()
+	_build_r6_midground_archaeology_composition()
 	_build_r6_eastern_margin_reading()
 	_build_r6_eastern_margin_depth()
 	_build_r6_eastern_margin_lateral_balance()
@@ -2298,6 +2300,16 @@ func _build_waterline_reading() -> void:
 		arrival_rock.rotation = Vector3(0.06, float(spec["r"]), -0.08 + float(index) * 0.13)
 		_apply_material(arrival_rock, ruin_material)
 		arrival_reading.add_child(arrival_rock)
+
+func _build_r6_midground_archaeology_composition() -> void:
+	# DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014: só reescala e roda três vestígios visuais da chegada, sem deslocar as bases.
+	var arrival_reading: Node3D = get_node_or_null("R6_LeituraArqueologicaDaMargem") as Node3D
+	if arrival_reading == null:
+		push_error("[ORIGEM_R6] Leitura arqueológica da chegada indisponível para composição de plano médio.")
+		return
+	var adjusted: int = int(R6_MIDGROUND_ARCHAEOLOGY_COMPOSITION_SCRIPT.call("apply", arrival_reading))
+	if adjusted != 3:
+		push_error("[ORIGEM_R6] Não foi possível compor os três vestígios arqueológicos existentes da chegada.")
 
 func _build_r6_eastern_margin_reading() -> void:
 	# DEV6-R6-EASTERN-MARGIN-READING-007: relê apenas os três vestígios já existentes da margem oriental.

@@ -531,6 +531,26 @@ if [[ "$REGION" == "R6" ]]; then
   GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_eastern_margin_finalization.gd >/tmp/origem_${REGION}_eastern_finalization_$$.log 2>&1
   grep -q '\[ORIGEM_R6_EASTERN_FINALIZATION_OK\]' /tmp/origem_${REGION}_eastern_finalization_$$.log
 
+  printf '[GATE:%s] prova DEV6-R6-MIDGROUND-ARCHAEOLOGY-COMPOSITION-014\n' "$REGION"
+  R6_MIDGROUND_ARCHAEOLOGY_LOG="/tmp/origem_${REGION}_midground_archaeology_$$.log"
+  set +e
+  GODOT_SILENCE_ROOT_WARNING=1 timeout 35s "$GODOT" --headless --path . --script res://qa/regions/verify_r6_midground_archaeology_composition.gd >"$R6_MIDGROUND_ARCHAEOLOGY_LOG" 2>&1
+  r6_midground_archaeology_status=$?
+  set -e
+  if [[ "$r6_midground_archaeology_status" -ne 0 ]]; then
+    cat "$R6_MIDGROUND_ARCHAEOLOGY_LOG"
+    exit 25
+  fi
+  if ! grep -q '\[ORIGEM_R6_MIDGROUND_ARCHAEOLOGY_OK\]' "$R6_MIDGROUND_ARCHAEOLOGY_LOG"; then
+    cat "$R6_MIDGROUND_ARCHAEOLOGY_LOG"
+    exit 25
+  fi
+  if grep -Eqi 'parse error|parser error|script error|shader error|fatal error|ORIGEM_R6_MIDGROUND_ARCHAEOLOGY_ERROR' "$R6_MIDGROUND_ARCHAEOLOGY_LOG"; then
+    cat "$R6_MIDGROUND_ARCHAEOLOGY_LOG"
+    exit 25
+  fi
+  printf '[GATE:%s] composição arqueológica de plano médio aprovada\n' "$REGION"
+
   printf '[GATE:%s] prova DEV6-R6-SHORE-HANDOFF-002\n' "$REGION"
   R6_HANDOFF_LOG="/tmp/origem_${REGION}_handoff_$$.log"
   set +e
