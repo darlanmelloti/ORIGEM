@@ -1,0 +1,12 @@
+[GATE:R3] Base=origin/integration/r1-r6-sprint1
+[GATE:R3] 1/4 diff --check
+[GATE:R3] 2/4 auditoria de escopo
+[GATE:R3] AVISO: houve alteração transversal; requer revisão explícita de Dev1.
+scripts/main.gd
+[GATE:R3] 3/4 parser Godot
+[GATE:R3] prova de mundo DEV3-R3-ARCH-AWAKENING-RECOVERY-001
+[GATE:R3] Arco R3 aprovado
+[GATE:R3] 5/5 contratos e rotas
+[GATE:R3] rota road_to_arch aprovada
+[GATE:R3] rota arch_to_forest aprovada
+[GATE:R3] PASS
