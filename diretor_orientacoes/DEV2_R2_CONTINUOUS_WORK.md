@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-RIVERBANK-040
+task_id: DEV2-R2-RIVER-RIVERBANK-041
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -133,7 +133,10 @@ A continuidade do trecho médio foi mantida no contrato ativo e aceita pelo orç
 ## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-039
 A ativação da leitura baixa de margem no lado oposto ao retorno foi aceita pela porta R2, orçamento global e continuidade Dev2 no CI `32927149297`.
 
-## Tarefa ativa — DEV2-R2-RIVER-RIVERBANK-040
+## Tarefa concluída — DEV2-R2-RIVER-RIVERBANK-040
+A leitura física baixa de margem no lado oposto ao retorno foi mantida como tarefa jogável rastreável e aceita pela porta R2, orçamento global e continuidade Dev2 no CI `32927452558`.
+
+## Tarefa ativa — DEV2-R2-RIVER-RIVERBANK-041
 
 A R2 deve receber uma **leitura física baixa de margem no lado oposto ao retorno**, com pedra e feto reais, mantendo o leito não atravessável, o reflexo Orion visível e a orientação Casa Voss → Arco sem nova rota.
 
@@ -154,4 +157,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RIVERBANK-040`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-RIVERBANK-041`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
