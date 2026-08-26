@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-OUTER-LATERAL-BALANCE-024
+task_id: DEV4-R4-FOREST-OUTER-VISTA-025
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -79,9 +79,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-OUTER-DEPTH-023` instalou `ForestOuterDepth.gd`: três árvores R4 já aprovadas pelo ritmo exterior receberam apenas variação estática de escala e orientação. As posições-base, árvores com colisor, clareira, lajes e corredor de `≥8 m` foram preservados. A prova `[ORIGEM_R4_OUTER_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
-## Tarefa ativa — DEV4-R4-FOREST-OUTER-LATERAL-BALANCE-024
+`DEV4-R4-FOREST-OUTER-LATERAL-BALANCE-024` instalou `ForestOuterLateralBalance.gd`: duas árvores exteriores já aprovadas pelo ritmo, mas não usadas pela profundidade, receberam só escala e orientação estáticas. As bases espaciais e o corredor de `≥8 m` foram preservados; a prova própria, parser, porta R4 e rotas foram aprovados.
 
-Refinar exclusivamente o equilíbrio lateral exterior R4 usando elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+## Tarefa ativa — DEV4-R4-FOREST-OUTER-VISTA-025
+
+Refinar exclusivamente a leitura exterior R4 usando elementos ambientais existentes, fora da clareira Orion e sem aproximar elementos do trilho ou do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -94,4 +96,4 @@ Refinar exclusivamente o equilíbrio lateral exterior R4 usando elementos ambien
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-OUTER-VISTA-025` deverá rever a leitura exterior R4 sem modificar rota, câmara ou limites regionais.
+`DEV4-R4-FOREST-OUTER-RHYTHM-FINAL-026` deverá rever a cadência exterior R4 sem modificar rota, câmara ou limites regionais.

@@ -43,6 +43,7 @@ const R4_FOREST_CANOPY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/Fo
 const R4_FOREST_OUTER_SILHOUETTE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterSilhouette.gd")
 const R4_FOREST_OUTER_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterRhythm.gd")
 const R4_FOREST_OUTER_DEPTH_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterDepth.gd")
+const R4_FOREST_OUTER_LATERAL_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestOuterLateralBalance.gd")
 const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
@@ -102,6 +103,7 @@ func _ready() -> void:
 	_build_r4_outer_silhouette()
 	_build_r4_outer_rhythm()
 	_build_r4_outer_depth()
+	_build_r4_outer_lateral_balance()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -516,6 +518,11 @@ func _build_r4_outer_depth() -> void:
 	var adjusted: int = int(R4_FOREST_OUTER_DEPTH_SCRIPT.call("apply", forest_root))
 	if adjusted != 3:
 		push_error("[ORIGEM_R4] Não foi possível ajustar as três árvores de profundidade exterior.")
+
+func _build_r4_outer_lateral_balance() -> void:
+	var forest_root: Node3D = get_node_or_null("FlorestaDensaRegional") as Node3D
+	if int(R4_FOREST_OUTER_LATERAL_BALANCE_SCRIPT.call("apply", forest_root)) != 2:
+		push_error("[ORIGEM_R4] Não foi possível equilibrar as duas árvores exteriores.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.
