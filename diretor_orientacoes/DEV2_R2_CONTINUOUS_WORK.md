@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV2-R2-RIVER-EDGE-033
+task_id: DEV2-R2-RIVER-FOOTBRIDGE-034
 owner: Dev2
 branch: dev2/r2-river-road
 ```
@@ -112,20 +112,23 @@ A R2 recebeu a `LajeConfirmacaoRetornoVossR2`, com laje caminhável, colisor coi
 ## Tarefa concluída — DEV2-R2-RIVER-ARCH-032
 A R2 recebeu a `LajeChegadaArcoR2`, curta e centralizada no eixo da estrada sob o vão livre do Arco, com colisor coincidente e sem bloquear a passagem. O CI regional aprovou o commit rebased `6b8c10e2`; a execução concorrente `32923814157` ficou verde.
 
-## Tarefa ativa — DEV2-R2-RIVER-EDGE-033
+## Tarefa concluída — DEV2-R2-RIVER-EDGE-033
+A R2 recebeu a `LeituraMargemReflexoOrionR2`, com duas pedras reais e fetos abertos no trecho médio. A leitura enquadra o reflexo sem parede, sem caminho novo para a água e sem luz dinâmica. O CI regional aprovou o commit `0d1ca207`.
 
-A R2 deve receber uma **leitura física baixa da margem do rio no trecho médio**, com duas pedras reais e vegetação aberta que enquadrem o reflexo Orion sem formar parede, sem criar caminho novo para a água e sem competir com a chegada ao Arco.
+## Tarefa ativa — DEV2-R2-RIVER-FOOTBRIDGE-034
+
+A R2 deve receber uma **melhoria física de aproximação à ponte positiva**, com uma laje de transição e colisor coincidente no encontro já existente, mantendo o vão, a passagem lateral e a rota `positive_bridge` sem ampliar o leito ou criar atalho.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | R2 e documentos de Dev2; não editar `ForestLakeRegion.gd`, âncoras ou módulos R3–R6 sem integração aprovada |
 | Cartografia | Validar as três rotas no contrato sem mover estrada, Arco ou âncoras cartográficas |
-| Acesso | Leitura lateral baixa da margem, fora do leito, sem novo caminho para a água |
+| Acesso | Laje de transição no encontro já existente da ponte, sem bloquear o vão ou criar atalho |
 | Desempenho | Zero luz dinâmica adicional, partículas ou emissão persistente; reutilizar pedra e fetos reais |
 | Jogabilidade | Não bloquear `road_return_voss`, `road_to_arch` ou `positive_bridge`; não criar um novo atalho para o rio |
 | Geometria | Não alterar a geometria; validar apenas metadados contratuais |
-| Narrativa | A margem deve enquadrar o reflexo Orion e manter a viagem Casa Voss → Arco legível |
-| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_EDGE_033_OK]` antes do PR |
+| Narrativa | A transição deve tornar a ponte positiva legível como marco de viagem sem competir com Orion ou o Arco |
+| Verificação | Executar parser, porta R2, rotas canônicas, orçamento e probe `[ORIGEM_R2_RIVER_FOOTBRIDGE_034_OK]` antes do PR |
 
 ## Fecho e avanço obrigatório
 
@@ -133,4 +136,4 @@ Dev2 só pode fechar a tarefa quando o commit estiver publicado, a porta R2 esti
 
 ## Próxima fila reservada
 
-A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-EDGE-033`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
+A fila seguinte será definida após a aprovação de `DEV2-R2-RIVER-FOOTBRIDGE-034`, mantendo o estado `ACTIVE` e o trabalho contínuo rastreável no GitHub.
