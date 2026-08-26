@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-APPROACH-RHYTHM-007
+task_id: DEV4-R4-MAJESTIC-EDGE-BALANCE-008
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -29,6 +29,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-ORION-VISTA-FRAMING-006` instalou `ForestOrionVistaFraming.gd`: seis copas laterais existentes foram ajustadas para uma revelação gradual de Orion; duas copas na faixa protegida permaneceram sem modulação. Não foram criadas malhas, materiais, luzes, colisores, animação, partículas, vento, shaders, pós-processamento, interface ou alterações de câmara. A prova `[ORIGEM_R4_VISTA_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-APPROACH-RHYTHM-007` instalou `ForestApproachRhythm.gd`: 24 árvores, copas ou fetos R4 existentes foram reposicionados estaticamente entre `Z=152–170`; 23 elementos na faixa Orion foram preservados. A fronteira de transformação encerra antes do conector Majestic e não altera qualquer módulo Dev5. A prova `[ORIGEM_R4_APPROACH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -36,20 +38,21 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Copas | 20 copas protegidas | ≥6 m | 0 luzes e colisores | Aprovada |
 | Sub-bosque | Sem elementos em Z=126–151 | ≥6,16 m | 0 luzes e colisores | Aprovada |
 | Vista Orion | 2 copas protegidas | ≥6 m | 0 luzes e colisores | Aprovada |
+| Aproximação Majestic | 23 elementos protegidos | ≥6 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-APPROACH-RHYTHM-007
+## Tarefa ativa — DEV4-R4-MAJESTIC-EDGE-BALANCE-008
 
-Consolidar a **cadência ambiental da chegada a Majestic** na faixa exterior R4 após a clareira Orion. A tarefa deve ajustar somente posições, escalas e rotações de instâncias estáticas já existentes de árvores, rochas ou fetos entre o fim da clareira e o conector Majestic. O objetivo é conduzir a leitura do trilho para Majestic sem criar muro de vegetação, alterar a rota, a geometria partilhada ou os módulos da Dev5.
+Equilibrar a **borda visual da transição R4→R5** usando apenas transformações de instâncias estáticas já existentes no limite exterior da floresta. A tarefa deve suavizar qualquer massa que pareça uma parede antes de Majestic, sem alterar a rota, o acampamento, a iluminação, a física, os módulos ou os ativos de Dev5.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Novo módulo em `levels/regions/r4/`, montagem mínima e QA R4 |
 | Clareira | Faixa `Z≈126–151` permanece integralmente livre |
 | Corredor | Nenhum elemento a menos de 6 m do trilho físico |
-| Integração R5 | Não alterar módulos, ativos ou lógica de Dev5 |
+| Integração R5 | Não alterar módulos, ativos, lógica, iluminação ou acampamento de Dev5 |
 | Dinâmica | Zero luz, colisores, partículas, vento, pós-processamento ou animação |
 | Verificação | Parser, prova própria, porta R4 e três rotas antes de publicar |
 
 ## Próxima fila reservada
 
-`DEV4-R4-MAJESTIC-EDGE-BALANCE-008` deverá equilibrar a borda visual da transição R4→R5, sem modificar a rota, o acampamento ou a iluminação de Majestic.
+`DEV4-R4-FOREST-SILHOUETTE-CONTINUITY-009` deverá rever a continuidade das silhuetas vegetais R4 sem modificar a rota, a câmara ou os limites regionais.
