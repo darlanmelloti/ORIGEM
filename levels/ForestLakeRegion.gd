@@ -24,6 +24,18 @@ const MOSSY_RUIN_NORMAL: Texture2D = preload("res://assets/textures/pbr/mossy_ro
 const CARTOGRAPHIC_ANCHORS: Script = preload("res://levels/CartographicAnchors.gd")
 const R4_FOREST_CLEARING_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingSightline.gd")
 const R4_FOREST_MIST_SCRIPT: Script = preload("res://levels/regions/r4/ForestMistLayer.gd")
+const R4_FOREST_CANOPY_CADENCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestCanopyCadence.gd")
+const R4_FOREST_ORION_VISTA_SCRIPT: Script = preload("res://levels/regions/r4/ForestOrionVistaFraming.gd")
+const R4_FOREST_APPROACH_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachRhythm.gd")
+const R4_FOREST_MAJESTIC_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestMajesticEdgeBalance.gd")
+const R4_FOREST_SILHOUETTE_CONTINUITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestSilhouetteContinuity.gd")
+const R4_FOREST_DEPTH_BALANCE_SCRIPT: Script = preload("res://levels/regions/r4/ForestDepthBalance.gd")
+const R4_FOREST_APPROACH_READABILITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachReadability.gd")
+const R4_FOREST_TRAIL_PACING_SCRIPT: Script = preload("res://levels/regions/r4/ForestTrailPacing.gd")
+const R4_FOREST_MARGIN_CONTINUITY_SCRIPT: Script = preload("res://levels/regions/r4/ForestMarginContinuity.gd")
+const R4_FOREST_APPROACH_COMPOSITION_SCRIPT: Script = preload("res://levels/regions/r4/ForestApproachComposition.gd")
+const R4_FOREST_EDGE_RHYTHM_SCRIPT: Script = preload("res://levels/regions/r4/ForestEdgeRhythm.gd")
+const R4_FOREST_UNDERSTORY_EDGE_SCRIPT: Script = preload("res://levels/regions/r4/ForestUnderstoryEdge.gd")
 const R4_FOREST_CLEARING_LORE_SCRIPT: Script = preload("res://levels/regions/r4/ForestClearingLore.gd")
 const R5_MAJESTIC_ARTIFACT_TRAIL_SCRIPT: Script = preload("res://levels/regions/r5/MajesticArtifactTrail.gd")
 const R5_MAJESTIC_WIND_READING_SCRIPT: Script = preload("res://levels/regions/r5/MajesticCampWindReading.gd")
@@ -48,6 +60,7 @@ func _ready() -> void:
 	_build_cartographic_forest_threshold()
 	_build_arch_to_forest_transition()
 	_build_arch_forest_understory()
+	_build_r4_understory_edge()
 	_build_r4_clearing_sightline()
 	_build_r4_clearing_lore()
 	_build_forest_wayfinding()
@@ -62,6 +75,17 @@ func _ready() -> void:
 	_build_dense_forest()
 	_build_forest_canopy_clusters()
 	_build_forest_micro_details()
+	_build_r4_canopy_cadence()
+	_build_r4_orion_vista_framing()
+	_build_r4_forest_approach_rhythm()
+	_build_r4_majestic_edge_balance()
+	_build_r4_silhouette_continuity()
+	_build_r4_depth_balance()
+	_build_r4_approach_readability()
+	_build_r4_trail_pacing()
+	_build_r4_margin_continuity()
+	_build_r4_approach_composition()
+	_build_r4_edge_rhythm()
 	_build_r4_mist_layer()
 	_build_majestic_camp()
 	_build_r5_majestic_artifact_trail()
@@ -285,6 +309,13 @@ func _build_arch_forest_understory() -> void:
 			rock.rotation.y = -0.28 + float(index) * 0.61
 			understory.add_child(rock)
 
+func _build_r4_understory_edge() -> void:
+	# DEV4-R4-UNDERSTORY-EDGE-005: reorganiza somente fetos e rochas já existentes, sem invadir o trilho ou a clareira Orion.
+	var understory: Node = get_node_or_null("SubBosqueDoLimiarArcoFloresta")
+	var edge: R4ForestUnderstoryEdge = R4_FOREST_UNDERSTORY_EDGE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), understory) as R4ForestUnderstoryEdge
+	if edge == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a transição lateral do sub-bosque.")
+
 func _build_r4_clearing_sightline() -> void:
 	# DEV4-R4-CLEARING-SIGHTLINE-001: moldura baixa, húmida e lateral para a visada de Orion sem fechar o trilho.
 	var clearing: R4ForestClearingSightline = R4_FOREST_CLEARING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), ROCK, FERN) as R4ForestClearingSightline
@@ -296,6 +327,123 @@ func _build_r4_clearing_lore() -> void:
 	var lore: R4ForestClearingLore = R4_FOREST_CLEARING_LORE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), ROCK) as R4ForestClearingLore
 	if lore == null:
 		push_error("[ORIGEM_R4] Não foi possível instalar a leitura arqueológica da clareira.")
+
+func _build_r4_canopy_cadence() -> void:
+	# DEV4-R4-CANOPY-CADENCE-004: apenas reorganiza transformações de copas já existentes nas massas laterais R4.
+	var target_names: PackedStringArray = PackedStringArray([
+		"FlorestaDensaRegional",
+		"CopasFocaisDaFlorestaDensa",
+	])
+	var canopy_roots: Array[Node] = []
+	for target_name: String in target_names:
+		var canopy_root: Node = get_node_or_null(target_name)
+		if canopy_root != null:
+			canopy_roots.append(canopy_root)
+	var cadence: R4ForestCanopyCadence = R4_FOREST_CANOPY_CADENCE_SCRIPT.call("install", self, Callable(self, "_path_x"), canopy_roots) as R4ForestCanopyCadence
+	if cadence == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a cadência estática das copas.")
+
+func _build_r4_orion_vista_framing() -> void:
+	# DEV4-R4-ORION-VISTA-FRAMING-006: transforma somente copas laterais existentes para uma revelação gradual de Orion.
+	var target_names: PackedStringArray = PackedStringArray([
+		"TransicaoOrganicaArcoFloresta",
+		"CopasFocaisDaFlorestaDensa",
+	])
+	var canopy_roots: Array[Node] = []
+	for target_name: String in target_names:
+		var canopy_root: Node = get_node_or_null(target_name)
+		if canopy_root != null:
+			canopy_roots.append(canopy_root)
+	var framing: R4ForestOrionVistaFraming = R4_FOREST_ORION_VISTA_SCRIPT.call("install", self, Callable(self, "_path_x"), canopy_roots) as R4ForestOrionVistaFraming
+	if framing == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o enquadramento lateral de Orion.")
+
+func _build_r4_forest_approach_rhythm() -> void:
+	# DEV4-R4-FOREST-APPROACH-RHYTHM-007: cadência exterior R4 depois da clareira e antes da fronteira Dev5.
+	var target_names: PackedStringArray = PackedStringArray([
+		"FlorestaDensaRegional",
+		"CopasFocaisDaFlorestaDensa",
+	])
+	var roots: Array[Node] = []
+	for target_name: String in target_names:
+		var source_root: Node = get_node_or_null(target_name)
+		if source_root != null:
+			roots.append(source_root)
+	var rhythm: R4ForestApproachRhythm = R4_FOREST_APPROACH_RHYTHM_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), roots) as R4ForestApproachRhythm
+	if rhythm == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a cadência da aproximação a Majestic.")
+
+func _build_r4_majestic_edge_balance() -> void:
+	# DEV4-R4-MAJESTIC-EDGE-BALANCE-008: equilibra apenas instâncias R4 junto ao limite anterior a Majestic.
+	var target_names: PackedStringArray = PackedStringArray([
+		"FlorestaDensaRegional",
+		"CopasFocaisDaFlorestaDensa",
+	])
+	var roots: Array[Node] = []
+	for target_name: String in target_names:
+		var source_root: Node = get_node_or_null(target_name)
+		if source_root != null:
+			roots.append(source_root)
+	var balance: R4ForestMajesticEdgeBalance = R4_FOREST_MAJESTIC_EDGE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), roots) as R4ForestMajesticEdgeBalance
+	if balance == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o equilíbrio da borda Majestic.")
+
+func _build_r4_silhouette_continuity() -> void:
+	# DEV4-R4-FOREST-SILHOUETTE-CONTINUITY-009: transforma somente silhuetas R4 sem colisão associada.
+	var target_names: PackedStringArray = PackedStringArray([
+		"FlorestaDensaRegional",
+		"CopasFocaisDaFlorestaDensa",
+	])
+	var roots: Array[Node] = []
+	for target_name: String in target_names:
+		var source_root: Node = get_node_or_null(target_name)
+		if source_root != null:
+			roots.append(source_root)
+	var continuity: R4ForestSilhouetteContinuity = R4_FOREST_SILHOUETTE_CONTINUITY_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), roots) as R4ForestSilhouetteContinuity
+	if continuity == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a continuidade das silhuetas.")
+
+func _build_r4_depth_balance() -> void:
+	# DEV4-R4-FOREST-DEPTH-BALANCE-010: separa fetos R4 existentes em planos laterais, sem criar nova geometria ou física.
+	var forest_root: Node = get_node_or_null("FlorestaDensaRegional")
+	var balance: R4ForestDepthBalance = R4_FOREST_DEPTH_BALANCE_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), forest_root) as R4ForestDepthBalance
+	if balance == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o equilíbrio de profundidade lateral.")
+
+func _build_r4_approach_readability() -> void:
+	# DEV4-R4-ORION-APPROACH-READABILITY-011: raízes R4 existentes reforçam a direção lateral para Majestic, sem UI ou efeitos.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var readability: R4ForestApproachReadability = R4_FOREST_APPROACH_READABILITY_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestApproachReadability
+	if readability == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a legibilidade da aproximação Orion.")
+
+func _build_r4_trail_pacing() -> void:
+	# DEV4-R4-FOREST-TRAIL-PACING-012: alterna pedras R4 existentes nas bordas, sem tocar em lajes ou colisores.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var pacing: R4ForestTrailPacing = R4_FOREST_TRAIL_PACING_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestTrailPacing
+	if pacing == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar o ritmo visual do trilho.")
+
+func _build_r4_margin_continuity() -> void:
+	# DEV4-R4-FOREST-MARGIN-CONTINUITY-013: ajusta raízes R4 existentes após a aproximação, sem criar geometrias ou física.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var continuity: R4ForestMarginContinuity = R4_FOREST_MARGIN_CONTINUITY_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestMarginContinuity
+	if continuity == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a continuidade da margem florestal.")
+
+func _build_r4_approach_composition() -> void:
+	# DEV4-R4-FOREST-APPROACH-COMPOSITION-014: equilibra copas focais R4 existentes sem colisores associados.
+	var canopy_root: Node = get_node_or_null("CopasFocaisDaFlorestaDensa")
+	var composition: R4ForestApproachComposition = R4_FOREST_APPROACH_COMPOSITION_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), canopy_root) as R4ForestApproachComposition
+	if composition == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a composição da aproximação.")
+
+func _build_r4_edge_rhythm() -> void:
+	# DEV4-R4-FOREST-EDGE-RHYTHM-015: alterna pedras R4 existentes junto ao conector, sem alterar sistemas Dev5.
+	var details_root: Node = get_node_or_null("RaizesPedrasESinaisP0")
+	var rhythm: R4ForestEdgeRhythm = R4_FOREST_EDGE_RHYTHM_SCRIPT.call("install", self, Callable(self, "_path_x"), Callable(self, "_height_at"), details_root) as R4ForestEdgeRhythm
+	if rhythm == null:
+		push_error("[ORIGEM_R4] Não foi possível instalar a cadência da borda florestal.")
 
 func _build_r4_mist_layer() -> void:
 	# DEV4-R4-MIST-LAYER-002: perspectiva local leve aplicada às massas R4, sem volumes, painéis, partículas ou luzes novas.

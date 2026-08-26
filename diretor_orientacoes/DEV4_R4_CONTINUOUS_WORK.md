@@ -6,48 +6,77 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CANOPY-CADENCE-004
+task_id: DEV4-R4-FOREST-THRESHOLD-READING-016
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
 
 ## Base oficial e fronteira
 
-A base de trabalho é o repositório oficial do ORIGEM, branch canónica `dev4/r4-dense-forest`, sincronizada por avanço rápido com `integration/r1-r6-sprint1`. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
+A base de trabalho é o repositório oficial do ORIGEM, branch canónica `dev4/r4-dense-forest`, sincronizada com `integration/r1-r6-sprint1`. A R4 mantém a âncora cartográfica `(-9, 116)`, ocupa a transição entre o Arco e o Acampamento Majestic e conserva as rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins`.
 
 O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mínima em `levels/ForestLakeRegion.gd` é permitida apenas para instalar módulos R4 aditivos; não editar âncoras, `RiverRoadJourney.gd`, módulos R1–R3/R5–R6 ou sistemas transversais protegidos.
 
-## Entrega concluída — DEV4-R4-MIST-LAYER-002
+## Entregas concluídas
 
-`R4CamadaNeblinaLocal` foi instalada por `ForestMistLayer.gd`. A camada não cria geometria, `FogVolume`, planos, partículas, colisores, pós-processamento ou luzes. Aplica apenas uma variação subtil de material nas massas selecionadas da R4.
+`DEV4-R4-MIST-LAYER-002` instalou `R4CamadaNeblinaLocal` com variação de material subtil, sem geometria, volume de neblina, partículas, pós-processamento ou luzes. A clareira Orion em `Z≈126–151` mantém peso zero e leitura livre.
 
-A clareira de Orion em `Z≈126–151` recebe peso zero; portanto, mantém-se aberta para a leitura de Orion e do caminho para Majestic. A prova `[ORIGEM_R4_MIST_OK]` registou `materiais=128`, `clareira_protegida=42` e `luzes=0`.
+`DEV4-R4-ORION-CLEARING-LORE-003` instalou `ForestClearingLore.gd`: três vestígios laterais e nove pedras gastas fora do corredor, sem interface, texto, eventos, colisores ou luzes.
 
-## Entrega concluída — DEV4-R4-ORION-CLEARING-LORE-003
+`DEV4-R4-CANOPY-CADENCE-004` instalou `ForestCanopyCadence.gd`: 26 copas laterais existentes receberam variação estática; 20 copas na faixa Orion foram preservadas; não foram criadas luzes ou colisores.
 
-`ForestClearingLore.gd` instala três vestígios de passagem antiga na lateral da clareira: nove pedras gastas em conjuntos assimétricos, todas fora do corredor jogável. A entrega não introduz UI, texto, objetivos, diálogos, colecionáveis, eventos, animações de revelação, colisores ou luzes. A leitura continua material e ambiental, sem antecipar a revelação narrativa de Orion.
+`DEV4-R4-UNDERSTORY-EDGE-005` instalou `ForestUnderstoryEdge.gd`: doze elementos existentes do sub-bosque foram reposicionados lateralmente com distância mínima validada de 6,16 m ao trilho. Não houve novos nós, malhas, luzes, colisores, partículas, vento, animação, shaders ou pós-processamento.
 
-| Critério | Resultado |
-|---|---|
-| Clareira Orion | Faixa `Z=126–151` mantida livre, com 4.40 m de afastamento mínimo ao trilho |
-| Vestígios | 3 conjuntos laterais e 9 pedras gastas |
-| Luz e física | Zero `Light3D` e zero `StaticBody3D` criados pelo módulo |
-| Atmosfera | Sem alteração à camada local de neblina ou à visibilidade distante |
-| QA | `[ORIGEM_R4_LORE_OK]`, porta R4 e três rotas aprovadas |
+`DEV4-R4-ORION-VISTA-FRAMING-006` instalou `ForestOrionVistaFraming.gd`: seis copas laterais existentes foram ajustadas para uma revelação gradual de Orion; duas copas na faixa protegida permaneceram sem modulação. Não foram criadas malhas, materiais, luzes, colisores, animação, partículas, vento, shaders, pós-processamento, interface ou alterações de câmara. A prova `[ORIGEM_R4_VISTA_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
-## Tarefa ativa — DEV4-R4-CANOPY-CADENCE-004
+`DEV4-R4-FOREST-APPROACH-RHYTHM-007` instalou `ForestApproachRhythm.gd`: 24 árvores, copas ou fetos R4 existentes foram reposicionados estaticamente entre `Z=152–170`; 23 elementos na faixa Orion foram preservados. A fronteira de transformação encerra antes do conector Majestic e não altera qualquer módulo Dev5. A prova `[ORIGEM_R4_APPROACH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
-Ajustar a cadência visual das copas R4 com poucas variações de escala, rotação e agrupamento em massa lateral. O objetivo é eliminar qualquer leitura de repetição sem erguer parede de árvores, invadir a clareira Orion, alterar a geometria partilhada, introduzir animação global, partículas, vento físico, luz, câmara ou pós-processamento. Preferir instâncias estáticas e materiais existentes; o trilho precisa permanecer legível desde o Arco até Majestic.
+`DEV4-R4-MAJESTIC-EDGE-BALANCE-008` instalou `ForestMajesticEdgeBalance.gd`: três fetos ou copas focais R4 existentes foram ajustados na faixa `Z=165–174` para suavizar a borda antes de Majestic. Não foram modificados módulos, ativos, lógica, física ou iluminação Dev5. A prova `[ORIGEM_R4_EDGE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-SILHOUETTE-CONTINUITY-009` instalou `ForestSilhouetteContinuity.gd`: oito árvores ou copas R4 sem colisores associados foram ajustadas na faixa `Z=152–164`; seis instâncias com colisores foram preservadas. A prova `[ORIGEM_R4_SILHOUETTE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-DEPTH-BALANCE-010` instalou `ForestDepthBalance.gd`: três fetos R4 existentes foram reorganizados em dois planos laterais estáticos na faixa `Z=153–169`; nenhum nó, luz, colisão, partícula, vento, shader ou pós-processamento foi criado. A prova `[ORIGEM_R4_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-ORION-APPROACH-READABILITY-011` instalou `ForestApproachReadability.gd`: quatro raízes R4 existentes foram ajustadas nas bordas laterais da faixa `Z=152–170` para reforçar a direção ambiental sem texto, interface ou eventos. A prova `[ORIGEM_R4_READABILITY_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-TRAIL-PACING-012` instalou `ForestTrailPacing.gd`: duas pedras húmidas R4 existentes foram alternadas nas bordas da faixa `Z=152–170`, sem alterar lajes, rota, câmara, física ou módulos Dev5. A prova `[ORIGEM_R4_PACING_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-MARGIN-CONTINUITY-013` instalou `ForestMarginContinuity.gd`: duas raízes R4 existentes foram reorganizadas na margem exterior entre `Z=171–181`, sem criar nós, luzes, colisores, partículas, vento, shaders ou pós-processamento. A prova `[ORIGEM_R4_MARGIN_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-APPROACH-COMPOSITION-014` instalou `ForestApproachComposition.gd`: duas copas focais R4 sem colisores associados foram equilibradas entre `Z=152–174`; uma copa com colisor foi preservada. A prova `[ORIGEM_R4_COMPOSITION_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+`DEV4-R4-FOREST-EDGE-RHYTHM-015` instalou `ForestEdgeRhythm.gd`: uma pedra húmida R4 existente foi ajustada entre `Z=174–182` para manter a leitura lateral junto ao conector Majestic. A prova `[ORIGEM_R4_EDGE_RHYTHM_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
+| Entrega | Clareira Orion | Corredor | Luz e física | QA |
+|---|---|---|---|---|
+| Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
+| Lore | 3 conjuntos laterais | Livre | 0 luzes e colisores | Aprovada |
+| Copas | 20 copas protegidas | ≥6 m | 0 luzes e colisores | Aprovada |
+| Sub-bosque | Sem elementos em Z=126–151 | ≥6,16 m | 0 luzes e colisores | Aprovada |
+| Vista Orion | 2 copas protegidas | ≥6 m | 0 luzes e colisores | Aprovada |
+| Aproximação Majestic | 23 elementos protegidos | ≥6 m | 0 luzes e colisores | Aprovada |
+| Borda Majestic | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
+| Silhuetas | Clareira e física preservadas | ≥6 m | 0 luzes e colisores | Aprovada |
+| Profundidade | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
+| Legibilidade | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
+| Ritmo do trilho | Lajes preservadas | ≥6 m | 0 luzes e colisores | Aprovada |
+| Margem ambiental | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
+| Composição | Física preservada | ≥6 m | 0 luzes e colisores | Aprovada |
+| Cadência de borda | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
+
+## Tarefa ativa — DEV4-R4-FOREST-THRESHOLD-READING-016
+
+Consolidar a **leitura do limiar R4** com transformações estáticas de detalhes ambientais existentes antes do conector Majestic. A tarefa deve manter a direção visual e o corredor livre sem alterar rota, câmara, lajes, clareira Orion, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface ou narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
 | Escopo | Novo módulo em `levels/regions/r4/`, montagem mínima e QA R4 |
-| Clareira | Manter integralmente a faixa aberta Z≈126–151 |
-| Corredor | Árvores a pelo menos 6 m do trilho físico |
-| Luz | Zero luz dinâmica nova; baliza local única preservada |
-| Performance | Poucas instâncias estáticas; sem animação ou shader novo |
-| Verificação | Parser, prova própria, porta R4 e três rotas antes do PR |
+| Clareira | Faixa `Z≈126–151` permanece integralmente livre |
+| Corredor | Nenhum elemento a menos de 6 m do trilho físico |
+| Integração R5 | Não alterar módulos, ativos, lógica, iluminação ou acampamento de Dev5 |
+| Dinâmica | Zero luz, colisores, partículas, vento, pós-processamento ou animação |
+| Verificação | Parser, prova própria, porta R4 e três rotas antes de publicar |
 
-## Sucessão obrigatória
+## Próxima fila reservada
 
-A esteira mantém uma única issue `[Dev4 Continuous]` e encerra automaticamente o item anterior quando o `task_id` avançar. O fecho de `DEV4-R4-CANOPY-CADENCE-004` exige commit publicado, porta R4 aprovada e nova tarefa em estado `ACTIVE`.
+`DEV4-R4-FOREST-ENTRY-BALANCE-017` deverá reequilibrar a entrada R4 sem modificar a rota, a câmara ou os limites regionais.
