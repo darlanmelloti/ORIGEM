@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-ENTRY-SILHOUETTE-027
+task_id: DEV4-R4-FOREST-ORION-MARGIN-028
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -69,6 +69,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-LATERAL-DEPTH-026` instalou `ForestLateralDepth.gd`: uma árvore R4 existente sem colisor associado foi ajustada entre `Z=170,5–174,5` para aprofundar a leitura lateral. A prova `[ORIGEM_R4_LATERAL_DEPTH_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-ENTRY-SILHOUETTE-027` instalou `ForestEntrySilhouette.gd`: uma árvore R4 existente sem colisor associado foi ajustada entre `Z=112–125` para reforçar a silhueta de entrada sem invadir Orion. A prova `[ORIGEM_R4_ENTRY_SILHOUETTE_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -96,10 +98,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Ritmo exterior | Fora da clareira | ≥11 m | 0 luzes e colisores | Aprovada |
 | Leitura de retorno | Fora da clareira | ≥11 m | 0 luzes e colisores | Aprovada |
 | Profundidade lateral | Fora da clareira | ≥10 m | 0 luzes e colisores | Aprovada |
+| Silhueta de entrada | Antes da clareira | ≥10 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-ENTRY-SILHOUETTE-027
+## Tarefa ativa — DEV4-R4-FOREST-ORION-MARGIN-028
 
-Reforçar a **silhueta de entrada R4** com transformações estáticas de instâncias ambientais existentes, sem criar paredes vegetais ou aproximar elementos do trilho e do conector Majestic. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
+Modular a **margem exterior de Orion R4** com transformações estáticas de instâncias ambientais existentes, sem inserir elementos na faixa protegida `Z≈126–151`, criar paredes vegetais ou aproximar elementos do trilho. A tarefa deve preservar rota, câmara, lajes, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface e narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -112,4 +115,4 @@ Reforçar a **silhueta de entrada R4** com transformações estáticas de instâ
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-ORION-MARGIN-028` deverá modular a margem de Orion R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-MAJESTIC-APPROACH-029` deverá refinar a aproximação Majestic R4 sem modificar a rota, a câmara ou os limites regionais.
