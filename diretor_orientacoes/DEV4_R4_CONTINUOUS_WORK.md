@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+task_id: DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-PUBLISH-MONITOR-055
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -150,19 +150,41 @@ O diagnóstico foi concluído sem alterar produção. O isolamento confirmou que
 
 A revisão QA consolidou a matriz de responsabilidades R4/R6 e confirmou que transparência, cota, largura e `cull_back` permanecem rejeitados. A evidência em `reports/r4/CARTOGRAPHIC_INLET_EVIDENCE_REVIEW_049.md` não autoriza produção: qualquer intervenção futura precisa de fonte causal, aprovação conjunta e prova runtime.
 
-## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-ELIGIBILITY-050
 
-Inventariar em QA os ativos e margens já existentes fora do corredor R4 para determinar se existe alguma candidata modular elegível para futura prova. A tarefa limita-se a inventário espacial, distância ao trilho, propriedade R4/R6 e roteiro de captura; não cria, move, instancia, materializa ou oculta qualquer nó.
+A auditoria QA inventariou duas raízes R4 existentes (`RaizExpostaFlorestal_14` e `RaizExpostaFlorestal_15`) fora da clareira Orion e a 8,75 m e 9,20 m do trilho. As referências não são autorizadas para produção. A reconciliação canónica também retirou a variante local de material incompatível com as quatro variantes formalmente rejeitadas, restaurando a lâmina e a fábrica lacustre canónicas. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_ELIGIBILITY_050.md`.
+
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-OWNERSHIP-CHECK-051
+
+A verificação documental confirmou que a causa permanece na lâmina e no material lacustre partilhado sob responsabilidade R6, e que as duas raízes R4 inventariadas não têm aprovação para alteração. O roteiro de captura comparativa foi definido sem criar candidata. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_OWNERSHIP_CHECK_051.md`.
+
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-CAPTURE-READINESS-052
+
+A prontidão estática confirmou a ferramenta canónica de captura, o viewport 16:9, a rota `arch_to_forest`, as dependências QA e a separação obrigatória baseline/candidata. Nenhuma captura runtime nem candidata foi criada. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_CAPTURE_READINESS_052.md`.
+
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-CAPTURE-053
+
+A captura baseline pós-carregamento de `arch_to_forest` foi concluída em 1600×900, com spawn e gates confirmados. A superfície ampla clara/opaca permanece visível como referência de baseline; não foi criada candidata e não houve alteração de produção. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_BASELINE_CAPTURE_053.md` e no directório de captura associado.
+
+## Entrega concluída — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-ARCHIVE-054
+
+O arquivo confirmou a presença remota e a igualdade SHA-256 do relatório baseline 053, da imagem, da revisão visual e dos logs de captura. Parser, orçamento, porta R4 e rotas continuam aprovados, sem candidata ou alteração de produção. A evidência está em `reports/r4/CARTOGRAPHIC_INLET_MODULE_BASELINE_ARCHIVE_054.md`.
+
+## Tarefa ativa — DEV4-R4-CARTOGRAPHIC-INLET-MODULE-BASELINE-PUBLISH-MONITOR-055
+
+Executar exclusivamente a monitorização documental de publicação da cadeia 050–054. Reagir a uma nova ponta canónica de integração ou publicação, confirmando a preservação da evidência e do estado regional sem criar candidata, executar comparação de variante, mover, instanciar, materializar ou ocultar nós e sem alterar `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6, materiais, luzes, rota, câmara, âncoras ou física.
 
 | Critério | Obrigatório |
 |---|---|
-| Produção | Zero modificações a `ForestLakeRegion.gd`, `TerrainPatch.gd`, água R6 ou âncoras |
-| Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` como microajustes |
+| Produção | Zero modificações de produção nesta tarefa de monitorização |
+| Evidência | Preservar cadeia 050–054, baseline 053 e o índice de hashes 054 |
+| Candidata | Ausente; nenhuma comparação runtime de variante autorizada |
+| Propriedade | Preservar a exigência de aprovação explícita conjunta R4/R6 para qualquer candidata futura |
+| Variantes rejeitadas | Não reabrir transparência, cota, largura ou `cull_back` |
 | R4 | Clareira Orion em `Z≈126–151` e corredor ≥8 m integralmente preservados |
 | R6 | Água, quatro luzes, handoff e rotas permanecem imutáveis |
-| Resultado | Inventário de elegibilidade; não é proposta de produção |
-| Verificação | `git diff --check`, parser, orçamento, porta R4 e três rotas antes de publicação |
+| Verificação | Comparação remota, parser, orçamento, porta R4 e três rotas antes de publicação |
 
 ## Sucessão obrigatória
 
-Há exatamente uma tarefa ACTIVE. Ao concluir a auditoria de elegibilidade, Dev4 deve avançar para uma nova tarefa QA rastreável; qualquer alteração de produção exige tarefa distinta, evidência runtime e reconciliação prévia da propriedade R4/R6.
+Há exatamente uma tarefa ACTIVE. A monitorização 055 só deve avançar quando uma nova ponta canónica exigir reconciliação ou o contrato integrado indicar nova prioridade.

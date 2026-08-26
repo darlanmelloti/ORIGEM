@@ -48,6 +48,11 @@ func _ready() -> void:
 	_build_return_confirmation_landing()
 	_build_arch_arrival_landing()
 	_build_midriver_reflection_edge()
+	_build_orion_reflection_marker()
+	_build_return_side_riverbank_reading()
+	_build_return_side_riverbank_landing()
+	_build_return_side_riverbank_marker()
+	_build_return_side_riverbank_reading_slab_061()
 	_build_river_margins()
 	_build_pre_arch_river_edge()
 	_build_pre_arch_river_approach()
@@ -58,6 +63,7 @@ func _ready() -> void:
 	_build_arch_forest_riparian_screen()
 	_build_positive_valley_bridge()
 	_build_positive_bridge_approach()
+	_build_positive_bridge_transition()
 	_build_macro_river_cutbanks()
 	_build_ruin_arch()
 	_build_cartographic_southwest_readability()
@@ -868,6 +874,31 @@ func _build_positive_bridge_approach() -> void:
 				fern.rotation.y = side * 0.65 + float(index) * 0.42
 				approach_root.add_child(fern)
 
+func _build_positive_bridge_transition() -> void:
+	# DEV2-R2-RIVER-FOOTBRIDGE-034: transições físicas nos encontros já existentes, sem ampliar o leito ou criar atalho.
+	var bridge_z: float = 58.0
+	var bridge_x: float = _river_x(bridge_z)
+	var transition_root: Node3D = Node3D.new()
+	transition_root.name = "TransicaoPontePositivaR2"
+	add_child(transition_root)
+	for side: float in [-1.0, 1.0]:
+		var side_name: String = "Oeste" if side < 0.0 else "Este"
+		var bank_x: float = bridge_x + side * 5.65
+		var bank_z: float = bridge_z + side * 1.18
+		var slab_x: float = bank_x - side * 0.18
+		var slab_z: float = bank_z + side * 0.34
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = "LajeTransicaoPontePositiva_%s" % side_name
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(1.12, 0.12, 0.78)
+		slab.mesh = slab_mesh
+		slab.material_override = path_material
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		slab.position = Vector3(slab_x, _height_at(slab_x, slab_z) + 0.07, slab_z)
+		slab.rotation.y = -0.16 * side
+		transition_root.add_child(slab)
+		_add_world_life_collision(transition_root, "ColisorLajeTransicaoPontePositiva_%s" % side_name, Vector3(slab_x, _height_at(slab_x, slab_z) + 0.02, slab_z), slab_mesh.size)
+
 func _build_orion_reflection_lookout() -> void:
 	# DEV2-R2-RIVER-LOOKOUT-030: micro-miradouro físico para ler o reflexo Orion e reter a orientação de retorno.
 	# Uma única laje lateral cria um ponto jogável, sem corredor novo para o rio, painel, luz ou emissão.
@@ -1032,6 +1063,154 @@ func _build_midriver_reflection_edge() -> void:
 			fern.scale = Vector3(0.25 + float(index) * 0.04, 0.25 + float(index) * 0.04, 0.25 + float(index) * 0.04)
 			fern.rotation.y = -side * 0.48
 			edge_root.add_child(fern)
+
+func _build_orion_reflection_marker() -> void:
+	# DEV2-R2-RIVER-ORION-035: marco baixo de leitura na margem média, sem emissão, interação ou rota nova para a água.
+	var marker_root: Node3D = Node3D.new()
+	marker_root.name = "MarcoBaixoReflexoOrionR2"
+	add_child(marker_root)
+	var marker_z: float = 72.0
+	var marker_x: float = _river_x(marker_z) - 6.85
+	var marker_material: StandardMaterial3D = StandardMaterial3D.new()
+	marker_material.albedo_color = Color(0.13, 0.16, 0.15, 1.0)
+	marker_material.roughness = 0.94
+	var marker_slab_mesh: BoxMesh = BoxMesh.new()
+	marker_slab_mesh.size = Vector3(0.58, 0.12, 0.34)
+	var marker_slab: MeshInstance3D = MeshInstance3D.new()
+	marker_slab.name = "LajeBaixaMarcoReflexoOrion"
+	marker_slab.mesh = marker_slab_mesh
+	marker_slab.material_override = marker_material
+	marker_slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	marker_slab.position = Vector3(marker_x, _height_at(marker_x, marker_z) + 0.08, marker_z)
+	marker_slab.rotation.y = -0.22
+	marker_root.add_child(marker_slab)
+	for index: int in range(2):
+		var stone: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if stone == null:
+			continue
+		stone.name = "PedraMarcoReflexoOrion_%02d" % (index + 1)
+		var stone_x: float = marker_x + float(index) * 0.62
+		var stone_z: float = marker_z - 0.34 + float(index) * 0.68
+		stone.position = Vector3(stone_x, _height_at(stone_x, stone_z) + 0.05, stone_z)
+		stone.scale = Vector3(0.15 + float(index) * 0.035, 0.11 + float(index) * 0.02, 0.18)
+		stone.rotation.y = -0.42 + float(index) * 0.72
+		_apply_material(stone, marker_material)
+		marker_root.add_child(stone)
+
+func _build_return_side_riverbank_reading() -> void:
+	# DEV2-R2-RIVER-RIVERBANK-042: leitura baixa da margem no lado oposto ao retorno, fora do leito e sem rota nova.
+	var bank_root: Node3D = Node3D.new()
+	bank_root.name = "LeituraMargemRetornoCasaVossR2"
+	add_child(bank_root)
+	var bank_z: float = 78.0
+	var bank_x: float = _river_x(bank_z) + 6.45
+	var bank_material: StandardMaterial3D = StandardMaterial3D.new()
+	bank_material.albedo_color = Color(0.12, 0.16, 0.15, 1.0)
+	bank_material.roughness = 0.94
+	for index: int in range(2):
+		var rock: Node3D = RUIN_ROCK.instantiate() as Node3D
+		if rock == null:
+			continue
+		var side: float = -1.0 if index == 0 else 1.0
+		var rock_x: float = bank_x + side * 0.58
+		var rock_z: float = bank_z + float(index) * 0.92
+		rock.name = "PedraLeituraRetornoCasaVoss_%02d" % (index + 1)
+		rock.position = Vector3(rock_x, _height_at(rock_x, rock_z) + 0.04, rock_z)
+		rock.scale = Vector3(0.20 + float(index) * 0.03, 0.13 + float(index) * 0.02, 0.22)
+		rock.rotation.y = side * 0.34
+		_apply_material(rock, bank_material)
+		bank_root.add_child(rock)
+		var fern: Node3D = FERN.instantiate() as Node3D
+		if fern != null:
+			fern.name = "FetoAbertoLeituraRetorno_%02d" % (index + 1)
+			fern.position = Vector3(rock_x - side * 0.64, _height_at(rock_x - side * 0.64, rock_z + 0.24) + 0.02, rock_z + 0.24)
+			fern.scale = Vector3(0.24 + float(index) * 0.035, 0.24 + float(index) * 0.035, 0.24 + float(index) * 0.035)
+			fern.rotation.y = side * 0.46
+			bank_root.add_child(fern)
+
+func _build_return_side_riverbank_landing() -> void:
+	# DEV2-R2-RIVER-RIVERBANK-051: pequena laje de leitura perto do retorno, fora do leito e sem criar travessia.
+	var landing_root: Node3D = Node3D.new()
+	landing_root.name = "LajeLeituraMargemRetornoR2"
+	add_child(landing_root)
+	var landing_z: float = 80.8
+	var landing_x: float = _river_x(landing_z) + 6.10
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeBaixaLeituraRetornoCasaVoss"
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(1.06, 0.12, 0.72)
+	slab.mesh = slab_mesh
+	slab.material_override = path_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(landing_x, _height_at(landing_x, landing_z) + 0.07, landing_z)
+	slab.rotation.y = -0.18
+	landing_root.add_child(slab)
+	_add_world_life_collision(landing_root, "ColisorLajeBaixaLeituraRetornoCasaVoss", Vector3(landing_x, _height_at(landing_x, landing_z) + 0.02, landing_z), slab_mesh.size)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoAbertoLajeLeituraRetorno"
+		fern.position = Vector3(landing_x + 0.72, _height_at(landing_x + 0.72, landing_z + 0.18) + 0.02, landing_z + 0.18)
+		fern.scale = Vector3(0.28, 0.28, 0.28)
+		fern.rotation.y = 0.52
+		landing_root.add_child(fern)
+
+func _build_return_side_riverbank_marker() -> void:
+	# DEV2-R2-RIVER-RIVERBANK-055: marco lateral baixo que confirma a margem do retorno sem abrir travessia para o rio.
+	var marker_root: Node3D = Node3D.new()
+	marker_root.name = "MarcoMargemEixoRetornoR2"
+	add_child(marker_root)
+	var marker_z: float = 84.2
+	var marker_x: float = _river_x(marker_z) + 6.7
+	var marker: Node3D = RUIN_ROCK.instantiate() as Node3D
+	if marker != null:
+		marker.name = "PedraMarcoMargemEixoRetorno"
+		marker.position = Vector3(marker_x, _height_at(marker_x, marker_z) + 0.06, marker_z)
+		marker.scale = Vector3(0.28, 0.19, 0.32)
+		marker.rotation.y = -0.28
+		_apply_material(marker, ruin_material)
+		marker_root.add_child(marker)
+		_add_world_life_collision(marker_root, "ColisorPedraMarcoMargemEixoRetorno", Vector3(marker_x, _height_at(marker_x, marker_z) + 0.15, marker_z), Vector3(0.58, 0.38, 0.64))
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoAbertoMarcoMargemEixoRetorno"
+		fern.position = Vector3(marker_x - 0.74, _height_at(marker_x - 0.74, marker_z + 0.22) + 0.02, marker_z + 0.22)
+		fern.scale = Vector3(0.30, 0.30, 0.30)
+		fern.rotation.y = -0.45
+		marker_root.add_child(fern)
+
+func _build_return_side_riverbank_reading_slab_061() -> void:
+	# DEV2-R2-RIVER-RIVERBANK-061: laje curta de leitura no retorno, fora do leito e sem abrir travessia.
+	var reading_root: Node3D = Node3D.new()
+	reading_root.name = "LajeLeituraEixoRetornoR2"
+	add_child(reading_root)
+	var reading_z: float = 87.1
+	var reading_x: float = _river_x(reading_z) + 6.35
+	var slab: MeshInstance3D = MeshInstance3D.new()
+	slab.name = "LajeBaixaEixoRetornoR2"
+	var slab_mesh: BoxMesh = BoxMesh.new()
+	slab_mesh.size = Vector3(0.92, 0.10, 0.58)
+	slab.mesh = slab_mesh
+	slab.material_override = path_material
+	slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	slab.position = Vector3(reading_x, _height_at(reading_x, reading_z) + 0.06, reading_z)
+	slab.rotation.y = 0.16
+	reading_root.add_child(slab)
+	_add_world_life_collision(reading_root, "ColisorLajeBaixaEixoRetornoR2", Vector3(reading_x, _height_at(reading_x, reading_z) + 0.01, reading_z), slab_mesh.size)
+	var marker: Node3D = RUIN_ROCK.instantiate() as Node3D
+	if marker != null:
+		marker.name = "PedraLeituraEixoRetornoR2"
+		marker.position = Vector3(reading_x - 0.58, _height_at(reading_x - 0.58, reading_z + 0.14) + 0.04, reading_z + 0.14)
+		marker.scale = Vector3(0.16, 0.11, 0.19)
+		marker.rotation.y = -0.36
+		_apply_material(marker, ruin_material)
+		reading_root.add_child(marker)
+	var fern: Node3D = FERN.instantiate() as Node3D
+	if fern != null:
+		fern.name = "FetoAbertoLajeEixoRetornoR2"
+		fern.position = Vector3(reading_x + 0.60, _height_at(reading_x + 0.60, reading_z + 0.18) + 0.02, reading_z + 0.18)
+		fern.scale = Vector3(0.24, 0.24, 0.24)
+		fern.rotation.y = 0.38
+		reading_root.add_child(fern)
 
 func _build_river_margins() -> void:
 	# Rochas, fetos e uma pequena seleção de colisores tornam o rio uma margem explorável, não uma faixa de água isolada.
