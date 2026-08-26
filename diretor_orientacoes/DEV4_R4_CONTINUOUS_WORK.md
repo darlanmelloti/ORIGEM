@@ -6,7 +6,7 @@
 
 ```text
 status: ACTIVE
-task_id: DEV4-R4-FOREST-THRESHOLD-READING-016
+task_id: DEV4-R4-FOREST-ENTRY-BALANCE-017
 owner: Dev4
 branch: dev4/r4-dense-forest
 ```
@@ -47,6 +47,8 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 
 `DEV4-R4-FOREST-EDGE-RHYTHM-015` instalou `ForestEdgeRhythm.gd`: uma pedra húmida R4 existente foi ajustada entre `Z=174–182` para manter a leitura lateral junto ao conector Majestic. A prova `[ORIGEM_R4_EDGE_RHYTHM_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
 
+`DEV4-R4-FOREST-THRESHOLD-READING-016` instalou `ForestThresholdReading.gd`: duas raízes R4 existentes foram ajustadas entre `Z=182–190` antes do conector Majestic. A prova `[ORIGEM_R4_THRESHOLD_OK]`, o parser, a porta R4 e as três rotas foram aprovados.
+
 | Entrega | Clareira Orion | Corredor | Luz e física | QA |
 |---|---|---|---|---|
 | Neblina | Peso zero em Z≈126–151 | Preservado | 0 luzes novas | Aprovada |
@@ -63,10 +65,11 @@ O conteúdo Dev4 novo continua modular sob `levels/regions/r4/`. A montagem mín
 | Margem ambiental | Fora da clareira | ≥6 m | 0 luzes e colisores | Aprovada |
 | Composição | Física preservada | ≥6 m | 0 luzes e colisores | Aprovada |
 | Cadência de borda | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
+| Leitura do limiar | Conector preservado | ≥6 m | 0 luzes e colisores | Aprovada |
 
-## Tarefa ativa — DEV4-R4-FOREST-THRESHOLD-READING-016
+## Tarefa ativa — DEV4-R4-FOREST-ENTRY-BALANCE-017
 
-Consolidar a **leitura do limiar R4** com transformações estáticas de detalhes ambientais existentes antes do conector Majestic. A tarefa deve manter a direção visual e o corredor livre sem alterar rota, câmara, lajes, clareira Orion, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface ou narrativa explícita.
+Reequilibrar a **entrada ambiental R4** usando somente transformações estáticas de instâncias existentes na aproximação da Floresta Densa. A tarefa deve preservar a leitura de chegada e a margem do trilho sem alterar rota, câmara, lajes, clareira Orion, física, módulos Dev5, iluminação, partículas, vento, pós-processamento, interface ou narrativa explícita.
 
 | Critério | Obrigatório |
 |---|---|
@@ -79,4 +82,4 @@ Consolidar a **leitura do limiar R4** com transformações estáticas de detalhe
 
 ## Próxima fila reservada
 
-`DEV4-R4-FOREST-ENTRY-BALANCE-017` deverá reequilibrar a entrada R4 sem modificar a rota, a câmara ou os limites regionais.
+`DEV4-R4-FOREST-LIMINAL-DEPTH-018` deverá aprofundar a transição ambiental R4 sem modificar a rota, a câmara ou os limites regionais.
