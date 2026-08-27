@@ -8,13 +8,14 @@
 | **Item governado no quadro** | **1** |
 | **Tarefas com execução material em curso** | **0** |
 | **Estado de máquina vigente** | **READY_FOR_HYPOTHESIS — pausa controlada** |
+| **Estado da frente** | **ABERTA — continuidade QA documental sob o bilhete 022** |
 | **Bilhete aplicável** | `DEV7-ENVIRONMENT-DIRECTION-ALIGNMENT-022` |
 | **Classificação de marco** | `ORIGEM — Classificação dos Relatos Anexados 019` |
 | **Fonte de autoridade operacional** | `diretor_orientacoes/DEV7_VISUAL_PLAYABLE_PHYSICS_CONTINUOUS_WORK.md` |
 | **Modo operacional aprovado** | Verificações pontuais exclusivamente nos marcos de publicação, reconciliação e CI; não manter monitor contínuo entre tarefas. |
 | **Integração** | Sem bypass administrativo e sem auto-merge; observar a política da branch base. |
 
-> **READY_FOR_HYPOTHESIS** é um estado de máquina formal, não uma paragem técnica. Significa que o bilhete permanece rastreável e a fronteira QA somente de leitura está pronta, mas não existe ação material legítima até à entrada regional necessária. Não deve ser reclassificado como `ACTIVE` apenas para aparentar atividade.
+> **READY_FOR_HYPOTHESIS** é um estado de máquina formal, não uma paragem técnica. Significa que o bilhete permanece rastreável e a fronteira QA somente de leitura está pronta, mas não existe ação material legítima até à entrada regional necessária. Não deve ser reclassificado como `ACTIVE` apenas para aparentar atividade. A frente fica **aberta**: cada verificação ou auditoria finita conclui um checkpoint, nunca encerra o bilhete 022.
 
 ## Trabalho concluído
 
@@ -40,6 +41,7 @@
 | **Região dona** | R6 — Ruínas Submersas / Dev6, em coordenação de evidência com Dev1. |
 | **Objetivo preservado** | Consumir a direção ambiental 001 sem duplicar a auditoria Dev1, preservando os contratos R6 e preparando a reconciliação documental de qualquer baseline publicada. |
 | **Capacidade imediata** | Verificar somente de modo documental um marco Dev1 publicado ou uma autorização Dev6/R6 completa; não há execução material autónoma. |
+| **Continuidade** | O bilhete 022 não é encerrado por uma verificação finita. Após cada checkpoint, Dev7 selecciona a próxima auditoria QA somente de leitura compatível com os limites vigentes, sem monitor persistente. |
 | **Permitido** | Inventário documental de referências, artefactos QA, estados de gates/CI já reportados, invariantes e critérios de próximo marco seguro. |
 | **Proibido** | Nova captura comparativa, nova variante de material, produção, cenas, mesh, nó, água, luz, partícula, colisor, área, rota, largura de trilho, ancoragem, Player ou câmara; bypass, force-push ou novo disparo agressivo de CI. |
 | **Saída para reconciliação documental** | Publicação Dev1 de bundle completo — relatório, seis PNGs 1600×900 e telemetria — validada pelo intake somente de leitura. |
