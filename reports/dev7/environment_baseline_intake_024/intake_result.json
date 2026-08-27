@@ -1,0 +1,161 @@
+{
+  "tool": "check_environment_baseline_intake",
+  "result": "READY_FOR_DEV7_RECONCILIATION",
+  "production_mutations": 0,
+  "report": "reports/dev7/environment_baseline_intake_024/INTEGRATED_BASELINE_READ_ONLY_MANIFEST.md",
+  "captures": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900",
+  "required_resolution": [
+    1600,
+    900
+  ],
+  "required_routes": [
+    "road_to_arch",
+    "arch_to_forest",
+    "forest_to_majestic",
+    "majestic_to_lake",
+    "forest_to_ruins",
+    "ruins_arrival"
+  ],
+  "allowed_decisions": [
+    "PASS_LEITURA",
+    "OBSERVAR_SEM_PRODUCAO",
+    "HIPOTESE_CAUSAL_REQUERIDA"
+  ],
+  "report_has_telemetry": true,
+  "report_has_all_routes": true,
+  "routes": {
+    "road_to_arch": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/road_to_arch.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [
+          "OBSERVAR_SEM_PRODUCAO"
+        ],
+        "decision_ok": true
+      }
+    },
+    "arch_to_forest": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/arch_to_forest.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [
+          "PASS_LEITURA"
+        ],
+        "decision_ok": true
+      }
+    },
+    "forest_to_majestic": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/forest_to_majestic.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [
+          "PASS_LEITURA"
+        ],
+        "decision_ok": true
+      }
+    },
+    "majestic_to_lake": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/majestic_to_lake.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [
+          "PASS_LEITURA"
+        ],
+        "decision_ok": true
+      }
+    },
+    "forest_to_ruins": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/forest_to_ruins.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [
+          "OBSERVAR_SEM_PRODUCAO"
+        ],
+        "decision_ok": true
+      }
+    },
+    "ruins_arrival": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/ruins_arrival.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [
+          "PASS_LEITURA"
+        ],
+        "decision_ok": true
+      }
+    }
+  },
+  "note": "READY confirma apenas completude de intake; não autoriza teste, hipótese ou produção R6."
+}
