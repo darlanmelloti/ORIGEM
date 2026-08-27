@@ -263,7 +263,8 @@ script = ExtResource("2")
 shape = SubResource("ShPlayer")
 
 [node name="Head" type="Node3D" parent="Player" unique_id=1937915174]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+# Altura de olhos adulta sobre a cápsula; não altera o colisor nem a posição física de Elias.
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=759234536]
 current = true
