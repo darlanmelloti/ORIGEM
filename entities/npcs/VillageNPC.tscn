@@ -1,26 +1,34 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://entities/npcs/VillageNPC.gd" id="1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShapeNPC"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMeshNPC"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShapeInteraction"]
+radius = 2.0
 
 [node name="VillageNPC" type="CharacterBody3D"]
 script = ExtResource("1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = CapsuleShape3D.new()
-shape.height = 1.8
-shape.radius = 0.3
+shape = SubResource("CapsuleShapeNPC")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = CapsuleMesh.new()
+mesh = SubResource("CapsuleMeshNPC")
 
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
 
 [node name="InteractionArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
-shape = SphereShape3D.new()
-shape.radius = 2.0
+shape = SubResource("SphereShapeInteraction")
 
 [node name="NameLabel" type="Label3D" parent="."]
 billboard = 1
-offset = Vector3(0, 1.2, 0)
+position = Vector3(0, 1.2, 0)
