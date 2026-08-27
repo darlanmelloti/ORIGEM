@@ -55,6 +55,8 @@ var opening_skip_hold_time: float = 0.0
 var opening_skip_key_held: bool = false
 var opening_was_skipped: bool = false
 const OPENING_SKIP_HOLD_SECONDS: float = 1.50
+# A malha física do terreno é amostrada por células; esta folga faz Elias entrar no solo por cima mesmo onde a interpolação do colisor diverge ligeiramente da altura analítica.
+const POST_OPENING_TERRAIN_CLEARANCE: float = 2.00
 # A captura em llvmpipe pode avançar o relógio do jogo mais depressa que os 18 s de parede da evidência.
 # Este limite só existe no modo QA e preserva a janela visual sem prolongar o prólogo normal do jogador.
 const QA_CINEMATIC_CAPTURE_HOLD_SECONDS: float = 300.0
@@ -1406,7 +1408,7 @@ func _finish_opening_camera() -> void:
 					# QA inicia no primeiro segmento livre da Estrada, já fora da fundação da Casa e voltado para o Arco macro em +Z.
 					var recovery_x: float = CartographicAnchors.ESTRADA_RIO_INICIO.x + 1.35
 					var recovery_z: float = CartographicAnchors.ESTRADA_RIO_INICIO.y + 10.0
-					elias_3d.global_position = Vector3(recovery_x, _ground_height(recovery_x, recovery_z) + 1.30, recovery_z)
+					elias_3d.global_position = Vector3(recovery_x, _ground_height(recovery_x, recovery_z) + POST_OPENING_TERRAIN_CLEARANCE, recovery_z)
 					# A linha de visão QA é calculada sobre o Arco físico recuado, não sobre uma rotação assumida.
 					elias_3d.look_at(Vector3(-13.8, elias_3d.global_position.y, 92.0), Vector3.UP)
 

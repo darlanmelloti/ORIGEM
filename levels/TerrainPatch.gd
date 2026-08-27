@@ -143,9 +143,10 @@ func _build_terrain() -> void:
 			var p11: Vector3 = Vector3(x1, height_at(x1, z1), z1)
 			_add_terrain_triangle(surface, p00, p01, p10)
 			_add_terrain_triangle(surface, p10, p01, p11)
-			# A forma concava de colisão deve ver o solo pela face superior.
-			_add_terrain_triangle(collision_surface, p00, p10, p01)
-			_add_terrain_triangle(collision_surface, p10, p11, p01)
+			# ConcavePolygonShape3D só classifica correctamente o piso a partir da frente da face.
+			# Mantém a mesma orientação da malha visual, cujo eixo normal é a face superior no Godot.
+			_add_terrain_triangle(collision_surface, p00, p01, p10)
+			_add_terrain_triangle(collision_surface, p10, p01, p11)
 
 	surface.generate_normals()
 	surface.generate_tangents()
