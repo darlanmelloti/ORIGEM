@@ -5,10 +5,17 @@
 | **Responsável** | Dev7 — Direção Visual, Legibilidade Ambiental e Física Jogável |
 | **Branch canónica** | `dev7/visual-playable-physics` |
 | **Base de integração** | `origin/integration/r1-r6-sprint1` |
-| **Tarefas ACTIVE** | **1** |
+| **Itens governados no quadro** | **1** |
+| **Tarefas com execução material em curso** | **0** |
+| **Estado de máquina vigente** | **READY_FOR_DEV7_RECONCILIATION — intake documental limitado** |
+| **Estado da frente** | **ABERTA — QA documental somente de leitura sob o intake 024** |
+| **Bilhete aplicável** | `DEV7-ENVIRONMENT-BASELINE-INTAKE-024` |
+| **Classificação de marco** | Baseline Dev1/Dev8 integrada em `d3bbf0daa960` |
 | **Fonte de autoridade operacional** | `diretor_orientacoes/DEV7_VISUAL_PLAYABLE_PHYSICS_CONTINUOUS_WORK.md` |
 | **Modo operacional aprovado** | Verificações pontuais exclusivamente nos marcos de publicação, reconciliação e CI; não manter monitor contínuo entre tarefas. |
 | **Integração** | Sem bypass administrativo e sem auto-merge; observar a política da branch base. |
+
+> **READY_FOR_DEV7_RECONCILIATION** é um estado de máquina formal, não uma paragem técnica. A entrada publicada é suficiente para a leitura QA delimitada, mas não autoriza produção, variante visual ou nova captura R6.
 
 ## Trabalho concluído
 
@@ -24,21 +31,33 @@
 | `DEV7-R6-POST-CI-CHECKPOINT-ATTESTATION-021` | **CONCLUÍDA — CI e PR #380 integradas** | Atestação técnica publicada e a PR #380 foi integrada na base canónica sem mutação de produção R6. |
 | `DEV7-ENVIRONMENT-DIRECTION-ALIGNMENT-022` | **CONCLUÍDA — referência disponibilizada** | A baseline Dev1 e a matriz cartográfica de seis vistas foram localizadas na integração canónica; a sucessora 024 recebe os caminhos e limites de intake. |
 
-## Tarefa ativa única
+## Item governado único
 
 | Campo | Valor |
 |---|---|
 | **Task ID** | `DEV7-ENVIRONMENT-BASELINE-INTAKE-024` |
-| **Estado** | **ACTIVE — intake QA documental, sem mutação de produção** |
-| **Região dona** | R6 — Ruínas Submersas / Dev6, em coordenação de evidência com Dev1 |
-| **Objetivo** | Consumir a baseline Dev1 de seis vistas já integrada, relacionando exclusivamente `forest_to_ruins` e `ruins_arrival` com os invariantes R6. |
-| **Permitido** | Inventário documental dos caminhos canónicos, artefactos QA existentes, estados de gates/CI já reportados, invariantes e classificação `PASS_LEITURA`, `OBSERVAR_SEM_PRODUCAO` ou `HIPOTESE_CAUSAL_REQUERIDA`. |
-| **Proibido** | Nova captura comparativa, nova variante de material, produção, cenas, mesh, nó, água, luz, partícula, colisor, área, rota, largura de trilho, ancoragem, Player ou câmara; bypass, force-push ou novo disparo agressivo de CI. |
-| **Condição para qualquer teste futuro** | Decisão explícita de Dev6/R6 sobre a hipótese visual, conjunto exato de alvos e enquadramento; os checkpoints/revisões Dev6/R6 015 e 016, por si só, não são autorização. Parser, `git diff --check`, gate R6, rota `forest_to_ruins` e auditoria de quatro luzes continuam obrigatórios. |
-| **Handoff** | R6→R7 permanece protegido; a tarefa não antecipa conteúdo R7. |
+| **Estado** | **ACTIVE — intake QA documental somente de leitura** |
+| **Região dona** | R6 — Ruínas Submersas / Dev6, em coordenação de evidência com Dev1. |
+| **Objetivo** | Relacionar as vistas integradas `forest_to_ruins` e `ruins_arrival` com os invariantes R6, sem duplicar a auditoria Dev1 ou a baseline cartográfica Dev8. |
+| **Baseline canónica** | `qa/environment/ENVIRONMENT_PLAYER_VIEW_BASELINE_002.md` (Dev1), `reports/dev8/cartographic_fidelity_baseline_001/CAPTURE_MATRIX_001.md`, a folha de contacto e os seis PNG/logs 1600×900 em `reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/`. |
+| **Referência de integração** | `d3bbf0daa960140dedff1a980c7f345c7561aacf`. |
+| **Permitido** | Inventário documental de referências, artefactos QA existentes, estados de gates/CI já reportados, invariantes e classificação `PASS_LEITURA`, `OBSERVAR_SEM_PRODUCAO` ou `HIPOTESE_CAUSAL_REQUERIDA`. |
+| **Proibido** | Nova captura comparativa, variante de material, produção, cenas, mesh, nó, água, luz, partícula, colisor, área, rota, largura de trilho, ancoragem, Player ou câmara; bypass, force-push ou novo disparo agressivo de CI. |
+| **Saída do intake** | Um único registo documental que aponta os artefactos consumidos e declara `PASS_LEITURA`, `OBSERVAR_SEM_PRODUCAO` ou `HIPOTESE_CAUSAL_REQUERIDA`. |
+| **Saída para teste futuro R6** | Decisão explícita Dev6/R6 com **hipótese visual falsificável**, **conjunto de alvos por `NodePath`** e **enquadramento de prova**. Os checkpoints 015 e 016, por si só, não autorizam teste. |
+| **Validação posterior obrigatória** | Parser, `git diff --check`, gate R6, rota `forest_to_ruins` e auditoria de quatro luzes, quando houver delta de teste autorizado. |
+| **Handoff** | R6→R7 permanece protegido; o intake não antecipa conteúdo R7. |
 
-> A tarefa ativa seguinte consome evidência já integrada, não cria variante visual nem alteração de produção. A auditoria de vistas pertence a Dev1; o resultado rejeitado da captura 003 mantém-se vinculativo até decisão regional explícita.
+> O intake 024 consome evidência já integrada e não cria variante visual nem alteração de produção. O resultado rejeitado da captura 003 mantém-se vinculativo até decisão regional explícita.
 
-## Cadência de continuidade
+## Semântica de estado e cadência
 
-Dev7 executa verificações pontuais quando ocorrer um marco verificável de **publicação**, **reconciliação** ou **CI**. Na ausência desses marcos, não há serviço persistente entre tarefas. Esta decisão não reduz as fronteiras: novos comparativos R6 e qualquer mutação de produção permanecem proibidos até autorização explícita de Dev6/R6.
+| Estado de máquina | Significado no quadro Dev7 | Ação Dev7 permitida |
+|---|---|---|
+| `READY_FOR_HYPOTHESIS` | Não há hipótese R6 autorizada nem baseline publicada para processar. | Preservar o contrato e consumir o próximo marco publicado. |
+| `READY_FOR_DEV7_RECONCILIATION` | Baseline integrada, estruturalmente verificável e limitada ao intake QA. | Executar somente a reconciliação documental focada nos invariantes R6. |
+| `PENDING` | Resultado possível do verificador de intake quando faltar uma referência necessária. | Registar um único défice verificável; não criar captura nem corrigir produção. |
+| `INVALID_INPUT` | Entrada publicada contraditória ou estruturalmente inválida. | Documentar o défice sem corrigir produção ou repetir a auditoria Dev1. |
+| `ACTIVE` | Ação rastreável explicitamente limitada pelo bilhete atual. | Executar exclusivamente o escopo autorizado; nunca criar sucessora cosmética. |
+
+Dev7 executa uma verificação pós-tarefa após 10 segundos e, então, uma consulta pontual a Git/PR/orientação. Sem novo marco verificável, não existe serviço persistente, polling infinito ou CI repetida. Novos comparativos R6 e qualquer mutação de produção permanecem proibidos até autorização explícita de Dev6/R6.
