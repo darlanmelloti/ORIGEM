@@ -23,6 +23,9 @@ A correção aplica uma altura mínima de olhos de `0.88 m` sem deslocar a cáps
 |---|---|
 | `QA-PLAYER-LOCO-026` | PASS: grounded, melhor deslocamento horizontal `3.469 m`, altura de olhos `0.88 m`, alcance descendente do viewmodel `1.17 m`. |
 | `QA-GROUND-01` | PASS: `180` frames grounded, sem variação vertical pós-aquecimento. |
+| Porta regional R2 | PASS: parser, física, rotas e orçamento R2 preservados. |
+| Porta regional R4 | PASS: rotas `arch_to_forest`, `forest_to_majestic` e `forest_to_ruins` preservadas. |
+| Porta regional R6 | PASS: rota `ruins_arrival`, limites de luz e continuidade do lago preservados. |
 
 ## Limites preservados
 
@@ -30,4 +33,4 @@ A correção não altera `CartographicAnchors`, rotas, colisores do jogador, ter
 
 ## Próximo passo
 
-Executar parser, `git diff --check` e a porta regional R2 no commit candidato. Depois publicar por fast-forward seguro, abrir PR regular e gerar uma build Windows somente após a CI regular concluir.
+A correção foi publicada na PR #504 para CI regular. A versão Windows será gerada somente após a revisão e os checks obrigatórios concluírem com sucesso.
