@@ -95,6 +95,16 @@ func height_at(world_x: float, world_z: float) -> float:
 		var vista_distance: float = abs(world_x - vista_center_x)
 		var vista_opening: float = 1.0 - clampf(vista_distance / 17.0, 0.0, 1.0)
 		height -= vista_opening * vista_opening * (1.25 + vista_progress * 2.15)
+		# Casa Voss nasce num esporão do próprio TerrainPatch. A cota cresce de forma
+		# contínua sob a fundação e desce até à Estrada; não há uma plataforma vertical
+		# nem colisor auxiliar a fingir o relevo. As âncoras em X/Z continuam imutáveis.
+		var voss_lateral: float = exp(-pow((world_x + 22.0) / 8.6, 2.0))
+		var voss_back_blend: float = smoothstep(-2.0, 4.0, world_z)
+		# A cota mantém-se até à soleira exterior e esbate-se entre o primeiro patamar e
+		# a Estrada. Assim o jogador recebe uma descida real, mas contínua e sem muro.
+		var voss_forward_blend: float = 1.0 - smoothstep(13.0, 29.0, world_z)
+		var voss_highland_rise: float = voss_lateral * voss_back_blend * voss_forward_blend * 2.40
+		height += voss_highland_rise
 
 	# Corredor ribeirinho de baixa inclinação: liga a Floresta Densa à margem ocidental do lago regional.
 	# A saída estende-se até z=270 para misturar a faixa baixa com o relevo regional; evita a parede criada pelo corte brusco em z=252.

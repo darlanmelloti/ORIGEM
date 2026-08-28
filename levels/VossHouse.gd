@@ -57,6 +57,8 @@ var opening_was_skipped: bool = false
 const OPENING_SKIP_HOLD_SECONDS: float = 1.50
 # A malha física do terreno é amostrada por células; esta folga faz Elias entrar no solo por cima mesmo onde a interpolação do colisor diverge ligeiramente da altura analítica.
 const POST_OPENING_TERRAIN_CLEARANCE: float = 2.00
+const CASA_VOSS_HIGHLAND_RISE: float = 2.40
+const CASA_VOSS_DESCENT_MIN_WIDTH: float = 4.20
 # A captura em llvmpipe pode avançar o relógio do jogo mais depressa que os 18 s de parede da evidência.
 # Este limite só existe no modo QA e preserva a janela visual sem prolongar o prólogo normal do jogador.
 const QA_CINEMATIC_CAPTURE_HOLD_SECONDS: float = 300.0
@@ -88,6 +90,8 @@ func _ready() -> void:
 	house.name = "CasaVoss"
 	house.add_to_group("voss_house")
 	var base_y: float = _ground_height(HOUSE_ORIGIN.x, HOUSE_ORIGIN.z)
+	# A cota elevada pertence ao TerrainPatch: a casa apoia-se no solo físico contínuo,
+	# preservando a âncora e eliminando uma plataforma vertical artificial sob a soleira.
 	house.position = Vector3(HOUSE_ORIGIN.x, base_y, HOUSE_ORIGIN.z)
 	# A fachada olha para a serra: o jogador vê casa, estrada e montanha no primeiro quadro.
 	house.rotation.y = PI + deg_to_rad(10.0)
@@ -100,6 +104,7 @@ func _ready() -> void:
 	_build_interior(house)
 	_build_exterior_details(house)
 	_build_ambient_life(house)
+	_build_casa_voss_highland_opening(house)
 	_build_voss_panoramic_threshold(house)
 	# O antigo miradouro visual dominava a vista macro sem contribuir para a rota física; a bacia deve abrir directamente após a soleira.
 	# A Estrada de Lama auxiliar sobrepunha as lajes físicas e produzia uma faixa escura vista da soleira; a rota real mantém-se nas lajes cartográficas.
@@ -177,6 +182,49 @@ func _build_voss_panoramic_threshold(house: Node3D) -> void:
 		fern.scale = Vector3.ONE * 0.42
 		fern.rotation.y = side * 0.62
 		threshold.add_child(fern)
+
+func _build_casa_voss_highland_opening(house: Node3D) -> void:
+	# DEV1-R1-CASA-VOSS-HIGHLAND-002: a elevação é o TerrainPatch físico; estas lajes
+	# são apenas a sua leitura material. Sem caixas altas e sem colisores auxiliares.
+	var highland: Node3D = Node3D.new()
+	highland.name = "AberturaElevadaCasaVoss"
+	house.add_child(highland)
+
+	var flagstone: StandardMaterial3D = stone_material.duplicate() as StandardMaterial3D
+	if flagstone != null:
+		flagstone.albedo_texture = DAYLIGHT_WEATHERED_FLAGSTONE_DIFF
+		flagstone.roughness = 0.88
+		flagstone.uv1_triplanar = true
+		flagstone.uv1_world_triplanar = true
+		flagstone.uv1_scale = Vector3(0.42, 0.42, 0.42)
+	else:
+		flagstone = stone_material
+
+	# Oito lajes largas seguem o declive físico real. A superfície deixa o caminho legível,
+	# mas a colisão continua exclusivamente no TerrainPatch, sem duplicar piso ou rota.
+	var descent_steps: Array[Dictionary] = [
+		{"name": "LajeDeDescida_01", "z": -7.55, "depth": 1.18, "width": 5.30},
+		{"name": "LajeDeDescida_02", "z": -8.72, "depth": 1.16, "width": 5.08},
+		{"name": "LajeDeDescida_03", "z": -9.87, "depth": 1.14, "width": 4.88},
+		{"name": "LajeDeDescida_04", "z": -11.00, "depth": 1.12, "width": 4.68},
+		{"name": "LajeDeDescida_05", "z": -12.11, "depth": 1.10, "width": 4.46},
+		{"name": "LajeDeDescida_06", "z": -13.20, "depth": 1.08, "width": CASA_VOSS_DESCENT_MIN_WIDTH},
+		{"name": "LajeDeDescida_07", "z": -14.27, "depth": 1.06, "width": CASA_VOSS_DESCENT_MIN_WIDTH},
+		{"name": "LajeDeDescida_08", "z": -15.32, "depth": 1.04, "width": CASA_VOSS_DESCENT_MIN_WIDTH}
+	]
+	for step_data: Dictionary in descent_steps:
+		var depth: float = step_data["depth"] as float
+		var width: float = step_data["width"] as float
+		var slab: MeshInstance3D = MeshInstance3D.new()
+		slab.name = step_data["name"] as String
+		var slab_mesh: BoxMesh = BoxMesh.new()
+		slab_mesh.size = Vector3(width, 0.075, depth)
+		slab_mesh.material = flagstone
+		slab.mesh = slab_mesh
+		var local_z: float = step_data["z"] as float
+		slab.position = Vector3(0.0, _house_ground_y(house, 0.0, local_z) + 0.048, local_z)
+		slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+		highland.add_child(slab)
 
 func _build_voss_revelation_terrace() -> void:
 	# QA cartográfico: isola a massa visual do miradouro sem afectar a porta, o terreno ou a rota exterior.
