@@ -291,7 +291,10 @@ func _prepare_voss_to_road_route_qa() -> void:
 	var focus: Vector3 = Vector3(-18.8, 0.0, 53.0)
 	player.velocity = Vector3.ZERO
 	player.set("player_velocity", Vector3.ZERO)
-	player.global_position = Vector3(spawn_x, _terrain_height_for_qa(spawn_x, spawn_z) + 1.30, spawn_z)
+	# Casa Voss recebe um patamar físico elevado. A rota QA nasce sobre a laje,
+	# não no TerrainPatch abaixo dela, para avaliar a descida que o jogador recebe.
+	var landing_surface_y: float = voss_exterior.to_global(Vector3(0.0, 0.22, -7.25)).y if voss_exterior != null else _terrain_height_for_qa(spawn_x, spawn_z)
+	player.global_position = Vector3(spawn_x, landing_surface_y + 1.30, spawn_z)
 	player.look_at(Vector3(focus.x, player.global_position.y, focus.z), Vector3.UP)
 	var head: Node3D = player.get_node_or_null("Head") as Node3D
 	if head != null:

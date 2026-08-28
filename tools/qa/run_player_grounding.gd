@@ -35,8 +35,7 @@ func _physics_process(_delta: float) -> void:
 	if elapsed_frames > WARMUP_PHYSICS_FRAMES:
 		if player.is_on_floor():
 			grounded_frames += 1
-		# Alguns StaticBody/CSG regionais estabilizam o CharacterBody antes de is_on_floor() devolver true.
-		# A variação vertical é a segunda evidência física: queda livre produz desvio crescente, mesmo nesse caso.
+		# A variação vertical é evidência complementar, mas não substitui contacto real de chão.
 		if is_inf(post_warmup_reference_y):
 			post_warmup_reference_y = player.global_position.y
 		else:
@@ -45,8 +44,8 @@ func _physics_process(_delta: float) -> void:
 		_finish(false, "player_below_safe_height")
 		return
 	if elapsed_frames >= WARMUP_PHYSICS_FRAMES + SAMPLE_PHYSICS_FRAMES:
-		var vertically_stable: bool = max_post_warmup_y_delta <= 0.25
-		_finish(grounded_frames >= 24 or vertically_stable, "insufficient_floor_contact")
+		var sufficient_floor_contact: bool = grounded_frames >= 24
+		_finish(sufficient_floor_contact, "insufficient_floor_contact")
 
 func _finish(passed: bool, failure_reason: String) -> void:
 	set_physics_process(false)

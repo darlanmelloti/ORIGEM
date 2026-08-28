@@ -15,6 +15,9 @@ const QA_STATE_TRANSITION_SCRIPT: Script = preload("res://tools/qa/run_player_st
 const QA_STATE_ROUNDTRIP_SCRIPT: Script = preload("res://tools/qa/run_player_state_roundtrip.gd")
 const QA_GROUNDING_SCRIPT: Script = preload("res://tools/qa/run_player_grounding.gd")
 const QA_PLAYER_LOCOMOTION_SCRIPT: Script = preload("res://qa/player/verify_player_locomotion_viewmodel.gd")
+const QA_POST_PROLOGUE_INPUT_SCRIPT: Script = preload("res://qa/player/verify_post_prologue_input_gameplay.gd")
+const QA_CASA_VOSS_HIGHLAND_SCRIPT: Script = preload("res://qa/player/verify_casa_voss_highland_gameplay.gd")
+const QA_CASA_VOSS_LATERAL_CAPTURE_SCRIPT: Script = preload("res://qa/player/capture_casa_voss_lateral.gd")
 const QA_R5_COMPOSITION_CAPTURE_SCRIPT: Script = preload("res://qa/regions/capture_r5_camp_composition_probe.gd")
 const QA_DEV7_R6_ARCHAEOLOGY_CAPTURE_SCRIPT: Script = preload("res://qa/regions/capture_dev7_r6_archaeology_override.gd")
 const R2_REGION_SCRIPT: Script = preload("res://levels/regions/R2_RiverRoad.gd")
@@ -100,6 +103,15 @@ func _ready():
 	elif OS.has_environment("ORIGEM_QA_PLAYER_LOCOMOTION"):
 		var locomotion_runner: Node = QA_PLAYER_LOCOMOTION_SCRIPT.new()
 		get_tree().root.call_deferred("add_child", locomotion_runner)
+	elif OS.has_environment("ORIGEM_QA_POST_PROLOGUE_INPUT"):
+		var post_prologue_input_runner: Node = QA_POST_PROLOGUE_INPUT_SCRIPT.new()
+		get_tree().root.call_deferred("add_child", post_prologue_input_runner)
+	elif OS.has_environment("ORIGEM_QA_CASA_VOSS_HIGHLAND"):
+		var casa_voss_highland_runner: Node = QA_CASA_VOSS_HIGHLAND_SCRIPT.new()
+		get_tree().root.call_deferred("add_child", casa_voss_highland_runner)
+	elif OS.has_environment("ORIGEM_QA_CASA_VOSS_LATERAL_CAPTURE"):
+		var casa_voss_lateral_capture_runner: Node = QA_CASA_VOSS_LATERAL_CAPTURE_SCRIPT.new()
+		get_tree().root.call_deferred("add_child", casa_voss_lateral_capture_runner)
 	elif OS.has_environment("ORIGEM_QA_STATE_TRANSITION"):
 		var state_runner: Node = QA_STATE_TRANSITION_SCRIPT.new()
 		get_tree().root.call_deferred("add_child", state_runner)
@@ -127,7 +139,7 @@ func _ready():
 	if exterior_player != null and OrionTransitionState.has_pending_exterior_return():
 		OrionTransitionState.restore_exterior_player(exterior_player)
 	# Os modos técnicos regionais não devem receber cartelas narrativas; no jogo normal a narrativa continua inalterada.
-	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_PLAYER_LOCOMOTION") and not OS.has_environment("ORIGEM_QA_R3_ARCH") and not OS.has_environment("ORIGEM_QA_R4_CLEARING") and not OS.has_environment("ORIGEM_QA_R5_ARTEFACT") and not OS.has_environment("ORIGEM_QA_R5_COMPOSITION_CAPTURE") and not OS.has_environment("ORIGEM_QA_R6_ARCHAEOLOGY_CAPTURE"):
+	if not OS.has_environment("ORIGEM_CAPTURE_TAKE") and not OS.has_environment("ORIGEM_QA_ROUTE") and not OS.has_environment("ORIGEM_QA_INTERACT") and not OS.has_environment("ORIGEM_QA_CINE48_HANDOFF") and not OS.has_environment("ORIGEM_QA_GROUNDING") and not OS.has_environment("ORIGEM_QA_PLAYER_LOCOMOTION") and not OS.has_environment("ORIGEM_QA_POST_PROLOGUE_INPUT") and not OS.has_environment("ORIGEM_QA_R3_ARCH") and not OS.has_environment("ORIGEM_QA_R4_CLEARING") and not OS.has_environment("ORIGEM_QA_R5_ARTEFACT") and not OS.has_environment("ORIGEM_QA_R5_COMPOSITION_CAPTURE") and not OS.has_environment("ORIGEM_QA_R6_ARCHAEOLOGY_CAPTURE"):
 		_start_narrative()
 
 func _run_codex_qa() -> void:
