@@ -49,8 +49,20 @@ const WALK_SPEED: float = 2.8
 const SPRINT_SPEED: float = 5.2
 const BLOCK_SPEED: float = 1.75
 const MOUSE_SENS: float = 0.0018
+const MIN_EYE_HEIGHT: float = 0.88
+
+# Viewmodel de primeira pessoa: a arma deve permanecer legível sem invadir o solo ao inclinar a câmara.
+const SWORD_VIEWMODEL_POSITION: Vector3 = Vector3(0.68, -0.42, -0.75)
+const SWORD_VIEWMODEL_SCALE: float = 0.44
+const SWORD_IDLE_ROTATION: Vector3 = Vector3(-12.0, 3.0, -14.0)
+const SWORD_BLOCK_ROTATION: Vector3 = Vector3(-30.0, 2.0, 24.0)
+const SWORD_STRIKE_ROTATION: Vector3 = Vector3(28.0, -8.0, 56.0)
+const SWORD_PITCH_COMPENSATION: float = 0.75
 
 func _ready() -> void:
+	# Algumas transições reutilizam a cena de Elias sem conservar a origem local de Head.
+	# Impõe apenas a altura visual mínima; não desloca a cápsula, o terreno ou a posição física.
+	head.position.y = maxf(head.position.y, MIN_EYE_HEIGHT)
 	add_to_group("player")
 	add_to_group("Persist")
 	flashlight_on = true
@@ -89,10 +101,10 @@ func _create_combat_nodes() -> void:
 
 	sword_pivot = Node3D.new()
 	sword_pivot.name = "SwordPivot"
-	# Preserva pivot, animação e raycast, mas desloca a arma para o canto inferior direito e liberta a leitura do mundo cartográfico.
-	sword_pivot.position = Vector3(0.84, -0.84, -1.50)
-	sword_pivot.scale = Vector3(0.52, 0.52, 0.52)
-	sword_pivot.rotation_degrees = Vector3(-12.0, 3.0, -20.0)
+	# A arma é um viewmodel compacto: permanece no canto inferior direito sem atingir visualmente o solo.
+	sword_pivot.position = SWORD_VIEWMODEL_POSITION
+	sword_pivot.scale = Vector3.ONE * SWORD_VIEWMODEL_SCALE
+	_set_sword_pose(SWORD_IDLE_ROTATION)
 	camera.add_child(sword_pivot)
 
 	var blade_material: StandardMaterial3D = StandardMaterial3D.new()
@@ -176,9 +188,9 @@ func _update_combat(delta: float) -> void:
 	is_blocking = Input.is_action_pressed("defend") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and attack_recovery_timer <= 0.0 and current_stamina > 1.0
 	if is_blocking:
 		_consume_stamina(BLOCK_STAMINA_PER_SECOND * delta)
-		sword_pivot.rotation_degrees = Vector3(-35.0, 2.0, 30.0)
+		_set_sword_pose(SWORD_BLOCK_ROTATION)
 	elif not is_attacking():
-		sword_pivot.rotation_degrees = Vector3(-16.0, 2.0, -16.0)
+		_set_sword_pose(SWORD_IDLE_ROTATION)
 
 	if Input.is_action_just_pressed("attack") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if attack_cooldown <= 0.0 and attack_recovery_timer <= 0.0 and not is_blocking and current_stamina >= ATTACK_STAMINA_COST:
@@ -217,9 +229,17 @@ func _update_stamina(delta: float) -> void:
 		current_stamina = minf(MAX_STAMINA, current_stamina + STAMINA_REGEN_PER_SECOND * delta)
 		EventBus.player_stamina_changed.emit(current_stamina, MAX_STAMINA)
 
+func _sword_rotation_for_pose(pose: Vector3) -> Vector3:
+	# Ao olhar para baixo, a compensação reduz a rotação herdada da cabeça e mantém a lâmina fora do solo.
+	return Vector3(pose.x - rad_to_deg(head.rotation.x) * SWORD_PITCH_COMPENSATION, pose.y, pose.z)
+
+func _set_sword_pose(pose: Vector3) -> void:
+	if sword_pivot != null:
+		sword_pivot.rotation_degrees = _sword_rotation_for_pose(pose)
+
 func _animate_sword_swing() -> void:
-	var start_rotation: Vector3 = Vector3(-16.0, 2.0, -16.0)
-	var strike_rotation: Vector3 = Vector3(35.0, -8.0, 64.0)
+	var start_rotation: Vector3 = _sword_rotation_for_pose(SWORD_IDLE_ROTATION)
+	var strike_rotation: Vector3 = _sword_rotation_for_pose(SWORD_STRIKE_ROTATION)
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(sword_pivot, "rotation_degrees", strike_rotation, 0.10)
 	tween.tween_property(sword_pivot, "rotation_degrees", start_rotation, 0.16)

@@ -1,0 +1,149 @@
+{
+  "tool": "check_environment_baseline_intake",
+  "result": "INVALID_INPUT",
+  "production_mutations": 0,
+  "report": "reports/dev8/cartographic_fidelity_baseline_001/CAPTURE_MATRIX_001.md",
+  "captures": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900",
+  "required_resolution": [
+    1600,
+    900
+  ],
+  "required_routes": [
+    "road_to_arch",
+    "arch_to_forest",
+    "forest_to_majestic",
+    "majestic_to_lake",
+    "forest_to_ruins",
+    "ruins_arrival"
+  ],
+  "allowed_decisions": [
+    "PASS_LEITURA",
+    "OBSERVAR_SEM_PRODUCAO",
+    "HIPOTESE_CAUSAL_REQUERIDA"
+  ],
+  "report_has_telemetry": false,
+  "report_has_all_routes": true,
+  "routes": {
+    "road_to_arch": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/road_to_arch.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [],
+        "decision_ok": false
+      }
+    },
+    "arch_to_forest": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/arch_to_forest.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [],
+        "decision_ok": false
+      }
+    },
+    "forest_to_majestic": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/forest_to_majestic.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [],
+        "decision_ok": false
+      }
+    },
+    "majestic_to_lake": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/majestic_to_lake.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [],
+        "decision_ok": false
+      }
+    },
+    "forest_to_ruins": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/forest_to_ruins.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [],
+        "decision_ok": false
+      }
+    },
+    "ruins_arrival": {
+      "capture": {
+        "present": true,
+        "files": [
+          {
+            "path": "reports/dev8/cartographic_fidelity_baseline_001/routes_1600x900/ruins_arrival.png",
+            "size": [
+              1600,
+              900
+            ],
+            "size_ok": true
+          }
+        ],
+        "size_ok": true
+      },
+      "report": {
+        "decision_matches": [],
+        "decision_ok": false
+      }
+    }
+  },
+  "note": "READY confirma apenas completude de intake; não autoriza teste, hipótese ou produção R6."
+}

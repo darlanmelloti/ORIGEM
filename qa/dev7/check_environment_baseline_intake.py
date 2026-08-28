@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from pathlib import Path
 from typing import Any
 
@@ -49,7 +48,16 @@ def image_state(paths: list[Path]) -> dict[str, Any]:
 
 
 def route_state(report_text: str, route: str) -> dict[str, Any]:
-    matches = [decision for decision in DECISIONS if re.search(rf"{re.escape(route)}[\s\S]{{0,500}}{decision}", report_text)]
+    """Encontra decisões apenas nas linhas que identificam a rota.
+
+    A versão anterior procurava numa janela de 500 caracteres após a primeira
+    ocorrência da rota. Em manifestos Markdown completos, essa janela podia
+    alcançar decisões de linhas seguintes e produzir falsos múltiplos. A
+    associação por linha preserva a validação somente de leitura e impede que
+    vocabulário de limites globais seja confundido com a decisão da rota.
+    """
+    route_lines = [line for line in report_text.splitlines() if route in line]
+    matches = [decision for decision in DECISIONS if any(decision in line for line in route_lines)]
     return {"decision_matches": matches, "decision_ok": len(matches) == 1}
 
 
